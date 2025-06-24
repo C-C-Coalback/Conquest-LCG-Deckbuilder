@@ -42,6 +42,10 @@
                     },
                     success: function(response) {
                         $('#responseMessage').text(response.message);  // Update the page dynamically
+                        const message = response.message;
+                        if (message === "REDIRECT") {
+                            location.href = "/cards/" + response.image_names[0] + "/";
+                        }
                         var card_names = response.cards;
                         const image_names = response.image_names;
                         e = document.getElementById("responseMessage");
