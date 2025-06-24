@@ -37,37 +37,5 @@ def ajax_view(request):
     return JsonResponse({'message': 'Invalid request'})
 
 
-def unused_index(request):
-    return render(request, "cards/index.html", {
-        'cards': []
-    })
-
-
-def ajax_index(request):
-    card_names = []
-    search = None
-    faction = None
-    dummy_message = "Testing"
-    if request.method == "GET":
-        if request.GET.get('search'):
-            search = request.GET.get('search')
-        if request.GET.get('main-faction'):
-            faction = request.GET.get('main-faction')
-            print(faction)
-        if search is not None or faction is not None:
-            filtered_df = df
-            if search is not None:
-                filtered_df = filtered_df[filtered_df['name'].str.contains(search)]
-            if faction is not None:
-                filtered_df = filtered_df.loc[filtered_df['faction'] == faction]
-            card_names = filtered_df['name'].to_list()
-            card_names = card_names[:4]
-    if not card_names:
-        card_names = ["Dummy"]
-    return JsonResponse({
-        'cards': card_names
-    })
-
-
-def card_data(request, room_name):
-    return render(request, "cards/card_data.html", {"room_name": room_name})
+def card_data(request, card_name):
+    return render(request, "cards/card_data.html", {"card_name": card_name})
