@@ -1,0 +1,61 @@
+{% extends "base.html" %}
+
+{% block content %}
+<style>
+        .box {
+            top: 80px;
+            margin-left:auto;
+            margin-right:auto;
+            width: 30vw;
+            height: auto;
+            background-color: lightblue;
+            opacity:0.8;
+            border: 2px solid blue;
+        }
+        .greetings {
+            position:absolute;
+            top: 80px;
+            left: 20px;
+        }
+
+        .profile-pic-entry {
+          background-color: lightblue;
+          border: 2px solid blue;
+          width: 180px
+        }
+</style>
+<div class="box">
+  <h1>Welcome to conquestdb.com!</h1>
+  <p>This site serves as a deckbuilder for the Warhammer 40,000: Conquest Living Card Game.</p>
+  <br/>
+  <p>The source code for this website can be found on the <a href="https://github.com/C-C-Coalback/Conquest-Deckbuilder">GitHub</a>.</p>
+  <br/>
+  <h1>DISCLAIMER</h1>
+  <p>Warhammer 40,000: Conquest is a trademark of Fantasy Flight Publishing, Inc. and/or Games Workshop Group. </p>
+  <p>This website is not affiliated with either Fantasy Flight Games or Games Workshop Group.</p>
+</div>
+{% if user.is_authenticated %}
+<div class="greetings">
+  <p>Hi {{ user.username }}!</p>
+  <p><a href="{% url 'password_change' %}">Password Change</a></p>
+  <form action="{% url 'logout' %}" method="post">
+    {% csrf_token %}
+    <button type="submit">Log Out</button>
+  </form>
+  <div>Change your profile picture by uploading a file here.</div>
+  <div>Please note that it could take several minutes for your profile picture to update.</div>
+  <div class="profile-pic-entry">
+  <form method="post" enctype="multipart/form-data" action="simple_upload/">
+    {% csrf_token %}
+    <input type="file" name="file">
+    <button type="submit">Upload</button>
+  </form>
+  </div>
+</div>
+{% else %}
+<div class="greetings">
+  <p>You are not logged in</p>
+  <a href="{% url 'login' %}">Log In</a>
+</div>
+{% endif %}
+{% endblock %}

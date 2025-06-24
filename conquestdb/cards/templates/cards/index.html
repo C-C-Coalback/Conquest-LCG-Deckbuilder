@@ -1,0 +1,56 @@
+{% extends "base.html" %}
+{% block title %}Ajax with Django{% endblock %}
+{% block content %}
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<body>
+    <div class="container">
+        <h1>Ajax with Django</h1>
+        <form id="myForm">
+            Card Name: <input id="searchInput" type="text" name="search"><br>
+            Faction: <select name="faction" id="faction">
+                        <option value="None"></option>
+                        <option value="Space Marines">Space Marines</option>
+                        <option value="Tau">Tau</option>
+                        <option value="Eldar">Eldar</option>
+                        <option value="Dark Eldar">Dark Eldar</option>
+                        <option value="Chaos">Chaos</option>
+                        <option value="Orks">Orks</option>
+                        <option value="Astra Militarum">Astra Militarum</option>
+                        <option value="Neutral">Neutral</option>
+                        <option value="Tyranids">Tyranids</option>
+                        <option value="Necrons">Necrons</option>
+                    </select><br>
+            <button type="submit">Submit</button>
+        </form>
+        <div id="responseMessage"></div>
+    </div>
+    <script>
+        // Ajax setup for form submission
+        $(document).ready(function() {
+            $('#myForm').on('submit', function(event) {
+                event.preventDefault();
+
+                $.ajax({
+                    url: '/cards/ajax/',  // The URL of the Django view that handles the request
+                    type: 'POST',
+                    data: {
+                        'search': $('#searchInput').val(),
+                        'faction': $('#faction').val(),
+                        'csrfmiddlewaretoken': '{{ csrf_token }}' // CSRF token for security
+                    },
+                    success: function(response) {
+                        $('#responseMessage').text(response.message);  // Update the page dynamically
+                        console.log(response.cards);
+                        var card_names = response.cards;
+                        e = document.getElementById("responseMessage");
+                        e.innerHTML = ``;
+                        for (let i = 0; i < card_names.length; i++) {
+                            console.log(card_names[i]);
+                            e.innerHTML += `<p>` + card_names[i] + `</p>`;
+                        }
+                    }
+                });
+            });
+        });
+    </script>
+{% endblock %}
