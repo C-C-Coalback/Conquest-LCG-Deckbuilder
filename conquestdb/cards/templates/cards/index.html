@@ -48,9 +48,69 @@
             </div>
             <button type="submit">Submit</button>
         </form>
-        <div id="responseMessage"></div>
+        <div id="cardBinder">
+            <input id="prev-page" type="button" value="previous" onclick="previousPage();">
+            <div id="responseMessage">
+                <div class="page" id="page"></div>
+            </div>
+            <input id="next-page" type="button" value="next" onclick="nextPage();">
+        </div>
     </div>
     <script>
+        var current_page_number = 0;
+        var max_page_number = 0;
+        var stored_image_links = [];
+        var stored_image_names = [];
+
+
+        function previousPage() {
+            if (current_page_number !== 0) {
+                current_page_number = current_page_number - 1;
+                e = document.getElementById("responseMessage");
+                e.innerHTML = ``;
+                var img_src = "";
+                var img_link = "";
+                var new_string = "";
+                var new_id = "";
+                new_string += `<div class="page" id="page">`;
+                for (let i = 0; i < stored_image_links[current_page_number].length; i++) {
+                    img_link = stored_image_links[current_page_number][i];
+                    new_string += `<a href=`;
+                    new_string += img_link;
+                    new_string += `>`;
+                    img_src = stored_image_names[current_page_number][i];
+                    new_string += `<img class="Card" src=` + img_src + ` alt="Loading...">`;
+                    new_string += `</a>`;
+                }
+                new_string += `</div>`;
+                e.innerHTML += new_string;
+            }
+        }
+
+        function nextPage() {
+            if (current_page_number !== max_page_number) {
+                current_page_number = current_page_number + 1;
+                e = document.getElementById("responseMessage");
+                e.innerHTML = ``;
+                var img_src = "";
+                var img_link = "";
+                var new_string = "";
+                var new_id = "";
+                new_string += `<div class="page" id="page">`;
+                for (let i = 0; i < stored_image_links[current_page_number].length; i++) {
+                    img_link = stored_image_links[current_page_number][i];
+                    new_string += `<a href=`;
+                    new_string += img_link;
+                    new_string += `>`;
+                    img_src = stored_image_names[current_page_number][i];
+                    new_string += `<img class="Card" src=` + img_src + ` alt="Loading...">`;
+                    new_string += `</a>`;
+                }
+                new_string += `</div>`;
+                e.innerHTML += new_string;
+            }
+        }
+
         // Ajax setup for form submission
         $(document).ready(function() {
             $('#myForm').on('submit', function(event) {
@@ -70,6 +130,9 @@
                         if (message === "REDIRECT") {
                             location.href = "/cards/" + response.image_names[0] + "/";
                         }
+                        current_page_number = 0;
+                        var cardCount = 0;
+                        var pageCount = 0;
                         var card_names = response.cards;
                         const image_names = response.image_names;
                         e = document.getElementById("responseMessage");
@@ -77,19 +140,36 @@
                         var img_src = "";
                         var img_link = "";
                         var new_string = "";
+                        var new_id = "";
+                        new_string += `<div class="page" id="page">`;
+                        stored_image_links = [[]];
+                        stored_image_names = [[]];
                         for (let i = 0; i < image_names.length; i++) {
-                            new_string = `<a href=`
-                            img_link = "/cards/" + image_names[i] + "/"
-                            new_string += img_link;
-                            new_string += `>`;
-                            // new_string = `<a href=/cards/`;
-                            img_link = image_names[i];
-                            // new_string += img_link + `/`;
+                            if (cardCount === 20) {
+                                pageCount += 1
+                                cardCount = 0;
+                                stored_image_links.push([]);
+                                stored_image_names.push([]);
+                                // new_id = "page-" + pageCount.toString();
+                                // new_string += `</div><div class="page" style="display: none;" id=` + new_id + `>`;
+                            }
+                            img_link = "/cards/" + image_names[i] + "/";
+                            stored_image_links[pageCount].push(img_link);
                             img_src ="/static/images/CardImages/" + image_names[i] + ".jpg";
-                            new_string += `<img class="Card" src=` + img_src + ` alt="No image">`;
-                            new_string += `</a>`
-                            e.innerHTML += new_string;
+                            stored_image_names[pageCount].push(img_src);
+                            if (pageCount === 0) {
+                                new_string += `<a href=`
+                                new_string += img_link;
+                                new_string += `>`;
+                                new_string += `<img class="Card" src=` + img_src + ` alt="Loading...">`;
+                                new_string += `</a>`;
+                            }
+                            cardCount += 1;
                         }
+                        max_page_number = pageCount;
+                        new_string += `</div>`;
+                        console.log(stored_image_links);
+                        e.innerHTML += new_string;
                     }
                 });
             });

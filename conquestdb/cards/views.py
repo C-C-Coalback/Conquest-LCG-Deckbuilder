@@ -43,8 +43,6 @@ def ajax_view(request):
             filtered_df = filtered_df.loc[filtered_df['faction'] == faction]
         card_names = filtered_df['name'].to_list()
         image_names = filtered_df['image name'].to_list()
-        card_names = card_names[:40]
-        image_names = image_names[:40]
         message = f'Faction, {faction}'
         return JsonResponse({'message': message, 'cards': card_names, 'image_names': image_names})
     return JsonResponse({'message': 'Invalid request'})

@@ -3,9 +3,45 @@
     width: 178px;
 }
 
+#prev-page {
+    position:relative;
+    left:0;
+    top:0;
+    height: 100px;
+    width: 100px;
+}
+
+#next-page {
+    position:relative;
+    right:0;
+    top:0;
+    height: 100px;
+    width: 100px;
+}
+
+#cardBinder {
+    margin:auto;
+    border: 0.05em solid red;
+    display:flex;
+    flex-direction:row;
+    flex-wrap: wrap;
+    max-width: 1300px;
+    justify-content:center;
+}
+
 #responseMessage {
     margin:auto;
     border: 0.05em solid red;
+    display:flex;
+    flex-direction:row;
+    flex-wrap: wrap;
+    max-width: 1000px;
+    justify-content:center;
+}
+
+.page {
+    margin:auto;
+    border: 0.05em solid blue;
     display:flex;
     flex-direction:row;
     flex-wrap: wrap;
