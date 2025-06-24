@@ -62,6 +62,10 @@ def card_data(request, card_name):
     command = -1
     attack = -1
     health = -1
+    bloodied_attack = -1
+    bloodied_health = -1
+    bloodied_text = -1
+    shields = str(card.shields)
     is_unit = "False"
     loyalty = card.loyalty
     faction = card.faction
@@ -69,8 +73,12 @@ def card_data(request, card_name):
     if card.is_unit:
         if card_type != "Warlord":
             card_type = card_type + " Unit"
+            command = str(card.command)
+        else:
+            bloodied_text = card.bloodied_text
+            bloodied_attack = card.bloodied_attack
+            bloodied_health = card.bloodied_health
         is_unit = "True"
-        command = str(card.command)
         attack = str(card.attack)
         health = str(card.health)
     errata_text = "No Errata"
@@ -79,9 +87,10 @@ def card_data(request, card_name):
         errata_text = "There is Errata"
     if original_card_name in banned_cards:
         ban_text = "Banned"
-    return render(request, "cards/card_data.html", {"card_name": original_card_name, "image_name": image_name,
-                                                    "text": text, "card_type": card_type, "cost": cost,
-                                                    "command": command, "attack": attack, "health": health,
-                                                    "is_unit": is_unit, "loyalty": loyalty, "faction": faction,
-                                                    "traits": traits, "ban_text": ban_text,
-                                                    "errata_text": errata_text})
+    return render(request, "cards/card_data.html",
+                  {"card_name": original_card_name, "image_name": image_name, "text": text,
+                   "card_type": card_type, "cost": cost, "command": command, "attack": attack, "health": health,
+                   "is_unit": is_unit, "loyalty": loyalty, "faction": faction, "traits": traits,
+                   "ban_text": ban_text, "errata_text": errata_text, "shields": shields,
+                   "bloodied_attack": bloodied_attack, "bloodied_health": bloodied_health,
+                   "bloodied_text": bloodied_text})
