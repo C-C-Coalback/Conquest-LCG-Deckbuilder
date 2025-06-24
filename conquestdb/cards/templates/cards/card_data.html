@@ -1,5 +1,31 @@
 {% extends "base.html" %}
 {% block title %}Card Data{% endblock %}
 {% block content %}
+{% load static %}
+<link rel="stylesheet" href="{% static 'card_data.css' %}">
     <h1>Card Data Placeholder</h1>
+    <div id="main-container">
+        <img id="card-image" src="/static/images/CardImages/{{ image_name }}.jpg">
+        <div id="card-info">
+            <div id="card-name">
+                <h2>{{ card_name }}</h2>
+            </div>
+            <h3>{{ faction }}</h3>
+            <h3>{{ loyalty }} {{ card_type }}</h3>
+            <h3>{{ traits }}</h3>
+            <h3>{{ text }}</h3>
+            <h3>Cost: {{ cost }}</h3>
+            <p></p>
+            {% if is_unit == "True" %}
+                <h3>{{ command }} command, {{ attack }} attack, {{ health }} health</h3>
+            {% endif %}
+        </div>
+        <div id="ban-info">
+            <div id="ban-header">
+                <h2>Banlist/Errata</h2>
+            </div>
+            <h3>{{ errata_text }}</h3>
+            <h3>{{ ban_text }}</h3>
+        </div>
+    </div>
 {% endblock %}
