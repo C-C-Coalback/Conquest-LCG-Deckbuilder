@@ -22,6 +22,30 @@
                         <option value="Tyranids">Tyranids</option>
                         <option value="Necrons">Necrons</option>
                     </select><br>
+            Loyalty: <select name="loyalty" id="loyalty">
+                        <option value="None"></option>
+                        <option value="Common">Common</option>
+                        <option value="Loyal">Loyal</option>
+                        <option value="Signature">Signature</option>
+                     </select><br>
+            Traits: <input id="traitsInput" type="text" name="traits"><br>
+            Shields: <select name="faction" id="shields">
+                        <option value="-1"></option>
+                        <option value="0">0</option>
+                        <option value="1">1</option>
+                        <option value="3">2</option>
+                        <option value="3">3</option>
+                    </select><br>
+            <div class="ranges-grid">
+                <p id="min-cost">Minimum Cost:</p><input id="minCost" type="text" name="minCost">
+                <p id="max-cost">Maximum Cost:</p><input id="maxCost" type="text" name="maxCost">
+                <p id="min-command">Minimum Command Icons:</p><input id="minCommand" type="text" name="minCommand">
+                <p id="max-command">Maximum Command Icons:</p><input id="maxCommand" type="text" name="maxCommand">
+                <p id="min-attack">Minimum Attack:</p><input id="minAttack" type="text" name="minAttack">
+                <p id="max-attack">Maximum Attack:</p><input id="maxAttack" type="text" name="maxAttack">
+                <p id="min-health">Minimum Health:</p><input id="minHealth" type="text" name="minHealth">
+                <p id="max-health">Maximum Health:</p><input id="maxHealth" type="text" name="maxHealth">
+            </div>
             <button type="submit">Submit</button>
         </form>
         <div id="responseMessage"></div>
@@ -62,7 +86,7 @@
                             img_link = image_names[i];
                             // new_string += img_link + `/`;
                             img_src ="/static/images/CardImages/" + image_names[i] + ".jpg";
-                            new_string += `<img src=` + img_src + ` alt="No image">`;
+                            new_string += `<img class="Card" src=` + img_src + ` alt="No image">`;
                             new_string += `</a>`
                             e.innerHTML += new_string;
                         }
