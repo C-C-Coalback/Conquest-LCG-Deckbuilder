@@ -1,10 +1,12 @@
 {% extends "base.html" %}
 {% block title %}Ajax with Django{% endblock %}
 {% block content %}
+{% load static %}
+<link rel="stylesheet" href="{% static 'card_search_style.css' %}">
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <body>
-    <div class="container">
-        <h1>Ajax with Django</h1>
+    <div class="filters-container">
+        <h1>Card Search Placeholder</h1>
         <form id="myForm">
             Card Name: <input id="searchInput" type="text" name="search"><br>
             Faction: <select name="faction" id="faction">
@@ -40,13 +42,25 @@
                     },
                     success: function(response) {
                         $('#responseMessage').text(response.message);  // Update the page dynamically
-                        console.log(response.cards);
                         var card_names = response.cards;
+                        const image_names = response.image_names;
                         e = document.getElementById("responseMessage");
                         e.innerHTML = ``;
-                        for (let i = 0; i < card_names.length; i++) {
-                            console.log(card_names[i]);
-                            e.innerHTML += `<p>` + card_names[i] + `</p>`;
+                        var img_src = "";
+                        var img_link = "";
+                        var new_string = "";
+                        for (let i = 0; i < image_names.length; i++) {
+                            new_string = `<a href=`
+                            img_link = "/cards/" + image_names[i] + "/"
+                            new_string += img_link;
+                            new_string += `>`;
+                            // new_string = `<a href=/cards/`;
+                            img_link = image_names[i];
+                            // new_string += img_link + `/`;
+                            img_src ="/static/images/CardImages/" + image_names[i] + ".jpg";
+                            new_string += `<img src=` + img_src + ` alt="No image">`;
+                            new_string += `</a>`
+                            e.innerHTML += new_string;
                         }
                     }
                 });

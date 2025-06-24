@@ -29,6 +29,7 @@ class Card:
         self.ready = True
         self.image_name = name.replace(" ", "_")
         self.image_name.replace("\"", "")
+        self.image_name.replace(":", "")
         self.image_name.replace("'idden_Base", "idden_Base")
         self.applies_discounts = applies_discounts[0]
         self.discount_amount = applies_discounts[1]
@@ -83,7 +84,7 @@ class Card:
 
     def as_dict(self):
         return {'name': self.name, 'faction': self.faction, 'loyalty': self.loyalty, 'traits': self.traits,
-                'card type': self.card_type}
+                'card type': self.card_type, 'image name': self.image_name}
 
     def get_has_deepstrike(self):
         if self.deepstrike == -1:
