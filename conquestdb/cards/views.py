@@ -125,18 +125,17 @@ def ajax_view(request):
 
 
 def card_data(request, card_name):
+    directory = os.getcwd()
+    target_directory = directory + "/cards/comments/" + card_name + "/"
     if request.method == 'POST':
         username = request.POST.get('username')
         if not username:
             username = "Anonymous"
         comment = request.POST.get('comment')
         print(username, ":", comment)
-        directory = os.getcwd()
-        target_directory = directory + "/cards/comments/" + card_name + "/"
-        print(directory)
         time = str(datetime.datetime.now())
         os.makedirs(target_directory, exist_ok=True)
-        file_id = len([name for name in os.listdir(target_directory) if os.path.isfile(name)])
+        file_id = len([name for name in os.listdir(target_directory) if os.path.isfile(target_directory + "/" + name)])
         name_file = str(file_id) + ".txt"
         with open(target_directory + name_file, 'w') as file:
             file.write(username + "\n" + time + "\n" + comment)
@@ -177,10 +176,25 @@ def card_data(request, card_name):
         errata_text = "There is Errata"
     if original_card_name in banned_cards:
         ban_text = "Banned"
+    names_comments = []
+    times_comments = []
+    comments = []
+    if os.path.exists(target_directory):
+        for infile in sorted(os.listdir(target_directory)):
+            print("current file", infile)
+            with open(target_directory + infile, 'r') as file:
+                t = file.read()
+                print(t)
+                split_text = t.split("\n")
+                if len(split_text) == 3:
+                    names_comments.append(split_text[0])
+                    times_comments.append(split_text[1])
+                    comments.append(split_text[2])
+    my_comments = zip(names_comments, times_comments, comments)
     return render(request, "cards/card_data.html",
                   {"card_name": original_card_name, "image_name": image_name, "text": text,
                    "card_type": card_type, "cost": cost, "command": command, "attack": attack, "health": health,
                    "is_unit": is_unit, "loyalty": loyalty, "faction": faction, "traits": traits,
                    "ban_text": ban_text, "errata_text": errata_text, "shields": shields,
                    "bloodied_attack": bloodied_attack, "bloodied_health": bloodied_health,
-                   "bloodied_text": bloodied_text})
+                   "bloodied_text": bloodied_text, "comments": my_comments})
