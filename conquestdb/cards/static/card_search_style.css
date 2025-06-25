@@ -3,6 +3,13 @@
     width: 178px;
 }
 
+.filters-container {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
 #prev-page {
     position:relative;
     left:0;
@@ -31,7 +38,7 @@
 
 #responseMessage {
     margin:auto;
-    border: 0.05em solid red;
+    background: #f9f9f9;
     display:flex;
     flex-direction:row;
     flex-wrap: wrap;
@@ -41,7 +48,6 @@
 
 .page {
     margin:auto;
-    border: 0.05em solid blue;
     display:flex;
     flex-direction:row;
     flex-wrap: wrap;

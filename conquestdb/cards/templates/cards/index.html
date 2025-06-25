@@ -6,7 +6,6 @@
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <body>
     <div class="filters-container">
-        <h1>Card Search Placeholder</h1>
         <form id="myForm">
             Card Name: <input id="searchInput" type="text" name="search"><br>
             Card Type: <select name="card-type" id="cardType">
@@ -58,13 +57,13 @@
             </div>
             <button type="submit">Submit</button>
         </form>
-        <div id="cardBinder">
-            <input id="prev-page" type="button" value="previous" onclick="previousPage();">
-            <div id="responseMessage">
-                <div class="page" id="page"></div>
-            </div>
-            <input id="next-page" type="button" value="next" onclick="nextPage();">
+    </div>
+    <div id="cardBinder">
+        <input id="prev-page" type="button" value="previous" onclick="previousPage();">
+        <div id="responseMessage">
+            <div class="page" id="page"></div>
         </div>
+        <input id="next-page" type="button" value="next" onclick="nextPage();">
     </div>
     <script>
         var current_page_number = 0;

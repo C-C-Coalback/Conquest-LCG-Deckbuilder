@@ -52,7 +52,6 @@ def ajax_view(request):
         min_health = -1
         max_health = -1
         try:
-            print(request.POST.get('min-cost'))
             min_cost = int(request.POST.get('min-cost'))
         except:
             pass
@@ -84,7 +83,6 @@ def ajax_view(request):
             max_health = int(request.POST.get('max-health'))
         except:
             pass
-        print(min_cost)
         loyalty = request.POST.get('loyalty')
         filtered_df = df
         if traits:
@@ -93,7 +91,6 @@ def ajax_view(request):
             filtered_df = filtered_df[filtered_df['name'].str.contains(search)]
         if shields != "-1":
             shields = int(shields)
-            print(shields)
             filtered_df = filtered_df.loc[filtered_df['shields'] == shields]
         if faction != "None":
             filtered_df = filtered_df.loc[filtered_df['faction'] == faction]
@@ -129,7 +126,6 @@ def card_data(request, card_name):
     target_directory = directory + "/cards/comments/" + card_name + "/"
     if request.method == 'POST':
         flag = request.POST.get('flag')
-        print(flag)
         if flag == "POST":
             username = request.POST.get('username')
             if not username:
@@ -143,7 +139,6 @@ def card_data(request, card_name):
                 file.write(username + "\n" + time + "\n" + comment)
         elif flag == "DELETE":
             # username = request.POST.get('username')
-            print("trying delete")
             id_c = request.POST.get('idcomment')
             name_file = id_c + ".txt"
             with open(target_directory + name_file, 'w') as file:
