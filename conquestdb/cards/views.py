@@ -194,7 +194,8 @@ def card_data(request, card_name):
             with open(target_directory + infile, 'r') as file:
                 t = file.read()
                 split_text = t.split("\n")
-                if len(split_text) == 3:
+                if len(split_text) >= 3:
+                    split_text[2] = "\n".join(split_text[2:])
                     idf = infile.split(sep=".")[0]
                     comment_ids.append(idf)
                     names_comments.append(split_text[0])

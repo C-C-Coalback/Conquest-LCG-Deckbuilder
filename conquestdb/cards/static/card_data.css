@@ -6,6 +6,11 @@
     gap: 20px;
 }
 
+# commentInput {
+    cols: 200;
+    rows: 40;
+}
+
 .comment-class {
     padding: 40px;
     background: #f9f9f9;

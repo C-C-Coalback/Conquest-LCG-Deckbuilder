@@ -57,7 +57,7 @@
                 <img class="comment-avatar" src="/media/{{ name }}.jpg" onerror="this.onerror=null; this.src='/static/images/defaultprofile.jpg'">
                 <p>{{ name }}<br>{{ time }}</p>
             </div>
-            <h3 class="comment-content"> {{ text }}</h3>
+            <h3 class="comment-content"> {{ text|linebreaks }}</h3>
             {% if user.username == name %}
                 <form class="delete-comment" method="post">
                     {% csrf_token %}
@@ -75,7 +75,7 @@
         Write a comment using the text box below.<br>
         <input id="username" name="username" value="{{ user.username }}" style="display:none;">
         <input name="flag" value="POST" style="display:none;">
-        <input id="commentInput" type="text" name="comment"><br>
+        <textarea id="commentInput" name="comment"></textarea><br>
         <button type="submit">Submit</button>
     </form>
 <script>
