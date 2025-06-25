@@ -51,13 +51,22 @@
                 No comments yet.
             </div>
         {% endif %}
-        {% for name, time, text in comments %}
+        {% for name, time, text, id in comments %}
         <div class="comment-class">
             <div class="comment-name">
-                <img class="comment-avatar" src="/media/{{ user.username }}.jpg" onerror="this.onerror=null; this.src='/static/images/defaultprofile.jpg'">
+                <img class="comment-avatar" src="/media/{{ name }}.jpg" onerror="this.onerror=null; this.src='/static/images/defaultprofile.jpg'">
                 <p>{{ name }}<br>{{ time }}</p>
             </div>
             <h3 class="comment-content"> {{ text }}</h3>
+            {% if user.username == name %}
+                <form class="delete-comment" method="post">
+                    {% csrf_token %}
+                            <input name="username" value="{{ user.username }}" style="display:none;">
+                            <input name="flag" value="DELETE" style="display:none;">
+                            <input name="idcomment" value="{{ id }}" style="display:none;">
+                    <button type="submit">Delete</button>
+                </form>
+            {% endif %}
         </div>
         {% endfor %}
     </div>
@@ -65,6 +74,7 @@
         {% csrf_token %}
         Write a comment using the text box below.<br>
         <input id="username" name="username" value="{{ user.username }}" style="display:none;">
+        <input name="flag" value="POST" style="display:none;">
         <input id="commentInput" type="text" name="comment"><br>
         <button type="submit">Submit</button>
     </form>

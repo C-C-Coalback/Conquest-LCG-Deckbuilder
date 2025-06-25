@@ -128,23 +128,31 @@ def card_data(request, card_name):
     directory = os.getcwd()
     target_directory = directory + "/cards/comments/" + card_name + "/"
     if request.method == 'POST':
-        username = request.POST.get('username')
-        if not username:
-            username = "Anonymous"
-        comment = request.POST.get('comment')
-        print(username, ":", comment)
-        time = str(datetime.datetime.now())
-        os.makedirs(target_directory, exist_ok=True)
-        file_id = len([name for name in os.listdir(target_directory) if os.path.isfile(target_directory + "/" + name)])
-        name_file = str(file_id) + ".txt"
-        with open(target_directory + name_file, 'w') as file:
-            file.write(username + "\n" + time + "\n" + comment)
+        flag = request.POST.get('flag')
+        print(flag)
+        if flag == "POST":
+            username = request.POST.get('username')
+            if not username:
+                username = "Anonymous"
+            comment = request.POST.get('comment')
+            time = str(datetime.datetime.now())
+            os.makedirs(target_directory, exist_ok=True)
+            file_id = len([name for name in os.listdir(target_directory) if os.path.isfile(target_directory + "/" + name)])
+            name_file = str(file_id) + ".txt"
+            with open(target_directory + name_file, 'w') as file:
+                file.write(username + "\n" + time + "\n" + comment)
+        elif flag == "DELETE":
+            # username = request.POST.get('username')
+            print("trying delete")
+            id_c = request.POST.get('idcomment')
+            name_file = id_c + ".txt"
+            with open(target_directory + name_file, 'w') as file:
+                file.write("")
     if card_name not in images_dict:
         return render(request, 'cards/index.html')
     card = images_dict[card_name]
     original_card_name = card.name
     image_name = card.image_name
-    print(original_card_name)
     text = card.text
     card_type = card.card_type
     cost = str(card.cost)
@@ -179,20 +187,21 @@ def card_data(request, card_name):
     names_comments = []
     times_comments = []
     comments = []
+    comment_ids = []
     no_comments = True
     if os.path.exists(target_directory):
         for infile in sorted(os.listdir(target_directory)):
-            print("current file", infile)
             with open(target_directory + infile, 'r') as file:
                 t = file.read()
-                print(t)
                 split_text = t.split("\n")
                 if len(split_text) == 3:
+                    idf = infile.split(sep=".")[0]
+                    comment_ids.append(idf)
                     names_comments.append(split_text[0])
                     times_comments.append(split_text[1])
                     comments.append(split_text[2])
-            no_comments = False
-    my_comments = zip(names_comments, times_comments, comments)
+                    no_comments = False
+    my_comments = zip(names_comments, times_comments, comments, comment_ids)
     return render(request, "cards/card_data.html",
                   {"card_name": original_card_name, "image_name": image_name, "text": text,
                    "card_type": card_type, "cost": cost, "command": command, "attack": attack, "health": health,
