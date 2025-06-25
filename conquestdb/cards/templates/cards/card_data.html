@@ -45,6 +45,18 @@
             <h3>{{ ban_text }}</h3>
         </div>
     </div>
+    <div id="card-reviews">
+        <div>
+            No card reviews
+        </div>
+    </div>
+    <form id="comment-form" method="post">
+        {% csrf_token %}
+        Write a comment using the text box below.<br>
+        <input id="username" name="username" value="{{ user.username }}" style="display:none;">
+        <input id="commentInput" type="text" name="comment"><br>
+        <button type="submit">Submit</button>
+    </form>
 <script>
     const image = document.getElementById("card-image");
     const button = document.getElementById("bloodied-toggle");

@@ -2,6 +2,10 @@ from django.shortcuts import render, redirect
 from conquestdb.cardscode import Initfunctions
 import pandas as pd
 from django.http import JsonResponse
+from django.http import HttpResponseRedirect
+import os
+import os.path
+import datetime
 
 
 card_array = Initfunctions.init_player_cards()
@@ -121,6 +125,21 @@ def ajax_view(request):
 
 
 def card_data(request, card_name):
+    if request.method == 'POST':
+        username = request.POST.get('username')
+        if not username:
+            username = "Anonymous"
+        comment = request.POST.get('comment')
+        print(username, ":", comment)
+        directory = os.getcwd()
+        target_directory = directory + "/cards/comments/" + card_name + "/"
+        print(directory)
+        time = str(datetime.datetime.now())
+        os.makedirs(target_directory, exist_ok=True)
+        file_id = len([name for name in os.listdir(target_directory) if os.path.isfile(name)])
+        name_file = str(file_id) + ".txt"
+        with open(target_directory + name_file, 'w') as file:
+            file.write(username + "\n" + time + "\n" + comment)
     if card_name not in images_dict:
         return render(request, 'cards/index.html')
     card = images_dict[card_name]
