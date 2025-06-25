@@ -36,11 +36,83 @@ def ajax_view(request):
             image_name = cards_dict[search].image_name
             return JsonResponse({'message': "REDIRECT", 'cards': card_names, 'image_names': [image_name]})
         faction = request.POST.get('faction')
+        traits = request.POST.get('traits')
+        card_type = request.POST.get('card_type')
+        shields = request.POST.get('shields')
+        min_cost = -1
+        max_cost = -1
+        min_command = -1
+        max_command = -1
+        min_attack = -1
+        max_attack = -1
+        min_health = -1
+        max_health = -1
+        try:
+            print(request.POST.get('min-cost'))
+            min_cost = int(request.POST.get('min-cost'))
+        except:
+            pass
+        try:
+            max_cost = int(request.POST.get('max-cost'))
+        except:
+            pass
+        try:
+            min_command = int(request.POST.get('min-command'))
+        except:
+            pass
+        try:
+            max_command = int(request.POST.get('max-command'))
+        except:
+            pass
+        try:
+            min_attack = int(request.POST.get('min-attack'))
+        except:
+            pass
+        try:
+            max_attack = int(request.POST.get('max-attack'))
+        except:
+            pass
+        try:
+            min_health = int(request.POST.get('min-health'))
+        except:
+            pass
+        try:
+            max_health = int(request.POST.get('max-health'))
+        except:
+            pass
+        print(min_cost)
+        loyalty = request.POST.get('loyalty')
         filtered_df = df
+        if traits:
+            filtered_df = filtered_df[filtered_df['traits'].str.contains(traits)]
         if search is not None:
             filtered_df = filtered_df[filtered_df['name'].str.contains(search)]
+        if shields != "-1":
+            shields = int(shields)
+            print(shields)
+            filtered_df = filtered_df.loc[filtered_df['shields'] == shields]
         if faction != "None":
             filtered_df = filtered_df.loc[filtered_df['faction'] == faction]
+        if loyalty != "None":
+            filtered_df = filtered_df.loc[filtered_df['loyalty'] == loyalty]
+        if card_type != "None":
+            filtered_df = filtered_df.loc[filtered_df['card type'] == card_type]
+        if min_cost != -1:
+            filtered_df = filtered_df.loc[filtered_df['cost'] >= min_cost]
+        if max_cost != -1:
+            filtered_df = filtered_df.loc[filtered_df['cost'] <= max_cost]
+        if min_command != -1:
+            filtered_df = filtered_df.loc[filtered_df['command'] >= min_command]
+        if max_command != -1:
+            filtered_df = filtered_df.loc[filtered_df['command'] <= max_command]
+        if min_attack != -1:
+            filtered_df = filtered_df.loc[filtered_df['attack'] >= min_attack]
+        if max_attack != -1:
+            filtered_df = filtered_df.loc[filtered_df['attack'] <= max_attack]
+        if min_health != -1:
+            filtered_df = filtered_df.loc[filtered_df['health'] >= min_health]
+        if max_health != -1:
+            filtered_df = filtered_df.loc[filtered_df['health'] <= max_health]
         card_names = filtered_df['name'].to_list()
         image_names = filtered_df['image name'].to_list()
         message = f'Faction, {faction}'

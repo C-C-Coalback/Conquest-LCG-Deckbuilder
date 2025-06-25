@@ -84,7 +84,8 @@ class Card:
 
     def as_dict(self):
         return {'name': self.name, 'faction': self.faction, 'loyalty': self.loyalty, 'traits': self.traits,
-                'card type': self.card_type, 'image name': self.image_name}
+                'card type': self.card_type, 'image name': self.image_name, 'cost': self.cost, 'command': -1,
+                'attack': -1, 'health': -1, 'shields': self.shields}
 
     def get_has_deepstrike(self):
         if self.deepstrike == -1:
@@ -342,6 +343,11 @@ class UnitCard(Card):
         self.new_additional_resources_command_struggle = 0
         self.new_additional_cards_command_struggle = 0
         self.new_brutal = False
+
+    def as_dict(self):
+        return {'name': self.name, 'faction': self.faction, 'loyalty': self.loyalty, 'traits': self.traits,
+                'card type': self.card_type, 'image name': self.image_name, 'cost': self.cost, 'command': self.command,
+                'attack': self.attack, 'health': self.health, 'shields': self.shields}
 
     def get_sweep(self):
         sweep = self.sweep

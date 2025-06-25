@@ -9,6 +9,16 @@
         <h1>Card Search Placeholder</h1>
         <form id="myForm">
             Card Name: <input id="searchInput" type="text" name="search"><br>
+            Card Type: <select name="card-type" id="cardType">
+                        <option value="None"></option>
+                        <option value="Army">Army</option>
+                        <option value="Support">Support</option>
+                        <option value="Event">Event</option>
+                        <option value="Attachment">Attachment</option>
+                        <option value="Warlord">Warlord</option>
+                        <option value="Synapse">Synapse</option>
+                        <option value="Token">Token</option>
+                    </select><br>
             Faction: <select name="faction" id="faction">
                         <option value="None"></option>
                         <option value="Space Marines">Space Marines</option>
@@ -29,11 +39,11 @@
                         <option value="Signature">Signature</option>
                      </select><br>
             Traits: <input id="traitsInput" type="text" name="traits"><br>
-            Shields: <select name="faction" id="shields">
+            Shields: <select name="shields" id="shields">
                         <option value="-1"></option>
                         <option value="0">0</option>
                         <option value="1">1</option>
-                        <option value="3">2</option>
+                        <option value="2">2</option>
                         <option value="3">3</option>
                     </select><br>
             <div class="ranges-grid">
@@ -122,6 +132,18 @@
                     data: {
                         'search': $('#searchInput').val(),
                         'faction': $('#faction').val(),
+                        'card_type': $('#cardType').val(),
+                        'loyalty': $('#loyalty').val(),
+                        'traits': $('#traitsInput').val(),
+                        'shields': $('#shields').val(),
+                        'min-cost': $('#minCost').val(),
+                        'max-cost': $('#maxCost').val(),
+                        'min-command': $('#minCommand').val(),
+                        'max-command': $('#maxCommand').val(),
+                        'min-attack': $('#minAttack').val(),
+                        'max-attack': $('#maxAttack').val(),
+                        'min-health': $('#minHealth').val(),
+                        'max-health': $('#maxHealth').val(),
                         'csrfmiddlewaretoken': '{{ csrf_token }}' // CSRF token for security
                     },
                     success: function(response) {
