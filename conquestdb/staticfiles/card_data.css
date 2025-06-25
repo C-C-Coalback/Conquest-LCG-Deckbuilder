@@ -6,9 +6,9 @@
     gap: 20px;
 }
 
-# commentInput {
-    cols: 200;
-    rows: 40;
+#commentInput {
+    cols: 2000;
+    rows: 200;
 }
 
 .comment-class {
