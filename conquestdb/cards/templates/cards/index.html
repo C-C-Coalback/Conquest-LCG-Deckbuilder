@@ -7,8 +7,10 @@
 <body>
     <div class="filters-container">
         <form id="myForm">
-            Card Name: <input id="searchInput" type="text" name="search"><br>
-            Card Type: <select name="card-type" id="cardType">
+            <div class="ranges-grid">
+                <p id="p-card-name">Card Name:</p><input id="searchInput" type="text" name="search">
+                <p id="p-traits">Traits:</p><input id="traitsInput" type="text" name="traits">
+                <p id="p-card-type">Card Type:</p><select name="card-type" id="cardType">
                         <option value="None"></option>
                         <option value="Army">Army</option>
                         <option value="Support">Support</option>
@@ -17,8 +19,8 @@
                         <option value="Warlord">Warlord</option>
                         <option value="Synapse">Synapse</option>
                         <option value="Token">Token</option>
-                    </select><br>
-            Faction: <select name="faction" id="faction">
+                    </select>
+                <p id="p-faction">Faction:</p><select name="faction" id="faction">
                         <option value="None"></option>
                         <option value="Space Marines">Space Marines</option>
                         <option value="Tau">Tau</option>
@@ -30,22 +32,20 @@
                         <option value="Neutral">Neutral</option>
                         <option value="Tyranids">Tyranids</option>
                         <option value="Necrons">Necrons</option>
-                    </select><br>
-            Loyalty: <select name="loyalty" id="loyalty">
+                    </select>
+                <p id="p-loyalty">Loyalty:</p><select name="loyalty" id="loyalty">
                         <option value="None"></option>
                         <option value="Common">Common</option>
                         <option value="Loyal">Loyal</option>
                         <option value="Signature">Signature</option>
-                     </select><br>
-            Traits: <input id="traitsInput" type="text" name="traits"><br>
-            Shields: <select name="shields" id="shields">
+                     </select>
+                <p id="p-shields">Shields:</p><select name="shields" id="shields">
                         <option value="-1"></option>
                         <option value="0">0</option>
                         <option value="1">1</option>
                         <option value="2">2</option>
                         <option value="3">3</option>
-                    </select><br>
-            <div class="ranges-grid">
+                    </select>
                 <p id="min-cost">Minimum Cost:</p><input id="minCost" type="text" name="minCost">
                 <p id="max-cost">Maximum Cost:</p><input id="maxCost" type="text" name="maxCost">
                 <p id="min-command">Minimum Command Icons:</p><input id="minCommand" type="text" name="minCommand">
