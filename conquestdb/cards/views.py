@@ -179,6 +179,7 @@ def card_data(request, card_name):
     names_comments = []
     times_comments = []
     comments = []
+    no_comments = True
     if os.path.exists(target_directory):
         for infile in sorted(os.listdir(target_directory)):
             print("current file", infile)
@@ -190,6 +191,7 @@ def card_data(request, card_name):
                     names_comments.append(split_text[0])
                     times_comments.append(split_text[1])
                     comments.append(split_text[2])
+            no_comments = False
     my_comments = zip(names_comments, times_comments, comments)
     return render(request, "cards/card_data.html",
                   {"card_name": original_card_name, "image_name": image_name, "text": text,
@@ -197,4 +199,4 @@ def card_data(request, card_name):
                    "is_unit": is_unit, "loyalty": loyalty, "faction": faction, "traits": traits,
                    "ban_text": ban_text, "errata_text": errata_text, "shields": shields,
                    "bloodied_attack": bloodied_attack, "bloodied_health": bloodied_health,
-                   "bloodied_text": bloodied_text, "comments": my_comments})
+                   "bloodied_text": bloodied_text, "comments": my_comments, "noc": no_comments})

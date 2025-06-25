@@ -46,15 +46,17 @@
         </div>
     </div>
     <div id="card-reviews">
-        {% if not comments %}
+        {% if noc is True %}
             <div>
                 No comments yet.
             </div>
         {% endif %}
         {% for name, time, text in comments %}
         <div class="comment-class">
-            <p class="comment-name">{{ name }}</p>
-            <p class="comment-time">{{ time }}</p>
+            <div class="comment-name">
+                <img class="comment-avatar" src="/media/{{ user.username }}.jpg" onerror="this.onerror=null; this.src='/static/images/defaultprofile.jpg'">
+                <p>{{ name }}<br>{{ time }}</p>
+            </div>
             <h3 class="comment-content"> {{ text }}</h3>
         </div>
         {% endfor %}
