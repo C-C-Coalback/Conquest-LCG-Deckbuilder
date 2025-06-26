@@ -10,11 +10,7 @@
     height: 70px;
 }
 
-.no-break-name {
-    display: inline;
-}
-
-.no-break-count {
+.no-break {
     display: inline;
 }
 
@@ -25,11 +21,11 @@
 
 .auto-deck-build {
     background: rgba(47, 40, 153, 0.3);
-    width: 740px;
+    width: 690px;
     height: 525px;
     border: 5px solid green;
     display: grid;
-    grid-template-columns: 90px 90px 50px 110px 170px 230px;
+    grid-template-columns: 90px 90px 50px 110px 120px 230px;
     grid-template-rows: 125px 200px 200px;
     grid-template-areas:
     "warlord-card synapse-card details details details details"
@@ -46,7 +42,7 @@
 .auto-deck-build > .db-section {
     background: rgba(47, 40, 153, 0.3);
     border: 1px solid black;
-    text-align: center;
+    text-align: left;
     overflow-y:auto;
 }
 
