@@ -39,11 +39,11 @@
 <textarea id="chat-log" cols="100" rows="10"></textarea><br>
 </div>
 <input id="card-input" type="search" list="card_list" size="60"><br>
-<input id="deck-submit-1" type="button" value="Send Deck" onclick="sendDeckAuto();">
 <input id="card-submit" type="button" value="Add Card">
-<div id="current-warlord">
-    <p></p>
-</div>
+<h2>Add a description for your deck here</h2>
+<textarea id="descriptionInput" name="description" rows="10" cols="80"></textarea><br>
+<input id="deck-submit-1" type="button" value="Send Deck" onclick="sendDeckAuto();">
+<input id="username" name="username" value="{{ user.username }}" style="display:none;">
 <div id="responseMessage">
     <p></p>
 </div>
@@ -307,7 +307,9 @@
                     data: {
                         'warlord_name': name_warlord,
                         'ally_faction': $('#ally').val(),
+                        'username': $('#username').val(),
                         'deck_text': chat_holder,
+                        'description': $('#descriptionInput').val(),
                         'flag': 'SENDDECK',
                         'csrfmiddlewaretoken': '{{ csrf_token }}' // CSRF token for security
                     },
