@@ -4,48 +4,51 @@
 {% load static %}
 <link rel="stylesheet" href="{% static 'createdeck.css' %}">
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<h1>Create Deck Placeholder</h1>
 <datalist id="card_list">
     <option value="Captain Cato Sicarius"></option>
 </datalist>
-<div class="auto-deck-build">
-    <div id="warlord-card" class="poster-card"><img id="Nazdreg" src="/static/images/CardImages/Cardback.jpg" class="db-image"></div>
-    <div id="synapse-card" class="poster-card"><img id="Cardback" src="/static/images/CardImages/Cardback.jpg" class="db-image"></div>
-    <div id="details">Details<br>
-        <label for="name-deck">Name:</label>
-        <input id="name-deck" type="search" size="28"><br>
-        <label for="ally">Ally:</label>
-        <select name="ally" id="ally" onChange="notCheckedAlly();">
-            <option value=""></option>
-            <option value="Space Marines">Space Marines</option>
-            <option value="Tau">Tau</option>
-            <option value="Eldar">Eldar</option>
-            <option value="Dark Eldar">Dark Eldar</option>
-            <option value="Chaos">Chaos</option>
-            <option value="Orks">Orks</option>
-            <option value="Astra Militarum">Astra Militarum</option>
-        </select>
-        <p id="ok-ally">Ally OK</p>
-    </div>
-    <div id="signature-squad-cards" class="db-section">Signature Squad
+<div id="deck-container">
+    <div class="auto-deck-build">
+        <div id="warlord-card" class="poster-card"><img id="Nazdreg" src="/static/images/CardImages/Cardback.jpg" class="db-image"></div>
+        <div id="synapse-card" class="poster-card"><img id="Cardback" src="/static/images/CardImages/Cardback.jpg" class="db-image"></div>
+        <div id="details">Details<br>
+            <label for="name-deck">Name:</label>
+            <input id="name-deck" type="search" size="28"><br>
+            <label for="ally">Ally:</label>
+            <select name="ally" id="ally" onChange="notCheckedAlly();">
+                <option value=""></option>
+                <option value="Space Marines">Space Marines</option>
+                <option value="Tau">Tau</option>
+                <option value="Eldar">Eldar</option>
+                <option value="Dark Eldar">Dark Eldar</option>
+                <option value="Chaos">Chaos</option>
+                <option value="Orks">Orks</option>
+                <option value="Astra Militarum">Astra Militarum</option>
+            </select>
+            <p id="ok-ally">Ally OK</p>
+        </div>
+        <div id="signature-squad-cards" class="db-section">Signature Squad
 
+        </div>
+        <div id="army-cards" class="db-section">Army Units</div>
+        <div id="event-cards" class="db-section">Events</div>
+        <div id="attachment-cards" class="db-section">Attachments</div>
+        <div id="support-cards" class="db-section">Supports</div>
     </div>
-    <div id="army-cards" class="db-section">Army Units</div>
-    <div id="event-cards" class="db-section">Events</div>
-    <div id="attachment-cards" class="db-section">Attachments</div>
-    <div id="support-cards" class="db-section">Supports</div>
+    <div id="manual-deck-import">
+    <textarea id="chat-log" cols="100" rows="10"></textarea><br>
+    </div>
+    <input id="card-input" type="search" list="card_list" size="60"><br>
+    <input id="card-submit" type="button" value="Add Card">
+    <input id="deck-submit-1" type="button" value="Send Deck" onclick="sendDeckAuto();">
+    <input id="username" name="username" value="{{ user.username }}" style="display:none;">
+    <div id="responseMessage">
+        <p></p>
+    </div>
 </div>
-<div id="manual-deck-import">
-<textarea id="chat-log" cols="100" rows="10"></textarea><br>
-</div>
-<input id="card-input" type="search" list="card_list" size="60"><br>
-<input id="card-submit" type="button" value="Add Card">
-<h2>Add a description for your deck here</h2>
-<textarea id="descriptionInput" name="description" rows="10" cols="80"></textarea><br>
-<input id="deck-submit-1" type="button" value="Send Deck" onclick="sendDeckAuto();">
-<input id="username" name="username" value="{{ user.username }}" style="display:none;">
-<div id="responseMessage">
-    <p></p>
+<div id="description-container">
+    <h2>Add a description for your deck here</h2>
+    <textarea id="descriptionInput" name="description" rows="20" cols="80"></textarea><br>
 </div>
     <script>
 

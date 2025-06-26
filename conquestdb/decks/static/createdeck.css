@@ -15,22 +15,22 @@
 }
 
 .db-image {
-    width: 75px;
-    height: 100px;
+    width: 90px;
+    height: 125px;
 }
 
 .auto-deck-build {
     background: rgba(47, 40, 153, 0.3);
-    width: 450px;
-    height: 500px;
+    width: 740px;
+    height: 525px;
     border: 5px solid green;
     display: grid;
-    grid-template-columns: 75px 75px 50px 100px 150px;
-    grid-template-rows: 100px 200px 200px;
+    grid-template-columns: 90px 90px 50px 110px 170px 230px;
+    grid-template-rows: 125px 200px 200px;
     grid-template-areas:
-    "warlord-card synapse-card details details details"
-    "signature-squad-cards signature-squad-cards army-cards army-cards army-cards"
-    "event-cards event-cards attachment-cards attachment-cards support-cards";
+    "warlord-card synapse-card details details details details"
+    "signature-squad-cards signature-squad-cards signature-squad-cards army-cards army-cards army-cards"
+    "event-cards event-cards event-cards attachment-cards attachment-cards support-cards";
 }
 
 .auto-deck-build > #details {
@@ -80,6 +80,18 @@
 
 #manual-deck-import {
     display: none;
+}
+
+#deck-container {
+    position: absolute;
+    left: 100px;
+    top: 100px;
+}
+
+#description-container {
+    position: absolute;
+    left: 900px;
+    top: 200px;
 }
 
 .box {
