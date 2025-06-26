@@ -177,6 +177,36 @@
             }
         }
 
+        function addCard(card_type, cardName) {
+            var idName = cardName.split(' ').join('_');
+            var countName = idName + "-Count";
+            var holderName = idName + "-Holder";
+            var e = document.getElementById(countName);
+            if (typeof(e) != 'undefined' && e != null) {
+                var str = e.innerHTML;
+                if (str[2] !== "3") {
+                    str = incrementString(str);
+                    e.innerHTML = str;
+                }
+            } else {
+                var newPart = `<div class="card-name-and-count" id=`;
+                newPart += holderName;
+                newPart += `><div id=`;
+                newPart += idName;
+                newPart += ` class="no-break">`;
+                newPart += cardName;
+                newPart += `</div><div id=`;
+                newPart += idName + "-Count";
+                newPart += ` class="no-break"> x1</div><input id=`;
+                newPart += idName + "-Increase";
+                newPart += ` type="button" value="+" onclick="incrementCount(this.id);"><input id=`;
+                newPart += idName + "-Decrease";
+                newPart += ` type="button" value="-" onclick="decreaseCount(this.id);">`
+                newPart += `</div>`
+                document.getElementById(card_type.toLowerCase() + "-cards").innerHTML += newPart;
+            }
+        }
+
         document.querySelector('#card-submit').onclick = function(e) {
             const messageInputDom = document.querySelector('#card-input');
             const message = messageInputDom.value;
@@ -209,33 +239,7 @@
                     } else if (message === "ADDCARD") {
                         var card_type = response.card_type;
                         var cardName = response.card_name;
-                        var idName = response.card_name.split(' ').join('_');
-                        var countName = idName + "-Count";
-                        var holderName = idName + "-Holder";
-                        var e = document.getElementById(countName);
-                        if (typeof(e) != 'undefined' && e != null) {
-                            var str = e.innerHTML;
-                            if (str[2] !== "3") {
-                                str = incrementString(str);
-                                e.innerHTML = str;
-                            }
-                        } else {
-                            var newPart = `<div class="card-name-and-count" id=`;
-                            newPart += holderName;
-                            newPart += `><div id=`;
-                            newPart += idName;
-                            newPart += ` class="no-break">`;
-                            newPart += cardName;
-                            newPart += `</div><div id=`;
-                            newPart += idName + "-Count";
-                            newPart += ` class="no-break"> x1</div><input id=`;
-                            newPart += idName + "-Increase";
-                            newPart += ` type="button" value="+" onclick="incrementCount(this.id);"><input id=`;
-                            newPart += idName + "-Decrease";
-                            newPart += ` type="button" value="-" onclick="decreaseCount(this.id);">`
-                            newPart += `</div>`
-                            document.getElementById(card_type.toLowerCase() + "-cards").innerHTML += newPart;
-                        }
+                        addCard(card_type, cardName);
                     }
                 }
             });

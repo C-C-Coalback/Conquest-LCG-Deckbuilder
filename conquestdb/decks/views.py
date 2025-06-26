@@ -81,15 +81,17 @@ def ajax_view(request):
                         card_type == "Army" and card.get_loyalty() == "Common" and card.check_for_a_trait("Vehicle"):
                     ally_ok = True
             else:
+                print('got here')
                 position_main_faction = -1
                 for i in range(len(alignment_wheel)):
-                    if alignment_wheel[i] == factions[0]:
+                    if alignment_wheel[i] == ally:
                         position_main_faction = i
                 if position_main_faction != -1:
                     ally_pos_1 = (position_main_faction + 1) % 7
                     ally_pos_2 = (position_main_faction - 1) % 7
                     if ally == alignment_wheel[ally_pos_1] or ally == alignment_wheel[ally_pos_2]:
                         ally_ok = True
+                print('got here')
             if ally_ok:
                 return JsonResponse({'message': 'ADDCARD', 'card_type': card_type,
                                      'card_name': card_name})
