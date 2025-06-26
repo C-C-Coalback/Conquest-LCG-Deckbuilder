@@ -1,5 +1,17 @@
 {% extends "base.html" %}
 {% block title %}Decks Lookup{% endblock %}
 {% block content %}
+{% load static %}
+<link rel="stylesheet" href="{% static 'home_decks.css' %}">
     <h1>Decks Placeholder</h1>
+    <div id="main-container">
+        <a href="/decks/my_decks/">View your decks</a>
+        <a href="/decks/create_deck/">Create a deck</a>
+        <div id="recently-published-container">
+            <h2>Recently published decks</h2>
+        </div>
+        <div id="featured-container">
+            <h2>Featured decklist</h2>
+        </div>
+    </div>
 {% endblock %}

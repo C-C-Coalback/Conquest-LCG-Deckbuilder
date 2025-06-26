@@ -1,0 +1,152 @@
+{% extends "base.html" %}
+{% block title %}Deck Data{% endblock %}
+{% block content %}
+{% load static %}
+<link rel="stylesheet" href="{% static 'createdeck.css' %}">
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<h1>Create Deck Placeholder</h1>
+<datalist id="card_list">
+    <option value="Captain Cato Sicarius"></option>
+</datalist>
+<div class="auto-deck-build">
+    <div id="warlord-card" class="poster-card"><img id="Nazdreg" src="/static/images/CardImages/Cardback.jpg" class="db-image"></div>
+    <div id="synapse-card" class="poster-card"><img id="Cardback" src="/static/images/CardImages/Cardback.jpg" class="db-image"></div>
+    <div id="details">Details<br>
+        <label for="name-deck">Name:</label>
+        <input id="name-deck" type="search" size="28"><br>
+        <label for="ally">Ally:</label>
+        <select name="ally" id="ally" onChange="notCheckedAlly();">
+            <option value=""></option>
+            <option value="Space Marines">Space Marines</option>
+            <option value="Tau">Tau</option>
+            <option value="Eldar">Eldar</option>
+            <option value="Dark Eldar">Dark Eldar</option>
+            <option value="Chaos">Chaos</option>
+            <option value="Orks">Orks</option>
+            <option value="Astra Militarum">Astra Militarum</option>
+        </select>
+        <input id="update-ally" type="button" value="Update Factions" onclick="sendAlly();">
+        <p id="ok-ally">Ally OK</p>
+    </div>
+    <div id="signature-squad-cards" class="db-section">Signature Squad
+
+    </div>
+    <div id="army-cards" class="db-section">Army Units</div>
+    <div id="event-cards" class="db-section">Events</div>
+    <div id="attachment-cards" class="db-section">Attachments</div>
+    <div id="support-cards" class="db-section">Supports</div>
+</div>
+<div id="manual-deck-import">
+<textarea id="chat-log" cols="100" rows="10"></textarea><br>
+</div>
+<input id="card-input" type="search" list="card_list" size="60"><br>
+<input id="deck-submit-1" type="button" value="Send Deck" onclick="sendDeckAuto();">
+<input id="card-submit" type="button" value="Add Card">
+<div id="current-warlord">
+    <p></p>
+</div>
+<div id="responseMessage">
+    <p></p>
+</div>
+    <script>
+
+        var name_warlord = "";
+        var ally_faction = "";
+
+        function setInitialDeck() {
+            document.querySelector('#chat-log').value = ""
+            document.querySelector('#chat-log').value += '\n----------------------------------------------------------------------\n\n\n----------------------------------------------------------------------\n';
+            document.querySelector('#chat-log').value += 'Signature Squad\n\n----------------------------------------------------------------------\n'
+            document.querySelector('#chat-log').value += 'Army\n\n----------------------------------------------------------------------\n'
+            document.querySelector('#chat-log').value += 'Support\n\n----------------------------------------------------------------------\n'
+            document.querySelector('#chat-log').value += 'Synapse\n\n----------------------------------------------------------------------\n'
+            document.querySelector('#chat-log').value += 'Attachment\n\n----------------------------------------------------------------------\n'
+            document.querySelector('#chat-log').value += 'Event\n\n----------------------------------------------------------------------\n'
+            document.querySelector('#chat-log').value += 'Planet\n\n----------------------------------------------------------------------\n'
+        }
+
+        setInitialDeck();
+
+        function notCheckedAlly() {
+            document.querySelector('#ok-ally').innerHTML = "Please update";
+        }
+
+        function sendDeckAuto() {
+            sendDeck();
+        }
+
+        function sendDeck() {
+            var chat_holder = document.querySelector('#chat-log').value;
+            $.ajax({
+                url: '/decks/ajax/',  // The URL of the Django view that handles the request
+                type: 'POST',
+                data: {
+                    'warlord_name': name_warlord,
+                    'ally_faction': $('#ally').val(),
+                    'deck_text': chat_holder,
+                    'flag': 'SENDDECK',
+                    'csrfmiddlewaretoken': '{{ csrf_token }}' // CSRF token for security
+                },
+                success: function(response) {
+                    $('#responseMessage').text(response.message);  // Update the page dynamically
+                    const message = response.message;
+                }
+            });
+        }
+
+        document.querySelector('#card-submit').onclick = function(e) {
+            const messageInputDom = document.querySelector('#card-input');
+            const message = messageInputDom.value;
+            $.ajax({
+                url: '/decks/ajax/',  // The URL of the Django view that handles the request
+                type: 'POST',
+                data: {
+                    'warlord_name': name_warlord,
+                    'ally_faction': $('#ally').val(),
+                    'card_name': message,
+                    'flag': 'ADDCARD',
+                    'csrfmiddlewaretoken': '{{ csrf_token }}' // CSRF token for security
+                },
+                success: function(response) {
+                    $('#responseMessage').text(response.message);  // Update the page dynamically
+                    const message = response.message;
+                }
+            });
+            messageInputDom.value = '';
+        };
+
+        // Ajax setup for form submission
+        function sendAlly() {
+            $.ajax({
+                url: '/decks/ajax/',  // The URL of the Django view that handles the request
+                type: 'POST',
+                data: {
+                    'warlord_name': name_warlord,
+                    'ally_faction': $('#ally').val(),
+                    'flag': 'SETALLY',
+                    'csrfmiddlewaretoken': '{{ csrf_token }}' // CSRF token for security
+                },
+                success: function(response) {
+                    $('#responseMessage').text(response.message);  // Update the page dynamically
+                    const message = response.message;
+                }
+            });
+        }
+
+        function sendAlly() {
+            $.ajax({
+                url: '/decks/ajax/',  // The URL of the Django view that handles the request
+                type: 'POST',
+                data: {
+                    'warlord_name': name_warlord,
+                    'ally_faction': $('#ally').val(),
+                    'csrfmiddlewaretoken': '{{ csrf_token }}' // CSRF token for security
+                },
+                success: function(response) {
+                    $('#responseMessage').text(response.message);  // Update the page dynamically
+                    const message = response.message;
+                }
+            });
+        }
+    </script>
+{% endblock %}
