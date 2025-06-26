@@ -43,6 +43,38 @@ def deck_data(request, room_name):
 def ajax_view(request):
     if request.method == 'POST':
         flag = request.POST.get('flag')
+        if flag == "SETALLY":
+            ally_name = request.POST.get('ally_faction')
+            warlord_name = request.POST.get('warlord_name')
+            warlord = FindCard.find_card(warlord_name, card_array, cards_dict)
+            if not ally_name:
+                return JsonResponse({'message': 'Ally ok', 'ally_result': 'OK'})
+            elif warlord.get_faction() == ally_name:
+                return JsonResponse({'message': 'Ally may not match main faction', 'ally_result': 'NO'})
+            elif warlord.get_faction() == "Tyranids" or warlord.get_faction() == "Necrons":
+                return JsonResponse({'message': 'Main faction does not ally', 'ally_result': 'NO'})
+            elif warlord.get_name() == 'Gorzod':
+                return JsonResponse({'message': 'Gorzod does not ally', 'ally_result': 'NO'})
+            elif warlord.get_name() == 'Commander Starblaze':
+                if ally_name == "Astra Militarum":
+                    return JsonResponse({'message': 'Ally ok', 'ally_result': 'OK'})
+                else:
+                    return JsonResponse({'message': 'Commander Starblaze allies with Astra Militarum only',
+                                         'ally_result': 'NO'})
+            else:
+                ally_ok = False
+                position_main_faction = -1
+                for i in range(len(alignment_wheel)):
+                    if alignment_wheel[i] == warlord.get_faction():
+                        position_main_faction = i
+                if position_main_faction != -1:
+                    ally_pos_1 = (position_main_faction + 1) % 7
+                    ally_pos_2 = (position_main_faction - 1) % 7
+                    if ally_name == alignment_wheel[ally_pos_1] or ally_name == alignment_wheel[ally_pos_2]:
+                        ally_ok = True
+                if ally_ok:
+                    return JsonResponse({'message': 'Ally ok', 'ally_result': 'OK'})
+                return JsonResponse({'message': 'Invalid Ally', 'ally_result': 'NO'})
         if flag == "ADDCARD":
             card_name = request.POST.get('card_name')
             if card_name not in cards_dict:
@@ -81,17 +113,15 @@ def ajax_view(request):
                         card_type == "Army" and card.get_loyalty() == "Common" and card.check_for_a_trait("Vehicle"):
                     ally_ok = True
             else:
-                print('got here')
                 position_main_faction = -1
                 for i in range(len(alignment_wheel)):
-                    if alignment_wheel[i] == ally:
+                    if alignment_wheel[i] == warlord.get_faction():
                         position_main_faction = i
                 if position_main_faction != -1:
                     ally_pos_1 = (position_main_faction + 1) % 7
                     ally_pos_2 = (position_main_faction - 1) % 7
                     if ally == alignment_wheel[ally_pos_1] or ally == alignment_wheel[ally_pos_2]:
                         ally_ok = True
-                print('got here')
             if ally_ok:
                 return JsonResponse({'message': 'ADDCARD', 'card_type': card_type,
                                      'card_name': card_name})

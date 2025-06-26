@@ -25,7 +25,6 @@
             <option value="Orks">Orks</option>
             <option value="Astra Militarum">Astra Militarum</option>
         </select>
-        <input id="update-ally" type="button" value="Update Factions" onclick="sendAlly();">
         <p id="ok-ally">Ally OK</p>
     </div>
     <div id="signature-squad-cards" class="db-section">Signature Squad
@@ -51,7 +50,6 @@
     <script>
 
         var name_warlord = "";
-        var ally_faction = "";
 
         document.querySelector('#card-input').focus();
         document.querySelector('#card-input').onkeyup = function(e) {
@@ -110,7 +108,8 @@
         setInitialDeck();
 
         function notCheckedAlly() {
-            document.querySelector('#ok-ally').innerHTML = "Please update";
+            document.querySelector('#ok-ally').innerHTML = "Checking...";
+            sendAlly();
         }
 
         function sendDeckAuto() {
@@ -260,22 +259,12 @@
                 success: function(response) {
                     $('#responseMessage').text(response.message);  // Update the page dynamically
                     const message = response.message;
-                }
-            });
-        }
-
-        function sendAlly() {
-            $.ajax({
-                url: '/decks/ajax/',  // The URL of the Django view that handles the request
-                type: 'POST',
-                data: {
-                    'warlord_name': name_warlord,
-                    'ally_faction': $('#ally').val(),
-                    'csrfmiddlewaretoken': '{{ csrf_token }}' // CSRF token for security
-                },
-                success: function(response) {
-                    $('#responseMessage').text(response.message);  // Update the page dynamically
-                    const message = response.message;
+                    const ally_result = response.ally_result;
+                    if (ally_result === "OK") {
+                        document.querySelector('#ok-ally').innerHTML = "Ally OK";
+                    } else {
+                        document.querySelector('#ok-ally').innerHTML = "Invalid Ally";
+                    }
                 }
             });
         }
