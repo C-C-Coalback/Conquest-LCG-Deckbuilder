@@ -113,26 +113,210 @@
         }
 
         function sendDeckAuto() {
+            addSavedDeck();
             sendDeck();
         }
 
+        function addSavedDeck() {
+        document.getElementById("chat-log").value = "";
+        const name = document.getElementById("name-deck").value;
+        document.getElementById("chat-log").value += name;
+        document.getElementById("chat-log").value += "\n----------------------------------------------------------------------\n"
+        const warlord_name = document.getElementById("warlord-card").children[0].id;
+        document.getElementById("chat-log").value += warlord_name.split('_').join(' ');
+        document.getElementById("chat-log").value += "\n{AUTOMAIN}";
+        var e = document.getElementById("ally");
+        if (e.selectedIndex != -1) {
+            var text = e.options[e.selectedIndex].text;
+            if (text !== "") {
+                document.getElementById("chat-log").value += " (" + text + ")";
+            }
+        }
+        document.getElementById("chat-log").value += "\n----------------------------------------------------------------------\n"
+        document.getElementById("chat-log").value += "Signature Squad\n\n";
+        var elements = document.getElementById("signature-squad-cards").children;
+        var text = "";
+        for (i = 0; i < elements.length; i++) {
+            var collection = elements[i].children;
+            var count = "";
+            var card_name = "";
+            for (j = 0; j < collection.length; j++) {
+                var id = collection[j].id;
+                var trail = "";
+                if (id.length > 5) {
+                    trail = id.slice(-6);
+                    console.log(trail);
+                }
+                if (trail === "-Count") {
+                    count = collection[j].innerHTML;
+                    count = count.split('').reverse().join('');
+                } else {
+                    card_name = collection[j].id;
+                }
+                //console.log(count);
+                //console.log(card_name);
+                //console.log(collection[j].id);
+            }
+
+            card_name = count + card_name.split('_').join(' ');
+            document.getElementById("chat-log").value += card_name + "\n";
+        }
+        document.getElementById("chat-log").value += "----------------------------------------------------------------------\n";
+        document.getElementById("chat-log").value += "Army\n\n";
+        var elements = document.getElementById("army-cards").children;
+        var text = "";
+        for (i = 0; i < elements.length; i++) {
+            var collection = elements[i].children;
+            var count = "";
+            var card_name = "";
+            for (j = 0; j < collection.length; j++) {
+                var id = collection[j].id;
+                var trail = "";
+                if (id.length > 5) {
+                    trail = id.slice(-6);
+                    console.log(trail);
+                }
+                if (trail === "-Count") {
+                    count = collection[j].innerHTML;
+                    count = count.split('').reverse().join('');
+                } else if (trail === "crease") {
+
+                } else {
+                    card_name = collection[j].id;
+                }
+                //console.log(count);
+                //console.log(card_name);
+                //console.log(collection[j].id);
+            }
+
+            card_name = count + card_name.split('_').join(' ');
+            document.getElementById("chat-log").value += card_name + "\n";
+        }
+        document.getElementById("chat-log").value += "----------------------------------------------------------------------\n";
+        document.getElementById("chat-log").value += "Support\n\n";
+        var elements = document.getElementById("support-cards").children;
+        var text = "";
+        for (i = 0; i < elements.length; i++) {
+            var collection = elements[i].children;
+            var count = "";
+            var card_name = "";
+            for (j = 0; j < collection.length; j++) {
+                var id = collection[j].id;
+                var trail = "";
+                if (id.length > 5) {
+                    trail = id.slice(-6);
+                    console.log(trail);
+                }
+                if (trail === "-Count") {
+                    count = collection[j].innerHTML;
+                    count = count.split('').reverse().join('');
+                } else if (trail === "crease") {
+
+                } else {
+                    card_name = collection[j].id;
+                }
+                //console.log(count);
+                //console.log(card_name);
+                //console.log(collection[j].id);
+            }
+
+            card_name = count + card_name.split('_').join(' ');
+            document.getElementById("chat-log").value += card_name + "\n";
+        }
+        document.getElementById("chat-log").value += "----------------------------------------------------------------------\n";
+        document.getElementById("chat-log").value += "Synapse\n\n";
+        const synapse_name = document.getElementById("synapse-card").children[0].id;
+        if (synapse_name != "Cardback") {
+            document.getElementById("chat-log").value += "1x " + synapse_name.split('_').join(' ');
+        }
+        document.getElementById("chat-log").value += "\n----------------------------------------------------------------------\n";
+        document.getElementById("chat-log").value += "Attachment\n\n";
+        var elements = document.getElementById("attachment-cards").children;
+        var text = "";
+        for (i = 0; i < elements.length; i++) {
+            var collection = elements[i].children;
+            var count = "";
+            var card_name = "";
+            for (j = 0; j < collection.length; j++) {
+                var id = collection[j].id;
+                var trail = "";
+                if (id.length > 5) {
+                    trail = id.slice(-6);
+                    console.log(trail);
+                }
+                if (trail === "-Count") {
+                    count = collection[j].innerHTML;
+                    count = count.split('').reverse().join('');
+                } else if (trail === "crease") {
+
+                } else {
+                    card_name = collection[j].id;
+                }
+                //console.log(count);
+                //console.log(card_name);
+                //console.log(collection[j].id);
+            }
+
+            card_name = count + card_name.split('_').join(' ');
+            document.getElementById("chat-log").value += card_name + "\n";
+        }
+        document.getElementById("chat-log").value += "\n----------------------------------------------------------------------\n";
+        document.getElementById("chat-log").value += "Event\n\n";
+        var elements = document.getElementById("event-cards").children;
+        var text = "";
+        for (i = 0; i < elements.length; i++) {
+            var collection = elements[i].children;
+            var count = "";
+            var card_name = "";
+            for (j = 0; j < collection.length; j++) {
+                var id = collection[j].id;
+                var trail = "";
+                if (id.length > 5) {
+                    trail = id.slice(-6);
+                    console.log(trail);
+                }
+                if (trail === "-Count") {
+                    count = collection[j].innerHTML;
+                    count = count.split('').reverse().join('');
+                } else if (trail === "crease") {
+
+                } else {
+                    card_name = collection[j].id;
+                }
+                //console.log(count);
+                //console.log(card_name);
+                //console.log(collection[j].id);
+            }
+
+            card_name = count + card_name.split('_').join(' ');
+            document.getElementById("chat-log").value += card_name + "\n";
+        }
+        document.getElementById("chat-log").value += "\n----------------------------------------------------------------------\n";
+        document.getElementById("chat-log").value += "Planet\n\n";
+    }
+
         function sendDeck() {
             var chat_holder = document.querySelector('#chat-log').value;
-            $.ajax({
-                url: '/decks/ajax/',  // The URL of the Django view that handles the request
-                type: 'POST',
-                data: {
-                    'warlord_name': name_warlord,
-                    'ally_faction': $('#ally').val(),
-                    'deck_text': chat_holder,
-                    'flag': 'SENDDECK',
-                    'csrfmiddlewaretoken': '{{ csrf_token }}' // CSRF token for security
-                },
-                success: function(response) {
-                    $('#responseMessage').text(response.message);  // Update the page dynamically
-                    const message = response.message;
-                }
-            });
+            const name = document.getElementById("name-deck").value;
+            if (name === "") {
+                $('#responseMessage').text("Please give your deck a name");
+            } else {
+                $.ajax({
+                    url: '/decks/ajax/',  // The URL of the Django view that handles the request
+                    type: 'POST',
+                    data: {
+                        'warlord_name': name_warlord,
+                        'ally_faction': $('#ally').val(),
+                        'deck_text': chat_holder,
+                        'flag': 'SENDDECK',
+                        'csrfmiddlewaretoken': '{{ csrf_token }}' // CSRF token for security
+                    },
+                    success: function(response) {
+                        $('#responseMessage').text(response.message);  // Update the page dynamically
+                        const message = response.message;
+                    }
+                });
+            }
         }
 
         function incrementString(str) {
@@ -238,7 +422,13 @@
                     } else if (message === "ADDCARD") {
                         var card_type = response.card_type;
                         var cardName = response.card_name;
-                        addCard(card_type, cardName);
+                        if (card_type === "Synapse") {
+                            var synapseName = cardName.split(' ').join('_');
+                            route = "/static/images/CardImages/" + synapseName + ".jpg";
+                            document.getElementById('synapse-card').innerHTML = `<img id=` + synapseName + ` src=` + route + ` class="db-image">`
+                        } else {
+                            addCard(card_type, cardName);
+                        }
                     }
                 }
             });

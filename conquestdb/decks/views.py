@@ -43,6 +43,10 @@ def deck_data(request, room_name):
 def ajax_view(request):
     if request.method == 'POST':
         flag = request.POST.get('flag')
+        if flag == "SENDDECK":
+            text = request.POST.get('deck_text')
+            print(text)
+            return JsonResponse({'message': 'Saving'})
         if flag == "SETALLY":
             ally_name = request.POST.get('ally_faction')
             warlord_name = request.POST.get('warlord_name')
