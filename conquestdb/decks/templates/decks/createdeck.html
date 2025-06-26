@@ -121,182 +121,182 @@
         }
 
         function addSavedDeck() {
-        document.getElementById("chat-log").value = "";
-        const name = document.getElementById("name-deck").value;
-        document.getElementById("chat-log").value += name;
-        document.getElementById("chat-log").value += "\n----------------------------------------------------------------------\n"
-        const warlord_name = document.getElementById("warlord-card").children[0].id;
-        document.getElementById("chat-log").value += warlord_name.split('_').join(' ');
-        document.getElementById("chat-log").value += "\n{AUTOMAIN}";
-        var e = document.getElementById("ally");
-        if (e.selectedIndex != -1) {
-            var text = e.options[e.selectedIndex].text;
-            if (text !== "") {
-                document.getElementById("chat-log").value += " (" + text + ")";
+            document.getElementById("chat-log").value = "";
+            const name = document.getElementById("name-deck").value;
+            document.getElementById("chat-log").value += name;
+            document.getElementById("chat-log").value += "\n----------------------------------------------------------------------\n"
+            const warlord_name = document.getElementById("warlord-card").children[0].id;
+            document.getElementById("chat-log").value += warlord_name.split('_').join(' ');
+            document.getElementById("chat-log").value += "\n{AUTOMAIN}";
+            var e = document.getElementById("ally");
+            if (e.selectedIndex != -1) {
+                var text = e.options[e.selectedIndex].text;
+                if (text !== "") {
+                    document.getElementById("chat-log").value += " (" + text + ")";
+                }
             }
-        }
-        document.getElementById("chat-log").value += "\n----------------------------------------------------------------------\n"
-        document.getElementById("chat-log").value += "Signature Squad\n\n";
-        var elements = document.getElementById("signature-squad-cards").children;
-        var text = "";
-        for (i = 0; i < elements.length; i++) {
-            var collection = elements[i].children;
-            var count = "";
-            var card_name = "";
-            for (j = 0; j < collection.length; j++) {
-                var id = collection[j].id;
-                var trail = "";
-                if (id.length > 5) {
-                    trail = id.slice(-6);
-                    console.log(trail);
+            document.getElementById("chat-log").value += "\n----------------------------------------------------------------------\n"
+            document.getElementById("chat-log").value += "Signature Squad\n\n";
+            var elements = document.getElementById("signature-squad-cards").children;
+            var text = "";
+            for (i = 0; i < elements.length; i++) {
+                var collection = elements[i].children;
+                var count = "";
+                var card_name = "";
+                for (j = 0; j < collection.length; j++) {
+                    var id = collection[j].id;
+                    var trail = "";
+                    if (id.length > 5) {
+                        trail = id.slice(-6);
+                        console.log(trail);
+                    }
+                    if (trail === "-Count") {
+                        count = collection[j].innerHTML;
+                        count = count.split('').reverse().join('');
+                    } else {
+                        card_name = collection[j].id;
+                    }
+                    //console.log(count);
+                    //console.log(card_name);
+                    //console.log(collection[j].id);
                 }
-                if (trail === "-Count") {
-                    count = collection[j].innerHTML;
-                    count = count.split('').reverse().join('');
-                } else {
-                    card_name = collection[j].id;
-                }
-                //console.log(count);
-                //console.log(card_name);
-                //console.log(collection[j].id);
+
+                card_name = count + card_name.split('_').join(' ');
+                document.getElementById("chat-log").value += card_name + "\n";
             }
+            document.getElementById("chat-log").value += "----------------------------------------------------------------------\n";
+            document.getElementById("chat-log").value += "Army\n\n";
+            var elements = document.getElementById("army-cards").children;
+            var text = "";
+            for (i = 0; i < elements.length; i++) {
+                var collection = elements[i].children;
+                var count = "";
+                var card_name = "";
+                for (j = 0; j < collection.length; j++) {
+                    var id = collection[j].id;
+                    var trail = "";
+                    if (id.length > 5) {
+                        trail = id.slice(-6);
+                        console.log(trail);
+                    }
+                    if (trail === "-Count") {
+                        count = collection[j].innerHTML;
+                        count = count.split('').reverse().join('');
+                    } else if (trail === "crease") {
 
-            card_name = count + card_name.split('_').join(' ');
-            document.getElementById("chat-log").value += card_name + "\n";
-        }
-        document.getElementById("chat-log").value += "----------------------------------------------------------------------\n";
-        document.getElementById("chat-log").value += "Army\n\n";
-        var elements = document.getElementById("army-cards").children;
-        var text = "";
-        for (i = 0; i < elements.length; i++) {
-            var collection = elements[i].children;
-            var count = "";
-            var card_name = "";
-            for (j = 0; j < collection.length; j++) {
-                var id = collection[j].id;
-                var trail = "";
-                if (id.length > 5) {
-                    trail = id.slice(-6);
-                    console.log(trail);
+                    } else {
+                        card_name = collection[j].id;
+                    }
+                    //console.log(count);
+                    //console.log(card_name);
+                    //console.log(collection[j].id);
                 }
-                if (trail === "-Count") {
-                    count = collection[j].innerHTML;
-                    count = count.split('').reverse().join('');
-                } else if (trail === "crease") {
 
-                } else {
-                    card_name = collection[j].id;
-                }
-                //console.log(count);
-                //console.log(card_name);
-                //console.log(collection[j].id);
+                card_name = count + card_name.split('_').join(' ');
+                document.getElementById("chat-log").value += card_name + "\n";
             }
+            document.getElementById("chat-log").value += "----------------------------------------------------------------------\n";
+            document.getElementById("chat-log").value += "Support\n\n";
+            var elements = document.getElementById("support-cards").children;
+            var text = "";
+            for (i = 0; i < elements.length; i++) {
+                var collection = elements[i].children;
+                var count = "";
+                var card_name = "";
+                for (j = 0; j < collection.length; j++) {
+                    var id = collection[j].id;
+                    var trail = "";
+                    if (id.length > 5) {
+                        trail = id.slice(-6);
+                        console.log(trail);
+                    }
+                    if (trail === "-Count") {
+                        count = collection[j].innerHTML;
+                        count = count.split('').reverse().join('');
+                    } else if (trail === "crease") {
 
-            card_name = count + card_name.split('_').join(' ');
-            document.getElementById("chat-log").value += card_name + "\n";
-        }
-        document.getElementById("chat-log").value += "----------------------------------------------------------------------\n";
-        document.getElementById("chat-log").value += "Support\n\n";
-        var elements = document.getElementById("support-cards").children;
-        var text = "";
-        for (i = 0; i < elements.length; i++) {
-            var collection = elements[i].children;
-            var count = "";
-            var card_name = "";
-            for (j = 0; j < collection.length; j++) {
-                var id = collection[j].id;
-                var trail = "";
-                if (id.length > 5) {
-                    trail = id.slice(-6);
-                    console.log(trail);
+                    } else {
+                        card_name = collection[j].id;
+                    }
+                    //console.log(count);
+                    //console.log(card_name);
+                    //console.log(collection[j].id);
                 }
-                if (trail === "-Count") {
-                    count = collection[j].innerHTML;
-                    count = count.split('').reverse().join('');
-                } else if (trail === "crease") {
 
-                } else {
-                    card_name = collection[j].id;
-                }
-                //console.log(count);
-                //console.log(card_name);
-                //console.log(collection[j].id);
+                card_name = count + card_name.split('_').join(' ');
+                document.getElementById("chat-log").value += card_name + "\n";
             }
-
-            card_name = count + card_name.split('_').join(' ');
-            document.getElementById("chat-log").value += card_name + "\n";
-        }
-        document.getElementById("chat-log").value += "----------------------------------------------------------------------\n";
-        document.getElementById("chat-log").value += "Synapse\n\n";
-        const synapse_name = document.getElementById("synapse-card").children[0].id;
-        if (synapse_name != "Cardback") {
-            document.getElementById("chat-log").value += "1x " + synapse_name.split('_').join(' ');
-        }
-        document.getElementById("chat-log").value += "\n----------------------------------------------------------------------\n";
-        document.getElementById("chat-log").value += "Attachment\n\n";
-        var elements = document.getElementById("attachment-cards").children;
-        var text = "";
-        for (i = 0; i < elements.length; i++) {
-            var collection = elements[i].children;
-            var count = "";
-            var card_name = "";
-            for (j = 0; j < collection.length; j++) {
-                var id = collection[j].id;
-                var trail = "";
-                if (id.length > 5) {
-                    trail = id.slice(-6);
-                    console.log(trail);
-                }
-                if (trail === "-Count") {
-                    count = collection[j].innerHTML;
-                    count = count.split('').reverse().join('');
-                } else if (trail === "crease") {
-
-                } else {
-                    card_name = collection[j].id;
-                }
-                //console.log(count);
-                //console.log(card_name);
-                //console.log(collection[j].id);
+            document.getElementById("chat-log").value += "----------------------------------------------------------------------\n";
+            document.getElementById("chat-log").value += "Synapse\n\n";
+            const synapse_name = document.getElementById("synapse-card").children[0].id;
+            if (synapse_name != "Cardback") {
+                document.getElementById("chat-log").value += "1x " + synapse_name.split('_').join(' ');
             }
+            document.getElementById("chat-log").value += "\n----------------------------------------------------------------------\n";
+            document.getElementById("chat-log").value += "Attachment\n\n";
+            var elements = document.getElementById("attachment-cards").children;
+            var text = "";
+            for (i = 0; i < elements.length; i++) {
+                var collection = elements[i].children;
+                var count = "";
+                var card_name = "";
+                for (j = 0; j < collection.length; j++) {
+                    var id = collection[j].id;
+                    var trail = "";
+                    if (id.length > 5) {
+                        trail = id.slice(-6);
+                        console.log(trail);
+                    }
+                    if (trail === "-Count") {
+                        count = collection[j].innerHTML;
+                        count = count.split('').reverse().join('');
+                    } else if (trail === "crease") {
 
-            card_name = count + card_name.split('_').join(' ');
-            document.getElementById("chat-log").value += card_name + "\n";
-        }
-        document.getElementById("chat-log").value += "\n----------------------------------------------------------------------\n";
-        document.getElementById("chat-log").value += "Event\n\n";
-        var elements = document.getElementById("event-cards").children;
-        var text = "";
-        for (i = 0; i < elements.length; i++) {
-            var collection = elements[i].children;
-            var count = "";
-            var card_name = "";
-            for (j = 0; j < collection.length; j++) {
-                var id = collection[j].id;
-                var trail = "";
-                if (id.length > 5) {
-                    trail = id.slice(-6);
-                    console.log(trail);
+                    } else {
+                        card_name = collection[j].id;
+                    }
+                    //console.log(count);
+                    //console.log(card_name);
+                    //console.log(collection[j].id);
                 }
-                if (trail === "-Count") {
-                    count = collection[j].innerHTML;
-                    count = count.split('').reverse().join('');
-                } else if (trail === "crease") {
 
-                } else {
-                    card_name = collection[j].id;
-                }
-                //console.log(count);
-                //console.log(card_name);
-                //console.log(collection[j].id);
+                card_name = count + card_name.split('_').join(' ');
+                document.getElementById("chat-log").value += card_name + "\n";
             }
+            document.getElementById("chat-log").value += "\n----------------------------------------------------------------------\n";
+            document.getElementById("chat-log").value += "Event\n\n";
+            var elements = document.getElementById("event-cards").children;
+            var text = "";
+            for (i = 0; i < elements.length; i++) {
+                var collection = elements[i].children;
+                var count = "";
+                var card_name = "";
+                for (j = 0; j < collection.length; j++) {
+                    var id = collection[j].id;
+                    var trail = "";
+                    if (id.length > 5) {
+                        trail = id.slice(-6);
+                        console.log(trail);
+                    }
+                    if (trail === "-Count") {
+                        count = collection[j].innerHTML;
+                        count = count.split('').reverse().join('');
+                    } else if (trail === "crease") {
 
-            card_name = count + card_name.split('_').join(' ');
-            document.getElementById("chat-log").value += card_name + "\n";
+                    } else {
+                        card_name = collection[j].id;
+                    }
+                    //console.log(count);
+                    //console.log(card_name);
+                    //console.log(collection[j].id);
+                }
+
+                card_name = count + card_name.split('_').join(' ');
+                document.getElementById("chat-log").value += card_name + "\n";
+            }
+            document.getElementById("chat-log").value += "\n----------------------------------------------------------------------\n";
+            document.getElementById("chat-log").value += "Planet\n\n";
         }
-        document.getElementById("chat-log").value += "\n----------------------------------------------------------------------\n";
-        document.getElementById("chat-log").value += "Planet\n\n";
-    }
 
         function sendDeck() {
             var chat_holder = document.querySelector('#chat-log').value;
@@ -353,11 +353,11 @@
                         newPart += holderName;
                         newPart += `><div id=`;
                         newPart += idName;
-                        newPart += ` class="no-break">`;
+                        newPart += ` class="no-break-name">`;
                         newPart += cardName;
                         newPart += `</div><div id=`;
                         newPart += idName + "-Count";
-                        newPart += ` class="no-break"> x1</div>`
+                        newPart += ` class="no-break-count"> x1</div>`
                         newPart += `</div>`
                         document.getElementById("signature-squad-cards").innerHTML += newPart;
                     }
@@ -381,11 +381,11 @@
                 newPart += holderName;
                 newPart += `><div id=`;
                 newPart += idName;
-                newPart += ` class="no-break">`;
+                newPart += ` class="no-break-name">`;
                 newPart += cardName;
                 newPart += `</div><div id=`;
                 newPart += idName + "-Count";
-                newPart += ` class="no-break"> x1</div><input id=`;
+                newPart += ` class="no-break-count"> x1</div><input id=`;
                 newPart += idName + "-Increase";
                 newPart += ` type="button" value="+" onclick="incrementCount(this.id);"><input id=`;
                 newPart += idName + "-Decrease";

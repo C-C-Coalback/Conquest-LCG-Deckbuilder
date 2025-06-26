@@ -10,7 +10,11 @@
     height: 70px;
 }
 
-.no-break {
+.no-break-name {
+    display: inline;
+}
+
+.no-break-count {
     display: inline;
 }
 
