@@ -53,6 +53,48 @@
         var name_warlord = "";
         var ally_faction = "";
 
+        document.querySelector('#card-input').focus();
+        document.querySelector('#card-input').onkeyup = function(e) {
+            if (e.key === 'Enter') {  // enter, return
+                document.querySelector('#card-submit').click();
+            }
+        };
+
+        function decreaseCount(id) {
+            var idName = id.slice(0,-9)
+            var countName = idName + "-Count";
+            var e = document.getElementById(countName);
+            if (typeof(e) != 'undefined' && e != null) {
+                var str = e.innerHTML;
+                if (str[2] !== "1") {
+                    str = decrementString(str);
+                    e.innerHTML = str;
+                } else {
+                    var holderName = idName + "-Holder";
+                    var x = document.getElementById(holderName);
+                    x.remove();
+                }
+            }
+        }
+
+        function selectElement(id, valueToSelect) {
+            let element = document.getElementById(id);
+            element.value = valueToSelect;
+        }
+
+        function incrementCount(id) {
+            var idName = id.slice(0,-9)
+            var countName = idName + "-Count";
+            var e = document.getElementById(countName);
+            if (typeof(e) != 'undefined' && e != null) {
+                var str = e.innerHTML;
+                if (str[2] !== "3") {
+                    str = incrementString(str);
+                    e.innerHTML = str;
+                }
+            }
+        }
+
         function setInitialDeck() {
             document.querySelector('#chat-log').value = ""
             document.querySelector('#chat-log').value += '\n----------------------------------------------------------------------\n\n\n----------------------------------------------------------------------\n';
@@ -99,6 +141,42 @@
             return str.substr(0, count.index) + (++count[0]);
         };
 
+        function decrementString(str) {
+            var count = str.match(/\d*$/);
+            return str.substr(0, count.index) + (--count[0]);
+        };
+
+        function addSigSquad(signature_squad) {
+            for (var i = 0; i < signature_squad.length; i++){
+                var sig_copies = signature_squad[i][0];
+                var sig_card_name = signature_squad[i].slice(3);
+                var cardName = sig_card_name;
+                var idName = sig_card_name.split(' ').join('_');
+                var countName = idName + "-Count";
+                var holderName = idName + "-Holder";
+                for (var j = 0; j < sig_copies; j++){
+                    var e = document.getElementById(countName);
+                    if (typeof(e) != 'undefined' && e != null) {
+                        var str = e.innerHTML;
+                        str = incrementString(str);
+                        e.innerHTML = str;
+                    } else {
+                        var newPart = `<div class="card-name-and-count" id=`;
+                        newPart += holderName;
+                        newPart += `><div id=`;
+                        newPart += idName;
+                        newPart += ` class="no-break">`;
+                        newPart += cardName;
+                        newPart += `</div><div id=`;
+                        newPart += idName + "-Count";
+                        newPart += ` class="no-break"> x1</div>`
+                        newPart += `</div>`
+                        document.getElementById("signature-squad-cards").innerHTML += newPart;
+                    }
+                }
+            }
+        }
+
         document.querySelector('#card-submit').onclick = function(e) {
             const messageInputDom = document.querySelector('#card-input');
             const message = messageInputDom.value;
@@ -115,7 +193,7 @@
                 success: function(response) {
                     $('#responseMessage').text(response.message);  // Update the page dynamically
                     const message = response.message;
-                    if (message === "WARLORD") {
+                    if (message === "Warlord") {
                         document.getElementById("signature-squad-cards").innerHTML = `Signature Squad`;
                         document.getElementById("army-cards").innerHTML = `Army Units`;
                         document.getElementById("event-cards").innerHTML = `Events`;
@@ -127,33 +205,36 @@
                         document.getElementById('warlord-card').innerHTML = `<img id=` + name_warlord.split(' ').join('_') + ` src=` + route + ` class="db-image">`
                         document.getElementById('synapse-card').innerHTML = `<img id="Cardback" src="/static/images/CardImages/Cardback.jpg" class="db-image">`
                         signature_squad = response.sig_squad;
-                        for (var i = 0; i < signature_squad.length; i++){
-                            var sig_copies = signature_squad[i][0];
-                            var sig_card_name = signature_squad[i].slice(3);
-                            var cardName = sig_card_name;
-                            var idName = sig_card_name.split(' ').join('_');
-                            var countName = idName + "-Count";
-                            var holderName = idName + "-Holder";
-                            for (var j = 0; j < sig_copies; j++){
-                                var e = document.getElementById(countName);
-                                if (typeof(e) != 'undefined' && e != null) {
-                                    var str = e.innerHTML;
-                                    str = incrementString(str);
-                                    e.innerHTML = str;
-                                } else {
-                                    var newPart = `<div class="card-name-and-count" id=`;
-                                    newPart += holderName;
-                                    newPart += `><div id=`;
-                                    newPart += idName;
-                                    newPart += ` class="no-break">`;
-                                    newPart += cardName;
-                                    newPart += `</div><div id=`;
-                                    newPart += idName + "-Count";
-                                    newPart += ` class="no-break"> x1</div>`
-                                    newPart += `</div>`
-                                    document.getElementById("signature-squad-cards").innerHTML += newPart;
-                                }
+                        addSigSquad(signature_squad);
+                    } else if (message === "ADDCARD") {
+                        var card_type = response.card_type;
+                        var cardName = response.card_name;
+                        var idName = response.card_name.split(' ').join('_');
+                        var countName = idName + "-Count";
+                        var holderName = idName + "-Holder";
+                        var e = document.getElementById(countName);
+                        if (typeof(e) != 'undefined' && e != null) {
+                            var str = e.innerHTML;
+                            if (str[2] !== "3") {
+                                str = incrementString(str);
+                                e.innerHTML = str;
                             }
+                        } else {
+                            var newPart = `<div class="card-name-and-count" id=`;
+                            newPart += holderName;
+                            newPart += `><div id=`;
+                            newPart += idName;
+                            newPart += ` class="no-break">`;
+                            newPart += cardName;
+                            newPart += `</div><div id=`;
+                            newPart += idName + "-Count";
+                            newPart += ` class="no-break"> x1</div><input id=`;
+                            newPart += idName + "-Increase";
+                            newPart += ` type="button" value="+" onclick="incrementCount(this.id);"><input id=`;
+                            newPart += idName + "-Decrease";
+                            newPart += ` type="button" value="-" onclick="decreaseCount(this.id);">`
+                            newPart += `</div>`
+                            document.getElementById(card_type.toLowerCase() + "-cards").innerHTML += newPart;
                         }
                     }
                 }
