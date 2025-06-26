@@ -94,6 +94,11 @@
             });
         }
 
+        function incrementString(str) {
+            var count = str.match(/\d*$/);
+            return str.substr(0, count.index) + (++count[0]);
+        };
+
         document.querySelector('#card-submit').onclick = function(e) {
             const messageInputDom = document.querySelector('#card-input');
             const message = messageInputDom.value;
@@ -110,6 +115,47 @@
                 success: function(response) {
                     $('#responseMessage').text(response.message);  // Update the page dynamically
                     const message = response.message;
+                    if (message === "WARLORD") {
+                        document.getElementById("signature-squad-cards").innerHTML = `Signature Squad`;
+                        document.getElementById("army-cards").innerHTML = `Army Units`;
+                        document.getElementById("event-cards").innerHTML = `Events`;
+                        document.getElementById("attachment-cards").innerHTML = `Attachments`;
+                        document.getElementById("support-cards").innerHTML = `Supports`;
+                        name_warlord = response.warlord;
+                        route = "/static/images/CardImages/" + name_warlord.split(' ').join('_') + ".jpg";
+                        notCheckedAlly();
+                        document.getElementById('warlord-card').innerHTML = `<img id=` + name_warlord.split(' ').join('_') + ` src=` + route + ` class="db-image">`
+                        document.getElementById('synapse-card').innerHTML = `<img id="Cardback" src="/static/images/CardImages/Cardback.jpg" class="db-image">`
+                        signature_squad = response.sig_squad;
+                        for (var i = 0; i < signature_squad.length; i++){
+                            var sig_copies = signature_squad[i][0];
+                            var sig_card_name = signature_squad[i].slice(3);
+                            var cardName = sig_card_name;
+                            var idName = sig_card_name.split(' ').join('_');
+                            var countName = idName + "-Count";
+                            var holderName = idName + "-Holder";
+                            for (var j = 0; j < sig_copies; j++){
+                                var e = document.getElementById(countName);
+                                if (typeof(e) != 'undefined' && e != null) {
+                                    var str = e.innerHTML;
+                                    str = incrementString(str);
+                                    e.innerHTML = str;
+                                } else {
+                                    var newPart = `<div class="card-name-and-count" id=`;
+                                    newPart += holderName;
+                                    newPart += `><div id=`;
+                                    newPart += idName;
+                                    newPart += ` class="no-break">`;
+                                    newPart += cardName;
+                                    newPart += `</div><div id=`;
+                                    newPart += idName + "-Count";
+                                    newPart += ` class="no-break"> x1</div>`
+                                    newPart += `</div>`
+                                    document.getElementById("signature-squad-cards").innerHTML += newPart;
+                                }
+                            }
+                        }
+                    }
                 }
             });
             messageInputDom.value = '';

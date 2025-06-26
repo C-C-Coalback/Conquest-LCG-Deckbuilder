@@ -1,6 +1,7 @@
 from django.shortcuts import render
 from django.http import JsonResponse
 from conquestdb.cardscode import Initfunctions
+from conquestdb.cardscode import FindCard
 
 
 card_array = Initfunctions.init_player_cards()
@@ -37,4 +38,16 @@ def deck_data(request, room_name):
 
 
 def ajax_view(request):
+    if request.method == 'POST':
+        flag = request.POST.get('flag')
+        if flag == "ADDCARD":
+            card_name = request.POST.get('card_name')
+            card = FindCard.find_card(card_name, card_array, cards_dict)
+            if card.get_card_type() == "Warlord":
+                message = "WARLORD"
+                name_warlord = card.get_name()
+                faction = card.get_faction()
+                sig_squad = card.signature_squad
+                return JsonResponse({'message': message, 'warlord': name_warlord,
+                                     'sig_squad': sig_squad, 'main_faction': faction})
     return JsonResponse({'message': 'Invalid request'})
