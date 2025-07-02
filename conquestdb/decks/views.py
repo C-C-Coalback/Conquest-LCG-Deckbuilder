@@ -4,6 +4,7 @@ from conquestdb.cardscode import Initfunctions
 from conquestdb.cardscode import FindCard
 import os
 import copy
+import datetime
 
 
 card_array = Initfunctions.init_player_cards()
@@ -24,6 +25,15 @@ for key in range(len(apoka_errata_array)):
 
 
 alignment_wheel = ["Astra Militarum", "Space Marines", "Tau", "Eldar", "Dark Eldar", "Chaos", "Orks"]
+
+
+def convert_name_to_img_src(card_name):
+    card_name = card_name.replace("\"", "")
+    card_name = card_name.replace(" ", "_")
+    card_name = card_name.replace("'idden_Base", "idden_Base")
+    card_name = card_name + ".jpg"
+    card_name = "/static/images/CardImages/" + card_name
+    return card_name
 
 
 def clean_sent_deck(deck_message):
@@ -180,7 +190,37 @@ def decks(request):
 
 
 def my_decks(request):
-    return render(request, "decks/mydecks.html")
+    deck_names = []
+    deck_warlords = []
+    deck_dates = []
+    img_srcs = []
+    username = request.user.username
+    print(username)
+    directory = os.getcwd()
+    target_directory = directory + "/decks/deckstorage/" + username + "/"
+    if username:
+        if os.path.exists(target_directory):
+            for file in os.listdir(target_directory):
+                try:
+                    target_file = target_directory + file
+                    with open(target_file + "/content", "r") as f:
+                        data = f.read()
+                        split_data = data.split(sep="\n")
+                        deck_name = split_data[0]
+                        warlord_name = split_data[2]
+                        timestamp = os.path.getmtime(target_file + "/content")
+                        datestamp = datetime.datetime.fromtimestamp(timestamp)
+                        date = str(datestamp.date())
+                        deck_names.append(deck_name)
+                        deck_warlords.append(warlord_name)
+                        deck_dates.append(date)
+                        img_src = convert_name_to_img_src(warlord_name)
+                        img_srcs.append(img_src)
+                except Exception as e:
+                    print(e)
+                    pass
+    decks_var = zip(deck_names, deck_warlords, deck_dates, img_srcs)
+    return render(request, "decks/mydecks.html", {"decks": decks_var})
 
 
 def create_deck(request):

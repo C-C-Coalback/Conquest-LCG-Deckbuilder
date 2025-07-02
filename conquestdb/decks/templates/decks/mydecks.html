@@ -1,5 +1,25 @@
 {% extends "base.html" %}
 {% block title %}Deck Data{% endblock %}
 {% block content %}
+{% load static %}
+<link rel="stylesheet" href="{% static 'mydecks.css' %}">
     <h1>My Decks Placeholder</h1>
+    <div id="main-box">
+        {% if user.is_authenticated %}
+            <div id="main-decks-box">
+                <div id="decks-list">
+                    {% for name, warlord_name, date, img_src in decks %}
+                        <div class="deck-item-grid">
+                            <h3 class="decklist-name">{{ name }}</h3>
+                            <h3 class="warlord-name">{{ warlord_name }}</h3>
+                            <h3 class="date">{{ date }}</h3>
+                            <img class="preview-image" src={{ img_src }}>
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
+        {% else %}
+            <h2>You are not logged in; you must be logged in to view your decks</h2>
+        {% endif %}
+    </div>
 {% endblock %}
