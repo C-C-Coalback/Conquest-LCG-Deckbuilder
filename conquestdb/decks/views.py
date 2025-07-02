@@ -194,6 +194,7 @@ def my_decks(request):
     deck_warlords = []
     deck_dates = []
     img_srcs = []
+    keys = []
     username = request.user.username
     print(username)
     directory = os.getcwd()
@@ -216,10 +217,14 @@ def my_decks(request):
                         deck_dates.append(date)
                         img_src = convert_name_to_img_src(warlord_name)
                         img_srcs.append(img_src)
+                        f.close()
+                    with open(target_file + "/key", "r") as k:
+                        data = k.read()
+                        keys.append(data)
                 except Exception as e:
                     print(e)
                     pass
-    decks_var = zip(deck_names, deck_warlords, deck_dates, img_srcs)
+    decks_var = zip(deck_names, deck_warlords, deck_dates, img_srcs, keys)
     return render(request, "decks/mydecks.html", {"decks": decks_var})
 
 
@@ -227,8 +232,12 @@ def create_deck(request):
     return render(request, "decks/createdeck.html")
 
 
-def deck_data(request, room_name):
-    return render(request, "decks/deck_data.html", {"room_name": room_name})
+def user_deck_data(request, deck_creator):
+    return render(request, "decks/deck_data.html")
+
+
+def deck_data(request, deck_creator, deck_name):
+    return render(request, "decks/deck_data.html")
 
 
 def ajax_view(request):

@@ -8,13 +8,15 @@
         {% if user.is_authenticated %}
             <div id="main-decks-box">
                 <div id="decks-list">
-                    {% for name, warlord_name, date, img_src in decks %}
+                    {% for name, warlord_name, date, img_src, key in decks %}
+                        <a href="/decks/{{ user.username }}/{{ key }}">
                         <div class="deck-item-grid">
                             <h3 class="decklist-name">{{ name }}</h3>
                             <h3 class="warlord-name">{{ warlord_name }}</h3>
                             <h3 class="date">{{ date }}</h3>
                             <img class="preview-image" src={{ img_src }}>
                         </div>
+                        </a>
                     {% endfor %}
                 </div>
             </div>
