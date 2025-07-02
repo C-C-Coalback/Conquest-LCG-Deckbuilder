@@ -1,21 +1,105 @@
 {% extends "base.html" %}
 {% block title %}Deck Data{% endblock %}
 {% block content %}
+{% load static %}
+<link rel="stylesheet" href="{% static 'deck_data.css' %}">
+    <img id="cursor-follower" src="/static/images/Nazdreg.jpg">
     <h1>Deck Data Placeholder</h1>
     {% if deck_found == "Y" %}
         <h2>deck info</h2>
         <div id="main-deck-info">
-            <h2>{{ deck_name }}</h2>
-            <h3>{{ factions }}</h3>
-            <h3>{{ warlord }}</h3>
-            <h3>{{ synapse }}</h3>
-            <h3>{{ sig_cards }}</h3>
-            <h3>{{ army_cards }}</h3>
-            <h3>{{ support_cards }}</h3>
-            <h3>{{ attachment_cards }}</h3>
-            <h3>{{ event_cards }}</h3>
+            <div>
+                <h1 id="deck-name">{{ deck_name }} by {{ creator }}</h1>
+                <div id="deck-grid">
+                    <h3 class="grid-section" id="factions">{{ factions }}</h3>
+                    <div class="grid-section" id="warlord">
+                        <a href={{ warlord_link }}>
+                            <img id="warlord-image" src={{ warlord_img }}>
+                        </a>
+                    </div>
+                    <div class="grid-section" id="synapse">
+                        {% if synapse_img != "None" %}
+                        <a href={{ synapse_link }}>
+                            <img id="synapse-image" src={{ synapse_img }}>
+                        </a>
+                        {% endif %}
+                    </div>
+                    <h3 class="grid-section" id="pledge">{{ pledge }}</h3>
+                    <div class="grid-section" id="sig_cards">
+                        <h2>Signature Squad</h2>
+                        {% for card, link, src in sig_cards %}
+                            <a href={{ link }}>
+                                <div onmouseenter="showImg(this)" onmouseleave="clearImg()" data-src={{ src }}>
+                                    <h3 class="card-in-deck">{{ card }}</h3>
+                                </div>
+                            </a>
+                        {% endfor %}
+                    </div>
+                    <div class="grid-army-section" id="army_cards">
+                        <h2>Army Units</h2>
+                        {% for card, link, src in army_cards %}
+                            <a href={{ link }}>
+                                <div onmouseenter="showImg(this)" onmouseleave="clearImg()" data-src={{ src }}>
+                                    <h3 class="card-in-deck">{{ card }}</h3>
+                                </div>
+                            </a>
+                        {% endfor %}
+                    </div>
+                    <div class="grid-section" id="support_cards">
+                        <h2>Supports</h2>
+                        {% for card, link, src in support_cards %}
+                            <a href={{ link }}>
+                                <div onmouseenter="showImg(this)" onmouseleave="clearImg()" data-src={{ src }}>
+                                    <h3 class="card-in-deck">{{ card }}</h3>
+                                </div>
+                            </a>
+                        {% endfor %}
+                    </div>
+                    <div class="grid-section" id="attachment_cards">
+                        <h2>Attachments</h2>
+                        {% for card, link, src in attachment_cards %}
+                            <a href={{ link }}>
+                                <div onmouseenter="showImg(this)" onmouseleave="clearImg()" data-src={{ src }}>
+                                    <h3 class="card-in-deck">{{ card }}</h3>
+                                </div>
+                            </a>
+                        {% endfor %}
+                    </div>
+                    <div class="grid-section" id="event_cards">
+                        <h2>Events</h2>
+                        {% for card, link, src in event_cards %}
+                            <a href={{ link }}>
+                                <div onmouseenter="showImg(this)" onmouseleave="clearImg()" data-src={{ src }}>
+                                    <h3 class="card-in-deck">{{ card }}</h3>
+                                </div>
+                            </a>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
         </div>
     {% else %}
         <h2>deck not found</h2>
     {% endif %}
+<script>
+    var mouse_x = 0;
+    var mouse_y = 0;
+    onmousemove = function(e){
+        mouse_x = e.clientX;
+        mouse_y = e.clientY;
+    }
+    function showImg(el) {
+        var new_src = el.getAttribute('data-src');
+        cursor_img = document.getElementById("cursor-follower");
+        cursor_img.style.left = mouse_x + 30 + "px";
+        cursor_img.style.top = mouse_y + 30 + "px";
+        cursor_img.src = new_src;
+        cursor_img.style.display = "block";
+    }
+    function clearImg() {
+        cursor_img = document.getElementById("cursor-follower");
+        cursor_img.src = "/static/images/Nazdreg.jpg";
+        cursor_img.style.display = "none";
+    }
+</script>
 {% endblock %}

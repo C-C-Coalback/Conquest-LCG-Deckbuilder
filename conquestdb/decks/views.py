@@ -19,7 +19,7 @@ apoka_errata_dict = {}
 banned_cards = ["Bonesinger Choir", "Squiggoth Brute", "Corrupted Teleportarium", "Gun Drones", "Archon's Palace",
                 "Land Speeder Vengeance", "Sowing Chaos", "Smasha Gun Battery", "The Prince's Might",
                 "Purveyor of Hubris", "Doom", "Exterminatus", "Mind Shackle Scarab",
-                "Crypt of Saint Camila", "Warp Storm"]
+                "Crypt of Saint Camila", "Warpstorm"]
 for key in range(len(card_array)):
     cards_dict[card_array[key].name] = card_array[key]
     images_dict[card_array[key].image_name] = card_array[key]
@@ -51,6 +51,14 @@ def convert_name_to_img_src(card_name):
     card_name = card_name.replace("'idden_Base", "idden_Base")
     card_name = card_name + ".jpg"
     card_name = "/static/images/CardImages/" + card_name
+    return card_name
+
+
+def convert_name_to_hyperlink(card_name):
+    card_name = card_name.replace("\"", "")
+    card_name = card_name.replace(" ", "_")
+    card_name = card_name.replace("'idden_Base", "idden_Base")
+    card_name = "/cards/" + card_name
     return card_name
 
 
@@ -315,19 +323,59 @@ def deck_data(request, deck_creator, deck_key):
         support_cards = deck_list[support_pos + 1:synapse_pos]
         attachment_cards = deck_list[attachment_pos + 1:event_pos]
         event_cards = deck_list[event_pos + 1:]
+        warlord_img = convert_name_to_img_src(warlord_name)
+        warlord_link = convert_name_to_hyperlink(warlord_name)
+        synapse_img = "None"
+        synapse_link = "None"
+        pledge = ""
+        if synapse_name:
+            synapse_img = convert_name_to_img_src(synapse_name)
+            synapse_link = convert_name_to_hyperlink(synapse_name)
         print(sig_cards)
         print(army_cards)
         print(support_cards)
         print(attachment_cards)
         print(event_cards)
+        links_to_sig_cards = []
+        links_to_army_cards = []
+        links_to_support_cards = []
+        links_to_attachment_cards = []
+        links_to_event_cards = []
+        sig_srcs = []
+        army_srcs = []
+        support_srcs = []
+        attachment_srcs = []
+        event_srcs = []
+        for card_name in sig_cards:
+            links_to_sig_cards.append(convert_name_to_hyperlink(card_name[3:]))
+            sig_srcs.append(convert_name_to_img_src(card_name[3:]))
+        for card_name in army_cards:
+            links_to_army_cards.append(convert_name_to_hyperlink(card_name[3:]))
+            army_srcs.append(convert_name_to_img_src(card_name[3:]))
+        for card_name in support_cards:
+            links_to_support_cards.append(convert_name_to_hyperlink(card_name[3:]))
+            support_srcs.append(convert_name_to_img_src(card_name[3:]))
+        for card_name in attachment_cards:
+            links_to_attachment_cards.append(convert_name_to_hyperlink(card_name[3:]))
+            attachment_srcs.append(convert_name_to_img_src(card_name[3:]))
+        for card_name in event_cards:
+            links_to_event_cards.append(convert_name_to_hyperlink(card_name[3:]))
+            event_srcs.append(convert_name_to_img_src(card_name[3:]))
+        sig_cards = zip(sig_cards, links_to_sig_cards, sig_srcs)
+        army_cards = zip(army_cards, links_to_army_cards, army_srcs)
+        support_cards = zip(support_cards, links_to_support_cards, support_srcs)
+        attachment_cards = zip(attachment_cards, links_to_attachment_cards, attachment_srcs)
+        event_cards = zip(event_cards, links_to_event_cards, event_srcs)
         return render(request, "decks/deck_data.html", {"deck_found": deck_found, "deck_content": deck_content,
                                                         "description": description, "deck_list": deck_list,
-                                                        "warlord": warlord_name, "synapse": synapse_name,
                                                         "factions": factions, "deck_name": deck_name,
                                                         "sig_cards": sig_cards, "army_cards": army_cards,
                                                         "support_cards": support_cards,
                                                         "attachment_cards": attachment_cards,
-                                                        "event_cards": event_cards})
+                                                        "event_cards": event_cards,
+                                                        "warlord_img": warlord_img, "synapse_img": synapse_img,
+                                                        "warlord_link": warlord_link, "synapse_link": synapse_link,
+                                                        "pledge": pledge, "creator": deck_creator})
     return render(request, "decks/deck_data.html", {"deck_found": deck_found})
 
 

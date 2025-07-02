@@ -1,0 +1,89 @@
+#main-deck-info {
+    margin-top: 50px;
+    display: flex;
+    justify-content: center;
+}
+
+#deck-grid {
+    width: 1000px;
+    height: 1000px;
+    border: 5px solid green;
+    background: #808080;
+    display: grid;
+    grid-row-gap: 1px;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    grid-template-rows: 1fr 1fr 1fr;
+    grid-template-areas:
+    "warlord factions army_cards support_cards"
+    "synapse sig_cards army_cards attachment_cards"
+    "pledge sig_cards army_cards event_cards";
+}
+
+.mouseOver {
+    display: none;
+    position: relative;
+    bottom: -50px;
+    width: 200px;
+    height:280px;
+}
+
+#warlord-image {
+    height:280px;
+    width:200px;
+}
+
+#synapse-image {
+    height:280px;
+    width:200px;
+}
+
+#cursor-follower {
+    position: absolute;
+    display: none;
+}
+
+.grid-section {
+    overflow-y: auto;
+    max-height: 330px;
+}
+
+.grid-army-section {
+    overflow-y: auto;
+    max-height: 1000px;
+}
+
+#factions {
+    grid-area: factions;
+}
+
+#warlord {
+    grid-area: warlord;
+}
+
+#synapse {
+    grid-area: synapse;
+}
+
+#pledge {
+    grid-area: pledge;
+}
+
+#sig_cards {
+    grid-area: sig_cards;
+}
+
+#army_cards {
+    grid-area: army_cards;
+}
+
+#support_cards {
+    grid-area: support_cards;
+}
+
+#event_cards {
+    grid-area: event_cards;
+}
+
+#attachment_cards {
+    grid-area:attachment_cards;
+}

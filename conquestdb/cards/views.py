@@ -17,7 +17,7 @@ apoka_errata_dict = {}
 banned_cards = ["Bonesinger Choir", "Squiggoth Brute", "Corrupted Teleportarium", "Gun Drones", "Archon's Palace",
                 "Land Speeder Vengeance", "Sowing Chaos", "Smasha Gun Battery", "The Prince's Might",
                 "Purveyor of Hubris", "Doom", "Exterminatus", "Mind Shackle Scarab",
-                "Crypt of Saint Camila", "Warp Storm"]
+                "Crypt of Saint Camila", "Warpstorm"]
 for key in range(len(card_array)):
     cards_dict[card_array[key].name] = card_array[key]
     images_dict[card_array[key].image_name] = card_array[key]
