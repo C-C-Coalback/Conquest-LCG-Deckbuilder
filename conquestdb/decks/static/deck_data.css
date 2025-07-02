@@ -19,12 +19,11 @@
     "pledge sig_cards army_cards event_cards";
 }
 
-.mouseOver {
-    display: none;
-    position: relative;
-    bottom: -50px;
-    width: 200px;
-    height:280px;
+#cursor-follower {
+    position:absolute;
+    width: 300px;
+    height: 420px;
+    display:none;
 }
 
 #warlord-image {

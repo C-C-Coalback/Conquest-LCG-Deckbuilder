@@ -14,9 +14,9 @@
     border: 5px solid green;
 }
 
-#cursor-follower {
-    position:absolute;
-    display:none;
+.preview-image {
+    width: 100px;
+    height: 140px;
 }
 
 .deck-item-grid {
