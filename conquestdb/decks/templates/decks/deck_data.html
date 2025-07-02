@@ -5,9 +5,16 @@
     {% if deck_found == "Y" %}
         <h2>deck info</h2>
         <div id="main-deck-info">
-
+            <h2>{{ deck_name }}</h2>
+            <h3>{{ factions }}</h3>
+            <h3>{{ warlord }}</h3>
+            <h3>{{ synapse }}</h3>
+            <h3>{{ sig_cards }}</h3>
+            <h3>{{ army_cards }}</h3>
+            <h3>{{ support_cards }}</h3>
+            <h3>{{ attachment_cards }}</h3>
+            <h3>{{ event_cards }}</h3>
         </div>
-        <h3>{{ deck_list|linebreaks }}</h3>
     {% else %}
         <h2>deck not found</h2>
     {% endif %}

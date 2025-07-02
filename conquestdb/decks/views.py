@@ -261,9 +261,6 @@ def deck_data(request, deck_creator, deck_key):
     target_directory = directory + "/decks/deckstorage/" + username + "/"
     permitted_to_read = False
     stored_target_file = ""
-    deck_content = ""
-    description = ""
-    deck_list = []
     if os.path.exists(target_directory):
         for file in os.listdir(target_directory):
             try:
@@ -288,8 +285,50 @@ def deck_data(request, deck_creator, deck_key):
                                 deck_list))
         deck_list = list(filter(("Planet").__ne__, deck_list))
         deck_list = list(filter(("").__ne__, deck_list))
-    return render(request, "decks/deck_data.html", {"deck_found": deck_found, "deck_content": deck_content,
-                                                    "description": description, "deck_list": deck_list})
+        deck_name = deck_list[0]
+        warlord_name = deck_list[1]
+        factions = deck_list[2]
+        sig_pos = -1
+        army_pos = -1
+        support_pos = -1
+        attachment_pos = -1
+        event_pos = -1
+        synapse_pos = -1
+        synapse_name = ""
+        for i in range(len(deck_list)):
+            if deck_list[i] == "Signature Squad":
+                sig_pos = i
+            if deck_list[i] == "Army":
+                army_pos = i
+            if deck_list[i] == "Support":
+                support_pos = i
+            if deck_list[i] == "Event":
+                event_pos = i
+            if deck_list[i] == "Attachment":
+                attachment_pos = i
+            if deck_list[i] == "Synapse":
+                if deck_list[i + 1] != "Attachment":
+                    synapse_name = deck_list[i + 1]
+                synapse_pos = i
+        sig_cards = deck_list[sig_pos + 1:army_pos]
+        army_cards = deck_list[army_pos + 1:support_pos]
+        support_cards = deck_list[support_pos + 1:synapse_pos]
+        attachment_cards = deck_list[attachment_pos + 1:event_pos]
+        event_cards = deck_list[event_pos + 1:]
+        print(sig_cards)
+        print(army_cards)
+        print(support_cards)
+        print(attachment_cards)
+        print(event_cards)
+        return render(request, "decks/deck_data.html", {"deck_found": deck_found, "deck_content": deck_content,
+                                                        "description": description, "deck_list": deck_list,
+                                                        "warlord": warlord_name, "synapse": synapse_name,
+                                                        "factions": factions, "deck_name": deck_name,
+                                                        "sig_cards": sig_cards, "army_cards": army_cards,
+                                                        "support_cards": support_cards,
+                                                        "attachment_cards": attachment_cards,
+                                                        "event_cards": event_cards})
+    return render(request, "decks/deck_data.html", {"deck_found": deck_found})
 
 
 def ajax_view(request):
