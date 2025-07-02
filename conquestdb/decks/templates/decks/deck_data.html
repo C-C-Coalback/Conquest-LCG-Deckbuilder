@@ -2,4 +2,13 @@
 {% block title %}Deck Data{% endblock %}
 {% block content %}
     <h1>Deck Data Placeholder</h1>
+    {% if deck_found == "Y" %}
+        <h2>deck info</h2>
+        <div id="main-deck-info">
+
+        </div>
+        <h3>{{ deck_list|linebreaks }}</h3>
+    {% else %}
+        <h2>deck not found</h2>
+    {% endif %}
 {% endblock %}

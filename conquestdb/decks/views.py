@@ -5,6 +5,9 @@ from conquestdb.cardscode import FindCard
 import os
 import copy
 import datetime
+import random
+import string
+
 
 
 card_array = Initfunctions.init_player_cards()
@@ -25,6 +28,21 @@ for key in range(len(apoka_errata_array)):
 
 
 alignment_wheel = ["Astra Militarum", "Space Marines", "Tau", "Eldar", "Dark Eldar", "Chaos", "Orks"]
+
+
+def check_if_key_in_use(key_string):
+    directory = os.getcwd()
+    target_directory = directory + "/decks/deckstorage/"
+    for username in os.listdir(target_directory):
+        if username:
+            second_target_directory = target_directory + "/" + username
+            for deck_name in os.listdir(second_target_directory):
+                if os.path.exists(second_target_directory + "/" + deck_name + "/key"):
+                    with open(second_target_directory + "/" + deck_name + "/key", "r") as f:
+                        this_key = f.read()
+                        if this_key == key_string:
+                            return True
+    return False
 
 
 def convert_name_to_img_src(card_name):
@@ -180,6 +198,7 @@ def deck_validation(deck, remaining_signature_squad, factions, warlord=""):
         return "No Synapse Unit Given"
     if card_count < 42:
         print("Too few cards")
+        print(card_count)
         return "Too few cards: " + str(card_count)
     print("No issues")
     return "SUCCESS"
@@ -196,7 +215,6 @@ def my_decks(request):
     img_srcs = []
     keys = []
     username = request.user.username
-    print(username)
     directory = os.getcwd()
     target_directory = directory + "/decks/deckstorage/" + username + "/"
     if username:
@@ -233,11 +251,45 @@ def create_deck(request):
 
 
 def user_deck_data(request, deck_creator):
-    return render(request, "decks/deck_data.html")
+    return render(request, "decks/user_deck_data.html")
 
 
-def deck_data(request, deck_creator, deck_name):
-    return render(request, "decks/deck_data.html")
+def deck_data(request, deck_creator, deck_key):
+    deck_found = "N"
+    username = request.user.username
+    directory = os.getcwd()
+    target_directory = directory + "/decks/deckstorage/" + username + "/"
+    permitted_to_read = False
+    stored_target_file = ""
+    deck_content = ""
+    description = ""
+    deck_list = []
+    if os.path.exists(target_directory):
+        for file in os.listdir(target_directory):
+            try:
+                target_file = target_directory + file
+                with open(target_file + "/key", "r") as f:
+                    data = f.read()
+                    if data == deck_key:
+                        if username == deck_creator:
+                            permitted_to_read = True
+                            stored_target_file = target_file
+            except Exception as e:
+                print(e)
+                pass
+    if permitted_to_read:
+        deck_found = "Y"
+        with open(stored_target_file + "/content", "r") as f:
+            deck_content = f.read()
+        with open(stored_target_file + "/desc", "r") as f:
+            description = f.read()
+        deck_list = deck_content.split(sep="\n")
+        deck_list = list(filter(("----------------------------------------------------------------------").__ne__,
+                                deck_list))
+        deck_list = list(filter(("Planet").__ne__, deck_list))
+        deck_list = list(filter(("").__ne__, deck_list))
+    return render(request, "decks/deck_data.html", {"deck_found": deck_found, "deck_content": deck_content,
+                                                    "description": description, "deck_list": deck_list})
 
 
 def ajax_view(request):
@@ -279,10 +331,26 @@ def ajax_view(request):
                     file.write(text)
                 with open(target_directory + "/desc", "w") as file:
                     file.write(description)
+                set_key = False
+                num_tries = 0
+                while not set_key:
+                    new_key = ''.join(random.choice(
+                        string.ascii_uppercase + string.ascii_lowercase + string.digits
+                    ) for _ in range(16 + num_tries))
+                    print(new_key)
+                    if not check_if_key_in_use(new_key):
+                        with open(target_directory + "/key", "w") as file:
+                            file.write(new_key)
+                        set_key = True
+                    if num_tries > 100:
+                        with open(target_directory + "/key", "w") as file:
+                            file.write(new_key)
+                        return JsonResponse({'message': 'deck ok, but problem occurred with the key. Contact admin.'})
+                    num_tries += 1
                 return JsonResponse({'message': 'deck ok'})
             message_to_send = "Feedback/" + message_to_send
             message = message_to_send
-            return JsonResponse({'message': 'deck not ok'})
+            return JsonResponse({'message': message})
         if flag == "SETALLY":
             ally_name = request.POST.get('ally_faction')
             warlord_name = request.POST.get('warlord_name')
