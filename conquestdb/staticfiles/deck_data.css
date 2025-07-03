@@ -1,5 +1,8 @@
 #main-deck-info {
+    position: relative;
     margin-top: 50px;
+    left: 0;
+    width:max(1200px, 100%);
     display: flex;
     justify-content: center;
 }

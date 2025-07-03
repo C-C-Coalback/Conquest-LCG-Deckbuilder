@@ -15,8 +15,8 @@
 }
 
 .preview-image {
-    width: 100px;
-    height: 140px;
+    width: 120px;
+    height: 168px;
 }
 
 .deck-item-grid {
@@ -24,7 +24,7 @@
     height: auto;
     border: 5px solid green;
     display: grid;
-    grid-template-columns: 300px 100px;
+    grid-template-columns: 280px 120px;
     grid-template-areas:
     "deck-name warlord-card"
     "warlord-name warlord-card"
