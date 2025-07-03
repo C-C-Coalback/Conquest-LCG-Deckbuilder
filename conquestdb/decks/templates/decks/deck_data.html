@@ -3,13 +3,17 @@
 {% block content %}
 {% load static %}
 <link rel="stylesheet" href="{% static 'deck_data.css' %}">
-    <img id="cursor-follower" src="/static/images/Nazdreg.jpg">
     <h1>Deck Data Placeholder</h1>
     {% if deck_found == "Y" %}
         <h2>deck info</h2>
         <div id="main-deck-info">
             <div>
-                <h1 id="deck-name">{{ deck_name }} by {{ creator }}</h1>
+                <div>
+                    <h1 id="deck-name">{{ deck_name }} by {{ creator }}</h1>
+                    <button class="button" id="publish">Publish Deck</button>
+                    <button class="button" id="modify">Modify Deck</button>
+                    <button class="button" id="delete">Delete Deck</button>
+                </div><br>
                 <div id="deck-grid">
                     <h3 class="grid-section" id="factions">{{ factions }}</h3>
                     <div class="grid-section" id="warlord">
@@ -78,6 +82,7 @@
                 </div>
             </div>
         </div>
+        <img id="cursor-follower" src="/static/images/Nazdreg.jpg">
     {% else %}
         <h2>deck not found</h2>
     {% endif %}
