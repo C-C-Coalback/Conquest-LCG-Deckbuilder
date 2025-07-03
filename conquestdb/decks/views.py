@@ -254,8 +254,30 @@ def my_decks(request):
     return render(request, "decks/mydecks.html", {"decks": decks_var})
 
 
+def modify_deck(request, deck_key):
+    username = request.user.username
+    directory = os.getcwd()
+    target_directory = directory + "/decks/deckstorage/" + username + "/"
+    data = []
+    desc = ""
+    if username:
+        if os.path.exists(target_directory):
+            for file in os.listdir(target_directory):
+                target_file = target_directory + file
+                with open(target_file + "/key", "r") as k:
+                    current_key = k.read()
+                    if current_key == deck_key:
+                        with open(target_file + "/content", "r") as f:
+                            data = f.read().replace("\n", "|||")
+                        with open(target_file + "/desc", "r") as f:
+                            desc = f.read()
+    if data:
+        return render(request, "decks/createdeck.html", {"edit": "T", "data": data, "desc": desc})
+    return render(request, "decks/createdeck.html", {"edit": "F", "data": "", "desc": ""})
+
+
 def create_deck(request):
-    return render(request, "decks/createdeck.html")
+    return render(request, "decks/createdeck.html", {"edit": "F", "data": "", "desc": ""})
 
 
 def user_deck_data(request, deck_creator):
@@ -386,6 +408,7 @@ def ajax_view(request):
             text = request.POST.get('deck_text')
             username = request.POST.get('username')
             description = request.POST.get('description')
+            force_send = request.POST.get('force_send')
             message_to_send = ""
             text = text.replace("\"Subject: &Omega;-X62113\"", "")
             text = text.replace("idden Base", "'idden Base")
@@ -408,9 +431,13 @@ def ajax_view(request):
                 target_directory = directory + "/decks/deckstorage/" + username + "/"
                 os.makedirs(target_directory, exist_ok=True)
                 target_directory = directory + "/decks/deckstorage/" + username + "/" + deck_name
+                set_key = False
                 if not os.path.exists(target_directory):
                     print("Path does not exist")
                     os.mkdir(target_directory)
+                elif force_send == "T":
+                    print("Overwriting path")
+                    set_key = True
                 else:
                     print("path exists")
                     return JsonResponse({'message': 'deck with that name already exists'})
@@ -418,7 +445,6 @@ def ajax_view(request):
                     file.write(text)
                 with open(target_directory + "/desc", "w") as file:
                     file.write(description)
-                set_key = False
                 num_tries = 0
                 while not set_key:
                     new_key = ''.join(random.choice(
@@ -432,7 +458,7 @@ def ajax_view(request):
                     if num_tries > 100:
                         with open(target_directory + "/key", "w") as file:
                             file.write(new_key)
-                        return JsonResponse({'message': 'deck ok, but problem occurred with the key. Contact admin.'})
+                        return JsonResponse({'message': 'deck ok'})
                     num_tries += 1
                 return JsonResponse({'message': 'deck ok'})
             message_to_send = "Feedback/" + message_to_send

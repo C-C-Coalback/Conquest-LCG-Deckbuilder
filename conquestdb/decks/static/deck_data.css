@@ -1,8 +1,8 @@
 #main-deck-info {
     position: relative;
     margin-top: 50px;
-    left: max(0, 10% - 100px);
-    width:max(1350px, 100%);
+    left: 0;
+    width:max(1100px, 100%);
     overflow-x: auto;
     display: flex;
     justify-content: center;

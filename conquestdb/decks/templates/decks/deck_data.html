@@ -10,9 +10,9 @@
             <div>
                 <div>
                     <h1 id="deck-name">{{ deck_name }} by {{ creator }}</h1>
-                    <button class="button" id="publish">Publish Deck</button>
-                    <button class="button" id="modify">Modify Deck</button>
-                    <button class="button" id="delete">Delete Deck</button>
+                    <button class="button" id="publish" onclick="publishDeck();">Publish Deck</button>
+                    <button class="button" id="modify" onclick="modifyDeck();">Modify Deck</button>
+                    <button class="button" id="delete" onclick="deleteDeck();">Delete Deck</button>
                 </div><br>
                 <div id="deck-grid">
                     <h3 class="grid-section" id="factions">{{ factions }}</h3>
@@ -82,7 +82,7 @@
                 </div>
             </div>
         </div>
-        <img id="cursor-follower" src="/static/images/Nazdreg.jpg">
+        <img id="cursor-follower" src="/static/images/CardImages/Cardback.jpg">
     {% else %}
         <h2>deck not found</h2>
     {% endif %}
@@ -103,8 +103,25 @@
     }
     function clearImg() {
         cursor_img = document.getElementById("cursor-follower");
-        cursor_img.src = "/static/images/Nazdreg.jpg";
+        cursor_img.src = "/static/images/CardImages/Cardback.jpg";
         cursor_img.style.display = "none";
+    }
+
+    function publishDeck() {
+
+    }
+    function modifyDeck() {
+        const current_url = document.URL;
+        const url_split = current_url.split("/");
+        const key = url_split[url_split.length - 2];
+        console.log(key);
+        location.href = "/decks/create_deck/" + key + "/";
+    }
+    function deleteDeck() {
+        const current_url = document.URL;
+        const url_split = current_url.split("/");
+        const key = url_split[url_split.length - 2];
+        console.log(key);
     }
 </script>
 {% endblock %}
