@@ -43,6 +43,16 @@ def check_if_key_in_use(key_string):
                         this_key = f.read()
                         if this_key == key_string:
                             return True
+    target_directory = directory + "/decks/publisheddecks/"
+    for username in os.listdir(target_directory):
+        if username:
+            second_target_directory = target_directory + "/" + username
+            for deck_name in os.listdir(second_target_directory):
+                if os.path.exists(second_target_directory + "/" + deck_name + "/key"):
+                    with open(second_target_directory + "/" + deck_name + "/key", "r") as f:
+                        this_key = f.read()
+                        if this_key == key_string:
+                            return True
     return False
 
 
@@ -449,19 +459,20 @@ def publish_deck(request, deck_key):
                         print("already published this deck!")
             num_tries = 0
             set_key = False
-            while not set_key:
-                new_key = ''.join(random.choice(
-                    string.ascii_uppercase + string.ascii_lowercase + string.digits
-                ) for _ in range(16 + num_tries))
-                print(new_key)
-                if not check_if_key_in_use(new_key):
-                    with open(target_directory + file + "/key", "w") as key_file:
-                        key_file.write(new_key)
-                    set_key = True
-                if num_tries > 100:
-                    with open(target_directory + file + "/key", "w") as key_file:
-                        key_file.write(new_key)
-                num_tries += 1
+            if published_deck:
+                while not set_key:
+                    new_key = ''.join(random.choice(
+                        string.ascii_uppercase + string.ascii_lowercase + string.digits
+                    ) for _ in range(16 + num_tries))
+                    print(new_key)
+                    if not check_if_key_in_use(new_key):
+                        with open(target_directory + file + "/key", "w") as key_file:
+                            key_file.write(new_key)
+                        set_key = True
+                    if num_tries > 100:
+                        with open(target_directory + file + "/key", "w") as key_file:
+                            key_file.write(new_key)
+                    num_tries += 1
         except Exception as e:
             print(e)
     return HttpResponseRedirect('/decks/my_decks/')
