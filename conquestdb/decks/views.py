@@ -7,7 +7,7 @@ import copy
 import datetime
 import random
 import string
-
+import shutil
 
 
 card_array = Initfunctions.init_player_cards()
@@ -42,6 +42,28 @@ def check_if_key_in_use(key_string):
                         this_key = f.read()
                         if this_key == key_string:
                             return True
+    return False
+
+
+def delete_private_deck(key_string, name_user):
+    directory = os.getcwd()
+    target_directory = directory + "/decks/deckstorage/"
+    try:
+        for username in os.listdir(target_directory):
+            if username == name_user:
+                second_target_directory = target_directory + "/" + username
+                for deck_name in os.listdir(second_target_directory):
+                    if os.path.exists(second_target_directory + "/" + deck_name + "/key"):
+                        is_the_file = False
+                        with open(second_target_directory + "/" + deck_name + "/key", "r") as f:
+                            this_key = f.read()
+                            if this_key == key_string:
+                                is_the_file = True
+                        if is_the_file:
+                            shutil.rmtree(second_target_directory + "/" + deck_name)
+                            return True
+    except Exception as E:
+        print(E)
     return False
 
 
@@ -214,6 +236,12 @@ def deck_validation(deck, remaining_signature_squad, factions, warlord=""):
 
 def decks(request):
     return render(request, "decks/home_decks.html")
+
+
+def delete_deck(request, deck_key):
+    print("delete deck")
+    delete_private_deck(deck_key, request.user.username)
+    return my_decks(request)
 
 
 def my_decks(request):

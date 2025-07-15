@@ -114,14 +114,14 @@
         const current_url = document.URL;
         const url_split = current_url.split("/");
         const key = url_split[url_split.length - 2];
-        console.log(key);
         location.href = "/decks/create_deck/" + key + "/";
     }
+
     function deleteDeck() {
         const current_url = document.URL;
         const url_split = current_url.split("/");
         const key = url_split[url_split.length - 2];
-        console.log(key);
+        location.href = "/decks/delete_deck/" + key + "/";
     }
 </script>
 {% endblock %}
