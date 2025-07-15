@@ -2,6 +2,7 @@ from django.shortcuts import render
 from django.http import JsonResponse
 from conquestdb.cardscode import Initfunctions
 from conquestdb.cardscode import FindCard
+from django.http import HttpResponseRedirect
 import os
 import copy
 import datetime
@@ -128,8 +129,6 @@ def second_part_deck_validation(deck):
         if factions[0] == factions[1]:
             print("Main faction and ally faction can not be the same")
             return "Main faction and ally faction can not be the same"
-        alignment_wheel = ["Astra Militarum", "Space Marines", "Tau", "Eldar",
-                           "Dark Eldar", "Chaos", "Orks"]
         position_main_faction = -1
         for i in range(len(alignment_wheel)):
             if alignment_wheel[i] == factions[0]:
@@ -241,7 +240,7 @@ def decks(request):
 def delete_deck(request, deck_key):
     print("delete deck")
     delete_private_deck(deck_key, request.user.username)
-    return my_decks(request)
+    return HttpResponseRedirect('/decks/my_decks/')
 
 
 def my_decks(request):
@@ -427,6 +426,45 @@ def deck_data(request, deck_creator, deck_key):
                                                         "warlord_link": warlord_link, "synapse_link": synapse_link,
                                                         "pledge": pledge, "creator": deck_creator})
     return render(request, "decks/deck_data.html", {"deck_found": deck_found})
+
+
+def publish_deck(request, deck_key):
+    username = request.user.username
+    directory = os.getcwd()
+    target_directory = directory + "/decks/publisheddecks/" + username + "/"
+    source_directory = directory + "/decks/deckstorage/" + username + "/"
+    os.makedirs(target_directory, exist_ok=True)
+    for file in os.listdir(source_directory):
+        try:
+            target_file = source_directory + file
+            published_deck = False
+            with open(target_file + "/key", "r") as f:
+                data = f.read()
+                if data == deck_key:
+                    if not os.path.exists(target_directory + file):
+                        print("Path does not exist")
+                        published_deck = True
+                        shutil.copytree(target_file, target_directory + file)
+                    else:
+                        print("already published this deck!")
+            num_tries = 0
+            set_key = False
+            while not set_key:
+                new_key = ''.join(random.choice(
+                    string.ascii_uppercase + string.ascii_lowercase + string.digits
+                ) for _ in range(16 + num_tries))
+                print(new_key)
+                if not check_if_key_in_use(new_key):
+                    with open(target_directory + file + "/key", "w") as key_file:
+                        key_file.write(new_key)
+                    set_key = True
+                if num_tries > 100:
+                    with open(target_directory + file + "/key", "w") as key_file:
+                        key_file.write(new_key)
+                num_tries += 1
+        except Exception as e:
+            print(e)
+    return HttpResponseRedirect('/decks/my_decks/')
 
 
 def ajax_view(request):

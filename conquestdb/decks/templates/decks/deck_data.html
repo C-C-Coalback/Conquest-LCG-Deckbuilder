@@ -108,7 +108,10 @@
     }
 
     function publishDeck() {
-
+        const current_url = document.URL;
+        const url_split = current_url.split("/");
+        const key = url_split[url_split.length - 2];
+        location.href = "/decks/publish_deck/" + key + "/";
     }
     function modifyDeck() {
         const current_url = document.URL;
