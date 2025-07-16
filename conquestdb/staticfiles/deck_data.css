@@ -8,6 +8,22 @@
     justify-content: center;
 }
 
+#description-area {
+    position: relative;
+    margin-top: 50px;
+    left: 0;
+    display: flex;
+    justify-content: center;
+    max-width: 100%;
+    border: 1px solid #000000;
+}
+
+#desc-id {
+    word-warp: break-word;
+    margin:auto;
+    max-width: min(1100px, 100%);
+}
+
 #publish {
     background-color: #04AA6D;
 }
