@@ -20,6 +20,27 @@ with open(dire + "back.json") as json_file:
 with open(dire + "desc.json") as json_file:
     desc_links = json.load(json_file)
 
+generic_back = "https://steamusercontent-a.akamaihd.net/ugc/1656728123510442187/" \
+               "0B3B69362D3729BC3AEDEBE665D6DF9A9E0AB627/"
+
+
+def get_front_link(name_card):
+    if name_card in front_links:
+        return front_links[name_card]
+    return generic_back
+
+
+def get_back_link(name_card):
+    if name_card in back_links:
+        return back_links[name_card]
+    return generic_back
+
+
+def get_desc(name_card):
+    if name_card in desc_links:
+        return desc_links[name_card]
+    return ""
+
 
 def send_deck_given_key(key_string):
     directory = os.getcwd()
@@ -80,8 +101,23 @@ def request_deck(request, deck_key):
                 deck_content = [x for x in deck_content if x != ""]
                 del deck_content[0]
                 del deck_content[1]
+                front_links_sent = []
+                back_links_sent = []
+                desc_links_sent = []
+                for i in range(len(deck_content)):
+                    if i == 0:
+                        print(deck_content[i])
+                        front_links_sent.append(get_front_link(deck_content[i]))
+                        back_links_sent.append(get_back_link(deck_content[i]))
+                        desc_links_sent.append(get_desc(deck_content[i]))
+                    else:
+                        print(deck_content[i][3:])
+                        front_links_sent.append(get_front_link(deck_content[i][3:]))
+                        back_links_sent.append(get_back_link(deck_content[i][3:]))
+                        desc_links_sent.append("")
                 # deck_content = "\n".join(deck_content)
-                return JsonResponse({'message': 'DECK FOUND', 'deck_content': deck_content})
+                return JsonResponse({'message': 'DECK FOUND', 'deck_content': deck_content,
+                                     'front': front_links_sent, 'back': back_links_sent})
         except Exception as e:
             print(e)
         return JsonResponse({'message': 'DECK NOT FOUND', 'deck_content': ""})
