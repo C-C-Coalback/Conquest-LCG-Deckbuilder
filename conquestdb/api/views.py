@@ -16,12 +16,14 @@ def nothing(request):
 
 
 def request_deck(request, deck_key):
-    if request.method == 'POST':
-        print("received post request, deck key:", deck_key)
+    if request.method == 'GET':
+        print("received get request, deck key:", deck_key)
+        return JsonResponse({'message': 'DECK CODE'})
     return render(request, "home.html")
 
 
 def tts_welcome(request):
-    if request.method == 'POST':
-        print("received post request")
+    if request.method == 'GET':
+        print("received get request")
+        return JsonResponse({'message': 'You have reached the deckbuilder!'})
     return render(request, "home.html")
