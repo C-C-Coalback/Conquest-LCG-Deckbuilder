@@ -27,7 +27,7 @@ def tau_cards_init():
                                                        "attachments to move it to a target planet.",
                               "Tactic.", 0, faction, "Signature", 1, False, action_in_hand=True,
                               allowed_phases_in_hand="ALL"),
-        CardClasses.AttachmentCard("Command-Link Drone", "Attach to a unit.\n"
+        CardClasses.AttachmentCard("Command-link Drone", "Attach to a unit.\n"
                                                          "Attached unit gets +1 ATK.\n"
                                                          "Action: Pay 1 resource to attach this card "
                                                          "to a different unit.", "Drone.",
