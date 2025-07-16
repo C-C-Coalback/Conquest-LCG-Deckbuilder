@@ -325,8 +325,9 @@ def deck_data(request, deck_creator, deck_key):
     deck_found = "N"
     username = request.user.username
     directory = os.getcwd()
-    target_directory = directory + "/decks/deckstorage/" + username + "/"
+    target_directory = directory + "/decks/deckstorage/" + deck_creator + "/"
     permitted_to_read = False
+    public_deck = "F"
     stored_target_file = ""
     if os.path.exists(target_directory):
         for file in os.listdir(target_directory):
@@ -341,6 +342,23 @@ def deck_data(request, deck_creator, deck_key):
             except Exception as e:
                 print(e)
                 pass
+    if not permitted_to_read:
+        target_directory = directory + "/decks/publisheddecks/" + deck_creator + "/"
+        if os.path.exists(target_directory):
+            for file in os.listdir(target_directory):
+                try:
+                    target_file = target_directory + file
+                    with open(target_file + "/key", "r") as f:
+                        data = f.read()
+                        if data == deck_key:
+                            print("key match")
+                            permitted_to_read = True
+                            stored_target_file = target_file
+                            public_deck = "T"
+                            if username == deck_creator:
+                                public_deck = "OWNER"
+                except Exception as e:
+                    print(e)
     if permitted_to_read:
         deck_found = "Y"
         with open(stored_target_file + "/content", "r") as f:
@@ -434,7 +452,8 @@ def deck_data(request, deck_creator, deck_key):
                                                         "event_cards": event_cards,
                                                         "warlord_img": warlord_img, "synapse_img": synapse_img,
                                                         "warlord_link": warlord_link, "synapse_link": synapse_link,
-                                                        "pledge": pledge, "creator": deck_creator})
+                                                        "pledge": pledge, "creator": deck_creator,
+                                                        "public": public_deck, "deck_key": deck_key})
     return render(request, "decks/deck_data.html", {"deck_found": deck_found})
 
 

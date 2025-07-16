@@ -10,9 +10,11 @@
             <div>
                 <div>
                     <h1 id="deck-name">{{ deck_name }} by {{ creator }}</h1>
-                    <button class="button" id="publish" onclick="publishDeck();">Publish Deck</button>
-                    <button class="button" id="modify" onclick="modifyDeck();">Modify Deck</button>
-                    <button class="button" id="delete" onclick="deleteDeck();">Delete Deck</button>
+                    {% if public == "F" %}
+                        <button class="button" id="publish" onclick="publishDeck();">Publish Deck</button>
+                        <button class="button" id="modify" onclick="modifyDeck();">Modify Deck</button>
+                        <button class="button" id="delete" onclick="deleteDeck();">Delete Deck</button>
+                    {% endif %}
                 </div><br>
                 <div id="deck-grid">
                     <h3 class="grid-section" id="factions">{{ factions }}</h3>
