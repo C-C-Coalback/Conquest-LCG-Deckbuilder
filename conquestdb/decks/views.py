@@ -78,6 +78,28 @@ def delete_private_deck(key_string, name_user):
     return False
 
 
+def delete_published_deck(key_string, name_user):
+    directory = os.getcwd()
+    target_directory = directory + "/decks/publisheddecks/"
+    try:
+        for username in os.listdir(target_directory):
+            if username == name_user:
+                second_target_directory = target_directory + "/" + username
+                for deck_name in os.listdir(second_target_directory):
+                    if os.path.exists(second_target_directory + "/" + deck_name + "/key"):
+                        is_the_file = False
+                        with open(second_target_directory + "/" + deck_name + "/key", "r") as f:
+                            this_key = f.read()
+                            if this_key == key_string:
+                                is_the_file = True
+                        if is_the_file:
+                            shutil.rmtree(second_target_directory + "/" + deck_name)
+                            return True
+    except Exception as E:
+        print(E)
+    return False
+
+
 def convert_name_to_img_src(card_name):
     card_name = card_name.replace("\"", "")
     card_name = card_name.replace(" ", "_")
@@ -250,6 +272,12 @@ def decks(request):
 def delete_deck(request, deck_key):
     print("delete deck")
     delete_private_deck(deck_key, request.user.username)
+    return HttpResponseRedirect('/decks/my_decks/')
+
+
+def retract_deck(request, deck_key):
+    print("delete deck")
+    delete_published_deck(deck_key, request.user.username)
     return HttpResponseRedirect('/decks/my_decks/')
 
 

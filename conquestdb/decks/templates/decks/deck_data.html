@@ -126,6 +126,7 @@
         const current_url = document.URL;
         const url_split = current_url.split("/");
         const key = url_split[url_split.length - 2];
+        location.href = "/decks/retract_deck/" + key + "/";
     }
 
     function publishDeck() {
