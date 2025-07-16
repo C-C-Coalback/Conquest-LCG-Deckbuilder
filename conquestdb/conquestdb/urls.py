@@ -26,6 +26,7 @@ urlpatterns = [
     path("accounts/", include("accounts.urls")),
     path("cards/", include("cards.urls")),
     path("decks/", include("decks.urls")),
+    path("api/", include("api.urls")),
     path("", TemplateView.as_view(template_name="home.html"), name="home"),
     re_path(r'^media/(?P<path>.*)$', serve, {'document_root': settings.MEDIA_ROOT}),
     path('accounts/', include('django.contrib.auth.urls')),
