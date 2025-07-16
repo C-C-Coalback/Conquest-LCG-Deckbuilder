@@ -10,6 +10,7 @@
             <div>
                 <div>
                     <h1 id="deck-name">{{ deck_name }} by {{ creator }}</h1>
+                    <h2>Deck Key: {{ deck_key }}</h2>
                     {% if public == "F" %}
                         <button class="button" id="publish" onclick="publishDeck();">Publish Deck</button>
                         <button class="button" id="modify" onclick="modifyDeck();">Modify Deck</button>
