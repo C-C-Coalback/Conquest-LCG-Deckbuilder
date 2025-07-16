@@ -14,6 +14,8 @@
                         <button class="button" id="publish" onclick="publishDeck();">Publish Deck</button>
                         <button class="button" id="modify" onclick="modifyDeck();">Modify Deck</button>
                         <button class="button" id="delete" onclick="deleteDeck();">Delete Deck</button>
+                    {% elif public == "OWNER" %}
+                        <button class="button" id="retract" onclick="retractDeck();">Retract Deck</button>
                     {% endif %}
                 </div><br>
                 <div id="deck-grid">
@@ -118,6 +120,12 @@
         cursor_img = document.getElementById("cursor-follower");
         cursor_img.src = "/static/images/CardImages/Cardback.jpg";
         cursor_img.style.display = "none";
+    }
+
+    function retractDeck() {
+        const current_url = document.URL;
+        const url_split = current_url.split("/");
+        const key = url_split[url_split.length - 2];
     }
 
     function publishDeck() {
