@@ -92,12 +92,46 @@
                 </div>
             </div>
         </div>
-
         <div id="description-area">
             <div id="desc-id">
                 <h3>{{ description|linebreaks }}</h3>
             </div>
         </div>
+        {% if public != "F" %}
+            <div id="card-reviews">
+                {% if noc is True %}
+                    <div>
+                        No comments yet.
+                    </div>
+                {% endif %}
+                {% for name, time, text, id in comments %}
+                <div class="comment-class">
+                    <div class="comment-name">
+                        <img class="comment-avatar" src="/media/{{ name }}.jpg" onerror="this.onerror=null; this.src='/static/images/defaultprofile.jpg'">
+                        <p>{{ name }}<br>{{ time }}</p>
+                    </div>
+                    <h3 class="comment-content"> {{ text|linebreaks }}</h3>
+                    {% if user.username == name %}
+                        <form class="delete-comment" method="post">
+                            {% csrf_token %}
+                                    <input name="username" value="{{ user.username }}" style="display:none;">
+                                    <input name="flag" value="DELETE" style="display:none;">
+                                    <input name="idcomment" value="{{ id }}" style="display:none;">
+                            <button type="submit">Delete</button>
+                        </form>
+                    {% endif %}
+                </div>
+                {% endfor %}
+            </div>
+            <form id="comment-form" method="post">
+                {% csrf_token %}
+                Write a comment using the text box below.<br>
+                <input id="username" name="username" value="{{ user.username }}" style="display:none;">
+                <input name="flag" value="POST" style="display:none;">
+                <textarea id="commentInput" name="comment" rows="10" cols="80"></textarea><br>
+                <button type="submit">Submit</button>
+            </form>
+        {% endif %}
         <img id="cursor-follower" src="/static/images/CardImages/Cardback.jpg">
     {% else %}
         <h2>deck not found</h2>

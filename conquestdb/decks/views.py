@@ -295,7 +295,6 @@ def published_decks(request):
             for file in os.listdir(target_directory + "/" + creator):
                 try:
                     target_file = target_directory + "/" + creator + "/" + file
-                    print(target_file)
                     with open(target_file + "/content", "r") as f:
                         data = f.read()
                         split_data = data.split(sep="\n")
@@ -511,6 +510,46 @@ def deck_data(request, deck_creator, deck_key):
         support_cards = zip(support_cards, links_to_support_cards, support_srcs)
         attachment_cards = zip(attachment_cards, links_to_attachment_cards, attachment_srcs)
         event_cards = zip(event_cards, links_to_event_cards, event_srcs)
+        names_comments = []
+        times_comments = []
+        comments = []
+        comment_ids = []
+        no_comments = True
+        target_directory = directory + "/decks/comments/" + deck_key + "/"
+        if request.method == 'POST':
+            flag = request.POST.get('flag')
+            if flag == "POST":
+                username = request.POST.get('username')
+                if not username:
+                    username = "Anonymous"
+                comment = request.POST.get('comment')
+                time = str(datetime.datetime.now())
+                os.makedirs(target_directory, exist_ok=True)
+                file_id = len(
+                    [name for name in os.listdir(target_directory) if os.path.isfile(target_directory + "/" + name)])
+                name_file = str(file_id) + ".txt"
+                with open(target_directory + name_file, 'w') as file:
+                    file.write(username + "\n" + time + "\n" + comment)
+            elif flag == "DELETE":
+                # username = request.POST.get('username')
+                id_c = request.POST.get('idcomment')
+                name_file = id_c + ".txt"
+                with open(target_directory + name_file, 'w') as file:
+                    file.write("")
+        if os.path.exists(target_directory):
+            for infile in sorted(os.listdir(target_directory)):
+                with open(target_directory + infile, 'r') as file:
+                    t = file.read()
+                    split_text = t.split("\n")
+                    if len(split_text) >= 3:
+                        split_text[2] = "\n".join(split_text[2:])
+                        idf = infile.split(sep=".")[0]
+                        comment_ids.append(idf)
+                        names_comments.append(split_text[0])
+                        times_comments.append(split_text[1])
+                        comments.append(split_text[2])
+                        no_comments = False
+        my_comments = zip(names_comments, times_comments, comments, comment_ids)
         return render(request, "decks/deck_data.html", {"deck_found": deck_found, "deck_content": deck_content,
                                                         "description": description, "deck_list": deck_list,
                                                         "factions": factions, "deck_name": deck_name,
@@ -521,7 +560,8 @@ def deck_data(request, deck_creator, deck_key):
                                                         "warlord_img": warlord_img, "synapse_img": synapse_img,
                                                         "warlord_link": warlord_link, "synapse_link": synapse_link,
                                                         "pledge": pledge, "creator": deck_creator,
-                                                        "public": public_deck, "deck_key": deck_key})
+                                                        "public": public_deck, "deck_key": deck_key,
+                                                        "comments": my_comments, "noc": no_comments})
     return render(request, "decks/deck_data.html", {"deck_found": deck_found})
 
 
