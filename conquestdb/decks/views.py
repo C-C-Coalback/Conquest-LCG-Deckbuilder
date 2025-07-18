@@ -595,10 +595,11 @@ def publish_deck(request, deck_key):
                     if not check_if_key_in_use(new_key):
                         with open(target_directory + file + "/key", "w") as key_file:
                             key_file.write(new_key)
-                        set_key = True
+                            return HttpResponseRedirect('/decks/' + username + "/" + new_key + "/")
                     if num_tries > 100:
                         with open(target_directory + file + "/key", "w") as key_file:
                             key_file.write(new_key)
+                            return HttpResponseRedirect('/decks/' + username + "/" + new_key + "/")
                     num_tries += 1
         except Exception as e:
             print(e)
