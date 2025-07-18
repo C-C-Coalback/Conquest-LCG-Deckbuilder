@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+{% block title %}Deck Data{% endblock %}
+{% block content %}
+{% load static %}
+<link rel="stylesheet" href="{% static 'mydecks.css' %}">
+    <h1>Published Decks Placeholder</h1>
+    <div id="main-box">
+        <div id="main-decks-box">
+            <div id="decks-list">
+                {% for name, warlord_name, date, img_src, key, creator_name in decks %}
+                    <a href="/decks/{{ user.username }}/{{ key }}">
+                    <div class="deck-item-grid">
+                        <h3 class="decklist-name">{{ name }}</h3>
+                        <h3 class="creator-name">{{ creator_name }}</h3>
+                        <h3 class="warlord-name">{{ warlord_name }}</h3>
+                        <h3 class="date">{{ date }}</h3>
+                        <img class="preview-image" src={{ img_src }}>
+                    </div>
+                    </a>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+{% endblock %}

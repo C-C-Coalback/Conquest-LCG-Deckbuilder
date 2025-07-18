@@ -179,7 +179,7 @@ def request_deck(request, deck_key):
                                      'front': front_links_sent, 'back': back_links_sent,
                                      'card_id': card_id_links_sent, 'deck_id': deck_id_links_sent,
                                      'height': height_links_sent, 'width': width_links_sent,
-                                     'amount': card_amounts})
+                                     'amount': card_amounts, 'desc': desc_links_sent})
         except Exception as e:
             print(e)
         return JsonResponse({'message': 'DECK NOT FOUND', 'deck_content': ""})

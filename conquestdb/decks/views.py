@@ -281,6 +281,46 @@ def retract_deck(request, deck_key):
     return HttpResponseRedirect('/decks/my_decks/')
 
 
+def published_decks(request):
+    deck_names = []
+    deck_warlords = []
+    deck_dates = []
+    img_srcs = []
+    keys = []
+    creator_name = []
+    directory = os.getcwd()
+    target_directory = directory + "/decks/publisheddecks/"
+    if os.path.exists(target_directory):
+        for creator in os.listdir(target_directory):
+            for file in os.listdir(target_directory + "/" + creator):
+                try:
+                    target_file = target_directory + "/" + creator + "/" + file
+                    print(target_file)
+                    with open(target_file + "/content", "r") as f:
+                        data = f.read()
+                        split_data = data.split(sep="\n")
+                        deck_name = split_data[0]
+                        warlord_name = split_data[2]
+                        timestamp = os.path.getmtime(target_file + "/content")
+                        datestamp = datetime.datetime.fromtimestamp(timestamp)
+                        date = str(datestamp.date())
+                        deck_names.append(deck_name)
+                        creator_name.append(creator)
+                        deck_warlords.append(warlord_name)
+                        deck_dates.append(date)
+                        img_src = convert_name_to_img_src(warlord_name)
+                        img_srcs.append(img_src)
+                        f.close()
+                    with open(target_file + "/key", "r") as k:
+                        data = k.read()
+                        keys.append(data)
+                except Exception as e:
+                    print(e)
+                    pass
+        decks_var = zip(deck_names, deck_warlords, deck_dates, img_srcs, keys, creator_name)
+        return render(request, "decks/published_decks.html", {"decks": decks_var})
+
+
 def my_decks(request):
     deck_names = []
     deck_warlords = []

@@ -1,0 +1,53 @@
+#main-box {
+    margin-top: 50px;
+    width:100%;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+#decks-list {
+    width: auto;
+    height: auto;
+    max-height: 1000px;
+    border: 5px solid green;
+}
+
+.preview-image {
+    width: 120px;
+    height: 168px;
+}
+
+.deck-item-grid {
+    width: 400px;
+    height: auto;
+    border: 5px solid green;
+    display: grid;
+    grid-template-columns: 280px 120px;
+    grid-template-areas:
+    "deck-name warlord-card"
+    "creator-name warlord-card"
+    "warlord-name warlord-card"
+    "date warlord-card";
+}
+
+.decklist-name {
+    grid-area: deck-name;
+}
+
+.creator-name {
+    grid-area: creator-name;
+}
+
+.warlord-name {
+    grid-area: warlord-name;
+}
+
+.date {
+    grid-area: date;
+}
+
+.preview-image {
+    grid-area: warlord-card;
+}

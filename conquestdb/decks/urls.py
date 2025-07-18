@@ -10,6 +10,7 @@ urlpatterns = [
     path("retract_deck/<str:deck_key>/", views.retract_deck, name="retract_deck"),
     path("create_deck/", views.create_deck, name="create_deck"),
     path("my_decks/", views.my_decks, name="my_decks"),
+    path("published_decks/", views.published_decks, name="published_decks"),
     path("ajax/", views.ajax_view, name="ajax"),
     path("<str:deck_creator>/<str:deck_key>/", views.deck_data, name="deck_data"),
     path("<str:deck_creator>/", views.user_deck_data, name="user_decks_data"),
