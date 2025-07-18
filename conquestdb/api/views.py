@@ -114,23 +114,23 @@ def request_deck(request, deck_key):
             if deck_content:
                 deck_content = deck_content.replace(
                     "----------------------------------------------------------------------", "")
-                deck_content = deck_content.replace(
-                    "Army", "")
-                deck_content = deck_content.replace(
-                    "Support", "")
-                deck_content = deck_content.replace(
-                    "Event", "")
-                deck_content = deck_content.replace(
-                    "Attachment", "")
-                deck_content = deck_content.replace(
-                    "Synapse", "")
-                deck_content = deck_content.replace(
-                    "Pledge", "")
-                deck_content = deck_content.replace(
-                    "Planet", "")
-                deck_content = deck_content.replace(
-                    "Signature Squad", "")
                 deck_content = deck_content.split(sep="\n")
+                if "Planet" in deck_content:
+                    deck_content.remove("Planet")
+                if "Signature Squad" in deck_content:
+                    deck_content.remove("Signature Squad")
+                if "Pledge" in deck_content:
+                    deck_content.remove("Pledge")
+                if "Synapse" in deck_content:
+                    deck_content.remove("Synapse")
+                if "Attachment" in deck_content:
+                    deck_content.remove("Attachment")
+                if "Event" in deck_content:
+                    deck_content.remove("Event")
+                if "Army" in deck_content:
+                    deck_content.remove("Army")
+                if "Support" in deck_content:
+                    deck_content.remove("Support")
                 deck_content = [x for x in deck_content if x != ""]
                 card_amounts = []
                 del deck_content[0]

@@ -473,8 +473,8 @@ def deck_data(request, deck_creator, deck_key):
         synapse_link = "None"
         pledge = ""
         if synapse_name:
-            synapse_img = convert_name_to_img_src(synapse_name)
-            synapse_link = convert_name_to_hyperlink(synapse_name)
+            synapse_img = convert_name_to_img_src(synapse_name[3:])
+            synapse_link = convert_name_to_hyperlink(synapse_name[3:])
         print(sig_cards)
         print(army_cards)
         print(support_cards)
