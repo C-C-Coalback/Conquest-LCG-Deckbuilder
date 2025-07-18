@@ -333,6 +333,140 @@ def dark_eldar_cards_init():
                              "Warrior. Beastmaster. Elite.", 5, faction, "Common", 2, 5, 2, False, deepstrike=4),
         CardClasses.ArmyCard("Hydrae Stalker", "Reaction: After you deploy this unit, deal 2 damage to a target unit "
                                                "with printed cost 2 or lower.", "Warrior. Wych. Raider.",
-                             3, faction, "Common", 2, 3, 0, False)
+                             3, faction, "Common", 2, 3, 0, False),
+        CardClasses.ArmyCard("Arrogant Haemonculus", "Increase the cost of each other Haemonculus unit "
+                                                     "deployed at this planet by 1.\n"
+                                                     "Forced Reaction: After you play a Torture card, deal 1 damage "
+                                                     "to a target non-warlord unit at this planet.",
+                             "Scholar. Haemonculus.", 1, faction, "Loyal", 1, 1, 1, False),
+        CardClasses.ArmyCard("Connoisseur of Terror", "Deep Strike (2).\n"
+                                                      "Reaction: After this unit is turned face-up, draw 2 cards.",
+                             "Scholar. Haemonculus.", 2, faction, "Loyal", 2, 2, 1, False, deepstrike=2),
+        CardClasses.ArmyCard("Dark Lance Raider", "No Wargear Attachments. Flying.\n"
+                                                  "Reaction: After this unit is declared as an attacker, "
+                                                  "choose either to deal 1 damage to up to 2 different enemy "
+                                                  "units at this planet or 3 damage to an enemy unit at this planet.",
+                             "Vehicle. Raider. Kabalite.", 3, faction, "Common", 0, 2, 1, False,
+                             wargear_attachments_permitted=False, flying=True),
+        CardClasses.ArmyCard("Distorted Talos", "Lumbering.\n"
+                                                "Interrupt: When you use a shield card on this unit, remove all damage "
+                                                "from it. (Limit once per phase.)", "Abomination. Creature. Elite.",
+                             3, faction, "Loyal", 5, 4, 1, False, lumbering=True),
+        CardClasses.ArmyCard("Kabal of the Ebon Law", "This unit gets +1 ATK while it is not at the first planet.\n"
+                                                      "Forced Reaction: After a battle starts at this planet, each "
+                                                      "player controlling a unit with 2 ATK or more, draws a card.",
+                             "Kabalite.", 2, faction, "Loyal", 2, 2, 1, False),
+        CardClasses.ArmyCard("Mindless Pain Addict", "Cannot retreat or be Routed.\n"
+                                                     "Reaction: After an army unit you control at this planet is "
+                                                     "destroyed, take control of this unit. Any player may use "
+                                                     "this ability.", "Creature. Abomination.",
+                             2, faction, "Common", 4, 4, 0, False),
+        CardClasses.ArmyCard("Pain Crafter", "Reaction: After you play a Dark Eldar event card, exhaust this unit "
+                                             "to attach that event card to a Dark Eldar unit as a Wargear attachment "
+                                             "with the text \"Attach to an army unit. Attached unit gets +1 ATK "
+                                             "and +1 HP.\". (Limit once per phase.)", "Scholar. Haemonculus.",
+                             2, faction, "Loyal", 1, 2, 1, False),
+        CardClasses.ArmyCard("Raiding Kabal", "This unit gets Sweep (1) while it is not at the first planet.\n"
+                                              "Reaction: After you win a battle at this planet, put a "
+                                              "Khymera token into play at this planet.", "Kabalite.",
+                             2, faction, "Loyal", 1, 2, 1, False),
+        CardClasses.AttachmentCard("The Shadow Suit", "Deep Strike (0).\n"
+                                                      "Attach to an army unit.\n"
+                                                      "Attached unit gets +2 ATK and +1 HP.\n"
+                                                      "Interrupt: When attached unit leaves play, put this card in "
+                                                      "reserve at a planet. Your opponent may exhaust a unit at "
+                                                      "that planet to cancel this effect.", "Wargear. Weapon.",
+                                   2, faction, "Loyal", 2, True, deepstrike=0, extra_health=1, extra_attack=2,
+                                   type_of_units_allowed_for_attachment="Army"),
+        CardClasses.AttachmentCard("Torturer's Masks", "Ambush.\n"
+                                                       "Attach to an army unit. Attached unit gets +1 ATK and +1 HP.\n"
+                                                       "Reaction: After you use a shield card, if you have no cards "
+                                                       "in hand, exhaust this attachment to draw a card.",
+                                   "Wargear.", 1, faction, "Loyal", 2, False, ambush=True, extra_attack=1,
+                                   extra_health=1, type_of_units_allowed_for_attachment="Army"),
+        CardClasses.EventCard("Catatonic Pain", "Reaction: After an enemy army unit enters play at a planet, move that "
+                                                "unit to an adjacent planet of your choice.", "Torture.",
+                              3, faction, "Common", 1, False),
+        CardClasses.EventCard("Supply Line Incursion", "Action: Exhaust target support. Then, if that support is a "
+                                                       "Limited card, draw one card and gain 1 resource.",
+                              "Tactic.", 1, faction, "Common", 1, False,
+                              action_in_hand=True, allowed_phases_in_hand="ALL"),
+        CardClasses.SupportCard("Prophets of Flesh", "Interrupt: When you deploy an Abomination or Scholar unit, "
+                                                     "exhaust this support to reduce its cost by 1.",
+                                "Pledge.", 1, faction, "Loyal", False),
+        CardClasses.SupportCard("The Broken Sigil", "Target a non-first planet and choose a secret number while "
+                                                    "deploying this card.\n"
+                                                    "Forced Interrupt: When that planet is captured, reveal the "
+                                                    "secret number, if it is odd the capturing player must sacrifice a "
+                                                    "unit, otherwise they may draw 3 cards.",
+                                "Pledge.", 1, faction, "Loyal", False),
+        CardClasses.SupportCard("The Flayed Mask", "Secretly choose a non-first planet when you deploy this support.\n"
+                                                   "Interrupt: When your opponent captures the chosen planet, reveal "
+                                                   "your choice to have them choose either to: deal 5 indirect "
+                                                   "damage among units they control, sacrifice a unit or forgo "
+                                                   "the capture.", "Pledge.",
+                                1, faction, "Loyal", False),
+        CardClasses.SupportCard("Willing Submission", "Forced Reaction: After the deploy phase begins, draw 1 card."
+                                                      " Then your opponent may choose 2 units he controls (or his "
+                                                      "warlord if he controls no other unit) to draw 1 card. You may "
+                                                      "deal 1 damage to one of the chosen units.", "Torture.",
+                                1, faction, "Loyal", False),
+        CardClasses.WarlordCard("Liatha", "Cards in your hand may be used as shield cards with 2 shield icons. "
+                                          "When you use a card this way, remove it from the game face-down. "
+                                          "As an interrupt your opponent may have you turn the card face-up, "
+                                          "if it is a card with 2 printed shield icons, deal 1 unpreventable damage "
+                                          "to a unit. If not, cancel that card's shielding effect. (Limit three times "
+                                          "per phase.)", "Assassin. Wych.",
+                                faction, 2, 7, 2, 5, "Bloodied.", 7, 7,
+                                ["1x Cloak of Shade", "4x Liatha's Retinue",
+                                 "1x Reveal the Blade", "2x Shadow Hunt"]),
+        CardClasses.AttachmentCard("Cloak of Shade", "Attach to your warlord.\n"
+                                                     "Each unit at this planet loses Armorbane.\n"
+                                                     "Forced Interrupt: When you use a card as a shield card, exhaust "
+                                                     "this attachment to have it gain 1 shield icon.",
+                                   "Wargear.", 1, faction, "Signature", 3, False, must_be_own_unit=True,
+                                   type_of_units_allowed_for_attachment="Warlord"),
+        CardClasses.ArmyCard("Liatha's Retinue", "Reaction: After this unit is turned face-up, put it into play "
+                                                 "exhausted at a planet where no battle is taking place.",
+                             "Assassin. Warrior. Creature.", 3, faction, "Signature", 3, 2, 1, False),
+        CardClasses.SupportCard("Reveal the Blade", "As an additional cost to target this support, discard two cards "
+                                                    "at random from your hand.\n"
+                                                    "Combat Action: Exhaust this support and turn face-up a face-down "
+                                                    "card with no printed shield you removed from the game to give "
+                                                    "an army unit +2 ATK for its next attack this phase.",
+                                "Skill.", 1, faction, "Signature", False,
+                                action_in_play=True, allowed_phases_in_play="COMBAT"),
+        CardClasses.EventCard("Shadow Hunt", "Reaction: After your opponent passes during the deploy phase, put a "
+                                             "face-down, non-Elite Dark Eldar unit you removed from the game into "
+                                             "play face-up at a target planet.", "Tactic.",
+                              1, faction, "Signature", 1, False),
+        CardClasses.WarlordCard("Yvraine", "You cannot include Chaos Elite units in your deck.\n"
+                                           "Reaction: After this unit commits to a planet, a non-Elite army "
+                                           "unit you control at an adjacent planet is considered to be a warlord "
+                                           "while checking for a battle at that planet this round.",
+                                "Herald of Ynnead.", faction, 2, 7, 2, 5, "Bloodied.", 7, 7,
+                                ["1x Attuned Gyrinx", "1x Host of the Emissary",
+                                 "2x Triumvirate of Ynnead", "4x Yvraine's Entourage"]),
+        CardClasses.AttachmentCard("Attuned Gyrinx", "Attach to your warlord.\n"
+                                                     "Attached unit gets +1 HP.\n"
+                                                     "Combat Action: Exhaust this attachment to give an army unit "
+                                                     "you control at each adjacent planet +1 ATK and +1 HP until the "
+                                                     "end of the phase.", "Familiar.",
+                                   1, faction, "Signature", 3, False, must_be_own_unit=True, extra_health=1,
+                                   type_of_units_allowed_for_attachment="Warlord",
+                                   action_in_play=True, allowed_phases_in_play="COMBAT"),
+        CardClasses.SupportCard("Host of the Emissary", "Reaction: After your opponent wins a battle, exhaust this "
+                                                        "support to have your opponent sacrifice an army unit at "
+                                                        "that planet, if able.", "Warhost.",
+                                3, faction, "Signature", False),
+        CardClasses.EventCard("Triumvirate of Ynnead", "The effects of this event cannot be cancelled.\n"
+                                                       "Deploy Action: Deploy 2 non-Elite units with a different name "
+                                                       "from your discard pile at 2 different planets. Reduce their "
+                                                       "cost by 1.", "Prophecy.",
+                              0, faction, "Signature", 1, False),
+        CardClasses.ArmyCard("Yvraine's Entourage", "Reaction: After a battle begins at this planet, switch the "
+                                                    "printed ATK values of two army units at this planet until the "
+                                                    "end of a combat round.", "Warrior.",
+                             2, faction, "Signature", 2, 2, 1, False)
     ]
     return dark_eldar_cards_array

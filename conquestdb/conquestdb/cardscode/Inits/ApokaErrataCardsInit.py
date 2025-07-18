@@ -74,6 +74,26 @@ def apoka_errata_cards_init():
                                                    "the bottom of your deck to Rally 6 a Necrons unit with a printed "
                                                    "cost of 3 or lower, put it into play exhausted at a planet "
                                                    "where no battle is taking place.",
-                                "Upgrade.", 1, "Necrons", "Common", False)
+                                "Upgrade.", 1, "Necrons", "Common", False),
+        CardClasses.ArmyCard("Undying Saint", "Lumbering.\n"
+                                              "Can only be played if you control a Holy Crusade.\n"
+                                              "Reaction: After the deploy phase begins, if this unit is in your "
+                                              "discard pile, put it into play at a target non-first planet "
+                                              "(ignore this restriction if your opponent has the initiative).",
+                             "Martyr. Ecclesiarchy.", 1, "Astra Militarum", "Loyal", 2, 1, 1, False, lumbering=True),
+        CardClasses.ArmyCard("Brotherhood Justicar", "Unstoppable - The first time this unit is assigned damage this "
+                                                     "turn, prevent 1 of that damage and place 1 faith on it.\n"
+                                                     "Reaction: After you deploy this unit place 2 faith among units "
+                                                     "you control at this planet.", "Soldier. Grey Knights.",
+                             3, "Space Marines", "Signature", 3, 3, 1, False, unstoppable=True),
+        CardClasses.EventCard("Kwik' Konstrucksun", "Combat Action: Put an Orks support with printed cost 3 or lower "
+                                                    "into play from your hand at your HQ. If this support is still in "
+                                                    "play at the end of the phase, discard it and draw a card.",
+                              "Tactic.", 0, "Orks", "Common", 1, False,
+                              action_in_hand=True, allowed_phases_in_hand="COMBAT"),
+        CardClasses.ArmyCard("Commander Bravestorm",
+                             "Reaction: After you attach a non-Drone attachment to a unit at this planet, "
+                             "draw a card (Limit once per phase).", "Soldier. Pilot. Shas'o.",
+                             3, "Tau", "Loyal", 2, 4, 1, True)
     ]
     return apoka_errata_cards_array

@@ -82,7 +82,7 @@ def astra_militarum_cards_init():
                                                 "into play at your HQ, and place the "
                                                 "remaining cards on the bottom of your deck "
                                                 "in any order.", "Scholar. Tech-Priest.",
-                             2, faction, "Loyal", 2, 2, 0, False),
+                             2, faction, "Common", 2, 2, 0, False),
         CardClasses.ArmyCard("Penal Legionnaire", "", "Conscript. Ally.",
                              0, faction, "Common", 1, 1, 0, False),
         CardClasses.ArmyCard("Infantry Conscripts", "This unit gets +2 ATK for each "
@@ -375,6 +375,304 @@ def astra_militarum_cards_init():
                              wargear_attachments_permitted=False),
         CardClasses.SupportCard("Jungle Trench", "Combat Action: Exhaust this support to prevent 1 damage from each "
                                                  "attack made by a non-warlord unit this combat round.", "Location.",
-                                2, faction, "Loyal", False, action_in_play=True, allowed_phases_in_play="COMBAT")
+                                2, faction, "Loyal", False, action_in_play=True, allowed_phases_in_play="COMBAT"),
+        CardClasses.ArmyCard("23rd Mechanised Battalion", "No Attachments. Cannot be targeted.\n"
+                                                          "Reaction: After the second combat round ends at this "
+                                                          "planet, if there is at least one enemy unit, retreat this "
+                                                          "unit to put 4 Guardsman tokens into play at this planet. "
+                                                          "Then deal 5 damage to this unit.", "Corps. Transport.",
+                             5, faction, "Loyal", 1, 12, 3, False, no_attachments=True),
+        CardClasses.ArmyCard("Armored Fist Squad", "No Wargear attachments.\n"
+                                                   "This unit gets +2 HP while it is at a planet with a warlord.\n"
+                                                   "Interrupt: When this unit retreats, exhaust a non-warlord unit "
+                                                   "at this planet.\n", "Vehicle. Tank. Transport.",
+                             2, faction, "Common", 2, 2, 1, False, wargear_attachments_permitted=False),
+        CardClasses.ArmyCard("Catachan Devils Patrol", "Interrupt: When a unit you control is chosen as a defender, "
+                                                       "deploy this unit from your hand at the same planet. Then "
+                                                       "your opponent must choose to either deal 2 damage to the "
+                                                       "attacker or cancel the remainder of the attack.",
+                             "Soldier. Catachan.", 2, faction, "Common", 2, 2, 1, False),
+        CardClasses.ArmyCard("Celestian Amelia", "Reaction: After an enemy unit is declared as an attacker at this "
+                                                 "planet, while that unit is attacking, reduce all damage taken by "
+                                                 "other Astra Militarum units you control to 1. "
+                                                 "(Limit once per phase.)", "Soldier. Martyr. Ecclesiarchy.",
+                             3, faction, "Loyal", 3, 3, 1, True),
+        CardClasses.ArmyCard("Commissar Somiel", "Reaction: After an Astra Militarum Transport unit you control leaves "
+                                                 "play, put a Guardsman token into play at your HQ.",
+                             "Soldier. Officer. Commissar.", 2, faction, "Loyal", 1, 2, 2, True),
+        CardClasses.ArmyCard("Devoted Hospitaller", "While you control a Commissar unit, you cannot deploy this unit.\n"
+                                                    "Reaction: After this unit enters play, place 2 faith among army "
+                                                    "units you control. Then you may exhaust an enemy army unit at "
+                                                    "this planet and deal damage equal to its ATK value to this unit.",
+                             "Novice. Ecclesiarchy.", 2, faction, "Loyal", 1, 2, 1, False),
+        CardClasses.ArmyCard("Dominion Eugenia", "While this unit has faith, it gains Armorbane.\n"
+                                                 "Reaction: After another Astra Militarum Ecclesiarchy unit you "
+                                                 "control at this planet is declared as an attacker, place 1 faith "
+                                                 "on this unit and the attacker.", "Soldier. Officer. Ecclesiarchy.",
+                             4, faction, "Loyal", 3, 4, 3, True),
+        CardClasses.ArmyCard("Eloquent Confessor", "While this unit has faith, it gets +1 ATK.\n"
+                                                   "Combat Reaction: After a non-warlord unit moves or enters play "
+                                                   "at this planet, pay 1 faith to exhaust it.",
+                             "Priest. Ecclesiarchy.", 2, faction, "Common", 2, 2, 1, False),
+        CardClasses.ArmyCard("Evangelizing Ships", "Combat Action: Pay 1 faith to put a Guardsman token into play at a "
+                                                   "non-green planet. Then your opponent moves this unit to a planet "
+                                                   "of his choice. (Limit once per phase.)",
+                             "Transport. Ecclesiarchy.", 2, faction, "Loyal", 1, 3, 1, False,
+                             action_in_play=True, allowed_phases_in_play="COMBAT"),
+        CardClasses.ArmyCard("Exalted Celestians", "While this unit has faith and is not a defender, it cannot be "
+                                                   "dealt damage.\n"
+                                                   "Reaction: After this unit exhausts, place 1 faith on it.",
+                             "Soldier. Ecclesiarchy.", 2, faction, "Common", 2, 2, 1, False),
+        CardClasses.ArmyCard("Fanatical Sister Repentia", "Interrupt: When this unit uses Shield with Faith, double "
+                                                          "the number of faith on it.",
+                             "Soldier. Martyr. Ecclesiarchy.", 3, faction, "Common", 4, 2, 1, False),
+        CardClasses.ArmyCard("Heavy Flamer Retributor", "While this unit has faith, it cannot be routed.\n"
+                                                        "Reaction: After this unit resolves its attack, deal 1 "
+                                                        "damage to a number of different enemy units at this "
+                                                        "planet equal to faith on this unit.",
+                             "Soldier. Ecclesiarchy.", 3, faction, "Common", 3, 2, 2, False),
+        CardClasses.ArmyCard("Holy Battery", "No Wargear Attachments.\n"
+                                             "While at a planet with a unit with faith you control, this "
+                                             "unit gets +1 ATK.\n"
+                                             "Reaction: After you use a shield card on this unit, place 1 faith on it.",
+                             "Tank. Vostroya. Vehicle.", 2, faction, "Loyal", 2, 2, 1, False,
+                             wargear_attachments_permitted=False),
+        CardClasses.ArmyCard("Hydra Flak Tank", "No Wargear Attachments.\n"
+                                                "This unit deals double damage to enemy Flying or Mobile units.\n"
+                                                "Reaction: After a unit moves to or from this planet, "
+                                                "deal it 1 damage. (Limit once per phase.)", "Vehicle. Tank. Krieg.",
+                             3, faction, "Common", 2, 3, 1, False, wargear_attachments_permitted=False),
+        CardClasses.ArmyCard("Krieg Armoured Regiment", "No Wargear Attachments.\n"
+                                                        "Reaction: After this unit leaves play, place it at the "
+                                                        "bottom of your deck to Rally 6 a Tank, Vehicle or Krieg "
+                                                        "unit with a different name, put it into play "
+                                                        "at the same planet.", "Vehicle. Tank. Elite.",
+                             6, faction, "Loyal", 5, 6, 2, False, wargear_attachments_permitted=False),
+        CardClasses.ArmyCard("Patron Saint", "Deep Strike (3).\n"
+                                             "Reaction: After you deploy or Deep Strike this unit, remove up to 3 "
+                                             "damage from Astra Militarum army units and Ecclesiarchy units you "
+                                             "control. Then place faith equal to the damage removed among "
+                                             "army units you control.\n", "Saint. Elite. Ecclesiarchy.",
+                             5, faction, "Loyal", 4, 5, 2, False, deepstrike=3),
+        CardClasses.ArmyCard("Pattern IX Immolator", "No Wargear Attachments.\n"
+                                                     "Command Action: Deal X damage among enemy non-warlord units at "
+                                                     "this planet and place X faith among army units at this planet. "
+                                                     "X is the number of command struggles your opponent won this "
+                                                     "phase minus 1. (Limit once per phase.)",
+                             "Vehicle. Tank. Ecclesiarchy.", 3, faction, "Common", 3, 3, 1, False,
+                             action_in_play=True, allowed_phases_in_play="COMMAND"),
+        CardClasses.ArmyCard("Penitent Engine", "No Wargear Attachments.\n"
+                                                "Reaction: After an attack resolved by a unit you control at this "
+                                                "planet does not destroy the defender, place 1 faith on this unit "
+                                                "and it gets +1 ATK for its next attack this phase.",
+                             "Vehicle. Martyr. Ecclesiarchy.", 3, faction, "Loyal", 2, 3, 1, False,
+                             wargear_attachments_permitted=False),
+        CardClasses.ArmyCard("Sacred Rose Immolator", "No Wargear Attachments.\n"
+                                                      "Reaction: After this unit resolves its attack or moves to a "
+                                                      "planet, place 1 faith on it. Then deal 1 damage to up to "
+                                                      "2 different enemy units at this planet. "
+                                                      "(Limit twice per round.)", "Vehicle. Transport. Ecclesiarchy.",
+                             3, faction, "Common", 1, 3, 1, False, wargear_attachments_permitted=False),
+        CardClasses.ArmyCard("Saint Erika", "If you don't control faith, destroy this unit.\n"
+                                            "Forced Reaction: After a non-Elysia, non-Saint Astra Militarum army unit "
+                                            "enters your discard pile from this planet, pay 1 faith to return that "
+                                            "unit to your hand.", "Saint. Martyr. Ecclesiarchy.",
+                             3, faction, "Loyal", 5, 5, 1, True),
+        CardClasses.ArmyCard("Siege Regiment Manticore", "No Wargear Attachments.\n"
+                                                         "Reaction: After the ranged skirmish at an adjacent planet "
+                                                         "ends, exhaust this unit to deal 3 damage to an enemy "
+                                                         "non-warlord unit at that planet.",
+                             "Vehicle. Artillery. Krieg.", 4, faction, "Common", 3, 4, 1, False,
+                             wargear_attachments_permitted=False),
+        CardClasses.ArmyCard("Tenacious Novice Squad", "While this unit has faith, it gets +1 ATK and +1 HP.\n"
+                                                       "Reaction: After a warlord commits to this planet, place 1 "
+                                                       "faith on an army unit at this planet.",
+                             "Soldier. Ecclesiarchy.", 1, faction, "Common", 1, 1, 1, False),
+        CardClasses.ArmyCard("Undying Saint", "Lumbering.\n"
+                                              "Cannot be damaged by Area Effect.\n"
+                                              "Reaction: After the deploy phase begins, if this unit is in your "
+                                              "discard pile, put it into play at a target non-first planet "
+                                              "(ignore this restriction if your opponent has the initiative).",
+                             "Martyr. Ecclesiarchy.", 1, faction, "Loyal", 2, 1, 1, False, lumbering=True),
+        CardClasses.ArmyCard("Vengeful Seraphim", "While this unit has faith, it gains Flying.\n"
+                                                  "Reaction: After an Ecclesiarchy unit you control at this planet "
+                                                  "is destroyed, this unit gets +1 ATK and +1 HP until the end "
+                                                  "of the phase. Then you may pay 1 faith to ready this unit. "
+                                                  "(Limit once per phase.)", "Soldier. Ecclesiarchy.",
+                             3, faction, "Common", 3, 2, 1, False),
+        CardClasses.ArmyCard("Zealous Cantus", "Reaction: After an Ecclesiarchy or Grey Knights card enters your "
+                                               "discard pile, place 1 faith on an army unit. "
+                                               "(Limit twice per faith.)", "Soldier. Ecclesiarchy.",
+                             3, faction, "Common", 3, 3, 1, False),
+        CardClasses.AttachmentCard("Banner of the Sacred Rose", "Limited.\n"
+                                                                "Attach to a unit you control.\n"
+                                                                "Interrupt: When you deploy an Ecclesiarchy unit, "
+                                                                "exhaust this attachment to reduce the cost by 1 plus "
+                                                                "the number of green planets in your opponent's "
+                                                                "victory display.", "Standard. Ecclesiarchy.",
+                                   1, faction, "Loyal", 2, True, limited=True, must_be_own_unit=True),
+        CardClasses.AttachmentCard("Blade of the Crimson Oath", "Attach to a non-warlord unit.\n"
+                                                                "Attached unit gets +2 ATK and +2 HP.\n"
+                                                                "Interrupt: When your opponent triggers an ability "
+                                                                "that discards a card from your hand, put 2 Guardsman "
+                                                                "tokens into play at a planet to put this card from "
+                                                                "your hand into play attached to a unit.",
+                                   "Relic. Wargear. Weapon.", 1, faction, "Loyal", 2, True,
+                                   type_of_units_allowed_for_attachment="Army/Synapse/Token.",
+                                   extra_attack=2, extra_health=2),
+        CardClasses.AttachmentCard("Departmento Munitorum Aid", "Attach to a Vehicle army unit.\n"
+                                                                "Attached unit gets +1 HP.\n"
+                                                                "Action: Exhaust this attachment and remove 1 "
+                                                                "damage from attached unit to retreat it.",
+                                   "Maintenance.", 0, faction, "Loyal", 2, False, extra_health=1,
+                                   required_traits="Vehicle", type_of_units_allowed_for_attachment="Army",
+                                   action_in_play=True, allowed_phases_in_play="ALL"),
+        CardClasses.AttachmentCard("Revered Heavy Flamer", "Deep Strike (0).\n"
+                                                           "Attach to an army unit.\n"
+                                                           "Attached unit gets +2 ATK.\n"
+                                                           "Reaction: After your opponent uses a shield card on a "
+                                                           "unit at this planet, place 1 faith on an army unit at "
+                                                           "this planet.", "Wargear. Weapon. Ecclesiarchy.",
+                                   1, faction, "Common", 1, False, type_of_units_allowed_for_attachment="Army",
+                                   extra_attack=2, deepstrike=0),
+        CardClasses.AttachmentCard("Sanctified Bolter", "Attach to an army unit you control.\n"
+                                                        "Attached unit gets +1 ATK and +1 HP.\n"
+                                                        "Reaction: After a ranged skirmish at this planet begins, "
+                                                        "or an enemy non-warlord unit moves from another planet to "
+                                                        "this planet, place 2 faith among army units at this planet.",
+                                   "Wargear. Weapon.", 1, faction, "Loyal", 1, False, extra_attack=1, extra_health=1,
+                                   type_of_units_allowed_for_attachment="Army", must_be_own_unit=True),
+        CardClasses.AttachmentCard("Seal of the Ebon Chalice", "Attach to an army unit. Attached unit gets +1 HP.\n"
+                                                               "Interrupt: When attached unit takes damage from a "
+                                                               "unit with a higher printed cost, deal to that unit "
+                                                               "damage equal to the difference between the "
+                                                               "units' printed costs.", "Award. Ecclesiarchy.",
+                                   1, faction, "Loyal", 2, False, extra_health=1,
+                                   type_of_units_allowed_for_attachment="Army"),
+        CardClasses.AttachmentCard("Until Justice is Done", "Attach to an enemy army unit.\n"
+                                                            "Increase damage dealt to attached unit by 1.\n"
+                                                            "Reaction: After an Ecclesiarchy unit you control is "
+                                                            "assigned damage by an attack, put this card from your "
+                                                            "hand into play attached to the attacker.\n",
+                                   "Vow. Ecclesiarchy.", 2, faction, "Common", 1, False, must_be_enemy_unit=True,
+                                   type_of_units_allowed_for_attachment="Army"),
+        CardClasses.EventCard("Our Last Stand", "Action: Place 1 faith on each Astra Militarum unit you control at the "
+                                                "first planet. If that planet shares a common type with two planets in "
+                                                "your opponent's victory display your warlord gains: Interrupt:\" "
+                                                "When this unit is assigned damage, reduce that damage by 1 (min 1)."
+                                                "\" until the end of the battle. Max 1 per round.",
+                              "Prayer. Ecclesiarchy.", 0, faction, "Loyal", 2, False,
+                              action_in_hand=True, allowed_phases_in_hand="ALL"),
+        CardClasses.EventCard("Wrathful Retribution", "Reaction: After an enemy unit moves to, or enters play at, "
+                                                      "a planet where a battle is taking place, place faith equal "
+                                                      "to its printed cost among army units you control. "
+                                                      "Then ready a non-Elite unit with faith.",
+                              "Prayer. Ecclesiarchy.", 1, faction, "Loyal", 2, False),
+        CardClasses.SupportCard("Holy Crusade", "Each other non-signature card in your deck must be Ecclesiarchy.\n"
+                                                "Action: Exhaust this support to place 2 faith among "
+                                                "units you control.", "Pledge.", 1, faction, "Loyal", False,
+                                action_in_play=True, allowed_phases_in_play="ALL"),
+        CardClasses.SupportCard("Munitorum Support", "Once per round you may deploy a card on this support as "
+                                                     "if it were in your hand.\n"
+                                                     "Reaction: After you deploy this support, place a M35 Galaxy "
+                                                     "Lasgun, a Hot-Shot Laspistol, a Bodyguard, a Seal of the "
+                                                     "Ebon Chalice, and a Defense Battery on this card.", "Pledge.",
+                                1, faction, "Common", False),
+        CardClasses.SupportCard("Senatorum Directives", "Reaction: After a Catachan unit you control is assigned "
+                                                        "damage, put a Guardsman token into play at the same planet. "
+                                                        "You may then reassign one of that damage to it."
+                                                        " (Limit once per battle.)", "Pledge.",
+                                1, faction, "Loyal", False),
+        CardClasses.SupportCard("Agra's Preachings", "Limited.\n"
+                                                     "Reaction: After your opponent wins a battle, exhaust this "
+                                                     "support and target a planet with an enemy unit to rally 6 "
+                                                     "a non-Elite Astra Militarum unit, attach it to that planet. "
+                                                     "When the combat phase ends, deploy that unit at that planet "
+                                                     "and reduce its cost by 2. If you can't, discard it.",
+                                "Decree. Ecclesiarchy.", 1, faction, "Common", True, limited=True),
+        CardClasses.SupportCard("Blood of Martyrs", "Interrupt: When an Astra Militarum unit you control is destroyed, "
+                                                    "exhaust this support and target up to 3 army units at the same "
+                                                    "planet. Move any faith on that unit to the targeted units and "
+                                                    "they get +1 ATK for their next attack this phase. Then if the "
+                                                    "destroyed card is a Martyr, draw 1 card.",
+                                "Decree. Ecclesiarchy.", 1, faction, "Loyal", False),
+        CardClasses.SupportCard("Cardinal Agra Decree", "While you control faith, each Vostroya unit you control "
+                                                        "gets +1 ATK.\n"
+                                                        "Interrupt: When this card enters your discard pile, "
+                                                        "draw a card and place 1 faith on an army unit.",
+                                "Decree. Ecclesiarchy.", 0, faction, "Loyal", True),
+        CardClasses.SupportCard("Convent Prioris Advisor", "Reaction: After a Vostroya unit moves to a planet, place "
+                                                           "1 faith on it. Then you may sacrifice this support to "
+                                                           "place 1 faith on that unit and Rally 6 a support, add "
+                                                           "it to your hand.", "Advisor. Ecclesiarchy.",
+                                0, faction, "Loyal", True),
+        CardClasses.SupportCard("Embarked Squads", "Command Action: Exhaust this support to have a target, "
+                                                   "non-Upgrade, Vehicle unit you control gain the Upgrade and "
+                                                   "Transport traits and \"Interrupt: When this unit retreats, put "
+                                                   "2 Guardsman tokens into play at the same planet. "
+                                                   "(Limit once per phase.)\" until the end of the round.",
+                                "Location.", 0, faction, "Loyal", False),
+        CardClasses.SupportCard("Holy Chapel", "Action: Exhaust and Sacrifice this support to put 4 faith among "
+                                               "Astra Militarum or Space Marines army units.",
+                                "Location. Ecclesiarchy.", 1, faction, "Common", False,
+                                action_in_play=True, allowed_phases_in_play="ALL"),
+        CardClasses.WarlordCard("Canoness Vardina", "Action: Place 2 faith among army units you control. If your "
+                                                    "warlord is at a planet with an enemy warlord, place 3 instead. "
+                                                    "(Limit once per round)", "Officer. Ecclesiarchy.",
+                                faction, 2, 6, 2, 6,
+                                "Bloodied.\n"
+                                "Action: Place 2 faith among Ecclesiarchy army units at this planet. "
+                                "(Limit once per game.)", 7, 7,
+                                ["2x Faith Denies Death", "4x Sororitas Command Squad",
+                                 "1x Supreme Appearance", "1x Transcendent Blessing"]),
+        CardClasses.EventCard("Faith Denies Death", "Reaction: After an army unit with faith is assigned damage, "
+                                                    "pay 1 faith to prevent up to 5 of that damage.",
+                              "Prayer. Ecclesiarchy.", 0, faction, "Signature", 1, False),
+        CardClasses.ArmyCard("Sororitas Command Squad", "Reaction: After you prevent damage assigned to this unit "
+                                                        "by a non-warlord unit, deal damage equal to the prevented "
+                                                        "damage to that enemy unit. (Limit once per phase.)",
+                             "Soldier. Ecclesiarchy.", 3, faction, "Signature", 3, 3, 1, False),
+        CardClasses.SupportCard("Supreme Appearance", "Action: Exhaust and sacrifice this support to exhaust each "
+                                                      "non-warlord unit. Use this ability only if you control "
+                                                      "no Ranged units.", "Miracle.", 1, faction, "Signature", False,
+                                action_in_play=True, allowed_phases_in_play="ALL"),
+        CardClasses.AttachmentCard("Transcendent Blessing", "Attach to a non-warlord unit.\n"
+                                                            "Attached unit gets +1 ATK and +1 HP.\n"
+                                                            "Interrupt: When attached unit leaves play, pay 1 "
+                                                            "faith to attach this card to an eligible unit.",
+                                   "Blessing.", 0, faction, "Signature", 3, False, extra_health=1, extra_attack=1,
+                                   type_of_units_allowed_for_attachment="Army/Synapse/Token"),
+        CardClasses.WarlordCard("Saint Celestine", "Combat Action: Pay faith equal to the printed cost of a "
+                                                   "non-Elite unit in your hand to put it into play at this planet. "
+                                                   "If that unit is still in play at the end of the phase, "
+                                                   "discard it and draw a card. (Limit once per phase.)",
+                                "Saint. Ecclesiarchy.", faction, 2, 7, 2, 5,
+                                "Bloodied.\n"
+                                "Interrupt: When your warlord would be defeated by taking damage, remove all damage "
+                                "from it instead. Then deal it 5 damage. (Limit once per game.)", 7, 7,
+                                ["1x Armour of Saint Katherine", "4x Heralding Cherubim",
+                                 "2x Miraculous Intervention", "1x Order of the Crimson Oath"],
+                                action_in_play=True, allowed_phases_in_play="COMBAT"),
+        CardClasses.AttachmentCard("Armour of Saint Katherine", "Attach to your warlord.\n"
+                                                                "Reduce all damage dealth to attached unit to 3.\n"
+                                                                "Reaction: After attached unit takes damage, place "
+                                                                "1 faith on it.", "Wargear. Armor.",
+                                   0, faction, "Signature", 3, True, type_of_units_allowed_for_attachment="Warlord",
+                                   must_be_own_unit=True),
+        CardClasses.ArmyCard("Heralding Cherubim", "Reaction: After your warlord commits to a planet, place 1 "
+                                                   "faith on this unit. Then you may move this unit to a planet "
+                                                   "adjacent to your warlord.", "Herald. Ecclesiarchy.",
+                             2, faction, "Signature", 2, 2, 1, False),
+        CardClasses.EventCard("Miraculous Intervention", "Reaction: After a combat round begins at a planet, commit "
+                                                         "your warlord to that planet and place 2 faith on it. Then "
+                                                         "you may pay 1 resource to put Guardsman tokens into play "
+                                                         "at that planet until you control at least as many units as "
+                                                         "your opponent at that planet.", "Prayer. Ecclesiarchy.",
+                              1, faction, "Signature", 1, False),
+        CardClasses.SupportCard("Order of the Crimson Oath", "While at the first planet, your warlord gets +2 HP.\n"
+                                                             "Reaction: After your opponent wins a battle, Rally 6 "
+                                                             "a unit, add it to your hand. Then place 2 faith among "
+                                                             "army units you control.", "Location. Ecclesiarchy.",
+                                0, faction, "Signature", False)
     ]
     return astra_militarum_cards_array

@@ -304,6 +304,200 @@ def tau_cards_init():
                              no_attachments=True, action_in_play=True, allowed_phases_in_play="COMBAT"),
         CardClasses.EventCard("Hunter's Ploy", "Reaction: After the headquarters phase begins, each player gains "
                                                "resources equal to the highest printed cost among units he controls.",
-                              "Tactic.", 0, faction, "Common", 1, False)
+                              "Tactic.", 0, faction, "Common", 1, False),
+        CardClasses.ArmyCard("Commander Bravestorm",
+                             "Reaction: After you attach a non-Drone attachment to a unit at this planet, "
+                             "draw a card.", "Soldier. Pilot. Shas'o.",
+                             3, faction, "Loyal", 2, 4, 1, True),
+        CardClasses.ArmyCard("Escort Drone",
+                             "You may deploy this card as a Wargear attachment with the text "
+                             "\"Attach to an army unit. Attached unit gains +2 ATK and +1 HP. "
+                             "Interrupt: When attached unit leaves play detach this card to have "
+                             "it become an army unit.\"", "Drone.",
+                             1, faction, "Loyal", 2, 1, 1, False),
+        CardClasses.ArmyCard("Frontline Counsellor",
+                             "Interrupt: When another unit you control is routed or moves from a planet, "
+                             "move this unit to that planet. (Limit once per phase.)\n"
+                             "Forced Reaction: After this unit resolves its attack, move it to your HQ.",
+                             "Soldier. Ethereal.", 2, faction, "Common", 2, 1, 2, False),
+        CardClasses.ArmyCard("Gue'vesa Overseer", "This unit is an Astra Militarum unit in addition to Tau.\n"
+                                                  "Reaction: After this unit enters play, a non-Tau army unit at "
+                                                  "an adjacent planet gets +1 ATK and another gets +1 HP until the "
+                                                  "end of the game. (Each unit can be at a different planet.)",
+                             "Soldier.", 2, faction, "Common", 1, 3, 1, False),
+        CardClasses.ArmyCard("Kroot Hounds",
+                             "No Attachments.\n"
+                             "Reaction: After a Kroot unit you control damages an enemy unit by an attack at "
+                             "this planet, exhaust this unit to deal 2 damage to that enemy unit.",
+                             "Creature. Kroot.", 2, faction, "Common", 3, 3, 0, False, no_attachments=True),
+        CardClasses.ArmyCard("Rampaging Knarloc",
+                             "No Attachments.\n"
+                             "While you have 4 resources or more, reduce all damage taken by this unit to 3.\n"
+                             "Reaction: After this unit is declared as a defender, exhaust it "
+                             "to deal 4 damage to the attacker.", "Creature. Kroot. Elite.",
+                             5, faction, "Loyal", 4, 7, 0, False, no_attachments=True),
+        CardClasses.ArmyCard("Scavenging Kroot Rider",
+                             "Reaction: After this unit enters play, attach an eligible attachment from your "
+                             "discard pile to this unit and exhaust a target enemy limited support card.",
+                             "Kroot.", 2, faction, "Common", 3, 3, 0, False),
+        CardClasses.ArmyCard("Shas'el Lyst",
+                             "While this unit is ready, as an additional cost to target units you control at this "
+                             "planet, your opponent must pay 1 resource.\n"
+                             "Interrupt: When your opponent triggers an ability that discards a card from your hand "
+                             "or routs a unit you control, put this unit from your hand into play at a planet.",
+                             "Soldier. Hero.", 2, faction, "Loyal", 2, 3, 1, True),
+        CardClasses.ArmyCard("Trap Laying Hunter", "Interrupt: When this unit is chosen as a defender, "
+                                                   "your opponent must choose to either deal 3 damage to the "
+                                                   "attacker or exhaust a unit he controls at the same planet. "
+                                                   "(Limit once per combat round.)", "Warrior. Kroot.",
+                             3, faction, "Common", 4, 2, 0, False),
+        CardClasses.AttachmentCard("Arrangement at Elova IV",
+                                   "Attach to a Tau army unit you control.\n"
+                                   "Attached unit gains, \"Reaction: When your opponent wins a command struggle at "
+                                   "a planet with one or more Tau units you control, gain 1 resource.\"",
+                                   "Negotiation.", 0, faction, "Loyal", 2, True, must_be_own_unit=True,
+                                   type_of_units_allowed_for_attachment="Army", unit_must_match_faction=True),
+        CardClasses.AttachmentCard("Data Analyzer",
+                                   "Attach to an army unit.\n"
+                                   "Attached unit gets +1 HP.\n"
+                                   "Interrupt: When a unit is assigned damage by an attack at this planet, reassign "
+                                   "1 of that damage to another unit controlled by the same player at this planet.",
+                                   "Wargear. Experimental.", 2, faction, "Loyal", 2, True,
+                                   type_of_units_allowed_for_attachment="Army", extra_health=1),
+        CardClasses.AttachmentCard("Fusion Cascade Defiance",
+                                   "Attach to an army unit.\n"
+                                   "Attached unit gets +1 ATK and +1 HP.\n"
+                                   "Reaction: After this card enters or leaves play, deal 1 damage to a target "
+                                   "unit at this planet.", "Wargear.", 1, faction, "Loyal", 2, False,
+                                   type_of_units_allowed_for_attachment="Army", extra_health=1, extra_attack=1),
+        CardClasses.AttachmentCard("Positional Relay",
+                                   "Attach to an army unit.\n"
+                                   "Attached unit gets +1 ATK and +1 HP.\n"
+                                   "Action: Exhaust this attachment to Rally X an attachment, add it to your hand. "
+                                   "X equals the number of attachments you control.",
+                                   "Wargear. Experimental.", 1, faction, "Loyal", 2, False,
+                                   type_of_units_allowed_for_attachment="Army", extra_health=1, extra_attack=1,
+                                   action_in_play=True, allowed_phases_in_play="ALL"),
+        CardClasses.EventCard("Breach and Clear",
+                              "If all effects of this event are cancelled, gain 2 resources.\n"
+                              "Action: Exhaust a target army unit. Then you may sacrifice an attachment to exhaust "
+                              "another target army unit at the same planet.", "Tactic.",
+                              2, faction, "Loyal", 2, False, action_in_hand=True, allowed_phases_in_hand="ALL"),
+        CardClasses.EventCard("Consumed by the Kindred",
+                              "Action: Exhaust a Kroot unit and sacrifice another non-Vehicle unit to gain "
+                              "resources equal to the sacrificed unit's printed cost.", "Tactic. Kroot.",
+                              0, faction, "Common", 1, False, action_in_hand=True, allowed_phases_in_hand="ALL"),
+        CardClasses.EventCard("Guerrilla Tactics",
+                              "Command Action: Choose a planet with an enemy unit. Your opponent loses resources "
+                              "equalt to the resource bonus and must discard cards equal to the card bonus. "
+                              "Then move a Kroot army unit you control at that planet to the first planet.",
+                              "Tactic. Kroot.", 1, faction, "Loyal", 2, False,
+                              action_in_hand=True, allowed_phases_in_hand="COMMAND"),
+        CardClasses.EventCard("Optimized Landing",
+                              "Interrupt: When you deploy a non-Drone army unit, reduce its cost by X (Max 2). "
+                              "X is the amount of attachments you control. (Max 1 per round.)",
+                              "Tactic.", 0, faction, "Loyal", 1, False),
+        CardClasses.SupportCard("Bork'an Sept",
+                                "Reaction: After you deploy this support, search your deck for a non-signature "
+                                "non-hardpoint Tau attachment, reveal it, add it to your hand and shuffle your deck.",
+                                "Pledge.", 0, faction, "Loyal", False),
+        CardClasses.SupportCard("Dal'yth Sept",
+                                "While there are two or more tokens on this support, you may use it from play as a "
+                                "shield card with 4 shield icons.\n"
+                                "Reaction: After your opponent captures a planet, put a token on this support.",
+                                "Pledge.", 0, faction, "Loyal", False),
+        CardClasses.SupportCard("Vior'la Sept",
+                                "If there are 3 or more tokens on this support, sacrifice it.\n"
+                                "Reaction: After the phase command ends, put a Defense Battery into play from the "
+                                "card collection at a planet without Defense Battery you control and put a "
+                                "token on this support.", "Pledge.", 1, faction, "Loyal", False),
+        CardClasses.SupportCard("Smuggler's Den",
+                                "Action: Exhaust this support and pay 1 resource to return a target non-Drone "
+                                "attachment you control to your hand and gain resources equal to the printed cost "
+                                "of the attachment.", "Location.", 1, faction, "Loyal", True,
+                                action_in_play=True, allowed_phases_in_play="ALL"),
+        CardClasses.WarlordCard("Aun'Len",
+                                "Reaction: After the deploy phase ends, have a player trigger the battle ability "
+                                "of a target planet with a unit you control. "
+                                "(You cannot target the same planet twice.)", "Prophet.", faction, 2, 6, 2, 6,
+                                "Bloodied.\nAction: Trigger the battle ability of this planet. "
+                                "(Limit once per game.)", 7, 7,
+                                ["1x Forward Outpost", "4x Pathfinder Team",
+                                 "1x Rail Rifle", "2 Tempting Ceasefire"]),
+        CardClasses.SupportCard("Forward Outpost",
+                                "Combat Action: Exhaust this support to give a non-Drone army unit "
+                                "Sweep (2) for its next attack this phase.", "Location.", 1, faction, "Signature",
+                                False, action_in_play=True, allowed_phases_in_play="COMBAT"),
+        CardClasses.ArmyCard("Pathfinder Team", "Reaction: After this planet battle ability is triggered, "
+                                                "exhaust this unit to draw a card.",
+                             "Soldier.", 2, faction, "Signature", 2, 3, 1, False),
+        CardClasses.AttachmentCard("Rail Rifle",
+                                   "Attach to your warlord.\n"
+                                   "Reaction: After your warlord resolves an attack, retreat it to deal 1 damage "
+                                   "to a target unit at this planet.", "Weapon.", 1, faction, "Signature", 3, False,
+                                   must_be_own_unit=True, type_of_units_allowed_for_attachment="Warlord"),
+        CardClasses.EventCard("Tempting Ceasefire",
+                              "Deploy Action: Each player secretly chooses a number on the command dial, reveal it and "
+                              "draw that many cards. Then if you set a lower number, take the difference in resources "
+                              "from your opponent. If not he takes the difference in resources from the token bank. "
+                              "If equal draw a card. Max 1 per round.", "Tactic.",
+                              0, faction, "Tactic.", 1, False, action_in_hand=True, allowed_phases_in_hand="DEPLOY"),
+        CardClasses.WarlordCard("Farsight",
+                                "Your attachment cards are considered to have Deep Strike (0).\n"
+                                "Reaction: After you Deep Strike a card, gain 2 resources. (Limit once per phase.)",
+                                "Shas'o.", faction, 2, 7, 2, 5,
+                                "Bloodied.\nYour attachment cards are considered to have Deep Strike (0).", 7, 7,
+                                ["2x Daring Assault", "4x Farsight Vanguard",
+                                 "1x Support Fleet", "1x The Dawn Blade"]),
+        CardClasses.EventCard("Daring Assault",
+                              "The effects of this event cannot be cancelled.\n"
+                              "Action: Draw a card. Then you may move each card in reserve you control to a "
+                              "different planet.", "Tactic.", 0, faction, "Signature", 1, False,
+                              action_in_hand=True, allowed_phases_in_hand="ALL"),
+        CardClasses.ArmyCard("Farsight Vanguard",
+                             "Reaction: After this unit is declared as an attacker or defender, choose a unit "
+                             "you control. Move a non-Drone attachment you control between this unit and the "
+                             "chosen unit. (Limit once per phase.)", "Soldier.",
+                             2, faction, "Signature", 2, 2, 1, False),
+        CardClasses.SupportCard("Support Fleet",
+                                "This support cannot be targeted nor discarded.\n"
+                                "After you play this support, Rally 16 for up to 4 attachments, place them on this "
+                                "support. Then shuffle your deck.\n"
+                                "Reaction: After the deploy phase begins, transfer a card from this support "
+                                "to your hand.", "Fleet.", 1, faction, "Signature", False),
+        CardClasses.AttachmentCard("The Dawn Blade",
+                                   "Attach to your warlord.\n"
+                                   "Attached unit gets Sweep (1).\n"
+                                   "Combat Action: Exhaust this attachment to either Deep Strike an attachment or "
+                                   "move a card in reserve you control to another planet.",
+                                   "Weapon.", 0, faction, "Signature", 3, True,
+                                   must_be_own_unit=True, type_of_units_allowed_for_attachment="Warlord"),
+        CardClasses.WarlordCard("Shaper Agnok",
+                                "Interrupt: When your opponent wins a command struggle at a planet with one or "
+                                "more Kroot units you control, gain 1 resource or draw 1 card.", "Kroot.",
+                                faction, 2, 7, 2, 5, "Bloodied.", 7, 7,
+                                ["4x Agnok's Shadows", "2x Behind Enemy Lines",
+                                 "1x Evolutionary Adaptation", "1x Vanguard Pack"]),
+        CardClasses.ArmyCard("Agnok's Shadows",
+                             "Combat Action: Exhaust this unit to have a target non-warlord unit at this planet "
+                             "get -2 ATK until the end of the phase, then move this unit to an adjacent planet.",
+                             "Warrior. Kroot.", 2, faction, "Signature", 2, 3, 0, False,
+                             action_in_play=True, allowed_phases_in_play="COMBAT"),
+        CardClasses.EventCard("Behind Enemy Lines",
+                              "Combat Action: Deploy a Kroot unit at a target planet. Then exhaust a target non-Elite "
+                              "enemy army unit at this planet.", "Tactic. Kroot.", 1, faction, "Signature", 1, False,
+                              action_in_hand=True, allowed_phases_in_hand="ALL"),
+        CardClasses.SupportCard("Evolutionary Adaptation",
+                                "Deploy Action: Exhaust this support to choose a unit in your opponent's discard pile "
+                                "and remove it from the game to give a target Kroot army unit a keyword (and all "
+                                "associated values) printed on the removed unit until the end of the round.",
+                                "Upgrade.", 0, faction, "Signature", False,
+                                action_in_play=True, allowed_phases_in_play="DEPLOY"),
+        CardClasses.AttachmentCard("Vanguard Pack",
+                                   "Limited.\nAttach to a planet.\n"
+                                   "Reaction: After an enemy unit is deployed at this planet, exhaust it. Then "
+                                   "your opponent may give you 1 resource to return this attachment to your hand.",
+                                   "Stratagem. Kroot.", 0, faction, "Signature", 3, False, limited=True,
+                                   planet_attachment=True)
     ]
     return tau_cards_array

@@ -347,6 +347,162 @@ def eldar_cards_init():
         CardClasses.EventCard("Piercing Wail", "Deploy Action: Exhaust up to 2 units each with printed cost X or lower."
                                                " X is equal to the highest printed cost among units you control.",
                               "Power.", 4, faction, "Common", 1, False,
-                              action_in_hand=True, allowed_phases_in_hand="DEPLOY")
+                              action_in_hand=True, allowed_phases_in_hand="DEPLOY"),
+        CardClasses.ArmyCard("Cegorach's Jesters", "Reaction: After a battle at this planet begins, your opponent "
+                                                   "may reveal any number of cards from him hand. He cannot use "
+                                                   "unrevealed event or attachment cards as shield cards during "
+                                                   "this battle.", "Psyker. Harlequin.",
+                             2, faction, "Loyal", 2, 2, 1, False),
+        CardClasses.ArmyCard("Evanescent Players", "Deep Strike (1).\n"
+                                                   "Interrupt: When this unit is assigned damage by an enemy army "
+                                                   "unit, prevent all but 2 of that damage. Then deal damage to that "
+                                                   "unit damage equal to the damage prevented. "
+                                                   "(Limit once per phase.)", "Psyker. Harlequin.",
+                             2, faction, "Loyal", 2, 2, 1, False, deepstrike=1),
+        CardClasses.ArmyCard("Luring Troupe", "Reaction: After you deploy this unit, move a target army unit at this "
+                                              "planet to an adjacent planet. At the end of next phase, move that unit "
+                                              "back to this planet, if able.", "Psyker. Harlequin.",
+                             2, faction, "Loyal", 3, 2, 1, False),
+        CardClasses.ArmyCard("Noble Shining Spears", "Mobile.\n"
+                                                     "This unit gets +3 ATK while attacking an undamaged unit.\n"
+                                                     "Reaction: After a Mobile unit you control is assigned damage "
+                                                     "at this planet, reassign 1 of that damage to this unit.",
+                             "Warrior. Hero.", 4, faction, "Common", 0, 4, 2, False, mobile=True),
+        CardClasses.ArmyCard("Phantasmatic Masque", "This unit gets +1 ATK for each remaining HP.\n"
+                                                    "Reaction: After an attack against this unit resolves, exhaust "
+                                                    "this unit to deal 2 damage to the attacker. "
+                                                    "(Limit once per phase.)", "Warrior. Harlequin.",
+                             2, faction, "Loyal", 0, 3, 1, False),
+        CardClasses.ArmyCard("Scheming Warlock", "Reaction: After you deploy this unit, look at the top 3 cards of "
+                                                 "your deck for a card with the Deep Strike keyword. Reveal it, "
+                                                 "and add it to your hand. Then, put each remaining card on the "
+                                                 "bottom of your deck in any order.", "Psyker.",
+                             3, faction, "Loyal", 2, 3, 1, False),
+        CardClasses.AttachmentCard("Close Quarters Doctrine", "Deep Strike (0).\n"
+                                                              "Attach to a planet. Limit 1 per planet.\n"
+                                                              "Each unit with a printed cost 3 or higher at this "
+                                                              "planet gets -1 ATK.\n"
+                                                              "Reaction: After a battle end at this planet, "
+                                                              "draw a card.", "Tactic.",
+                                   1, faction, "Common", 1, False, deepstrike=0, planet_attachment=True,
+                                   limit_one_per_unit=True),
+        CardClasses.AttachmentCard("Flickering Holosuit", "Attach to an army unit.\n"
+                                                          "Attached unit gets +1 HP.\n"
+                                                          "Forced Interrupt: When attaced unit is assigned damage, "
+                                                          "exhaust this attachment to prevent 2 of that damage. "
+                                                          "If this attachment was already exhausted, ready it instead.",
+                                   "Wargear. Armor.", 1, faction, "Common", 1, False, extra_health=1,
+                                   type_of_units_allowed_for_attachment="Army"),
+        CardClasses.AttachmentCard("Warhost Helmet", "Attach to a Saim-Hann unit. Limit 1 per unit.\n"
+                                                     "Attached unit gets +2 HP.\n"
+                                                     "Reaction: After attached unit is assigned damage, exhaust it "
+                                                     "and this attachment to prevent all of that damage. Then "
+                                                     "attached unit gets +1 ATK for its next attack this phase.",
+                                   "Wargear.", 0, faction, "Loyal", 2, False, required_traits="Saim-Hann",
+                                   limit_one_per_unit=True, extra_health=2),
+        CardClasses.EventCard("Clash of Wings", "Combat Action: Target a planet with your warlord. Until the end of "
+                                                "the combat round, each Mobile unit you control at that planet "
+                                                "gains Flying.", "Tactic.", 1, faction, "Common", 1, False,
+                              action_in_hand=True, allowed_phases_in_hand="COMBAT"),
+        CardClasses.EventCard("Lost in the Webway", "Combat Action: Either (choose one): Switch the location of two "
+                                                    "Harlequin units you control or your opponent must switch the "
+                                                    "location of two army units he controls.", "Power. Harlequin.",
+                              1, faction, "Loyal", 2, False, action_in_hand=True, allowed_phases_in_hand="COMBAT"),
+        CardClasses.EventCard("The Dance Without End", "Reaction: After a Harlequin unit enters your discard pile "
+                                                       "from a planet, return it to your hand to deploy a Harlequin "
+                                                       "unit with a different name at the same planet.",
+                              "Power.", 1, faction, "Loyal", 2, False),
+        CardClasses.EventCard("Theater of War", "Play only if an enemy warlord is ready.\n"
+                                                "Command Action: Exhaust your warlord to trigger the Battle ability "
+                                                "of a target planet. Then your opponent may exhaust his warlord to "
+                                                "trigger the Battle ability of another planet.", "Power. Harlequin.",
+                              1, faction, "Common", 1, False, action_in_hand=True, allowed_phases_in_hand="COMMAND"),
+        CardClasses.SupportCard("Children of the Stars", "Reaction: After you deploy a Wargear attachment, put a "
+                                                         "token on this support. Then if there are 3 tokens or more "
+                                                         "on this support, Rally 6 an attachment, add it to your hand.",
+                                "Pledge.", 0, faction, "Common", False),
+        CardClasses.SupportCard("Followers of Asuryan", "While there are 4 tokens on this support, you may deploy a "
+                                                        "unit with printed cost 3 or lower from your hand at a "
+                                                        "non-first planet as though it had ambush. "
+                                                        "(Limit once per phase.)\n"
+                                                        "Reaction: After you Deep Strike or Ambush, put a "
+                                                        "token on this support.", "Pledge.",
+                                1, faction, "Loyal", False),
+        CardClasses.SupportCard("Ghosts of Cegorach", "While each unit you control has the Harlequin trait, "
+                                                      "your warlord gets +3 HP.\n"
+                                                      "Reaction: After a Harlequin unit is assigned damage at the "
+                                                      "same planet as your warlord, exhaust this support to reassign "
+                                                      "1 of that damage to your warlord.",
+                                "Pledge.", 0, faction, "Loyal", False),
+        CardClasses.SupportCard("Wraithbone Armour", "Units you control with a printed ATK of 0 get +1 HP.\n"
+                                                     "Combat Action: Exhaust this support to move 1 damage from a "
+                                                     "target enemy unit at a planet with a unit you control with a "
+                                                     "printed ATK of 0 to another unit at the same planet.",
+                                "Upgrade.", 1, faction, "Loyal", True),
+        CardClasses.WarlordCard("Farseer Tadheris", "You choose your allied faction as if you were Astra Militarum.\n"
+                                                    "Action: Perform a mulligan with your current hand size. "
+                                                    "(Limit once per round.)", "Psyker. Prophet.",
+                                faction, 2, 6, 2, 5,
+                                "Bloodied.\n"
+                                "Action: Deal 1 damage to this unit to perform a mulligan "
+                                "with your current hand size. (Limit once per game.)", 7, 7,
+                                ["2x Back to the Shadows", "4x Elusive Escort",
+                                 "1x Singing Spear", "1x Wisdom of Biel-Tan"]),
+        CardClasses.EventCard("Back to the Shadows", "Interrupt: When an army unit you control is assigned damage, "
+                                                     "return it and each attachment you control on it to your hand."
+                                                     " Then draw a card.", "Power.",
+                              0, faction, "Signature", 1, False),
+        CardClasses.ArmyCard("Elusive Escort", "Reaction: After this unit enters play, draw a card. Then remove from "
+                                               "the game facedown a card from your hand. When this unit leaves play, "
+                                               "return the facedown card to your hand.", "Scout.",
+                             2, faction, "Signature", 2, 3, 1, False),
+        CardClasses.AttachmentCard("Singing Spear",
+                                   "Attach to an army unit.\n"
+                                   "Attached unit gets +2 ATK and +2 HP.\n"
+                                   "Interrupt: When you perform a mulligan, reveal this card from your hand to move "
+                                   "an army unit you control to the last planet.", "Wargear.",
+                                   0, faction, "Signature", 3, False,
+                                   extra_health=2, extra_attack=2, type_of_units_allowed_for_attachment="Army"),
+        CardClasses.SupportCard("Wisdom of Biel-tan", "Reaction: After you perform a mulligan, draw a card.",
+                                "Doctrine.", 0, faction, "Signature", False),
+        CardClasses.WarlordCard("Zen Xi Aonia", "Each unit at this planet loses the Area Effect keyword.\n"
+                                                "Forced Interrupt: When a unit you control at this planet is "
+                                                "chosen as a defender, declare another eligible unit at this planet "
+                                                "as the defender instead, if able.", "Shadowseer. Harlequin.",
+                                faction, 2, 6, 2, 6, "Bloodied.", 7, 7,
+                                ["2x Access to the Black Library", "1x Masters of the Webway", "1x Starmist Raiment",
+                                 "1x The Blinded Princess", "1x The Dawnsinger",
+                                 "1x The Sun Prince", "1x The Webway Witch"]),
+        CardClasses.EventCard("Access to the Black Library",
+                              "Deploy Action: Search your deck for 2 cards with a different name. Reveal them, have "
+                              "your opponent choose one, add it to your hand, and shuffle the remaining card "
+                              "in your deck.", "Power.", 1, faction, "Signature", 1, False,
+                              action_in_hand=True, allowed_phases_in_hand="DEPLOY"),
+        CardClasses.SupportCard("Masters of the Webway",
+                                "Reaction: After the deploy phase begins, sacrifice this support to have each player "
+                                "exchange their command dial value the next time they reveal their command dial "
+                                "this round", "Location.", 1, faction, "Signature", False),
+        CardClasses.AttachmentCard("Starmist Raiment",
+                                   "Attach to a Harlequin unit you control.\n"
+                                   "Interrupt: When damage is assigned to a Harlequin unit you control at this planet, "
+                                   "exhaust this attachment to reassign 1 of that damage to another non-warlord "
+                                   "unit at this planet.", "Wargear. Armor.", 1, faction, "Signature", 3, True,
+                                   required_traits="Harlequin", must_be_own_unit=True),
+        CardClasses.ArmyCard("The Blinded Princess",
+                             "Forced Reaction: After this unit enters play, your opponent may exhaust a unit at a "
+                             "planet to move this unit to that planet.",
+                             "Warrior. Harlequin.", 1, faction, "Signature", 3, 3, 1, False),
+        CardClasses.ArmyCard("The Dawnsinger",
+                             "Reaction: After this unit is destroyed, your opponent must choose to either put 2 "
+                             "cards from his hand on the top of his deck in any order or you draw 2 cards.",
+                             "Psyker. Harlequin.", 2, faction, "Signature", 2, 3, 1, False),
+        CardClasses.ArmyCard("The Sun Prince",
+                             "Interrupt: When this unit leaves play, your opponent must choose, at the same planet, "
+                             "either to exhaust a unit he controls or ready a unit you control.",
+                             "Warrior. Harlequin.", 2, faction, "Signature", 3, 2, 1, False),
+        CardClasses.ArmyCard("The Webway Witch",
+                             "Reaction: After you deploy this unit, the next time your opponent deploys a unit this "
+                             "phase, he must deploy it at this planet, if able.",
+                             "Psyker. Harlequin.", 2, faction, "Signature", 1, 2, 2, False)
     ]
     return eldar_cards_array

@@ -5,8 +5,8 @@ def space_marines_cards_init():
     faction = "Space Marines"
     space_marines_card_array = [
         CardClasses.WarlordCard("Captain Cato Sicarius",
-                                "Reaction: After an enemy unit at this planet "
-                                "is destroyed, gain 1 resource.", "Soldier. Ultramarines.",
+                                "Reaction: After an enemy unit at this planet"
+                                "is destoyed, gain 1 resource.", "Soldier. Ultramarines.",
                                 faction, 2, 6, 2, 5,
                                 "Bloodied.", 7, 7,
                                 ["1x Cato's Stronghold", "1x Tallassarian Tempest Blade",
@@ -364,6 +364,296 @@ def space_marines_cards_init():
         CardClasses.SupportCard("Standard of Devastation", "Reaction: After a Dark Angels unit you control is "
                                                            "destroyed, each other Space Marines army unit "
                                                            "you control gets +1 ATK until the end of the phase.",
-                                "Relic. Upgrade.", 3, faction, "Common", True)
+                                "Relic. Upgrade.", 3, faction, "Common", True),
+        CardClasses.ArmyCard("Avenging Squad", "Retaliate (1).\n"
+                                               "Reaction: After another unit you control at this planet is dealt "
+                                               "damage by an enemy unit, this unit gains Retaliate (1) until "
+                                               "the end of the phase.", "Soldier. Ultramarines.",
+                             1, faction, "Common", 1, 2, 1, False),
+        CardClasses.ArmyCard("Command Predator", "No Wargear Attachments.\n"
+                                                 "Reaction: After a combat turn during which this unit was an "
+                                                 "attacker ends, take a combat turn. (Limit once per phase.)",
+                             "Vehicle. Tank. Elite.", 5, faction, "Common", 4, 5, 2, False,
+                             wargear_attachments_permitted=False),
+        CardClasses.ArmyCard("Deathwing Interceders", "Deep Strike (2).\n"
+                                                      "Interrupt: When an enemy unit would declare an attack against "
+                                                      "a unit you control at this planet, Deep Strike this unit to "
+                                                      "declare it as the defender instead. If this unit is still "
+                                                      "in play at the end of the phase, return it to your hand.",
+                             "Soldier. Dark Angels.", 3, faction, "Common", 2, 4, 0, False, deepstrike=2),
+        CardClasses.ArmyCard("Dodging Land Speeder", "No Wargear Attachments.\n"
+                                                     "Deep Strike (1). Flying.\n"
+                                                     "Cannot be damaged by Area Effect.\n"
+                                                     "Interrupt: When this unit is chosen as a defender, exhaust it "
+                                                     "and move it to an adjacent planet to cancel the attack.",
+                             "Vehicle. Dark Angels.", 2, faction, "Loyal", 3, 1, 1, False, deepstrike=1, flying=True,
+                             wargear_attachments_permitted=False),
+        CardClasses.ArmyCard("Dutiful Castellan", "While you control an Ecclesiarchy unit, reduce the cost of this "
+                                                  "unit by 1.\n"
+                                                  "Unstoppable - The first time this unit is assigned damage this "
+                                                  "turn, prevent 1 of that damage and deal 1 damage to a "
+                                                  "target unit at this planet.", "Martyr. Black Templars.",
+                             3, faction, "Loyal", 3, 3, 1, False, unstoppable=True),
+        CardClasses.ArmyCard("Fierce Purgator", "While this unit has faith, it gains Retaliate (3).\n"
+                                                "Reaction: After this unit resolves its attack, deal 1 damage to a "
+                                                "unit at this planet and each adjacent planet."
+                                                "\n\nEditor's note: the 'Action' in the image"
+                                                " is meant to read 'Reaction'",
+                             "Soldier. Grey Knights.", 3, faction, "Common", 1, 4, 1, False),
+        CardClasses.ArmyCard("Fighting Company Daras", "Sweep (1).\n"
+                                                       "Unstoppable - The first time this unit is assigned damage "
+                                                       "this turn, prevent 1 of that damage and this unit gains "
+                                                       "Retaliate (2) until the end of the phase.",
+                             "Soldier. Black Templars.", 3, faction, "Loyal", 2, 3, 1, False, sweep=1),
+        CardClasses.ArmyCard("First Line Rhinos", "No Wargear Attachments.\n"
+                                                  "Reaction: After you deploy this unit, Rally 6 a non-Vehicle "
+                                                  "Space Marines unit with printed cost 3 or lower, attach it to "
+                                                  "this unit. When this unit leaves play, as an interrupt, put the "
+                                                  "attached unit into play exhausted at the same planet.",
+                             "Vehicle. Ultramarines.", 2, faction, "Loyal", 2, 2, 1, False,
+                             wargear_attachments_permitted=False),
+        CardClasses.ArmyCard("Frenzied Wulfen", "Retaliate (2).\n"
+                                                "Reaction: After this unit enters play, a target army unit at this "
+                                                "planet is considered a warlord for your card effects.",
+                             "Warrior. Mutant. Space Wolves.", 3, faction, "Loyal", 3, 3, 1, False),
+        CardClasses.ArmyCard("Grand Master Belial", "Deep Strike (2)\n"
+                                                    "Interrupt: When your Bloodied warlord is defeated, discard it "
+                                                    "and pay 1 resource and Deep Strike this unit to have it be "
+                                                    "considered a warlord. If it is defeated you lose the game.",
+                             "Soldier. Dark Angels.", -1, faction, "Loyal", 2, 6, 0, True, deepstrike=2),
+        CardClasses.ArmyCard("Hjorvath Coldstorm", "While this unit is at a planet with an enemy warlord "
+                                                   "it gets -2 ATK and -2 HP.\n"
+                                                   "Interrupt: When your opponent triggers an ability that discards "
+                                                   "a card from your hand, put this unit into play at a planet. Then "
+                                                   "deal 1 damage to an enemy unit at that planet and draw a card.",
+                             "Soldier. Space Wolves.", 1, faction, "Loyal", 3, 3, 1, True),
+        CardClasses.ArmyCard("Inspiring Sergeant", "Reaction: After this unit resolves its attack, a target unit "
+                                                   "at this planet gets +1 ATK and +1 HP until the end of the phase.",
+                             "Soldier. Space Marines.", 2, faction, "Loyal", 2, 2, 1, False),
+        CardClasses.ArmyCard("Interceptor Squad", "While this unit has faith, it gains Mobile.\n"
+                                                  "Reaction: After a unit enters play at an adjacent planet, move "
+                                                  "this unit to that planet. Then you may deal 1 damage to that unit. "
+                                                  "(Limit once per phase.)", "Soldier. Grey Knights.",
+                             3, faction, "Common", 2, 4, 1, False),
+        CardClasses.ArmyCard("Knight Paladin Voris", "No Attachments. Lumbering. Retaliate (5).\n"
+                                                     "Cannot be targeted.\n"
+                                                     "Each other unit you control at this planet "
+                                                     "gets +1 ATK and +1 HP.", "Questor Imperialis.",
+                             6, faction, "Loyal", 5, 9, 6, True, no_attachments=True, lumbering=True),
+        CardClasses.ArmyCard("Pinning Razorback", "No Wargear Attachments.\n"
+                                                  "Combat Action: A target enemy non-warlord unit at this planet "
+                                                  "cannot be declared as an attacker during your opponent's next "
+                                                  "combat turn this round. (Limit once per phase.)",
+                             "Vehicle. Tank. Space Wolves.", 4, faction, "Common", 2, 5, 1, False,
+                             wargear_attachments_permitted=False, action_in_play=True, allowed_phases_in_play="COMBAT"),
+        CardClasses.ArmyCard("Prognosticator", "While this unit has faith it gains 1 command icon.\n"
+                                               "Reaction: After a unit with faith you control is assigned damage, "
+                                               "place 1 faith on an army unit at the same planet. "
+                                               "(Limit once per round.)", "Soldier. Grey Knights.",
+                             2, faction, "Common", 2, 2, 1, False),
+        CardClasses.ArmyCard("Sanctified Aggressor", "Cannot be damaged by Area Effect.\n"
+                                                     "Reaction: After two or more warlords commit to this planet, "
+                                                     "gain 1 resource and place 1 faith on an army unit at "
+                                                     "this planet.", "Soldier. Space Wolves.",
+                             3, faction, "Common", 3, 4, 1, False),
+        CardClasses.ArmyCard("Steadfast Sword Brethren", "Unstoppable - The first time this unit is assigned damage "
+                                                         "this round, prevent 1 of that damage and another Black "
+                                                         "Templars unit you control gets +2 HP until the "
+                                                         "end of the phase.", "Soldier. Black Templars.",
+                             4, faction, "Common", 3, 4, 1, False, unstoppable=True),
+        CardClasses.ArmyCard("Storming Librarian", "Retaliate (1).\n"
+                                                   "Reaction: After a combat round begins, deal 4 damage to each "
+                                                   "enemy unit at this planet attacked by this unit during the "
+                                                   "previous combat round.", "Psyker. Ultramarines.",
+                             3, faction, "Common", 1, 6, 1, False),
+        CardClasses.ArmyCard("Thunderwolf Cavalry", "Reaction: After an enemy warlord commits to an adjacent planet "
+                                                    "with a single army unit you control switch the location of "
+                                                    "that single unit with this unit.", "Soldier. Space Wolves.",
+                             3, faction, "Common", 3, 3, 1, False),
+        CardClasses.ArmyCard("Wrathful Dreadnought", "No Wargear Attachments.\n"
+                                                     "Unstoppable - The first time this unit is assigned damage "
+                                                     "this turn, prevent 1 of that damage and a target army unit "
+                                                     "has its HP value set to 4 until the end of the phase.",
+                             "Vehicle. Black Templars.", 4, faction, "Loyal", 6, 3, 2, False,
+                             wargear_attachments_permitted=False, unstoppable=True),
+        CardClasses.AttachmentCard("Call the Storm", "Attach to a planet.\n"
+                                                     "Combat Action: If there is no enemy warlord at this planet, "
+                                                     "exhaust this attachment to move a target enemy army unit at "
+                                                     "this planet to a planet with a Space Wolves unit you control.",
+                                   "Power. Space Wolves.", 2, faction, "Common", 1, True,
+                                   action_in_play=True, allowed_phases_in_play="COMBAT", planet_attachment=True),
+        CardClasses.AttachmentCard("Centurion Warsuit", "Attach to a non-Elite army unit you control.\n"
+                                                        "Attached unit gets +2 ATK, +4 HP and Lumbering.",
+                                   "Wargear.", 1, faction, "Loyal", 2, False, must_be_own_unit=True,
+                                   forbidden_traits="Elite", type_of_units_allowed_for_attachment="Army",
+                                   extra_attack=2, extra_health=4),
+        CardClasses.AttachmentCard("Terminator Armour", "Deep Strike (1).\n"
+                                                        "Attach to a Space Marines army unit. "
+                                                        "Attached unit gets +2 ATK and +2 HP.\n"
+                                                        "Action: Move attached unit to a planet with a Scout unit "
+                                                        "you control. (Limit once per game.)", "Wargear.",
+                                   2, faction, "Loyal", 2, False, unit_must_match_faction=True,
+                                   extra_attack=2, extra_health=2, type_of_units_allowed_for_attachment="Army",
+                                   action_in_play=True, allowed_phases_in_play="ALL"),
+        CardClasses.AttachmentCard("Trapped Objective", "Attach to a non-first planet.\n"
+                                                        "Forced Reaction: After the combat phase begins, sacrifice "
+                                                        "this attachment and deal 2 damage to a warlord at this "
+                                                        "planet if able. Then draw a card.", "Tactic. Space Wolves.",
+                                   1, faction, "Common", 1, True, planet_attachment=True),
+        CardClasses.AttachmentCard("Woken Machine Spirit", "Attach to a Vehicle unit. Limit 1 per unit.\n"
+                                                           "Attached unit gets +1 HP.\n"
+                                                           "Interrupt: When you use a shield card to prevent damage "
+                                                           "to attached unit, that card gains 1 shield icon. Then "
+                                                           "the shielded unit gets +1 ATK until the end of the phase.",
+                                   "Hardpoint.", 0, faction, "Common", 1, False, required_traits="Vehicle",
+                                   limit_one_per_unit=True, extra_health=1),
+        CardClasses.EventCard("Aerial Deployment", "Reaction: After both players passed during the deploy phase, "
+                                                   "take an extra deployment turn.", "Tactic.",
+                              0, faction, "Loyal", 2, False),
+        CardClasses.EventCard("The Emperor's Retribution", "Reaction: After your opponent passes during the deploy "
+                                                           "phase, move a non-Elite Space Marines army unit from "
+                                                           "your HQ to a target non-first planet to have it gain "
+                                                           "1 command icon until the end of next phase.",
+                              "Tactic.", 1, faction, "Common", 1, False),
+        CardClasses.EventCard("Uphold His Honor", "The effects of this event cannot be cancelled.\n"
+                                                  "Reaction: After a unit is chosen as a defender, it can trigger "
+                                                  "its Unstoppable specialization for this attack even if it already "
+                                                  "triggered this round.", "Vow.",
+                              0, faction, "Common", 1, False),
+        CardClasses.SupportCard("Anvil Strike Force", "While there is a token on this support, the first shield "
+                                                      "card with 1 printed shield icon you play each round gains "
+                                                      "1 shield icon.\n"
+                                                      "Reaction: After you win a battle at the first planet with "
+                                                      "your warlord, put a token on this support.",
+                                "Pledge.", 0, faction, "Loyal", False),
+        CardClasses.SupportCard("Gladius Strike Force", "While there is a token on this support, each Rally and "
+                                                        "Search you perform is increased by 2.\n"
+                                                        "Reaction: After your warlord resolves an attack against an "
+                                                        "enemy warlord, put a token on this support.",
+                                "Pledge.", 0, faction, "Loyal", False),
+        CardClasses.SupportCard("Talon Strike Force", "While there are 3 tokens on this support, you may use each "
+                                                      "attachment you control as a shield for the attached unit.\n"
+                                                      "Reaction: After you deploy an attachment card, place a "
+                                                      "token on this support.",
+                                "Pledge.", 0, faction, "Loyal", False),
+        CardClasses.SupportCard("Mobilize the Chapter", "When deployed choose a trait among: Dark Angels, "
+                                                        "Ultramarines, Space Wolves, Black Templars.\n"
+                                                        "Reaction: After the combat phase begins, draw a card or gain "
+                                                        "a resource. Use this ability only if each unit you "
+                                                        "control shares the chosen trait.", "Upgrade.",
+                                0, faction, "Loyal", True),
+        CardClasses.SupportCard("The Wolf Within", "Action: Sacrifice this support to have up to 2 target Space "
+                                                   "Wolves units you control get +1 ATK and +1 HP until the end "
+                                                   "of the phase. If both units are at a planet with 2 or more "
+                                                   "warlords, gain 1 resource.", "Tale.",
+                                1, faction, "Loyal", True, action_in_play=True, allowed_phases_in_play="ALL"),
+        CardClasses.SupportCard("Vamii Industrial Complex", "Limited.\n"
+                                                            "Reaction: After the combat phase begins, place 2 "
+                                                            "resources on this support. Then you may sacrifice it to "
+                                                            "deploy a unit from your hand at a non-first planet, "
+                                                            "reducing its cost by the number of tokens on this "
+                                                            "support.", "Location.",
+                                3, faction, "Common", False, limited=True),
+        CardClasses.WarlordCard("Castellan Crowe", "Each unit you control is considered to have faith.\n"
+                                                   "Reaction: After an army unit damages an enemy army unit "
+                                                   "by an attack, pay X faith to deal X damage to that enemy unit.",
+                                "Soldier. Grey Knights.", faction, 2, 7, 2, 6,
+                                "Bloodied.\n"
+                                "Each unit you control is considered to have faith.\n"
+                                "Action: Pay 1 faith to give this unit +3 ATK for its next attack this phase. "
+                                "(Limit once per game.)", 7, 7,
+                                ["4x Brotherhood Justicar", "1x Humanity's Shield",
+                                 "2x Psychic Ward", "1x The Blade of Antwyr"]),
+        CardClasses.ArmyCard("Brotherhood Justicar", "Unstoppable - The first time this unit is assigned damage this "
+                                                     "turn, prevent 1 of that damage and place 1 faith on it.\n"
+                                                     "Reaction: After you deploy this unit place 1 faith on each "
+                                                     "unit you control at this planet.", "Soldier. Grey Knights.",
+                             3, faction, "Signature", 3, 3, 1, False, unstoppable=True),
+        CardClasses.SupportCard("Humanity's Shield", "This card (in your hand or in play) may be used as a "
+                                                     "shield card with 2 shield icons.\n"
+                                                     "Reaction: After your opponent wins a command struggle, "
+                                                     "place 1 faith on an army unit.", "Creed. Grey Knights.",
+                                1, faction, "Signature", False),
+        CardClasses.EventCard("Psychic Ward", "Interrupt: When your opponent plays an event card, cancel its effects."
+                                              "Your opponent may place 1 faith on your warlord and exhaust their "
+                                              "warlord to cancel this effect.", "Power. Grey Knights.",
+                              0, faction, "Signature", 1, False),
+        CardClasses.AttachmentCard("The Blade of Antwyr", "Attach to a Grey Knights unit.\n"
+                                                          "Attached unit gets +1 HP.\n"
+                                                          "Reaction: After attached unit commits to a planet, place "
+                                                          "1 faith on a unit you control at each adjacent planet.",
+                                   "Wargear. Daemon.", 1, faction, "Signature", 3, True, extra_health=1,
+                                   required_traits="Grey Knights"),
+        CardClasses.WarlordCard("Chapter Champion Varn", "Reduce by 1 the cost of the first support you deploy "
+                                                         "each round.\n"
+                                                         "If a support has more damage on it than its cost, "
+                                                         "sacrifice it.\n"
+                                                         "Forced Interrupt: When an army unit you control takes damage "
+                                                         "equal or lower than its remaining HP, move 1 of that damage "
+                                                         "to a support card you control.", "Soldier. Imperial Fists.",
+                                faction, 2, 7, 2, 6, "Bloodied.\n"
+                                                     "Reduce by 1 the cost of the first support you deploy"
+                                                     " each round.", 7, 7,
+                                ["3x 3rd Company Tactical Squad", "1x Citadel of Vamii", "1x Fortress of Mangeras",
+                                 "1x Memories of Fallen Comrades", "2x The Siege Masters"]),
+        CardClasses.ArmyCard("3rd Company Tactical Squad", "While you control no support cards this unit gains "
+                                                           "1 command icon.\n"
+                                                           "Interrupt: When this unit leaves play, Rally 6 a support "
+                                                           "card, add it to your hand.", "Soldier. Imperial Fists.",
+                             2, faction, "Signature", 2, 3, 1, False),
+        CardClasses.SupportCard("Citadel of Vamii", "Cannot be targeted by enemy card abilities.\n"
+                                                    "For the purposes of card effects, this card is considered to "
+                                                    "have a cost of 4.\n"
+                                                    "Reaction: After a support card enters play, treat its printed "
+                                                    "text box as blank until the end of the round and remove 1 "
+                                                    "damage from a support card.", "Location.",
+                                2, faction, "Signature", False),
+        CardClasses.SupportCard("Fortress of Mangeras", "Cannot be targeted by enemy card abilities.\n"
+                                                        "For the purposes of card effects, this card is considered to "
+                                                        "have a cost of 4.\n"
+                                                        "Reaction: After a support card you control leaves play, "
+                                                        "draw a card.", "Location.",
+                                3, faction, "Signature", False),
+        CardClasses.AttachmentCard("Memories of Fallen Comrades", "Attach to your warlord.\n"
+                                                                  "Attached unit gets +1 HP.\n"
+                                                                  "Combat Action: Exhaust this attachment to "
+                                                                  "remove 1 damage from up to 2 support cards you "
+                                                                  "control.", "Wargear.",
+                                   1, faction, "Signature", 3, False, must_be_own_unit=True,
+                                   type_of_units_allowed_for_attachment="Warlord", extra_health=1,
+                                   action_in_play=True, allowed_phases_in_play="COMBAT"),
+        CardClasses.EventCard("The Siege Masters", "The effects of this event cannot be cancelled.\n"
+                                                   "Action: Exhaust a target enemy support card and Rally 8 "
+                                                   "a support card, add it to your hand.", "Tactic. Imperial Fists.",
+                              1, faction, "Signature", 1, False, action_in_hand=True, allowed_phases_in_hand="ALL"),
+        CardClasses.WarlordCard("Mephiston", "Each unit you control gains Retaliate (1).\n"
+                                             "Interrupt: When the command phase ends, if your opponent won more "
+                                             "command struggles than you this phase, draw a card or gain 1 resource.",
+                                "Myth. Blood Angels.", faction, 2, 7, 2, 6,
+                                "Bloodied.\n"
+                                "Each unit you control at this planet gains Retaliate (1).", 7, 7,
+                                ["4x Sanguinary Guard", "1x The Black Rage",
+                                 "2x The Bloodied Host", "1x Vitarus, the Sanguine Sword"]),
+        CardClasses.ArmyCard("Sanguinary Guard", "You may deploy this unit from your hand at a planet with your "
+                                                 "warlord as though it had Ambush.\n"
+                                                 "Interrupt: When you win a battle at this planet, return this "
+                                                 "unit to your hand.", "Blood Angels. Elite.",
+                             2, faction, "Signature", 2, 2, 1, False),
+        CardClasses.SupportCard("The Black Rage", "Action: Exhaust this support to give a target Space Marines "
+                                                  "army unit you control +1 ATK, +1 HP and Retaliate (1). "
+                                                  "If that unit is still in play at the end of the phase, "
+                                                  "sacrifice it.", "Flaw. Blood Angels.",
+                                1, faction, "Signature", False,
+                                action_in_play=True, allowed_phases_in_play="ALL"),
+        CardClasses.EventCard("The Bloodied Host", "Play only during a battle.\n"
+                                                   "Action: Each unit you control gets +2 HP until the end of "
+                                                   "the combat round. (Max 1 per round.)",
+                              "Tale.", 1, faction, "Signature", 1, False,
+                              action_in_hand=True, allowed_phases_in_hand="ALL"),
+        CardClasses.AttachmentCard("Vitarus, the Sanguine Sword", "Deep Strike (0).\n"
+                                                                  "Attach to a unit.\n"
+                                                                  "Attached unit gets +1 ATK, +1 HP, "
+                                                                  "and Retaliate (3).", "Wargear.",
+                                   1, faction, "Signature", 3, True, deepstrike=0, extra_health=1, extra_attack=1)
     ]
     return space_marines_card_array

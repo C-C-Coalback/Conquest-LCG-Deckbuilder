@@ -273,7 +273,7 @@ def orks_cards_init():
                                                  " you control at this planet and deal it 1 damage.", "Soldier.",
                              3, faction, "Common", 2, 3, 0, False,
                              action_in_hand=True, allowed_phases_in_hand="COMBAT", ambush=True),
-        CardClasses.ArmyCard("Gorgul Da Slaya", "Interrupt: When a unit you control at this planet is declared as an "
+        CardClasses.ArmyCard("Gorgul da Slaya", "Interrupt: When a unit you control at this planet is declared as an "
                                                 "attacker, your opponent cannot trigger effects until after "
                                                 "that attack resolves.", "Soldier. Nob.",
                              4, faction, "Loyal", 4, 5, 0, True),
@@ -313,6 +313,185 @@ def orks_cards_init():
         CardClasses.SupportCard("Fungal Turf", "HEADQUARTERS ACTION: Sacrifice this support to put X Snotling tokens "
                                                "into play divided among any number of planets. "
                                                "X is the highest printed cost among units you control.", "Location.",
-                                2, faction, "Loyal", False, action_in_play=True, allowed_phases_in_play="HEADQUARTERS")
+                                2, faction, "Loyal", False, action_in_play=True, allowed_phases_in_play="HEADQUARTERS"),
+        CardClasses.ArmyCard("Fairly 'Quipped Kommando",
+                             "Deep Strike (0).\n"
+                             "This unit gets +1 HP per attachment on it.\n"
+                             "Interrupt: When an attachment you control leaves play from this planet, return it "
+                             "to your hand instead.", "Soldier.",
+                             2, faction, "Loyal", 2, 2, 1, False, deepstrike=0),
+        CardClasses.ArmyCard("Herald of the WAAGH!", "Deploy Reaction: After this unit enters play, resolve a battle "
+                                                     "at this planet. (Only actions of the deploy phase are allowed "
+                                                     "and the planet cannot be captured.)", "Warrior. Nob.",
+                             4, faction, "Loyal", 2, 3, 1, False),
+        CardClasses.ArmyCard("Improbable Runt Machine",
+                             "Flying.\n"
+                             "This unit gets +1 ATK, +1 HP and 1 command icon per attachment on it (Max 3).\n"
+                             "Action: Attach a Runt unit you control to this unit as a Copilot attachment."
+                             " (Limit once per round.)", "Machine. Marvel.",
+                             2, faction, "Loyal", 1, 1, 1, False, flying=True),
+        CardClasses.ArmyCard("Impulsive Loota",
+                             "Deep Strike (1).\n"
+                             "Reaction: After an attachment card is discarded, Deep Strike this unit to deploy that "
+                             "attachment from your discard pile attached to this unit.",
+                             "Soldier.", 1, faction, "Common", 1, 3, 1, False, deepstrike=1),
+        CardClasses.ArmyCard("Junk Chucka Kommando",
+                             "Reduce the cost of attachments you attach to this unit by 1.\n"
+                             "Reaction: After this unit resolves an attack, move an attachment from this unit to a "
+                             "target eligible unit at this planet to deal 2 damage to it. (Limit once per attack.)",
+                             "Soldier.", 3, faction, "Common", 2, 3, 1, False),
+        CardClasses.ArmyCard("Kamouflage Expert",
+                             "Deep Strike (2).\n"
+                             "Reaction: After you Deep Strike this unit, a card in reserve at this planet or an "
+                             "adjacent planet is treated as a 3 ATK, 3 HP Orks army unit until the end of the phase.",
+                             "Soldier.", 3, faction, "Common", 3, 3, 1, False, deepstrike=2),
+        CardClasses.ArmyCard("Morkanaut Rekuperator", "Reaction: After this unit resolves its attack, deal 1 "
+                                                      "unpreventable damage to a unit at this planet. If that unit "
+                                                      "is destroyed by this effect, Rally 6 an attachment card, "
+                                                      "attach it to this unit.", "Oddboy. Machine.",
+                             3, faction, "Common", 2, 4, 1, False),
+        CardClasses.ArmyCard("Patient Infiltrator",
+                             "Deep Strike (1). You may Deep Strike this card as an action during the combat phase.\n"
+                             "Reaction: After you Deep Strike this unit, ready it and move up to 1 damage from this "
+                             "unit to a target unit at the same planet.", "Soldier.",
+                             2, faction, "Common", 3, 2, 1, False, deepstrike=1,
+                             action_in_play=True, allowed_phases_in_play="COMBAT"),
+        CardClasses.ArmyCard("Slave-powered Wagons",
+                             "No Wargear Attachments.\n"
+                             "Deep Strike (1).\n"
+                             "Action: Destroy a target token unit at this planet or an adjacent planet. Then this unit "
+                             "gets +1 ATK and +1 HP until the end of the phase. (Limit once per round.)",
+                             "Vehicle.", 2, faction, "Common", 2, 3, 1, False, wargear_attachments_permitted=False,
+                             deepstrike=1, action_in_play=True, allowed_phases_in_play="ALL"),
+        CardClasses.EventCard("Kwik' Konstruckshun", "Combat Action: Put an Orks support with printed cost 3 or lower "
+                                                     "into play from your hand at your HQ. If this support is still in "
+                                                     "play at the end of the phase, discard it and draw a card.",
+                              "Tactic.", 0, faction, "Common", 2, False,
+                              action_in_hand=True, allowed_phases_in_hand="COMBAT"),
+        CardClasses.EventCard("Painboy Surjery",
+                              "Action: Target an Orks unit you control. Reveal the top card of your deck. If it's an "
+                              "eligible attachment, put it into play attached to this unit, otherwise deal it 1 "
+                              "damage and put the card at the bottom of your deck. Repeat until you reveal an "
+                              "eligible attachment or the unit is destroyed. Then shuffle your deck.", "Tactic.",
+                              0, faction, "Loyal", 2, False, action_in_hand=True, allowed_phases_in_hand="ALL"),
+        CardClasses.EventCard("Runts to the Front",
+                              "Interrupt: When an enemy unit would declare an attack against a unit you control, "
+                              "declare a ready Runt unit you control at the same planet as the defender instead.",
+                              "Tactic. Snotling.", 1, faction, "Common", 1, False),
+        CardClasses.EventCard("Sneaky Lootin'",
+                              "Reaction: After an Orks Soldier unit you control damages an enemy unit by an attack, "
+                              "move the attacker to your HQ to gain 3 resources.",
+                              "Tactic.", 1, faction, "Common", 1, False),
+        CardClasses.SupportCard("WAAAGH! Arbuttz",
+                                "Reaction: When you deploy an attachment, exhaust this support and deal 1 damage "
+                                "to attached unit to reduce its cost by 1. Then Rally 6 an attachment, "
+                                "add it to your hand.", "Pledge.", 1, faction, "Loyal", False),
+        CardClasses.SupportCard("WAAAGH! Zanzag",
+                                "Reaction: After your warlord commits to a planet with an enemy warlord, "
+                                "it gains +1 ATK until the end of a battle at that planet.",
+                                "Pledge.", 1, faction, "Loyal", False),
+        CardClasses.SupportCard("WAAAGH! Ungskar",
+                                "Reaction: After you deploy this support, put a Squiggoth Brute in reserve at the "
+                                "last planet. Starting from the second round, if you win a battle at that planet, "
+                                "you may Deep Strike it for 2 resources.",
+                                "Pledge.", 1, faction, "Loyal", False),
+        CardClasses.SupportCard("Extra Boomsticks", "When an Orks unit is assigned damage, exhaust this support to "
+                                                    "give it Retaliate (2) until the end of the phase.",
+                                "Upgrade.", 2, faction, "Loyal", False),
+        CardClasses.SupportCard("Truck Wreck Launcha", "Interrupt: When a Vehicle unit you control leaves play, "
+                                                       "exhaust this support to deal 1 damage to an enemy "
+                                                       "non-warlord unit at the same planet. If this support was "
+                                                       "already exhausted, ready it instead.", "Artillery.",
+                                1, faction, "Common", False),
+        CardClasses.WarlordCard("Big Mek Kagdrak",
+                                "Action: Give a non-Elite army unit a keyword, different from previous round, "
+                                "from among: Flying, Armorbane, Brutal, Area Effect (1), Sweep (2) or Retaliate (3), "
+                                "until the end of the round. (Limit once per round.)", "Soldier. Big Mek.",
+                                faction, 2, 7, 2, 5,
+                                "Bloodied.\n"
+                                "Action: Give a non-Elite army unit at this planet a keyword, "
+                                "from among: Flying, Armorbane, Brutal, Area Effect (1), Sweep (2) or Retaliate (3), "
+                                "until the end of the round. (Limit once per game.)", 7, 7,
+                                ["1x Da Workship", "1x Drivin' Ambishun'", "2x Looted Skrap",
+                                 "1x Da 'Eavy", "1x Da Boomy", "1x Da Sharpy", "1x Da Swoopy"]),
+        CardClasses.SupportCard("Da Workship",
+                                "Deploy Action: Exhaust this support to place X Snotling tokens into play at a "
+                                "target planet. X equals the number of planets in your opponent's victory display.",
+                                "Location.", 1, faction, "Signature", False,
+                                action_in_play=True, allowed_phases_in_play="DEPLOY"),
+        CardClasses.AttachmentCard("Drivin' Ambishun'",
+                                   "Attach to your warlord.\n"
+                                   "Action: Exhaust this attachment to have a target army unit at this planet "
+                                   "gain +1 HP per keyword it has, until the end of the round.",
+                                   "Wargear.", 0, faction, "Signature", 3, False,
+                                   must_be_own_unit=True, type_of_units_allowed_for_attachment="Warlord",
+                                   action_in_play=True, allowed_phases_in_play="ALL"),
+        CardClasses.EventCard("Looted Skrap",
+                              "Limited.\n"
+                              "Action: Target a planet where a battle is taking place. Until the end of the battle, "
+                              "each time an enemy unit is destroyed at that planet, gain 1 resource (max 3).",
+                              "Tactic.", 0, faction, "Signature", 1, False),
+        CardClasses.ArmyCard("Da 'Eavy", "Lumbering.\nCombat Action: Retreat this unit.",
+                             "Vehicle. Experimental.", 0, faction, "Signature", 2, 3, 1, False, lumbering=True),
+        CardClasses.ArmyCard("Da Boomy", "Retaliate (3).",
+                             "Vehicle. Experimental.", 1, faction, "Signature", 1, 2, 1, False),
+        CardClasses.ArmyCard("Da Sharpy", "Sweep (2).",
+                             "Vehicle. Experimental.", 2, faction, "Signature", 2, 2, 1, False),
+        CardClasses.ArmyCard("Da 'Eavy",
+                             "Flying.\n"
+                             "Reaction: After a battle starts at this planet, have a Warrior Orks army unit gain "
+                             "flying until the end of the combat round.",
+                             "Vehicle. Experimental.", 2, faction, "Signature", 2, 4, 1, False, flying=True),
+        CardClasses.WarlordCard("Kaptin Bluddflagg",
+                                "The first unit each player deploys each round must be deploy in their HQ.\n"
+                                "Action: Move a non-Elite unit from your HQ to a target non-leftmost planet "
+                                "and ready it. (Limit once per round.)", "Soldier. Freebooter.",
+                                faction, 2, 7, 2, 5, "Bloodied.", 7, 7,
+                                ["1x Naval Surgeon", "1x Kaptin's Hook'",
+                                 "2x Indiscriminate Bombing", "4x Quartermasters"]),
+        CardClasses.EventCard("Indiscriminate Bombing",
+                              "Action: Target a planet. Each player must move an army unit they control from "
+                              "that planet to their HQ.", "Tactic.", 2, faction, "Signature", 1, False,
+                              action_in_hand=True, allowed_phases_in_hand="ALL"),
+        CardClasses.AttachmentCard("Kaptin's Hook",
+                                   "Attach to your warlord.\n"
+                                   "Reaction: After a non-Elite unit you control at an adjacent planet is declared as "
+                                   "a defender, exhaust this attachment to cancel the attack, move that unit to this "
+                                   "planet and exhaust it.", "Wargear.", 1, faction, "Signature", 3, False,
+                                   must_be_own_unit=True, type_of_units_allowed_for_attachment="Warlord"),
+        CardClasses.SupportCard("Naval Surgeon", "Action: Exhaust this support to have a target army unit in your "
+                                                 "HQ gain +1 ATK and +1 HP.", "Specialised Crew.", 1, faction,
+                                "Signature", False, action_in_play=True, allowed_phases_in_play="ALL"),
+        CardClasses.ArmyCard("Quartermasters",
+                             "This unit may be deployed in your HQ. If you do so, reduce its cost by 1.\n"
+                             "Reaction: After this unit moves to a planet, remove 1 damage from it.",
+                             "Krew. Soldier.", 2, faction, "Signature", 2, 3, 1, False),
+        CardClasses.WarlordCard("Korporal Snagbrat",
+                                "Action: Move a card you control in reserve to an adjacent planet without an enemy "
+                                "warlord. (Limit once per phase.)", "Soldier. Blood Axe.",
+                                faction, 2, 6, 2, 6, "Bloodied.", 7, 7,
+                                ["1x Fake Ooman Base", "1x Soot-Blackened Axe'",
+                                 "2x Kommando Cunning", "4x Snagbrat's Scouts"]),
+        CardClasses.SupportCard("Fake Ooman Base",
+                                "Reaction: After an Orks Soldier army unit you control is chosen as a defender, "
+                                "exhaust this support and move that unit to your HQ to cancel the attack.",
+                                "Location.", 1, faction, "Signature", False),
+        CardClasses.EventCard("Kommando Cunning",
+                              "Action: Deep Strike a card you control without paying its Deep Strike cost.",
+                              "Tactic.", 0, faction, "Signature", 1, False,
+                              action_in_hand=True, allowed_phases_in_hand="ALL"),
+        CardClasses.ArmyCard("Snagbrat's Scouts",
+                             "Deep Strike (1).\n"
+                             "Reaction: When the command phase begins, Deep Strike this unit to have it gain "
+                             "2 command icons until the end of the phase.", "Soldier. Blood Axe.",
+                             2, faction, "Signature", 2, 3, 1, False, deepstrike=1),
+        CardClasses.AttachmentCard("Soot-Blackened Axe",
+                                   "Deep Strike (0).\n"
+                                   "Attach to an Orks unit. Attached unit gets +1 ATK and +1 HP.\n"
+                                   "Action: Put this card in reserve at this planet to move up to 1 damage from "
+                                   "attached unit to a target non-unique unit at the same planet.",
+                                   "Wargear. Blood Axe.", 1, faction, "Signature", 3, False,
+                                   deepstrike=0, extra_attack=1, extra_health=1, unit_must_match_faction=True,
+                                   action_in_play=True, allowed_phases_in_play="ALL")
     ]
     return orks_card_array
