@@ -55,7 +55,7 @@
                 <p id="min-health">Minimum Health:</p><input id="minHealth" type="text" name="minHealth">
                 <p id="max-health">Maximum Health:</p><input id="maxHealth" type="text" name="maxHealth">
             </div>
-            <button type="submit">Submit</button>
+            <button type="submit">Perform Search</button>
         </form>
     </div>
     <div id="cardBinder">
@@ -143,6 +143,7 @@
                         'max-attack': $('#maxAttack').val(),
                         'min-health': $('#minHealth').val(),
                         'max-health': $('#maxHealth').val(),
+                        'redirect-enabled': "Yes",
                         'csrfmiddlewaretoken': '{{ csrf_token }}' // CSRF token for security
                     },
                     success: function(response) {

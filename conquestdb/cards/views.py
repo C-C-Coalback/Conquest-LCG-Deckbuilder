@@ -36,7 +36,8 @@ def ajax_view(request):
     if request.method == 'POST':
         card_names = []
         search = request.POST.get('search')
-        if search in cards_dict:
+        redirect_enabled = request.POST.get('redirect-enabled')
+        if search in cards_dict and redirect_enabled == "Yes":
             image_name = cards_dict[search].image_name
             return JsonResponse({'message': "REDIRECT", 'cards': card_names, 'image_names': [image_name]})
         faction = request.POST.get('faction')

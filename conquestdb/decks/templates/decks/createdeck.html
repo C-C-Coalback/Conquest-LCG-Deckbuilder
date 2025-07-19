@@ -808,6 +808,40 @@
 </div>
 <div id="mini-card-search-container">
     <h2>Available Cards</h2>
+    <form id="myForm">
+        <div id="filters-container">
+            <p id="p-card-name">Card Name:</p><input id="searchInput" type="text" name="search">
+            <p id="p-card-type">Card Type:</p><select name="card-type" id="cardType">
+                <option value="None"></option>
+                <option value="Army">Army</option>
+                <option value="Support">Support</option>
+                <option value="Event">Event</option>
+                <option value="Attachment">Attachment</option>
+                <option value="Warlord">Warlord</option>
+                <option value="Synapse">Synapse</option>
+            </select>
+                <p id="p-faction">Faction:</p><select name="faction" id="faction">
+                <option value="None"></option>
+                <option value="Space Marines">Space Marines</option>
+                <option value="Tau">Tau</option>
+                <option value="Eldar">Eldar</option>
+                <option value="Dark Eldar">Dark Eldar</option>
+                <option value="Chaos">Chaos</option>
+                <option value="Orks">Orks</option>
+                <option value="Astra Militarum">Astra Militarum</option>
+                <option value="Neutral">Neutral</option>
+                <option value="Tyranids">Tyranids</option>
+                <option value="Necrons">Necrons</option>
+            </select>
+                <p id="p-loyalty">Loyalty:</p><select name="loyalty" id="loyalty">
+                <option value="None"></option>
+                <option value="Common">Common</option>
+                <option value="Loyal">Loyal</option>
+                <option value="Signature">Signature</option>
+             </select>
+        </div>
+        <button id="send-filter">Perform Search</button>
+    </form>
     <div id="card-filter-results">
         <div class="searched-card" onclick="quickAddCard(this)" onmouseenter="showImg(this)" onmouseleave="clearImg()" data-src="/static/images/CardImages/Captain_Cato_Sicarius.jpg" data-name="Captain Cato Sicarius">
             <div class="mini-card-name">Captain Cato Sicarius</div>
@@ -1353,6 +1387,84 @@
         });
         messageInputDom.value = '';
     };
+
+    // Ajax search cards function
+    $(document).ready(function() {
+        $('#myForm').on('submit', function(event) {
+            event.preventDefault();
+
+            $.ajax({
+                url: '/cards/ajax/',  // The URL of the Django view that handles the request
+                type: 'POST',
+                data: {
+                    'search': $('#searchInput').val(),
+                    'faction': $('#faction').val(),
+                    'card_type': $('#cardType').val(),
+                    'loyalty': $('#loyalty').val(),
+                    'traits': "",
+                    'shields': "-1",
+                    'min-cost': "-1",
+                    'max-cost': "-1",
+                    'min-command': "-1",
+                    'max-command': "-1",
+                    'min-attack': "-1",
+                    'max-attack': "-1",
+                    'min-health': "-1",
+                    'max-health': "-1",
+                    'redirect-enabled': "No",
+                    'csrfmiddlewaretoken': '{{ csrf_token }}' // CSRF token for security
+                },
+                success: function(response) {
+                    // $('#responseMessage').text(response.message);
+                    const message = response.message;
+                    console.log("test")
+                    /*
+                    current_page_number = 0;
+                    var cardCount = 0;
+                    var pageCount = 0;
+                    var card_names = response.cards;
+                    const image_names = response.image_names;
+                    e = document.getElementById("responseMessage");
+                    e.innerHTML = ``;
+                    var img_src = "";
+                    var img_link = "";
+                    var new_string = "";
+                    var new_id = "";
+                    new_string += `<div class="page" id="page">`;
+                    stored_image_links = [[]];
+                    stored_image_names = [[]];
+                    for (let i = 0; i < image_names.length; i++) {
+                        if (cardCount === 20) {
+                            pageCount += 1
+                            cardCount = 0;
+                            stored_image_links.push([]);
+                            stored_image_names.push([]);
+                            // new_id = "page-" + pageCount.toString();
+                            // new_string += `</div><div class="page" style="display: none;" id=` + new_id + `>`;
+                        }
+                        img_link = "/cards/" + image_names[i] + "/";
+                        stored_image_links[pageCount].push(img_link);
+                        img_src ="/static/images/CardImages/" + image_names[i] + ".jpg";
+                        stored_image_names[pageCount].push(img_src);
+                        if (pageCount === 0) {
+                            new_string += `<a href=`
+                            new_string += img_link;
+                            new_string += `>`;
+                            new_string += `<img class="Card" src=` + img_src + ` alt="Loading...">`;
+                            new_string += `</a>`;
+                        }
+                        cardCount += 1;
+                    }
+                    max_page_number = pageCount;
+                    new_string += `</div>`;
+                    console.log(stored_image_links);
+                    e.innerHTML += new_string;
+                    */
+                }
+            });
+        });
+    });
+
 
     // Ajax setup for form submission
     function sendAlly() {

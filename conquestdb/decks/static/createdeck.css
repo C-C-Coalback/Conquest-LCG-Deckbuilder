@@ -140,6 +140,16 @@
     overflow-y: scroll;
 }
 
+#filters-container {
+    width: 600px;
+    height: auto;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    grid-template-areas:
+    "p-card-name search p-card-type card-type"
+    "p-faction faction p-loyalty loyalty";
+}
+
 .saved-deck-box {
     width: 200px;
     height: 70px;
