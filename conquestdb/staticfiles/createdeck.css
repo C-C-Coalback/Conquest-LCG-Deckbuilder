@@ -88,10 +88,42 @@
     top: 100px;
 }
 
+#cursor-follower {
+    position:absolute;
+    width: 300px;
+    height: 420px;
+    display:none;
+}
+
+.mini-card-info {
+    width: 200px;
+}
+
 #description-container {
     position: absolute;
     left: 900px;
-    top: 200px;
+    top: 100px;
+}
+
+#card-filter-results {
+    border: 2px solid blue;
+}
+
+.searched-card {
+    position: relative;
+    margin-top: 10px;
+    border: 1px solid gray;
+    left: 0;
+    width:100%;
+    overflow-x: auto;
+    display: flex;
+    justify-content: center;
+}
+
+#mini-card-search-container {
+    position: absolute;
+    left: 900px;
+    top: 500px;
 }
 
 .box {
