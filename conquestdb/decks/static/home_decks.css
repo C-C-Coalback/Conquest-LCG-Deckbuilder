@@ -1,0 +1,27 @@
+#main-container {
+    position: relative;
+    left: 0;
+    width:100%;
+}
+
+#buttons-container, #featured-container {
+    position: relative;
+    left: 0;
+    width:100%;
+    overflow-x: auto;
+    display: flex;
+    justify-content: center;
+}
+
+.button {
+    background-color: #808080;
+    border: none;
+    color: white;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    cursor: pointer;
+}

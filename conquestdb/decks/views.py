@@ -3,6 +3,7 @@ from django.http import JsonResponse
 from conquestdb.cardscode import Initfunctions
 from conquestdb.cardscode import FindCard
 from django.http import HttpResponseRedirect
+import pandas as pd
 import os
 import copy
 import datetime
@@ -354,6 +355,26 @@ def my_decks(request):
                 except Exception as e:
                     print(e)
                     pass
+    data = {
+        "Deck Names": deck_names,
+        "Deck Warlords": deck_warlords,
+        "Deck Dates": deck_dates,
+        "Img Srcs": img_srcs,
+        "Keys": keys
+    }
+    try:
+        df = pd.DataFrame(data=data)
+        df = df.sort_values(by="Deck Dates", ascending=False)
+        print(df.head())
+        new_deck_names = df["Deck Names"]
+        new_deck_warlords = df["Deck Warlords"]
+        new_deck_dates = df["Deck Dates"]
+        new_img_srcs = df["Img Srcs"]
+        new_keys = df["Keys"]
+        decks_var = zip(new_deck_names, new_deck_warlords, new_deck_dates, new_img_srcs, new_keys)
+        return render(request, "decks/mydecks.html", {"decks": decks_var})
+    except Exception as e:
+        print(e)
     decks_var = zip(deck_names, deck_warlords, deck_dates, img_srcs, keys)
     return render(request, "decks/mydecks.html", {"decks": decks_var})
 

@@ -5,11 +5,18 @@
 <link rel="stylesheet" href="{% static 'home_decks.css' %}">
     <h1>Decks Placeholder</h1>
     <div id="main-container">
-        <a href="/decks/my_decks/">View your decks</a>
-        <a href="/decks/published_decks/">View published decks</a>
-        <a href="/decks/create_deck/">Create a deck</a>
-        <div id="recently-published-container">
-            <h2>Recently published decks</h2>
+        <div id="buttons-container">
+            <a href="/decks/my_decks/">
+                <button class="button">View your decks</button>
+            </a>
+            <div></div>
+            <a href="/decks/published_decks/">
+                <button class="button">View published decks</button>
+            </a>
+            <div></div>
+            <a href="/decks/create_deck/">
+                <button class="button">Create a deck</button>
+            </a>
         </div>
         <div id="featured-container">
             <h2>Featured decklist</h2>

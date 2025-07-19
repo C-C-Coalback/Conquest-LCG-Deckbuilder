@@ -10,7 +10,6 @@
 #decks-list {
     width: auto;
     height: auto;
-    max-height: 1000px;
     border: 5px solid green;
 }
 
