@@ -985,7 +985,7 @@
     var mouse_y = 0;
     onmousemove = function(e){
         mouse_x = e.clientX;
-        mouse_y = e.clientY;
+        mouse_y = e.clientY + window.scrollY;
     }
 
     function previousPage() {
@@ -1067,7 +1067,7 @@
     var force_send = "F";
     if (data !== "") {
         force_send = "T";
-        data = data.replace("&#x27;", "'");
+        data = data.replace(new RegExp("&"+"#"+"x27;", "g"), "'");
         var deck_data = data.split("|||");
         deck_data = deck_data.filter(function(a){return a !== "----------------------------------------------------------------------"});
         deck_data = deck_data.filter(function(a){return a !== "Planet"});
@@ -1117,17 +1117,10 @@
         var synapse_cards = deck_data.slice(synapse_pos+1, attachment_pos);
         var attachment_cards = deck_data.slice(attachment_pos+1, event_pos);
         var event_cards = deck_data.slice(event_pos+1, deck_data.length);
-        // console.log(sig_cards);
-        // console.log(army_cards);
-        // console.log(support_cards);
-        // console.log(synapse_cards);
-        // console.log(attachment_cards);
-        // console.log(event_cards);
         addSigSquad(sig_cards);
         for (let i = 0; i < army_cards.length; i++) {
             var card_name = army_cards[i].slice(3);
             var card_amount = parseInt(army_cards[i].charAt(0));
-            console.log(card_name);
             for (let j = 0; j < card_amount; j++) {
                 addCard("Army", card_name);
             }
@@ -1135,7 +1128,6 @@
         for (let i = 0; i < support_cards.length; i++) {
             var card_name = support_cards[i].slice(3);
             var card_amount = parseInt(support_cards[i].charAt(0));
-            console.log(card_name);
             for (let j = 0; j < card_amount; j++) {
                 addCard("Support", card_name);
             }
@@ -1143,7 +1135,6 @@
         for (let i = 0; i < attachment_cards.length; i++) {
             var card_name = attachment_cards[i].slice(3);
             var card_amount = parseInt(attachment_cards[i].charAt(0));
-            console.log(card_name);
             for (let j = 0; j < card_amount; j++) {
                 addCard("Attachment", card_name);
             }
@@ -1151,7 +1142,6 @@
         for (let i = 0; i < event_cards.length; i++) {
             var card_name = event_cards[i].slice(3);
             var card_amount = parseInt(event_cards[i].charAt(0));
-            console.log(card_name);
             for (let j = 0; j < card_amount; j++) {
                 addCard("Event", card_name);
             }

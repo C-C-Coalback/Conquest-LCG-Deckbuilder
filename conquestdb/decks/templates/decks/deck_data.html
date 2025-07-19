@@ -139,7 +139,7 @@
     var mouse_y = 0;
     onmousemove = function(e){
         mouse_x = e.clientX;
-        mouse_y = e.clientY;
+        mouse_y = e.clientY + window.scrollY;
     }
     function showImg(el) {
         var new_src = el.getAttribute('data-src');

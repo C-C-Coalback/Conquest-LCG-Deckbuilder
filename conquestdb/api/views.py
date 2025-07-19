@@ -27,10 +27,26 @@ with open(dire + "height.json") as json_file:
     height_links = json.load(json_file)
 with open(dire + "width.json") as json_file:
     width_links = json.load(json_file)
+with open(dire + "unique.json") as json_file:
+    unique_links = json.load(json_file)
+with open(dire + "hidden.json") as json_file:
+    hidden_links = json.load(json_file)
 
 
 generic_back = "https://steamusercontent-a.akamaihd.net/ugc/1656728123510442187/" \
                "0B3B69362D3729BC3AEDEBE665D6DF9A9E0AB627/"
+
+
+def get_hidden_link(name_card):
+    if name_card in hidden_links:
+        return hidden_links[name_card]
+    return False
+
+
+def get_unique_link(name_card):
+    if name_card in unique_links:
+        return unique_links[name_card]
+    return False
 
 
 def get_front_link(name_card):
@@ -148,6 +164,8 @@ def request_deck(request, deck_key):
                 height_links_sent = []
                 width_links_sent = []
                 nicknames_sent = []
+                hidden_links_sent = []
+                unique_links_sent = []
                 for i in range(len(deck_content)):
                     if i == 0:
                         print(deck_content[i])
@@ -159,6 +177,8 @@ def request_deck(request, deck_key):
                         height_links_sent.append(get_height(deck_content[i]))
                         width_links_sent.append(get_width(deck_content[i]))
                         nicknames_sent.append(deck_content[i])
+                        hidden_links_sent.append(get_hidden_link(deck_content[i]))
+                        unique_links_sent.append((get_unique_link(deck_content[i])))
                     else:
                         print(deck_content[i][3:])
                         nicknames_sent.append(deck_content[i][3:])
@@ -169,17 +189,14 @@ def request_deck(request, deck_key):
                         deck_id_links_sent.append(get_deck_id(deck_content[i][3:]))
                         height_links_sent.append(get_height(deck_content[i][3:]))
                         width_links_sent.append(get_width(deck_content[i][3:]))
-                        if nicknames_sent[i] == "Drop Pod Assault":
-                            print(front_links_sent[i])
-                            print(back_links_sent[i])
-                            print(deck_id_links_sent[i])
-                            print(height_links_sent[i])
-                            print(width_links_sent[i])
+                        hidden_links_sent.append(get_hidden_link(deck_content[i][3:]))
+                        unique_links_sent.append((get_unique_link(deck_content[i][3:])))
                 return JsonResponse({'message': 'DECK FOUND', 'deck_content': nicknames_sent,
                                      'front': front_links_sent, 'back': back_links_sent,
                                      'card_id': card_id_links_sent, 'deck_id': deck_id_links_sent,
                                      'height': height_links_sent, 'width': width_links_sent,
-                                     'amount': card_amounts, 'desc': desc_links_sent})
+                                     'amount': card_amounts, 'desc': desc_links_sent,
+                                     'hidden': hidden_links_sent, 'unique': unique_links_sent})
         except Exception as e:
             print(e)
         return JsonResponse({'message': 'DECK NOT FOUND', 'deck_content': ""})
