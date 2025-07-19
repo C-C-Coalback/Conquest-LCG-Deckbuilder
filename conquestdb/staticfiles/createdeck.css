@@ -95,8 +95,12 @@
     display:none;
 }
 
-.mini-card-info {
+.mini-card-name, .mini-card-faction {
     width: 200px;
+}
+
+.mini-card-type, .mini-card-loyalty {
+    width: 100px;
 }
 
 #description-container {

@@ -809,20 +809,23 @@
 <div id="mini-card-search-container">
     <h2>Available Cards</h2>
     <div id="card-filter-results">
-        <div class="searched-card" onmouseenter="showImg(this)" onmouseleave="clearImg()" data-src="/static/images/CardImages/Captain_Cato_Sicarius.jpg">
-            <div class="mini-card-info">Captain Cato Sicarius</div>
-            <div class="mini-card-info">Warlord</div>
-            <div class="mini-card-info">Space Marines</div>
+        <div class="searched-card" onclick="quickAddCard(this)" onmouseenter="showImg(this)" onmouseleave="clearImg()" data-src="/static/images/CardImages/Captain_Cato_Sicarius.jpg" data-name="Captain Cato Sicarius">
+            <div class="mini-card-name">Captain Cato Sicarius</div>
+            <div class="mini-card-type">Warlord</div>
+            <div class="mini-card-loyalty">Signature</div>
+            <div class="mini-card-faction">Space Marines</div>
         </div>
-        <div class="searched-card" onmouseenter="showImg(this)" onmouseleave="clearImg()" data-src="/static/images/CardImages/10th_Company_Scout.jpg">
-            <div class="mini-card-info">10th Company Scout</div>
-            <div class="mini-card-info">Army</div>
-            <div class="mini-card-info">Space Marines</div>
+        <div class="searched-card" onclick="quickAddCard(this)" onmouseenter="showImg(this)" onmouseleave="clearImg()" data-src="/static/images/CardImages/10th_Company_Scout.jpg" data-name="10th Company Scout">
+            <div class="mini-card-name">10th Company Scout</div>
+            <div class="mini-card-type">Army</div>
+            <div class="mini-card-loyalty">Common</div>
+            <div class="mini-card-faction">Space Marines</div>
         </div>
-        <div class="searched-card" onmouseenter="showImg(this)" onmouseleave="clearImg()" data-src="/static/images/CardImages/Bigtoof_Banna.jpg">
-            <div class="mini-card-info">Bigtoof Banna</div>
-            <div class="mini-card-info">Support</div>
-            <div class="mini-card-info">Orks</div>
+        <div class="searched-card" onclick="quickAddCard(this)" onmouseenter="showImg(this)" onmouseleave="clearImg()" data-src="/static/images/CardImages/Bigtoof_Banna.jpg" data-name="Bigtoof Banna">
+            <div class="mini-card-name">Bigtoof Banna</div>
+            <div class="mini-card-type">Support</div>
+            <div class="mini-card-loyalty">Common</div>
+            <div class="mini-card-faction">Orks</div>
         </div>
     </div>
 </div>
@@ -956,6 +959,11 @@
         }
     };
 
+    function quickAddCard(el) {
+        const cardName = el.getAttribute('data-name');
+        document.querySelector('#card-input').value = cardName;
+        document.querySelector('#card-submit').click();
+    }
     function decreaseCount(id) {
         var idName = id.slice(0,-9)
         var countName = idName + "-Count";
