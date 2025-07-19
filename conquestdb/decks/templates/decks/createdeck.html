@@ -969,6 +969,16 @@
 </div>
 <img id="cursor-follower" src="/static/images/CardImages/Cardback.jpg">
 <script>
+
+    var current_page_number = 0;
+    var max_page_number = 0;
+    var stored_image_links = [];
+    var stored_image_names = [];
+    var stored_card_names = [];
+    var stored_card_types = [];
+    var stored_card_loyalties = [];
+    var stored_card_factions = [];
+
     var mouse_x = 0;
     var mouse_y = 0;
     onmousemove = function(e){
@@ -1098,7 +1108,7 @@
     };
 
     function quickAddCard(el) {
-        const cardName = el.getAttribute('data-name');
+        const cardName = el.getAttribute('data-name').split('_').join(' ');
         document.querySelector('#card-input').value = cardName;
         document.querySelector('#card-submit').click();
     }
@@ -1522,48 +1532,59 @@
                     // $('#responseMessage').text(response.message);
                     const message = response.message;
                     console.log("test")
-                    /*
+
                     current_page_number = 0;
                     var cardCount = 0;
                     var pageCount = 0;
                     var card_names = response.cards;
+                    var card_types = response.card_types;
+                    var loyalties = response.loyalties;
+                    var factions = response.factions;
                     const image_names = response.image_names;
-                    e = document.getElementById("responseMessage");
+                    e = document.getElementById("card-filter-results");
                     e.innerHTML = ``;
                     var img_src = "";
                     var img_link = "";
                     var new_string = "";
                     var new_id = "";
-                    new_string += `<div class="page" id="page">`;
                     stored_image_links = [[]];
                     stored_image_names = [[]];
+                    var stored_card_names = [[]];
+                    var stored_card_types = [[]];
+                    var stored_card_loyalties = [[]];
+                    var stored_card_factions = [[]];
                     for (let i = 0; i < image_names.length; i++) {
                         if (cardCount === 20) {
-                            pageCount += 1
+                            pageCount += 1;
                             cardCount = 0;
                             stored_image_links.push([]);
                             stored_image_names.push([]);
-                            // new_id = "page-" + pageCount.toString();
-                            // new_string += `</div><div class="page" style="display: none;" id=` + new_id + `>`;
+                            stored_card_names.push([]);
+                            stored_card_types.push([]);
+                            stored_card_loyalties.push([]);
+                            stored_card_factions.push([]);
                         }
                         img_link = "/cards/" + image_names[i] + "/";
                         stored_image_links[pageCount].push(img_link);
                         img_src ="/static/images/CardImages/" + image_names[i] + ".jpg";
                         stored_image_names[pageCount].push(img_src);
+                        stored_card_names.push(card_names[i]);
+                        stored_card_types.push(card_types[i]);
+                        stored_card_loyalties.push(loyalties[i]);
+                        stored_card_factions.push(factions[i]);
                         if (pageCount === 0) {
-                            new_string += `<a href=`
-                            new_string += img_link;
-                            new_string += `>`;
-                            new_string += `<img class="Card" src=` + img_src + ` alt="Loading...">`;
-                            new_string += `</a>`;
+                            new_string += `<div class="searched-card" onclick="quickAddCard(this)" onmouseenter="showImg(this)" onmouseleave="clearImg()" data-src=` + img_src + ` data-name=` + card_names[i].split(' ').join('_') + `>`
+                            new_string += `<div class="mini-card-name">` + card_names[i] + `</div>`
+                            new_string += `<div class="mini-card-type">` + card_types[i] + `</div>`
+                            new_string += `<div class="mini-card-loyalty">` + loyalties[i] + `</div>`
+                            new_string += `<div class="mini-card-faction">` + factions[i] + `</div>`
+                            new_string += `</div>`
                         }
                         cardCount += 1;
                     }
                     max_page_number = pageCount;
-                    new_string += `</div>`;
                     console.log(stored_image_links);
                     e.innerHTML += new_string;
-                    */
                 }
             });
         });

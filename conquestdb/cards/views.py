@@ -116,9 +116,13 @@ def ajax_view(request):
         if max_health != -1:
             filtered_df = filtered_df.loc[filtered_df['health'] <= max_health]
         card_names = filtered_df['name'].to_list()
+        loyalties = filtered_df['loyalty'].to_list()
+        card_types = filtered_df['card type'].to_list()
+        factions = filtered_df['faction'].to_list()
         image_names = filtered_df['image name'].to_list()
         message = f'Faction, {faction}'
-        return JsonResponse({'message': message, 'cards': card_names, 'image_names': image_names})
+        return JsonResponse({'message': message, 'cards': card_names, 'image_names': image_names,
+                             'loyalties': loyalties, 'card_types': card_types, 'factions': factions})
     return JsonResponse({'message': 'Invalid request'})
 
 
