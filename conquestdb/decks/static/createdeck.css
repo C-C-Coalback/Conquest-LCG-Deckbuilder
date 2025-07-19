@@ -150,6 +150,22 @@
     "p-faction faction p-loyalty loyalty";
 }
 
+#prev-page {
+    position:relative;
+    left:0;
+    top:0;
+    height: 100px;
+    width: 100px;
+}
+
+#next-page {
+    position:relative;
+    right:0;
+    top:0;
+    height: 100px;
+    width: 100px;
+}
+
 .saved-deck-box {
     width: 200px;
     height: 70px;

@@ -946,6 +946,7 @@
         </div>
         <button id="send-filter">Perform Search</button>
     </form>
+    <input id="prev-page" type="button" value="previous" onclick="previousPage();">
     <div id="card-filter-results">
         <div class="searched-card" onclick="quickAddCard(this)" onmouseenter="showImg(this)" onmouseleave="clearImg()" data-src="/static/images/CardImages/Captain_Cato_Sicarius.jpg" data-name="Captain Cato Sicarius">
             <div class="mini-card-name">Captain Cato Sicarius</div>
@@ -966,6 +967,7 @@
             <div class="mini-card-faction">Orks</div>
         </div>
     </div>
+    <input id="next-page" type="button" value="next" onclick="nextPage();">
 </div>
 <img id="cursor-follower" src="/static/images/CardImages/Cardback.jpg">
 <script>
@@ -985,6 +987,67 @@
         mouse_x = e.clientX;
         mouse_y = e.clientY;
     }
+
+    function previousPage() {
+        if (current_page_number !== 0) {
+            current_page_number = current_page_number - 1;
+            e = document.getElementById("card-filter-results");
+            e.innerHTML = ``;
+            var img_src = "";
+            var new_string = "";
+            var new_id = "";
+            var new_card_name = "";
+            var new_card_type = "";
+            var new_loyalty = "";
+            var new_faction = "";
+            for (let i = 0; i < stored_image_links[current_page_number].length; i++) {
+                img_src = stored_image_names[current_page_number][i];
+                new_card_name = stored_card_names[current_page_number][i];
+                new_card_type = stored_card_types[current_page_number][i];
+                new_loyalty = stored_card_loyalties[current_page_number][i];
+                new_faction = stored_card_factions[current_page_number][i];
+                new_string += `<div class="searched-card" onclick="quickAddCard(this)" onmouseenter="showImg(this)" onmouseleave="clearImg()" data-src=` + img_src + ` data-name=` + new_card_name.split(' ').join('_') + `>`
+                new_string += `<div class="mini-card-name">` + new_card_name + `</div>`
+                new_string += `<div class="mini-card-type">` + new_card_type + `</div>`
+                new_string += `<div class="mini-card-loyalty">` + new_loyalty + `</div>`
+                new_string += `<div class="mini-card-faction">` + new_faction + `</div>`
+                new_string += `</div>`;
+            }
+            e.innerHTML += new_string;
+        }
+    }
+
+    function nextPage() {
+        if (current_page_number !== max_page_number) {
+            current_page_number = current_page_number + 1;
+            e = document.getElementById("card-filter-results");
+            e.innerHTML = ``;
+            var img_src = "";
+            var new_string = "";
+            var new_id = "";
+            var new_card_name = "";
+            var new_card_type = "";
+            var new_loyalty = "";
+            var new_faction = "";
+            for (let i = 0; i < stored_image_links[current_page_number].length; i++) {
+                console.log(current_page_number);
+                console.log(stored_card_names);
+                img_src = stored_image_names[current_page_number][i];
+                new_card_name = stored_card_names[current_page_number][i];
+                new_card_type = stored_card_types[current_page_number][i];
+                new_loyalty = stored_card_loyalties[current_page_number][i];
+                new_faction = stored_card_factions[current_page_number][i];
+                new_string += `<div class="searched-card" onclick="quickAddCard(this)" onmouseenter="showImg(this)" onmouseleave="clearImg()" data-src=` + img_src + ` data-name=` + new_card_name.split(' ').join('_') + `>`
+                new_string += `<div class="mini-card-name">` + new_card_name + `</div>`
+                new_string += `<div class="mini-card-type">` + new_card_type + `</div>`
+                new_string += `<div class="mini-card-loyalty">` + new_loyalty + `</div>`
+                new_string += `<div class="mini-card-faction">` + new_faction + `</div>`
+                new_string += `</div>`;
+            }
+            e.innerHTML += new_string;
+        }
+    }
+
     function showImg(el) {
         var new_src = el.getAttribute('data-src');
         cursor_img = document.getElementById("cursor-follower");
@@ -1549,10 +1612,10 @@
                     var new_id = "";
                     stored_image_links = [[]];
                     stored_image_names = [[]];
-                    var stored_card_names = [[]];
-                    var stored_card_types = [[]];
-                    var stored_card_loyalties = [[]];
-                    var stored_card_factions = [[]];
+                    stored_card_names = [[]];
+                    stored_card_types = [[]];
+                    stored_card_loyalties = [[]];
+                    stored_card_factions = [[]];
                     for (let i = 0; i < image_names.length; i++) {
                         if (cardCount === 20) {
                             pageCount += 1;
@@ -1568,10 +1631,10 @@
                         stored_image_links[pageCount].push(img_link);
                         img_src ="/static/images/CardImages/" + image_names[i] + ".jpg";
                         stored_image_names[pageCount].push(img_src);
-                        stored_card_names.push(card_names[i]);
-                        stored_card_types.push(card_types[i]);
-                        stored_card_loyalties.push(loyalties[i]);
-                        stored_card_factions.push(factions[i]);
+                        stored_card_names[pageCount].push(card_names[i]);
+                        stored_card_types[pageCount].push(card_types[i]);
+                        stored_card_loyalties[pageCount].push(loyalties[i]);
+                        stored_card_factions[pageCount].push(factions[i]);
                         if (pageCount === 0) {
                             new_string += `<div class="searched-card" onclick="quickAddCard(this)" onmouseenter="showImg(this)" onmouseleave="clearImg()" data-src=` + img_src + ` data-name=` + card_names[i].split(' ').join('_') + `>`
                             new_string += `<div class="mini-card-name">` + card_names[i] + `</div>`
@@ -1583,7 +1646,7 @@
                         cardCount += 1;
                     }
                     max_page_number = pageCount;
-                    console.log(stored_image_links);
+                    console.log(stored_card_names);
                     e.innerHTML += new_string;
                 }
             });
