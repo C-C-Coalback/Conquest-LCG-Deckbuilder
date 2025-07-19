@@ -1,5 +1,5 @@
 {% extends "base.html" %}
-{% block title %}Decks Lookup{% endblock %}
+{% block title %}Decks Home{% endblock %}
 {% block content %}
 {% load static %}
 <link rel="stylesheet" href="{% static 'home_decks.css' %}">
@@ -19,7 +19,24 @@
             </a>
         </div>
         <div id="featured-container">
-            <h2>Featured decklist</h2>
+            <div>
+                <h2>Featured decklist</h2>
+                {% if decks_exist == "Yes" %}
+                    {% for name, warlord_name, date, img_src, key, creator_name in decks %}
+                        <a href="/decks/{{ user.username }}/{{ key }}">
+                        <div class="deck-item-grid">
+                            <h3 class="decklist-name">{{ name }}</h3>
+                            <h3 class="creator-name">{{ creator_name }}</h3>
+                            <h3 class="warlord-name">{{ warlord_name }}</h3>
+                            <h3 class="date">{{ date }}</h3>
+                            <img class="preview-image" src={{ img_src }}>
+                        </div>
+                        </a>
+                    {% endfor %}
+                {% else %}
+                    <h3>No recent decks to feature</h3>
+                {% endif %}
+            </div>
         </div>
     </div>
 {% endblock %}

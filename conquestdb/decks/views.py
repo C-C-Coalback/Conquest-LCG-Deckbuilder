@@ -267,7 +267,31 @@ def deck_validation(deck, remaining_signature_squad, factions, warlord=""):
 
 
 def decks(request):
-    return render(request, "decks/home_decks.html")
+    deck_names, deck_warlords, deck_dates, img_srcs, keys, creator_name = get_published_decks_lists()
+    data = {
+        "Deck Names": deck_names,
+        "Deck Warlords": deck_warlords,
+        "Deck Dates": deck_dates,
+        "Img Srcs": img_srcs,
+        "Keys": keys,
+        "Creator Name": creator_name
+    }
+    try:
+        df = pd.DataFrame(data=data)
+        df = df.sort_values(by="Deck Dates", ascending=False)
+        new_deck_names = df["Deck Names"]
+        new_deck_warlords = df["Deck Warlords"]
+        new_deck_dates = df["Deck Dates"]
+        new_img_srcs = df["Img Srcs"]
+        new_keys = df["Keys"]
+        new_creator_name = df["Creator Name"]
+        decks_var = zip(new_deck_names[0:1], new_deck_warlords[0:1], new_deck_dates[0:1],
+                        new_img_srcs[0:1], new_keys[0:1], new_creator_name[0:1])
+
+        return render(request, "decks/home_decks.html", {"decks_exist": "Yes", "decks": decks_var})
+    except Exception as e:
+        print(e)
+    return render(request, "decks/home_decks.html", {"decks_exist": "No"})
 
 
 def delete_deck(request, deck_key):
@@ -282,7 +306,7 @@ def retract_deck(request, deck_key):
     return HttpResponseRedirect('/decks/my_decks/')
 
 
-def published_decks(request):
+def get_published_decks_lists():
     deck_names = []
     deck_warlords = []
     deck_dates = []
@@ -317,31 +341,35 @@ def published_decks(request):
                 except Exception as e:
                     print(e)
                     pass
-        data = {
-            "Deck Names": deck_names,
-            "Deck Warlords": deck_warlords,
-            "Deck Dates": deck_dates,
-            "Img Srcs": img_srcs,
-            "Keys": keys,
-            "Creator Name": creator_name
-        }
-        try:
-            df = pd.DataFrame(data=data)
-            df = df.sort_values(by="Deck Dates", ascending=False)
-            print(df.head())
-            new_deck_names = df["Deck Names"]
-            new_deck_warlords = df["Deck Warlords"]
-            new_deck_dates = df["Deck Dates"]
-            new_img_srcs = df["Img Srcs"]
-            new_keys = df["Keys"]
-            new_creator_name = df["Creator Name"]
-            decks_var = zip(new_deck_names, new_deck_warlords, new_deck_dates,
-                            new_img_srcs, new_keys, new_creator_name)
-            return render(request, "decks/published_decks.html", {"decks": decks_var})
-        except Exception as e:
-            print(e)
-        decks_var = zip(deck_names, deck_warlords, deck_dates, img_srcs, keys, creator_name)
+    return deck_names, deck_warlords, deck_dates, img_srcs, keys, creator_name
+
+
+def published_decks(request):
+    deck_names, deck_warlords, deck_dates, img_srcs, keys, creator_name = get_published_decks_lists()
+    data = {
+        "Deck Names": deck_names,
+        "Deck Warlords": deck_warlords,
+        "Deck Dates": deck_dates,
+        "Img Srcs": img_srcs,
+        "Keys": keys,
+        "Creator Name": creator_name
+    }
+    try:
+        df = pd.DataFrame(data=data)
+        df = df.sort_values(by="Deck Dates", ascending=False)
+        new_deck_names = df["Deck Names"]
+        new_deck_warlords = df["Deck Warlords"]
+        new_deck_dates = df["Deck Dates"]
+        new_img_srcs = df["Img Srcs"]
+        new_keys = df["Keys"]
+        new_creator_name = df["Creator Name"]
+        decks_var = zip(new_deck_names, new_deck_warlords, new_deck_dates,
+                        new_img_srcs, new_keys, new_creator_name)
         return render(request, "decks/published_decks.html", {"decks": decks_var})
+    except Exception as e:
+        print(e)
+    decks_var = zip(deck_names, deck_warlords, deck_dates, img_srcs, keys, creator_name)
+    return render(request, "decks/published_decks.html", {"decks": decks_var})
 
 
 def my_decks(request):
@@ -388,7 +416,6 @@ def my_decks(request):
     try:
         df = pd.DataFrame(data=data)
         df = df.sort_values(by="Deck Dates", ascending=False)
-        print(df.head())
         new_deck_names = df["Deck Names"]
         new_deck_warlords = df["Deck Warlords"]
         new_deck_dates = df["Deck Dates"]
