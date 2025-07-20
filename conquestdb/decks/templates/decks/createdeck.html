@@ -54,7 +54,8 @@
     <textarea id="descriptionInput" name="description" rows="20" cols="80"></textarea><br>
 </div>
 <div id="mini-card-search-container">
-    <h2>Available Cards</h2>
+    <h2>Card Filter</h2>
+    <button id="clear-filter" onclick="clearFilters();">Reset Filters</button>
     <form id="myForm">
         <div id="filters-container">
             <p id="p-card-name">Card Name:</p><input id="searchInput" type="text" name="search">
@@ -94,24 +95,7 @@
         <input id="next-page" type="button" value="next" onclick="nextPage();">
     </div>
     <div id="card-filter-results">
-        <div class="searched-card" onclick="quickAddCard(this)" onmouseenter="showImg(this)" onmouseleave="clearImg()" data-src="/static/images/CardImages/Captain_Cato_Sicarius.jpg" data-name="Captain Cato Sicarius">
-            <div class="mini-card-name">Captain Cato Sicarius</div>
-            <div class="mini-card-type">Warlord</div>
-            <div class="mini-card-loyalty">Signature</div>
-            <div class="mini-card-faction">Space Marines</div>
-        </div>
-        <div class="searched-card" onclick="quickAddCard(this)" onmouseenter="showImg(this)" onmouseleave="clearImg()" data-src="/static/images/CardImages/10th_Company_Scout.jpg" data-name="10th Company Scout">
-            <div class="mini-card-name">10th Company Scout</div>
-            <div class="mini-card-type">Army</div>
-            <div class="mini-card-loyalty">Common</div>
-            <div class="mini-card-faction">Space Marines</div>
-        </div>
-        <div class="searched-card" onclick="quickAddCard(this)" onmouseenter="showImg(this)" onmouseleave="clearImg()" data-src="/static/images/CardImages/Bigtoof_Banna.jpg" data-name="Bigtoof Banna">
-            <div class="mini-card-name">Bigtoof Banna</div>
-            <div class="mini-card-type">Support</div>
-            <div class="mini-card-loyalty">Common</div>
-            <div class="mini-card-faction">Orks</div>
-        </div>
+
     </div>
 </div>
 <img id="cursor-follower" src="/static/images/CardImages/Cardback.jpg">
@@ -131,6 +115,17 @@
     onmousemove = function(e){
         mouse_x = e.clientX;
         mouse_y = e.clientY * (0.8) + 80 + window.scrollY;
+    }
+
+    function clearFilters() {
+        var searchInput = document.getElementById("searchInput");
+        searchInput.value = "";
+        var searchInput = document.getElementById("loyalty");
+        searchInput.value = "None";
+        var searchInput = document.getElementById("faction");
+        searchInput.value = "None";
+        var searchInput = document.getElementById("cardType");
+        searchInput.value = "None";
     }
 
     function previousPage() {

@@ -64,3 +64,17 @@ h2 {
 h3 {
     color: green;
 }
+
+footer {
+    background-color: #f1f1f1;
+    text-align: center;
+    padding: 10px;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    border-bottom: 1px solid #f4f4f4
+}
+
+body {
+    padding-bottom: 50px;
+}
