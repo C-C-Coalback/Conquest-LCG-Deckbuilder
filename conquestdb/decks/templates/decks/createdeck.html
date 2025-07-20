@@ -228,7 +228,7 @@
             document.getElementById('ally').value = ally;
         }
         route = "/static/images/CardImages/" + name_warlord.split(' ').join('_') + ".jpg";
-        document.getElementById('warlord-card').innerHTML = `<img id=` + name_warlord.split(' ').join('_') + ` src=` + route + ` class="db-image">`;
+        document.getElementById('warlord-card').innerHTML = `<img id=` + name_warlord.split(' ').join('_') + ` src=` + route + ` class="db-image" onmouseenter="showImg(this)" onmouseleave="clearImg()" data-src=` + route + `>`;
         document.getElementById('name-deck').value = name;
         var sig_pos = -1;
         var army_pos = -1;
@@ -294,12 +294,12 @@
         if (synapse_cards.length === 1) {
             var synapseName = synapse_cards[0].slice(3).split(' ').join('_');
             route = "/static/images/CardImages/" + synapseName + ".jpg";
-            document.getElementById('synapse-card').innerHTML = `<img id=` + synapseName + ` src=` + route + ` class="db-image">`
+            document.getElementById('synapse-card').innerHTML = `<img id=` + synapseName + ` src=` + route + ` class="db-image" onmouseenter="showImg(this)" onmouseleave="clearImg()" data-src=` + route + `>`
         }
         if (pledge_card !== "" && pledge_card !== "----------------------------------------------------------------------") {
             pledge_card = pledge_card.split(' ').join('_');
             route = "/static/images/CardImages/" + pledge_card + ".jpg";
-            document.getElementById('pledge-card').innerHTML = `<img id=` + pledge_card + ` src=` + route + ` class="db-image">`
+            document.getElementById('pledge-card').innerHTML = `<img id=` + pledge_card + ` src=` + route + ` class="db-image" onmouseenter="showImg(this)" onmouseleave="clearImg()" data-src=` + route + `>`
         }
     }
 
@@ -693,7 +693,7 @@
                     name_warlord = response.warlord;
                     route = "/static/images/CardImages/" + name_warlord.split(' ').join('_') + ".jpg";
                     notCheckedAlly();
-                    document.getElementById('warlord-card').innerHTML = `<img id=` + name_warlord.split(' ').join('_') + ` src=` + route + ` class="db-image">`
+                    document.getElementById('warlord-card').innerHTML = `<img id=` + name_warlord.split(' ').join('_') + ` src=` + route + ` class="db-image" onmouseenter="showImg(this)" onmouseleave="clearImg()" data-src=` + route + `>`
                     document.getElementById('synapse-card').innerHTML = `<img id="Cardback" src="/static/images/CardImages/Cardback.jpg" class="db-image">`
                     document.getElementById('pledge-card').innerHTML = `<img id="Cardback_Two" src="/static/images/CardImages/Cardback.jpg" class="db-image">`
                     signature_squad = response.sig_squad;
@@ -704,11 +704,11 @@
                     if (card_type === "Synapse") {
                         var synapseName = cardName.split(' ').join('_');
                         route = "/static/images/CardImages/" + synapseName + ".jpg";
-                        document.getElementById('synapse-card').innerHTML = `<img id=` + synapseName + ` src=` + route + ` class="db-image">`
+                        document.getElementById('synapse-card').innerHTML = `<img id=` + synapseName + ` src=` + route + ` class="db-image" onmouseenter="showImg(this)" onmouseleave="clearImg()" data-src=` + route + `>`
                     } else if (card_type === "Pledge") {
                         var pledgeName = cardName.split(' ').join('_');
                         route = "/static/images/CardImages/" + pledgeName + ".jpg";
-                        document.getElementById('pledge-card').innerHTML = `<img id=` + pledgeName + ` src=` + route + ` class="db-image">`
+                        document.getElementById('pledge-card').innerHTML = `<img id=` + pledgeName + ` src=` + route + ` class="db-image" onmouseenter="showImg(this)" onmouseleave="clearImg()" data-src=` + route + `>`
                     } else {
                         addCard(card_type, cardName);
                     }
