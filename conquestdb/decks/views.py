@@ -821,7 +821,8 @@ def ajax_view(request):
                 ally_ok = True
             elif main_faction == "Necrons":
                 if card.get_faction() == "Neutral" or (card.get_faction() != "Tyranids" and card_type == "Army"):
-                    ally_ok = True
+                    if card.get_loyalty() == "Common":
+                        ally_ok = True
             elif main_faction == "Tyranids":
                 if card.get_faction() == "Tyranids" or (card.get_faction() == "Neutral" and card_type != "Army"):
                     ally_ok = True
@@ -844,7 +845,7 @@ def ajax_view(request):
                     ally_pos_1 = (position_main_faction + 1) % 7
                     ally_pos_2 = (position_main_faction - 1) % 7
                     if ally == alignment_wheel[ally_pos_1] or ally == alignment_wheel[ally_pos_2]:
-                        if card.get_loyalty() == "Loyal":
+                        if card.get_loyalty() == "Common":
                             ally_ok = True
             if ally_ok:
                 if card.check_for_a_trait("Pledge"):
