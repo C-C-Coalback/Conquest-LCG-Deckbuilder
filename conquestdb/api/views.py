@@ -21,6 +21,11 @@ apoka_errata_array = Initfunctions.init_apoka_errata_cards()
 images_dict = {}
 cards_dict = {}
 apoka_errata_dict = {}
+for key in range(len(card_array)):
+    cards_dict[card_array[key].name] = card_array[key]
+    images_dict[card_array[key].image_name] = card_array[key]
+for key in range(len(apoka_errata_array)):
+    apoka_errata_dict[apoka_errata_array[key].image_name] = apoka_errata_array[key]
 banned_cards = ["Bonesinger Choir", "Squiggoth Brute", "Corrupted Teleportarium", "Gun Drones", "Archon's Palace",
                 "Land Speeder Vengeance", "Sowing Chaos", "Smasha Gun Battery", "The Prince's Might",
                 "Purveyor of Hubris", "Doom", "Exterminatus", "Mind Shackle Scarab",
@@ -187,28 +192,30 @@ def request_deck(request, deck_key):
                 for i in range(len(deck_content)):
                     if i == 0 or deck_content[i] in pledges_array:
                         print(deck_content[i])
-                        front_links_sent.append(get_front_link(deck_content[i]))
-                        back_links_sent.append(get_back_link(deck_content[i]))
-                        desc_links_sent.append(get_desc(deck_content[i]))
-                        card_id_links_sent.append(get_card_id(deck_content[i]))
-                        deck_id_links_sent.append(get_deck_id(deck_content[i]))
-                        height_links_sent.append(get_height(deck_content[i]))
-                        width_links_sent.append(get_width(deck_content[i]))
-                        nicknames_sent.append(deck_content[i])
-                        hidden_links_sent.append(get_hidden_link(deck_content[i]))
-                        unique_links_sent.append((get_unique_link(deck_content[i])))
+                        card_name = deck_content[i]
+                        front_links_sent.append(get_front_link(card_name))
+                        back_links_sent.append(get_back_link(card_name))
+                        desc_links_sent.append(get_desc(card_name))
+                        card_id_links_sent.append(get_card_id(card_name))
+                        deck_id_links_sent.append(get_deck_id(card_name))
+                        height_links_sent.append(get_height(card_name))
+                        width_links_sent.append(get_width(card_name))
+                        nicknames_sent.append(card_name)
+                        hidden_links_sent.append(get_hidden_link(card_name))
+                        unique_links_sent.append((get_unique_link(card_name)))
                     else:
                         print(deck_content[i][3:])
-                        nicknames_sent.append(deck_content[i][3:])
-                        front_links_sent.append(get_front_link(deck_content[i][3:]))
-                        back_links_sent.append(get_back_link(deck_content[i][3:]))
+                        card_name = deck_content[i][3:]
+                        nicknames_sent.append(card_name)
+                        front_links_sent.append(get_front_link(card_name))
+                        back_links_sent.append(get_back_link(card_name))
                         desc_links_sent.append("")
-                        card_id_links_sent.append(get_card_id(deck_content[i][3:]))
-                        deck_id_links_sent.append(get_deck_id(deck_content[i][3:]))
-                        height_links_sent.append(get_height(deck_content[i][3:]))
-                        width_links_sent.append(get_width(deck_content[i][3:]))
-                        hidden_links_sent.append(get_hidden_link(deck_content[i][3:]))
-                        unique_links_sent.append((get_unique_link(deck_content[i][3:])))
+                        card_id_links_sent.append(get_card_id(card_name))
+                        deck_id_links_sent.append(get_deck_id(card_name))
+                        height_links_sent.append(get_height(card_name))
+                        width_links_sent.append(get_width(card_name))
+                        hidden_links_sent.append(get_hidden_link(card_name))
+                        unique_links_sent.append((get_unique_link(card_name)))
                 return JsonResponse({'message': 'DECK FOUND', 'deck_content': nicknames_sent,
                                      'front': front_links_sent, 'back': back_links_sent,
                                      'card_id': card_id_links_sent, 'deck_id': deck_id_links_sent,
