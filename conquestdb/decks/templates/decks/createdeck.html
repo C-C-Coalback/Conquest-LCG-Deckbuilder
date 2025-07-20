@@ -11,9 +11,9 @@
 </datalist>
 <div id="deck-container">
     <div class="auto-deck-build">
-        <div id="warlord-card" class="poster-card"><img src="/static/images/CardImages/Cardback.jpg" class="db-image"></div>
-        <div id="synapse-card" class="poster-card"><img src="/static/images/CardImages/Cardback.jpg" class="db-image"></div>
-        <div id="pledge-card" class="poster-card"><img src="/static/images/CardImages/Cardback.jpg" class="db-image"></div>
+        <div id="warlord-card" class="poster-card"><img id="Nazdreg" src="/static/images/CardImages/Cardback.jpg" class="db-image"></div>
+        <div id="synapse-card" class="poster-card"><img id="Cardback" src="/static/images/CardImages/Cardback.jpg" class="db-image"></div>
+        <div id="pledge-card" class="poster-card"><img id="Cardback_Two" src="/static/images/CardImages/Cardback.jpg" class="db-image"></div>
         <div id="details">Details<br>
             <label for="name-deck">Name:</label>
             <input id="name-deck" type="search" size="28"><br>
@@ -391,6 +391,11 @@
                 document.getElementById("chat-log").value += " (" + text + ")";
             }
         }
+        const pledge_name = document.getElementById("pledge-card").children[0].id;
+        if (pledge_name !== "Cardback_Two") {
+            document.getElementById("chat-log").value += "\n";
+            document.getElementById("chat-log").value += pledge_name.split('_').join(' ');
+        }
         document.getElementById("chat-log").value += "\n----------------------------------------------------------------------\n"
         document.getElementById("chat-log").value += "Signature Squad\n\n";
         var elements = document.getElementById("signature-squad-cards").children;
@@ -689,6 +694,7 @@
                     notCheckedAlly();
                     document.getElementById('warlord-card').innerHTML = `<img id=` + name_warlord.split(' ').join('_') + ` src=` + route + ` class="db-image">`
                     document.getElementById('synapse-card').innerHTML = `<img id="Cardback" src="/static/images/CardImages/Cardback.jpg" class="db-image">`
+                    document.getElementById('pledge-card').innerHTML = `<img id="Cardback_Two" src="/static/images/CardImages/Cardback.jpg" class="db-image">`
                     signature_squad = response.sig_squad;
                     addSigSquad(signature_squad);
                 } else if (message === "ADDCARD") {

@@ -186,6 +186,13 @@ def deck_validation(deck, remaining_signature_squad, factions, warlord=""):
     global cards_dict
     print("Can continue")
     current_index = 4
+    if deck[current_index]  == "Signature Squad":
+        card = FindCard.find_card(deck[current_index - 1], card_array, cards_dict)
+        print(deck[current_index - 1])
+        if card.check_for_a_trait("Pledge"):
+            current_index = 5
+        else:
+            return "Non-Pledge card in Pledge position"
     while deck[current_index] != "Army":
         if deck[current_index] in remaining_signature_squad:
             print("Found a match")
@@ -697,7 +704,6 @@ def ajax_view(request):
             text = text.replace("\"", "")
             deck = clean_sent_deck(text)
             print(deck)
-            print("got here")
             deck_name = deck[0]
             if len(deck) > 5:
                 if "{AUTOMAIN}" in deck[2]:
@@ -705,7 +711,6 @@ def ajax_view(request):
                     deck[2] = deck[2].replace("{AUTOMAIN}", warlord.get_faction())
                     text = text.replace("{AUTOMAIN}", warlord.get_faction())
                 message_to_send = second_part_deck_validation(deck)
-            print("got here 2")
             if message_to_send == "SUCCESS":
                 print("Need to save deck")
                 print(os.getcwd())
@@ -828,7 +833,7 @@ def ajax_view(request):
                     if ally == alignment_wheel[ally_pos_1] or ally == alignment_wheel[ally_pos_2]:
                         ally_ok = True
             if ally_ok:
-                if "Pledge" in card.get_traits():
+                if card.check_for_a_trait("Pledge"):
                     card_type = "Pledge"
                 return JsonResponse({'message': 'ADDCARD', 'card_type': card_type,
                                      'card_name': card_name})
