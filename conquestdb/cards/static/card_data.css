@@ -42,7 +42,7 @@
     margin:auto;
 }
 
-#card-name {
+#card-name, #errata-card-name {
     background-color: lightgrey;
 }
 
@@ -63,6 +63,14 @@
 }
 
 #card-info {
+    max-width:300px;
+    background: rgba(47, 40, 153, 0.3);
+    border: 0.15em dashed lightblue;
+    overflow-y:auto;
+}
+
+#errata-card-info {
+    display:none;
     max-width:300px;
     background: rgba(47, 40, 153, 0.3);
     border: 0.15em dashed lightblue;

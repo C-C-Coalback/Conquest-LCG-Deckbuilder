@@ -38,6 +38,34 @@
                 <h3>{{ bloodied_attack }} attack, {{ bloodied_health }} health</h3>
             {% endif %}
         </div>
+        {% if errata_text == "There is Errata" %}
+        <div id="errata-card-info">
+            <div id="errata-card-name">
+                <h2>{{ errata_card_name }}</h2>
+            </div>
+            <h3>{{ errata_faction }}</h3>
+            <h3>{{ errata_loyalty }} {{ errata_card_type }}</h3>
+            <h3>{{ errata_traits }}</h3>
+            <h3>{{ errata_full_text|linebreaks }}</h3>
+            {% if errata_cost != "-1" %}
+                <h3>Cost: {{ errata_cost }}</h3>
+            {% endif %}
+            <p></p>
+            {% if errata_shields != "0" %}
+                <h3>Shields: {{ errata_shields }}</h3>
+            {% endif %}
+            {% if errata_card_type == "Warlord" %}
+                <h3>{{ errata_attack }} attack, {{ errata_health }} health</h3>
+            {% elif errata_is_unit == "True" %}
+                <h3>{{ errata_command }} command, {{ errata_attack }} attack, {{ errata_health }} health</h3>
+            {% endif %}
+            {% if errata_card_type == "Warlord" %}
+                <h3>When bloodied:</h3>
+                <h3>{{ errata_bloodied_text|linebreaks }}</h3>
+                <h3>{{ errata_bloodied_attack }} attack, {{ errata_bloodied_health }} health</h3>
+            {% endif %}
+        </div>
+        {% endif %}
         <div id="ban-info">
             <div id="ban-header">
                 <h2>Banlist/Errata</h2>

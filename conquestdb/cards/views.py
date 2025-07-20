@@ -180,7 +180,42 @@ def card_data(request, card_name):
         health = str(card.health)
     errata_text = "No Errata"
     ban_text = "No Bans"
+    errata_card_name = ""
+    errata_faction = ""
+    errata_loyalty = ""
+    errata_card_type = ""
+    errata_traits = ""
+    errata_full_text = ""
+    errata_cost = -1
+    errata_shields = -1
+    errata_command = -1
+    errata_bloodied_text = ""
+    errata_bloodied_attack = -1
+    errata_bloodied_health = -1
+    errata_attack = -1
+    errata_health = -1
+    errata_is_unit = "False"
     if card_name in apoka_errata_dict:
+        card = apoka_errata_dict[card_name]
+        errata_card_name = card.get_name()
+        errata_faction = card.get_faction()
+        errata_loyalty = card.get_loyalty()
+        errata_card_type = card.get_card_type()
+        errata_traits = card.get_traits()
+        errata_full_text = card.get_text()
+        errata_cost = card.get_cost()
+        errata_shields = card.get_shields()
+        if card.is_unit:
+            if errata_card_type != "Warlord":
+                errata_card_type = errata_card_type + " Unit"
+                errata_command = str(card.command)
+            else:
+                errata_bloodied_text = card.bloodied_text
+                errata_bloodied_attack = card.bloodied_attack
+                errata_bloodied_health = card.bloodied_health
+            errata_is_unit = "True"
+            errata_attack = str(card.attack)
+            errata_health = str(card.health)
         errata_text = "There is Errata"
     if original_card_name in banned_cards:
         ban_text = "Banned"
@@ -209,4 +244,11 @@ def card_data(request, card_name):
                    "is_unit": is_unit, "loyalty": loyalty, "faction": faction, "traits": traits,
                    "ban_text": ban_text, "errata_text": errata_text, "shields": shields,
                    "bloodied_attack": bloodied_attack, "bloodied_health": bloodied_health,
-                   "bloodied_text": bloodied_text, "comments": my_comments, "noc": no_comments})
+                   "bloodied_text": bloodied_text, "comments": my_comments, "noc": no_comments,
+                   "errata_card_name": errata_card_name, "errata_faction": errata_faction,
+                   "errata_loyalty": errata_loyalty, "errata_card_type": errata_card_type,
+                   "errata_traits": errata_traits, "errata_full_text": errata_full_text,
+                   "errata_cost": errata_cost, "errata_shields": errata_shields,
+                   "errata_command": errata_command, "errata_bloodied_text": errata_bloodied_text,
+                   "errata_bloodied_attack": errata_bloodied_attack, "errata_bloodied_health": errata_bloodied_health,
+                   "errata_attack": errata_attack, "errata_health": errata_health, "errata_is_unit": errata_is_unit})
