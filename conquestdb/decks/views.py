@@ -30,7 +30,10 @@ for key in range(len(card_array)):
     images_dict[card_array[key].image_name] = card_array[key]
 for key in range(len(apoka_errata_array)):
     apoka_errata_dict[apoka_errata_array[key].image_name] = apoka_errata_array[key]
-
+pledges_array = []
+for i in range(len(card_array)):
+    if card_array[i].check_for_a_trait("Pledge"):
+        pledges_array.append(card_array[i].get_name())
 
 alignment_wheel = ["Astra Militarum", "Space Marines", "Tau", "Eldar", "Dark Eldar", "Chaos", "Orks"]
 
@@ -531,9 +534,12 @@ def deck_data(request, deck_creator, deck_key):
         event_pos = -1
         synapse_pos = -1
         synapse_name = ""
+        pledge_name = ""
         for i in range(len(deck_list)):
             if deck_list[i] == "Signature Squad":
                 sig_pos = i
+                if deck_list[i - 1] in pledges_array:
+                    pledge_name = deck_list[i - 1]
             if deck_list[i] == "Army":
                 army_pos = i
             if deck_list[i] == "Support":
@@ -555,10 +561,14 @@ def deck_data(request, deck_creator, deck_key):
         warlord_link = convert_name_to_hyperlink(warlord_name)
         synapse_img = "None"
         synapse_link = "None"
-        pledge = ""
+        pledge_img = "None"
+        pledge_link = "None"
         if synapse_name:
             synapse_img = convert_name_to_img_src(synapse_name[3:])
             synapse_link = convert_name_to_hyperlink(synapse_name[3:])
+        if pledge_name:
+            pledge_img = convert_name_to_img_src(pledge_name)
+            pledge_link = convert_name_to_hyperlink(pledge_name)
         print(sig_cards)
         print(army_cards)
         print(support_cards)
@@ -643,9 +653,10 @@ def deck_data(request, deck_creator, deck_key):
                                                         "event_cards": event_cards,
                                                         "warlord_img": warlord_img, "synapse_img": synapse_img,
                                                         "warlord_link": warlord_link, "synapse_link": synapse_link,
-                                                        "pledge": pledge, "creator": deck_creator,
-                                                        "public": public_deck, "deck_key": deck_key,
-                                                        "comments": my_comments, "noc": no_comments})
+                                                        "creator": deck_creator, "public": public_deck,
+                                                        "deck_key": deck_key,
+                                                        "comments": my_comments, "noc": no_comments,
+                                                        "pledge_img": pledge_img, "pledge_link": pledge_link})
     return render(request, "decks/deck_data.html", {"deck_found": deck_found})
 
 

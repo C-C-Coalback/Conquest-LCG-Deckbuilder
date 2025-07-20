@@ -31,7 +31,13 @@
                         </a>
                         {% endif %}
                     </div>
-                    <h3 class="grid-section" id="pledge">{{ pledge }}</h3>
+                    <div class="grid-section" id="pledge">
+                        {% if pledge_img != "None" %}
+                        <a href={{ pledge_link }}>
+                            <img id="pledge-image" src={{ pledge_img }}>
+                        </a>
+                        {% endif %}
+                    </div>
                     <div class="grid-section" id="sig_cards">
                         <h2>Signature Squad</h2>
                         {% for card, link, src in sig_cards %}
