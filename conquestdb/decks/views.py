@@ -13,6 +13,9 @@ import shutil
 
 
 card_array = Initfunctions.init_player_cards()
+card_names_array = []
+for i in range(len(card_array)):
+    card_names_array.append(card_array[i].get_name())
 planet_array = Initfunctions.init_planet_cards()
 apoka_errata_array = Initfunctions.init_apoka_errata_cards()
 images_dict = {}
@@ -447,12 +450,15 @@ def modify_deck(request, deck_key):
                         with open(target_file + "/desc", "r") as f:
                             desc = f.read()
     if data:
-        return render(request, "decks/createdeck.html", {"edit": "T", "data": data, "desc": desc})
-    return render(request, "decks/createdeck.html", {"edit": "F", "data": "", "desc": ""})
+        return render(request, "decks/createdeck.html", {"edit": "T", "data": data, "desc": desc,
+                                                         "auto_complete": card_names_array})
+    return render(request, "decks/createdeck.html", {"edit": "F", "data": "", "desc": "",
+                                                     "auto_complete": card_names_array})
 
 
 def create_deck(request):
-    return render(request, "decks/createdeck.html", {"edit": "F", "data": "", "desc": ""})
+    return render(request, "decks/createdeck.html", {"edit": "F", "data": "", "desc": "",
+                                                     "auto_complete": card_names_array})
 
 
 def user_deck_data(request, deck_creator):
