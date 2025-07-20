@@ -828,6 +828,8 @@ def ajax_view(request):
                     if ally == alignment_wheel[ally_pos_1] or ally == alignment_wheel[ally_pos_2]:
                         ally_ok = True
             if ally_ok:
+                if "Pledge" in card.get_traits():
+                    card_type = "Pledge"
                 return JsonResponse({'message': 'ADDCARD', 'card_type': card_type,
                                      'card_name': card_name})
             else:

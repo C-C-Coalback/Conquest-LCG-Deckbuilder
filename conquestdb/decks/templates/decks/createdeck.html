@@ -698,6 +698,10 @@
                         var synapseName = cardName.split(' ').join('_');
                         route = "/static/images/CardImages/" + synapseName + ".jpg";
                         document.getElementById('synapse-card').innerHTML = `<img id=` + synapseName + ` src=` + route + ` class="db-image">`
+                    } else if (card_type === "Pledge") {
+                        var pledgeName = cardName.split(' ').join('_');
+                        route = "/static/images/CardImages/" + pledgeName + ".jpg";
+                        document.getElementById('pledge-card').innerHTML = `<img id=` + pledgeName + ` src=` + route + ` class="db-image">`
                     } else {
                         addCard(card_type, cardName);
                     }
