@@ -844,7 +844,8 @@ def ajax_view(request):
                     ally_pos_1 = (position_main_faction + 1) % 7
                     ally_pos_2 = (position_main_faction - 1) % 7
                     if ally == alignment_wheel[ally_pos_1] or ally == alignment_wheel[ally_pos_2]:
-                        ally_ok = True
+                        if card.get_loyalty() == "Loyal":
+                            ally_ok = True
             if ally_ok:
                 if card.check_for_a_trait("Pledge"):
                     card_type = "Pledge"
