@@ -109,24 +109,33 @@
     </form>
 <script>
     const image = document.getElementById("card-image");
-    const button = document.getElementById("bloodied-toggle");
+    const bloodied_button = document.getElementById("bloodied-toggle");
+    const errata_button = document.getElementById("errata-toggle");
     function changeBloodied() {
         if (image.src.includes("_bloodied")) {
             image.src = image.src.replace("_bloodied", "");
-            button.innerHTML = "View Bloodied Side";
+            bloodied_button.innerHTML = "View Bloodied Side";
         } else {
             image.src = image.src.replace(".jpg", "_bloodied.jpg");
-            button.innerHTML = "View Hale Side";
+            bloodied_button.innerHTML = "View Hale Side";
         }
     }
 
     function changeErrata() {
         if (image.src.includes("_apoka")) {
             image.src = image.src.replace("_apoka", "");
-            button.innerHTML = "View Original Version";
+            errata_button.innerHTML = "View Original Version";
+            var e = document.getElementById("card-info");
+            e.style.display = "block";
+            e = document.getElementById("errata-card-info");
+            e.style.display = "none";
         } else {
             image.src = image.src.replace(".jpg", "_apoka.jpg");
-            button.innerHTML = "View Errata Version";
+            errata_button.innerHTML = "View Errata Version";
+            var e = document.getElementById("card-info");
+            e.style.display = "none";
+            e = document.getElementById("errata-card-info");
+            e.style.display = "block";
         }
     }
 </script>

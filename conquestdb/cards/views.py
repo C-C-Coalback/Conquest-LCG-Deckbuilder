@@ -204,7 +204,7 @@ def card_data(request, card_name):
         errata_traits = card.get_traits()
         errata_full_text = card.get_text()
         errata_cost = card.get_cost()
-        errata_shields = card.get_shields()
+        errata_shields = str(card.get_shields())
         if card.is_unit:
             if errata_card_type != "Warlord":
                 errata_card_type = errata_card_type + " Unit"
