@@ -51,15 +51,16 @@ def check_if_key_in_use(key_string):
                         if this_key == key_string:
                             return True
     target_directory = directory + "/decks/publisheddecks/"
-    for username in os.listdir(target_directory):
-        if username:
-            second_target_directory = target_directory + "/" + username
-            for deck_name in os.listdir(second_target_directory):
-                if os.path.exists(second_target_directory + "/" + deck_name + "/key"):
-                    with open(second_target_directory + "/" + deck_name + "/key", "r") as f:
-                        this_key = f.read()
-                        if this_key == key_string:
-                            return True
+    if os.path.exists(target_directory):
+        for username in os.listdir(target_directory):
+            if username:
+                second_target_directory = target_directory + "/" + username
+                for deck_name in os.listdir(second_target_directory):
+                    if os.path.exists(second_target_directory + "/" + deck_name + "/key"):
+                        with open(second_target_directory + "/" + deck_name + "/key", "r") as f:
+                            this_key = f.read()
+                            if this_key == key_string:
+                                return True
     return False
 
 
