@@ -212,6 +212,10 @@
         force_send = "T";
         data = data.replace(new RegExp("&"+"#"+"x27;", "g"), "'");
         var deck_data = data.split("|||");
+        var pledge_card = "";
+        if (deck_data[4] !== "") {
+            pledge_card = deck_data[4];
+        }
         deck_data = deck_data.filter(function(a){return a !== "----------------------------------------------------------------------"});
         deck_data = deck_data.filter(function(a){return a !== "Planet"});
         deck_data = deck_data.filter(function(a){return a !== ""});
@@ -293,6 +297,11 @@
             var synapseName = synapse_cards[0].slice(3).split(' ').join('_');
             route = "/static/images/CardImages/" + synapseName + ".jpg";
             document.getElementById('synapse-card').innerHTML = `<img id=` + synapseName + ` src=` + route + ` class="db-image">`
+        }
+        if (pledge_card !== "" && pledge_card !== "----------------------------------------------------------------------") {
+            pledge_card = pledge_card.split(' ').join('_');
+            route = "/static/images/CardImages/" + pledge_card + ".jpg";
+            document.getElementById('pledge-card').innerHTML = `<img id=` + pledge_card + ` src=` + route + ` class="db-image">`
         }
     }
 
