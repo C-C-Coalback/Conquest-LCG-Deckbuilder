@@ -92,6 +92,10 @@
     top: 100px;
 }
 
+#buttons-container {
+    white-space: nowrap;
+}
+
 #cursor-follower {
     position:absolute;
     width: 300px;
@@ -144,6 +148,38 @@
     padding: 10px;
     margin: 10px;
     overflow-y: scroll;
+}
+
+#clear-filter {
+    position: relative;
+    left: 200px;
+    border: none;
+    background-color: red;
+    color: white;
+    padding: 15px 32px;
+    width: 200px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    cursor: pointer;
+}
+
+#send-filter {
+    position: relative;
+    left: 200px;
+    border: none;
+    background-color: green;
+    color: white;
+    padding: 15px 32px;
+    width: 200px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    cursor: pointer;
 }
 
 #filters-container {
