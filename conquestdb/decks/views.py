@@ -726,6 +726,7 @@ def ajax_view(request):
                 print("Need to save deck")
                 print(os.getcwd())
                 directory = os.getcwd()
+                os.makedirs(directory + "/decks/deckstorage/", exist_ok=True)
                 target_directory = directory + "/decks/deckstorage/" + username + "/"
                 os.makedirs(target_directory, exist_ok=True)
                 target_directory = directory + "/decks/deckstorage/" + username + "/" + deck_name
