@@ -160,7 +160,7 @@
     left:0;
     top:0;
     height: 50px;
-    width: 600px;
+    width: 200px;
 }
 
 #next-page {
@@ -168,7 +168,8 @@
     right:0;
     top:0;
     height: 50px;
-    width: 600px;
+    width: 200px;
+    margin-left: 200px;
 }
 
 .saved-deck-box {

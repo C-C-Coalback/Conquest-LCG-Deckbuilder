@@ -89,7 +89,10 @@
         </div>
         <button id="send-filter">Perform Search</button>
     </form>
-    <input id="prev-page" type="button" value="previous" onclick="previousPage();">
+    <div id="buttons-container">
+        <input id="prev-page" type="button" value="previous" onclick="previousPage();">
+        <input id="next-page" type="button" value="next" onclick="nextPage();">
+    </div>
     <div id="card-filter-results">
         <div class="searched-card" onclick="quickAddCard(this)" onmouseenter="showImg(this)" onmouseleave="clearImg()" data-src="/static/images/CardImages/Captain_Cato_Sicarius.jpg" data-name="Captain Cato Sicarius">
             <div class="mini-card-name">Captain Cato Sicarius</div>
@@ -110,7 +113,6 @@
             <div class="mini-card-faction">Orks</div>
         </div>
     </div>
-    <input id="next-page" type="button" value="next" onclick="nextPage();">
 </div>
 <img id="cursor-follower" src="/static/images/CardImages/Cardback.jpg">
 <script>
