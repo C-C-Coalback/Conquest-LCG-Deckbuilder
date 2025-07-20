@@ -83,7 +83,7 @@
 }
 
 #deck-container {
-    position: absolute;
+    position: fixed;
     left: 100px;
     top: 100px;
 }
@@ -126,6 +126,7 @@
 
 #mini-card-search-container {
     position: absolute;
+    cursor: pointer;
     left: 900px;
     top: 500px;
 }
