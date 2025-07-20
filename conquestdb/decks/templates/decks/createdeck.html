@@ -196,6 +196,7 @@
         cursor_img.src = new_src;
         cursor_img.style.display = "block";
     }
+
     function clearImg() {
         cursor_img = document.getElementById("cursor-follower");
         cursor_img.src = "/static/images/CardImages/Cardback.jpg";
@@ -603,6 +604,8 @@
         for (var i = 0; i < signature_squad.length; i++){
             var sig_copies = signature_squad[i][0];
             var sig_card_name = signature_squad[i].slice(3);
+            var sig_image_name = sig_card_name.split(' ').join('_');
+            var img_src = "/static/images/CardImages/" + sig_image_name + ".jpg";
             var cardName = sig_card_name;
             var idName = sig_card_name.split(' ').join('_');
             var countName = idName + "-Count";
@@ -621,7 +624,7 @@
                     newPart += ` class="no-break">1`;
                     newPart += `</div><div class="no-break">x </div><div id=`;
                     newPart += idName;
-                    newPart += ` class="no-break">`;
+                    newPart += ` class="no-break" onmouseenter="showImg(this)" onmouseleave="clearImg()" data-src=` + img_src + `>`;
                     newPart += cardName;
                     newPart += `</div></div>`
                     document.getElementById("signature-squad-cards").innerHTML += newPart;
@@ -632,6 +635,7 @@
 
     function addCard(card_type, cardName) {
         var idName = cardName.split(' ').join('_');
+        var img_src = "/static/images/CardImages/" + idName + ".jpg";
         var countName = idName + "-Count";
         var holderName = idName + "-Holder";
         var e = document.getElementById(countName);
@@ -656,7 +660,7 @@
             newPart += ` type="button" value="-" onclick="decreaseCount(this.id);">`
             newPart += `<div id=`;
             newPart += idName;
-            newPart += ` class="no-break">`;
+            newPart += ` class="no-break" onmouseenter="showImg(this)" onmouseleave="clearImg()" data-src=` + img_src + `>`;
             newPart += cardName;
             newPart += `</div>`;
             newPart += `</div>`
