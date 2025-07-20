@@ -8,6 +8,8 @@
         <img id="card-image" src="/static/images/CardImages/{{ image_name }}.jpg">
         {% if card_type == "Warlord" %}
             <br><button id="bloodied-toggle" onclick="changeBloodied();">View Bloodied Side</button>
+        {% elif errata_text == "There is Errata" %}
+            <br><button id="errata-toggle" onclick="changeErrata();">View Errata Version</button>
         {% endif %}
         </div>
         <div id="card-info">
@@ -87,6 +89,16 @@
         } else {
             image.src = image.src.replace(".jpg", "_bloodied.jpg");
             button.innerHTML = "View Hale Side";
+        }
+    }
+
+    function changeErrata() {
+        if (image.src.includes("_apoka")) {
+            image.src = image.src.replace("_apoka", "");
+            button.innerHTML = "View Original Version";
+        } else {
+            image.src = image.src.replace(".jpg", "_apoka.jpg");
+            button.innerHTML = "View Errata Version";
         }
     }
 </script>

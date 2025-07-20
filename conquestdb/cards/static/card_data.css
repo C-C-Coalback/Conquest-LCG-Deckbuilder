@@ -46,7 +46,7 @@
     background-color: lightgrey;
 }
 
-#bloodied-toggle {
+#bloodied-toggle, #errata-toggle {
     width: 360px;
     margin: 0 auto;
     display: block;
