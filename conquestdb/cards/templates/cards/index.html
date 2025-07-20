@@ -55,6 +55,7 @@
                 <p id="min-health">Minimum Health:</p><input id="minHealth" type="text" name="minHealth">
                 <p id="max-health">Maximum Health:</p><input id="maxHealth" type="text" name="maxHealth">
             </div>
+            <button id="clear-filter" onclick="clearFilters();">Reset Filters</button>
             <button type="submit">Perform Search</button>
         </form>
     </div>
@@ -71,6 +72,37 @@
         var stored_image_links = [];
         var stored_image_names = [];
 
+        function clearFilters() {
+            var searchInput = document.getElementById("searchInput");
+            searchInput.value = "";
+            var searchInput = document.getElementById("loyalty");
+            searchInput.value = "None";
+            var searchInput = document.getElementById("faction");
+            searchInput.value = "None";
+            var searchInput = document.getElementById("cardType");
+            searchInput.value = "None";
+            var searchInput = document.getElementById("traitsInput");
+            searchInput.value = "";
+            var searchInput = document.getElementById("shields");
+            searchInput.value = "-1";
+            var searchInput = document.getElementById("minCost");
+            searchInput.value = "";
+            var searchInput = document.getElementById("maxCost");
+            searchInput.value = "";
+            var searchInput = document.getElementById("minCommand");
+            searchInput.value = "";
+            var searchInput = document.getElementById("maxCommand");
+            searchInput.value = "";
+            var searchInput = document.getElementById("minAttack");
+            searchInput.value = "";
+            var searchInput = document.getElementById("maxAttack");
+            searchInput.value = "";
+            var searchInput = document.getElementById("minHealth");
+            searchInput.value = "";
+            var searchInput = document.getElementById("maxHealth");
+            searchInput.value = "";
+            console.log("got here");
+        }
 
         function previousPage() {
             if (current_page_number !== 0) {
