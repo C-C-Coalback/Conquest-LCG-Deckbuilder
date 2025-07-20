@@ -11,6 +11,26 @@ import string
 import shutil
 import json
 
+
+card_array = Initfunctions.init_player_cards()
+card_names_array = []
+for i in range(len(card_array)):
+    card_names_array.append(card_array[i].get_name())
+planet_array = Initfunctions.init_planet_cards()
+apoka_errata_array = Initfunctions.init_apoka_errata_cards()
+images_dict = {}
+cards_dict = {}
+apoka_errata_dict = {}
+banned_cards = ["Bonesinger Choir", "Squiggoth Brute", "Corrupted Teleportarium", "Gun Drones", "Archon's Palace",
+                "Land Speeder Vengeance", "Sowing Chaos", "Smasha Gun Battery", "The Prince's Might",
+                "Purveyor of Hubris", "Doom", "Exterminatus", "Mind Shackle Scarab",
+                "Crypt of Saint Camila", "Warpstorm"]
+pledges_array = []
+for i in range(len(card_array)):
+    if card_array[i].check_for_a_trait("Pledge"):
+        pledges_array.append(card_array[i].get_name())
+
+
 dire = os.getcwd()
 dire = dire + "/api/imagelinkslookup/all/"
 with open(dire + "front.json") as json_file:
@@ -135,8 +155,6 @@ def request_deck(request, deck_key):
                     deck_content.remove("Planet")
                 if "Signature Squad" in deck_content:
                     deck_content.remove("Signature Squad")
-                if "Pledge" in deck_content:
-                    deck_content.remove("Pledge")
                 if "Synapse" in deck_content:
                     deck_content.remove("Synapse")
                 if "Attachment" in deck_content:
@@ -152,7 +170,7 @@ def request_deck(request, deck_key):
                 del deck_content[0]
                 del deck_content[1]
                 for i in range(len(deck_content)):
-                    if i == 0:
+                    if i == 0 or deck_content[i] in pledges_array:
                         card_amounts.append(1)
                     else:
                         card_amounts.append(int(deck_content[i][0]))
@@ -167,7 +185,7 @@ def request_deck(request, deck_key):
                 hidden_links_sent = []
                 unique_links_sent = []
                 for i in range(len(deck_content)):
-                    if i == 0:
+                    if i == 0 or deck_content[i] in pledges_array:
                         print(deck_content[i])
                         front_links_sent.append(get_front_link(deck_content[i]))
                         back_links_sent.append(get_back_link(deck_content[i]))

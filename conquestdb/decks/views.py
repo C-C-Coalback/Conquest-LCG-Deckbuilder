@@ -186,7 +186,7 @@ def deck_validation(deck, remaining_signature_squad, factions, warlord=""):
     global cards_dict
     print("Can continue")
     current_index = 4
-    if deck[current_index]  == "Signature Squad":
+    if deck[current_index] == "Signature Squad":
         card = FindCard.find_card(deck[current_index - 1], card_array, cards_dict)
         print(deck[current_index - 1])
         if card.check_for_a_trait("Pledge"):
