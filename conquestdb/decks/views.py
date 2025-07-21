@@ -253,6 +253,9 @@ def deck_validation(deck, remaining_signature_squad, factions, warlord=""):
             if card_result.get_faction() == factions[0]:
                 faction_check_passed = True
             elif card_result.get_faction() == factions[1] and card_result.get_loyalty() == "Common":
+                if warlord_name == "Yvraine":
+                    if card_result.get_faction() == "Chaos" and card_result.check_for_a_trait("Elite"):
+                        return 'Yvraine cannot have Chaos elites: ' + card_result.get_name()
                 faction_check_passed = True
             elif card_result.get_faction() != factions[0] and card_result.get_loyalty() == "Loyal":
                 return "Loyal card detected: " + card_result.get_name()
@@ -870,6 +873,9 @@ def ajax_view(request):
                         if card.get_loyalty() == "Loyal":
                             return JsonResponse({'message': 'Cannot add loyal cards from other factions'})
                         if card.get_loyalty() == "Common":
+                            if warlord_name == "Yvraine":
+                                if card.get_faction() == "Chaos" and card.check_for_a_trait("Elite"):
+                                    return JsonResponse({'message': 'Yvraine cannot have Chaos elites'})
                             ally_ok = True
             if ally_ok:
                 if card.check_for_a_trait("Pledge"):
