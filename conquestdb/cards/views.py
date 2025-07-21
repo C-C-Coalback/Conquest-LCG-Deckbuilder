@@ -3,10 +3,10 @@ from conquestdb.cardscode import Initfunctions
 import pandas as pd
 from django.http import JsonResponse
 from django.http import HttpResponseRedirect
+from conquestdb.cardscode import FindCard
 import os
 import os.path
 import datetime
-
 
 card_array = Initfunctions.init_player_cards()
 planet_array = Initfunctions.init_planet_cards()
@@ -45,7 +45,6 @@ def ajax_view(request):
         card_type = request.POST.get('card_type')
         shields = request.POST.get('shields')
         view_as = request.POST.get('view-as')
-
         min_cost = -1
         max_cost = -1
         min_command = -1
@@ -54,6 +53,33 @@ def ajax_view(request):
         max_attack = -1
         min_health = -1
         max_health = -1
+        filtered_df = df
+        if view_as == "Rows Mini":
+            warlord_name = request.POST.get('warlord_name')
+            ally_faction = request.POST.get('ally_faction')
+            print(warlord_name)
+            if warlord_name == "Gorzod":
+                filtered_df = filtered_df[((filtered_df['faction'] == "Space Marines") &
+                                           (filtered_df['loyalty'] == "Common") &
+                                           (filtered_df['traits'].str.contains("Vehicle"))) |
+                                          ((filtered_df['faction'] == "Astra Militarum") &
+                                           (filtered_df['loyalty'] == "Common") &
+                                           (filtered_df['traits'].str.contains("Vehicle"))) |
+                                          ((filtered_df['faction'] == "Orks") &
+                                           (filtered_df['loyalty'] != "Signature"))]
+            elif warlord_name and ally_faction:
+                warlord = FindCard.find_card(warlord_name, card_array, cards_dict)
+                filtered_df = filtered_df[((filtered_df['faction'] == warlord.get_faction()) &
+                                           (filtered_df['loyalty'] != "Signature")) |
+                                          ((filtered_df['faction'] == ally_faction) &
+                                           (filtered_df['loyalty'] == "Common"))]
+            elif warlord_name:
+                warlord = FindCard.find_card(warlord_name, card_array, cards_dict)
+                filtered_df = filtered_df[((filtered_df['faction'] == warlord.get_faction()) &
+                                           (filtered_df['loyalty'] != "Signature"))]
+            if warlord_name == "Yvraine":
+                filtered_df = filtered_df[((filtered_df['faction'] != "Chaos") |
+                                           (~filtered_df['traits'].str.contains("Elite")))]
         try:
             min_cost = int(request.POST.get('min-cost'))
         except:
@@ -87,7 +113,6 @@ def ajax_view(request):
         except:
             pass
         loyalty = request.POST.get('loyalty')
-        filtered_df = df
         if traits:
             filtered_df = filtered_df[filtered_df['traits'].str.contains(traits)]
         if search is not None:
@@ -140,7 +165,8 @@ def card_data(request, card_name):
             comment = request.POST.get('comment')
             time = str(datetime.datetime.now())
             os.makedirs(target_directory, exist_ok=True)
-            file_id = len([name for name in os.listdir(target_directory) if os.path.isfile(target_directory + "/" + name)])
+            file_id = len(
+                [name for name in os.listdir(target_directory) if os.path.isfile(target_directory + "/" + name)])
             name_file = str(file_id) + ".txt"
             with open(target_directory + name_file, 'w') as file:
                 file.write(username + "\n" + time + "\n" + comment)
