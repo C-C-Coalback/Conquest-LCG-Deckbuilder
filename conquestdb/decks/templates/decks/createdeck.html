@@ -786,6 +786,7 @@
         }
     }
 
+    // Ajax add card function
     document.querySelector('#card-submit').onclick = function(e) {
         const messageInputDom = document.querySelector('#card-input');
         const message = messageInputDom.value;
@@ -983,7 +984,7 @@
     });
 
 
-    // Ajax setup for form submission
+    // Ajax change ally
     function sendAlly() {
         $.ajax({
             url: '/decks/ajax/',  // The URL of the Django view that handles the request

@@ -31,9 +31,16 @@ banned_cards = ["Bonesinger Choir", "Squiggoth Brute", "Corrupted Teleportarium"
                 "Purveyor of Hubris", "Doom", "Exterminatus", "Mind Shackle Scarab",
                 "Crypt of Saint Camila", "Warpstorm"]
 pledges_array = []
+preparation_array = ["The Blood Pits", "The Grand Plan",
+                     "The Inevitable Decay", "The Orgiastic Feast",
+                     "Mobilize the Chapter", "Support Fleet",
+                     "Pulsating Carapace"]
 for i in range(len(card_array)):
     if card_array[i].check_for_a_trait("Pledge"):
         pledges_array.append(card_array[i].get_name())
+        preparation_array.append(card_array[i].get_name())
+    if card_array[i].get_card_type() == "Synapse":
+        preparation_array.append(card_array[i].get_name())
 
 
 dire = os.getcwd()
@@ -189,6 +196,7 @@ def request_deck(request, deck_key):
                 nicknames_sent = []
                 hidden_links_sent = []
                 unique_links_sent = []
+                set_aside_sent = []
                 for i in range(len(deck_content)):
                     if i == 0 or deck_content[i] in pledges_array:
                         print(deck_content[i])
@@ -203,6 +211,7 @@ def request_deck(request, deck_key):
                         nicknames_sent.append(card_name)
                         hidden_links_sent.append(get_hidden_link(card_name))
                         unique_links_sent.append((get_unique_link(card_name)))
+                        set_aside_sent.append(True)
                     else:
                         print(deck_content[i][3:])
                         card_name = deck_content[i][3:]
@@ -216,12 +225,17 @@ def request_deck(request, deck_key):
                         width_links_sent.append(get_width(card_name))
                         hidden_links_sent.append(get_hidden_link(card_name))
                         unique_links_sent.append((get_unique_link(card_name)))
+                        if card_name in preparation_array:
+                            set_aside_sent.append(True)
+                        else:
+                            set_aside_sent.append(False)
                 return JsonResponse({'message': 'DECK FOUND', 'deck_content': nicknames_sent,
                                      'front': front_links_sent, 'back': back_links_sent,
                                      'card_id': card_id_links_sent, 'deck_id': deck_id_links_sent,
                                      'height': height_links_sent, 'width': width_links_sent,
                                      'amount': card_amounts, 'desc': desc_links_sent,
-                                     'hidden': hidden_links_sent, 'unique': unique_links_sent})
+                                     'hidden': hidden_links_sent, 'unique': unique_links_sent,
+                                     'set_aside': set_aside_sent})
         except Exception as e:
             print(e)
         return JsonResponse({'message': 'DECK NOT FOUND', 'deck_content': ""})
