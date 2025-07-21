@@ -34,6 +34,9 @@ pledges_array = []
 for i in range(len(card_array)):
     if card_array[i].check_for_a_trait("Pledge"):
         pledges_array.append(card_array[i].get_name())
+temp_cwd = os.getcwd()
+target_dir_temp = temp_cwd + "/decks/publisheddecks/"
+os.makedirs(target_dir_temp, exist_ok=True)
 
 alignment_wheel = ["Astra Militarum", "Space Marines", "Tau", "Eldar", "Dark Eldar", "Chaos", "Orks"]
 
@@ -414,6 +417,23 @@ def my_decks(request):
                         img_src = convert_name_to_img_src(warlord_name)
                         img_srcs.append(img_src)
                         f.close()
+                    if not os.path.exists(target_file + "/key"):
+                        num_tries = 0
+                        set_key = False
+                        while not set_key:
+                            new_key = ''.join(random.choice(
+                                string.ascii_uppercase + string.ascii_lowercase + string.digits
+                            ) for _ in range(16 + num_tries))
+                            print(new_key)
+                            if not check_if_key_in_use(new_key):
+                                with open(target_file + "/key", "w") as file:
+                                    file.write(new_key)
+                                set_key = True
+                            if num_tries > 100:
+                                with open(target_file + "/key", "w") as file:
+                                    file.write(new_key)
+                                    set_key = True
+                            num_tries += 1
                     with open(target_file + "/key", "r") as k:
                         data = k.read()
                         keys.append(data)
