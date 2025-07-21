@@ -180,6 +180,20 @@
     align-items: center;
 }
 
+#card-submit, #deck-submit-1 {
+    border: none;
+    background-color: blue;
+    color: white;
+    padding: 15px 32px;
+    width: 200px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    cursor: pointer;
+}
+
 #send-filter {
     position: relative;
     left: 200px;
