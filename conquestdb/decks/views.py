@@ -254,6 +254,8 @@ def deck_validation(deck, remaining_signature_squad, factions, warlord=""):
                 faction_check_passed = True
             elif card_result.get_faction() == factions[1] and card_result.get_loyalty() == "Common":
                 faction_check_passed = True
+            elif card_result.get_faction() != factions[0] and card_result.get_loyalty() == "Loyal":
+                return "Loyal card detected: " + card_result.get_name()
             elif factions[0] == "Necrons" and card_result.get_faction() != "Tyranids" and \
                     card_result.get_loyalty() == "Common" and card_result.get_card_type() == "Army":
                 faction_check_passed = True
@@ -781,7 +783,7 @@ def ajax_view(request):
                         return JsonResponse({'message': 'deck ok'})
                     num_tries += 1
                 return JsonResponse({'message': 'deck ok'})
-            message_to_send = "Feedback/" + message_to_send
+            # message_to_send = "Feedback/" + message_to_send
             message = message_to_send
             return JsonResponse({'message': message})
         if flag == "SETALLY":
@@ -865,6 +867,8 @@ def ajax_view(request):
                     ally_pos_1 = (position_main_faction + 1) % 7
                     ally_pos_2 = (position_main_faction - 1) % 7
                     if ally == alignment_wheel[ally_pos_1] or ally == alignment_wheel[ally_pos_2]:
+                        if card.get_loyalty() == "Loyal":
+                            return JsonResponse({'message': 'Cannot add loyal cards from other factions'})
                         if card.get_loyalty() == "Common":
                             ally_ok = True
             if ally_ok:
