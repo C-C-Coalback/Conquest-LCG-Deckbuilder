@@ -97,6 +97,9 @@
     <div id="card-filter-results">
 
     </div>
+    <div id="card-counts-pages">
+        <p>Showing 0-0 of 0 matches</p>
+    </div>
 </div>
 <img id="cursor-follower" src="/static/images/CardImages/Cardback.jpg">
 <script>
@@ -109,6 +112,9 @@
     var stored_card_types = [];
     var stored_card_loyalties = [];
     var stored_card_factions = [];
+    var num_matches = 0;
+    var current_low_match = 0;
+    var current_high_match = 0;
 
     var mouse_x = 0;
     var mouse_y = 0;
@@ -131,6 +137,10 @@
     function previousPage() {
         if (current_page_number !== 0) {
             current_page_number = current_page_number - 1;
+            current_low_match = current_low_match - 20;
+            current_high_match = (current_page_number + 1) * 20;
+            page_counter = document.getElementById("card-counts-pages");
+            page_counter.innerHTML = `<p>Showing ` + current_low_match + `-` + current_high_match + ` of ` + num_matches + ` matches</p>`;
             e = document.getElementById("card-filter-results");
             e.innerHTML = ``;
             var img_src = "";
@@ -162,6 +172,13 @@
             current_page_number = current_page_number + 1;
             e = document.getElementById("card-filter-results");
             e.innerHTML = ``;
+            current_low_match = current_low_match + 20;
+            current_high_match = (current_page_number + 1) * 20;
+            if (current_high_match > num_matches) {
+                current_high_match = num_matches;
+            }
+            page_counter = document.getElementById("card-counts-pages");
+            page_counter.innerHTML = `<p>Showing ` + current_low_match + `-` + current_high_match + ` of ` + num_matches + ` matches</p>`;
             var img_src = "";
             var new_string = "";
             var new_id = "";
@@ -772,6 +789,17 @@
                     stored_card_types = [[]];
                     stored_card_loyalties = [[]];
                     stored_card_factions = [[]];
+                    num_matches = image_names.length;
+                    current_low_match = 1;
+                    if (num_matches === 0) {
+                        current_low_match = 0;
+                    }
+                    current_high_match = 20;
+                    if (current_high_match > num_matches) {
+                        current_high_match = num_matches;
+                    }
+                    page_counter = document.getElementById("card-counts-pages");
+                    page_counter.innerHTML = `<p>Showing ` + current_low_match + `-` + current_high_match + ` of ` + num_matches + ` matches</p>`;
                     for (let i = 0; i < image_names.length; i++) {
                         if (cardCount === 20) {
                             pageCount += 1;

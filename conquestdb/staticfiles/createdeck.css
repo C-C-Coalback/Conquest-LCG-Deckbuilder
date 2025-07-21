@@ -166,6 +166,12 @@
     cursor: pointer;
 }
 
+#card-counts-pages {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
 #send-filter {
     position: relative;
     left: 200px;
