@@ -104,11 +104,21 @@
 }
 
 .mini-card-name, .mini-card-faction {
+    text-align: center;
+    vertical-align: middle;
     width: 200px;
 }
 
 .mini-card-type, .mini-card-loyalty {
+    text-align: center;
+    vertical-align: middle;
     width: 100px;
+}
+
+.mini-card-cost, .mini-card-attack, .mini-card-health, .mini-card-command, .mini-card-shield {
+    text-align: center;
+    vertical-align: middle;
+    width: 50px
 }
 
 #description-container {
@@ -121,7 +131,7 @@
     border: 2px solid blue;
 }
 
-.searched-card {
+.searched-card, .searched-card-headers {
     position: relative;
     margin-top: 10px;
     border: 1px solid gray;

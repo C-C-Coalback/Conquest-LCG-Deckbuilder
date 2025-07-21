@@ -57,7 +57,6 @@ def ajax_view(request):
         if view_as == "Rows Mini":
             warlord_name = request.POST.get('warlord_name')
             ally_faction = request.POST.get('ally_faction')
-            print(warlord_name)
             if warlord_name == "Gorzod":
                 filtered_df = filtered_df[((filtered_df['faction'] == "Space Marines") &
                                            (filtered_df['loyalty'] == "Common") &
@@ -147,9 +146,27 @@ def ajax_view(request):
         card_types = filtered_df['card type'].to_list()
         factions = filtered_df['faction'].to_list()
         image_names = filtered_df['image name'].to_list()
+        attack_vals = filtered_df['attack'].to_list()
+        health_vals = filtered_df['health'].to_list()
+        cost_vals = filtered_df['cost'].to_list()
+        command_vals = filtered_df['command'].to_list()
+        shield_vals = filtered_df['shields'].to_list()
+        for i in range(len(attack_vals)):
+            if attack_vals[i] == -1:
+                attack_vals[i] = "-"
+            if health_vals[i] == -1:
+                health_vals[i] = "-"
+            if cost_vals[i] == -1:
+                cost_vals[i] = "-"
+            if command_vals[i] == -1:
+                command_vals[i] = "-"
+            if shield_vals[i] == 0:
+                shield_vals[i] = "-"
         message = f'Faction, {faction}'
         return JsonResponse({'message': message, 'cards': card_names, 'image_names': image_names,
-                             'loyalties': loyalties, 'card_types': card_types, 'factions': factions})
+                             'loyalties': loyalties, 'card_types': card_types, 'factions': factions,
+                             'attack': attack_vals, 'health': health_vals, 'cost': cost_vals,
+                             'command': command_vals, "shield": shield_vals})
     return JsonResponse({'message': 'Invalid request'})
 
 

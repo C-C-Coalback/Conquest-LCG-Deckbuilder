@@ -742,7 +742,7 @@ class WarlordCard(UnitCard):
                  action_in_play=False, allowed_phases_in_play=None, ranged=False,
                  wargear_attachments_permitted=True, no_attachments=False, mobile=False,
                  sweep=0):
-        super().__init__(name, text, traits, -1, faction, "Signature", "Warlord", attack, health, 999,
+        super().__init__(name, text, traits, -1, faction, "Signature", "Warlord", attack, health, -1,
                          True, image_name, brutal, flying, armorbane, area_effect,
                          applies_discounts, action_in_hand, allowed_phases_in_hand,
                          action_in_play, allowed_phases_in_play, ranged=ranged,

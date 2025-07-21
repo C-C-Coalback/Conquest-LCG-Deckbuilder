@@ -95,7 +95,29 @@
         <input id="next-page" type="button" value="Next Page" onclick="nextPage();">
     </div>
     <div id="card-filter-results">
-
+        <div class="searched-card-headers">
+            <div class="mini-card-name">
+                Card Name
+            </div>
+            <div class="mini-card-type">
+                Card Type
+            </div>
+            <div class="mini-card-cost">
+                Cost
+            </div>
+            <div class="mini-card-attack">
+                ATK
+            </div>
+            <div class="mini-card-health">
+                HP
+            </div>
+            <div class="mini-card-command">
+                CMD
+            </div>
+            <div class="mini-card-shields">
+                SHLD
+            </div>
+        </div>
     </div>
     <div id="card-counts-pages">
         <p>Showing 0-0 of 0 matches</p>
@@ -112,6 +134,11 @@
     var stored_card_types = [];
     var stored_card_loyalties = [];
     var stored_card_factions = [];
+    var stored_card_attacks = [];
+    var stored_card_healths = [];
+    var stored_card_costs = [];
+    var stored_card_commands = [];
+    var stored_card_shields = [];
     var num_matches = 0;
     var current_low_match = 0;
     var current_high_match = 0;
@@ -150,17 +177,54 @@
             var new_card_type = "";
             var new_loyalty = "";
             var new_faction = "";
+            var new_cost = "";
+            var new_attack = "";
+            var new_health = "";
+            var new_command = "";
+            var new_shield = "";
+            new_string += `
+            <div class="searched-card-headers">
+                <div class="mini-card-name">
+                    Card Name
+                </div>
+                <div class="mini-card-type">
+                    Card Type
+                </div>
+                <div class="mini-card-cost">
+                    Cost
+                </div>
+                <div class="mini-card-attack">
+                    ATK
+                </div>
+                <div class="mini-card-health">
+                    HP
+                </div>
+                <div class="mini-card-command">
+                    CMD
+                </div>
+                <div class="mini-card-shields">
+                    SHLD
+                </div>
+            </div>`
             for (let i = 0; i < stored_image_links[current_page_number].length; i++) {
                 img_src = stored_image_names[current_page_number][i];
                 new_card_name = stored_card_names[current_page_number][i];
                 new_card_type = stored_card_types[current_page_number][i];
                 new_loyalty = stored_card_loyalties[current_page_number][i];
                 new_faction = stored_card_factions[current_page_number][i];
+                new_cost = stored_card_costs[current_page_number][i];
+                new_attack = stored_card_attacks[current_page_number][i];
+                new_health = stored_card_healths[current_page_number][i];
+                new_command = stored_card_commands[current_page_number][i];
+                new_shield = stored_card_shields[current_page_number][i];
                 new_string += `<div class="searched-card" onclick="quickAddCard(this)" onmouseenter="showImg(this)" onmouseleave="clearImg()" data-src=` + img_src + ` data-name=` + new_card_name.split(' ').join('_') + `>`
                 new_string += `<div class="mini-card-name">` + new_card_name + `</div>`
                 new_string += `<div class="mini-card-type">` + new_card_type + `</div>`
-                new_string += `<div class="mini-card-loyalty">` + new_loyalty + `</div>`
-                new_string += `<div class="mini-card-faction">` + new_faction + `</div>`
+                new_string += `<div class="mini-card-cost">` + new_cost + `</div>`
+                new_string += `<div class="mini-card-attack">` + new_attack + `</div>`
+                new_string += `<div class="mini-card-health">` + new_health + `</div>`
+                new_string += `<div class="mini-card-command">` + new_command + `</div>`
+                new_string += `<div class="mini-card-shield">` + new_shield + `</div>`
                 new_string += `</div>`;
             }
             e.innerHTML += new_string;
@@ -186,6 +250,35 @@
             var new_card_type = "";
             var new_loyalty = "";
             var new_faction = "";
+            var new_cost = "";
+            var new_attack = "";
+            var new_health = "";
+            var new_command = "";
+            var new_shield = "";
+            new_string += `
+            <div class="searched-card-headers">
+                <div class="mini-card-name">
+                    Card Name
+                </div>
+                <div class="mini-card-type">
+                    Card Type
+                </div>
+                <div class="mini-card-cost">
+                    Cost
+                </div>
+                <div class="mini-card-attack">
+                    ATK
+                </div>
+                <div class="mini-card-health">
+                    HP
+                </div>
+                <div class="mini-card-command">
+                    CMD
+                </div>
+                <div class="mini-card-shields">
+                    SHLD
+                </div>
+            </div>`
             for (let i = 0; i < stored_image_links[current_page_number].length; i++) {
                 console.log(current_page_number);
                 console.log(stored_card_names);
@@ -194,11 +287,19 @@
                 new_card_type = stored_card_types[current_page_number][i];
                 new_loyalty = stored_card_loyalties[current_page_number][i];
                 new_faction = stored_card_factions[current_page_number][i];
+                new_cost = stored_card_costs[current_page_number][i];
+                new_attack = stored_card_attacks[current_page_number][i];
+                new_health = stored_card_healths[current_page_number][i];
+                new_command = stored_card_commands[current_page_number][i];
+                new_shield = stored_card_shields[current_page_number][i];
                 new_string += `<div class="searched-card" onclick="quickAddCard(this)" onmouseenter="showImg(this)" onmouseleave="clearImg()" data-src=` + img_src + ` data-name=` + new_card_name.split(' ').join('_') + `>`
                 new_string += `<div class="mini-card-name">` + new_card_name + `</div>`
                 new_string += `<div class="mini-card-type">` + new_card_type + `</div>`
-                new_string += `<div class="mini-card-loyalty">` + new_loyalty + `</div>`
-                new_string += `<div class="mini-card-faction">` + new_faction + `</div>`
+                new_string += `<div class="mini-card-cost">` + new_cost + `</div>`
+                new_string += `<div class="mini-card-attack">` + new_attack + `</div>`
+                new_string += `<div class="mini-card-health">` + new_health + `</div>`
+                new_string += `<div class="mini-card-command">` + new_command + `</div>`
+                new_string += `<div class="mini-card-shield">` + new_shield + `</div>`
                 new_string += `</div>`;
             }
             e.innerHTML += new_string;
@@ -767,8 +868,6 @@
                 success: function(response) {
                     // $('#responseMessage').text(response.message);
                     const message = response.message;
-                    console.log("test")
-
                     current_page_number = 0;
                     var cardCount = 0;
                     var pageCount = 0;
@@ -776,6 +875,11 @@
                     var card_types = response.card_types;
                     var loyalties = response.loyalties;
                     var factions = response.factions;
+                    var attacks = response.attack;
+                    var healths = response.health;
+                    var costs = response.cost;
+                    var commands = response.command;
+                    var shields = response.shield;
                     const image_names = response.image_names;
                     e = document.getElementById("card-filter-results");
                     e.innerHTML = ``;
@@ -789,6 +893,11 @@
                     stored_card_types = [[]];
                     stored_card_loyalties = [[]];
                     stored_card_factions = [[]];
+                    stored_card_attacks = [[]];
+                    stored_card_healths = [[]];
+                    stored_card_costs = [[]];
+                    stored_card_commands = [[]];
+                    stored_card_shields = [[]];
                     num_matches = image_names.length;
                     current_low_match = 1;
                     if (num_matches === 0) {
@@ -800,6 +909,30 @@
                     }
                     page_counter = document.getElementById("card-counts-pages");
                     page_counter.innerHTML = `<p>Showing ` + current_low_match + `-` + current_high_match + ` of ` + num_matches + ` matches</p>`;
+                    new_string += `
+                    <div class="searched-card-headers">
+                        <div class="mini-card-name">
+                            Card Name
+                        </div>
+                        <div class="mini-card-type">
+                            Card Type
+                        </div>
+                        <div class="mini-card-cost">
+                            Cost
+                        </div>
+                        <div class="mini-card-attack">
+                            ATK
+                        </div>
+                        <div class="mini-card-health">
+                            HP
+                        </div>
+                        <div class="mini-card-command">
+                            CMD
+                        </div>
+                        <div class="mini-card-shields">
+                            SHLD
+                        </div>
+                    </div>`
                     for (let i = 0; i < image_names.length; i++) {
                         if (cardCount === 20) {
                             pageCount += 1;
@@ -810,6 +943,11 @@
                             stored_card_types.push([]);
                             stored_card_loyalties.push([]);
                             stored_card_factions.push([]);
+                            stored_card_attacks.push([]);
+                            stored_card_healths.push([]);
+                            stored_card_costs.push([]);
+                            stored_card_commands.push([]);
+                            stored_card_shields.push([]);
                         }
                         img_link = "/cards/" + image_names[i] + "/";
                         stored_image_links[pageCount].push(img_link);
@@ -819,18 +957,25 @@
                         stored_card_types[pageCount].push(card_types[i]);
                         stored_card_loyalties[pageCount].push(loyalties[i]);
                         stored_card_factions[pageCount].push(factions[i]);
+                        stored_card_attacks[pageCount].push(attacks[i]);
+                        stored_card_healths[pageCount].push(healths[i]);
+                        stored_card_costs[pageCount].push(costs[i]);
+                        stored_card_commands[pageCount].push(commands[i]);
+                        stored_card_shields[pageCount].push(shields[i]);
                         if (pageCount === 0) {
                             new_string += `<div class="searched-card" onclick="quickAddCard(this)" onmouseenter="showImg(this)" onmouseleave="clearImg()" data-src=` + img_src + ` data-name=` + card_names[i].split(' ').join('_') + `>`
                             new_string += `<div class="mini-card-name">` + card_names[i] + `</div>`
                             new_string += `<div class="mini-card-type">` + card_types[i] + `</div>`
-                            new_string += `<div class="mini-card-loyalty">` + loyalties[i] + `</div>`
-                            new_string += `<div class="mini-card-faction">` + factions[i] + `</div>`
+                            new_string += `<div class="mini-card-cost">` + costs[i] + `</div>`
+                            new_string += `<div class="mini-card-attack">` + attacks[i] + `</div>`
+                            new_string += `<div class="mini-card-health">` + healths[i] + `</div>`
+                            new_string += `<div class="mini-card-command">` + commands[i] + `</div>`
+                            new_string += `<div class="mini-card-shield">` + shields[i] + `</div>`
                             new_string += `</div>`
                         }
                         cardCount += 1;
                     }
                     max_page_number = pageCount;
-                    console.log(stored_card_names);
                     e.innerHTML += new_string;
                 }
             });
