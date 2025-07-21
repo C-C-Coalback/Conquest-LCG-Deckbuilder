@@ -23,7 +23,7 @@
                 <h2>Featured decklist</h2>
                 {% if decks_exist == "Yes" %}
                     {% for name, warlord_name, date, img_src, key, creator_name in decks %}
-                        <a href="/decks/{{ user.username }}/{{ key }}">
+                        <a href="/decks/{{ creator_name }}/{{ key }}">
                         <div class="deck-item-grid">
                             <h3 class="decklist-name">{{ name }}</h3>
                             <h3 class="creator-name">{{ creator_name }}</h3>
