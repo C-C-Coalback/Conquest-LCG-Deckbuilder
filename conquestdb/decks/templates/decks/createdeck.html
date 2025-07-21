@@ -68,7 +68,7 @@
                 <option value="Warlord">Warlord</option>
                 <option value="Synapse">Synapse</option>
             </select>
-                <p id="p-faction">Faction:</p><select name="faction" id="faction">
+            <p id="p-faction">Faction:</p><select name="faction" id="faction">
                 <option value="None"></option>
                 <option value="Space Marines">Space Marines</option>
                 <option value="Tau">Tau</option>
@@ -81,12 +81,22 @@
                 <option value="Tyranids">Tyranids</option>
                 <option value="Necrons">Necrons</option>
             </select>
-                <p id="p-loyalty">Loyalty:</p><select name="loyalty" id="loyalty">
+            <p id="p-loyalty">Loyalty:</p><select name="loyalty" id="loyalty">
                 <option value="None"></option>
                 <option value="Common">Common</option>
                 <option value="Loyal">Loyal</option>
                 <option value="Signature">Signature</option>
-             </select>
+            </select>
+            <p id="p-min-cost">Min Cost:</p><input id="minCostInput" type="text" name="cost-min">
+            <p id="p-max-cost">Max Cost:</p><input id="maxCostInput" type="text" name="cost-max">
+            <p id="p-shield">Shields:</p><select name="shield" id="shieldInput">
+                <option value="-1"></option>
+                <option value="0">0</option>
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+            </select>
+            <p id="p-traits">Trait:</p><input id="traitsInput" type="text" name="traits">
         </div>
         <button id="send-filter">Perform Search</button>
     </form>
@@ -125,7 +135,6 @@
 </div>
 <img id="cursor-follower" src="/static/images/CardImages/Cardback.jpg">
 <script>
-
     var current_page_number = 0;
     var max_page_number = 0;
     var stored_image_links = [];
@@ -159,6 +168,14 @@
         searchInput.value = "None";
         var searchInput = document.getElementById("cardType");
         searchInput.value = "None";
+        var searchInput = document.getElementById("minCostInput");
+        searchInput.value = "";
+        var searchInput = document.getElementById("maxCostInput");
+        searchInput.value = "";
+        var searchInput = document.getElementById("shieldInput");
+        searchInput.value = "-1";
+        var searchInput = document.getElementById("traitsInput");
+        searchInput.value = "";
     }
 
     function previousPage() {
@@ -852,10 +869,10 @@
                     'loyalty': $('#loyalty').val(),
                     'warlord_name': name_warlord,
                     'ally_faction': $('#ally').val(),
-                    'traits': "",
-                    'shields': "-1",
-                    'min-cost': "-1",
-                    'max-cost': "-1",
+                    'traits': $('#traitsInput').val(),
+                    'shields': $('#shieldInput').val(),
+                    'min-cost': $('#minCostInput').val(),
+                    'max-cost': $('#maxCostInput').val(),
                     'min-command': "-1",
                     'max-command': "-1",
                     'min-attack': "-1",

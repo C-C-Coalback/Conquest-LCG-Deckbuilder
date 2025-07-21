@@ -203,7 +203,9 @@
     grid-template-columns: 1fr 1fr 1fr 1fr;
     grid-template-areas:
     "p-card-name search p-card-type card-type"
-    "p-faction faction p-loyalty loyalty";
+    "p-faction faction p-loyalty loyalty"
+    "p-min-cost min-cost p-max-cost max-cost"
+    "p-shields shields p-traits traits";
 }
 
 #prev-page {
