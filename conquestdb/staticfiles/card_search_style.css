@@ -39,8 +39,9 @@
     flex-wrap: nowrap;
 }
 
-#view-as {
+#view-as, #view-as-selector {
     margin-left: 50px;
+    display: none;
 }
 
 #submit {

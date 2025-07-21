@@ -44,6 +44,8 @@ def ajax_view(request):
         traits = request.POST.get('traits')
         card_type = request.POST.get('card_type')
         shields = request.POST.get('shields')
+        view_as = request.POST.get('view-as')
+
         min_cost = -1
         max_cost = -1
         min_command = -1
