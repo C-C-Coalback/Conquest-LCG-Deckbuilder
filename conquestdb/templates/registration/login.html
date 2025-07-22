@@ -4,19 +4,21 @@
 
 {% block content %}
 <h2>Log In</h2>
-<form method="post">
-    {% csrf_token %}
-    {{ form.non_field_errors }}
-    <div class="fieldWrapper">
-        {{ form.username.errors }}
-        <label for="{{ form.username.id_for_label }}">Username:</label>
-        {{ form.username }}
-    </div>
-    <div class="fieldWrapper">
-        {{ form.password.errors }}
-        <label for="{{ form.password.id_for_label }}">Password:</label>
-        {{ form.password }}
-    </div>
-    <button type="submit">Login</button>
-</form>
+<div id="log-in-box" style="margin: auto;width: 50%;border: 3px solid green;padding: 10px;">
+    <form method="post">
+        {% csrf_token %}
+        {{ form.non_field_errors }}
+        <div class="fieldWrapper">
+            {{ form.username.errors }}
+            <label for="{{ form.username.id_for_label }}">Username:</label>
+            {{ form.username }}
+        </div>
+        <div class="fieldWrapper">
+            {{ form.password.errors }}
+            <label for="{{ form.password.id_for_label }}">Password:</label>
+            {{ form.password }}
+        </div>
+        <button type="submit">Login</button>
+    </form>
+</div>
 {% endblock %}
