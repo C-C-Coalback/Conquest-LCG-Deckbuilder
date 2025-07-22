@@ -58,24 +58,27 @@ def ajax_view(request):
             warlord_name = request.POST.get('warlord_name')
             ally_faction = request.POST.get('ally_faction')
             if warlord_name == "Gorzod":
-                filtered_df = filtered_df[((filtered_df['faction'] == "Space Marines") &
+                filtered_df = filtered_df[(((filtered_df['faction'] == "Space Marines") &
                                            (filtered_df['loyalty'] == "Common") &
                                            (filtered_df['traits'].str.contains("Vehicle"))) |
                                           ((filtered_df['faction'] == "Astra Militarum") &
                                            (filtered_df['loyalty'] == "Common") &
                                            (filtered_df['traits'].str.contains("Vehicle"))) |
                                           ((filtered_df['faction'] == "Orks") &
-                                           (filtered_df['loyalty'] != "Signature"))]
+                                           (filtered_df['loyalty'] != "Signature"))) |
+                                          (filtered_df['faction'] == "Neutral")]
             elif warlord_name and ally_faction:
                 warlord = FindCard.find_card(warlord_name, card_array, cards_dict)
-                filtered_df = filtered_df[((filtered_df['faction'] == warlord.get_faction()) &
+                filtered_df = filtered_df[(((filtered_df['faction'] == warlord.get_faction()) &
                                            (filtered_df['loyalty'] != "Signature")) |
                                           ((filtered_df['faction'] == ally_faction) &
-                                           (filtered_df['loyalty'] == "Common"))]
+                                           (filtered_df['loyalty'] == "Common"))) |
+                                          (filtered_df['faction'] == "Neutral")]
             elif warlord_name:
                 warlord = FindCard.find_card(warlord_name, card_array, cards_dict)
-                filtered_df = filtered_df[((filtered_df['faction'] == warlord.get_faction()) &
-                                           (filtered_df['loyalty'] != "Signature"))]
+                filtered_df = filtered_df[(((filtered_df['faction'] == warlord.get_faction()) &
+                                           (filtered_df['loyalty'] != "Signature"))) |
+                                          (filtered_df['faction'] == "Neutral")]
             if warlord_name == "Yvraine":
                 filtered_df = filtered_df[((filtered_df['faction'] != "Chaos") |
                                            (~filtered_df['traits'].str.contains("Elite")))]
