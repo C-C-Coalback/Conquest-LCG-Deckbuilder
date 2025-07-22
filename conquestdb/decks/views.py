@@ -11,7 +11,6 @@ import random
 import string
 import shutil
 
-
 card_array = Initfunctions.init_player_cards()
 card_names_array = []
 for i in range(len(card_array)):
@@ -173,17 +172,21 @@ def second_part_deck_validation(deck):
             print("Main faction and ally faction can not be the same")
             return "Main faction and ally faction can not be the same"
         position_main_faction = -1
-        for i in range(len(alignment_wheel)):
-            if alignment_wheel[i] == factions[0]:
-                position_main_faction = i
+        for faction in range(len(alignment_wheel)):
+            if alignment_wheel[faction] == factions[0]:
+                position_main_faction = faction
         if position_main_faction != -1:
             ally_pos_1 = (position_main_faction + 1) % 7
             ally_pos_2 = (position_main_faction - 1) % 7
-            if factions[1] == alignment_wheel[ally_pos_1] \
+            if warlord_card.get_name() == "Commander Starblaze":
+                if factions[1] == "Astra Militarum":
+                    return deck_validation(deck, remaining_signature_squad, factions, "Commander Starblaze")
+            elif warlord_card.get_name() == "Farseer Tadheris":
+                if factions[1] == "Space Marines" or factions[1] == "Orks":
+                    return deck_validation(deck, remaining_signature_squad, factions, "Farseer Tadheris")
+            elif factions[1] == alignment_wheel[ally_pos_1] \
                     or factions[1] == alignment_wheel[ally_pos_2]:
                 return deck_validation(deck, remaining_signature_squad, factions)
-            elif factions[1] == "Astra Militarum" and warlord_card.get_name() == "Commander Starblaze":
-                return deck_validation(deck, remaining_signature_squad, factions, "Commander Starblaze")
         return "Issue with faction matching."
     return "Unknown issue"
 
@@ -253,7 +256,7 @@ def deck_validation(deck, remaining_signature_squad, factions, warlord=""):
             if card_result.get_faction() == factions[0]:
                 faction_check_passed = True
             elif card_result.get_faction() == factions[1] and card_result.get_loyalty() == "Common":
-                if warlord_name == "Yvraine":
+                if warlord == "Yvraine":
                     if card_result.get_faction() == "Chaos" and card_result.check_for_a_trait("Elite"):
                         return 'Yvraine cannot have Chaos elites: ' + card_result.get_name()
                 faction_check_passed = True
@@ -273,7 +276,7 @@ def deck_validation(deck, remaining_signature_squad, factions, warlord=""):
                             faction_check_passed = True
             if not faction_check_passed:
                 print("Faction check not passed", factions[0], factions[1], card_result.get_faction())
-                return "Faction check not passed (Main, Ally, Card): "\
+                return "Faction check not passed (Main, Ally, Card): " \
                        + factions[0] + factions[1] + card_result.get_faction()
         current_index += 1
         while deck[current_index] in skippers:
@@ -801,6 +804,11 @@ def ajax_view(request):
                 return JsonResponse({'message': 'Main faction does not ally', 'ally_result': 'NO'})
             elif warlord.get_name() == 'Gorzod':
                 return JsonResponse({'message': 'Gorzod does not ally', 'ally_result': 'NO'})
+            elif warlord.get_name() == "Farseer Tadheris":
+                if ally_name == "Space Marines" or ally_name == "Orks":
+                    return JsonResponse({'message': 'Ally ok', 'ally_result': 'OK'})
+                return JsonResponse({'message': 'Farseer Tadheris allies as if they were Astra Militarum',
+                                     'ally_result': 'NO'})
             elif warlord.get_name() == 'Commander Starblaze':
                 if ally_name == "Astra Militarum":
                     return JsonResponse({'message': 'Ally ok', 'ally_result': 'OK'})
@@ -854,12 +862,16 @@ def ajax_view(request):
             elif card.get_faction() == "Neutral":
                 ally_ok = True
             elif warlord_name == "Commander Starblaze":
-                if ally == "Astra Militarum" and card.get_faction() == "Astra Militarum" and\
+                if ally == "Astra Militarum" and card.get_faction() == "Astra Militarum" and \
                         card.get_loyalty() == "Common":
                     ally_ok = True
             elif warlord_name == "Gorzod":
                 if (card.get_faction() == "Space Marines" or card.get_faction() == "Astra Militarum") and \
                         card_type == "Army" and card.get_loyalty() == "Common" and card.check_for_a_trait("Vehicle"):
+                    ally_ok = True
+            elif warlord_name == "Farseer Tadheris":
+                if (card.get_faction() == "Space Marines" or card.get_faction() == "Orks") and \
+                            ally == card.get_faction() and card.get_loyalty() == "Common":
                     ally_ok = True
             else:
                 position_main_faction = -1
