@@ -46,7 +46,7 @@
     <div id="manual-deck-import">
     <textarea id="chat-log" cols="100" rows="10"></textarea><br>
     </div>
-    <input id="card-input" type="search" list="card_list" size="60"><br>
+    <input id="card-input" type="search" list="card_list" size="60" style="max-width:35vw;"><br>
     <input id="card-submit" type="button" value="Add Card">
     <input id="deck-submit-1" type="button" value="Save Deck" onclick="sendDeckAuto();">
     <input id="username" name="username" value="{{ user.username }}" style="display:none;">
@@ -56,15 +56,15 @@
 </div>
 <div id="description-container">
     <h2>Add a description for your deck here</h2>
-    <textarea id="descriptionInput" name="description" rows="20" cols="80"></textarea><br>
+    <textarea id="descriptionInput" name="description" rows="20" cols="80" style="max-width:40vw;"></textarea><br>
 </div>
 <div id="mini-card-search-container">
     <h2>Card Filter</h2>
     <button id="clear-filter" onclick="clearFilters();">Reset Filters</button>
     <form id="myForm">
         <div id="filters-container">
-            <p id="p-card-name">Card Name:</p><input id="searchInput" type="text" name="search">
-            <p id="p-card-type">Card Type:</p><select name="card-type" id="cardType">
+            <p id="p-card-name" class="filter">Card Name:</p><input id="searchInput" class="filter" type="text" name="search">
+            <p id="p-card-type" class="filter">Card Type:</p><select name="card-type" class="filter" id="cardType">
                 <option value="None"></option>
                 <option value="Army">Army</option>
                 <option value="Support">Support</option>
@@ -73,7 +73,7 @@
                 <option value="Warlord">Warlord</option>
                 <option value="Synapse">Synapse</option>
             </select>
-            <p id="p-faction">Faction:</p><select name="faction" id="faction">
+            <p id="p-faction" class="filter">Faction:</p><select name="faction" class="filter" id="faction">
                 <option value="None"></option>
                 <option value="Space Marines">Space Marines</option>
                 <option value="Tau">Tau</option>
@@ -86,22 +86,22 @@
                 <option value="Tyranids">Tyranids</option>
                 <option value="Necrons">Necrons</option>
             </select>
-            <p id="p-loyalty">Loyalty:</p><select name="loyalty" id="loyalty">
+            <p id="p-loyalty" class="filter">Loyalty:</p><select name="loyalty" class="filter" id="loyalty">
                 <option value="None"></option>
                 <option value="Common">Common</option>
                 <option value="Loyal">Loyal</option>
                 <option value="Signature">Signature</option>
             </select>
-            <p id="p-min-cost">Min Cost:</p><input id="minCostInput" type="text" name="cost-min">
-            <p id="p-max-cost">Max Cost:</p><input id="maxCostInput" type="text" name="cost-max">
-            <p id="p-shield">Shields:</p><select name="shield" id="shieldInput">
+            <p id="p-min-cost" class="filter">Min Cost:</p><input id="minCostInput" class="filter" type="text" name="cost-min">
+            <p id="p-max-cost" class="filter">Max Cost:</p><input id="maxCostInput" class="filter" type="text" name="cost-max">
+            <p id="p-shield" class="filter">Shields:</p><select name="shield" class="filter" id="shieldInput">
                 <option value="-1"></option>
                 <option value="0">0</option>
                 <option value="1">1</option>
                 <option value="2">2</option>
                 <option value="3">3</option>
             </select>
-            <p id="p-traits">Trait:</p><input id="traitsInput" type="text" name="traits">
+            <p id="p-traits" class="filter">Trait:</p><input id="traitsInput" class="filter" type="text" name="traits">
         </div>
         <button id="send-filter">Perform Search</button>
     </form>
