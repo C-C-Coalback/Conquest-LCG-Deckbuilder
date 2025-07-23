@@ -66,6 +66,21 @@ def check_if_key_in_use(key_string):
     return False
 
 
+def create_new_key():
+    num_tries = 0
+    set_key = False
+    while not set_key:
+        new_key = ''.join(random.choice(
+            string.ascii_uppercase + string.ascii_lowercase + string.digits
+        ) for _ in range(16 + num_tries))
+        print(new_key)
+        if not check_if_key_in_use(new_key):
+            return new_key
+        if num_tries > 100:
+            return new_key
+        num_tries += 1
+
+
 def delete_private_deck(key_string, name_user):
     directory = os.getcwd()
     target_directory = directory + "/decks/deckstorage/"
@@ -687,6 +702,33 @@ def deck_data(request, deck_creator, deck_key):
                                                         "comments": my_comments, "noc": no_comments,
                                                         "pledge_img": pledge_img, "pledge_link": pledge_link})
     return render(request, "decks/deck_data.html", {"deck_found": deck_found})
+
+
+def copy_published_deck(request, deck_key):
+    og_username = request.user.username
+    directory = os.getcwd()
+    source_directory = directory + "/decks/publisheddecks/"
+    target_directory = directory + "/decks/deckstorage/" + og_username + "/"
+    os.makedirs(target_directory, exist_ok=True)
+    if os.path.exists(source_directory):
+        for username in os.listdir(source_directory):
+            if username:
+                second_source_directory = source_directory + "/" + username
+                for file in os.listdir(second_source_directory):
+                    try:
+                        target_file = second_source_directory + "/" + file
+                        with open(target_file + "/key", "r") as f:
+                            data = f.read()
+                            if data == deck_key:
+                                if not os.path.exists(target_directory + file):
+                                    shutil.copytree(target_file, target_directory + file)
+                                    new_key = create_new_key()
+                                    with open(target_directory + file + "/key", "w") as new_f:
+                                        new_f.write(new_key)
+                                    return HttpResponseRedirect('/decks/' + og_username + "/" + new_key + "/")
+                    except Exception as e:
+                        print(e)
+    return HttpResponseRedirect('/decks/my_decks/')
 
 
 def publish_deck(request, deck_key):

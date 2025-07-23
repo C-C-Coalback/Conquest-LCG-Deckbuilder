@@ -15,6 +15,8 @@
                         <button class="button" id="delete" onclick="deleteDeck();">Delete Deck</button>
                     {% elif public == "OWNER" %}
                         <button class="button" id="retract" onclick="retractDeck();">Retract Deck</button>
+                    {% else %}
+                        <button class="button" id="copy" onclick="copyDeck();">Copy Deck</button>
                     {% endif %}
                 </div><br>
                 <div id="deck-grid">
@@ -166,6 +168,13 @@
         const url_split = current_url.split("/");
         const key = url_split[url_split.length - 2];
         location.href = "/decks/retract_deck/" + key + "/";
+    }
+
+    function copyDeck() {
+        const current_url = document.URL;
+        const url_split = current_url.split("/");
+        const key = url_split[url_split.length - 2];
+        location.href = "/decks/copy_deck/" + key + "/";
     }
 
     function publishDeck() {
