@@ -55,7 +55,6 @@
 }
 
 #desc-id {
-    // word-warp: break-word;
     margin:auto;
     max-width: min(1100px, 100%);
 }
@@ -68,7 +67,7 @@
     background-color: #f44336;
 }
 
-#modify, #copy {
+#modify, #copy, #download {
     background-color: #008CBA;
 }
 
@@ -115,7 +114,6 @@
     position: relative;
     left: 90px;
     rotate: 270deg;
-    // overflow: visible;
     height:322px;
     width:230px;
 }

@@ -688,6 +688,7 @@ def deck_data(request, deck_creator, deck_key):
                         comments.append(split_text[2])
                         no_comments = False
         my_comments = zip(names_comments, times_comments, comments, comment_ids)
+        deck_content = deck_content.replace("\n", "|||")
         return render(request, "decks/deck_data.html", {"deck_found": deck_found, "deck_content": deck_content,
                                                         "description": description, "deck_list": deck_list,
                                                         "factions": factions, "deck_name": deck_name,
@@ -701,7 +702,7 @@ def deck_data(request, deck_creator, deck_key):
                                                         "deck_key": deck_key,
                                                         "comments": my_comments, "noc": no_comments,
                                                         "pledge_img": pledge_img, "pledge_link": pledge_link})
-    return render(request, "decks/deck_data.html", {"deck_found": deck_found})
+    return render(request, "decks/deck_data.html", {"deck_found": deck_found, "deck_content": ""})
 
 
 def copy_published_deck(request, deck_key):

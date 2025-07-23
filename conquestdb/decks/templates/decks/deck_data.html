@@ -18,6 +18,7 @@
                     {% else %}
                         <button class="button" id="copy" onclick="copyDeck();">Copy Deck</button>
                     {% endif %}
+                    <button class="button" id="download" onclick="downloadDeck();">Download Deck</button>
                 </div><br>
                 <div id="deck-grid">
                     <h3 class="grid-section" id="factions">{{ factions }}</h3>
@@ -145,6 +146,9 @@
 <script>
     var mouse_x = 0;
     var mouse_y = 0;
+    var deck_text = "{{ deck_content }}";
+    deck_text = deck_text.split("|||").join("\n");
+    deck_text = deck_text.replace(new RegExp("&"+"#"+"x27;", "g"), "'");
     onmousemove = function(e){
         mouse_x = e.clientX;
         mouse_y = e.clientY * (0.5) + 80 + window.scrollY;
@@ -188,6 +192,18 @@
         const url_split = current_url.split("/");
         const key = url_split[url_split.length - 2];
         location.href = "/decks/create_deck/" + key + "/";
+    }
+    function downloadDeck() {
+        var element = document.createElement('a');
+        element.setAttribute('href', 'data:text/plain;charset=utf-8,' + encodeURIComponent(deck_text));
+        element.setAttribute('download', 'deck.txt');
+
+        element.style.display = 'none';
+        document.body.appendChild(element);
+
+        element.click();
+
+        document.body.removeChild(element);
     }
 
     function deleteDeck() {
