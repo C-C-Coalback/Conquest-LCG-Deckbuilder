@@ -211,11 +211,14 @@ def deck_validation(deck, remaining_signature_squad, factions, warlord=""):
     global cards_dict
     print("Can continue")
     current_index = 4
+    holy_crusade_relevant = False
     if deck[current_index] == "Signature Squad":
         card = FindCard.find_card(deck[current_index - 1], card_array, cards_dict)
         print(deck[current_index - 1])
         if card.check_for_a_trait("Pledge"):
             current_index = 5
+            if card.get_name() == "Holy Crusade":
+                holy_crusade_relevant = True
         else:
             return "Non-Pledge card in Pledge position"
     while deck[current_index] != "Army":
@@ -268,6 +271,9 @@ def deck_validation(deck, remaining_signature_squad, factions, warlord=""):
                 else:
                     return "Synapse units not allowed in this deck"
             faction_check_passed = False
+            if holy_crusade_relevant:
+                if not card_result.check_for_a_trait("Ecclesiarchy"):
+                    return "Non-Ecclesiarchy card present: " + card_result.get_name()
             if card_result.get_faction() == factions[0]:
                 faction_check_passed = True
             elif card_result.get_faction() == factions[1] and card_result.get_loyalty() == "Common":
