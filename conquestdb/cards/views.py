@@ -57,6 +57,8 @@ def ajax_view(request):
         if view_as == "Rows Mini":
             warlord_name = request.POST.get('warlord_name')
             ally_faction = request.POST.get('ally_faction')
+            order_by = request.POST.get('order')
+            asc = request.POST.get('asc')
             if warlord_name == "Gorzod":
                 filtered_df = filtered_df[(((filtered_df['faction'] == "Space Marines") &
                                            (filtered_df['loyalty'] == "Common") &
@@ -82,6 +84,13 @@ def ajax_view(request):
             if warlord_name == "Yvraine":
                 filtered_df = filtered_df[((filtered_df['faction'] != "Chaos") |
                                            (~filtered_df['traits'].str.contains("Elite")))]
+            if order_by != "None":
+                ascending = False
+                if asc == "Ascending":
+                    ascending = True
+                order_by = order_by.lower()
+                if order_by in filtered_df.columns:
+                    filtered_df = filtered_df.sort_values(by=[order_by], ascending=ascending)
         try:
             min_cost = int(request.POST.get('min-cost'))
         except:

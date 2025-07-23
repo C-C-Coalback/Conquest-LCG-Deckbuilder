@@ -294,7 +294,7 @@ def orks_cards_init():
         CardClasses.ArmyCard("Blood Axe Strategist", "Reaction: After an Orks unit you control at this planet resolves "
                                                      "an attack, move it to an adjacent planet or your HQ.", "Soldier.",
                              3, faction, "Common", 2, 4, 2, False),
-        CardClasses.SupportCard("'idden Base", "Each card you control in reserve is treated as a 2 ATK, 2 HP Orks"
+        CardClasses.SupportCard("idden Base", "Each card you control in reserve is treated as a 2 ATK, 2 HP Orks"
                                                " army unit during the combat phase.", "Location.",
                                 1, faction, "Common", False),
         CardClasses.ArmyCard("Sootblade Assashun", "Deep Strike (2).\n"

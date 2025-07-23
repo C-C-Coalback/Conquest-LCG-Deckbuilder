@@ -102,6 +102,20 @@
                 <option value="3">3</option>
             </select>
             <p id="p-traits" class="filter">Trait:</p><input id="traitsInput" class="filter" type="text" name="traits">
+            <p id="p-order" class="filter">Order By:</p><select name="order" class="filter" id="order">
+                <option value="None"></option>
+                <option value="Name">Name</option>
+                <option value="Card Type">Card Type</option>
+                <option value="COST">COST</option>
+                <option value="Attack">ATK</option>
+                <option value="Health">HP</option>
+                <option value="Command">Command</option>
+                <option value="Shields">Shields</option>
+            </select>
+            <p id="p-asc-desc" class="filter">Asc./Desc.:</p><select name="asc-desc" class="filter" id="asc-desc">
+                <option value="Ascending" selected="selected">Ascending</option>
+                <option value="Descending">Descending</option>
+            </select>
         </div>
         <button id="send-filter">Perform Search</button>
     </form>
@@ -903,6 +917,8 @@
                     'min-health': "-1",
                     'max-health': "-1",
                     'redirect-enabled': "No",
+                    'order': $('#order').val(),
+                    'asc': $('#asc-desc').val(),
                     'view-as': "Rows Mini",
                     'csrfmiddlewaretoken': '{{ csrf_token }}' // CSRF token for security
                 },

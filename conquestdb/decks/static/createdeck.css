@@ -246,7 +246,8 @@
     "p-card-name search p-card-type card-type"
     "p-faction faction p-loyalty loyalty"
     "p-min-cost min-cost p-max-cost max-cost"
-    "p-shields shields p-traits traits";
+    "p-shields shields p-traits traits"
+    "p-order order p-asc-desc asc-desc";
 }
 
 #prev-page {
