@@ -890,8 +890,10 @@ def ajax_view(request):
                 sig_squad = card.signature_squad
                 return JsonResponse({'message': message, 'warlord': name_warlord,
                                      'sig_squad': sig_squad, 'main_faction': faction})
+            elif card.get_card_type() == "Token":
+                return JsonResponse({'message': 'Cannot add tokens'})
             elif card.get_loyalty() == "Signature":
-                return JsonResponse({'message': 'Can not add Signature units'})
+                return JsonResponse({'message': 'Cannot add Signature units'})
             card_type = card.get_card_type()
             warlord_name = request.POST.get('warlord_name')
             print(warlord_name)

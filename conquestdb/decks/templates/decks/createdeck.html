@@ -317,8 +317,8 @@
                 </div>
             </div>`
             for (let i = 0; i < stored_image_links[current_page_number].length; i++) {
-                console.log(current_page_number);
-                console.log(stored_card_names);
+                // console.log(current_page_number);
+                // console.log(stored_card_names);
                 img_src = stored_image_names[current_page_number][i];
                 new_card_name = stored_card_names[current_page_number][i];
                 new_card_type = stored_card_types[current_page_number][i];
@@ -372,14 +372,14 @@
         deck_data = deck_data.filter(function(a){return a !== "----------------------------------------------------------------------"});
         deck_data = deck_data.filter(function(a){return a !== "Planet"});
         deck_data = deck_data.filter(function(a){return a !== ""});
-        console.log(deck_data);
+        // console.log(deck_data);
         const name = deck_data[0];
         name_warlord = deck_data[1];
         var factions = deck_data[2];
         var split_factions = factions.split(" (");
         if (split_factions.length === 2) {
             const ally = split_factions[1].replace(")", "");
-            console.log(ally);
+            // console.log(ally);
             document.getElementById('ally').value = ally;
         }
         route = "/static/images/CardImages/" + name_warlord.split(' ').join('_') + ".jpg";
@@ -571,7 +571,7 @@
                 var trail = "";
                 if (id.length > 5) {
                     trail = id.slice(-6);
-                    console.log(trail);
+                    // console.log(trail);
                 }
                 if (trail === "-Count") {
                     count = collection[j].innerHTML;
@@ -600,7 +600,7 @@
                 var trail = "";
                 if (id.length > 5) {
                     trail = id.slice(-6);
-                    console.log(trail);
+                    // console.log(trail);
                 }
                 if (trail === "-Count") {
                     count = collection[j].innerHTML;
@@ -631,7 +631,7 @@
                 var trail = "";
                 if (id.length > 5) {
                     trail = id.slice(-6);
-                    console.log(trail);
+                    // console.log(trail);
                 }
                 if (trail === "-Count") {
                     count = collection[j].innerHTML;
@@ -668,7 +668,7 @@
                 var trail = "";
                 if (id.length > 5) {
                     trail = id.slice(-6);
-                    console.log(trail);
+                    // console.log(trail);
                 }
                 if (trail === "-Count") {
                     count = collection[j].innerHTML;
@@ -699,7 +699,7 @@
                 var trail = "";
                 if (id.length > 5) {
                     trail = id.slice(-6);
-                    console.log(trail);
+                    // console.log(trail);
                 }
                 if (trail === "-Count") {
                     count = collection[j].innerHTML;
