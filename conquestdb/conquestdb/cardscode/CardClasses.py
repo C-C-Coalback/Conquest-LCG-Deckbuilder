@@ -5,7 +5,7 @@ class Card:
     def __init__(self, name, text, traits, cost, faction, loyalty, shields, card_type, unique, image_name="",
                  applies_discounts=None, action_in_hand=False, allowed_phases_in_hand=None,
                  action_in_play=False, allowed_phases_in_play=None, is_faction_limited_unique_discounter=False,
-                 limited=False, ambush=False, deepstrike=-1):
+                 limited=False, ambush=False, deepstrike=-1, cycle_info="", war_pack_info=""):
         if applies_discounts is None:
             applies_discounts = [False, 0, False]
         self.name_owner = ""
@@ -81,6 +81,8 @@ class Card:
         self.new_sweep = 0
         self.new_mobile = False
         self.new_ambush = False
+        self.war_pack = war_pack_info
+        self.cycle = cycle_info
 
     def as_dict(self):
         return {'name': self.name, 'faction': self.faction, 'loyalty': self.loyalty, 'traits': self.traits,
@@ -275,10 +277,11 @@ class UnitCard(Card):
                  limited=False, ranged=False, wargear_attachments_permitted=True, no_attachments=False,
                  additional_resources_command_struggle=0, additional_cards_command_struggle=0,
                  mobile=False, ambush=False, hive_mind=False, unstoppable=False, deepstrike=-1,
-                 lumbering=False, sweep=0):
+                 lumbering=False, sweep=0, cycle_info="", war_pack_info=""):
         super().__init__(name, text, traits, cost, faction, loyalty, 0,
                          card_type, unique, image_name, applies_discounts, action_in_hand, allowed_phases_in_hand,
-                         action_in_play, allowed_phases_in_play, limited, deepstrike=deepstrike)
+                         action_in_play, allowed_phases_in_play, limited, deepstrike=deepstrike,
+                         cycle_info=cycle_info, war_pack_info=war_pack_info)
         self.attack = attack
         self.health = health
         self.damage = 0
@@ -741,14 +744,15 @@ class WarlordCard(UnitCard):
                  applies_discounts=None, action_in_hand=False, allowed_phases_in_hand=None,
                  action_in_play=False, allowed_phases_in_play=None, ranged=False,
                  wargear_attachments_permitted=True, no_attachments=False, mobile=False,
-                 sweep=0):
+                 sweep=0, cycle_info="", war_pack_info=""):
         super().__init__(name, text, traits, -1, faction, "Signature", "Warlord", attack, health, -1,
                          True, image_name, brutal, flying, armorbane, area_effect,
                          applies_discounts, action_in_hand, allowed_phases_in_hand,
                          action_in_play, allowed_phases_in_play, ranged=ranged,
                          wargear_attachments_permitted=wargear_attachments_permitted,
                          no_attachments=no_attachments, additional_cards_command_struggle=0,
-                         additional_resources_command_struggle=0, mobile=mobile, sweep=sweep)
+                         additional_resources_command_struggle=0, mobile=mobile, sweep=sweep,
+                         cycle_info=cycle_info, war_pack_info=war_pack_info)
         self.bloodied = False
         self.bloodied_attack = bloodied_attack
         self.bloodied_health = bloodied_health
@@ -809,9 +813,10 @@ class WarlordCard(UnitCard):
 
 class SynapseCard(UnitCard):
     def __init__(self, name, text, traits, attack, health, command, unique,
-                 action_in_play=False, allowed_phases_in_play=""):
+                 action_in_play=False, allowed_phases_in_play="", cycle_info="", war_pack_info=""):
         super().__init__(name, text, traits, -1, "Tyranids", "Loyal", "Synapse", attack, health, command, unique,
-                         action_in_play=action_in_play, allowed_phases_in_play=allowed_phases_in_play)
+                         action_in_play=action_in_play, allowed_phases_in_play=allowed_phases_in_play,
+                         cycle_info=cycle_info, war_pack_info=war_pack_info)
 
 
 class ArmyCard(UnitCard):
@@ -822,7 +827,7 @@ class ArmyCard(UnitCard):
                  limited=False, ranged=False, wargear_attachments_permitted=True, no_attachments=False,
                  additional_cards_command_struggle=0, additional_resources_command_struggle=0, mobile=False,
                  ambush=False, hive_mind=False, unstoppable=False, deepstrike=-1, lumbering=False,
-                 sweep=0):
+                 sweep=0, cycle_info="", war_pack_info=""):
         super().__init__(name, text, traits, cost, faction, loyalty, "Army", attack, health, command,
                          unique, image_name, brutal, flying, armorbane, area_effect,
                          applies_discounts, action_in_hand, allowed_phases_in_hand,
@@ -831,7 +836,7 @@ class ArmyCard(UnitCard):
                          additional_cards_command_struggle=additional_cards_command_struggle,
                          additional_resources_command_struggle=additional_resources_command_struggle, mobile=mobile,
                          ambush=ambush, hive_mind=hive_mind, unstoppable=unstoppable, deepstrike=deepstrike,
-                         lumbering=lumbering, sweep=sweep)
+                         lumbering=lumbering, sweep=sweep, cycle_info=cycle_info, war_pack_info=war_pack_info)
 
     def print_info(self):
         if self.unique:
@@ -850,11 +855,11 @@ class EventCard(Card):
     def __init__(self, name, text, traits, cost, faction, loyalty,
                  shields, unique, image_name="", applies_discounts=None, action_in_hand=False
                  , allowed_phases_in_hand=None, action_in_play=False, allowed_phases_in_play=None,
-                 limited=False, deepstrike=-1):
+                 limited=False, deepstrike=-1, cycle_info="", war_pack_info=""):
         super().__init__(name, text, traits, cost, faction, loyalty,
                          shields, "Event", unique, image_name, applies_discounts, action_in_hand
                          , allowed_phases_in_hand, action_in_play, allowed_phases_in_play,
-                         limited=limited, deepstrike=deepstrike)
+                         limited=limited, deepstrike=deepstrike, cycle_info=cycle_info, war_pack_info=war_pack_info)
 
     def print_info(self):
         if self.unique:
@@ -879,12 +884,13 @@ class AttachmentCard(Card):
                  must_be_enemy_unit=False, limit_one_per_unit=False, extra_attack=0, extra_health=0,
                  extra_command=0, required_traits="", forbidden_traits="NO FORBIDDEN TRAITS",
                  planet_attachment=False, ambush=False, blue_required=False, green_required=False, red_required=False,
-                 deepstrike=-1):
+                 deepstrike=-1, cycle_info="", war_pack_info=""):
         super().__init__(name, text, traits, cost, faction, loyalty,
                          shields, "Attachment", unique, applies_discounts=applies_discounts,
                          action_in_hand=action_in_hand, allowed_phases_in_hand=allowed_phases_in_hand,
                          action_in_play=action_in_play, allowed_phases_in_play=allowed_phases_in_play,
-                         limited=limited, ambush=ambush, deepstrike=deepstrike)
+                         limited=limited, ambush=ambush, deepstrike=deepstrike,
+                         cycle_info=cycle_info, war_pack_info=war_pack_info)
         self.type_of_units_allowed_for_attachment = type_of_units_allowed_for_attachment
         self.unit_must_be_unique = unit_must_be_unique
         self.unit_must_match_faction = unit_must_match_faction
@@ -929,11 +935,12 @@ class SupportCard(Card):
     def __init__(self, name, text, traits, cost, faction, loyalty, unique, image_name="", applies_discounts=None
                  , action_in_hand=False, allowed_phases_in_hand=None,
                  action_in_play=False, allowed_phases_in_play=None, is_faction_limited_unique_discounter=False,
-                 limited=False):
+                 limited=False, cycle_info="", war_pack_info=""):
         super().__init__(name, text, traits, cost, faction, loyalty,
                          0, "Support", unique, image_name, applies_discounts, action_in_hand
                          , allowed_phases_in_hand, action_in_play, allowed_phases_in_play,
-                         is_faction_limited_unique_discounter, limited)
+                         is_faction_limited_unique_discounter, limited,
+                         cycle_info=cycle_info, war_pack_info=war_pack_info)
 
     def print_info(self):
         if self.unique:
@@ -951,12 +958,13 @@ class SupportCard(Card):
 
 class TokenCard(UnitCard):
     def __init__(self, name, text, traits, faction, attack, health, applies_discounts=None,
-                 no_attachments=False):
+                 no_attachments=False, cycle_info="", war_pack_info=""):
         super().__init__(name, text, traits, -1, faction, "Common", "Token",
                          attack, health, 0, False, applies_discounts=applies_discounts, action_in_hand=False,
                          allowed_phases_in_hand=None, action_in_play=False, allowed_phases_in_play=None,
                          ranged=False, wargear_attachments_permitted=True, no_attachments=no_attachments,
-                         additional_resources_command_struggle=0, additional_cards_command_struggle=0, mobile=False)
+                         additional_resources_command_struggle=0, additional_cards_command_struggle=0, mobile=False,
+                         cycle_info=cycle_info, war_pack_info=war_pack_info)
 
     def print_info(self):
         print("Name:", self.name)

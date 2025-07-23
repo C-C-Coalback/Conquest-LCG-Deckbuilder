@@ -2,12 +2,15 @@ from .. import CardClasses
 
 
 def tokens_cards_init():
-    tokens_card_array = [CardClasses.TokenCard("Snotlings", "", "Runt.", "Orks", 1, 1),
+    tokens_card_array = [CardClasses.TokenCard("Snotlings", "", "Runt.", "Orks", 1, 1, cycle_info="Core Set"),
                          CardClasses.TokenCard("Cultist", "Interrupt: When you deploy a Daemon unit, "
                                                           "sacrifice this unit to reduce its cost by 1.",
-                                               "Cultist.", "Chaos", 1, 1, applies_discounts=[True, 1, False]),
-                         CardClasses.TokenCard("Guardsman", "", "Soldier.", "Astra Militarum", 1, 2),
+                                               "Cultist.", "Chaos", 1, 1, applies_discounts=[True, 1, False],
+                                               cycle_info="Core Set"),
+                         CardClasses.TokenCard("Guardsman", "", "Soldier.", "Astra Militarum", 1, 2,
+                                               cycle_info="Core Set"),
                          CardClasses.TokenCard("Khymera", "No Attachments.", "Creature.", "Dark Eldar", 2, 1,
-                                               no_attachments=True),
-                         CardClasses.TokenCard("Termagant", "", " Creature. Termagant.", "Tyranids", 1, 1)]
+                                               no_attachments=True, cycle_info="Core Set"),
+                         CardClasses.TokenCard("Termagant", "", " Creature. Termagant.", "Tyranids", 1, 1,
+                                               cycle_info="The Great Devourer")]
     return tokens_card_array

@@ -7,30 +7,30 @@ def neutral_cards_init():
         CardClasses.EventCard("No Mercy", "Interrupt: When an opponent uses a shield card, "
                                           "exhaust a unique unit you control to cancel that card's "
                                           "shielding effect.", "Tactic.", 0, "Neutral",
-                              "Common", 1, False, ""),
+                              "Common", 1, False, cycle_info="Core Set"),
         CardClasses.ArmyCard("Void Pirate", "+1 card when command struggle won at this planet.",
                              "Ally.", 1, "Neutral", "Common", 0, 1, 1,
-                             False, additional_cards_command_struggle=1),
+                             False, additional_cards_command_struggle=1, cycle_info="Core Set"),
         CardClasses.ArmyCard("Rogue Trader", "+1 resource when "
                                              "command struggle won at this planet.", "Ally.",
                              1, "Neutral", "Common", 0, 1, 1,
-                             False, additional_resources_command_struggle=1),
+                             False, additional_resources_command_struggle=1, cycle_info="Core Set"),
         CardClasses.EventCard("Fall Back!", "Reaction: After an Elite unit is destroyed, "
                                             "put it into play from your discard pile at your HQ.",
                               "Tactic.", 1, "Neutral", "Common", 1,
-                              False, ""),
+                              False, cycle_info="Core Set"),
         CardClasses.SupportCard("Promethium Mine", "Limited.\nFORCED REACTION: After this"
                                                    " card enters play, place 4 resources on it.\n"
                                                    "Reaction: After the deploy phase begins, transfer"
                                                    " 1 resource from this card to "
                                                    "your resource pool.",
                                 "Location.", 1, "Neutral", "Common", False,
-                                limited=True),
+                                limited=True, cycle_info="Core Set"),
         CardClasses.AttachmentCard("Promotion", "Limited.\nAttach to an army unit.\n"
                                                 "Attached unit gains 2 command icons.", "Skill.",
                                    0, "Neutral", "Common", 1, False, limited=True,
                                    type_of_units_allowed_for_attachment="Army",
-                                   extra_command=2),
+                                   extra_command=2, cycle_info="Core Set"),
         CardClasses.ArmyCard("Freebooter Kaptain", "Army units with printed cost 2 or lower do not count their command "
                                                    "icons during command struggles at this planet.", "Ally.",
                              3, "Neutral", "Common", 3, 3, 1, False),
