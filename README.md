@@ -16,7 +16,9 @@ Here is a link to The Hive Tyrant's tutorial for the game: https://www.youtube.c
 
 # What is the current progress?
 
-TBD; unsure what to aim for yet, so nothing is quite set in stone. We already have an AJAX cards lookup system and log-in system. The card data is also already initialised.
+WHOOPS haven't updated this in a while. Pretty much done, all things considered. There will likely be some minor 
+style changes that need to be done, but obviously it's hard to spot those problems beforehand.
+Probably want to add set/war pack info to cards too.
 
 # How can I run it myself?
 
