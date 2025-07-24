@@ -59,7 +59,10 @@
     <textarea id="descriptionInput" name="description" rows="20" cols="80" style="max-width:40vw;"></textarea><br>
 </div>
 <div id="mini-card-search-container">
-    <h2>Card Filter</h2>
+    <div><h2>Card Filter</h2><div class="tooltip">NOTES
+                <span class="tooltiptext">After you select a warlord, only cards you can add to your deck will be shown.<br>
+                This does take your ally into consideration.<br>Clicking on a card in the filter adds it to your deck.</span>
+            </div></div>
     <button id="clear-filter" onclick="clearFilters();">Reset Filters</button>
     <form id="myForm">
         <div id="filters-container">
@@ -175,7 +178,7 @@
     var mouse_x = 0;
     var mouse_y = 0;
     onmousemove = function(e){
-        mouse_x = e.clientX;
+        mouse_x = e.clientX + window.scrollX;
         mouse_y = e.clientY * (0.5) + 320 + window.scrollY;
     }
 

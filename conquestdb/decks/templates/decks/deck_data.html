@@ -150,7 +150,7 @@
     deck_text = deck_text.split("|||").join("\n");
     deck_text = deck_text.replace(new RegExp("&"+"#"+"x27;", "g"), "'");
     onmousemove = function(e){
-        mouse_x = e.clientX;
+        mouse_x = e.clientX + window.scrollX;
         mouse_y = e.clientY * (0.5) + 80 + window.scrollY;
     }
     function showImg(el) {
