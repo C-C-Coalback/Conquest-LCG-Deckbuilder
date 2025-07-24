@@ -12,6 +12,7 @@
     position: relative;
     margin-top: 50px;
     left: 0;
+    background: #f9f9f9;
     display: flex;
     justify-content: center;
     max-width: 100%;
