@@ -76,6 +76,7 @@
                 <option value="Warlord">Warlord</option>
                 <option value="Synapse">Synapse</option>
             </select>
+            <!--
             <p id="p-faction" class="filter">Faction:</p><select name="faction" class="filter" id="faction">
                 <option value="None"></option>
                 <option value="Space Marines">Space Marines</option>
@@ -95,6 +96,7 @@
                 <option value="Loyal">Loyal</option>
                 <option value="Signature">Signature</option>
             </select>
+            -->
             <p id="p-min-cost" class="filter">Min Cost:</p><input id="minCostInput" class="filter" type="text" name="cost-min">
             <p id="p-max-cost" class="filter">Max Cost:</p><input id="maxCostInput" class="filter" type="text" name="cost-max">
             <p id="p-shield" class="filter">Shields:</p><select name="shield" class="filter" id="shieldInput">
@@ -1017,9 +1019,9 @@
                 type: 'POST',
                 data: {
                     'search': $('#searchInput').val(),
-                    'faction': $('#faction').val(),
+                    'faction': "None",
                     'card_type': $('#cardType').val(),
-                    'loyalty': $('#loyalty').val(),
+                    'loyalty': "None",
                     'warlord_name': name_warlord,
                     'ally_faction': $('#ally').val(),
                     'traits': $('#traitsInput').val(),
