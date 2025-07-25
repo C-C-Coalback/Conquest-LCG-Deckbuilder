@@ -4,6 +4,11 @@
     width:5vw;
 }
 
+.center {
+    display: flex;
+    justify-content: center;
+}
+
 .Card-saved-box {
     position: relative;
     width: 50px;

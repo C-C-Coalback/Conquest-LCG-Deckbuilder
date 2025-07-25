@@ -154,11 +154,26 @@
         <input id="prev-page" type="button" value="Previous Page" onclick="previousPage();">
         <input id="next-page" type="button" value="Next Page" onclick="nextPage();">
     </div>
+    <div class="center">
+        Number of rows per page:<select name="num-rows" class="num-rows" id="num-rows" onchange="updateMaxRows(this)">
+            <option value="5">5</option>
+            <option value="10">10</option>
+            <option value="20" selected="selected">20</option>
+            <option value="50">50</option>
+            <option value="100">100</option>
+            <option value="200">200</option>
+            <option value="500">500</option>
+            <option value="1000">1000</option>
+            <option value="2000">2000</option>
+        </select>
+    </div>
 </div>
 <img id="cursor-follower" src="/static/images/CardImages/Cardback.jpg">
 <script>
     var current_page_number = 0;
     var max_page_number = 0;
+    var max_rows = "20";
+    var current_max_rows = 20;
     var stored_image_links = [];
     var stored_image_names = [];
     var stored_card_names = [];
@@ -201,11 +216,15 @@
         searchInput.value = "";
     }
 
+    function updateMaxRows(e) {
+        max_rows = e.value;
+    }
+
     function previousPage() {
         if (current_page_number !== 0) {
             current_page_number = current_page_number - 1;
-            current_low_match = current_low_match - 20;
-            current_high_match = (current_page_number + 1) * 20;
+            current_low_match = current_low_match - current_max_rows;
+            current_high_match = (current_page_number + 1) * current_max_rows;
             page_counter = document.getElementById("card-counts-pages");
             page_counter.innerHTML = `<p>Showing ` + current_low_match + `-` + current_high_match + ` of ` + num_matches + ` matches</p>`;
             e = document.getElementById("card-filter-results");
@@ -276,8 +295,8 @@
             current_page_number = current_page_number + 1;
             e = document.getElementById("card-filter-results");
             e.innerHTML = ``;
-            current_low_match = current_low_match + 20;
-            current_high_match = (current_page_number + 1) * 20;
+            current_low_match = current_low_match + current_max_rows;
+            current_high_match = (current_page_number + 1) * current_max_rows;
             if (current_high_match > num_matches) {
                 current_high_match = num_matches;
             }
@@ -473,6 +492,7 @@
         document.querySelector('#card-input').value = cardName;
         document.querySelector('#card-submit').click();
     }
+
     function decreaseCount(id) {
         var idName = id.slice(0,-9)
         var countName = idName + "-Count";
@@ -940,6 +960,7 @@
                     var costs = response.cost;
                     var commands = response.command;
                     var shields = response.shield;
+                    current_max_rows = parseInt(max_rows);
                     const image_names = response.image_names;
                     e = document.getElementById("card-filter-results");
                     e.innerHTML = ``;
@@ -963,7 +984,7 @@
                     if (num_matches === 0) {
                         current_low_match = 0;
                     }
-                    current_high_match = 20;
+                    current_high_match = current_max_rows;
                     if (current_high_match > num_matches) {
                         current_high_match = num_matches;
                     }
@@ -994,7 +1015,7 @@
                         </div>
                     </div>`
                     for (let i = 0; i < image_names.length; i++) {
-                        if (cardCount === 20) {
+                        if (cardCount === current_max_rows) {
                             pageCount += 1;
                             cardCount = 0;
                             stored_image_links.push([]);
