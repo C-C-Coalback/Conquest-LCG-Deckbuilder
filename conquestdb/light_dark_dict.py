@@ -20,7 +20,6 @@ def get_light_mode(username):
     with open(light_mode_dir, "r") as data:
         light_dark_dict = ast.literal_eval(data.read())
     if username in light_dark_dict:
-        print(light_dark_dict[username] == "Light")
         return light_dark_dict[username] == "Light"
     return False
 

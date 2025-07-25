@@ -2,6 +2,7 @@
   <li><a href="/">Home</a></li>
   <li><a href="/decks/">Decks</a></li>
   <li><a href="/cards/">Cards</a></li>
+  <li><a href="/accounts/settings/">Settings</a></li>
   {% if user.is_authenticated %}
   <li id="avatar" class="pull-right">
     <img class="avatar" src="/media/{{ user.username }}.jpg" onerror="this.onerror=null; this.src='/static/images/defaultprofile.jpg'">

@@ -1,1 +1,1 @@
-{'alex': 'Light', 'Test': 'Dark'}
+{'alex': 'Dark', 'Test': 'Dark'}
