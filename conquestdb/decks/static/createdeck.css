@@ -186,6 +186,7 @@
     cursor: pointer;
     width:40vw;
     border: 2px solid blue;
+    overflow: hidden;
     background: rgba(47, 40, 153, 0.8);
 }
 
