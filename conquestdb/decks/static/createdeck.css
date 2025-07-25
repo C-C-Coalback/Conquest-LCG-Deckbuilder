@@ -4,19 +4,27 @@
     width:5vw;
 }
 
+#new-faction-filter {
+    background: rgba(30, 113, 114, 0.42);
+}
+
 #faction_code, #type_code {
-  border: 1px solid gray;
-  border-radius: 3px;
-  justify-content: space-between;
-  display: flex;
-  margin: 0 auto;
-  padding: 10px 0;
+    border: 1px solid gray;
+    border-radius: 3px;
+    justify-content: space-between;
+    display: flex;
+    margin: 0 auto;
+    padding: 10px 0;
 }
 
 [data-toggle="buttons"] > .btn input[type="checkbox"], [data-toggle="buttons"] > .btn input[type="radio"], [data-toggle="buttons"] > .btn-group > .btn input[type="checkbox"], [data-toggle="buttons"] > .btn-group > .btn input[type="radio"] {
     position: absolute;
     clip: rect(0,0,0,0);
     pointer-events: none;
+}
+
+.btn + .btn {
+    border-left: 2px solid black;
 }
 
 .btn {
@@ -41,7 +49,7 @@
 }
 
 #faction_code label.btn.active {
-    background-color: rgb(169, 169, 169);
+    background-color: rgb(50, 50, 50);
 }
 
 .center {
@@ -178,6 +186,7 @@
     cursor: pointer;
     width:40vw;
     border: 2px solid blue;
+    background: rgba(47, 40, 153, 0.8);
 }
 
 .searched-card, .searched-card-headers {
@@ -191,11 +200,17 @@
     justify-content: center;
 }
 
-#mini-card-search-container {
+#mini-card-search-container-container {
     position: absolute;
     left: 47vw;
+    overflow:hidden;
     top: 500px;
     padding-bottom: 150px;
+}
+
+#mini-card-search-container {
+    border: 3px black double;
+    background-color: rgba(220, 220, 220, 0.5);
 }
 
 #clear-filter {

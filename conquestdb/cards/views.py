@@ -72,7 +72,6 @@ def ajax_view(request):
                     for i in range(len(special_factions)):
                         if special_enabled[i] == "Y":
                             extra_faction_filter.append(special_factions[i])
-                    print(extra_faction_filter)
                     if extra_faction_filter:
                         filtered_df = filtered_df[filtered_df['faction'].isin(extra_faction_filter)]
             if warlord_name == "Gorzod":
