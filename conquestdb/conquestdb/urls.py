@@ -29,7 +29,7 @@ urlpatterns = [
     path("decks/", include("decks.urls")),
     path("api/", include("api.urls")),
     path('simple_upload/', views.simple_upload, name='simple_upload'),
-    path("", TemplateView.as_view(template_name="home.html"), name="home"),
+    path("", views.home_page, name="home"),
     re_path(r'^media/(?P<path>.*)$', serve, {'document_root': settings.MEDIA_ROOT}),
     path('accounts/', include('django.contrib.auth.urls')),
 ]

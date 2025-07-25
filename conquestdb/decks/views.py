@@ -3,6 +3,7 @@ from django.http import JsonResponse
 from conquestdb.cardscode import Initfunctions
 from conquestdb.cardscode import FindCard
 from django.http import HttpResponseRedirect
+import light_dark_dict
 import pandas as pd
 import os
 import copy
@@ -10,6 +11,7 @@ import datetime
 import random
 import string
 import shutil
+
 
 card_array = Initfunctions.init_player_cards()
 card_names_array = []
@@ -312,46 +314,6 @@ def deck_validation(deck, remaining_signature_squad, factions, warlord=""):
     return "SUCCESS"
 
 
-def decks(request):
-    deck_names, deck_warlords, deck_dates, img_srcs, keys, creator_name = get_published_decks_lists()
-    data = {
-        "Deck Names": deck_names,
-        "Deck Warlords": deck_warlords,
-        "Deck Dates": deck_dates,
-        "Img Srcs": img_srcs,
-        "Keys": keys,
-        "Creator Name": creator_name
-    }
-    try:
-        df = pd.DataFrame(data=data)
-        df = df.sort_values(by="Deck Dates", ascending=False)
-        new_deck_names = df["Deck Names"]
-        new_deck_warlords = df["Deck Warlords"]
-        new_deck_dates = df["Deck Dates"]
-        new_img_srcs = df["Img Srcs"]
-        new_keys = df["Keys"]
-        new_creator_name = df["Creator Name"]
-        decks_var = zip(new_deck_names[0:1], new_deck_warlords[0:1], new_deck_dates[0:1],
-                        new_img_srcs[0:1], new_keys[0:1], new_creator_name[0:1])
-
-        return render(request, "decks/home_decks.html", {"decks_exist": "Yes", "decks": decks_var})
-    except Exception as e:
-        print(e)
-    return render(request, "decks/home_decks.html", {"decks_exist": "No"})
-
-
-def delete_deck(request, deck_key):
-    print("delete deck")
-    delete_private_deck(deck_key, request.user.username)
-    return HttpResponseRedirect('/decks/my_decks/')
-
-
-def retract_deck(request, deck_key):
-    print("delete deck")
-    delete_published_deck(deck_key, request.user.username)
-    return HttpResponseRedirect('/decks/my_decks/')
-
-
 def get_published_decks_lists():
     deck_names = []
     deck_warlords = []
@@ -389,9 +351,54 @@ def get_published_decks_lists():
                     pass
     return deck_names, deck_warlords, deck_dates, img_srcs, keys, creator_name
 
+# Views start here
+
+
+def decks(request):
+    deck_names, deck_warlords, deck_dates, img_srcs, keys, creator_name = get_published_decks_lists()
+    light_dark_toggle = light_dark_dict.get_light_mode(request.user.username)
+    data = {
+        "Deck Names": deck_names,
+        "Deck Warlords": deck_warlords,
+        "Deck Dates": deck_dates,
+        "Img Srcs": img_srcs,
+        "Keys": keys,
+        "Creator Name": creator_name
+    }
+    try:
+        df = pd.DataFrame(data=data)
+        df = df.sort_values(by="Deck Dates", ascending=False)
+        new_deck_names = df["Deck Names"]
+        new_deck_warlords = df["Deck Warlords"]
+        new_deck_dates = df["Deck Dates"]
+        new_img_srcs = df["Img Srcs"]
+        new_keys = df["Keys"]
+        new_creator_name = df["Creator Name"]
+        decks_var = zip(new_deck_names[0:1], new_deck_warlords[0:1], new_deck_dates[0:1],
+                        new_img_srcs[0:1], new_keys[0:1], new_creator_name[0:1])
+
+        return render(request, "decks/home_decks.html", {"decks_exist": "Yes", "decks": decks_var,
+                                                         "light_dark_toggle": light_dark_toggle})
+    except Exception as e:
+        print(e)
+    return render(request, "decks/home_decks.html", {"decks_exist": "No", "light_dark_toggle": light_dark_toggle})
+
+
+def delete_deck(request, deck_key):
+    print("delete deck")
+    delete_private_deck(deck_key, request.user.username)
+    return HttpResponseRedirect('/decks/my_decks/')
+
+
+def retract_deck(request, deck_key):
+    print("delete deck")
+    delete_published_deck(deck_key, request.user.username)
+    return HttpResponseRedirect('/decks/my_decks/')
+
 
 def published_decks(request):
     deck_names, deck_warlords, deck_dates, img_srcs, keys, creator_name = get_published_decks_lists()
+    light_dark_toggle = light_dark_dict.get_light_mode(request.user.username)
     data = {
         "Deck Names": deck_names,
         "Deck Warlords": deck_warlords,
@@ -411,11 +418,11 @@ def published_decks(request):
         new_creator_name = df["Creator Name"]
         decks_var = zip(new_deck_names, new_deck_warlords, new_deck_dates,
                         new_img_srcs, new_keys, new_creator_name)
-        return render(request, "decks/published_decks.html", {"decks": decks_var})
+        return render(request, "decks/published_decks.html", {"decks": decks_var, "light_dark_toggle": light_dark_toggle})
     except Exception as e:
         print(e)
     decks_var = zip(deck_names, deck_warlords, deck_dates, img_srcs, keys, creator_name)
-    return render(request, "decks/published_decks.html", {"decks": decks_var})
+    return render(request, "decks/published_decks.html", {"decks": decks_var, "light_dark_toggle": light_dark_toggle})
 
 
 def my_decks(request):
@@ -427,6 +434,7 @@ def my_decks(request):
     username = request.user.username
     directory = os.getcwd()
     target_directory = directory + "/decks/deckstorage/" + username + "/"
+    light_dark_toggle = light_dark_dict.get_light_mode(request.user.username)
     if username:
         if os.path.exists(target_directory):
             for file in os.listdir(target_directory):
@@ -485,11 +493,11 @@ def my_decks(request):
         new_img_srcs = df["Img Srcs"]
         new_keys = df["Keys"]
         decks_var = zip(new_deck_names, new_deck_warlords, new_deck_dates, new_img_srcs, new_keys)
-        return render(request, "decks/mydecks.html", {"decks": decks_var})
+        return render(request, "decks/mydecks.html", {"decks": decks_var, "light_dark_toggle": light_dark_toggle})
     except Exception as e:
         print(e)
     decks_var = zip(deck_names, deck_warlords, deck_dates, img_srcs, keys)
-    return render(request, "decks/mydecks.html", {"decks": decks_var})
+    return render(request, "decks/mydecks.html", {"decks": decks_var, "light_dark_toggle": light_dark_toggle})
 
 
 def modify_deck(request, deck_key):
@@ -498,6 +506,7 @@ def modify_deck(request, deck_key):
     target_directory = directory + "/decks/deckstorage/" + username + "/"
     data = []
     desc = ""
+    light_dark_toggle = light_dark_dict.get_light_mode(request.user.username)
     if username:
         if os.path.exists(target_directory):
             for file in os.listdir(target_directory):
@@ -511,21 +520,27 @@ def modify_deck(request, deck_key):
                             desc = f.read()
     if data:
         return render(request, "decks/createdeck.html", {"edit": "T", "data": data, "desc": desc,
-                                                         "auto_complete": card_names_array})
+                                                         "auto_complete": card_names_array,
+                                                         "light_dark_toggle": light_dark_toggle})
     return render(request, "decks/createdeck.html", {"edit": "F", "data": "", "desc": "",
-                                                     "auto_complete": card_names_array})
+                                                     "auto_complete": card_names_array,
+                                                     "light_dark_toggle": light_dark_toggle})
 
 
 def create_deck(request):
+    light_dark_toggle = light_dark_dict.get_light_mode(request.user.username)
     return render(request, "decks/createdeck.html", {"edit": "F", "data": "", "desc": "",
-                                                     "auto_complete": card_names_array})
+                                                     "auto_complete": card_names_array,
+                                                     "light_dark_toggle": light_dark_toggle})
 
 
 def user_deck_data(request, deck_creator):
-    return render(request, "decks/user_deck_data.html")
+    light_dark_toggle = light_dark_dict.get_light_mode(request.user.username)
+    return render(request, "decks/user_deck_data.html", {"light_dark_toggle": light_dark_toggle})
 
 
 def deck_data(request, deck_creator, deck_key):
+    light_dark_toggle = light_dark_dict.get_light_mode(request.user.username)
     deck_found = "N"
     username = request.user.username
     directory = os.getcwd()
@@ -707,8 +722,10 @@ def deck_data(request, deck_creator, deck_key):
                                                         "creator": deck_creator, "public": public_deck,
                                                         "deck_key": deck_key,
                                                         "comments": my_comments, "noc": no_comments,
-                                                        "pledge_img": pledge_img, "pledge_link": pledge_link})
-    return render(request, "decks/deck_data.html", {"deck_found": deck_found, "deck_content": ""})
+                                                        "pledge_img": pledge_img, "pledge_link": pledge_link,
+                                                        "light_dark_toggle": light_dark_toggle})
+    return render(request, "decks/deck_data.html", {"deck_found": deck_found, "deck_content": "",
+                                                    "light_dark_toggle": light_dark_toggle})
 
 
 def copy_published_deck(request, deck_key):

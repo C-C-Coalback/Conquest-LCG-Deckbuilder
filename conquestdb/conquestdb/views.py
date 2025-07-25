@@ -5,6 +5,7 @@ from django.shortcuts import redirect
 from django.core.files.storage import FileSystemStorage
 from django.core.files.base import ContentFile
 import os
+import light_dark_dict
 
 
 def simple_upload(request):
@@ -27,3 +28,8 @@ def simple_upload(request):
             # img = Image.open(files)
             # img.save(destination)
     return redirect("/")
+
+
+def home_page(request):
+    light_dark_toggle = light_dark_dict.get_light_mode(request.user.username)
+    return render(request, "home.html", {"light_dark_toggle": light_dark_toggle})

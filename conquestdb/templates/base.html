@@ -2,6 +2,11 @@
 {% load static %}
 <html>
 <link rel="stylesheet" href="{% static 'navi_bar.css' %}">
+{% if light_dark_toggle %}
+  <link rel="stylesheet" href="{% static 'background_white.css' %}">
+{% else %}
+  <link rel="stylesheet" href="{% static 'background_black.css' %}">
+{% endif %}
 <link rel ="shortcut icon" href="{% static 'images/favicon.jpg' %}" type="image/jpg">
 <head>
   {% include 'header.html'%}

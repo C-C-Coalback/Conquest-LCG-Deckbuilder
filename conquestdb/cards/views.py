@@ -7,6 +7,7 @@ from conquestdb.cardscode import FindCard
 import os
 import os.path
 import datetime
+import light_dark_dict
 
 card_array = Initfunctions.init_player_cards()
 planet_array = Initfunctions.init_planet_cards()
@@ -28,7 +29,8 @@ df = pd.DataFrame([x.as_dict() for x in card_array])
 
 
 def index(request):
-    return render(request, 'cards/index.html')
+    light_dark_toggle = light_dark_dict.get_light_mode(request.user.username)
+    return render(request, 'cards/index.html', {"light_dark_toggle": light_dark_toggle})
 
 
 # View to handle the Ajax request
@@ -183,6 +185,7 @@ def ajax_view(request):
 
 
 def card_data(request, card_name):
+    light_dark_toggle = light_dark_dict.get_light_mode(request.user.username)
     directory = os.getcwd()
     target_directory = directory + "/cards/comments/" + card_name + "/"
     if request.method == 'POST':
@@ -206,7 +209,7 @@ def card_data(request, card_name):
             with open(target_directory + name_file, 'w') as file:
                 file.write("")
     if card_name not in images_dict:
-        return render(request, 'cards/index.html')
+        return render(request, 'cards/index.html', {"light_dark_toggle": light_dark_toggle})
     card = images_dict[card_name]
     original_card_name = card.name
     image_name = card.image_name
@@ -308,4 +311,5 @@ def card_data(request, card_name):
                    "errata_cost": errata_cost, "errata_shields": errata_shields,
                    "errata_command": errata_command, "errata_bloodied_text": errata_bloodied_text,
                    "errata_bloodied_attack": errata_bloodied_attack, "errata_bloodied_health": errata_bloodied_health,
-                   "errata_attack": errata_attack, "errata_health": errata_health, "errata_is_unit": errata_is_unit})
+                   "errata_attack": errata_attack, "errata_health": errata_health, "errata_is_unit": errata_is_unit,
+                   "light_dark_toggle": light_dark_toggle})
