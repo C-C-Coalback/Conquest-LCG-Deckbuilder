@@ -14,7 +14,6 @@ class SignUpView(CreateView):
 
 def user_settings(request):
     if request.method == "POST":
-        print("POST METHOD")
         light_dark = request.POST.get("light")
         if light_dark != "None":
             light_dark_dict.update_light_mode(request.user.username, light_dark)
