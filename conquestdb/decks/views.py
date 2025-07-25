@@ -598,25 +598,64 @@ def deck_data(request, deck_creator, deck_key):
         attachment_pos = -1
         event_pos = -1
         synapse_pos = -1
+        extra_army_cards = 0
+        extra_support_cards = 0
+        extra_attachment_cards = 0
+        extra_event_cards = 0
+        army_card_count = 0
+        support_card_count = 0
+        event_card_count = 0
+        attachment_card_count = 0
         synapse_name = ""
         pledge_name = ""
+        last_card_type = ""
         for i in range(len(deck_list)):
             if deck_list[i] == "Signature Squad":
                 sig_pos = i
+                last_card_type = deck_list[i]
                 if deck_list[i - 1] in pledges_array:
                     pledge_name = deck_list[i - 1]
-            if deck_list[i] == "Army":
+            elif deck_list[i] == "Army":
                 army_pos = i
-            if deck_list[i] == "Support":
+                last_card_type = deck_list[i]
+            elif deck_list[i] == "Support":
                 support_pos = i
-            if deck_list[i] == "Event":
+                last_card_type = deck_list[i]
+            elif deck_list[i] == "Event":
                 event_pos = i
-            if deck_list[i] == "Attachment":
+                last_card_type = deck_list[i]
+            elif deck_list[i] == "Attachment":
                 attachment_pos = i
-            if deck_list[i] == "Synapse":
+                last_card_type = deck_list[i]
+            elif deck_list[i] == "Synapse":
+                last_card_type = deck_list[i]
                 if deck_list[i + 1] != "Attachment":
                     synapse_name = deck_list[i + 1]
                 synapse_pos = i
+            elif last_card_type != "Synapse" and deck_list[i]:
+                if last_card_type == "Signature Squad":
+                    card_name = deck_list[i][3:]
+                    card = FindCard.find_card(card_name, card_array, cards_dict)
+                    print(card.get_name())
+                    if card.get_card_type() == "Army":
+                        extra_army_cards += int(deck_list[i][0])
+                    if card.get_card_type() == "Event":
+                        extra_event_cards += int(deck_list[i][0])
+                    if card.get_card_type() == "Attachment":
+                        extra_attachment_cards += int(deck_list[i][0])
+                    if card.get_card_type() == "Support":
+                        extra_support_cards += int(deck_list[i][0])
+                elif last_card_type == "Army":
+                    army_card_count += int(deck_list[i][0])
+                elif last_card_type == "Support":
+                    support_card_count += int(deck_list[i][0])
+                elif last_card_type == "Event":
+                    event_card_count += int(deck_list[i][0])
+                elif last_card_type == "Attachment":
+                    attachment_card_count += int(deck_list[i][0])
+        print(attachment_card_count)
+        print(army_card_count)
+        print(extra_event_cards)
         sig_cards = deck_list[sig_pos + 1:army_pos]
         army_cards = deck_list[army_pos + 1:support_pos]
         support_cards = deck_list[support_pos + 1:synapse_pos]
@@ -723,7 +762,15 @@ def deck_data(request, deck_creator, deck_key):
                                                         "deck_key": deck_key,
                                                         "comments": my_comments, "noc": no_comments,
                                                         "pledge_img": pledge_img, "pledge_link": pledge_link,
-                                                        "light_dark_toggle": light_dark_toggle})
+                                                        "light_dark_toggle": light_dark_toggle,
+                                                        "event_card_count": event_card_count,
+                                                        "extra_event_cards": extra_event_cards,
+                                                        "army_card_count": army_card_count,
+                                                        "extra_army_cards": extra_army_cards,
+                                                        "attachment_card_count": attachment_card_count,
+                                                        "extra_attachment_cards": extra_attachment_cards,
+                                                        "support_card_count": support_card_count,
+                                                        "extra_support_cards": extra_support_cards})
     return render(request, "decks/deck_data.html", {"deck_found": deck_found, "deck_content": "",
                                                     "light_dark_toggle": light_dark_toggle})
 
