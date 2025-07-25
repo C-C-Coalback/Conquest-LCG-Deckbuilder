@@ -4,6 +4,46 @@
     width:5vw;
 }
 
+#faction_code, #type_code {
+  border: 1px solid gray;
+  border-radius: 3px;
+  justify-content: space-between;
+  display: flex;
+  margin: 0 auto;
+  padding: 10px 0;
+}
+
+[data-toggle="buttons"] > .btn input[type="checkbox"], [data-toggle="buttons"] > .btn input[type="radio"], [data-toggle="buttons"] > .btn-group > .btn input[type="checkbox"], [data-toggle="buttons"] > .btn-group > .btn input[type="radio"] {
+    position: absolute;
+    clip: rect(0,0,0,0);
+    pointer-events: none;
+}
+
+.btn {
+    display: inline-block;
+    margin-bottom: 0;
+    font-weight: 400;
+    text-align: center;
+    white-space: nowrap;
+    vertical-align: middle;
+    -ms-touch-action: manipulation;
+    touch-action: manipulation;
+    cursor: pointer;
+    background-image: none;
+    border: 1px solid transparent;
+    font-size: 14px;
+    line-height: 1.42857143;
+    border-radius: 4px;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+#faction_code label.btn.active {
+    background-color: rgb(169, 169, 169);
+}
+
 .center {
     display: flex;
     justify-content: center;

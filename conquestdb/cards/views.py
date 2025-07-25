@@ -4,6 +4,7 @@ import pandas as pd
 from django.http import JsonResponse
 from django.http import HttpResponseRedirect
 from conquestdb.cardscode import FindCard
+import ast
 import os
 import os.path
 import datetime
@@ -61,6 +62,19 @@ def ajax_view(request):
             ally_faction = request.POST.get('ally_faction')
             order_by = request.POST.get('order')
             asc = request.POST.get('asc')
+            special_factions = request.POST.get('special_factions')
+            special_factions = ast.literal_eval(special_factions)
+            special_enabled = request.POST.get('special_enabled')
+            special_enabled = ast.literal_eval(special_enabled)
+            if special_factions:
+                if len(special_factions) == len(special_enabled):
+                    extra_faction_filter = []
+                    for i in range(len(special_factions)):
+                        if special_enabled[i] == "Y":
+                            extra_faction_filter.append(special_factions[i])
+                    print(extra_faction_filter)
+                    if extra_faction_filter:
+                        filtered_df = filtered_df[filtered_df['faction'].isin(extra_faction_filter)]
             if warlord_name == "Gorzod":
                 filtered_df = filtered_df[(((filtered_df['faction'] == "Space Marines") &
                                            (filtered_df['loyalty'] == "Common") &
