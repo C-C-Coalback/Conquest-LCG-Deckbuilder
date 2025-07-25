@@ -5,6 +5,7 @@
 {% block content %}
 <h2>Settings</h2>
 <div id="log-in-box" style="margin: auto;width: 50%;border: 3px solid green;padding: 10px;">
+    {% if user.is_authenticated %}
     <form method="post">
         {% csrf_token %}
         <h2>Light or Dark mode.</h2>
@@ -15,5 +16,8 @@
         </select>
         <button type="submit" id="submit">Save Settings</button>
     </form>
+    {% else %}
+    <h2>You must be logged in to change your settings.</h2>
+    {% endif %}
 </div>
 {% endblock %}
