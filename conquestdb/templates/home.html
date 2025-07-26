@@ -2,14 +2,18 @@
 
 {% block content %}
 <style>
-        .box {
+        .home-box {
             top: 80px;
             margin-left:auto;
             margin-right:auto;
             width: 30vw;
             height: auto;
+            {% if light_dark_toggle %}
             background-color: lightblue;
             opacity:0.8;
+            {% else %}
+            background-color: rgba(0, 0, 139, 0.8);
+            {% endif %}
             border: 2px solid blue;
             margin-bottom: 100px;
         }
@@ -19,8 +23,12 @@
             margin-right:auto;
             width: 30vw;
             height: auto;
+            {% if light_dark_toggle %}
             background-color: lightblue;
             opacity:0.8;
+            {% else %}
+            background-color: rgba(0, 0, 139, 0.8);
+            {% endif %}
             border: 2px solid blue;
             max-height: 100px;
             overflow-y: scroll;
@@ -33,7 +41,7 @@
             max-width: 30vw;
         }
 </style>
-<div class="box">
+<div class="home-box">
   <h1>Welcome to conquestdb.com!</h1>
   <p>This site serves as a deckbuilder for the Warhammer 40,000: Conquest Living Card Game.</p>
   <p>For information about how to play the game, please see the links below.</p>
