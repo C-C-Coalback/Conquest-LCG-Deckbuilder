@@ -11,18 +11,26 @@
             background-color: lightblue;
             opacity:0.8;
             border: 2px solid blue;
+            margin-bottom: 100px;
         }
+
+        .box-scroll {
+            margin-left:auto;
+            margin-right:auto;
+            width: 30vw;
+            height: auto;
+            background-color: lightblue;
+            opacity:0.8;
+            border: 2px solid blue;
+            max-height: 100px;
+            overflow-y: scroll;
+        }
+
         .greetings {
             position:absolute;
             top: 80px;
             left: 20px;
             max-width: 30vw;
-        }
-
-        .profile-pic-entry {
-          background-color: lightblue;
-          border: 2px solid blue;
-          width: 180px
         }
 </style>
 <div class="box">
@@ -34,7 +42,7 @@
   <p>If you would rather watch a video, you can find a tutorial by The Hive Tyrant <a href="https://www.youtube.com/watch?v=NE8NL9PfjXU">here</a>.</p>
   <p>All additional rules, such as those found in expansions or introduced by Apoka Team, can be found at:</p>
   <p><a href="https://apoka.mozello.com/rules/">Apoka and Expansions rules collection</a></p>
-  <p>For playing the game online, there is a Tabletop Simulator (TTS) mod, and a website, found respectively at:</p>
+  <p>For playing the game online, there is a Tabletop Simulator (TTS) mod, and a website found respectively at:</p>
   <p><a href="https://steamcommunity.com/sharedfiles/filedetails/?id=2471847304">TTS Mod</a></p>
   <p><a href="https://www.iridial.net">iridial.net</a></p>
   <p>This website supports exporting decks to both the TTS mod and iridial.net.</p>
@@ -43,6 +51,10 @@
   <h1>DISCLAIMER</h1>
   <p>Warhammer 40,000: Conquest is a trademark of Fantasy Flight Publishing, Inc. and/or Games Workshop Group. </p>
   <p>This website is not affiliated with either Fantasy Flight Games or Games Workshop Group.</p>
+</div>
+<div class="box-scroll">
+  <h1>Changelog</h1>
+  <p>26/07/2025 Version 1.0.0 - Website launched</p>
 </div>
 {% if user.is_authenticated %}
 <div class="greetings">
