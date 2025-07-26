@@ -195,7 +195,7 @@
 .searched-card, .searched-card-headers {
     position: relative;
     margin-top: 10px;
-    // border: 1px solid gray;
+    // border: 1px solid gray
     left: 0;
     width:100%;
     overflow-x: auto;
