@@ -47,20 +47,25 @@ body {
 }
 
 p {
+    font-family: Arial, sans-serif;
     color: green;
 }
 
 div {
+    font-family: Arial, sans-serif;
     color: green;
 }
 
 h1 {
+    font-family: Arial, sans-serif;
     color: green;
 }
 h2 {
+    font-family: Arial, sans-serif;
     color: green;
 }
 h3 {
+    font-family: Arial, sans-serif;
     color: green;
 }
 
