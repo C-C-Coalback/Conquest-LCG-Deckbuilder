@@ -228,6 +228,34 @@
 </div>
 <img id="cursor-follower" src="/static/images/CardImages/Cardback.jpg">
 <script>
+    const pledges_array = ["/static/images/CardImages/Anvil_Strike_Force.jpg",
+                           "/static/images/CardImages/Gladius_Strike_Force.jpg",
+                           "/static/images/CardImages/Talon_Strike_Force.jpg",
+                           "/static/images/CardImages/Holy_Crusade.jpg",
+                           "/static/images/CardImages/Munitorum_Support.jpg",
+                           "/static/images/CardImages/Senatorum_Directives.jpg",
+                           "/static/images/CardImages/WAAAGH!_Arbuttz.jpg",
+                           "/static/images/CardImages/WAAAGH!_Zanzag.jpg",
+                           "/static/images/CardImages/WAAAGH!_Ungskar.jpg",
+                           "/static/images/CardImages/Dark_Allegiance.jpg",
+                           "/static/images/CardImages/Myriad_Excesses.jpg",
+                           "/static/images/CardImages/Unstoppable_Tide.jpg",
+                           "/static/images/CardImages/Prophets_of_Flesh.jpg",
+                           "/static/images/CardImages/The_Broken_Sigil.jpg",
+                           "/static/images/CardImages/The_Flayed_Mask.jpg",
+                           "/static/images/CardImages/Children_of_the_Stars.jpg",
+                           "/static/images/CardImages/Followers_of_Asuryan.jpg",
+                           "/static/images/CardImages/Ghosts_of_Cegorach.jpg",
+                           "/static/images/CardImages/Bork'an_Sept.jpg",
+                           "/static/images/CardImages/Dal'yth_Sept.jpg",
+                           "/static/images/CardImages/Vior'la_Sept.jpg",
+                           "/static/images/CardImages/Hive_Fleet_Behemoth.jpg",
+                           "/static/images/CardImages/Hive_Fleet_Kraken.jpg",
+                           "/static/images/CardImages/Hive_Fleet_Leviathan.jpg",
+                           "/static/images/CardImages/Maynarkh_Dynasty.jpg",
+                           "/static/images/CardImages/Novokh_Dynasty.jpg",
+                           "/static/images/CardImages/Sautekh_Dynasty.jpg"];
+
     var current_page_number = 0;
     var max_page_number = 0;
     var max_rows = "20";
@@ -464,8 +492,15 @@
     function showImg(el) {
         var new_src = el.getAttribute('data-src');
         cursor_img = document.getElementById("cursor-follower");
-        cursor_img.style.left = mouse_x + 30 + "px";
-        cursor_img.style.top = mouse_y - 300 + "px";
+        if (pledges_array.includes(new_src)) {
+            cursor_img.style.rotate = "270deg";
+            cursor_img.style.left = mouse_x + 150 + "px";
+            cursor_img.style.top = mouse_y - 300 + "px";
+        } else {
+            cursor_img.style.rotate = "0deg";
+            cursor_img.style.left = mouse_x + 30 + "px";
+            cursor_img.style.top = mouse_y - 300 + "px";
+        }
         cursor_img.src = new_src;
         cursor_img.style.display = "block";
     }

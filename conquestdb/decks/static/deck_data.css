@@ -105,7 +105,7 @@
     background: #808080;
     display: grid;
     grid-row-gap: 1px;
-    grid-template-columns: 250px 500px;
+    grid-template-columns: 250px 250px;
     grid-template-rows: 333px 333px 333px;
     grid-template-areas:
     "sig_cards support_cards"
@@ -161,7 +161,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    // border: 1px dotted black;
+    // border: 1px dotted black
 }
 
 #author-desc-text {
@@ -174,7 +174,7 @@
 }
 
 .large-grid-section-pledge {
-    // border: 1px dotted black;
+    // border: 1px dotted black
 }
 
 #sig_cards {
