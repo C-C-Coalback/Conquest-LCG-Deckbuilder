@@ -321,6 +321,16 @@
         document.getElementById('send-filter').click();
     }
 
+    function clearSynapse() {
+        document.getElementById('synapse-card').innerHTML = `<img id="Cardback" src="/static/images/CardImages/Cardback.jpg" style="opacity:0.0" class="db-image">`;
+        clearImg();
+    }
+
+    function clearPledge() {
+        document.getElementById('pledge-card').innerHTML = `<img id="Cardback_Two" src="/static/images/CardImages/Cardback.jpg" style="opacity:0.0" class="db-image">`;
+        clearImg();
+    }
+
     function clearFilters() {
         var searchInput = document.getElementById("searchInput");
         searchInput.value = "";
@@ -602,12 +612,12 @@
         if (synapse_cards.length === 1) {
             var synapseName = synapse_cards[0].slice(3).split(' ').join('_');
             route = "/static/images/CardImages/" + synapseName + ".jpg";
-            document.getElementById('synapse-card').innerHTML = `<img id=` + synapseName + ` src=` + route + ` class="db-image" onmouseenter="showImg(this)" onmouseleave="clearImg()" data-src=` + route + `>`
+            document.getElementById('synapse-card').innerHTML = `<img id=` + synapseName + ` src=` + route + ` class="db-image" onmouseenter="showImg(this)" onmouseleave="clearImg()" onclick="clearSynapse()" data-src=` + route + `>`
         }
         if (pledge_card !== "" && pledge_card !== "----------------------------------------------------------------------") {
             pledge_card = pledge_card.split(' ').join('_');
             route = "/static/images/CardImages/" + pledge_card + ".jpg";
-            document.getElementById('pledge-card').innerHTML = `<img id=` + pledge_card + ` src=` + route + ` class="db-image" onmouseenter="showImg(this)" onmouseleave="clearImg()" data-src=` + route + `>`
+            document.getElementById('pledge-card').innerHTML = `<img id=` + pledge_card + ` src=` + route + ` class="db-image" onmouseenter="showImg(this)" onmouseleave="clearImg()" onclick="clearPledge()" data-src=` + route + `>`
         }
     }
 
@@ -1031,11 +1041,11 @@
                     if (card_type === "Synapse") {
                         var synapseName = cardName.split(' ').join('_');
                         route = "/static/images/CardImages/" + synapseName + ".jpg";
-                        document.getElementById('synapse-card').innerHTML = `<img id=` + synapseName + ` src=` + route + ` class="db-image" onmouseenter="showImg(this)" onmouseleave="clearImg()" data-src=` + route + `>`
+                        document.getElementById('synapse-card').innerHTML = `<img id=` + synapseName + ` src=` + route + ` class="db-image" onmouseenter="showImg(this)" onmouseleave="clearImg()" onclick="clearSynapse()" data-src=` + route + `>`
                     } else if (card_type === "Pledge") {
                         var pledgeName = cardName.split(' ').join('_');
                         route = "/static/images/CardImages/" + pledgeName + ".jpg";
-                        document.getElementById('pledge-card').innerHTML = `<img id=` + pledgeName + ` src=` + route + ` class="db-image" onmouseenter="showImg(this)" onmouseleave="clearImg()" data-src=` + route + `>`
+                        document.getElementById('pledge-card').innerHTML = `<img id=` + pledgeName + ` src=` + route + ` class="db-image" onmouseenter="showImg(this)" onmouseleave="clearImg()" onclick="clearPledge()" data-src=` + route + `>`
                     } else {
                         addCard(card_type, cardName);
                     }
