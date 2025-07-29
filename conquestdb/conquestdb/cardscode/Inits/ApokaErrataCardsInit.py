@@ -6,14 +6,16 @@ def apoka_errata_cards_init():
         CardClasses.ArmyCard("Ba'ar Zul's Cleavers", "Action: Deal 2 damage to this unit to have it get +2 "
                                                      "ATK for its next attack this phase. (Limit once per phase)",
                              "Warrior. Khorne. World Eaters.", 2, "Chaos", "Signature",
-                             2, 5, 1, False, action_in_play=True, allowed_phases_in_play="ALL"),
+                             2, 5, 1, False, action_in_play=True, allowed_phases_in_play="ALL",
+                             war_pack_info="Chronicles of Heroes"),
         CardClasses.ArmyCard("Maksim's Squadron", "No Wargear Attachments.\n"
                                                   "Interrupt: When you use a shield card to "
                                                   "prevent this unit from taking "
                                                   "damage, that card gains 1 shield icon and you draw 1 card."
                                                   "(Limit once per phase.)",
                              "Vehicle. Tank. Vostroya.",
-                             3, "Astra Militarum", "Signature", 2, 3, 1, False, wargear_attachments_permitted=False),
+                             3, "Astra Militarum", "Signature", 2, 3, 1, False, wargear_attachments_permitted=False,
+                             war_pack_info="Chronicles of Heroes"),
         CardClasses.ArmyCard("Captain Markis", "Action: Sacrifice an Astra Militarum unit "
                                                "at this planet to exhaust a target "
                                                "non-warlord unit at this planet. "
@@ -58,17 +60,18 @@ def apoka_errata_cards_init():
                              6, "Eldar", "Common", 5, 5, 2, False, wargear_attachments_permitted=False),
         CardClasses.ArmyCard("Shrieking Exarch", "Reaction: After an army unit is destroyed at this planet, draw 1 card"
                                                  " and deal 1 damage to a target enemy unit. (Limit once per phase.)",
-                             "Warrior. Elite.", 5, "Eldar", "Common", 4, 6, 2, False),
+                             "Warrior. Elite.", 5, "Eldar", "Common", 4, 6, 2, False,
+                             war_pack_info="Chronicles of Heroes"),
         CardClasses.EventCard("For the Tau'va", "Action: Ready a unit "
                                                 "you control with 1 or more attachments.", "Tactic. Maneuver.",
                               2, "Tau", "Common", 1, False, action_in_hand=True, allowed_phases_in_hand="ALL"),
         CardClasses.ArmyCard("Kroot Hunter", "Reaction: After you deploy this unit at a "
                                              "Material planet (red), gain 1 resource.", "Scout. Ally. Kroot.",
-                             1, "Tau", "Common", 2, 2, 0, False),
+                             1, "Tau", "Common", 2, 2, 0, False, war_pack_info="Chronicles of Heroes"),
         CardClasses.ArmyCard("Ardent Auxiliaries", "This unit is an Astra Militarum unit in addition to Tau.\n"
                                                    "Reaction: After this unit commits to a planet, if you control an "
                                                    "Astra Militarum unit at this planet, ready this unit.", "Soldier.",
-                             2, "Tau", "Signature", 2, 2, 1, False),
+                             2, "Tau", "Signature", 2, 2, 1, False, war_pack_info="Chronicles of Heroes"),
         CardClasses.SupportCard("Endless Legions", "Reaction: After a Necrons unit enters your discard pile from play, "
                                                    "exhaust this support and place 2 units from your discard pile at "
                                                    "the bottom of your deck to Rally 6 a Necrons unit with a printed "

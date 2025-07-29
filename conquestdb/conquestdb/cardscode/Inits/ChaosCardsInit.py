@@ -119,264 +119,301 @@ def chaos_cards_init():
         CardClasses.ArmyCard("Roghrax Bloodhand", "Brutal.\n"
                                                   "BLOODTHIRST - During a combat round in which 1 or more units "
                                                   "have been destroyed at this planet, double this unit's ATK.",
-                             "Warrior. Khorne. World Eaters.", 4, "Chaos", "Loyal", 2, 5, 1, True, brutal=True),
+                             "Warrior. Khorne. World Eaters.", 4, "Chaos", "Loyal", 2, 5, 1, True, brutal=True,
+                             war_pack_info="The Great Devourer"),
         CardClasses.EventCard("Ecstatic Seizures", "Action: Discard each attachment from "
                                                    "each unit at a target planet.", "Power. Slaanesh.",
-                              2, "Chaos", "Common", 1, False, action_in_hand=True, allowed_phases_in_hand="ALL"),
+                              2, "Chaos", "Common", 1, False, action_in_hand=True, allowed_phases_in_hand="ALL",
+                              war_pack_info="The Great Devourer"),
         CardClasses.ArmyCard("Venomous Fiend", "While you control a non-Chaos warlord, this unit gains Mobile.\n"
                                                "Reaction: After this unit moves to a planet, deal X damage to a "
                                                "target enemy army unit at that planet. X is the number of command "
                                                "icons the target unit has.", "Daemon. Slaanesh. Elite.",
-                             5, "Chaos", "Common", 3, 5, 2, False),
+                             5, "Chaos", "Common", 3, 5, 2, False, war_pack_info="Legions of Death"),
         CardClasses.ArmyCard("Death Guard Infantry", "", "Warrior. Death Guard. Nurgle.",
-                             3, "Chaos", "Common", 2, 4, 1, False),
+                             3, "Chaos", "Common", 2, 4, 1, False, war_pack_info="The Howl of Blackmane"),
         CardClasses.ArmyCard("Heretek Inventor", "FORCED REACTION: After this unit enters play, your opponent may "
                                                  "move it to a planet of his choice.", "Scholar.",
-                             1, "Chaos", "Loyal", 3, 3, 1, False),
+                             1, "Chaos", "Loyal", 3, 3, 1, False, war_pack_info="The Howl of Blackmane"),
         CardClasses.WarlordCard("Ku'gath Plaguefather", "Reaction: After this warlord is declared as an attacker, "
                                                         "move 1 damage from this warlord to another unit "
                                                         "at this planet.", "Deamon. Nurgle.", "Chaos",
                                 1, 7, 1, 5, "Bloodied.", 7, 7,
                                 ["4x Ku'gath's Nurglings", "1x Vile Laboratory",
-                                 "1x The Plaguefather's Banner", "2x Fetid Haze"]),
+                                 "1x The Plaguefather's Banner", "2x Fetid Haze"], war_pack_info="The Scourge"),
         CardClasses.ArmyCard("Ku'gath's Nurglings", "FORCED REACTION: After a unit moves to this planet, "
                                                     "deal it 1 damage.", "Daemon. Nurgle.",
-                             2, "Chaos", "Signature", 2, 2, 1, False),
+                             2, "Chaos", "Signature", 2, 2, 1, False, war_pack_info="The Scourge"),
         CardClasses.SupportCard("Vile Laboratory", "Deploy Action: Exhaust this support to have your opponent choose "
                                                    "and move a non-Vehicle unit he controls from a "
                                                    "target planet to an adjacent planet of his choice.",
                                 "Location.", 2, faction, "Signature", False,
-                                action_in_play=True, allowed_phases_in_play="DEPLOY"),
+                                action_in_play=True, allowed_phases_in_play="DEPLOY", war_pack_info="The Scourge"),
         CardClasses.AttachmentCard("The Plaguefather's Banner", "Attach to a Nurgle unit.\n"
                                                                 "Attached unit gets +1 HP.\n"
                                                                 "Reaction: After attached unit is declared as "
                                                                 "an attacker, move 1 damage from attached unit "
                                                                 "to another unit at this planet.", "Wargear. Standard.",
-                                   1, faction, "Signature", 3, True, required_traits="Nurgle", extra_health=1),
+                                   1, faction, "Signature", 3, True, required_traits="Nurgle", extra_health=1,
+                                   war_pack_info="The Scourge"),
         CardClasses.EventCard("Fetid Haze", "Combat Action: Remove all damage from a target Nurgle "
                                             "unit you control. Then, have your opponent deal an amount of "
                                             "indirect damage equal to the damage removed among army units he "
                                             "controls at the same planet.", "Power. Nurgle.",
                               3, faction, "Signature", 1, False,
-                              action_in_hand=True, allowed_phases_in_hand="COMBAT"),
+                              action_in_hand=True, allowed_phases_in_hand="COMBAT", war_pack_info="The Scourge"),
         CardClasses.ArmyCard("Rotten Plaguebearers", "Action: Exhaust this unit to deal 1 damage to a target "
                                                      "unit at this planet.", "Daemon. Nurgle.",
-                             2, faction, "Common", 0, 2, 1, False, action_in_play=True, allowed_phases_in_play="ALL"),
+                             2, faction, "Common", 0, 2, 1, False, action_in_play=True, allowed_phases_in_play="ALL",
+                             war_pack_info="Gift of the Ethereals"),
         CardClasses.EventCard("Nurgling Bomb", "Combat Action: Target a planet. For each non-Nurgle unit at that"
                                                " planet, its controller must choose to either deal 1 damage "
                                                "to it or rout it.", "Tactic. Nurgle.",
-                              3, faction, "Common", 1, False, action_in_hand=True, allowed_phases_in_hand="COMBAT"),
+                              3, faction, "Common", 1, False, action_in_hand=True, allowed_phases_in_hand="COMBAT",
+                              war_pack_info="Gift of the Ethereals"),
         CardClasses.SupportCard("Throne of Vainglory", "Action: Exhaust this support to discard the top card of your "
                                                        "deck. If the printed cost of the discarded card is "
                                                        "3 or higher, put 2 Cultist tokens into play at your HQ.",
                                 "Upgrade. Slaanesh.", 3, faction, "Loyal", False,
-                                action_in_play=True, allowed_phases_in_play="ALL"),
+                                action_in_play=True, allowed_phases_in_play="ALL",
+                                war_pack_info="Gift of the Ethereals"),
         CardClasses.ArmyCard("Gleeful Plague Beast", "No Wargear Attachments.\n"
                                                      "FORCED REACTION: After the combat phase begins, deal 1 damage "
                                                      "to each unit at this planet.", "Daemon. Nurgle. Elite.",
-                             5, faction, "Loyal", 3, 5, 1, False, wargear_attachments_permitted=False),
+                             5, faction, "Loyal", 3, 5, 1, False, wargear_attachments_permitted=False,
+                             war_pack_info="Zogwort's Curse"),
         CardClasses.EventCard("Doombolt", "Deploy Action: Deal X damage to a target enemy army unit. "
                                           "X is the amount of damage on that unit.", "Power.",
-                              1, faction, "Common", 1, False, action_in_hand=True, allowed_phases_in_hand="DEPLOY"),
+                              1, faction, "Common", 1, False, action_in_hand=True, allowed_phases_in_hand="DEPLOY",
+                              war_pack_info="Zogwort's Curse"),
         CardClasses.AttachmentCard("Blight Grenades", "Combat Action: Sacrifice this attachment to give attached "
                                                       "unit Area Effect (2) until the end of the combat phase.",
                                    "Wargear. Nurgle.", 1, faction, "Common", 1, False,
                                    action_in_play=True, allowed_phases_in_play="COMBAT",
-                                   type_of_units_allowed_for_attachment="Army", required_traits="Nurgle"),
+                                   type_of_units_allowed_for_attachment="Army", required_traits="Nurgle",
+                                   war_pack_info="Zogwort's Curse"),
         CardClasses.ArmyCard("Noise Marine Zealots", "This unit gets +2 ATK while it is at a planet with a warlord.",
-                             "Warrior. Slaanesh.", 3, faction, "Common", 2, 3, 1, False),
+                             "Warrior. Slaanesh.", 3, faction, "Common", 2, 3, 1, False,
+                             war_pack_info="The Threat Beyond"),
         CardClasses.SupportCard("Turbulent Rift", "Reaction: After you deploy an Elite unit, deal 1 damage to that "
                                                   "unit to deal 1 damage to each enemy unit at that planet.",
-                                "Location.", 1, faction, "Common", False),
+                                "Location.", 1, faction, "Common", False,
+                                war_pack_info="The Threat Beyond"),
         CardClasses.EventCard("Cacophonic Choir", "Deploy Action: Exhaust your warlord to have your opponent deal "
                                                   "X indirect damage among units he controls. "
                                                   "X is the number of units your opponent controls.",
                               "Power. Maneuver. Slaanesh.", 2, faction, "Common", 1, False,
-                              action_in_hand=True, allowed_phases_in_hand="DEPLOY"),
+                              action_in_hand=True, allowed_phases_in_hand="DEPLOY",
+                              war_pack_info="The Threat Beyond"),
         CardClasses.ArmyCard("Ancient Keeper of Secrets", "No Wargear Attachments.\n"
                                                           "Action: Sacrifice a Cultist unit to ready this unit.",
                              "Daemon. Slaanesh. Elite.", 7, faction, "Common", 5, 5, 3, False,
-                             wargear_attachments_permitted=False, action_in_play=True, allowed_phases_in_play="ALL"),
+                             wargear_attachments_permitted=False, action_in_play=True, allowed_phases_in_play="ALL",
+                             war_pack_info="Descendants of Isha"),
         CardClasses.AttachmentCard("Slaanesh's Temptation", "Attach to a planet.\n"
                                                             "Increase the cost of each enemy unit being deployed "
                                                             "at another planet by 1.\n"
                                                             "FORCED REACTION: After a battle at attached planet ends, "
                                                             "sacrifice this attachment.", "Power. Slaanesh.",
-                                   2, faction, "Loyal", 2, True, planet_attachment=True),
+                                   2, faction, "Loyal", 2, True, planet_attachment=True,
+                                   war_pack_info="Descendants of Isha"),
         CardClasses.AttachmentCard("Doom Siren", "Attach to an army unit you control.\n"
                                                  "Reaction: After attached unit uses its Area Effect ability, "
                                                  "deal damage equal to its Area Effect value to each enemy unit "
                                                  "at each adjacent planet. Then, sacrifice the attached unit.",
                                    "Wargear. Slaanesh.", 2, faction, "Loyal", 2, False,
-                                   type_of_units_allowed_for_attachment="Army", must_be_own_unit=True),
+                                   type_of_units_allowed_for_attachment="Army", must_be_own_unit=True,
+                                   war_pack_info="Descendants of Isha"),
         CardClasses.ArmyCard("Ravening Psychopath", "Reaction: After this unit resolves an attack, deal 1 damage to "
                                                     "this unit to deal 1 damage to an enemy army unit at the "
                                                     "same planet.", "Ally. Cultist. Khorne.",
-                             2, faction, "Common", 1, 3, 1, False),
+                             2, faction, "Common", 1, 3, 1, False, war_pack_info="Decree of Ruin"),
         CardClasses.EventCard("Sowing Chaos", "Deploy Action: Destroy each army unit with printed cost 2"
                                               " or lower at each tech planet (blue).", "Tactic.",
-                              2, faction, "Common", 1, False, action_in_hand=True, allowed_phases_in_hand="DEPLOY"),
+                              2, faction, "Common", 1, False, action_in_hand=True, allowed_phases_in_hand="DEPLOY",
+                              war_pack_info="Decree of Ruin"),
         CardClasses.WarlordCard("Ba'ar Zul the Hate-Bound", "Reaction: After a unit you control at this planet "
                                                             "takes damage, move all of that damage to this warlord.",
                                 "Khorne. Warrior.", faction, 0, 5, 3, 11, "Bloodied.", 7, 7,
                                 ["4x Ba'ar Zul's Cleavers", "1x Kaerux Erameas",
-                                 "2x Blood For The Blood God!", "1x The Butcher's Nails"]),
+                                 "2x Blood For The Blood God!", "1x The Butcher's Nails"],
+                                war_pack_info="Boundless Hate"),
         CardClasses.ArmyCard("Ba'ar Zul's Cleavers", "Action: Deal 2 damage to this unit to have it get +2 "
                                                      "ATK for its next attack this phase. (Limit once per phase)",
                              "Warrior. Khorne. World Eaters.", 3, faction, "Signature",
-                             2, 5, 1, False, action_in_play=True, allowed_phases_in_play="ALL"),
+                             2, 5, 1, False, action_in_play=True, allowed_phases_in_play="ALL",
+                             war_pack_info="Boundless Hate"),
         CardClasses.SupportCard("Kaerux Erameas", "Combat Action: Exhaust this support to resolve a battle at a "
                                                   "non-first planet without a warlord. Use this ability only if no "
                                                   "battle has been initiated this phase.", "Location. Space Hulk.",
-                                2, faction, "Signature", True, action_in_play=True, allowed_phases_in_play="COMBAT"),
+                                2, faction, "Signature", True, action_in_play=True, allowed_phases_in_play="COMBAT",
+                                war_pack_info="Boundless Hate"),
         CardClasses.EventCard("Blood For The Blood God!", "Combat Action: Deal 1 damage to each undamaged unit "
                                                           "at a target planet.", "Tactic. Khorne.",
-                              1, faction, "Signature", 1, False, action_in_hand=True, allowed_phases_in_hand="COMBAT"),
+                              1, faction, "Signature", 1, False, action_in_hand=True, allowed_phases_in_hand="COMBAT",
+                              war_pack_info="Boundless Hate"),
         CardClasses.AttachmentCard("The Butcher's Nails", "Attach to your warlord.\n"
                                                           "Attached unit gains Brutal while it is hale.\n"
                                                           "Attached unit gains Armorbane while it is bloodied.",
                                    "Wargear. World Eaters.", 1, faction, "Signature", 3, False,
-                                   type_of_units_allowed_for_attachment="Warlord", must_be_own_unit=True),
+                                   type_of_units_allowed_for_attachment="Warlord", must_be_own_unit=True,
+                                   war_pack_info="Boundless Hate"),
         CardClasses.ArmyCard("Prodigal Sons Disciple", "Reaction: After this unit resolves an attack against an "
                                                        "enemy army unit, deal X unpreventable damage to a target "
                                                        "enemy unit at this planet. X is the number of command icons"
                                                        " the targeted unit has.", "Psyker. Tzeentch. Elite.",
-                             5, faction, "Loyal", 3, 6, 3, False),
+                             5, faction, "Loyal", 3, 6, 3, False, war_pack_info="Deadly Salvage"),
         CardClasses.ArmyCard("Seer of Deceit", "While this unit is at a tech planet (blue), it gains: +1 card"
                                                " when command struggle won at this planet.", "Scholar. Ally.",
-                             3, faction, "Common", 3, 3, 1, False),
+                             3, faction, "Common", 3, 3, 1, False, war_pack_info="Deadly Salvage"),
         CardClasses.AttachmentCard("Khornate Chain Axe", "Attach to an army unit.\n"
                                                          "Attached unit gets +2 ATK.\n"
                                                          "BLOODTHIRST - During a round in which 1 or more units "
                                                          "have been destroyed at this planet, attached unit "
                                                          "gains Brutal.", "Wargear. Weapon. Khorne.",
                                    1, faction, "Common", 1, False, extra_attack=2,
-                                   type_of_units_allowed_for_attachment="Army"),
+                                   type_of_units_allowed_for_attachment="Army", war_pack_info="Deadly Salvage"),
         CardClasses.ArmyCard("Master Warpsmith", "Reaction: After you sacrifice a Cultist token, reduce the "
                                                  "cost of the next Elite unit you deploy this phase by 1.", "Scholar.",
-                             4, faction, "Common", 2, 4, 2, False),
+                             4, faction, "Common", 2, 4, 2, False, war_pack_info="What Lurks Below"),
         CardClasses.SupportCard("Corrupted Teleportarium", "Action: Exhaust this support to move an Elite unit you"
                                                            " control from a tech planet (blue) to another planet.",
                                 "Location.", 1, faction, "Common", False,
-                                action_in_play=True, allowed_phases_in_play="ALL"),
+                                action_in_play=True, allowed_phases_in_play="ALL", war_pack_info="What Lurks Below"),
         CardClasses.ArmyCard("Berzerker Warriors", "Interrupt: When an enemy unit is destroyed, "
                                                    "deploy this unit from your hand at the same "
                                                    "planet as the destroyed unit.", "Warrior. Khorne. World Eaters.",
-                             2, faction, "Loyal", 3, 2, 0, False),
+                             2, faction, "Loyal", 3, 2, 0, False, war_pack_info="Wrath of the Crusaders"),
         CardClasses.SupportCard("Killing Field", "Action: Exhaust this support to have each unit at a target planet"
                                                  " lose Ranged until the end of the phase.", "Location.",
-                                1, faction, "Common", False, action_in_play=True, allowed_phases_in_play="ALL"),
+                                1, faction, "Common", False, action_in_play=True, allowed_phases_in_play="ALL",
+                                war_pack_info="Wrath of the Crusaders"),
         CardClasses.AttachmentCard("Staff of Change", "Attach to an army unit.\n"
                                                       "Limit 1 per unit.\n"
                                                       "Reaction: After you win a command struggle at this planet,"
                                                       " deal 2 damage to a target unit at this planet.",
                                    "Wargear. Weapon. Tzeentch.", 1, faction, "Common", 1, False,
-                                   type_of_units_allowed_for_attachment="Army", limit_one_per_unit=True),
+                                   type_of_units_allowed_for_attachment="Army", limit_one_per_unit=True,
+                                   war_pack_info="Wrath of the Crusaders"),
         CardClasses.ArmyCard("Frenzied Bloodthirster", "No Wargear Attachments.\n"
                                                        "Immune to Power events.\n"
                                                        "BLOODTHIRST - During a combat round in which 1 or more units "
                                                        "have been destroyed at this planet, this unit gains "
                                                        "Armorbane, Brutal, and Flying.", "Daemon. Khorne. Elite.",
-                             10, faction, "Loyal", 8, 8, 2, False, wargear_attachments_permitted=False),
+                             10, faction, "Loyal", 8, 8, 2, False, wargear_attachments_permitted=False,
+                             war_pack_info="The Final Gambit"),
         CardClasses.EventCard("Warp Rift", "HEADQUARTERS ACTION: Switch a target planet with an adjacent planet. "
                                            "(Units that were at a switched-out planet are now at "
                                            "the switched-in planet.)", "Power. Tzeentch.", 1, faction, "Loyal",
-                              2, False, action_in_hand=True, allowed_phases_in_hand="HEADQUARTERS"),
+                              2, False, action_in_hand=True, allowed_phases_in_hand="HEADQUARTERS",
+                              war_pack_info="The Final Gambit"),
         CardClasses.ArmyCard("Sathariel the Invokator", "Deep Strike (3).\n"
                                                         "Reaction: After a combat round at this planet begins, "
                                                         "return a Chaos Power event from your discard pile to"
                                                         " your hand.", "Psyker. Fallen. Elite.",
-                             5, faction, "Common", 4, 4, 1, True, deepstrike=3),
+                             5, faction, "Common", 4, 4, 1, True, deepstrike=3,
+                             war_pack_info="Jungles of Nectavus"),
         CardClasses.EventCard("The Prince's Might", "Deep Strike (1).\n"
                                                     "Reaction: After you Deep Strike this event, Daemon units at "
                                                     "this planet cannot be damaged by units with printed cost 2 "
                                                     "or lower until the end of the phase.", "Tactic.",
-                              0, faction, "Loyal", 2, False, deepstrike=1),
+                              0, faction, "Loyal", 2, False, deepstrike=1, war_pack_info="Jungles of Nectavus"),
         CardClasses.ArmyCard("Infectious Nurgling", "Armorbane.", "Daemon. Nurgle.",
-                             1, faction, "Common", 2, 1, 0, False, armorbane=True),
+                             1, faction, "Common", 2, 1, 0, False, armorbane=True, war_pack_info="Unforgiven"),
         CardClasses.ArmyCard("Seekers of Slaanesh", "No Wargear Attachments.\n"
                                                     "Action: Sacrifice a Cultist unit at this planet to draw 1 card.",
                              "Daemon. Slaanesh. Elite.", 5, faction, "Common", 4, 5, 2, False,
-                             action_in_play=True, allowed_phases_in_play="ALL"),
+                             action_in_play=True, allowed_phases_in_play="ALL", war_pack_info="Unforgiven"),
         CardClasses.AttachmentCard("Mark of Slaanesh", "Attach to an army unit you control.\n"
                                                        "Interrupt: When attached unit leaves play, "
                                                        "move an army unit you control to this planet.",
                                    "Curse. Slaanesh.", 0, faction, "Common", 1, False,
-                                   type_of_units_allowed_for_attachment="Army"),
+                                   type_of_units_allowed_for_attachment="Army", war_pack_info="Unforgiven"),
         CardClasses.ArmyCard("Disciple of Excess", "Each Elite unit you control at this planet gains "
                                                    "“Cannot be routed or exhausted by card effects.”",
-                             "Cultist. Slaanesh.", 2, faction, "Common", 1, 3, 1, False),
+                             "Cultist. Slaanesh.", 2, faction, "Common", 1, 3, 1, False,
+                             war_pack_info="Slash and Burn"),
         CardClasses.SupportCard("Blood Rain Tempest", "Reaction: After the combat phase begins, sacrifice this support"
                                                       " to reverse the order in which planets are checked for battles."
                                                       " (Start with the last planet and finish with the first planet.)",
-                                "Upgrade.", 1, faction, "Common", False),
+                                "Upgrade.", 1, faction, "Common", False, war_pack_info="Slash and Burn"),
         CardClasses.ArmyCard("Noise Marines Warband", "Area Effect (1), Deep Strike (2)", "Soldier. Slaanesh.",
-                             4, faction, "Loyal", 2, 3, 1, False, area_effect=2, deepstrike=2),
+                             4, faction, "Loyal", 2, 3, 1, False, area_effect=2, deepstrike=2,
+                             war_pack_info="Searching for Truth"),
         CardClasses.EventCard("Ominous Wind", "Action: Draw X cards. X is the highest printed cost among units "
                                               "you control. Then, discard 4 cards from your hand.", "Power. Nurgle.",
-                              2, faction, "Common", 1, False, action_in_hand=True, allowed_phases_in_hand="ALL"),
+                              2, faction, "Common", 1, False, action_in_hand=True, allowed_phases_in_hand="ALL",
+                              war_pack_info="Searching for Truth"),
         CardClasses.ArmyCard("Sickening Helbrute", "Brutal.\n"
                                                    "FORCED REACTION: After a unit at this planet is declared as a "
                                                    "defender, deal 1 damage to it.", "Vehicle. Nurgle. Elite.",
-                             7, faction, "Common", 2, 9, 2, False, brutal=True),
+                             7, faction, "Common", 2, 9, 2, False, brutal=True,
+                             war_pack_info="Against the Great Enemy"),
         CardClasses.ArmyCard("Purveyor of Hubris", "Interrupt: When your opponent deploys a non-Elite unit at this "
                                                    "planet, increase its cost by 2.", "Soldier. Slaanesh.",
-                             4, faction, "Common", 3, 4, 2, False),
+                             4, faction, "Common", 3, 4, 2, False, war_pack_info="Against the Great Enemy"),
         CardClasses.AttachmentCard("Cloud of Flies", "Attach to a Nurgle army unit you control.\n"
                                                      "Reaction: After a combat round begins at this planet, "
                                                      "each player deals 2 indirect damage among non-Nurgle units "
                                                      "he controls at this planet, if able.", "Blessing.",
                                    1, faction, "Common", 1, False, type_of_units_allowed_for_attachment="Army",
-                                   must_be_own_unit=True, required_traits="Nurgle"),
+                                   must_be_own_unit=True, required_traits="Nurgle",
+                                   war_pack_info="Against the Great Enemy"),
         CardClasses.WarlordCard("Vha'shaelhur", "Area Effect (1).\n"
                                                 "Reaction: After an enemy army unit is destroyed while this "
                                                 "unit is attacking, put a Cultist token into play at your HQ. "
                                                 "(Limit once per attack.)", "Daemon. Slaanesh.",
                                 faction, 1, 8, 1, 6, "Bloodied.", 7, 7,
                                 ["4x Alluring Daemonette", "1x Tower of Worship",
-                                 "2x Daemonic Incursion", "1x Predatory Instinct"], area_effect=1),
+                                 "2x Daemonic Incursion", "1x Predatory Instinct"], area_effect=1,
+                                war_pack_info="The Warp Unleashed"),
         CardClasses.ArmyCard("Alluring Daemonette", "Combat Action: Sacrifice a Cultist unit you control to move an \n"
                                                     "enemy army unit at an adjacent planet to this planet. "
                                                     "(Limit once per phase.)", "Daemon. Slaanesh.", 3, faction,
-                             "Signature", 3, 2, 1, False, action_in_play=True, allowed_phases_in_play="COMBAT"),
+                             "Signature", 3, 2, 1, False, action_in_play=True, allowed_phases_in_play="COMBAT",
+                             war_pack_info="The Warp Unleashed"),
         CardClasses.SupportCard("Tower of Worship", "Reaction: After you deploy a Daemon unit, put a "
                                                     "Cultist token into play at your HQ.", "Location. Slaanesh.",
-                                1, faction, "Signature", True),
+                                1, faction, "Signature", True, war_pack_info="The Warp Unleashed"),
         CardClasses.EventCard("Daemonic Incursion", "Action: Search the top 6 cards of your deck for a Daemon unit. "
                                                     "Reveal it, add it to your hand, and put the remaining cards on"
                                                     " the bottom of your deck in any order.", "Power.",
-                              1, faction, "Signature", 1, False, action_in_hand=True, allowed_phases_in_hand="ALL"),
+                              1, faction, "Signature", 1, False, action_in_hand=True, allowed_phases_in_hand="ALL",
+                              war_pack_info="The Warp Unleashed"),
         CardClasses.AttachmentCard("Predatory Instinct", "Attach to a Chaos unit you control."
                                                          "Attached unit gains Area Effect (1).", "Skill.",
                                    2, faction, "Signature", 3, False,
-                                   unit_must_match_faction=True, must_be_own_unit=True),
+                                   unit_must_match_faction=True, must_be_own_unit=True,
+                                   war_pack_info="The Warp Unleashed"),
         CardClasses.ArmyCard("Advocator of Blood", "Brutal.\n"
                                                    "While any warlord is bloodied, this unit gains 1 command icon.\n"
                                                    "Reaction: After this unit enters play, move up to 2 damage from "
                                                    "Chaos army units and Khorne units to this unit.",
-                             "Daemon. Khorne.", 3, faction, "Common", 1, 5, 1, False, brutal=True),
+                             "Daemon. Khorne.", 3, faction, "Common", 1, 5, 1, False, brutal=True,
+                             war_pack_info="By Imperial Decree"),
         CardClasses.ArmyCard("Cajivak the Hateful", "Interrupt: When damage equal to or greater than your warlord's "
                                                     "remaining HP is assigned or moved to your warlord, either "
                                                     "(choose one): put this unit into play from your hand at a planet, "
                                                     "or discard this card from your hand to draw 2 cards.",
-                             "Warrior. Khorne.", 2, faction, "Loyal", 2, 2, 2, True),
+                             "Warrior. Khorne.", 2, faction, "Loyal", 2, 2, 2, True, war_pack_info="Overrun"),
         CardClasses.ArmyCard("Champion of Khorne", "Bloodthirst - During a combat round in which 1 or more units "
                                                    "have been destroyed at this planet, this unit gains Brutal and "
                                                    "Immune to enemy events.\n"
                                                    "Forced Reaction: After a battle at an adjacent planet begins, move "
                                                    "this unit to that planet.", "Warrior. Khorne.",
-                             3, faction, "Loyal", 1, 6, 0, False),
+                             3, faction, "Loyal", 1, 6, 0, False, war_pack_info="Breaching the Veil"),
         CardClasses.ArmyCard("Charging Juggernaut", "While this unit has an attachment, it gets +1 HP and it cannot "
                                                     "be routed until a combat round ended this round.\n"
                                                     "Forced Reaction: After the deploy phase begins, move this unit "
                                                     "to the first planet. Then deal 2 damage to an enemy unit at "
                                                     "that planet.", "Daemon. Khorne.",
-                             3, faction, "Loyal", 4, 2, 1, False),
+                             3, faction, "Loyal", 4, 2, 1, False, war_pack_info="Order of the Crimson Oath"),
         CardClasses.ArmyCard("Conjuring Warmaster", "While at a planet with your warlord, this unit gains Mobile.\n"
                                                     "Combat Action: Exhaust an Elite unit you control at a planet to "
                                                     "move it to this planet. (Limit once per phase.)",
                              "Warrior. Slaanesh.", 3, faction, "Loyal", 2, 3, 1, False,
-                             action_in_play=True, allowed_phases_in_play="COMBAT"),
+                             action_in_play=True, allowed_phases_in_play="COMBAT",
+                             war_pack_info="Chronicles of Heroes"),
         CardClasses.ArmyCard("Death Guard Preachers", "Lumbering. Retaliate (2).\n"
                                                       "Reaction: After you deploy a Nurgle unit at this planet, at "
                                                       "this planet move 1 damage from an army unit to another "
@@ -384,17 +421,20 @@ def chaos_cards_init():
                              3, faction, "Common", 2, 6, 2, False, lumbering=True),
         CardClasses.ArmyCard("Expendable Pawn", "Reaction: After a unit is assigned damage at this planet or "
                                                 "an adjacent planet, sacrifice this unit to prevent 2 of that damage.",
-                             "Cultist. Khorne.", 1, faction, "Common", 1, 1, 1, False),
+                             "Cultist. Khorne.", 1, faction, "Common", 1, 1, 1, False,
+                             war_pack_info="By Imperial Decree"),
         CardClasses.ArmyCard("Galvax the Bloated", "This unit gets +1 ATK and +1 HP for each cultist unit you control "
                                                    "at this planet.\n"
                                                    "Reaction: After a Cultist unit you control leaves play from "
                                                    "this planet, deal 1 damage to a unit at this planet.",
-                             "Touched. Nurgle.", 3, faction, "Loyal", 2, 4, 1, True),
+                             "Touched. Nurgle.", 3, faction, "Loyal", 2, 4, 1, True,
+                             war_pack_info="The Laughing God"),
         CardClasses.ArmyCard("Ireful Vanguard", "While any warlord is bloodied, this unit gets +1 ATK and +1 HP.\n"
                                                 "Action: Deal 3 damage to an army unit at this planet. Use this "
                                                 "ability only if your opponent won a command struggle at this "
                                                 "planet this round (Limit once per round.)", "Warrior. Khorne.",
-                             3, faction, "Loyal", 3, 4, 1, False, action_in_play=True, allowed_phases_in_play="COMBAT"),
+                             3, faction, "Loyal", 3, 4, 1, False, action_in_play=True, allowed_phases_in_play="COMBAT",
+                             war_pack_info="By Imperial Decree"),
         CardClasses.ArmyCard("Lekor Blight-Tongue", "Sweep (1).\n"
                                                     "Headquarters Action: Exhaust this unit to place a token on a "
                                                     "target army unit. Then if there is 2 tokens or more on that "
@@ -404,7 +444,7 @@ def chaos_cards_init():
         CardClasses.ArmyCard("Neurotic Obliterator", "This unit gets +1 ATK and +1 HP for each attachment on it.\n"
                                                      "Reaction: After this unit is chosen as a defender, exhaust a "
                                                      "Weapon attachment on it to deal 1 damage to the attacker.",
-                             "Warrior.", 3, faction, "Common", 1, 5, 1, False),
+                             "Warrior.", 3, faction, "Common", 1, 5, 1, False, war_pack_info="Breaching the Veil"),
         CardClasses.ArmyCard("Plagueburst Crawler", "Lumbering.\n"
                                                     "Headquarters Action: Ready this unit to deal 2 damage to a "
                                                     "target non-unique unit.", "Vehicle. Nurgle. Daemon.",
@@ -414,12 +454,14 @@ def chaos_cards_init():
                                                   "you control at the same planet instead as an attachment with the "
                                                   "text: \"Attach to a non-Daemon, non-Vehicle army unit. Attached "
                                                   "unit gets +3 ATK, +3 HP and the Khorne trait.\"",
-                             "Daemon. Cultist. Khorne.", 4, faction, "Common", 3, 3, 0, False),
+                             "Daemon. Cultist. Khorne.", 4, faction, "Common", 3, 3, 0, False,
+                             war_pack_info="Promise of War"),
         CardClasses.ArmyCard("Sivarla Soulbinder", "Each Cultist token you control gets +1 ATK and +1 HP. Your Cultist "
                                                    "token limit is set to 2.\n"
                                                    "Combat Action: Move a Cultist unit you control to a target planet. "
                                                    "(Limit once per phase.)", "Daemon. Slaanesh.",
-                             2, faction, "Loyal", 1, 4, 1, True, action_in_play=True, allowed_phases_in_play="COMBAT"),
+                             2, faction, "Loyal", 1, 4, 1, True, action_in_play=True, allowed_phases_in_play="COMBAT",
+                             war_pack_info="Aligned Stars"),
         CardClasses.ArmyCard("The Masque", "Sweep (1). Retaliate (4).\n"
                                            "Reaction: After this unit resolves an attack, put a Cultist token into "
                                            "play at this planet.", "Daemon. Slaanesh. Elite.",
@@ -428,12 +470,13 @@ def chaos_cards_init():
                                                        "This unit cannot change control more than once per round.\n"
                                                        "Action: Give control of this unit to your opponent.",
                              "Cultist. Mob.", 0, faction, "Loyal", 2, 1, 0, False,
-                             action_in_play=True, allowed_phases_in_play="ALL"),
+                             action_in_play=True, allowed_phases_in_play="ALL", war_pack_info="The Laughing God"),
         CardClasses.AttachmentCard("Improvised Minefield", "Deep Strike (1). Attach to a planet.\n"
                                                            "Forced Reaction: After a non-warlord unit is declared as "
                                                            "an attacker at this planet, deal 3 damage to it and "
                                                            "discard this card.", "Location.",
-                                   2, faction, "Common", 1, False, deepstrike=1, planet_attachment=True),
+                                   2, faction, "Common", 1, False, deepstrike=1, planet_attachment=True,
+                                   war_pack_info="Enemy Territory"),
         CardClasses.AttachmentCard("Medallion of Betrayal", "Attach to a non-warlord unit.\n"
                                                             "Attached unit gets +1 ATK and +1 HP, double if it "
                                                             "is a Cultist.\n"
@@ -441,45 +484,47 @@ def chaos_cards_init():
                                                             "you control no Cultist token, put a Cultist token into "
                                                             "play at your HQ.", "Wargear. Weapon. Slaanesh.",
                                    1, faction, "Loyal", 2, False, extra_attack=1, extra_health=1,
-                                   type_of_units_allowed_for_attachment="Army/Synapse/Token"),
+                                   type_of_units_allowed_for_attachment="Army/Synapse/Token",
+                                   war_pack_info="Aligned Stars"),
         CardClasses.AttachmentCard("Scrying Pool", "Attach to an army unit. Attached unit gets +1 HP.\n"
                                                    "Interrupt: When you would discard a card from your hand as a "
                                                    "result of an opponent's triggered ability, discard this card from "
                                                    "your hand and draw a card instead. Then put it into play from your "
                                                    "discard pile attached to an eligible unit, if able.",
                                    "Blessing. Tzeentch.", 0, faction, "Common", 1, False, extra_health=1,
-                                   type_of_units_allowed_for_attachment="Army"),
+                                   type_of_units_allowed_for_attachment="Army", war_pack_info="Overrun"),
         CardClasses.EventCard("Everlasting Rage", "Action: Remove up to X damage from a Khorne unit, then this unit "
                                                   "gets +X ATK for its next attack this phase. X is the number of "
                                                   "Khorne units you control. (Max 1 per round.)", "Tactic. Khorne.",
-                              2, faction, "Common", 1, False, action_in_hand=True, allowed_phases_in_hand="ALL"),
+                              2, faction, "Common", 1, False, action_in_hand=True, allowed_phases_in_hand="ALL",
+                              war_pack_info="Promise of War"),
         CardClasses.EventCard("Tides of Chaos", "Reaction: After your warlord commits to a planet, each army unit "
                                                 "gains an amount of command icons equal to their ATK value until the "
                                                 "end of the phase.", "Tactic.",
-                              1, faction, "Loyal", 2, False),
+                              1, faction, "Loyal", 2, False, war_pack_info="The Laughing God"),
         CardClasses.SupportCard("Dark Allegiance", "When deployed, choose a trait among: Nurgle, Khorne, "
                                                    "Slaanesh, Tzeentch.\n"
                                                    "Reaction: After the deploy phase begins, Rally 6 a card with the "
                                                    "chosen trait, then deploy it at a target planet reducing its "
                                                    "cost by 1. Use this ability only if each unit you control shares "
                                                    "the chosen trait.", "Pledge.",
-                                1, faction, "Loyal", False),
+                                1, faction, "Loyal", False, war_pack_info="Chronicles of Heroes"),
         CardClasses.SupportCard("Myriad Excesses", "You cannot sacrifice tokens.\n"
                                                    "Reaction: After the deploy phase ends, both players set their "
                                                    "command dial then reveal it. Place 2 Cultist tokens into play "
                                                    "at the planet you chose. Then, if your opponent chose the "
                                                    "same planet, they may choose either to destroy one of those "
                                                    "tokens or take control of it.", "Pledge.",
-                                2, faction, "Loyal", False),
+                                2, faction, "Loyal", False, war_pack_info="Chronicles of Heroes"),
         CardClasses.SupportCard("Unstoppable Tide", "After your warlord is assigned damage, exhaust this support to "
                                                     "prevent all of that damage. At the end of the phase, deal an "
                                                     "amount of damage to your warlord equal to the damage prevented.",
-                                "Pledge.", 0, faction, "Loyal", False),
+                                "Pledge.", 0, faction, "Loyal", False, war_pack_info="Chronicles of Heroes"),
         CardClasses.SupportCard("Cult of Khorne", "Interrupt: When a Khorne army unit enters play under your control, "
                                                   "move 1 damage from a unit to this support. Then if this support has "
                                                   "2 damage on it, attach it to a unit as a Wargear attachment with "
                                                   "the text: \"Attach to an army unit. Attached unit gets +2 ATK.\".",
-                                "Cult. Khorne.", 1, faction, "Loyal", False),
+                                "Cult. Khorne.", 1, faction, "Loyal", False, war_pack_info="Aligned Stars"),
         CardClasses.WarlordCard("Tras the Corrupter", "Forced Reaction: After you commit your warlord, replace a "
                                                       "planet with one from The Breach sector (each planet can "
                                                       "only be used once). After that planet is captured, replace "
@@ -520,17 +565,19 @@ def chaos_cards_init():
                                 "were in your hand. (Limit once per game.)", 7, 7,
                                 ["2x Drammask Nane", "1x Sacrificial Altar", "1x Talisman of Denial",
                                  "1x The Blood Pits", "1x The Grand Plan",
-                                 "1x The Inevitable Decay", "1x The Orgiastic Feast"]),
+                                 "1x The Inevitable Decay", "1x The Orgiastic Feast"],
+                                war_pack_info="The Laughing God"),
         CardClasses.ArmyCard("Drammask Nane", "Reaction: After you play a Ritual event, sacrifice a unit at this "
                                               "planet to have up to 4 units you control at this planet get +1 ATK "
                                               "until the end of the phase.", "Sorcerer.",
-                             3, faction, "Signature", 2, 4, 2, True),
+                             3, faction, "Signature", 2, 4, 2, True, war_pack_info="The Laughing God"),
         CardClasses.SupportCard("Sacrificial Altar", "Deploy Action: Exhaust this support and target a non "
                                                      "first-planet to draw 1 card an gain 1 resource. If your "
                                                      "opponent wins a command struggle at the targeted planet "
                                                      "this round, they draw 1 card and gain 1 resource.",
                                 "Location.", 1, faction, "Signature", False,
-                                action_in_play=True, allowed_phases_in_play="DEPLOY"),
+                                action_in_play=True, allowed_phases_in_play="DEPLOY",
+                                war_pack_info="The Laughing God"),
         CardClasses.AttachmentCard("Talisman of Denial", "Attach to your warlord.\n"
                                                          "Attached unit gains 3 command icons.\n"
                                                          "Combat Action: Sacrifice this attachment to switch the "
@@ -538,25 +585,27 @@ def chaos_cards_init():
                                                          "at this planet.", "Wargear.",
                                    0, faction, "Signature", 3, False, extra_command=3,
                                    type_of_units_allowed_for_attachment="Warlord", must_be_own_unit=True,
-                                   action_in_play=True, allowed_phases_in_play="COMBAT"),
+                                   action_in_play=True, allowed_phases_in_play="COMBAT",
+                                   war_pack_info="The Laughing God"),
         CardClasses.EventCard("The Blood Pits", "Reaction: After your warlord commits to a planet with an enemy "
                                                 "warlord, choose up to 1 enemy unit at each planet without a "
                                                 "warlord. Deal 2 damage to each chosen unit.", "Ritual. Khorne.",
-                              1, faction, "Signature", 1, False),
+                              1, faction, "Signature", 1, False, war_pack_info="The Laughing God"),
         CardClasses.EventCard("The Grand Plan", "Interrupt: When a player places a planet in their victory display, "
                                                 "sacrifice an army unit at a planet with no enemy army unit to remove "
                                                 "that planet from the game instead. At the end of the next round, "
                                                 "place the planet in that player's victory display and draw 4 cards.",
-                              "Ritual. Tzeentch.", 1, faction, "Signature", 1, False),
+                              "Ritual. Tzeentch.", 1, faction, "Signature", 1, False, war_pack_info="The Laughing God"),
         CardClasses.EventCard("The Inevitable Decay", "Reaction: After an enemy army unit enters play or moves "
                                                       "to a planet with a unique unit you control, exhaust it "
                                                       "and move up to 2 damage from units at the same planet "
                                                       "to that enemy unit.", "Ritual. Nurgle.",
-                              1, faction, "Signature", 1, False),
+                              1, faction, "Signature", 1, False, war_pack_info="The Laughing God"),
         CardClasses.EventCard("The Orgiastic Feast", "Command Action: Rally 12 up to two units with cost 4 or lower, "
                                                      "put them into play at a target planet and shuffle your deck. If "
                                                      "those units are still in play at the end of the round, return "
                                                      "them to your hand.", "Ritual. Slaanesh.",
-                              4, faction, "Signature", 1, False, action_in_hand=True, allowed_phases_in_hand="COMMAND")
+                              4, faction, "Signature", 1, False, action_in_hand=True, allowed_phases_in_hand="COMMAND",
+                              war_pack_info="The Laughing God")
     ]
     return chaos_card_array
