@@ -987,6 +987,11 @@ class PlanetCard(Card):
         self.commit_text = commit_text
         self.sector = sector
 
+    def as_dict(self):
+        return {'name': self.name, 'faction': self.faction, 'loyalty': self.loyalty, 'traits': self.traits,
+                'card type': self.card_type, 'image name': self.image_name, 'cost': self.cost, 'command': -1,
+                'attack': -1, 'health': -1, 'shields': self.shields, 'sector': self.sector}
+
     def get_name(self):
         return self.name
 

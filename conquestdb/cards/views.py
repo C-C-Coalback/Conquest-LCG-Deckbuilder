@@ -60,6 +60,7 @@ def ajax_view(request):
         if card_type == "Planet" and view_as != "Rows Mini":
             filtered_df = planet_df
             filtered_df = filtered_df[filtered_df['name'].str.contains(search)]
+            filtered_df = filtered_df[filtered_df['sector'].str.contains(traits)]
             card_names = filtered_df['name'].to_list()
             image_names = filtered_df['image name'].to_list()
             return JsonResponse({'message': "", 'cards': card_names, 'image_names': image_names})
