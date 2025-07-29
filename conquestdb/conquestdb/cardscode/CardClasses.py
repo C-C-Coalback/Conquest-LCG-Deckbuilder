@@ -28,9 +28,9 @@ class Card:
         self.unique = unique
         self.ready = True
         self.image_name = name.replace(" ", "_")
-        self.image_name.replace("\"", "")
-        self.image_name.replace(":", "")
-        self.image_name.replace("'idden_Base", "idden_Base")
+        self.image_name = self.image_name.replace("\"", "")
+        self.image_name = self.image_name.replace(":", "")
+        self.image_name = self.image_name.replace("'idden_Base", "idden_Base")
         self.applies_discounts = applies_discounts[0]
         self.discount_amount = applies_discounts[1]
         self.discount_match_factions = applies_discounts[2]
@@ -976,19 +976,51 @@ class TokenCard(UnitCard):
         print("Text:", self.text, "\nStats:", self.attack, "Attack,", self.health, "Health")
 
 
-class PlanetCard:
-    def __init__(self, name, text, cards, resources, red, blue, green, image_name):
-        self.name = name
-        self.text = text
+class PlanetCard(Card):
+    def __init__(self, name, text, cards, resources, red, blue, green, sector, image_name="", commit_text=""):
+        super().__init__(name, text, "", -1, "", "", 0, "Planet", True)
         self.cards = cards
         self.resources = resources
         self.red = red
         self.blue = blue
         self.green = green
-        self.image_name = image_name
+        self.commit_text = commit_text
+        self.sector = sector
 
     def get_name(self):
         return self.name
+
+    def get_sector(self):
+        return self.sector
+
+    def get_sector_as_text(self):
+        return "Sector: " + self.sector + "\n"
+
+    def get_icons_as_text(self):
+        text = "Icons: \n"
+        if self.red:
+            text += "Material (red)\n"
+        if self.green:
+            text += "Strongpoint (green)\n"
+        if self.blue:
+            text += "Technology (blue)\n"
+        text += "\n"
+        return text
+
+    def get_winnings_as_text(self):
+        text = "Command struggle rewards:\n"
+        text += "Resources: " + str(self.resources)
+        text += "\nCards: " + str(self.cards)
+        text += "\n\n"
+        return text
+
+    def get_commit_text_as_text(self):
+        if self.commit_text:
+            return self.commit_text + "\n\n"
+        return ""
+
+    def get_commit_text(self):
+        return self.commit_text
 
     def get_image_name(self):
         return self.image_name

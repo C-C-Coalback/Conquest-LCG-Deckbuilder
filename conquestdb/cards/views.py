@@ -15,6 +15,7 @@ planet_array = Initfunctions.init_planet_cards()
 apoka_errata_array = Initfunctions.init_apoka_errata_cards()
 images_dict = {}
 cards_dict = {}
+planets_dict = {}
 apoka_errata_dict = {}
 banned_cards = ["Bonesinger Choir", "Squiggoth Brute", "Corrupted Teleportarium", "Gun Drones", "Archon's Palace",
                 "Land Speeder Vengeance", "Sowing Chaos", "Smasha Gun Battery", "The Prince's Might",
@@ -23,10 +24,14 @@ banned_cards = ["Bonesinger Choir", "Squiggoth Brute", "Corrupted Teleportarium"
 for key in range(len(card_array)):
     cards_dict[card_array[key].name] = card_array[key]
     images_dict[card_array[key].image_name] = card_array[key]
+for key in range(len(planet_array)):
+    planets_dict[planet_array[key].name] = planet_array[key]
+    images_dict[planet_array[key].image_name] = planet_array[key]
 for key in range(len(apoka_errata_array)):
     apoka_errata_dict[apoka_errata_array[key].image_name] = apoka_errata_array[key]
 
 df = pd.DataFrame([x.as_dict() for x in card_array])
+planet_df = pd.DataFrame([x.as_dict() for x in planet_array])
 
 
 def index(request):
@@ -43,11 +48,21 @@ def ajax_view(request):
         if search in cards_dict and redirect_enabled == "Yes":
             image_name = cards_dict[search].image_name
             return JsonResponse({'message': "REDIRECT", 'cards': card_names, 'image_names': [image_name]})
+        elif search in planets_dict and redirect_enabled == "Yes":
+            image_name = planets_dict[search].image_name
+            return JsonResponse({'message': "REDIRECT", 'cards': card_names, 'image_names': [image_name]})
         faction = request.POST.get('faction')
         traits = request.POST.get('traits')
         card_type = request.POST.get('card_type')
         shields = request.POST.get('shields')
         view_as = request.POST.get('view-as')
+
+        if card_type == "Planet" and view_as != "Rows Mini":
+            filtered_df = planet_df
+            filtered_df = filtered_df[filtered_df['name'].str.contains(search)]
+            card_names = filtered_df['name'].to_list()
+            image_names = filtered_df['image name'].to_list()
+            return JsonResponse({'message': "", 'cards': card_names, 'image_names': image_names})
         min_cost = -1
         max_cost = -1
         min_command = -1
@@ -297,6 +312,9 @@ def card_data(request, card_name):
     comments = []
     comment_ids = []
     no_comments = True
+    if card_type == "Planet":
+        text = card.get_sector_as_text() + card.get_icons_as_text() + card.get_winnings_as_text() +\
+               card.get_commit_text_as_text() + text
     if os.path.exists(target_directory):
         for infile in sorted(os.listdir(target_directory)):
             with open(target_directory + infile, 'r') as file:
