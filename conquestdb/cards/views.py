@@ -21,6 +21,13 @@ banned_cards = ["Bonesinger Choir", "Squiggoth Brute", "Corrupted Teleportarium"
                 "Land Speeder Vengeance", "Sowing Chaos", "Smasha Gun Battery", "The Prince's Might",
                 "Purveyor of Hubris", "Doom", "Exterminatus", "Mind Shackle Scarab",
                 "Crypt of Saint Camila", "Warpstorm"]
+warpacks_list = []
+cycles_list = []
+for i in range(len(card_array)):
+    if card_array[i].war_pack not in warpacks_list:
+        warpacks_list.append(card_array[i].war_pack)
+    if card_array[i].cycle not in cycles_list:
+        cycles_list.append(card_array[i].cycle)
 for key in range(len(card_array)):
     cards_dict[card_array[key].name] = card_array[key]
     images_dict[card_array[key].image_name] = card_array[key]
@@ -36,7 +43,8 @@ planet_df = pd.DataFrame([x.as_dict() for x in planet_array])
 
 def index(request):
     light_dark_toggle = light_dark_dict.get_light_mode(request.user.username)
-    return render(request, 'cards/index.html', {"light_dark_toggle": light_dark_toggle})
+    return render(request, 'cards/index.html', {"light_dark_toggle": light_dark_toggle,
+                                                "cycles_list": cycles_list, "warpacks_list": warpacks_list})
 
 
 # View to handle the Ajax request
@@ -56,7 +64,8 @@ def ajax_view(request):
         card_type = request.POST.get('card_type')
         shields = request.POST.get('shields')
         view_as = request.POST.get('view-as')
-
+        cycle = request.POST.get('cycle')
+        warpack = request.POST.get('war-pack')
         if card_type == "Planet" and view_as != "Rows Mini":
             filtered_df = planet_df
             filtered_df = filtered_df[filtered_df['name'].str.contains(search)]
@@ -159,6 +168,10 @@ def ajax_view(request):
             filtered_df = filtered_df[filtered_df['traits'].str.contains(traits)]
         if search is not None:
             filtered_df = filtered_df[filtered_df['name'].str.contains(search)]
+        if cycle:
+            filtered_df = filtered_df.loc[filtered_df['cycle'] == cycle]
+        if warpack:
+            filtered_df = filtered_df.loc[filtered_df['war pack'] == warpack]
         if shields != "-1":
             shields = int(shields)
             filtered_df = filtered_df.loc[filtered_df['shields'] == shields]

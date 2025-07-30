@@ -395,7 +395,8 @@ class UnitCard(Card):
     def as_dict(self):
         return {'name': self.name, 'faction': self.faction, 'loyalty': self.loyalty, 'traits': self.traits,
                 'card type': self.card_type, 'image name': self.image_name, 'cost': self.cost, 'command': self.command,
-                'attack': self.attack, 'health': self.health, 'shields': self.shields}
+                'attack': self.attack, 'health': self.health, 'shields': self.shields,
+                'cycle': self.cycle, 'war pack': self.war_pack}
 
     def get_sweep(self):
         sweep = self.sweep

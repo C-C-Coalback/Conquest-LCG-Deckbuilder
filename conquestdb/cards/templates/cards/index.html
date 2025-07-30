@@ -55,6 +55,18 @@
                 <p id="max-attack">Maximum Attack:</p><input id="maxAttack" type="text" name="maxAttack">
                 <p id="min-health">Minimum Health:</p><input id="minHealth" type="text" name="minHealth">
                 <p id="max-health">Maximum Health:</p><input id="maxHealth" type="text" name="maxHealth">
+                <p id="p-war-pack">War Pack:</p><select name="war-pack" id="war-pack">
+                        <option value=""></option>
+                        {% for warpack_name in warpacks_list %}
+                            <option value="{{ warpack_name }}">{{ warpack_name }}</option>
+                        {% endfor %}
+                    </select>
+                <p id="p-cycle">Cycle:</p><select name="cycle" id="cycle">
+                        <option value=""></option>
+                        {% for cycle_name in cycles_list %}
+                            <option value="{{ cycle_name }}">{{ cycle_name }}</option>
+                        {% endfor %}
+                    </select>
             </div>
             <div id="buttons-container">
                 <button type="submit" id="submit">Perform Search</button>
@@ -108,6 +120,10 @@
             searchInput.value = "";
             var searchInput = document.getElementById("maxHealth");
             searchInput.value = "";
+            var searchInput = document.getElementById("cycle");
+            searchInput.value = "None";
+            var searchInput = document.getElementById("war-pack");
+            searchInput.value = "None";
         }
 
         function previousPage() {
@@ -181,6 +197,8 @@
                         'max-attack': $('#maxAttack').val(),
                         'min-health': $('#minHealth').val(),
                         'max-health': $('#maxHealth').val(),
+                        'war-pack': $('#war-pack').val(),
+                        'cycle': $('#cycle').val(),
                         'redirect-enabled': "Yes",
                         'view-as': $('#view-as-selector').val(),
                         'csrfmiddlewaretoken': '{{ csrf_token }}' // CSRF token for security
