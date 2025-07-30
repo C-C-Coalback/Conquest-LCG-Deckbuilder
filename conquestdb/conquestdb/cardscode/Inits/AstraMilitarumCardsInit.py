@@ -434,38 +434,38 @@ def astra_militarum_cards_init():
                                                     "units you control. Then you may exhaust an enemy army unit at "
                                                     "this planet and deal damage equal to its ATK value to this unit.",
                              "Novice. Ecclesiarchy.", 2, faction, "Loyal", 1, 2, 1, False,
-                             war_pack_info="Order of the Crimson Oath"),
+                             war_pack_info="Defenders of the Faith"),
         CardClasses.ArmyCard("Dominion Eugenia", "While this unit has faith, it gains Armorbane.\n"
                                                  "Reaction: After another Astra Militarum Ecclesiarchy unit you "
                                                  "control at this planet is declared as an attacker, place 1 faith "
                                                  "on this unit and the attacker.", "Soldier. Officer. Ecclesiarchy.",
-                             4, faction, "Loyal", 3, 4, 3, True, war_pack_info="Order of the Crimson Oath"),
+                             4, faction, "Loyal", 3, 4, 3, True, war_pack_info="Defenders of the Faith"),
         CardClasses.ArmyCard("Eloquent Confessor", "While this unit has faith, it gets +1 ATK.\n"
                                                    "Combat Reaction: After a non-warlord unit moves or enters play "
                                                    "at this planet, pay 1 faith to exhaust it.",
                              "Priest. Ecclesiarchy.", 2, faction, "Common", 2, 2, 1, False,
-                             war_pack_info="Order of the Crimson Oath"),
+                             war_pack_info="Defenders of the Faith"),
         CardClasses.ArmyCard("Evangelizing Ships", "Combat Action: Pay 1 faith to put a Guardsman token into play at a "
                                                    "non-green planet. Then your opponent moves this unit to a planet "
                                                    "of his choice. (Limit once per phase.)",
                              "Transport. Ecclesiarchy.", 2, faction, "Loyal", 1, 3, 1, False,
                              action_in_play=True, allowed_phases_in_play="COMBAT",
-                             war_pack_info="Order of the Crimson Oath"),
+                             war_pack_info="Defenders of the Faith"),
         CardClasses.ArmyCard("Exalted Celestians", "While this unit has faith and is not a defender, it cannot be "
                                                    "dealt damage.\n"
                                                    "Reaction: After this unit exhausts, place 1 faith on it.",
                              "Soldier. Ecclesiarchy.", 2, faction, "Common", 2, 2, 1, False,
-                             war_pack_info="Order of the Crimson Oath"),
+                             war_pack_info="Defenders of the Faith"),
         CardClasses.ArmyCard("Fanatical Sister Repentia", "Interrupt: When this unit uses Shield with Faith, double "
                                                           "the number of faith on it.",
                              "Soldier. Martyr. Ecclesiarchy.", 3, faction, "Common", 4, 2, 1, False,
-                             war_pack_info="Order of the Crimson Oath"),
+                             war_pack_info="Defenders of the Faith"),
         CardClasses.ArmyCard("Heavy Flamer Retributor", "While this unit has faith, it cannot be routed.\n"
                                                         "Reaction: After this unit resolves its attack, deal 1 "
                                                         "damage to a number of different enemy units at this "
                                                         "planet equal to faith on this unit.",
                              "Soldier. Ecclesiarchy.", 3, faction, "Common", 3, 2, 2, False,
-                             war_pack_info="Order of the Crimson Oath"),
+                             war_pack_info="Defenders of the Faith"),
         CardClasses.ArmyCard("Holy Battery", "No Wargear Attachments.\n"
                                              "While at a planet with a unit with faith you control, this "
                                              "unit gets +1 ATK.\n"
@@ -491,7 +491,7 @@ def astra_militarum_cards_init():
                                              "control. Then place faith equal to the damage removed among "
                                              "army units you control.\n", "Saint. Elite. Ecclesiarchy.",
                              5, faction, "Loyal", 4, 5, 2, False, deepstrike=3,
-                             war_pack_info="Order of the Crimson Oath"),
+                             war_pack_info="Defenders of the Faith"),
         CardClasses.ArmyCard("Pattern IX Immolator", "No Wargear Attachments.\n"
                                                      "Command Action: Deal X damage among enemy non-warlord units at "
                                                      "this planet and place X faith among army units at this planet. "
@@ -499,25 +499,25 @@ def astra_militarum_cards_init():
                                                      "phase minus 1. (Limit once per phase.)",
                              "Vehicle. Tank. Ecclesiarchy.", 3, faction, "Common", 3, 3, 1, False,
                              action_in_play=True, allowed_phases_in_play="COMMAND",
-                             war_pack_info="Order of the Crimson Oath"),
+                             war_pack_info="Defenders of the Faith"),
         CardClasses.ArmyCard("Penitent Engine", "No Wargear Attachments.\n"
                                                 "Reaction: After an attack resolved by a unit you control at this "
                                                 "planet does not destroy the defender, place 1 faith on this unit "
                                                 "and it gets +1 ATK for its next attack this phase.",
                              "Vehicle. Martyr. Ecclesiarchy.", 3, faction, "Loyal", 2, 3, 1, False,
-                             wargear_attachments_permitted=False, war_pack_info="Order of the Crimson Oath"),
+                             wargear_attachments_permitted=False, war_pack_info="Defenders of the Faith"),
         CardClasses.ArmyCard("Sacred Rose Immolator", "No Wargear Attachments.\n"
                                                       "Reaction: After this unit resolves its attack or moves to a "
                                                       "planet, place 1 faith on it. Then deal 1 damage to up to "
                                                       "2 different enemy units at this planet. "
                                                       "(Limit twice per round.)", "Vehicle. Transport. Ecclesiarchy.",
                              3, faction, "Common", 1, 3, 1, False, wargear_attachments_permitted=False,
-                             war_pack_info="Order of the Crimson Oath"),
+                             war_pack_info="Defenders of the Faith"),
         CardClasses.ArmyCard("Saint Erika", "If you don't control faith, destroy this unit.\n"
                                             "Forced Reaction: After a non-Elysia, non-Saint Astra Militarum army unit "
                                             "enters your discard pile from this planet, pay 1 faith to return that "
                                             "unit to your hand.", "Saint. Martyr. Ecclesiarchy.",
-                             3, faction, "Loyal", 5, 5, 1, True, war_pack_info="Order of the Crimson Oath"),
+                             3, faction, "Loyal", 5, 5, 1, True, war_pack_info="Defenders of the Faith"),
         CardClasses.ArmyCard("Siege Regiment Manticore", "No Wargear Attachments.\n"
                                                          "Reaction: After the ranged skirmish at an adjacent planet "
                                                          "ends, exhaust this unit to deal 3 damage to an enemy "
@@ -528,7 +528,7 @@ def astra_militarum_cards_init():
                                                        "Reaction: After a warlord commits to this planet, place 1 "
                                                        "faith on an army unit at this planet.",
                              "Soldier. Ecclesiarchy.", 1, faction, "Common", 1, 1, 1, False,
-                             war_pack_info="Order of the Crimson Oath"),
+                             war_pack_info="Defenders of the Faith"),
         CardClasses.ArmyCard("Undying Saint", "Lumbering.\n"
                                               "Cannot be damaged by Area Effect.\n"
                                               "Reaction: After the deploy phase begins, if this unit is in your "
@@ -541,11 +541,11 @@ def astra_militarum_cards_init():
                                                   "is destroyed, this unit gets +1 ATK and +1 HP until the end "
                                                   "of the phase. Then you may pay 1 faith to ready this unit. "
                                                   "(Limit once per phase.)", "Soldier. Ecclesiarchy.",
-                             3, faction, "Common", 3, 2, 1, False, war_pack_info="Order of the Crimson Oath"),
+                             3, faction, "Common", 3, 2, 1, False, war_pack_info="Defenders of the Faith"),
         CardClasses.ArmyCard("Zealous Cantus", "Reaction: After an Ecclesiarchy or Grey Knights card enters your "
                                                "discard pile, place 1 faith on an army unit. "
                                                "(Limit twice per faith.)", "Soldier. Ecclesiarchy.",
-                             3, faction, "Common", 3, 3, 1, False, war_pack_info="Order of the Crimson Oath"),
+                             3, faction, "Common", 3, 3, 1, False, war_pack_info="Defenders of the Faith"),
         CardClasses.AttachmentCard("Banner of the Sacred Rose", "Limited.\n"
                                                                 "Attach to a unit you control.\n"
                                                                 "Interrupt: When you deploy an Ecclesiarchy unit, "
@@ -553,7 +553,7 @@ def astra_militarum_cards_init():
                                                                 "the number of green planets in your opponent's "
                                                                 "victory display.", "Standard. Ecclesiarchy.",
                                    1, faction, "Loyal", 2, True, limited=True, must_be_own_unit=True,
-                                   war_pack_info="Order of the Crimson Oath"),
+                                   war_pack_info="Defenders of the Faith"),
         CardClasses.AttachmentCard("Blade of the Crimson Oath", "Attach to a non-warlord unit.\n"
                                                                 "Attached unit gets +2 ATK and +2 HP.\n"
                                                                 "Interrupt: When your opponent triggers an ability "
@@ -578,7 +578,7 @@ def astra_militarum_cards_init():
                                                            "unit at this planet, place 1 faith on an army unit at "
                                                            "this planet.", "Wargear. Weapon. Ecclesiarchy.",
                                    1, faction, "Common", 1, False, type_of_units_allowed_for_attachment="Army",
-                                   extra_attack=2, deepstrike=0, war_pack_info="Order of the Crimson Oath"),
+                                   extra_attack=2, deepstrike=0, war_pack_info="Defenders of the Faith"),
         CardClasses.AttachmentCard("Sanctified Bolter", "Attach to an army unit you control.\n"
                                                         "Attached unit gets +1 ATK and +1 HP.\n"
                                                         "Reaction: After a ranged skirmish at this planet begins, "
@@ -586,7 +586,7 @@ def astra_militarum_cards_init():
                                                         "this planet, place 2 faith among army units at this planet.",
                                    "Wargear. Weapon.", 1, faction, "Loyal", 1, False, extra_attack=1, extra_health=1,
                                    type_of_units_allowed_for_attachment="Army", must_be_own_unit=True,
-                                   war_pack_info="Order of the Crimson Oath"),
+                                   war_pack_info="Defenders of the Faith"),
         CardClasses.AttachmentCard("Seal of the Ebon Chalice", "Attach to an army unit. Attached unit gets +1 HP.\n"
                                                                "Interrupt: When attached unit takes damage from a "
                                                                "unit with a higher printed cost, deal to that unit "
@@ -601,7 +601,7 @@ def astra_militarum_cards_init():
                                                             "hand into play attached to the attacker.\n",
                                    "Vow. Ecclesiarchy.", 2, faction, "Common", 1, False, must_be_enemy_unit=True,
                                    type_of_units_allowed_for_attachment="Army",
-                                   war_pack_info="Order of the Crimson Oath"),
+                                   war_pack_info="Defenders of the Faith"),
         CardClasses.EventCard("Our Last Stand", "Action: Place 1 faith on each Astra Militarum unit you control at the "
                                                 "first planet. If that planet shares a common type with two planets in "
                                                 "your opponent's victory display your warlord gains: Interrupt:\" "
@@ -609,28 +609,28 @@ def astra_militarum_cards_init():
                                                 "\" until the end of the battle. Max 1 per round.",
                               "Prayer. Ecclesiarchy.", 0, faction, "Loyal", 2, False,
                               action_in_hand=True, allowed_phases_in_hand="ALL",
-                              war_pack_info="Order of the Crimson Oath"),
+                              war_pack_info="Defenders of the Faith"),
         CardClasses.EventCard("Wrathful Retribution", "Reaction: After an enemy unit moves to, or enters play at, "
                                                       "a planet where a battle is taking place, place faith equal "
                                                       "to its printed cost among army units you control. "
                                                       "Then ready a non-Elite unit with faith.",
                               "Prayer. Ecclesiarchy.", 1, faction, "Loyal", 2, False,
-                              war_pack_info="Order of the Crimson Oath"),
+                              war_pack_info="Defenders of the Faith"),
         CardClasses.SupportCard("Holy Crusade", "Each other non-signature card in your deck must be Ecclesiarchy.\n"
                                                 "Action: Exhaust this support to place 2 faith among "
                                                 "units you control.", "Pledge.", 1, faction, "Loyal", False,
-                                action_in_play=True, allowed_phases_in_play="ALL"),
+                                action_in_play=True, allowed_phases_in_play="ALL", war_pack_info="For the Enclaves"),
         CardClasses.SupportCard("Munitorum Support", "Once per round you may deploy a card on this support as "
                                                      "if it were in your hand.\n"
                                                      "Reaction: After you deploy this support, place a M35 Galaxy "
                                                      "Lasgun, a Hot-Shot Laspistol, a Bodyguard, a Seal of the "
                                                      "Ebon Chalice, and a Defense Battery on this card.", "Pledge.",
-                                1, faction, "Common", False),
+                                1, faction, "Common", False, war_pack_info="For the Enclaves"),
         CardClasses.SupportCard("Senatorum Directives", "Reaction: After a Catachan unit you control is assigned "
                                                         "damage, put a Guardsman token into play at the same planet. "
                                                         "You may then reassign one of that damage to it."
                                                         " (Limit once per battle.)", "Pledge.",
-                                1, faction, "Loyal", False),
+                                1, faction, "Loyal", False, war_pack_info="For the Enclaves"),
         CardClasses.SupportCard("Agra's Preachings", "Limited.\n"
                                                      "Reaction: After your opponent wins a battle, exhaust this "
                                                      "support and target a planet with an enemy unit to rally 6 "
@@ -638,20 +638,20 @@ def astra_militarum_cards_init():
                                                      "When the combat phase ends, deploy that unit at that planet "
                                                      "and reduce its cost by 2. If you can't, discard it.",
                                 "Decree. Ecclesiarchy.", 1, faction, "Common", True, limited=True,
-                                war_pack_info="Order of the Crimson Oath"),
+                                war_pack_info="Defenders of the Faith"),
         CardClasses.SupportCard("Blood of Martyrs", "Interrupt: When an Astra Militarum unit you control is destroyed, "
                                                     "exhaust this support and target up to 3 army units at the same "
                                                     "planet. Move any faith on that unit to the targeted units and "
                                                     "they get +1 ATK for their next attack this phase. Then if the "
                                                     "destroyed card is a Martyr, draw 1 card.",
                                 "Decree. Ecclesiarchy.", 1, faction, "Loyal", False,
-                                war_pack_info="Order of the Crimson Oath"),
+                                war_pack_info="Defenders of the Faith"),
         CardClasses.SupportCard("Cardinal Agra Decree", "While you control faith, each Vostroya unit you control "
                                                         "gets +1 ATK.\n"
                                                         "Interrupt: When this card enters your discard pile, "
                                                         "draw a card and place 1 faith on an army unit.",
                                 "Decree. Ecclesiarchy.", 0, faction, "Loyal", True,
-                                war_pack_info="Order of the Crimson Oath"),
+                                war_pack_info="Defenders of the Faith"),
         CardClasses.SupportCard("Convent Prioris Advisor", "Reaction: After a Vostroya unit moves to a planet, place "
                                                            "1 faith on it. Then you may sacrifice this support to "
                                                            "place 1 faith on that unit and Rally 6 a support, add "
@@ -667,7 +667,7 @@ def astra_militarum_cards_init():
                                                "Astra Militarum or Space Marines army units.",
                                 "Location. Ecclesiarchy.", 1, faction, "Common", False,
                                 action_in_play=True, allowed_phases_in_play="ALL",
-                                war_pack_info="Order of the Crimson Oath"),
+                                war_pack_info="Defenders of the Faith"),
         CardClasses.WarlordCard("Canoness Vardina", "Action: Place 2 faith among army units you control. If your "
                                                     "warlord is at a planet with an enemy warlord, place 3 instead. "
                                                     "(Limit once per round)", "Officer. Ecclesiarchy.",
@@ -677,28 +677,28 @@ def astra_militarum_cards_init():
                                 "(Limit once per game.)", 7, 7,
                                 ["2x Faith Denies Death", "4x Sororitas Command Squad",
                                  "1x Supreme Appearance", "1x Transcendent Blessing"],
-                                war_pack_info="Order of the Crimson Oath"),
+                                war_pack_info="Defenders of the Faith"),
         CardClasses.EventCard("Faith Denies Death", "Reaction: After an army unit with faith is assigned damage, "
                                                     "pay 1 faith to prevent up to 5 of that damage.",
                               "Prayer. Ecclesiarchy.", 0, faction, "Signature", 1, False,
-                              war_pack_info="Order of the Crimson Oath"),
+                              war_pack_info="Defenders of the Faith"),
         CardClasses.ArmyCard("Sororitas Command Squad", "Reaction: After you prevent damage assigned to this unit "
                                                         "by a non-warlord unit, deal damage equal to the prevented "
                                                         "damage to that enemy unit. (Limit once per phase.)",
                              "Soldier. Ecclesiarchy.", 3, faction, "Signature", 3, 3, 1, False,
-                             war_pack_info="Order of the Crimson Oath"),
+                             war_pack_info="Defenders of the Faith"),
         CardClasses.SupportCard("Supreme Appearance", "Action: Exhaust and sacrifice this support to exhaust each "
                                                       "non-warlord unit. Use this ability only if you control "
                                                       "no Ranged units.", "Miracle.", 1, faction, "Signature", False,
                                 action_in_play=True, allowed_phases_in_play="ALL",
-                                war_pack_info="Order of the Crimson Oath"),
+                                war_pack_info="Defenders of the Faith"),
         CardClasses.AttachmentCard("Transcendent Blessing", "Attach to a non-warlord unit.\n"
                                                             "Attached unit gets +1 ATK and +1 HP.\n"
                                                             "Interrupt: When attached unit leaves play, pay 1 "
                                                             "faith to attach this card to an eligible unit.",
                                    "Blessing.", 0, faction, "Signature", 3, False, extra_health=1, extra_attack=1,
                                    type_of_units_allowed_for_attachment="Army/Synapse/Token",
-                                   war_pack_info="Order of the Crimson Oath"),
+                                   war_pack_info="Defenders of the Faith"),
         CardClasses.WarlordCard("Saint Celestine", "Combat Action: Pay faith equal to the printed cost of a "
                                                    "non-Elite unit in your hand to put it into play at this planet. "
                                                    "If that unit is still in play at the end of the phase, "
@@ -710,27 +710,27 @@ def astra_militarum_cards_init():
                                 ["1x Armour of Saint Katherine", "4x Heralding Cherubim",
                                  "2x Miraculous Intervention", "1x Order of the Crimson Oath"],
                                 action_in_play=True, allowed_phases_in_play="COMBAT",
-                                war_pack_info="Order of the Crimson Oath"),
+                                war_pack_info="Defenders of the Faith"),
         CardClasses.AttachmentCard("Armour of Saint Katherine", "Attach to your warlord.\n"
                                                                 "Reduce all damage dealth to attached unit to 3.\n"
                                                                 "Reaction: After attached unit takes damage, place "
                                                                 "1 faith on it.", "Wargear. Armor.",
                                    0, faction, "Signature", 3, True, type_of_units_allowed_for_attachment="Warlord",
-                                   must_be_own_unit=True, war_pack_info="Order of the Crimson Oath"),
+                                   must_be_own_unit=True, war_pack_info="Defenders of the Faith"),
         CardClasses.ArmyCard("Heralding Cherubim", "Reaction: After your warlord commits to a planet, place 1 "
                                                    "faith on this unit. Then you may move this unit to a planet "
                                                    "adjacent to your warlord.", "Herald. Ecclesiarchy.",
-                             2, faction, "Signature", 2, 2, 1, False, war_pack_info="Order of the Crimson Oath"),
+                             2, faction, "Signature", 2, 2, 1, False, war_pack_info="Defenders of the Faith"),
         CardClasses.EventCard("Miraculous Intervention", "Reaction: After a combat round begins at a planet, commit "
                                                          "your warlord to that planet and place 2 faith on it. Then "
                                                          "you may pay 1 resource to put Guardsman tokens into play "
                                                          "at that planet until you control at least as many units as "
                                                          "your opponent at that planet.", "Prayer. Ecclesiarchy.",
-                              1, faction, "Signature", 1, False, war_pack_info="Order of the Crimson Oath"),
+                              1, faction, "Signature", 1, False, war_pack_info="Defenders of the Faith"),
         CardClasses.SupportCard("Order of the Crimson Oath", "While at the first planet, your warlord gets +2 HP.\n"
                                                              "Reaction: After your opponent wins a battle, Rally 6 "
                                                              "a unit, add it to your hand. Then place 2 faith among "
                                                              "army units you control.", "Location. Ecclesiarchy.",
-                                0, faction, "Signature", False, war_pack_info="Order of the Crimson Oath")
+                                0, faction, "Signature", False, war_pack_info="Defenders of the Faith")
     ]
     return astra_militarum_cards_array

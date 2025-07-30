@@ -407,7 +407,7 @@ def chaos_cards_init():
                                                     "Forced Reaction: After the deploy phase begins, move this unit "
                                                     "to the first planet. Then deal 2 damage to an enemy unit at "
                                                     "that planet.", "Daemon. Khorne.",
-                             3, faction, "Loyal", 4, 2, 1, False, war_pack_info="Order of the Crimson Oath"),
+                             3, faction, "Loyal", 4, 2, 1, False, war_pack_info="Defenders of the Faith"),
         CardClasses.ArmyCard("Conjuring Warmaster", "While at a planet with your warlord, this unit gains Mobile.\n"
                                                     "Combat Action: Exhaust an Elite unit you control at a planet to "
                                                     "move it to this planet. (Limit once per phase.)",
@@ -418,7 +418,8 @@ def chaos_cards_init():
                                                       "Reaction: After you deploy a Nurgle unit at this planet, at "
                                                       "this planet move 1 damage from an army unit to another "
                                                       "army unit. (Limit once per phase.)", "Daemon. Nurgle.",
-                             3, faction, "Common", 2, 6, 2, False, lumbering=True),
+                             3, faction, "Common", 2, 6, 2, False, lumbering=True,
+                             war_pack_info="Herald of the Plague God"),
         CardClasses.ArmyCard("Expendable Pawn", "Reaction: After a unit is assigned damage at this planet or "
                                                 "an adjacent planet, sacrifice this unit to prevent 2 of that damage.",
                              "Cultist. Khorne.", 1, faction, "Common", 1, 1, 1, False,
@@ -440,7 +441,8 @@ def chaos_cards_init():
                                                     "target army unit. Then if there is 2 tokens or more on that "
                                                     "unit, remove them to deal it 3 damage.", "Cultist. Nurgle.",
                              2, faction, "Loyal", 1, 3, 1, True, sweep=1,
-                             action_in_play=True, allowed_phases_in_play="HEADQUARTERS"),
+                             action_in_play=True, allowed_phases_in_play="HEADQUARTERS",
+                             war_pack_info="Herald of the Plague God"),
         CardClasses.ArmyCard("Neurotic Obliterator", "This unit gets +1 ATK and +1 HP for each attachment on it.\n"
                                                      "Reaction: After this unit is chosen as a defender, exhaust a "
                                                      "Weapon attachment on it to deal 1 damage to the attacker.",
@@ -449,7 +451,8 @@ def chaos_cards_init():
                                                     "Headquarters Action: Ready this unit to deal 2 damage to a "
                                                     "target non-unique unit.", "Vehicle. Nurgle. Daemon.",
                              2, faction, "Loyal", 2, 4, 1, False, lumbering=True,
-                             action_in_play=True, allowed_phases_in_play="HEADQUARTERS"),
+                             action_in_play=True, allowed_phases_in_play="HEADQUARTERS",
+                             war_pack_info="Herald of the Plague God"),
         CardClasses.ArmyCard("Raging Daemonhost", "Interrupt: When this card leaves play, attach it to an army unit "
                                                   "you control at the same planet instead as an attachment with the "
                                                   "text: \"Attach to a non-Daemon, non-Vehicle army unit. Attached "
@@ -465,7 +468,7 @@ def chaos_cards_init():
         CardClasses.ArmyCard("The Masque", "Sweep (1). Retaliate (4).\n"
                                            "Reaction: After this unit resolves an attack, put a Cultist token into "
                                            "play at this planet.", "Daemon. Slaanesh. Elite.",
-                             6, faction, "Common", 3, 6, 2, True, sweep=1),
+                             6, faction, "Common", 3, 6, 2, True, sweep=1, war_pack_info="Herald of the Plague God"),
         CardClasses.ArmyCard("Uncontrollable Rioters", "Cost of units you deploy is increased by 1.\n"
                                                        "This unit cannot change control more than once per round.\n"
                                                        "Action: Give control of this unit to your opponent.",
@@ -536,24 +539,27 @@ def chaos_cards_init():
                                 "only be used once). After that planet is captured, replace "
                                 "it again with the original.", 7, 7,
                                 ["1x Cult of Duplicity", "1x Iridescent Wand",
-                                 "2x Torturer of Worlds", "4x War Cabal"]),
+                                 "2x Torturer of Worlds", "4x War Cabal"],
+                                war_pack_info="The Shadow in the Warp"),
         CardClasses.SupportCard("Cult of Duplicity", "While triggering battle abilities with a choice on a replaced "
                                                      "planet, you may pay 1 resource to choose both.", "Cult.",
-                                1, faction, "Signature", False),
+                                1, faction, "Signature", False, war_pack_info="The Shadow in the Warp"),
         CardClasses.AttachmentCard("Iridescent Wand", "Attach to your warlord.\n"
                                                       "Action: Exhaust this attachment to have up to 2 army units "
                                                       "at this planet gain Sweep (1) until the end of the phase. "
                                                       "Can only be used at a replaced planet.",
                                    "Wargear. Tzeentch.", 1, faction, "Signature", 3, False,
                                    type_of_units_allowed_for_attachment="Warlord", must_be_own_unit=True,
-                                   action_in_play=True, allowed_phases_in_play="ALL"),
+                                   action_in_play=True, allowed_phases_in_play="ALL",
+                                   war_pack_info="The Shadow in the Warp"),
         CardClasses.EventCard("Torturer of Worlds", "Action: Switch the location of two target army units you control. "
                                                     "Each target must be at a replaced planet.",
                               "Tactic. Tzeentch.", 1, faction, "Signature", 1, False,
-                              action_in_hand=True, allowed_phases_in_hand="ALL"),
+                              action_in_hand=True, allowed_phases_in_hand="ALL",
+                              war_pack_info="The Shadow in the Warp"),
         CardClasses.ArmyCard("War Cabal", "Reaction: After a planet replaces another or is revealed, move this unit "
                                           "to that planet and exhaust it if able.", "Soldier. Tzeentch.",
-                             2, faction, "Signature", 2, 3, 1, False),
+                             2, faction, "Signature", 2, 3, 1, False, war_pack_info="The Shadow in the Warp"),
         CardClasses.WarlordCard("Vael the Gifted", "Effects of events you play cannot be cancelled.\n"
                                                    "When the game starts, remove each Ritual card in your deck from "
                                                    "the game.\n"

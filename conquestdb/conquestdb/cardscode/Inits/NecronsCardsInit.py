@@ -368,25 +368,28 @@ def necrons_cards_init():
                                 "the end of the round. (Limit once per phase.)", 7, 7,
                                 ["4x Convoking Praetorians", "1x Hollow Sun",
                                  "2x Eldritch Reaping", "1x Crown of Control"],
-                                action_in_play=True, allowed_phases_in_play="DEPLOY"),
+                                action_in_play=True, allowed_phases_in_play="DEPLOY",
+                                war_pack_info="Herald of the Plague God"),
         CardClasses.ArmyCard("Convoking Praetorians", "Reaction: After this unit enters play, "
                                                       "change your enslavement dial.", "Soldier. Suhbekhar.",
-                             1, faction, "Signature", 1, 3, 1, False),
+                             1, faction, "Signature", 1, 3, 1, False, war_pack_info="Herald of the Plague God"),
         CardClasses.EventCard("Eldritch Reaping", "Action: Your opponent announces a number between 0 and 5. "
                                                   "Then you choose another number. The player with the highest number "
                                                   "must deal an equal amount of indirect damage among units he "
                                                   "controls, if that player is you, draw 2 cards and gain 2 resources.",
                               "Tactic.", 0, faction, "Signature", 1, False,
-                              action_in_hand=True, allowed_phases_in_hand="ALL"),
+                              action_in_hand=True, allowed_phases_in_hand="ALL",
+                              war_pack_info="Herald of the Plague God"),
         CardClasses.AttachmentCard("Crown of Control", "Attach to your warlord.\n"
                                                        "Attached unit gains Sweep (1).\n"
                                                        "Action: Exhaust this attachment to remove up to 2 damage "
                                                        "among units you control at this planet.", "Wargear.",
                                    1, faction, "Signature", 3, False, type_of_units_allowed_for_attachment="Warlord",
-                                   action_in_play=True, allowed_phases_in_play="ALL", must_be_own_unit=True),
+                                   action_in_play=True, allowed_phases_in_play="ALL", must_be_own_unit=True,
+                                   war_pack_info="Herald of the Plague God"),
         CardClasses.SupportCard("Hollow Sun", "While you control no unit of a faction, you may ignore your "
                                               "enslavement dial while deploying for that faction.", "Tomb World.",
-                                1, faction, "Signature", False),
+                                1, faction, "Signature", False, war_pack_info="Herald of the Plague God"),
         CardClasses.ArmyCard("Tomb Blade Diversionist", "No Wargear attachments.\n"
                                                         "Reaction: After an enemy army unit resolves an attack "
                                                         "at this planet, if this unit wasn't chosen as a defender, "
@@ -411,7 +414,7 @@ def necrons_cards_init():
                                                       "Reaction: After this unit leaves play as a result of an "
                                                       "enemy card effect, draw 2 cards and gain 2 resources.",
                              "Warrior.", 4, faction, "Common", 6, 6, 2, False,
-                             war_pack_info="Order of the Crimson Oath"),
+                             war_pack_info="Defenders of the Faith"),
         CardClasses.SupportCard("Endless Legions", "Reaction: After a Necrons unit enters your discard pile from play, "
                                                    "exhaust this support and place 2 units from your discard pile at "
                                                    "the bottom of your deck to Rally 6 a Necrons unit with a printed "
@@ -444,18 +447,18 @@ def necrons_cards_init():
                                    war_pack_info="Aligned Stars"),
         CardClasses.SupportCard("Maynarkh Dynasty", "Reaction: After the deployment phase begins, remove 1 "
                                                     "damage from your warlord.",
-                                "Pledge.", 1, faction, "Common", False),
+                                "Pledge.", 1, faction, "Common", False, war_pack_info="For the Enclaves"),
         CardClasses.SupportCard("Novokh Dynasty",
                                 "Place 5 non-Necrons non-Deep Strike common units, with a different faction, from the"
                                 " card collection in reserve at 5 different planets as buried units.\n"
                                 "Interrupt: When you win a battle, gain 1 resource to Deep Strike your buried unit "
                                 "at that planet, its Deep Strike value equals its printed cost.",
-                                "Pledge.", 2, faction, "Common", False),
+                                "Pledge.", 2, faction, "Common", False, war_pack_info="For the Enclaves"),
         CardClasses.SupportCard("Sautekh Dynasty",
                                 "Reaction: After you deploy a non-Necrons unit, exhaust this support to give it +X HP "
                                 "until the end of the round. X equals the number of factions in your discard pile. "
                                 "Then, you may set your enslavement dial to any faction, if you do so, this support "
                                 "does not ready during the next headquarters phase.",
-                                "Pledge.", 1, faction, "Common", False)
+                                "Pledge.", 1, faction, "Common", False, war_pack_info="For the Enclaves")
     ]
     return necrons_card_array

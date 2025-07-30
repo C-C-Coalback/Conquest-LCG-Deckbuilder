@@ -375,7 +375,7 @@ def tau_cards_init():
                              "Interrupt: When your opponent triggers an ability that discards a card from your hand "
                              "or routs a unit you control, put this unit from your hand into play at a planet.",
                              "Soldier. Hero.", 2, faction, "Loyal", 2, 3, 1, True,
-                             war_pack_info="Order of the Crimson Oath"),
+                             war_pack_info="Defenders of the Faith"),
         CardClasses.ArmyCard("Trap Laying Hunter", "Interrupt: When this unit is chosen as a defender, "
                                                    "your opponent must choose to either deal 3 damage to the "
                                                    "attacker or exhaust a unit he controls at the same planet. "
@@ -431,7 +431,7 @@ def tau_cards_init():
         CardClasses.EventCard("Optimized Landing",
                               "Interrupt: When you deploy a non-Drone army unit, reduce its cost by X (Max 2). "
                               "X is the amount of attachments you control. (Max 1 per round.)",
-                              "Tactic.", 0, faction, "Loyal", 1, False),
+                              "Tactic.", 0, faction, "Loyal", 1, False, war_pack_info="For the Enclaves"),
         CardClasses.SupportCard("Bork'an Sept",
                                 "Reaction: After you deploy this support, search your deck for a non-signature "
                                 "non-hardpoint Tau attachment, reveal it, add it to your hand and shuffle your deck.",
@@ -459,55 +459,62 @@ def tau_cards_init():
                                 "Bloodied.\nAction: Trigger the battle ability of this planet. "
                                 "(Limit once per game.)", 7, 7,
                                 ["1x Forward Outpost", "4x Pathfinder Team",
-                                 "1x Rail Rifle", "2 Tempting Ceasefire"]),
+                                 "1x Rail Rifle", "2 Tempting Ceasefire"], war_pack_info="For the Enclaves"),
         CardClasses.SupportCard("Forward Outpost",
                                 "Combat Action: Exhaust this support to give a non-Drone army unit "
                                 "Sweep (2) for its next attack this phase.", "Location.", 1, faction, "Signature",
-                                False, action_in_play=True, allowed_phases_in_play="COMBAT"),
+                                False, action_in_play=True, allowed_phases_in_play="COMBAT",
+                                war_pack_info="For the Enclaves"),
         CardClasses.ArmyCard("Pathfinder Team", "Reaction: After this planet battle ability is triggered, "
                                                 "exhaust this unit to draw a card.",
-                             "Soldier.", 2, faction, "Signature", 2, 3, 1, False),
+                             "Soldier.", 2, faction, "Signature", 2, 3, 1, False,
+                             war_pack_info="For the Enclaves"),
         CardClasses.AttachmentCard("Rail Rifle",
                                    "Attach to your warlord.\n"
                                    "Reaction: After your warlord resolves an attack, retreat it to deal 1 damage "
                                    "to a target unit at this planet.", "Weapon.", 1, faction, "Signature", 3, False,
-                                   must_be_own_unit=True, type_of_units_allowed_for_attachment="Warlord"),
+                                   must_be_own_unit=True, type_of_units_allowed_for_attachment="Warlord",
+                                   war_pack_info="For the Enclaves"),
         CardClasses.EventCard("Tempting Ceasefire",
                               "Deploy Action: Each player secretly chooses a number on the command dial, reveal it and "
                               "draw that many cards. Then if you set a lower number, take the difference in resources "
                               "from your opponent. If not he takes the difference in resources from the token bank. "
                               "If equal draw a card. Max 1 per round.", "Tactic.",
-                              0, faction, "Tactic.", 1, False, action_in_hand=True, allowed_phases_in_hand="DEPLOY"),
+                              0, faction, "Tactic.", 1, False, action_in_hand=True, allowed_phases_in_hand="DEPLOY",
+                              war_pack_info="For the Enclaves"),
         CardClasses.WarlordCard("Farsight",
                                 "Your attachment cards are considered to have Deep Strike (0).\n"
                                 "Reaction: After you Deep Strike a card, gain 2 resources. (Limit once per phase.)",
                                 "Shas'o.", faction, 2, 7, 2, 5,
                                 "Bloodied.\nYour attachment cards are considered to have Deep Strike (0).", 7, 7,
                                 ["2x Daring Assault", "4x Farsight Vanguard",
-                                 "1x Support Fleet", "1x The Dawn Blade"]),
+                                 "1x Support Fleet", "1x The Dawn Blade"],
+                                war_pack_info="For the Enclaves"),
         CardClasses.EventCard("Daring Assault",
                               "The effects of this event cannot be cancelled.\n"
                               "Action: Draw a card. Then you may move each card in reserve you control to a "
                               "different planet.", "Tactic.", 0, faction, "Signature", 1, False,
-                              action_in_hand=True, allowed_phases_in_hand="ALL"),
+                              action_in_hand=True, allowed_phases_in_hand="ALL", war_pack_info="For the Enclaves"),
         CardClasses.ArmyCard("Farsight Vanguard",
                              "Reaction: After this unit is declared as an attacker or defender, choose a unit "
                              "you control. Move a non-Drone attachment you control between this unit and the "
                              "chosen unit. (Limit once per phase.)", "Soldier.",
-                             2, faction, "Signature", 2, 2, 1, False),
+                             2, faction, "Signature", 2, 2, 1, False, war_pack_info="For the Enclaves"),
         CardClasses.SupportCard("Support Fleet",
                                 "This support cannot be targeted nor discarded.\n"
                                 "After you play this support, Rally 16 for up to 4 attachments, place them on this "
                                 "support. Then shuffle your deck.\n"
                                 "Reaction: After the deploy phase begins, transfer a card from this support "
-                                "to your hand.", "Fleet.", 1, faction, "Signature", False),
+                                "to your hand.", "Fleet.", 1, faction, "Signature", False,
+                                war_pack_info="For the Enclaves"),
         CardClasses.AttachmentCard("The Dawn Blade",
                                    "Attach to your warlord.\n"
                                    "Attached unit gets Sweep (1).\n"
                                    "Combat Action: Exhaust this attachment to either Deep Strike an attachment or "
                                    "move a card in reserve you control to another planet.",
                                    "Weapon.", 0, faction, "Signature", 3, True,
-                                   must_be_own_unit=True, type_of_units_allowed_for_attachment="Warlord"),
+                                   must_be_own_unit=True, type_of_units_allowed_for_attachment="Warlord",
+                                   war_pack_info="For the Enclaves"),
         CardClasses.WarlordCard("Shaper Agnok",
                                 "Interrupt: When your opponent wins a command struggle at a planet with one or "
                                 "more Kroot units you control, gain 1 resource or draw 1 card.", "Kroot.",

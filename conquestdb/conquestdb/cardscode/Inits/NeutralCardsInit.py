@@ -76,12 +76,12 @@ def neutral_cards_init():
                               "card to target a planet. Until the end of the round, at that planet, players must pay 1 "
                               "resource to trigger a non-warlord card effect that moves a "
                               "unit to that planet, rout a unit or makes a non-Runt unit enter play.", "Tactic.",
-                              0, faction, "Common", 1, False, war_pack_info="Order of the Crimson Oath"),
+                              0, faction, "Common", 1, False, war_pack_info="Defenders of the Faith"),
         CardClasses.SupportCard("Eldritch Council",
                                 "Reaction: After you deploy a non-Elite unit, exhaust this support to look at an "
                                 "amount of top cards of your equal to the unit's printed cost. Put up to 1 card on "
                                 "the bottom of your deck and place the remaining cards on top of your deck "
                                 "in any order. Then if your opponent has more cards in hand than you, draw a card.",
-                                "Relic.", 0, faction, "Common", True, war_pack_info="Order of the Crimson Oath")
+                                "Relic.", 0, faction, "Common", True, war_pack_info="Defenders of the Faith")
     ]
     return neutral_card_array

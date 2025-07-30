@@ -343,7 +343,7 @@ def orks_cards_init():
                              "Action: Attach a Runt unit you control to this unit as a Copilot attachment."
                              " (Limit once per round.)", "Machine. Marvel.",
                              2, faction, "Loyal", 1, 1, 1, False, flying=True,
-                             war_pack_info="Order of the Crimson Oath"),
+                             war_pack_info="Defenders of the Faith"),
         CardClasses.ArmyCard("Impulsive Loota",
                              "Deep Strike (1).\n"
                              "Reaction: After an attachment card is discarded, Deep Strike this unit to deploy that "
@@ -403,19 +403,20 @@ def orks_cards_init():
         CardClasses.SupportCard("WAAAGH! Arbuttz",
                                 "Reaction: When you deploy an attachment, exhaust this support and deal 1 damage "
                                 "to attached unit to reduce its cost by 1. Then Rally 6 an attachment, "
-                                "add it to your hand.", "Pledge.", 1, faction, "Loyal", False),
+                                "add it to your hand.", "Pledge.", 1, faction, "Loyal", False,
+                                war_pack_info="For the Enclaves"),
         CardClasses.SupportCard("WAAAGH! Zanzag",
                                 "Reaction: After your warlord commits to a planet with an enemy warlord, "
                                 "it gains +1 ATK until the end of a battle at that planet.",
-                                "Pledge.", 1, faction, "Loyal", False),
+                                "Pledge.", 1, faction, "Loyal", False, war_pack_info="For the Enclaves"),
         CardClasses.SupportCard("WAAAGH! Ungskar",
                                 "Reaction: After you deploy this support, put a Squiggoth Brute in reserve at the "
                                 "last planet. Starting from the second round, if you win a battle at that planet, "
                                 "you may Deep Strike it for 2 resources.",
-                                "Pledge.", 1, faction, "Loyal", False),
+                                "Pledge.", 1, faction, "Loyal", False, war_pack_info="For the Enclaves"),
         CardClasses.SupportCard("Extra Boomsticks", "When an Orks unit is assigned damage, exhaust this support to "
                                                     "give it Retaliate (2) until the end of the phase.",
-                                "Upgrade.", 2, faction, "Loyal", False),
+                                "Upgrade.", 2, faction, "Loyal", False, war_pack_info="The Shadow in the Warp"),
         CardClasses.SupportCard("Truck Wreck Launcha", "Interrupt: When a Vehicle unit you control leaves play, "
                                                        "exhaust this support to deal 1 damage to an enemy "
                                                        "non-warlord unit at the same planet. If this support was "
@@ -431,59 +432,71 @@ def orks_cards_init():
                                 "from among: Flying, Armorbane, Brutal, Area Effect (1), Sweep (2) or Retaliate (3), "
                                 "until the end of the round. (Limit once per game.)", 7, 7,
                                 ["1x Da Workship", "1x Drivin' Ambishun'", "2x Looted Skrap",
-                                 "1x Da 'Eavy", "1x Da Boomy", "1x Da Sharpy", "1x Da Swoopy"]),
+                                 "1x Da 'Eavy", "1x Da Boomy", "1x Da Sharpy", "1x Da Swoopy"],
+                                war_pack_info="The Shadow in the Warp"),
         CardClasses.SupportCard("Da Workship",
                                 "Deploy Action: Exhaust this support to place X Snotling tokens into play at a "
                                 "target planet. X equals the number of planets in your opponent's victory display.",
                                 "Location.", 1, faction, "Signature", False,
-                                action_in_play=True, allowed_phases_in_play="DEPLOY"),
+                                action_in_play=True, allowed_phases_in_play="DEPLOY",
+                                war_pack_info="The Shadow in the Warp"),
         CardClasses.AttachmentCard("Drivin' Ambishun'",
                                    "Attach to your warlord.\n"
                                    "Action: Exhaust this attachment to have a target army unit at this planet "
                                    "gain +1 HP per keyword it has, until the end of the round.",
                                    "Wargear.", 0, faction, "Signature", 3, False,
                                    must_be_own_unit=True, type_of_units_allowed_for_attachment="Warlord",
-                                   action_in_play=True, allowed_phases_in_play="ALL"),
+                                   action_in_play=True, allowed_phases_in_play="ALL",
+                                   war_pack_info="The Shadow in the Warp"),
         CardClasses.EventCard("Looted Skrap",
                               "Limited.\n"
                               "Action: Target a planet where a battle is taking place. Until the end of the battle, "
                               "each time an enemy unit is destroyed at that planet, gain 1 resource (max 3).",
-                              "Tactic.", 0, faction, "Signature", 1, False),
+                              "Tactic.", 0, faction, "Signature", 1, False, war_pack_info="The Shadow in the Warp"),
         CardClasses.ArmyCard("Da 'Eavy", "Lumbering.\nCombat Action: Retreat this unit.",
-                             "Vehicle. Experimental.", 0, faction, "Signature", 2, 3, 1, False, lumbering=True),
+                             "Vehicle. Experimental.", 0, faction, "Signature", 2, 3, 1, False, lumbering=True,
+                             war_pack_info="The Shadow in the Warp"),
         CardClasses.ArmyCard("Da Boomy", "Retaliate (3).",
-                             "Vehicle. Experimental.", 1, faction, "Signature", 1, 2, 1, False),
+                             "Vehicle. Experimental.", 1, faction, "Signature", 1, 2, 1, False,
+                             war_pack_info="The Shadow in the Warp"),
         CardClasses.ArmyCard("Da Sharpy", "Sweep (2).",
-                             "Vehicle. Experimental.", 2, faction, "Signature", 2, 2, 1, False),
+                             "Vehicle. Experimental.", 2, faction, "Signature", 2, 2, 1, False,
+                             war_pack_info="The Shadow in the Warp"),
         CardClasses.ArmyCard("Da 'Eavy",
                              "Flying.\n"
                              "Reaction: After a battle starts at this planet, have a Warrior Orks army unit gain "
                              "flying until the end of the combat round.",
-                             "Vehicle. Experimental.", 2, faction, "Signature", 2, 4, 1, False, flying=True),
+                             "Vehicle. Experimental.", 2, faction, "Signature", 2, 4, 1, False, flying=True,
+                             war_pack_info="The Shadow in the Warp"),
         CardClasses.WarlordCard("Kaptin Bluddflagg",
                                 "The first unit each player deploys each round must be deploy in their HQ.\n"
                                 "Action: Move a non-Elite unit from your HQ to a target non-leftmost planet "
                                 "and ready it. (Limit once per round.)", "Soldier. Freebooter.",
                                 faction, 2, 7, 2, 5, "Bloodied.", 7, 7,
                                 ["1x Naval Surgeon", "1x Kaptin's Hook'",
-                                 "2x Indiscriminate Bombing", "4x Quartermasters"]),
+                                 "2x Indiscriminate Bombing", "4x Quartermasters"],
+                                war_pack_info="Herald of the Plague God"),
         CardClasses.EventCard("Indiscriminate Bombing",
                               "Action: Target a planet. Each player must move an army unit they control from "
                               "that planet to their HQ.", "Tactic.", 2, faction, "Signature", 1, False,
-                              action_in_hand=True, allowed_phases_in_hand="ALL"),
+                              action_in_hand=True, allowed_phases_in_hand="ALL",
+                              war_pack_info="Herald of the Plague God"),
         CardClasses.AttachmentCard("Kaptin's Hook",
                                    "Attach to your warlord.\n"
                                    "Reaction: After a non-Elite unit you control at an adjacent planet is declared as "
                                    "a defender, exhaust this attachment to cancel the attack, move that unit to this "
                                    "planet and exhaust it.", "Wargear.", 1, faction, "Signature", 3, False,
-                                   must_be_own_unit=True, type_of_units_allowed_for_attachment="Warlord"),
+                                   must_be_own_unit=True, type_of_units_allowed_for_attachment="Warlord",
+                                   war_pack_info="Herald of the Plague God"),
         CardClasses.SupportCard("Naval Surgeon", "Action: Exhaust this support to have a target army unit in your "
                                                  "HQ gain +1 ATK and +1 HP.", "Specialised Crew.", 1, faction,
-                                "Signature", False, action_in_play=True, allowed_phases_in_play="ALL"),
+                                "Signature", False, action_in_play=True, allowed_phases_in_play="ALL",
+                                war_pack_info="Herald of the Plague God"),
         CardClasses.ArmyCard("Quartermasters",
                              "This unit may be deployed in your HQ. If you do so, reduce its cost by 1.\n"
                              "Reaction: After this unit moves to a planet, remove 1 damage from it.",
-                             "Krew. Soldier.", 2, faction, "Signature", 2, 3, 1, False),
+                             "Krew. Soldier.", 2, faction, "Signature", 2, 3, 1, False,
+                             war_pack_info="Herald of the Plague God"),
         CardClasses.WarlordCard("Korporal Snagbrat",
                                 "Action: Move a card you control in reserve to an adjacent planet without an enemy "
                                 "warlord. (Limit once per phase.)", "Soldier. Blood Axe.",

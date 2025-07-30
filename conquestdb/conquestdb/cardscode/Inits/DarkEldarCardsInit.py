@@ -383,7 +383,7 @@ def dark_eldar_cards_init():
         CardClasses.ArmyCard("Kabal of the Ebon Law", "This unit gets +1 ATK while it is not at the first planet.\n"
                                                       "Forced Reaction: After a battle starts at this planet, each "
                                                       "player controlling a unit with 2 ATK or more, draws a card.",
-                             "Kabalite.", 2, faction, "Loyal", 2, 2, 1, False),
+                             "Kabalite.", 2, faction, "Loyal", 2, 2, 1, False, war_pack_info="For the Enclaves"),
         CardClasses.ArmyCard("Mindless Pain Addict", "Cannot retreat or be Routed.\n"
                                                      "Reaction: After an army unit you control at this planet is "
                                                      "destroyed, take control of this unit. Any player may use "
@@ -397,7 +397,7 @@ def dark_eldar_cards_init():
         CardClasses.ArmyCard("Raiding Kabal", "This unit gets Sweep (1) while it is not at the first planet.\n"
                                               "Reaction: After you win a battle at this planet, put a "
                                               "Khymera token into play at this planet.", "Kabalite.",
-                             2, faction, "Loyal", 1, 2, 1, False),
+                             2, faction, "Loyal", 1, 2, 1, False, war_pack_info="The Shadow in the Warp"),
         CardClasses.AttachmentCard("The Shadow Suit", "Deep Strike (0).\n"
                                                       "Attach to an army unit.\n"
                                                       "Attached unit gets +2 ATK and +1 HP.\n"
@@ -406,7 +406,7 @@ def dark_eldar_cards_init():
                                                       "that planet to cancel this effect.", "Wargear. Weapon.",
                                    2, faction, "Loyal", 2, True, deepstrike=0, extra_health=1, extra_attack=2,
                                    type_of_units_allowed_for_attachment="Army",
-                                   war_pack_info="Order of the Crimson Oath"),
+                                   war_pack_info="Defenders of the Faith"),
         CardClasses.AttachmentCard("Torturer's Masks", "Ambush.\n"
                                                        "Attach to an army unit. Attached unit gets +1 ATK and +1 HP.\n"
                                                        "Reaction: After you use a shield card, if you have no cards "

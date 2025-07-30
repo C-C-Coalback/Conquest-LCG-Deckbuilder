@@ -8,7 +8,11 @@ planetfall_cycle_warpacks = ["Decree of Ruin", "Boundless Hate", "Deadly Salvage
 death_world_cycle_warpacks = ["Jungles of Nectavus", "Unforgiven", "Slash and Burn",
                               "Searching for Truth", "Against the Great Enemy", "The Warp Unleashed"]
 deluxe_expansions = ["The Great Devourer", "Legions of Death",
-                     "Chronicles of Heroes", "Order of the Crimson Oath"]
+                     "Chronicles of Heroes", "Defenders of the Faith"]
+bloodied_path_cycle_warpacks = ["For the Enclaves", "Herald of the Plague God", "The Shadow in the Warp"]  # cycle 3
+confrontation_cycle_warpacks = ["By Imperial Decree", "The Laughing God", "A Mask Falls Off"]  # cycle 2
+navida_prime_cycle_warpacks = ["Aligned Stars", "Overrun", "Promise of War",
+                               "Breaching the Veil", "Enemy Territory"]  # cycle 1
 
 
 class Card:
@@ -104,6 +108,12 @@ class Card:
                 self.cycle = "Planetfall Cycle"
             elif self.war_pack in death_world_cycle_warpacks:
                 self.cycle = "Death World Cycle"
+            elif self.war_pack in navida_prime_cycle_warpacks:
+                self.cycle = "Navida Prime Cycle"
+            elif self.war_pack in confrontation_cycle_warpacks:
+                self.cycle = "Confrontation Cycle"
+            elif self.war_pack in bloodied_path_cycle_warpacks:
+                self.cycle = "Bloodied Path Cycle"
             else:
                 self.cycle = "Unknown Apoka Cycle"
         elif not self.war_pack and not self.cycle:
@@ -1014,9 +1024,19 @@ class TokenCard(UnitCard):
 class PlanetCard(Card):
     def __init__(self, name, text, cards, resources, red, blue, green, sector, image_name="", commit_text=""):
         cycle_info = ""
+        war_pack_info = ""
         if sector == "Traxis":
             cycle_info = "Core Set"
-        super().__init__(name, text, "", -1, "", "", 0, "Planet", True, cycle_info=cycle_info)
+        elif sector == "Gardis" or sector == "Veros":
+            cycle_info = "Confrontation"
+        elif sector == "Sargos":
+            war_pack_info = "For the Enclave"
+        elif sector == "Nepthis":
+            war_pack_info = "Herald of the Plague God"
+        elif sector == "The Breach":
+            war_pack_info = "The Shadow in the Warp"
+        super().__init__(name, text, "", -1, "", "", 0, "Planet", True,
+                         cycle_info=cycle_info, war_pack_info=war_pack_info)
         self.cards = cards
         self.resources = resources
         self.red = red

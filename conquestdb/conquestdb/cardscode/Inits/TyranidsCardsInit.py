@@ -392,7 +392,7 @@ def tyranids_cards_init():
                                                            "infest an adjacent planet. (Limit once per phase.)",
                                 "Creature. Genestealer. Elite.", 1, 4, 1, True, war_pack_info="By Imperial Decree"),
         CardClasses.SynapseCard("Aberrant Alpha", "Each army unit you control at an infested planet gets +1 HP.",
-                                "Genestealer. Elite.", 1, 4, 1, True),
+                                "Genestealer. Elite.", 1, 4, 1, True, war_pack_info="Herald of the Plague God"),
         CardClasses.SynapseCard("Praetorian Shadow", "While this unit is at the same or adjacent planet as "
                                                      "your warlord, your warlord gets +1 ATK.\n"
                                                      "Reaction: After your warlord is assigned damage, exhaust this "
@@ -410,7 +410,8 @@ def tyranids_cards_init():
                                                        "into play from your hand or discard pile at this planet. "
                                                        "They must have different names and a printed cost of "
                                                        "1 or less.", "Creature. Transport.",
-                             0, faction, "Common", 1, 3, 0, False, deepstrike=1),
+                             0, faction, "Common", 1, 3, 0, False, deepstrike=1,
+                             war_pack_info="Herald of the Plague God"),
         CardClasses.ArmyCard("Spreading Genestealer Brood", "Reaction: After this unit enters play, put a Brood "
                                                             "unit into play from your discard pile at this planet.",
                              "Creature. Genestealer. Brood.", 1, faction, "Common", 1, 1, 1, False,
@@ -418,7 +419,8 @@ def tyranids_cards_init():
         CardClasses.ArmyCard("Icy Trygon", "Deep Strike (1).\n"
                                            "Interrupt: When this unit would be destroyed by taking damage, remove "
                                            "all damage from it and put it into reserve at this planet instead.",
-                             "Creature.", 3, faction, "Common", 2, 4, 1, False, deepstrike=1),
+                             "Creature.", 3, faction, "Common", 2, 4, 1, False, deepstrike=1,
+                             war_pack_info="The Shadow in the Warp"),
         CardClasses.ArmyCard("Emergent Cultists", "While at an infested planet, this unit gets +1 HP.\n"
                                                   "Reaction: After you deploy this unit, "
                                                   "exhaust a target enemy support card.", "Hybrid. Genestealer.",
@@ -466,7 +468,8 @@ def tyranids_cards_init():
                                                  "For each support, gain 1 resource."
                                                  "(Limit 2 per type)", "Power.",
                               0, faction, "Common", 2, False, limited=True,
-                              action_in_hand=True, allowed_phases_in_hand="DEPLOY"),
+                              action_in_hand=True, allowed_phases_in_hand="DEPLOY",
+                              war_pack_info="The Shadow in the Warp"),
         CardClasses.ArmyCard("Drifting Spore Mines", "Forced Reaction: After the combat phase begins, your opponent "
                                                      "moves this unit to an adjacent planet. Then you may deal 1 "
                                                      "damage to this unit to deal 1 damage to a non-unique "
@@ -559,13 +562,14 @@ def tyranids_cards_init():
                                                              "of the round, discard any synapse unit not from "
                                                              "your deck you control.", "Tactic.",
                               1, faction, "Common", 1, False, action_in_hand=True, allowed_phases_in_hand="DEPLOY",
-                              war_pack_info="Order of the Crimson Oath"),
+                              war_pack_info="Defenders of the Faith"),
         CardClasses.AttachmentCard("Pulsating Carapace", "Attach to a Behemoth warlord unit.\n"
                                                          "Reduce all damage taken by attached unit to 2.\n"
                                                          "Action: Exhaust this attachment to remove 2 damage from "
                                                          "attached unit or infest this planet.", "Biomorph.",
                                    2, faction, "Common", 1, False, action_in_play=True, allowed_phases_in_play="ALL",
-                                   type_of_units_allowed_for_attachment="Warlord", required_traits="Behemoth"),
+                                   type_of_units_allowed_for_attachment="Warlord", required_traits="Behemoth",
+                                   war_pack_info="Herald of the Plague God"),
         CardClasses.SupportCard("Hive Fleet Behemoth",
                                 "Reaction: After you capture a planet, put a token on this support. Then if there "
                                 "are 2 tokens or more on this support, put a Termagant token into play "

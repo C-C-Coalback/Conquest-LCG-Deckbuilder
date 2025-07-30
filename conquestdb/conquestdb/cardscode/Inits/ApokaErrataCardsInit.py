@@ -21,50 +21,56 @@ def apoka_errata_cards_init():
                                                "non-warlord unit at this planet. "
                                                "(Limit once per round.)",
                              "Soldier. Officer. Vostroya.", 3, "Astra Militarum", "Loyal", 2, 3, 2, True,
-                             action_in_play=True, allowed_phases_in_play="ALL"),
+                             action_in_play=True, allowed_phases_in_play="ALL", war_pack_info="For the Enclaves"),
         CardClasses.EventCard("Death Serves the Emperor", "Interrupt: When a Vehicle unit you control is destroyed, "
                                                           "gain 2 resources.",
-                              "Tactic.", 0, "Astra Militarum", "Common", 1, False),
+                              "Tactic.", 0, "Astra Militarum", "Common", 1, False,
+                              war_pack_info="For the Enclaves"),
         CardClasses.SupportCard("STC Fragment", "Limited.\n"
                                                 "Interrupt: When you deploy an Elite unit, exhaust this support to "
                                                 "reduce the cost of that unit by 2. Then exhaust that unit.", "Relic.",
-                                1, "Neutral", "Common", True, limited=True, applies_discounts=[True, 2, False]),
+                                1, "Neutral", "Common", True, limited=True, applies_discounts=[True, 2, False],
+                                war_pack_info="For the Enclaves"),
         CardClasses.ArmyCard("Shrieking Harpy", "Flying.\n"
                                                 "Combat Action: After this unit is declared as an attacker at an "
                                                 "infested planet, exhaust each enemy non-Elite army unit and "
                                                 "token unit at this planet. (Limit once per phase.)",
-                             "Creature. Kraken. Elite.", 6, "Tyranids", "Common", 2, 5, 2, False, flying=True),
+                             "Creature. Kraken. Elite.", 6, "Tyranids", "Common", 2, 5, 2, False, flying=True,
+                             war_pack_info="For the Enclaves"),
         CardClasses.SupportCard("Loamy Broodhive", "Reaction: After you deploy an Elite unit, exhaust this support to "
                                                    "put 2 Termagant tokens into play at the same planet as that unit.",
-                                "Location.", 1, "Tyranids", "Common", True),
+                                "Location.", 1, "Tyranids", "Common", True, war_pack_info="For the Enclaves"),
         CardClasses.SupportCard("Invasion Site", "Reaction: After an Elite unit you control is destroyed, "
                                                  "sacrifice this support to gain 3 resources. ", "Location.",
-                                0, "Tyranids", "Common", True),
+                                0, "Tyranids", "Common", True, war_pack_info="For the Enclaves"),
         CardClasses.ArmyCard("Syren Zythlex", "Forced Reaction: After an enemy unit is deployed at "
                                               "this planet, exhaust it. (Limit once per phase.)",
-                             "Warrior. Wych.", 3, "Dark Eldar", "Loyal", 2, 3, 2, True),
+                             "Warrior. Wych.", 3, "Dark Eldar", "Loyal", 2, 3, 2, True,
+                             war_pack_info="For the Enclaves"),
         CardClasses.ArmyCard("Klaivex Warleader", "Ambush.\n"
                                                   "Reaction: After you deploy this unit during the combat phase, "
                                                   "destroy a target damaged army unit at this planet.", "Warrior.",
                              4, "Dark Eldar", "Loyal", 1, 3, 2, False, ambush=True,
-                             allowed_phases_in_hand="COMBAT", action_in_hand=True),
+                             allowed_phases_in_hand="COMBAT", action_in_hand=True, war_pack_info="For the Enclaves"),
         CardClasses.ArmyCard("Kabalite Blackguard", "Reaction: After you win a battle at this planet, "
                                                     "take up to 1 resources from your opponent.", "Warrior. Kabalite.",
-                             2, "Dark Eldar", "Loyal", 2, 3, 0, False),
+                             2, "Dark Eldar", "Loyal", 2, 3, 0, False, war_pack_info="For the Enclaves"),
         CardClasses.EventCard("Gut and Pillage", "Reaction: After you win a battle at a Material planet (red), "
                                                  "gain 2 resources. (Max 1 per round.)", "Tactic.",
-                              0, "Dark Eldar", "Common", 1, False),
+                              0, "Dark Eldar", "Common", 1, False, war_pack_info="For the Enclaves"),
         CardClasses.ArmyCard("Mighty Wraithknight", "No Wargear Attachments.\n"
                                                     "Reaction: After this unit enters play, exhaust 2 non-Spirit"
                                                     " units of each player at this planet.", "Vehicle. Spirit. Elite.",
-                             6, "Eldar", "Common", 5, 5, 2, False, wargear_attachments_permitted=False),
+                             6, "Eldar", "Common", 5, 5, 2, False, wargear_attachments_permitted=False,
+                             war_pack_info="For the Enclaves"),
         CardClasses.ArmyCard("Shrieking Exarch", "Reaction: After an army unit is destroyed at this planet, draw 1 card"
                                                  " and deal 1 damage to a target enemy unit. (Limit once per phase.)",
                              "Warrior. Elite.", 5, "Eldar", "Common", 4, 6, 2, False,
                              war_pack_info="Chronicles of Heroes"),
         CardClasses.EventCard("For the Tau'va", "Action: Ready a unit "
                                                 "you control with 1 or more attachments.", "Tactic. Maneuver.",
-                              2, "Tau", "Common", 1, False, action_in_hand=True, allowed_phases_in_hand="ALL"),
+                              2, "Tau", "Common", 1, False, action_in_hand=True, allowed_phases_in_hand="ALL",
+                              war_pack_info="For the Enclaves"),
         CardClasses.ArmyCard("Kroot Hunter", "Reaction: After you deploy this unit at a "
                                              "Material planet (red), gain 1 resource.", "Scout. Ally. Kroot.",
                              1, "Tau", "Common", 2, 2, 0, False, war_pack_info="Chronicles of Heroes"),
@@ -77,26 +83,28 @@ def apoka_errata_cards_init():
                                                    "the bottom of your deck to Rally 6 a Necrons unit with a printed "
                                                    "cost of 3 or lower, put it into play exhausted at a planet "
                                                    "where no battle is taking place.",
-                                "Upgrade.", 1, "Necrons", "Common", False),
+                                "Upgrade.", 1, "Necrons", "Common", False, war_pack_info="For the Enclaves"),
         CardClasses.ArmyCard("Undying Saint", "Lumbering.\n"
                                               "Can only be played if you control a Holy Crusade.\n"
                                               "Reaction: After the deploy phase begins, if this unit is in your "
                                               "discard pile, put it into play at a target non-first planet "
                                               "(ignore this restriction if your opponent has the initiative).",
-                             "Martyr. Ecclesiarchy.", 1, "Astra Militarum", "Loyal", 2, 1, 1, False, lumbering=True),
+                             "Martyr. Ecclesiarchy.", 1, "Astra Militarum", "Loyal", 2, 1, 1, False, lumbering=True,
+                             war_pack_info="For the Enclaves"),
         CardClasses.ArmyCard("Brotherhood Justicar", "Unstoppable - The first time this unit is assigned damage this "
                                                      "turn, prevent 1 of that damage and place 1 faith on it.\n"
                                                      "Reaction: After you deploy this unit place 2 faith among units "
                                                      "you control at this planet.", "Soldier. Grey Knights.",
-                             3, "Space Marines", "Signature", 3, 3, 1, False, unstoppable=True),
+                             3, "Space Marines", "Signature", 3, 3, 1, False, unstoppable=True,
+                             war_pack_info="For the Enclaves"),
         CardClasses.EventCard("Kwik' Konstrucksun", "Combat Action: Put an Orks support with printed cost 3 or lower "
                                                     "into play from your hand at your HQ. If this support is still in "
                                                     "play at the end of the phase, discard it and draw a card.",
                               "Tactic.", 0, "Orks", "Common", 1, False,
-                              action_in_hand=True, allowed_phases_in_hand="COMBAT"),
+                              action_in_hand=True, allowed_phases_in_hand="COMBAT", war_pack_info="For the Enclaves"),
         CardClasses.ArmyCard("Commander Bravestorm",
                              "Reaction: After you attach a non-Drone attachment to a unit at this planet, "
                              "draw a card (Limit once per phase).", "Soldier. Pilot. Shas'o.",
-                             3, "Tau", "Loyal", 2, 4, 1, True)
+                             3, "Tau", "Loyal", 2, 4, 1, True, war_pack_info="For the Enclaves")
     ]
     return apoka_errata_cards_array

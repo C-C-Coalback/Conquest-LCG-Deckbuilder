@@ -439,18 +439,20 @@ def space_marines_cards_init():
                                                        "Unstoppable - The first time this unit is assigned damage "
                                                        "this turn, prevent 1 of that damage and this unit gains "
                                                        "Retaliate (2) until the end of the phase.",
-                             "Soldier. Black Templars.", 3, faction, "Loyal", 2, 3, 1, False, sweep=1),
+                             "Soldier. Black Templars.", 3, faction, "Loyal", 2, 3, 1, False, sweep=1,
+                             war_pack_info="The Shadow in the Warp"),
         CardClasses.ArmyCard("First Line Rhinos", "No Wargear Attachments.\n"
                                                   "Reaction: After you deploy this unit, Rally 6 a non-Vehicle "
                                                   "Space Marines unit with printed cost 3 or lower, attach it to "
                                                   "this unit. When this unit leaves play, as an interrupt, put the "
                                                   "attached unit into play exhausted at the same planet.",
                              "Vehicle. Ultramarines.", 2, faction, "Loyal", 2, 2, 1, False,
-                             wargear_attachments_permitted=False, war_pack_info="Order of the Crimson Oath"),
+                             wargear_attachments_permitted=False, war_pack_info="Defenders of the Faith"),
         CardClasses.ArmyCard("Frenzied Wulfen", "Retaliate (2).\n"
                                                 "Reaction: After this unit enters play, a target army unit at this "
                                                 "planet is considered a warlord for your card effects.",
-                             "Warrior. Mutant. Space Wolves.", 3, faction, "Loyal", 3, 3, 1, False),
+                             "Warrior. Mutant. Space Wolves.", 3, faction, "Loyal", 3, 3, 1, False,
+                             war_pack_info="The Shadow in the Warp"),
         CardClasses.ArmyCard("Grand Master Belial", "Deep Strike (2)\n"
                                                     "Interrupt: When your Bloodied warlord is defeated, discard it "
                                                     "and pay 1 resource and Deep Strike this unit to have it be "
@@ -592,7 +594,8 @@ def space_marines_cards_init():
                                                    "Wolves units you control get +1 ATK and +1 HP until the end "
                                                    "of the phase. If both units are at a planet with 2 or more "
                                                    "warlords, gain 1 resource.", "Tale.",
-                                1, faction, "Loyal", True, action_in_play=True, allowed_phases_in_play="ALL"),
+                                1, faction, "Loyal", True, action_in_play=True, allowed_phases_in_play="ALL",
+                                war_pack_info="Herald of the Plague God"),
         CardClasses.SupportCard("Vamii Industrial Complex", "Limited.\n"
                                                             "Reaction: After the combat phase begins, place 2 "
                                                             "resources on this support. Then you may sacrifice it to "
