@@ -270,6 +270,7 @@ def deck_validation(deck, remaining_signature_squad, factions, warlord=""):
                         if current_amount != "1":
                             return "Wrong number for synapse unit"
                         has_synapse = True
+                        card_count = card_count - 1
                 else:
                     return "Synapse units not allowed in this deck"
             faction_check_passed = False
@@ -300,7 +301,7 @@ def deck_validation(deck, remaining_signature_squad, factions, warlord=""):
             if not faction_check_passed:
                 print("Faction check not passed", factions[0], factions[1], card_result.get_faction())
                 return "Faction check not passed (Main, Ally, Card): " \
-                       + factions[0] + factions[1] + card_result.get_faction()
+                       + factions[0] + ", " + factions[1] + ", " + card_result.get_faction()
         current_index += 1
         while deck[current_index] in skippers:
             current_index += 1
@@ -309,7 +310,7 @@ def deck_validation(deck, remaining_signature_squad, factions, warlord=""):
     if card_count < 42:
         print("Too few cards")
         print(card_count)
-        return "Too few cards: " + str(card_count)
+        return "Too few cards: " + str(card_count + 8)
     print("No issues")
     return "SUCCESS"
 
