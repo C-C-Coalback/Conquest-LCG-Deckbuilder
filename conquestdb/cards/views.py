@@ -276,6 +276,7 @@ def card_data(request, card_name):
     errata_card_type = ""
     errata_traits = ""
     errata_full_text = ""
+    errata_cycle_text = ""
     errata_cost = -1
     errata_shields = -1
     errata_command = -1
@@ -288,6 +289,7 @@ def card_data(request, card_name):
     if card_name in apoka_errata_dict:
         card = apoka_errata_dict[card_name]
         errata_card_name = card.get_name()
+        errata_cycle_text = card.get_cycle_info_as_text()
         errata_faction = card.get_faction()
         errata_loyalty = card.get_loyalty()
         errata_card_type = card.get_card_type()
@@ -345,4 +347,5 @@ def card_data(request, card_name):
                    "errata_command": errata_command, "errata_bloodied_text": errata_bloodied_text,
                    "errata_bloodied_attack": errata_bloodied_attack, "errata_bloodied_health": errata_bloodied_health,
                    "errata_attack": errata_attack, "errata_health": errata_health, "errata_is_unit": errata_is_unit,
-                   "light_dark_toggle": light_dark_toggle, "cycle_text": cycle_text})
+                   "light_dark_toggle": light_dark_toggle, "cycle_text": cycle_text,
+                   "errata_cycle_text": errata_cycle_text})
