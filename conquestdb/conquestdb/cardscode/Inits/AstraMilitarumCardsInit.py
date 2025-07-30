@@ -562,7 +562,7 @@ def astra_militarum_cards_init():
                                                                 "your hand into play attached to a unit.",
                                    "Relic. Wargear. Weapon.", 1, faction, "Loyal", 2, True,
                                    type_of_units_allowed_for_attachment="Army/Synapse/Token.",
-                                   extra_attack=2, extra_health=2),
+                                   extra_attack=2, extra_health=2, war_pack_info="Defenders of the Faith"),
         CardClasses.AttachmentCard("Departmento Munitorum Aid", "Attach to a Vehicle army unit.\n"
                                                                 "Attached unit gets +1 HP.\n"
                                                                 "Action: Exhaust this attachment and remove 1 "

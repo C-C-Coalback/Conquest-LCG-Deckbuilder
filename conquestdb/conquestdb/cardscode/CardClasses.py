@@ -2,7 +2,7 @@ import copy
 
 
 warlord_cycle_warpacks = ["The Howl of Blackmane", "The Scourge", "Gift of the Ethereals",
-                          "Zogwort's Curse", "The Threat Beyond", "Descendents of Isha"]
+                          "Zogwort's Curse", "The Threat Beyond", "Descendants of Isha"]
 planetfall_cycle_warpacks = ["Decree of Ruin", "Boundless Hate", "Deadly Salvage",
                              "What Lurks Below", "Wrath of the Crusaders", "The Final Gambit"]
 death_world_cycle_warpacks = ["Jungles of Nectavus", "Unforgiven", "Slash and Burn",
@@ -1049,7 +1049,8 @@ class PlanetCard(Card):
     def as_dict(self):
         return {'name': self.name, 'faction': self.faction, 'loyalty': self.loyalty, 'traits': self.traits,
                 'card type': self.card_type, 'image name': self.image_name, 'cost': self.cost, 'command': -1,
-                'attack': -1, 'health': -1, 'shields': self.shields, 'sector': self.sector}
+                'attack': -1, 'health': -1, 'shields': self.shields, 'sector': self.sector,
+                'cycle': self.cycle, 'war pack': self.war_pack}
 
     def get_name(self):
         return self.name

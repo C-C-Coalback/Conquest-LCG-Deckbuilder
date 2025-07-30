@@ -390,7 +390,8 @@ def eldar_cards_init():
                                                    "unit, prevent all but 2 of that damage. Then deal damage to that "
                                                    "unit damage equal to the damage prevented. "
                                                    "(Limit once per phase.)", "Psyker. Harlequin.",
-                             2, faction, "Loyal", 2, 2, 1, False, deepstrike=1),
+                             2, faction, "Loyal", 2, 2, 1, False, deepstrike=1,
+                             war_pack_info="Defenders of the Faith"),
         CardClasses.ArmyCard("Luring Troupe", "Reaction: After you deploy this unit, move a target army unit at this "
                                               "planet to an adjacent planet. At the end of next phase, move that unit "
                                               "back to this planet, if able.", "Psyker. Harlequin.",

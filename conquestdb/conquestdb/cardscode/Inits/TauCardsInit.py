@@ -289,13 +289,13 @@ def tau_cards_init():
         CardClasses.ArmyCard("Grav Inhibitor Drone", "Each unit with printed cost 2 or lower at this planet cannot "
                                                      "attack while a unit with printed cost 3 or higher at"
                                                      " this planet is ready.", "Drone.",
-                             1, faction, "Common", 0, 4, 0, False),
+                             1, faction, "Common", 0, 4, 0, False, war_pack_info="Unforgiven"),
         CardClasses.AttachmentCard("Missile Pod", "Attach to a Pilot or Vehicle unit you control."
                                                   "Deploy Action: Sacrifice this attachment to deal 3 damage to a "
                                                   "target enemy army unit in your opponent's HQ or destroy a target "
-                                                  "support card.", "Hardpoint.",2, faction, "Common", 1, False,
+                                                  "support card.", "Hardpoint.", 2, faction, "Common", 1, False,
                                    must_be_own_unit=True, required_traits="Pilot/Vehicle", action_in_play=True,
-                                   allowed_phases_in_play="DEPLOY"),
+                                   allowed_phases_in_play="DEPLOY", war_pack_info="Unforgiven"),
         CardClasses.ArmyCard("Sniper Drone Team", "Ranged.\n"
                                                   "Reaction: After the ranged skirmish at this planet ends, "
                                                   "ready this unit.", "Soldier. Drone.",

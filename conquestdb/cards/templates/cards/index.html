@@ -67,6 +67,22 @@
                             <option value="{{ cycle_name }}">{{ cycle_name }}</option>
                         {% endfor %}
                     </select>
+                <p id="p-order" class="filter">Order By:</p><select name="order" class="filter" id="order">
+                    <option value="None"></option>
+                    <option value="Name">Name</option>
+                    <option value="Card Type">Card Type</option>
+                    <option value="COST">COST</option>
+                    <option value="Attack">ATK</option>
+                    <option value="Health">HP</option>
+                    <option value="Command">Command</option>
+                    <option value="Shields">Shields</option>
+                    <option value="War Pack">War Pack</option>
+                    <option value="Cycle">Cycle</option>
+                </select>
+                <p id="p-asc-desc" class="filter">Asc./Desc.:</p><select name="asc-desc" class="filter" id="asc-desc">
+                    <option value="Ascending" selected="selected">Ascending</option>
+                    <option value="Descending">Descending</option>
+                </select>
             </div>
             <div id="buttons-container">
                 <button type="submit" id="submit">Perform Search</button>
@@ -200,6 +216,8 @@
                         'war-pack': $('#war-pack').val(),
                         'cycle': $('#cycle').val(),
                         'redirect-enabled': "Yes",
+                        'order': $('#order').val(),
+                        'asc': $('#asc-desc').val(),
                         'view-as': $('#view-as-selector').val(),
                         'csrfmiddlewaretoken': '{{ csrf_token }}' // CSRF token for security
                     },

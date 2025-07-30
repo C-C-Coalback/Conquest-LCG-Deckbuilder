@@ -369,7 +369,8 @@ def dark_eldar_cards_init():
                              war_pack_info="Breaching the Veil"),
         CardClasses.ArmyCard("Connoisseur of Terror", "Deep Strike (2).\n"
                                                       "Reaction: After this unit is turned face-up, draw 2 cards.",
-                             "Scholar. Haemonculus.", 2, faction, "Loyal", 2, 2, 1, False, deepstrike=2),
+                             "Scholar. Haemonculus.", 2, faction, "Loyal", 2, 2, 1, False, deepstrike=2,
+                             war_pack_info="By Imperial Decree"),
         CardClasses.ArmyCard("Dark Lance Raider", "No Wargear Attachments. Flying.\n"
                                                   "Reaction: After this unit is declared as an attacker, "
                                                   "choose either to deal 1 damage to up to 2 different enemy "

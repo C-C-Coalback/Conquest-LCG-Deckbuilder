@@ -27,7 +27,7 @@ def orks_cards_init():
                               0, "Orks", "Signature", 1, False, [True, 2, True], cycle_info="Core Set"),
         CardClasses.AttachmentCard("Cybork Body", "Attach to an army unit.\nDouble attached unit's HP.",
                                    "Wargear. Bionics.", 1, "Orks", "Signature", 3, False,
-                                   type_of_units_allowed_for_attachment="Army"),
+                                   type_of_units_allowed_for_attachment="Army", cycle_info="Core Set"),
         CardClasses.ArmyCard("Sniveling Grot", "", "Runt. Ally.", 0, "Orks", "Common", 1, 1, 0, False,
                              cycle_info="Core Set"),
         CardClasses.ArmyCard("Goff Nob", "", "Warrior. Nob. Elite.", 5, "Orks", "Loyal", 6, 6, 0, False,

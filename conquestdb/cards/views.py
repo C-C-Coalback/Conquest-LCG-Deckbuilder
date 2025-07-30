@@ -10,6 +10,36 @@ import os.path
 import datetime
 import light_dark_dict
 
+
+def sorter_cycles(column):
+    order_of_cycles = ['Core Set', 'Warlord Cycle', 'The Great Devourer', 'Planetfall Cycle',
+                       'Legions of Death', 'Death World Cycle', 'Navida Prime Cycle',
+                       'Defenders of the Faith', 'Confrontation Cycle',
+                       'Chronicles of Heroes', 'Bloodied Path Cycle']
+    cat = pd.Categorical(column, categories=order_of_cycles, ordered=True)
+    return pd.Series(cat)
+
+
+def sorter_warpacks(column):
+    order_of_warpacks = ['Core Set',
+                         'The Howl of Blackmane', 'The Scourge', 'Gift of the Ethereals',
+                         "Zogwort's Curse", 'The Threat Beyond', 'Descendants of Isha',
+                         'The Great Devourer',
+                         'Decree of Ruin', 'Boundless Hate', 'Deadly Salvage',
+                         'What Lurks Below', 'Wrath of the Crusaders', 'The Final Gambit',
+                         'Legions of Death',
+                         'Jungles of Nectavus', 'Unforgiven', 'Slash and Burn',
+                         'Searching for Truth', 'Against the Great Enemy', 'The Warp Unleashed',
+                         'Enemy Territory', 'Promise of War', 'Aligned Stars',
+                         'Overrun', 'Breaching the Veil',
+                         'Defenders of the Faith',
+                         'By Imperial Decree', 'A Mask Falls Off', 'The Laughing God',
+                         'Chronicles of Heroes',
+                         'The Shadow in the Warp', 'Herald of the Plague God', 'For the Enclaves']
+    cat = pd.Categorical(column, categories=order_of_warpacks, ordered=True)
+    return pd.Series(cat)
+
+
 card_array = Initfunctions.init_player_cards()
 planet_array = Initfunctions.init_planet_cards()
 apoka_errata_array = Initfunctions.init_apoka_errata_cards()
@@ -28,6 +58,7 @@ for i in range(len(card_array)):
         warpacks_list.append(card_array[i].war_pack)
     if card_array[i].cycle not in cycles_list:
         cycles_list.append(card_array[i].cycle)
+print(warpacks_list)
 for key in range(len(card_array)):
     cards_dict[card_array[key].name] = card_array[key]
     images_dict[card_array[key].image_name] = card_array[key]
@@ -82,11 +113,11 @@ def ajax_view(request):
         min_health = -1
         max_health = -1
         filtered_df = df
+        order_by = request.POST.get('order')
+        asc = request.POST.get('asc')
         if view_as == "Rows Mini":
             warlord_name = request.POST.get('warlord_name')
             ally_faction = request.POST.get('ally_faction')
-            order_by = request.POST.get('order')
-            asc = request.POST.get('asc')
             special_factions = request.POST.get('special_factions')
             special_factions = ast.literal_eval(special_factions)
             special_enabled = request.POST.get('special_enabled')
@@ -124,12 +155,17 @@ def ajax_view(request):
             if warlord_name == "Yvraine":
                 filtered_df = filtered_df[((filtered_df['faction'] != "Chaos") |
                                            (~filtered_df['traits'].str.contains("Elite")))]
-            if order_by != "None":
-                ascending = False
-                if asc == "Ascending":
-                    ascending = True
-                order_by = order_by.lower()
-                if order_by in filtered_df.columns:
+        if order_by != "None":
+            ascending = False
+            if asc == "Ascending":
+                ascending = True
+            order_by = order_by.lower()
+            if order_by in filtered_df.columns:
+                if order_by == "cycle":
+                    filtered_df = filtered_df.sort_values(by='cycle', key=sorter_cycles)
+                elif order_by == "war pack":
+                    filtered_df = filtered_df.sort_values(by='war pack', key=sorter_warpacks)
+                else:
                     filtered_df = filtered_df.sort_values(by=[order_by], ascending=ascending)
         try:
             min_cost = int(request.POST.get('min-cost'))

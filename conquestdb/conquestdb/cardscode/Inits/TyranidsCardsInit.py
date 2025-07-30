@@ -67,7 +67,8 @@ def tyranids_cards_init():
                                                    "token into play at this planet. If this planet is infested, "
                                                    "put 2 Termagant tokens into play at this planet instead.",
                                 "Creature. Kraken. Elite.", 0, 4, 1, True, war_pack_info="The Great Devourer"),
-        CardClasses.SynapseCard("Stalking Lictor", "", "Creature. Behemoth. Elite.", 1, 4, 2, True),
+        CardClasses.SynapseCard("Stalking Lictor", "", "Creature. Behemoth. Elite.", 1, 4, 2, True,
+                                war_pack_info="The Great Devourer"),
         CardClasses.SynapseCard("Venomthrope Polluter", "Reaction: After this unit commits to a planet, move a "
                                                         "non-warlord unit you control from the planet "
                                                         "with your warlord to this planet.",
