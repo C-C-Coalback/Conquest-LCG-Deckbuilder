@@ -482,7 +482,7 @@ def eldar_cards_init():
                                 "Action: Deal 1 damage to this unit to perform a mulligan "
                                 "with your current hand size. (Limit once per game.)", 7, 7,
                                 ["2x Back to the Shadows", "4x Elusive Escort",
-                                 "1x Singing Spear", "1x Wisdom of Biel-Tan"],
+                                 "1x Singing Spear", "1x Wisdom of Biel-tan"],
                                 war_pack_info="Herald of the Plague God"),
         CardClasses.EventCard("Back to the Shadows", "Interrupt: When an army unit you control is assigned damage, "
                                                      "return it and each attachment you control on it to your hand."
