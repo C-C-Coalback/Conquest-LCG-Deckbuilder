@@ -58,7 +58,6 @@ for i in range(len(card_array)):
         warpacks_list.append(card_array[i].war_pack)
     if card_array[i].cycle not in cycles_list:
         cycles_list.append(card_array[i].cycle)
-print(warpacks_list)
 for key in range(len(card_array)):
     cards_dict[card_array[key].name] = card_array[key]
     images_dict[card_array[key].image_name] = card_array[key]
@@ -162,11 +161,11 @@ def ajax_view(request):
             order_by = order_by.lower()
             if order_by in filtered_df.columns:
                 if order_by == "cycle":
-                    filtered_df = filtered_df.sort_values(by='cycle', key=sorter_cycles)
+                    filtered_df = filtered_df.sort_values(by='cycle', key=sorter_cycles, kind="stable")
                 elif order_by == "war pack":
-                    filtered_df = filtered_df.sort_values(by='war pack', key=sorter_warpacks)
+                    filtered_df = filtered_df.sort_values(by='war pack', key=sorter_warpacks, kind="stable")
                 else:
-                    filtered_df = filtered_df.sort_values(by=[order_by], ascending=ascending)
+                    filtered_df = filtered_df.sort_values(by=[order_by], ascending=ascending, kind="stable")
         try:
             min_cost = int(request.POST.get('min-cost'))
         except:
