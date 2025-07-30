@@ -252,6 +252,7 @@ def card_data(request, card_name):
     bloodied_health = -1
     bloodied_text = -1
     shields = str(card.shields)
+    cycle_text = card.get_cycle_info_as_text()
     is_unit = "False"
     loyalty = card.loyalty
     faction = card.faction
@@ -344,4 +345,4 @@ def card_data(request, card_name):
                    "errata_command": errata_command, "errata_bloodied_text": errata_bloodied_text,
                    "errata_bloodied_attack": errata_bloodied_attack, "errata_bloodied_health": errata_bloodied_health,
                    "errata_attack": errata_attack, "errata_health": errata_health, "errata_is_unit": errata_is_unit,
-                   "light_dark_toggle": light_dark_toggle})
+                   "light_dark_toggle": light_dark_toggle, "cycle_text": cycle_text})

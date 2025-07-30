@@ -1,6 +1,16 @@
 import copy
 
 
+warlord_cycle_warpacks = ["The Howl of Blackmane", "The Scourge", "Gift of the Ethereals",
+                          "Zogwort's Curse", "The Threat Beyond", "Descendents of Isha"]
+planetfall_cycle_warpacks = ["Decree of Ruin", "Boundless Hate", "Deadly Salvage",
+                             "What Lurks Below", "Wrath of the Crusaders", "The Final Gambit"]
+death_world_cycle_warpacks = ["Jungles of Nectavus", "Unforgiven", "Slash and Burn",
+                              "Searching for Truth", "Against the Great Enemy", "The Warp Unleashed"]
+deluxe_expansions = ["The Great Devourer", "Legions of Death",
+                     "Chronicles of Heroes", "Order of the Crimson Oath"]
+
+
 class Card:
     def __init__(self, name, text, traits, cost, faction, loyalty, shields, card_type, unique, image_name="",
                  applies_discounts=None, action_in_hand=False, allowed_phases_in_hand=None,
@@ -83,11 +93,36 @@ class Card:
         self.new_ambush = False
         self.war_pack = war_pack_info
         self.cycle = cycle_info
+        if self.cycle and not self.war_pack:
+            self.war_pack = self.cycle
+        elif self.war_pack and not self.cycle:
+            if self.war_pack in deluxe_expansions:
+                self.cycle = self.war_pack
+            elif self.war_pack in warlord_cycle_warpacks:
+                self.cycle = "Warlord Cycle"
+            elif self.war_pack in planetfall_cycle_warpacks:
+                self.cycle = "Planetfall Cycle"
+            elif self.war_pack in death_world_cycle_warpacks:
+                self.cycle = "Death World Cycle"
+            else:
+                self.cycle = "Unknown Apoka Cycle"
+        elif not self.war_pack and not self.cycle:
+            self.war_pack = "Unknown Apoka War Pack"
+            self.cycle = "Unknown Apoka Cycle"
 
     def as_dict(self):
         return {'name': self.name, 'faction': self.faction, 'loyalty': self.loyalty, 'traits': self.traits,
                 'card type': self.card_type, 'image name': self.image_name, 'cost': self.cost, 'command': -1,
-                'attack': -1, 'health': -1, 'shields': self.shields}
+                'attack': -1, 'health': -1, 'shields': self.shields, 'cycle': self.cycle, 'war pack': self.war_pack}
+
+    def get_cycle_info_as_text(self):
+        text = ""
+        if self.cycle == self.war_pack:
+            text += "Cycle: " + self.cycle + "\n"
+            return text
+        text += "Cycle: " + self.cycle + "\n"
+        text += "War Pack: " + self.war_pack + "\n"
+        return text
 
     def get_has_deepstrike(self):
         if self.deepstrike == -1:
@@ -978,7 +1013,10 @@ class TokenCard(UnitCard):
 
 class PlanetCard(Card):
     def __init__(self, name, text, cards, resources, red, blue, green, sector, image_name="", commit_text=""):
-        super().__init__(name, text, "", -1, "", "", 0, "Planet", True)
+        cycle_info = ""
+        if sector == "Traxis":
+            cycle_info = "Core Set"
+        super().__init__(name, text, "", -1, "", "", 0, "Planet", True, cycle_info=cycle_info)
         self.cards = cards
         self.resources = resources
         self.red = red

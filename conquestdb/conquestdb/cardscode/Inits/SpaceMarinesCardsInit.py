@@ -40,7 +40,7 @@ def space_marines_cards_init():
         CardClasses.ArmyCard("Tactical Squad Cardinis", "Area Effect (1). (When this unit "
                                                         "attacks it may instead deal its "
                                                         "Area Effect damage to each enemy "
-                                                        "unit at this planet.",
+                                                        "unit at this planet.)",
                              "Soldier. Ultramarines.", 2, faction,
                              "Common", 1, 3, 1, False, area_effect=1, cycle_info="Core Set"),
         CardClasses.ArmyCard("Honored Librarian", "Enemy units cannot attack this unit while "
@@ -57,7 +57,7 @@ def space_marines_cards_init():
         CardClasses.ArmyCard("Daring Assault Squad", "Area Effect (2). (When this unit "
                                                      "attacks it may instead deal its "
                                                      "Area Effect damage to each enemy "
-                                                     "unit at this planet.",
+                                                     "unit at this planet.)",
                              "Soldier. Blood Angels.", 4, faction,
                              "Common", 3, 3, 1, False, area_effect=2, cycle_info="Core Set"),
         CardClasses.ArmyCard("Land Raider", "No Wargear Attachments.\n Non-Vehicle units you "
@@ -83,7 +83,7 @@ def space_marines_cards_init():
                              "Soldier. Iron Hands.", 3, faction, "Common", 1, 3, 1, False, cycle_info="Core Set"),
         CardClasses.ArmyCard("Raven Guard Speeder", "No Wargear Attachments.\n Flying. (This "
                                                     "unit takes half damage from non-Flying "
-                                                    "units.", "Vehicle. Raven Guard.",
+                                                    "units.)", "Vehicle. Raven Guard.",
                              4, faction, "Common", 3, 3, 2, False, flying=True,
                              wargear_attachments_permitted=False, cycle_info="Core Set"),
         CardClasses.ArmyCard("Deathwing Guard", "", "Soldier. Dark Angels. Elite.", 5, faction,
