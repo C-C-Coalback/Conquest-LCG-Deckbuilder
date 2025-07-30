@@ -23,7 +23,7 @@ def necrons_cards_init():
         CardClasses.AttachmentCard("The Staff of Command", "Attach to your warlord.\n"
                                                            "Action: Exhaust this attachment to set your enslavement "
                                                            "dial to another faction.", "Wargear. Weapon.",
-                                   0, faction, "Loyal", 3, True, type_of_units_allowed_for_attachment="Warlord",
+                                   0, faction, "Signature", 3, True, type_of_units_allowed_for_attachment="Warlord",
                                    must_be_own_unit=True, action_in_play=True, allowed_phases_in_play="ALL",
                                    war_pack_info="Legions of Death"),
         CardClasses.WarlordCard("Anrakyr the Traveller", "Deploy Action: Deploy the topmost unit card in a target "

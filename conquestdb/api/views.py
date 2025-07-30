@@ -201,6 +201,8 @@ def request_deck(request, deck_key):
                     if i == 0 or deck_content[i] in pledges_array:
                         print(deck_content[i])
                         card_name = deck_content[i]
+                        if deck_content[i] == "idden Base":
+                            deck_content[i] = "'idden Base"
                         front_links_sent.append(get_front_link(card_name))
                         back_links_sent.append(get_back_link(card_name))
                         desc_links_sent.append(get_desc(card_name))
@@ -215,6 +217,8 @@ def request_deck(request, deck_key):
                     else:
                         print(deck_content[i][3:])
                         card_name = deck_content[i][3:]
+                        if card_name == "idden Base":
+                            card_name = "'idden Base"
                         nicknames_sent.append(card_name)
                         front_links_sent.append(get_front_link(card_name))
                         back_links_sent.append(get_back_link(card_name))

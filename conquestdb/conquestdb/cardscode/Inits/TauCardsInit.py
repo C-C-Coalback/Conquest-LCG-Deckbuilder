@@ -12,7 +12,7 @@ def tau_cards_init():
                                                        "attached to an eligible unit at this planet.",
                                 "Soldier. Shas'o.", faction, 1, 7, 1, 5, "Bloodied.", 7, 7,
                                 ["4x Shadowsun's Stealth Cadre", "1x Communications Relay",
-                                 "2x Squadron Redeployment", "1x Command-Link Drone"], cycle_info="Core Set"),
+                                 "2x Squadron Redeployment", "1x Command-link Drone"], cycle_info="Core Set"),
         CardClasses.ArmyCard("Shadowsun's Stealth Cadre", "This card may enter play as an attachment "
                                                           "with the text \"Attach to a non-Vehicle "
                                                           "army unit. Attached unit gets "
@@ -480,7 +480,7 @@ def tau_cards_init():
                               "draw that many cards. Then if you set a lower number, take the difference in resources "
                               "from your opponent. If not he takes the difference in resources from the token bank. "
                               "If equal draw a card. Max 1 per round.", "Tactic.",
-                              0, faction, "Tactic.", 1, False, action_in_hand=True, allowed_phases_in_hand="DEPLOY",
+                              0, faction, "Signature", 1, False, action_in_hand=True, allowed_phases_in_hand="DEPLOY",
                               war_pack_info="For the Enclaves"),
         CardClasses.WarlordCard("Farsight",
                                 "Your attachment cards are considered to have Deep Strike (0).\n"

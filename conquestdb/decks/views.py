@@ -854,7 +854,7 @@ def ajax_view(request):
             force_send = request.POST.get('force_send')
             message_to_send = ""
             text = text.replace("\"Subject: &Omega;-X62113\"", "")
-            text = text.replace("idden Base", "'idden Base")
+            # text = text.replace("idden Base", "'idden Base")
             text = text.replace("\"", "")
             deck = clean_sent_deck(text)
             print(deck)
