@@ -459,7 +459,7 @@ def tau_cards_init():
                                 "Bloodied.\nAction: Trigger the battle ability of this planet. "
                                 "(Limit once per game.)", 7, 7,
                                 ["1x Forward Outpost", "4x Pathfinder Team",
-                                 "1x Rail Rifle", "2 Tempting Ceasefire"], war_pack_info="For the Enclaves"),
+                                 "1x Rail Rifle", "2x Tempting Ceasefire"], war_pack_info="For the Enclaves"),
         CardClasses.SupportCard("Forward Outpost",
                                 "Combat Action: Exhaust this support to give a non-Drone army unit "
                                 "Sweep (2) for its next attack this phase.", "Location.", 1, faction, "Signature",

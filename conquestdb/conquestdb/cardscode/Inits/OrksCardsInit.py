@@ -473,7 +473,7 @@ def orks_cards_init():
                                 "Action: Move a non-Elite unit from your HQ to a target non-leftmost planet "
                                 "and ready it. (Limit once per round.)", "Soldier. Freebooter.",
                                 faction, 2, 7, 2, 5, "Bloodied.", 7, 7,
-                                ["1x Naval Surgeon", "1x Kaptin's Hook'",
+                                ["1x Naval Surgeon", "1x Kaptin's Hook",
                                  "2x Indiscriminate Bombing", "4x Quartermasters"],
                                 war_pack_info="Herald of the Plague God"),
         CardClasses.EventCard("Indiscriminate Bombing",
@@ -501,7 +501,7 @@ def orks_cards_init():
                                 "Action: Move a card you control in reserve to an adjacent planet without an enemy "
                                 "warlord. (Limit once per phase.)", "Soldier. Blood Axe.",
                                 faction, 2, 6, 2, 6, "Bloodied.", 7, 7,
-                                ["1x Fake Ooman Base", "1x Soot-Blackened Axe'",
+                                ["1x Fake Ooman Base", "1x Soot-Blackened Axe",
                                  "2x Kommando Cunning", "4x Snagbrat's Scouts"], war_pack_info="Enemy Territory"),
         CardClasses.SupportCard("Fake Ooman Base",
                                 "Reaction: After an Orks Soldier army unit you control is chosen as a defender, "
