@@ -16,11 +16,19 @@ Here is a link to The Hive Tyrant's tutorial for the game: https://www.youtube.c
 
 # What is the current progress?
 
-WHOOPS haven't updated this in a while. Pretty much done, all things considered. There will likely be some minor 
-style changes that need to be done, but obviously it's hard to spot those problems beforehand.
-Probably want to add set/war pack info to cards too.
+Haven't done this in a while. Seriously, this is an impressive crop. Great vegetables.
+
+All done; things I want to do though:
+
+- More graphs/statistics on the adv. deck details page.
+- Separate decks into pages.
+- Add support to search + filter decks.
+- Rework deck lookup logic to use a dataframe.
+- Add support for viewing user profiles.
 
 # How can I run it myself?
+
+(This assumes you have a general idea about how to use python and git already.)
 
 First run "py -m pip install -r requirements.txt" to install dependencies.
 
