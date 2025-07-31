@@ -540,6 +540,247 @@ def user_deck_data(request, deck_creator):
     return render(request, "decks/user_deck_data.html", {"light_dark_toggle": light_dark_toggle})
 
 
+def advanced_deck_details(request, deck_creator, deck_key):
+    light_dark_toggle = light_dark_dict.get_light_mode(request.user.username)
+    deck_found = "N"
+    username = request.user.username
+    directory = os.getcwd()
+    target_directory = directory + "/decks/deckstorage/" + deck_creator + "/"
+    permitted_to_read = False
+    public_deck = "F"
+    stored_target_file = ""
+    if os.path.exists(target_directory):
+        for file in os.listdir(target_directory):
+            try:
+                target_file = target_directory + file
+                with open(target_file + "/key", "r") as f:
+                    data = f.read()
+                    if data == deck_key:
+                        if username == deck_creator:
+                            permitted_to_read = True
+                            stored_target_file = target_file
+            except Exception as e:
+                print(e)
+                pass
+    if not permitted_to_read:
+        target_directory = directory + "/decks/publisheddecks/" + deck_creator + "/"
+        if os.path.exists(target_directory):
+            for file in os.listdir(target_directory):
+                try:
+                    target_file = target_directory + file
+                    with open(target_file + "/key", "r") as f:
+                        data = f.read()
+                        if data == deck_key:
+                            print("key match")
+                            permitted_to_read = True
+                            stored_target_file = target_file
+                            public_deck = "T"
+                            if username == deck_creator:
+                                public_deck = "OWNER"
+                except Exception as e:
+                    print(e)
+    if permitted_to_read:
+        deck_found = "Y"
+        with open(stored_target_file + "/content", "r") as f:
+            deck_content = f.read()
+        with open(stored_target_file + "/desc", "r") as f:
+            description = f.read()
+        deck_list = deck_content.split(sep="\n")
+        deck_list = list(filter(("----------------------------------------------------------------------").__ne__,
+                                deck_list))
+        deck_list = list(filter(("Planet").__ne__, deck_list))
+        deck_list = list(filter(("").__ne__, deck_list))
+        deck_name = deck_list[0]
+        warlord_name = deck_list[1]
+        factions = deck_list[2]
+        sig_pos = -1
+        army_pos = -1
+        support_pos = -1
+        attachment_pos = -1
+        event_pos = -1
+        synapse_pos = -1
+        extra_army_cards = 0
+        extra_support_cards = 0
+        extra_attachment_cards = 0
+        extra_event_cards = 0
+        army_card_count = 0
+        support_card_count = 0
+        event_card_count = 0
+        attachment_card_count = 0
+        synapse_name = ""
+        pledge_name = ""
+        last_card_type = ""
+        for i in range(len(deck_list)):
+            if deck_list[i] == "Signature Squad":
+                sig_pos = i
+                last_card_type = deck_list[i]
+                if deck_list[i - 1] in pledges_array:
+                    pledge_name = deck_list[i - 1]
+            elif deck_list[i] == "Army":
+                army_pos = i
+                last_card_type = deck_list[i]
+            elif deck_list[i] == "Support":
+                support_pos = i
+                last_card_type = deck_list[i]
+            elif deck_list[i] == "Event":
+                event_pos = i
+                last_card_type = deck_list[i]
+            elif deck_list[i] == "Attachment":
+                attachment_pos = i
+                last_card_type = deck_list[i]
+            elif deck_list[i] == "Synapse":
+                last_card_type = deck_list[i]
+                if deck_list[i + 1] != "Attachment":
+                    synapse_name = deck_list[i + 1]
+                synapse_pos = i
+            elif last_card_type != "Synapse" and deck_list[i]:
+                if last_card_type == "Signature Squad":
+                    card_name = deck_list[i][3:]
+                    card = FindCard.find_card(card_name, card_array, cards_dict)
+                    print(card.get_name())
+                    if card.get_card_type() == "Army":
+                        extra_army_cards += int(deck_list[i][0])
+                    if card.get_card_type() == "Event":
+                        extra_event_cards += int(deck_list[i][0])
+                    if card.get_card_type() == "Attachment":
+                        extra_attachment_cards += int(deck_list[i][0])
+                    if card.get_card_type() == "Support":
+                        extra_support_cards += int(deck_list[i][0])
+                elif last_card_type == "Army":
+                    army_card_count += int(deck_list[i][0])
+                elif last_card_type == "Support":
+                    support_card_count += int(deck_list[i][0])
+                elif last_card_type == "Event":
+                    event_card_count += int(deck_list[i][0])
+                elif last_card_type == "Attachment":
+                    attachment_card_count += int(deck_list[i][0])
+        print(attachment_card_count)
+        print(army_card_count)
+        print(extra_event_cards)
+        sig_cards = deck_list[sig_pos + 1:army_pos]
+        army_cards = deck_list[army_pos + 1:support_pos]
+        support_cards = deck_list[support_pos + 1:synapse_pos]
+        attachment_cards = deck_list[attachment_pos + 1:event_pos]
+        event_cards = deck_list[event_pos + 1:]
+        warlord_img = convert_name_to_img_src(warlord_name)
+        warlord_link = convert_name_to_hyperlink(warlord_name)
+        synapse_img = "None"
+        synapse_link = "None"
+        pledge_img = "None"
+        pledge_link = "None"
+        if synapse_name:
+            synapse_img = convert_name_to_img_src(synapse_name[3:])
+            synapse_link = convert_name_to_hyperlink(synapse_name[3:])
+        if pledge_name:
+            pledge_img = convert_name_to_img_src(pledge_name)
+            pledge_link = convert_name_to_hyperlink(pledge_name)
+        print(sig_cards)
+        print(army_cards)
+        print(support_cards)
+        print(attachment_cards)
+        print(event_cards)
+        links_to_sig_cards = []
+        links_to_army_cards = []
+        links_to_support_cards = []
+        links_to_attachment_cards = []
+        links_to_event_cards = []
+        sig_srcs = []
+        army_srcs = []
+        support_srcs = []
+        attachment_srcs = []
+        event_srcs = []
+        for card_name in sig_cards:
+            links_to_sig_cards.append(convert_name_to_hyperlink(card_name[3:]))
+            sig_srcs.append(convert_name_to_img_src(card_name[3:]))
+        for card_name in army_cards:
+            links_to_army_cards.append(convert_name_to_hyperlink(card_name[3:]))
+            army_srcs.append(convert_name_to_img_src(card_name[3:]))
+        for card_name in support_cards:
+            links_to_support_cards.append(convert_name_to_hyperlink(card_name[3:]))
+            support_srcs.append(convert_name_to_img_src(card_name[3:]))
+        for card_name in attachment_cards:
+            links_to_attachment_cards.append(convert_name_to_hyperlink(card_name[3:]))
+            attachment_srcs.append(convert_name_to_img_src(card_name[3:]))
+        for card_name in event_cards:
+            links_to_event_cards.append(convert_name_to_hyperlink(card_name[3:]))
+            event_srcs.append(convert_name_to_img_src(card_name[3:]))
+        raw_card_data = [*sig_cards, *army_cards, *support_cards, *attachment_cards, *event_cards]
+        sig_cards = zip(sig_cards, links_to_sig_cards, sig_srcs)
+        army_cards = zip(army_cards, links_to_army_cards, army_srcs)
+        support_cards = zip(support_cards, links_to_support_cards, support_srcs)
+        attachment_cards = zip(attachment_cards, links_to_attachment_cards, attachment_srcs)
+        event_cards = zip(event_cards, links_to_event_cards, event_srcs)
+        names_comments = []
+        times_comments = []
+        comments = []
+        comment_ids = []
+        no_comments = True
+        target_directory = directory + "/decks/comments/" + deck_key + "/"
+        if request.method == 'POST':
+            flag = request.POST.get('flag')
+            if flag == "POST":
+                username = request.POST.get('username')
+                if not username:
+                    username = "Anonymous"
+                comment = request.POST.get('comment')
+                time = str(datetime.datetime.now())
+                os.makedirs(target_directory, exist_ok=True)
+                file_id = len(
+                    [name for name in os.listdir(target_directory) if os.path.isfile(target_directory + "/" + name)])
+                name_file = str(file_id) + ".txt"
+                with open(target_directory + name_file, 'w') as file:
+                    file.write(username + "\n" + time + "\n" + comment)
+            elif flag == "DELETE":
+                # username = request.POST.get('username')
+                id_c = request.POST.get('idcomment')
+                name_file = id_c + ".txt"
+                with open(target_directory + name_file, 'w') as file:
+                    file.write("")
+        if os.path.exists(target_directory):
+            for infile in sorted(os.listdir(target_directory)):
+                with open(target_directory + infile, 'r') as file:
+                    t = file.read()
+                    split_text = t.split("\n")
+                    if len(split_text) >= 3:
+                        split_text[2] = "\n".join(split_text[2:])
+                        idf = infile.split(sep=".")[0]
+                        comment_ids.append(idf)
+                        names_comments.append(split_text[0])
+                        times_comments.append(split_text[1])
+                        comments.append(split_text[2])
+                        no_comments = False
+        my_comments = zip(names_comments, times_comments, comments, comment_ids)
+        deck_content = deck_content.replace("\n", "|||")
+        return render(request, "decks/advanced_deck_details.html",
+                      {"deck_found": deck_found, "deck_content": deck_content,
+                       "description": description, "deck_list": deck_list,
+                       "factions": factions, "deck_name": deck_name,
+                       "sig_cards": sig_cards, "army_cards": army_cards,
+                       "support_cards": support_cards,
+                       "attachment_cards": attachment_cards,
+                       "event_cards": event_cards,
+                       "warlord_img": warlord_img, "synapse_img": synapse_img,
+                       "warlord_link": warlord_link, "synapse_link": synapse_link,
+                       "creator": deck_creator, "public": public_deck,
+                       "deck_key": deck_key,
+                       "comments": my_comments, "noc": no_comments,
+                       "pledge_img": pledge_img, "pledge_link": pledge_link,
+                       "light_dark_toggle": light_dark_toggle,
+                       "event_card_count": event_card_count,
+                       "extra_event_cards": extra_event_cards,
+                       "army_card_count": army_card_count,
+                       "extra_army_cards": extra_army_cards,
+                       "attachment_card_count": attachment_card_count,
+                       "extra_attachment_cards": extra_attachment_cards,
+                       "support_card_count": support_card_count,
+                       "extra_support_cards": extra_support_cards,
+                       "cards_raw": raw_card_data}
+                      )
+    return render(request, "decks/advanced_deck_details.html",
+                  {"deck_found": deck_found, "deck_content": "", "light_dark_toggle": light_dark_toggle,
+                   "cards_raw": []})
+
+
 def deck_data(request, deck_creator, deck_key):
     light_dark_toggle = light_dark_dict.get_light_mode(request.user.username)
     deck_found = "N"

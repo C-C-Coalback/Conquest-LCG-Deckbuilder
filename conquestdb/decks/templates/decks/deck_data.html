@@ -19,6 +19,7 @@
                         <button class="button" id="copy" onclick="copyDeck();">Copy Deck</button>
                     {% endif %}
                     <button class="button" id="download" onclick="downloadDeck();">Download Deck</button>
+                    <button class="button" id="advanced" onclick="sendToAdvanced();">Adv. Details</button>
                 </div><br>
                 <h3 class="grid-section" id="factions">Faction(s): {{ factions }}</h3>
                 <div id="large-grid">
@@ -180,6 +181,14 @@
         const url_split = current_url.split("/");
         const key = url_split[url_split.length - 2];
         location.href = "/decks/retract_deck/" + key + "/";
+    }
+
+    function sendToAdvanced() {
+        const current_url = document.URL;
+        const url_split = current_url.split("/");
+        const creator = url_split[url_split.length - 3];
+        const key = url_split[url_split.length - 2];
+        location.href = "/decks/" + creator + "/" + key + "/advanced_deck_details/"
     }
 
     function copyDeck() {

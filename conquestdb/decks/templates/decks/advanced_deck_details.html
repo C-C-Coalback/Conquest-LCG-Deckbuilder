@@ -1,0 +1,211 @@
+{% extends "base.html" %}
+{% block title %}Advanced Deck Details{% endblock %}
+{% block content %}
+{% load static %}
+<link rel="stylesheet" href="{% static 'advanced_deck_details.css' %}">
+<script
+        src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js">
+</script>
+<script
+        src="https://cdn.jsdelivr.net/npm/chart.js@4.0.1/dist/chart.umd.min.js">
+</script>
+    {% if deck_found == "Y" %}
+        <div id="all-info-deck-grid">
+            <div id="main-deck-info">
+                <div>
+                    <div>
+                        <h1 id="deck-name">{{ deck_name }} by {{ creator }}</h1>
+                        <h2>Deck Key: {{ deck_key }}</h2>
+                    </div>
+                    <h3 class="grid-section" id="factions">Faction(s): {{ factions }}</h3>
+                    <div id="large-grid">
+                        <div class="large-grid-section" id="warlord">
+                            <div id="warlord-image-container">
+                                <a href={{ warlord_link }}>
+                                    <img id="warlord-image" src={{ warlord_img }}>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="large-grid-section" id="synapse">
+                            <div id="synapse-image-container">
+                                {% if synapse_img != "None" %}
+                                <a href={{ synapse_link }}>
+                                    <img id="synapse-image" src={{ synapse_img }}>
+                                </a>
+                                {% endif %}
+                            </div>
+                        </div>
+                        <div class="large-grid-section-pledge" id="pledge">
+                            <div id="pledge-image-container">
+                                {% if pledge_img != "None" %}
+                                <a href={{ pledge_link }}>
+                                    <img id="pledge-image" src={{ pledge_img }}>
+                                </a>
+                                {% endif %}
+                            </div>
+                        </div>
+                        <div id="deck-grid">
+                            <div class="grid-section" id="sig_cards">
+                                <h2>Signature Squad</h2>
+                                {% for card, link, src in sig_cards %}
+                                    <a href={{ link }}>
+                                        <div onmouseenter="showImg(this)" onmouseleave="clearImg()" data-src={{ src }}>
+                                            <h3 class="card-in-deck">{{ card }}</h3>
+                                        </div>
+                                    </a>
+                                {% endfor %}
+                            </div>
+                            <div class="grid-army-section" id="army_cards">
+                                <h2>Army Units ({{ army_card_count }} + {{ extra_army_cards }})</h2>
+                                {% for card, link, src in army_cards %}
+                                    <a href={{ link }}>
+                                        <div onmouseenter="showImg(this)" onmouseleave="clearImg()" data-src={{ src }}>
+                                            <h3 class="card-in-deck">{{ card }}</h3>
+                                        </div>
+                                    </a>
+                                {% endfor %}
+                            </div>
+                            <div class="grid-section" id="support_cards">
+                                <h2>Supports ({{ support_card_count }} + {{ extra_support_cards }})</h2>
+                                {% for card, link, src in support_cards %}
+                                    <a href={{ link }}>
+                                        <div onmouseenter="showImg(this)" onmouseleave="clearImg()" data-src={{ src }}>
+                                            <h3 class="card-in-deck">{{ card }}</h3>
+                                        </div>
+                                    </a>
+                                {% endfor %}
+                            </div>
+                            <div class="grid-section" id="attachment_cards">
+                                <h2>Attachments ({{ attachment_card_count }} + {{ extra_attachment_cards }})</h2>
+                                {% for card, link, src in attachment_cards %}
+                                    <a href={{ link }}>
+                                        <div onmouseenter="showImg(this)" onmouseleave="clearImg()" data-src={{ src }}>
+                                            <h3 class="card-in-deck">{{ card }}</h3>
+                                        </div>
+                                    </a>
+                                {% endfor %}
+                            </div>
+                            <div class="grid-section" id="event_cards">
+                                <h2>Events ({{ event_card_count }} + {{ extra_event_cards }})</h2>
+                                {% for card, link, src in event_cards %}
+                                    <a href={{ link }}>
+                                        <div onmouseenter="showImg(this)" onmouseleave="clearImg()" data-src={{ src }}>
+                                            <h3 class="card-in-deck">{{ card }}</h3>
+                                        </div>
+                                    </a>
+                                {% endfor %}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="pie-chart-container">
+                <p id="header-pie-chart">Distribution of card types (excluding signatures)</p>
+                <canvas id="pie-chart" style="height:300px"></canvas>
+            </div>
+            <div id="draw-cards-div">
+                <div id="draw-cards-preamble">
+                    <div id="draw-cards-preamble-2">
+                        <div style="display: inline;float:left;width: 50px;"><p>Draw </p></div>
+                        <div style="display: inline;float:left;position: relative;top: 13px;width:70px;"><input style="width:60px" type="number" id="numCards" name="numCards" /></div>
+                        <div style="display: inline;float:left;width: 150px;"><p> cards</p></div>
+                    </div>
+                    <br>
+                    <button class="button" id="draw" onclick="drawCards();">Draw!</button>
+                </div>
+                <div id="draw-cards-container">
+
+                </div>
+            </div>
+        </div>
+        <img id="cursor-follower" src="/static/images/CardImages/Cardback.jpg">
+    {% else %}
+        <h2>deck not found</h2>
+    {% endif %}
+<script>
+    var mouse_x = 0;
+    var mouse_y = 0;
+    const xValues = ["Army", "Support", "Attachment", "Event"];
+    const yValues = [parseInt("{{ army_card_count }}"), parseInt("{{ support_card_count }}"), parseInt("{{ attachment_card_count }}"), parseInt("{{ event_card_count }}")];
+    const barColors = ["red", "green","blue","orange","brown"];
+    var deck_text = "{{ deck_content }}";
+    var raw_cards = {{ cards_raw|safe }};
+    deck_text = deck_text.split("|||").join("\n");
+    deck_text = deck_text.replace(new RegExp("&"+"#"+"x27;", "g"), "'");
+    onmousemove = function(e){
+        mouse_x = e.clientX + window.scrollX;
+        mouse_y = e.clientY * (0.5) + 80 + window.scrollY;
+    }
+    function showImg(el) {
+        var new_src = el.getAttribute('data-src');
+        cursor_img = document.getElementById("cursor-follower");
+        cursor_img.style.left = mouse_x + 30 + "px";
+        cursor_img.style.top = mouse_y + 30 + "px";
+        cursor_img.src = new_src;
+        cursor_img.style.display = "block";
+    }
+    function clearImg() {
+        cursor_img = document.getElementById("cursor-follower");
+        cursor_img.src = "/static/images/CardImages/Cardback.jpg";
+        cursor_img.style.display = "none";
+    }
+
+    function convertNameToImg(cardName) {
+        var imgSrc = "/static/images/CardImages/";
+        imgSrc = imgSrc + cardName.replaceAll(" ", "_") + ".jpg"
+        return imgSrc;
+    }
+
+    function drawCards() {
+        drawNCards(document.getElementById("numCards").value);
+    }
+
+    function drawNCards(n) {
+        if (n < 1) {
+            return;
+        }
+        var card_names = [];
+        var card_count = 0;
+        var card_name = "";
+        for (var i = 0; i < raw_cards.length; i++) {
+            card_name = raw_cards[i].slice(3);
+            card_count = raw_cards[i][0];
+            for (var j = 0; j < card_count; j++) {
+                card_names.push(card_name);
+            }
+        }
+        console.log(card_names);
+        for (let i = card_names.length - 1; i > 0; i--) {
+
+            const j = Math.floor(Math.random() * (i + 1));
+
+            const temp = card_names[i];
+            card_names[i] = card_names[j];
+            card_names[j] = temp;
+        }
+        var e = document.getElementById("draw-cards-container");
+        e.innerHTML = ``;
+        var imgSrc = "";
+        if (n <= card_names.length) {
+            for (var i = 0; i < n; i++) {
+                imgSrc = convertNameToImg(card_names[i]);
+                e.innerHTML += `<img class="generic-card" src=` + imgSrc + `>`;
+            }
+        } else {
+            e.innerHTML += "Not enough cards in deck";
+        }
+    }
+    if (raw_cards.length > 0) {
+        new Chart("pie-chart", {
+            type: "pie",
+            data: {
+                labels: xValues,
+                datasets: [{
+                    backgroundColor: barColors,
+                    data: yValues
+                }]
+            }
+        });
+    }
+</script>
+{% endblock %}

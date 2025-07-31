@@ -1,11 +1,55 @@
+#all-info-deck-grid {
+    position: relative;
+    width: max(1690px, 100%);
+    margin-top: 50px;
+    display: grid;
+    grid-row-gap: 1px;
+    grid-template-columns: 1040px 50px auto;
+    grid-template-rows: 400px 400px 400px auto;
+    grid-template-areas:
+    "original-deck-info gap pie-chart-container"
+    "original-deck-info gap temp-div"
+    "original-deck-info gap other-stuff"
+    "draw-cards draw-cards draw-cards";
+}
+
+#draw-cards-div {
+    grid-area: draw-cards;
+    width: 100%;
+}
+
+#draw-cards-preamble {
+    display: flex;
+    justify-content: center;
+}
+
+#draw-cards-container {
+    display: flex;
+    justify-content: center;
+    border: 5px solid red;
+    max-width: 100%;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+
+#header-pie-chart {
+    position: relative;
+}
+
+#pie-chart-container {
+    grid-area: pie-chart-container;
+    justify-content: center;
+}
+
 #main-deck-info {
     position: relative;
-    margin-top: 50px;
+    border: 1px black dashed;
     left: 0;
-    width:max(1100px, 100%);
+    width:100%;
     overflow-x: auto;
     display: flex;
     justify-content: center;
+    grid-area: original-deck-info;
 }
 
 #description-area {
@@ -68,7 +112,7 @@
     background-color: #f44336;
 }
 
-#modify, #copy, #download, #advanced {
+#modify, #copy, #download, #draw {
     background-color: #008CBA;
 }
 
@@ -120,7 +164,7 @@
     display:none;
 }
 
-#warlord-image, #synapse-image {
+#warlord-image, #synapse-image, .generic-card {
     height:280px;
     width:200px;
 }

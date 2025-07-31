@@ -68,7 +68,7 @@
     background-color: #f44336;
 }
 
-#modify, #copy, #download {
+#modify, #copy, #download, #advanced {
     background-color: #008CBA;
 }
 
@@ -161,7 +161,6 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    // border: 1px dotted black
 }
 
 #author-desc-text {
@@ -174,7 +173,7 @@
 }
 
 .large-grid-section-pledge {
-    // border: 1px dotted black
+
 }
 
 #sig_cards {
