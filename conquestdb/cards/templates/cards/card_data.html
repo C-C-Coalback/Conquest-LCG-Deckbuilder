@@ -13,10 +13,8 @@
         {% endif %}
         </div>
         <div id="card-info">
-            <div id="card-name">
-                <h2>{{ card_name }}</h2>
-                <h3>{{ cycle_text|linebreaks }}</h3>
-            </div>
+            <h2>{{ card_name }}</h2>
+            <h3>{{ cycle_text|linebreaks }}</h3>
             <h3>{{ faction }}</h3>
             <h3>{{ loyalty }} {{ card_type }}</h3>
             <h3>{{ traits }}</h3>
@@ -41,10 +39,8 @@
         </div>
         {% if errata_text == "There is Errata" %}
         <div id="errata-card-info">
-            <div id="errata-card-name">
-                <h2>{{ errata_card_name }}</h2>
-                <h3>{{ errata_cycle_text|linebreaks }}</h3>
-            </div>
+            <h2>{{ errata_card_name }}</h2>
+            <h3>{{ errata_cycle_text|linebreaks }}</h3>
             <h3>{{ errata_faction }}</h3>
             <h3>{{ errata_loyalty }} {{ errata_card_type }}</h3>
             <h3>{{ errata_traits }}</h3>
@@ -69,9 +65,7 @@
         </div>
         {% endif %}
         <div id="ban-info">
-            <div id="ban-header">
-                <h2>Banlist/Errata</h2>
-            </div>
+            <h2>Banlist/Errata</h2>
             <h3>{{ errata_text }}</h3>
             <h3>{{ ban_text }}</h3>
         </div>
