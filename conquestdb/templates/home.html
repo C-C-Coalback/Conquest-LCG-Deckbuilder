@@ -33,6 +33,7 @@
             border: 2px solid blue;
             max-height: 100px;
             overflow-y: scroll;
+            margin-bottom: 30px;
         }
 
         .greetings {
@@ -42,6 +43,10 @@
             max-width: 30vw;
         }
 </style>
+<div class="box-scroll">
+  <h1>Changelog</h1>
+  <p>01/08/2025 Version 1.0.0 - Website launched</p>
+</div>
 <div class="home-box">
   <h1>Welcome to conquestdb.com!</h1>
   <p>This site serves as a deckbuilder for the Warhammer 40,000: Conquest Living Card Game.</p>
@@ -60,10 +65,6 @@
   <h1>DISCLAIMER</h1>
   <p>Warhammer 40,000: Conquest is a trademark of Fantasy Flight Publishing, Inc. and/or Games Workshop Group. </p>
   <p>This website is not affiliated with either Fantasy Flight Games or Games Workshop Group.</p>
-</div>
-<div class="box-scroll">
-  <h1>Changelog</h1>
-  <p>26/07/2025 Version 1.0.0 - Website launched</p>
 </div>
 {% if user.is_authenticated %}
 <div class="greetings">
