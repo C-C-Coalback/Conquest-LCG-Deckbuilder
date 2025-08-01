@@ -134,7 +134,7 @@ MEDIA_URL = 'media/'
 # https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field
 
 CSRF_TRUSTED_ORIGINS = [
-    "https://www.conquestdb.com", "https://167.172.157.98"
+    "https://www.conquestdb.com", "https://conquestdb.com", "https://167.172.157.98"
 ]
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
