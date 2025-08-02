@@ -199,3 +199,7 @@
 .comment-content > p {
     color: black; !important;
 }
+
+#desc-text > p {
+    color: black; !important;
+}
