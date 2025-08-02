@@ -196,6 +196,6 @@
     grid-area:attachment_cards;
 }
 
-#desc-text > p {
+.comment-content > p {
     color: black; !important;
 }

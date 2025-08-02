@@ -82,3 +82,7 @@
     background: rgba(47, 40, 153, 0.3);
     border: 0.15em dashed lightblue
 }
+
+.comment-content > p {
+    color: black; !important;
+}
