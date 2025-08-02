@@ -195,3 +195,7 @@
 #attachment_cards {
     grid-area:attachment_cards;
 }
+
+#desc-text > p {
+    color: black; !important;
+}

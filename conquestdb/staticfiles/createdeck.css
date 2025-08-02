@@ -156,6 +156,10 @@
     display:none;
 }
 
+.minus-spacing {
+    margin-left: 10px;
+}
+
 .mini-card-name, .mini-card-faction {
     width: 14.40vw;
 }
