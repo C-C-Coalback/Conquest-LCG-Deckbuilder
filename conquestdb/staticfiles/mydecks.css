@@ -23,6 +23,16 @@
     width: 60px;
 }
 
+.center {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.border-bottom {
+    border-bottom: 5px solid green;
+}
+
 #next-page {
     position:relative;
     right:0;
@@ -45,7 +55,6 @@
 .deck-item-grid {
     width: 400px;
     height: auto;
-    border: 5px solid green;
     display: grid;
     grid-template-columns: 280px 120px;
     grid-template-areas:
