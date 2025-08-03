@@ -119,6 +119,12 @@
     "p-order order p-asc-desc asc-desc";
 }
 
+#card-counts-pages {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
 #p-loyalty {
     grid-area: p-loyalty;
 }

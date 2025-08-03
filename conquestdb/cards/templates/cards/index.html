@@ -101,9 +101,30 @@
         </div>
         <input id="next-page" type="button" value="next" onclick="nextPage();">
     </div>
+    <div id="card-counts-pages">
+        <p>Showing 0-0 of 0 matches</p>
+    </div>
+    <div class="center" style="display:none">
+        Number of rows per page:<select name="num-rows" class="num-rows" id="num-rows" onchange="updateMaxRows(this)">
+            <option value="5">5</option>
+            <option value="10">10</option>
+            <option value="20" selected="selected">20</option>
+            <option value="50">50</option>
+            <option value="100">100</option>
+            <option value="200">200</option>
+            <option value="500">500</option>
+            <option value="1000">1000</option>
+            <option value="2000">2000</option>
+        </select>
+    </div>
     <script>
         var current_page_number = 0;
         var max_page_number = 0;
+        var max_rows = "20";
+        var current_max_rows = 20;
+        var num_matches = 0;
+        var current_low_match = 0;
+        var current_high_match = 0;
         var stored_image_links = [];
         var stored_image_names = [];
 
@@ -142,9 +163,17 @@
             searchInput.value = "None";
         }
 
+        function updateMaxRows(e) {
+            max_rows = e.value;
+        }
+
         function previousPage() {
             if (current_page_number !== 0) {
                 current_page_number = current_page_number - 1;
+                current_low_match = current_low_match - current_max_rows;
+                current_high_match = (current_page_number + 1) * current_max_rows;
+                page_counter = document.getElementById("card-counts-pages");
+                page_counter.innerHTML = `<p>Showing ` + current_low_match + `-` + current_high_match + ` of ` + num_matches + ` matches</p>`;
                 e = document.getElementById("responseMessage");
                 e.innerHTML = ``;
                 var img_src = "";
@@ -171,6 +200,13 @@
                 current_page_number = current_page_number + 1;
                 e = document.getElementById("responseMessage");
                 e.innerHTML = ``;
+                current_low_match = current_low_match + current_max_rows;
+                current_high_match = (current_page_number + 1) * current_max_rows;
+                if (current_high_match > num_matches) {
+                    current_high_match = num_matches;
+                }
+                page_counter = document.getElementById("card-counts-pages");
+                page_counter.innerHTML = `<p>Showing ` + current_low_match + `-` + current_high_match + ` of ` + num_matches + ` matches</p>`;
                 var img_src = "";
                 var img_link = "";
                 var new_string = "";
@@ -241,6 +277,18 @@
                         new_string += `<div class="page" id="page">`;
                         stored_image_links = [[]];
                         stored_image_names = [[]];
+                        current_max_rows = parseInt(max_rows);
+                        num_matches = image_names.length;
+                        current_low_match = 1;
+                        if (num_matches === 0) {
+                            current_low_match = 0;
+                        }
+                        current_high_match = current_max_rows;
+                        if (current_high_match > num_matches) {
+                            current_high_match = num_matches;
+                        }
+                        page_counter = document.getElementById("card-counts-pages");
+                        page_counter.innerHTML = `<p>Showing ` + current_low_match + `-` + current_high_match + ` of ` + num_matches + ` matches</p>`;
                         for (let i = 0; i < image_names.length; i++) {
                             if (cardCount === 20) {
                                 pageCount += 1
