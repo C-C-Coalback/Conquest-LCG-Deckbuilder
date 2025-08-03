@@ -123,6 +123,12 @@ def get_width(name_card):
     return 1
 
 
+def get_horizontal_link(name_card):
+    if name_card in pledges_array:
+        return True
+    return False
+
+
 def send_deck_given_key(key_string):
     directory = os.getcwd()
     target_directory = directory + "/decks/deckstorage/"
@@ -197,6 +203,7 @@ def request_deck(request, deck_key):
                 hidden_links_sent = []
                 unique_links_sent = []
                 set_aside_sent = []
+                horizontal_card_links_sent = []
                 for i in range(len(deck_content)):
                     if i == 0 or deck_content[i] in pledges_array:
                         print(deck_content[i])
@@ -214,6 +221,7 @@ def request_deck(request, deck_key):
                         hidden_links_sent.append(get_hidden_link(card_name))
                         unique_links_sent.append((get_unique_link(card_name)))
                         set_aside_sent.append(True)
+                        horizontal_card_links_sent.append(get_horizontal_link(card_name))
                     else:
                         print(deck_content[i][3:])
                         card_name = deck_content[i][3:]
@@ -229,6 +237,7 @@ def request_deck(request, deck_key):
                         width_links_sent.append(get_width(card_name))
                         hidden_links_sent.append(get_hidden_link(card_name))
                         unique_links_sent.append((get_unique_link(card_name)))
+                        horizontal_card_links_sent.append(get_horizontal_link(card_name))
                         if card_name in preparation_array:
                             set_aside_sent.append(True)
                         else:
@@ -239,7 +248,7 @@ def request_deck(request, deck_key):
                                      'height': height_links_sent, 'width': width_links_sent,
                                      'amount': card_amounts, 'desc': desc_links_sent,
                                      'hidden': hidden_links_sent, 'unique': unique_links_sent,
-                                     'set_aside': set_aside_sent})
+                                     'set_aside': set_aside_sent, 'horizontal': horizontal_card_links_sent})
         except Exception as e:
             print(e)
         return JsonResponse({'message': 'DECK NOT FOUND', 'deck_content': ""})
