@@ -696,7 +696,7 @@ def advanced_deck_details(request, deck_creator, deck_key):
             links_to_sig_cards.append(convert_name_to_hyperlink(actual_name))
             sig_srcs.append(convert_name_to_img_src(actual_name))
             cost = FindCard.find_card(actual_name, card_array, cards_dict).get_cost()
-            if cost != -1:
+            if cost != -1 and cost < 11:
                 try:
                     str_cost = str(cost)
                     if str_cost in cost_indices:
@@ -708,7 +708,7 @@ def advanced_deck_details(request, deck_creator, deck_key):
             links_to_army_cards.append(convert_name_to_hyperlink(actual_name))
             army_srcs.append(convert_name_to_img_src(actual_name))
             cost = FindCard.find_card(actual_name, card_array, cards_dict).get_cost()
-            if cost != -1:
+            if cost != -1 and cost < 11:
                 try:
                     str_cost = str(cost)
                     if str_cost in cost_indices:
@@ -720,7 +720,7 @@ def advanced_deck_details(request, deck_creator, deck_key):
             links_to_support_cards.append(convert_name_to_hyperlink(actual_name))
             support_srcs.append(convert_name_to_img_src(actual_name))
             cost = FindCard.find_card(actual_name, card_array, cards_dict).get_cost()
-            if cost != -1:
+            if cost != -1 and cost < 11:
                 try:
                     str_cost = str(cost)
                     if str_cost in cost_indices:
@@ -732,7 +732,7 @@ def advanced_deck_details(request, deck_creator, deck_key):
             links_to_attachment_cards.append(convert_name_to_hyperlink(actual_name))
             attachment_srcs.append(convert_name_to_img_src(actual_name))
             cost = FindCard.find_card(actual_name, card_array, cards_dict).get_cost()
-            if cost != -1:
+            if cost != -1 and cost < 11:
                 try:
                     str_cost = str(cost)
                     if str_cost in cost_indices:
@@ -744,7 +744,7 @@ def advanced_deck_details(request, deck_creator, deck_key):
             links_to_event_cards.append(convert_name_to_hyperlink(actual_name))
             event_srcs.append(convert_name_to_img_src(actual_name))
             cost = FindCard.find_card(actual_name, card_array, cards_dict).get_cost()
-            if cost != -1:
+            if cost != -1 and cost < 11:
                 try:
                     str_cost = str(cost)
                     if str_cost in cost_indices:
