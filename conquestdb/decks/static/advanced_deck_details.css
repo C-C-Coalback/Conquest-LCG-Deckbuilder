@@ -8,7 +8,7 @@
     grid-template-rows: 400px 400px 400px auto;
     grid-template-areas:
     "original-deck-info gap pie-chart-container"
-    "original-deck-info gap temp-div"
+    "original-deck-info gap bar-chart-container"
     "original-deck-info gap other-stuff"
     "draw-cards draw-cards draw-cards";
 }
@@ -32,12 +32,17 @@
     flex-wrap: wrap;
 }
 
-#header-pie-chart {
+#header-pie-chart, #header-bar-chart {
     position: relative;
 }
 
 #pie-chart-container {
     grid-area: pie-chart-container;
+    justify-content: center;
+}
+
+#cost-chart-container {
+    grid-area: bar-chart-container;
     justify-content: center;
 }
 

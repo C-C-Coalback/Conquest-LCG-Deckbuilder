@@ -50,7 +50,7 @@ def neutral_cards_init():
                                 war_pack_info="Legions of Death"),
         CardClasses.EventCard("Calamity", "HEADQUARTERS ACTION: Return each army unit with printed cost 2 or "
                                           "lower to its owner's hand.", "Disaster.",
-                              1, "Neutral", "Common", 1, False,
+                              2, "Neutral", "Common", 1, False,
                               action_in_hand=True, allowed_phases_in_hand="HEADQUARTERS",
                               war_pack_info="The Howl of Blackmane"),
         CardClasses.ArmyCard("Inquisitor Caius Wroth", "Reaction: After this unit enters play, each player must "

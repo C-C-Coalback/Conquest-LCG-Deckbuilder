@@ -689,21 +689,68 @@ def advanced_deck_details(request, deck_creator, deck_key):
         support_srcs = []
         attachment_srcs = []
         event_srcs = []
+        cost_indices = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10"]
+        cost_values = [0 for _ in range(11)]
         for card_name in sig_cards:
-            links_to_sig_cards.append(convert_name_to_hyperlink(card_name[3:]))
-            sig_srcs.append(convert_name_to_img_src(card_name[3:]))
+            actual_name = card_name[3:]
+            links_to_sig_cards.append(convert_name_to_hyperlink(actual_name))
+            sig_srcs.append(convert_name_to_img_src(actual_name))
+            cost = FindCard.find_card(actual_name, card_array, cards_dict).get_cost()
+            if cost != -1:
+                try:
+                    str_cost = str(cost)
+                    if str_cost in cost_indices:
+                        cost_values[cost] += int(card_name[0])
+                except:
+                    pass
         for card_name in army_cards:
-            links_to_army_cards.append(convert_name_to_hyperlink(card_name[3:]))
-            army_srcs.append(convert_name_to_img_src(card_name[3:]))
+            actual_name = card_name[3:]
+            links_to_army_cards.append(convert_name_to_hyperlink(actual_name))
+            army_srcs.append(convert_name_to_img_src(actual_name))
+            cost = FindCard.find_card(actual_name, card_array, cards_dict).get_cost()
+            if cost != -1:
+                try:
+                    str_cost = str(cost)
+                    if str_cost in cost_indices:
+                        cost_values[cost] += int(card_name[0])
+                except:
+                    pass
         for card_name in support_cards:
-            links_to_support_cards.append(convert_name_to_hyperlink(card_name[3:]))
-            support_srcs.append(convert_name_to_img_src(card_name[3:]))
+            actual_name = card_name[3:]
+            links_to_support_cards.append(convert_name_to_hyperlink(actual_name))
+            support_srcs.append(convert_name_to_img_src(actual_name))
+            cost = FindCard.find_card(actual_name, card_array, cards_dict).get_cost()
+            if cost != -1:
+                try:
+                    str_cost = str(cost)
+                    if str_cost in cost_indices:
+                        cost_values[cost] += int(card_name[0])
+                except:
+                    pass
         for card_name in attachment_cards:
-            links_to_attachment_cards.append(convert_name_to_hyperlink(card_name[3:]))
-            attachment_srcs.append(convert_name_to_img_src(card_name[3:]))
+            actual_name = card_name[3:]
+            links_to_attachment_cards.append(convert_name_to_hyperlink(actual_name))
+            attachment_srcs.append(convert_name_to_img_src(actual_name))
+            cost = FindCard.find_card(actual_name, card_array, cards_dict).get_cost()
+            if cost != -1:
+                try:
+                    str_cost = str(cost)
+                    if str_cost in cost_indices:
+                        cost_values[cost] += int(card_name[0])
+                except:
+                    pass
         for card_name in event_cards:
-            links_to_event_cards.append(convert_name_to_hyperlink(card_name[3:]))
-            event_srcs.append(convert_name_to_img_src(card_name[3:]))
+            actual_name = card_name[3:]
+            links_to_event_cards.append(convert_name_to_hyperlink(actual_name))
+            event_srcs.append(convert_name_to_img_src(actual_name))
+            cost = FindCard.find_card(actual_name, card_array, cards_dict).get_cost()
+            if cost != -1:
+                try:
+                    str_cost = str(cost)
+                    if str_cost in cost_indices:
+                        cost_values[cost] += int(card_name[0])
+                except:
+                    pass
         raw_card_data = [*sig_cards, *army_cards, *support_cards, *attachment_cards, *event_cards]
         sig_cards = zip(sig_cards, links_to_sig_cards, sig_srcs)
         army_cards = zip(army_cards, links_to_army_cards, army_srcs)
@@ -774,7 +821,8 @@ def advanced_deck_details(request, deck_creator, deck_key):
                        "extra_attachment_cards": extra_attachment_cards,
                        "support_card_count": support_card_count,
                        "extra_support_cards": extra_support_cards,
-                       "cards_raw": raw_card_data}
+                       "cards_raw": raw_card_data, "cost_indices": cost_indices,
+                       "cost_values": cost_values}
                       )
     return render(request, "decks/advanced_deck_details.html",
                   {"deck_found": deck_found, "deck_content": "", "light_dark_toggle": light_dark_toggle,

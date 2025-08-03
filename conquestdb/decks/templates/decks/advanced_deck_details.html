@@ -99,9 +99,13 @@
                     </div>
                 </div>
             </div>
-            <div id="pie-chart-container">
+            <div id="pie-chart-container" style="height:300px">
                 <p id="header-pie-chart">Distribution of card types (excluding signatures)</p>
-                <canvas id="pie-chart" style="height:300px"></canvas>
+                <canvas id="pie-chart" style="height:100px"></canvas>
+            </div>
+            <div id="cost-chart-container">
+                <p id="header-bar-chart">Cost Distribution (including signatures)</p>
+                <canvas id="bar-chart" style="width:100px"></canvas>
             </div>
             <div id="draw-cards-div">
                 <div id="draw-cards-preamble">
@@ -128,6 +132,8 @@
     const xValues = ["Army", "Support", "Attachment", "Event"];
     const yValues = [parseInt("{{ army_card_count }}"), parseInt("{{ support_card_count }}"), parseInt("{{ attachment_card_count }}"), parseInt("{{ event_card_count }}")];
     const barColors = ["red", "green","blue","orange","brown"];
+    const xValues_cost = {{ cost_indices|safe }};
+    const yValues_cost = {{ cost_values|safe }};
     var deck_text = "{{ deck_content }}";
     var raw_cards = {{ cards_raw|safe }};
     deck_text = deck_text.split("|||").join("\n");
@@ -204,6 +210,24 @@
                     backgroundColor: barColors,
                     data: yValues
                 }]
+            }
+        });
+        new Chart("bar-chart", {
+            type: "bar",
+            data: {
+                labels: xValues_cost,
+                datasets: [{
+                    backgroundColor: "steelblue",
+                    data: yValues_cost
+                }]
+            },
+            options: {
+                indexAxis: 'y',
+                plugins: {
+                    legend: {
+                        display: false
+                    }
+                }
             }
         });
     }
