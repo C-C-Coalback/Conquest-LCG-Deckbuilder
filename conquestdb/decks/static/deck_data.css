@@ -12,11 +12,15 @@
     position: relative;
     margin-top: 50px;
     left: 0;
-    background: #f9f9f9;
     display: flex;
     justify-content: center;
     max-width: 100%;
+}
+
+#desc-text {
+    background: #f9f9f9;
     border: 1px solid #000000;
+    padding: 20px;
 }
 
 .comment-class {
@@ -201,5 +205,9 @@
 }
 
 #desc-text > p {
+    color: black; !important;
+}
+
+.comment-name > p {
     color: black; !important;
 }
