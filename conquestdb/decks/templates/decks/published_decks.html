@@ -4,6 +4,7 @@
 {% load static %}
 <link rel="stylesheet" href="{% static 'mydecks.css' %}">
     <div id="main-box">
+        <input id="prev-page" type="button" value="previous" onclick="previousPage();">
         <div id="main-decks-box">
             <div id="decks-list">
                 {% for name, warlord_name, date, img_src, key, creator_name in decks %}
@@ -19,5 +20,30 @@
                 {% endfor %}
             </div>
         </div>
+        <input id="next-page" type="button" value="next" onclick="nextPage();">
     </div>
+    <script>
+        const current_url = document.URL;
+        const url_split = current_url.split("/");
+
+        function nextPage() {
+            if (url_split.length == 6) {
+                location.href = "/decks/published_decks/1/";
+            } else {
+                var number = parseInt(url_split[5]);
+                number = number + 1;
+                location = "/decks/published_decks/" + number.toString() + "/";
+            }
+        }
+
+        function previousPage() {
+            if (url_split.length == 7) {
+                var number = parseInt(url_split[5]);
+                number = number - 1;
+                if (number > 0) {
+                    location = "/decks/published_decks/" + number.toString() + "/";
+                }
+            }
+        }
+    </script>
 {% endblock %}

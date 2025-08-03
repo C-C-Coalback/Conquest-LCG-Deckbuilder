@@ -14,6 +14,30 @@
     border: 5px solid green;
 }
 
+#prev-page {
+    position:relative;
+    left:0;
+    top:0;
+    background-color: #f1f1f1;
+    color: black;
+    height: 60px;
+    width: 60px;
+}
+
+#next-page {
+    position:relative;
+    right:0;
+    top:0;
+    background-color: #f1f1f1;
+    color: black;
+    height: 60px;
+    width: 60px;
+}
+
+.round {
+    border-radius: 50%;
+}
+
 .preview-image {
     width: 120px;
     height: 168px;
