@@ -86,3 +86,7 @@
 .comment-content > p {
     color: black; !important;
 }
+
+.comment-name > p {
+    color: black; !important;
+}

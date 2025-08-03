@@ -1034,7 +1034,10 @@ def deck_data(request, deck_creator, deck_key):
                         idf = infile.split(sep=".")[0]
                         comment_ids.append(idf)
                         names_comments.append(split_text[0])
-                        times_comments.append(split_text[1])
+                        time = datetime.datetime.strptime(split_text[1], '%Y-%m-%d %H:%M:%S.%f')
+                        time.replace(microsecond=0)
+                        time = time.strftime('%Y-%m-%d %H:%M:%S')
+                        times_comments.append(time)
                         comments.append(split_text[2])
                         no_comments = False
         my_comments = zip(names_comments, times_comments, comments, comment_ids)
