@@ -1270,6 +1270,8 @@ def ajax_view(request):
         if flag == "SENDDECK":
             text = request.POST.get('deck_text')
             username = request.POST.get('username')
+            if username == "":
+                username = "Anonymous"
             description = request.POST.get('description')
             force_send = request.POST.get('force_send')
             message_to_send = ""
