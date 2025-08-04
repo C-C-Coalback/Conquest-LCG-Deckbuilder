@@ -121,6 +121,7 @@ def ajax_view(request):
             special_factions = ast.literal_eval(special_factions)
             special_enabled = request.POST.get('special_enabled')
             special_enabled = ast.literal_eval(special_enabled)
+            warlord = FindCard.find_card(warlord_name, card_array, cards_dict)
             if special_factions:
                 if len(special_factions) == len(special_enabled):
                     extra_faction_filter = []
@@ -139,8 +140,21 @@ def ajax_view(request):
                                           ((filtered_df['faction'] == "Orks") &
                                            (filtered_df['loyalty'] != "Signature"))) |
                                           (filtered_df['faction'] == "Neutral")]
+            elif warlord.get_faction() == "Necrons":
+                valid_necrons_enslavement = ["Astra Militarum", "Space Marines", "Tau",
+                                             "Eldar", "Dark Eldar", "Chaos", "Orks"]
+                filtered_df = filtered_df[(((filtered_df['faction'] == warlord.get_faction()) &
+                                            (filtered_df['loyalty'] != "Signature")) |
+                                           ((filtered_df['faction'].isin(valid_necrons_enslavement)) &
+                                            (filtered_df['loyalty'] == "Common")) &
+                                           (filtered_df['card type'] == "Army")) |
+                                          (filtered_df['faction'] == "Neutral")]
+            elif warlord.get_faction() == "Tyranids" and warlord.get_name() != "Termagant":
+                filtered_df = filtered_df[(((filtered_df['faction'] == warlord.get_faction()) &
+                                            (filtered_df['loyalty'] != "Signature"))) |
+                                          ((filtered_df['faction'] == "Neutral") &
+                                           (filtered_df['card type'] != "Army"))]
             elif warlord_name and ally_faction:
-                warlord = FindCard.find_card(warlord_name, card_array, cards_dict)
                 filtered_df = filtered_df[(((filtered_df['faction'] == warlord.get_faction()) &
                                            (filtered_df['loyalty'] != "Signature")) |
                                           ((filtered_df['faction'] == ally_faction) &
