@@ -10,13 +10,16 @@
     {% endfor %}
 </datalist>
 <div id="deck-container">
+    <input id="toggle-position-type-deck" type="button" value="Lock Deck Location" onclick="makeDeckSticky();">
     <div class="auto-deck-build">
         <div id="warlord-card" class="poster-card"><img id="Nazdreg" src="/static/images/CardImages/Cardback.jpg" style="opacity:0.0" class="db-image"></div>
         <div id="synapse-card" class="poster-card"><img id="Cardback" src="/static/images/CardImages/Cardback.jpg" style="opacity:0.0" class="db-image"></div>
         <div id="pledge-card" class="poster-card"><img id="Cardback_Two" src="/static/images/CardImages/Cardback.jpg" style="opacity:0.0" class="db-image"></div>
         <div id="details">Details<br>
             <label for="name-deck">Name:</label>
-            <input id="name-deck" type="search" size="28"><br>
+            <input id="name-deck" type="search" size="28"><div class="tooltip">?
+                <span class="tooltiptext">Maximum of 29 characters are allowed. <br>Only letters, numbers and spaces are allowed.</span>
+            </div><br>
             <div class="ally-area">
                 <label for="ally">Ally:</label>
                 <select name="ally" id="ally" onChange="notCheckedAlly();">
@@ -281,6 +284,15 @@
     onmousemove = function(e){
         mouse_x = e.clientX + window.scrollX;
         mouse_y = e.clientY * (0.5) + 320 + window.scrollY;
+    }
+
+    function makeDeckSticky() {
+        var e = document.getElementById("deck-container");
+        if (e.style.position === "fixed") {
+            e.style.position = "absolute";
+        } else {
+            e.style.position = "fixed";
+        }
     }
 
     function getFactionSelections() {

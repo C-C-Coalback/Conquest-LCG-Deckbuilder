@@ -140,7 +140,7 @@
 }
 
 #deck-container {
-    position: fixed;
+    position: absolute;
     left: 100px;
     top: 100px;
 }
@@ -273,7 +273,7 @@
     margin-right:10px;
 }
 
-#card-submit, #deck-submit-1 {
+#card-submit, #deck-submit-1, #toggle-position-type-deck {
     border: none;
     background-color: blue;
     color: white;
