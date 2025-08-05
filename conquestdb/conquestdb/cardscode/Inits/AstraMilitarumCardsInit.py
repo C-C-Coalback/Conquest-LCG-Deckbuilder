@@ -82,7 +82,7 @@ def astra_militarum_cards_init():
                                                 "into play at your HQ, and place the "
                                                 "remaining cards on the bottom of your deck "
                                                 "in any order.", "Scholar. Tech-Priest.",
-                             2, faction, "Common", 2, 2, 0, False, cycle_info="Core Set"),
+                             2, faction, "Loyal", 2, 2, 0, False, cycle_info="Core Set"),
         CardClasses.ArmyCard("Penal Legionnaire", "", "Conscript. Ally.",
                              0, faction, "Common", 1, 1, 0, False, cycle_info="Core Set"),
         CardClasses.ArmyCard("Infantry Conscripts", "This unit gets +2 ATK for each "
