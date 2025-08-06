@@ -121,6 +121,10 @@ def ajax_view(request):
             special_factions = ast.literal_eval(special_factions)
             special_enabled = request.POST.get('special_enabled')
             special_enabled = ast.literal_eval(special_enabled)
+            special_types = request.POST.get('special_types')
+            special_types = ast.literal_eval(special_types)
+            special_types_enabled = request.POST.get('special_types_enabled')
+            special_types_enabled = ast.literal_eval(special_types_enabled)
             warlord = FindCard.find_card(warlord_name, card_array, cards_dict)
             if special_factions:
                 if len(special_factions) == len(special_enabled):
@@ -130,6 +134,14 @@ def ajax_view(request):
                             extra_faction_filter.append(special_factions[i])
                     if extra_faction_filter:
                         filtered_df = filtered_df[filtered_df['faction'].isin(extra_faction_filter)]
+            if special_types:
+                if len(special_types) == len(special_types_enabled):
+                    extra_card_type_filter = []
+                    for i in range(len(special_types)):
+                        if special_types_enabled[i] == "Y":
+                            extra_card_type_filter.append(special_types[i])
+                    if extra_card_type_filter:
+                        filtered_df = filtered_df[filtered_df['card type'].isin(extra_card_type_filter)]
             if warlord_name == "Gorzod":
                 filtered_df = filtered_df[(((filtered_df['faction'] == "Space Marines") &
                                            (filtered_df['loyalty'] == "Common") &

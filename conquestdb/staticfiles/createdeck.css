@@ -4,7 +4,7 @@
     width:5vw;
 }
 
-#new-faction-filter {
+#new-faction-filter, #new-card-type-filter {
     background: rgba(30, 113, 114, 0.42);
 }
 
@@ -49,6 +49,10 @@
 }
 
 #faction_code label.btn.active {
+    background-color: rgb(50, 50, 50);
+}
+
+#type_code label.btn.active {
     background-color: rgb(50, 50, 50);
 }
 
