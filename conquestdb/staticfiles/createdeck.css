@@ -88,6 +88,7 @@
 
 .auto-deck-build > #details {
     background: rgba(47, 40, 153, 0.3);
+    overflow-y: auto;
     border: 1px solid black;
     text-align: center;
 }
@@ -143,6 +144,7 @@
     position: absolute;
     left: 100px;
     top: 100px;
+    width: 37vw;
 }
 
 #buttons-container {
@@ -161,24 +163,24 @@
 }
 
 .mini-card-name, .mini-card-faction {
-    width: 14.40vw;
+    width: max(14.40vw, 188px);
 }
 
 .mini-card-type, .mini-card-loyalty {
     text-align: center;
     vertical-align: middle;
-    width: 7.20vw;
+    width: max(7.20vw, 94px);
 }
 
 .mini-card-cost, .mini-card-attack, .mini-card-health, .mini-card-command, .mini-card-shield {
     text-align: center;
     vertical-align: middle;
-    width: 3.68vw;
+    width: max(3.68vw, 48px);
 }
 
 #description-container {
     position: absolute;
-    left: 47vw;
+    left: calc(47vw + 100px);
     top: 100px;
 }
 
@@ -188,13 +190,15 @@
 
 #card-filter-results {
     cursor: pointer;
-    width:40vw;
+    width:max(42vw, 550px);;
     border: 2px solid blue;
     overflow: hidden;
     background: rgba(47, 40, 153, 0.6);
 }
 
-
+#name-deck {
+    width: 10vw;
+}
 
 .searched-card, .searched-card-headers {
     position: relative;
@@ -208,7 +212,7 @@
 
 #mini-card-search-container-container {
     position: absolute;
-    left: 47vw;
+    left: calc(47vw + 100px);
     overflow:hidden;
     top: 500px;
     padding-bottom: 150px;
@@ -221,7 +225,7 @@
 
 #clear-filter {
     position: relative;
-    left: 10.43vw;
+    left: max(10.43vw, 180px);
     border: none;
     background-color: red;
     color: white;
@@ -247,21 +251,31 @@
   border-bottom: 1px dotted black;
 }
 
-.tooltip .tooltiptext {
-  visibility: hidden;
-  width: 120px;
-  background-color: black;
-  color: #fff;
-  text-align: center;
-  padding: 5px 0;
-  border-radius: 6px;
+#card-count-tooltip {
+    margin-top: max(-125px, -8vh);
+    margin-left: -13vw;
+}
 
-  position: absolute;
-  z-index: 1;
+#name-tooltip {
+    margin-left: -13vw;
+}
+
+.tooltip .tooltiptext {
+    visibility: hidden;
+    width: 200px;
+    max-width: 15vw;
+    background-color: black;
+    color: #fff;
+    text-align: center;
+    padding: 5px 0;
+    border-radius: 6px;
+
+    position: absolute;
+    z-index: 1;
 }
 
 .tooltip:hover .tooltiptext {
-  visibility: visible;
+    visibility: visible;
 }
 
 .ally-area > * {
@@ -278,7 +292,7 @@
     background-color: blue;
     color: white;
     padding: 15px 32px;
-    width: max(10.43vw, 100px);
+    width: max(10.43vw, 150px);
     text-align: center;
     text-decoration: none;
     display: inline-block;
@@ -289,7 +303,7 @@
 
 #send-filter {
     position: relative;
-    left: 10.43vw;
+    left: max(10.43vw, 180px);
     border: none;
     background-color: green;
     color: white;
@@ -307,7 +321,7 @@
     width: 25vw;
     height: auto;
     display: grid;
-    grid-template-columns: 1fr 1fr 1fr 1fr;
+    grid-template-columns: max(10vw, 130px) max(11vw, 144px) max(10vw, 130px) max(10vw, 144px);
     grid-template-areas:
     "p-card-name search p-card-type card-type"
     "p-faction faction p-loyalty loyalty"
@@ -330,7 +344,7 @@
     top:0;
     height: 50px;
     width: 10.43vw;
-    margin-left: 19vw;
+    float: right;
 }
 
 .saved-deck-box {

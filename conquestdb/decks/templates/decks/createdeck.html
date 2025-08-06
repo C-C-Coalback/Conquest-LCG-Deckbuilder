@@ -10,7 +10,7 @@
     {% endfor %}
 </datalist>
 <div id="deck-container">
-    <input id="toggle-position-type-deck" type="button" value="Lock Deck Location" onclick="makeDeckSticky();">
+    <input id="toggle-position-type-deck" type="button" value="Lock Deck" onclick="makeDeckSticky(this);">
     <div class="auto-deck-build">
         <div id="warlord-card" class="poster-card"><img id="Nazdreg" src="/static/images/CardImages/Cardback.jpg" style="opacity:0.0" class="db-image"></div>
         <div id="synapse-card" class="poster-card"><img id="Cardback" src="/static/images/CardImages/Cardback.jpg" style="opacity:0.0" class="db-image"></div>
@@ -18,7 +18,7 @@
         <div id="details">Details<br>
             <label for="name-deck">Name:</label>
             <input id="name-deck" type="search" size="28"><div class="tooltip">?
-                <span class="tooltiptext">Maximum of 29 characters are allowed. <br>Only letters, numbers and spaces are allowed.</span>
+                <span id="name-tooltip" class="tooltiptext">Maximum of 29 characters are allowed. <br>Only letters, numbers and spaces are allowed.</span>
             </div><br>
             <div class="ally-area">
                 <label for="ally">Ally:</label>
@@ -35,7 +35,7 @@
                 <p id="ok-ally">Ally OK</p>
             </div>
             <div class="card-count-div"><div>Card Count: </div><div id="card-count">0</div><div class="tooltip">?
-                <span class="tooltiptext">You need to have 50 cards in your deck for it to be legal. Warlords, synapses and pledges do not count toward this amount.</span>
+                <span id="card-count-tooltip" class="tooltiptext">You need to have 50 cards in your deck for it to be legal. Warlords, synapses and pledges do not count toward this amount.</span>
             </div></div>
         </div>
         <div id="signature-squad-cards" class="db-section">Signature Squad
@@ -59,7 +59,7 @@
 </div>
 <div id="description-container">
     <h2>Add a description for your deck here</h2>
-    <textarea id="descriptionInput" name="description" rows="20" cols="80" style="max-width:40vw;"></textarea><br>
+    <textarea id="descriptionInput" name="description" rows="20" cols="80" style="max-width:40vw;">{{ desc }}</textarea><br>
 </div>
 <div id="mini-card-search-container-container">
     <div id="mini-card-search-container">
@@ -80,27 +80,6 @@
                     <option value="Warlord">Warlord</option>
                     <option value="Synapse">Synapse</option>
                 </select>
-                <!--
-                <p id="p-faction" class="filter">Faction:</p><select name="faction" class="filter" id="faction">
-                    <option value="None"></option>
-                    <option value="Space Marines">Space Marines</option>
-                    <option value="Tau">Tau</option>
-                    <option value="Eldar">Eldar</option>
-                    <option value="Dark Eldar">Dark Eldar</option>
-                    <option value="Chaos">Chaos</option>
-                    <option value="Orks">Orks</option>
-                    <option value="Astra Militarum">Astra Militarum</option>
-                    <option value="Neutral">Neutral</option>
-                    <option value="Tyranids">Tyranids</option>
-                    <option value="Necrons">Necrons</option>
-                </select>
-                <p id="p-loyalty" class="filter">Loyalty:</p><select name="loyalty" class="filter" id="loyalty">
-                    <option value="None"></option>
-                    <option value="Common">Common</option>
-                    <option value="Loyal">Loyal</option>
-                    <option value="Signature">Signature</option>
-                </select>
-                -->
                 <p id="p-min-cost" class="filter">Min Cost:</p><input id="minCostInput" class="filter" type="text" name="cost-min">
                 <p id="p-max-cost" class="filter">Max Cost:</p><input id="maxCostInput" class="filter" type="text" name="cost-max">
                 <p id="p-shield" class="filter">Shields:</p><select name="shield" class="filter" id="shieldInput">
@@ -286,12 +265,14 @@
         mouse_y = e.clientY * (0.5) + 320 + window.scrollY;
     }
 
-    function makeDeckSticky() {
+    function makeDeckSticky(button) {
         var e = document.getElementById("deck-container");
         if (e.style.position === "fixed") {
             e.style.position = "absolute";
+            button.value = "Lock Deck";
         } else {
             e.style.position = "fixed";
+            button.value = "Unlock Deck";
         }
     }
 
