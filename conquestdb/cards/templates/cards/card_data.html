@@ -70,6 +70,18 @@
             <h3>{{ ban_text }}</h3>
         </div>
     </div>
+        {% if card_type == "Warlord" %}
+            <div class="sig-squad-center">
+                <h2>Signature Squad</h2>
+            </div>
+            <div class="sig-squad-center">
+                <div id="sig-squad-grid">
+                    {% for image_name, card_link in sig_squad %}
+                        <a href="{{ card_link }}"><img src="{{ image_name }}" class="sig-squad-card"></a>
+                    {% endfor %}
+                </div>
+            </div>
+        {% endif %}
     <div id="card-reviews">
         {% if noc is True %}
             <div>

@@ -40,6 +40,23 @@ def sorter_warpacks(column):
     return pd.Series(cat)
 
 
+def convert_name_to_img_src(card_name):
+    card_name = card_name.replace("\"", "")
+    card_name = card_name.replace(" ", "_")
+    card_name = card_name.replace("'idden_Base", "idden_Base")
+    card_name = card_name + ".jpg"
+    card_name = "/static/images/CardImages/" + card_name
+    return card_name
+
+
+def convert_name_to_hyperlink(card_name):
+    card_name = card_name.replace("\"", "")
+    card_name = card_name.replace(" ", "_")
+    card_name = card_name.replace("'idden_Base", "idden_Base")
+    card_name = "/cards/" + card_name
+    return card_name
+
+
 card_array = Initfunctions.init_player_cards()
 planet_array = Initfunctions.init_planet_cards()
 apoka_errata_array = Initfunctions.init_apoka_errata_cards()
@@ -360,6 +377,21 @@ def card_data(request, card_name):
     errata_attack = -1
     errata_health = -1
     errata_is_unit = "False"
+    sig_squad = []
+    sig_squad_links = []
+    if card_type == "Warlord":
+        try:
+            sig_squad_raw = card.signature_squad
+            for a in range(len(sig_squad_raw)):
+                num = int(sig_squad_raw[a][0])
+                for _ in range(num):
+                    sig_squad.append(sig_squad_raw[a][3:])
+        except:
+            pass
+    for a in range(len(sig_squad)):
+        print(sig_squad[a])
+        sig_squad_links.append(convert_name_to_hyperlink(sig_squad[a]))
+        sig_squad[a] = convert_name_to_img_src(sig_squad[a])
     if card_name in apoka_errata_dict:
         card = apoka_errata_dict[card_name]
         errata_card_name = card.get_name()
@@ -410,6 +442,7 @@ def card_data(request, card_name):
                     comments.append(split_text[2])
                     no_comments = False
     my_comments = zip(names_comments, times_comments, comments, comment_ids)
+    sig_squad = zip(sig_squad, sig_squad_links)
     return render(request, "cards/card_data.html",
                   {"card_name": original_card_name, "image_name": image_name, "text": text,
                    "card_type": card_type, "cost": cost, "command": command, "attack": attack, "health": health,
@@ -425,4 +458,4 @@ def card_data(request, card_name):
                    "errata_bloodied_attack": errata_bloodied_attack, "errata_bloodied_health": errata_bloodied_health,
                    "errata_attack": errata_attack, "errata_health": errata_health, "errata_is_unit": errata_is_unit,
                    "light_dark_toggle": light_dark_toggle, "cycle_text": cycle_text,
-                   "errata_cycle_text": errata_cycle_text})
+                   "errata_cycle_text": errata_cycle_text, "sig_squad": sig_squad})

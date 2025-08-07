@@ -6,6 +6,11 @@
     gap: 20px;
 }
 
+.sig-squad-center {
+    justify-content:center;
+    display: flex;
+}
+
 .comment-class {
     padding: 40px;
     background: #f9f9f9;
@@ -40,6 +45,7 @@
     width:100%;
     border: 0.05em solid green;
     margin:auto;
+    margin-top: 30px;
 }
 
 #card-name, #errata-card-name {
@@ -60,6 +66,21 @@
     border: 0.05em dashed blue;
     height:500px;
     width:360px;
+}
+
+#sig-squad-grid {
+    width: auto;
+    height: auto;
+    border: 5px solid green;
+    display: grid;
+    grid-row-gap: 10px;
+    grid-column-gap: 10px;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+}
+
+.sig-squad-card {
+    height: 250px;
+    width: 180px;
 }
 
 #card-info {
@@ -84,9 +105,9 @@
 }
 
 .comment-content > p {
-    color: black; !important;
+    color: black !important;
 }
 
 .comment-name > p {
-    color: black; !important;
+    color: black !important;
 }
