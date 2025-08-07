@@ -97,7 +97,7 @@ def apoka_errata_cards_init():
                                                      "you control at this planet.", "Soldier. Grey Knights.",
                              3, "Space Marines", "Signature", 3, 3, 1, False, unstoppable=True,
                              war_pack_info="For the Enclaves"),
-        CardClasses.EventCard("Kwik' Konstrucksun", "Combat Action: Put an Orks support with printed cost 3 or lower "
+        CardClasses.EventCard("Kwik' Konstruckshun", "Combat Action: Put an Orks support with printed cost 3 or lower "
                                                     "into play from your hand at your HQ. If this support is still in "
                                                     "play at the end of the phase, discard it and draw a card.",
                               "Tactic.", 0, "Orks", "Common", 1, False,
