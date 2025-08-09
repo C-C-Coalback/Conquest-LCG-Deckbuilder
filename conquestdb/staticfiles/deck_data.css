@@ -201,13 +201,28 @@
 }
 
 .comment-content > p {
-    color: black; !important;
+    color: black !important;
 }
 
 #desc-text > p {
-    color: black; !important;
+    color: black !important;
+}
+
+#liked, #not-liked {
+    cursor: pointer;
+}
+
+#like-count {
+    font-size: 50px;
+    position: relative;
+    margin-top:0px;
+    padding-left:20px;
+}
+
+#like-area {
+    display: flex;
 }
 
 .comment-name > p {
-    color: black; !important;
+    color: black !important;
 }

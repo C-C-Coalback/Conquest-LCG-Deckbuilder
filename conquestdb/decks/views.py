@@ -965,6 +965,8 @@ def deck_data(request, deck_creator, deck_key):
     target_directory = directory + "/decks/deckstorage/" + deck_creator + "/"
     permitted_to_read = False
     public_deck = "F"
+    liked = False
+    like_count = 0
     stored_target_file = ""
     if os.path.exists(target_directory):
         for file in os.listdir(target_directory):
@@ -988,12 +990,25 @@ def deck_data(request, deck_creator, deck_key):
                     with open(target_file + "/key", "r") as f:
                         data = f.read()
                         if data == deck_key:
-                            print("key match")
                             permitted_to_read = True
                             stored_target_file = target_file
                             public_deck = "T"
                             if username == deck_creator:
                                 public_deck = "OWNER"
+                            if not os.path.exists(target_file + "/likes"):
+                                print("making new file")
+                                with open(target_file + "/likes", "w") as like_file:
+                                    like_file.write("")
+                                    like_file.close()
+                            with open(target_file + "/likes") as like_file:
+                                content = like_file.read()
+                                liked_names = content.split(sep="\n")
+                                liked_names = [x for x in liked_names if x]
+                                if username:
+                                    if username in liked_names:
+                                        liked = True
+                                if len(liked_names) > 0:
+                                    like_count = len(liked_names)
                 except Exception as e:
                     print(e)
     if permitted_to_read:
@@ -1054,7 +1069,6 @@ def deck_data(request, deck_creator, deck_key):
                 if last_card_type == "Signature Squad":
                     card_name = deck_list[i][3:]
                     card = FindCard.find_card(card_name, card_array, cards_dict)
-                    print(card.get_name())
                     if card.get_card_type() == "Army":
                         extra_army_cards += int(deck_list[i][0])
                     if card.get_card_type() == "Event":
@@ -1071,9 +1085,6 @@ def deck_data(request, deck_creator, deck_key):
                     event_card_count += int(deck_list[i][0])
                 elif last_card_type == "Attachment":
                     attachment_card_count += int(deck_list[i][0])
-        print(attachment_card_count)
-        print(army_card_count)
-        print(extra_event_cards)
         sig_cards = deck_list[sig_pos + 1:army_pos]
         army_cards = deck_list[army_pos + 1:support_pos]
         support_cards = deck_list[support_pos + 1:synapse_pos]
@@ -1091,11 +1102,6 @@ def deck_data(request, deck_creator, deck_key):
         if pledge_name:
             pledge_img = convert_name_to_img_src(pledge_name)
             pledge_link = convert_name_to_hyperlink(pledge_name)
-        print(sig_cards)
-        print(army_cards)
-        print(support_cards)
-        print(attachment_cards)
-        print(event_cards)
         links_to_sig_cards = []
         links_to_army_cards = []
         links_to_support_cards = []
@@ -1191,7 +1197,8 @@ def deck_data(request, deck_creator, deck_key):
                                                         "attachment_card_count": attachment_card_count,
                                                         "extra_attachment_cards": extra_attachment_cards,
                                                         "support_card_count": support_card_count,
-                                                        "extra_support_cards": extra_support_cards})
+                                                        "extra_support_cards": extra_support_cards,
+                                                        "liked": liked, "like_count": like_count})
     return render(request, "decks/deck_data.html", {"deck_found": deck_found, "deck_content": "",
                                                     "light_dark_toggle": light_dark_toggle})
 
@@ -1209,15 +1216,60 @@ def copy_published_deck(request, deck_key):
                 for file in os.listdir(second_source_directory):
                     try:
                         target_file = second_source_directory + "/" + file
+                        found = False
                         with open(target_file + "/key", "r") as f:
                             data = f.read()
                             if data == deck_key:
-                                if not os.path.exists(target_directory + file):
-                                    shutil.copytree(target_file, target_directory + file)
-                                    new_key = create_new_key()
-                                    with open(target_directory + file + "/key", "w") as new_f:
-                                        new_f.write(new_key)
-                                    return HttpResponseRedirect('/decks/' + og_username + "/" + new_key + "/")
+                                found = True
+                        if found:
+                            if not os.path.exists(target_directory + file):
+                                shutil.copytree(target_file, target_directory + file)
+                                new_key = create_new_key()
+                                with open(target_directory + file + "/key", "w") as new_f:
+                                    new_f.write(new_key)
+                                return HttpResponseRedirect('/decks/' + og_username + "/" + new_key + "/")
+                    except Exception as e:
+                        print(e)
+    return HttpResponseRedirect('/decks/my_decks/')
+
+
+def like_deck(request, deck_key):
+    og_username = request.user.username
+    if not og_username:
+        return HttpResponseRedirect('/decks/published_decks/')
+    directory = os.getcwd()
+    source_directory = directory + "/decks/publisheddecks/"
+    if os.path.exists(source_directory):
+        for username in os.listdir(source_directory):
+            if username:
+                second_source_directory = source_directory + "/" + username
+                for file in os.listdir(second_source_directory):
+                    try:
+                        target_file = second_source_directory + "/" + file
+                        found = False
+                        with open(target_file + "/key", "r") as f:
+                            data = f.read()
+                            if data == deck_key:
+                                found = True
+                                if not os.path.exists(target_file + "/likes"):
+                                    with open(target_file + "/likes", "w") as like_file:
+                                        like_file.write("")
+                                        like_file.close()
+                                with open(target_file + "/likes", "r") as like_file:
+                                    content = like_file.read()
+                                    liked_names = content.split(sep="\n")
+                                    liked_names = [x for x in liked_names if x]
+                                    if og_username in liked_names:
+                                        liked_names.remove(og_username)
+                                    else:
+                                        liked_names.append(og_username)
+                                print(liked_names)
+                                new_string = "\n".join(liked_names)
+                                with open(target_file + "/likes", "w") as like_file:
+                                    like_file.write(new_string)
+                                    like_file.close()
+                        if found:
+                            return HttpResponseRedirect('/decks/' + username + "/" + deck_key + "/")
                     except Exception as e:
                         print(e)
     return HttpResponseRedirect('/decks/my_decks/')

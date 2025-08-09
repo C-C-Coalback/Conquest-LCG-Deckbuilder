@@ -9,6 +9,7 @@ urlpatterns = [
     path("publish_deck/<str:deck_key>/", views.publish_deck, name="publish_deck"),
     path("retract_deck/<str:deck_key>/", views.retract_deck, name="retract_deck"),
     path("copy_deck/<str:deck_key>/", views.copy_published_deck, name="copy_deck"),
+    path("toggle_like/<str:deck_key>/", views.like_deck, name="like_deck"),
     path("create_deck/", views.create_deck, name="create_deck"),
     path("my_decks/<int:page_num>/", views.my_decks_page, name="my_decks_page"),
     path("my_decks/", views.my_decks, name="my_decks"),
