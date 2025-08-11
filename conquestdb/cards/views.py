@@ -304,10 +304,43 @@ def ajax_view(request):
     return JsonResponse({'message': 'Invalid request'})
 
 
+def rate_card(request, card_name, rating_value):
+    username = request.user.username
+    try:
+        rating_value = int(rating_value)
+    except:
+        return HttpResponseRedirect("/cards/" + card_name + "/")
+    if rating_value < 0 or rating_value > 5 or not username:
+        return HttpResponseRedirect("/cards/" + card_name + "/")
+    directory = os.getcwd()
+    ratings_file = directory + "/cards/ratings/" + card_name + ".csv"
+    if not os.path.exists(directory + "/cards/ratings/"):
+        os.makedirs(directory + "/cards/ratings/", exist_ok=True)
+    if not os.path.exists(ratings_file):
+        new_df = pd.DataFrame({'Name': [], 'Rating': []})
+        new_df.to_csv(ratings_file, header=True, index=False)
+    new_df = pd.read_csv(ratings_file)
+    create_new_rating = True
+    if username in new_df["Name"].values:
+        current_rating = new_df.loc[new_df["Name"] == username, "Rating"]
+        if int(current_rating.iloc[0]) == rating_value:
+            create_new_rating = False
+        new_df = new_df[new_df["Name"] != username]
+        if not create_new_rating:
+            new_df.to_csv(ratings_file, header=True, index=False)
+    if create_new_rating:
+        new_row = pd.DataFrame({'Name': [username], 'Rating': [rating_value]})
+        new_df = pd.concat([new_df, new_row], ignore_index=True)
+        new_df.to_csv(ratings_file, header=True, index=False)
+    return HttpResponseRedirect("/cards/" + card_name + "/")
+
+
 def card_data(request, card_name):
+    username = request.user.username
     light_dark_toggle = light_dark_dict.get_light_mode(request.user.username)
     directory = os.getcwd()
     target_directory = directory + "/cards/comments/" + card_name + "/"
+    ratings_file = directory + "/cards/ratings/" + card_name + ".csv"
     if request.method == 'POST':
         flag = request.POST.get('flag')
         if flag == "POST":
@@ -441,8 +474,36 @@ def card_data(request, card_name):
                     times_comments.append(time)
                     comments.append(split_text[2])
                     no_comments = False
+    if not os.path.exists(directory + "/cards/ratings/"):
+        os.makedirs(directory + "/cards/ratings/", exist_ok=True)
+    if not os.path.exists(ratings_file):
+        new_df = pd.DataFrame({'Name': [], 'Rating': []})
+        new_df.to_csv(ratings_file, header=True, index=False)
+    own_ratings = [False, False, False, False, False]
+    has_rated = False
+    new_df = pd.read_csv(ratings_file)
+    average_rating = new_df["Rating"].mean()
+    if pd.isna(average_rating):
+        average_rating = 0
+    average_rating = int(round(average_rating))
+    ratings = []
+    for _ in range(average_rating):
+        ratings.append(True)
+    for _ in range(5 - average_rating):
+        ratings.append(False)
+    if username in new_df["Name"].values:
+        current_rating = new_df.loc[new_df["Name"] == username, "Rating"]
+        current_rating = int(current_rating.iloc[0])
+        own_ratings = []
+        has_rated = True
+        for _ in range(current_rating):
+            own_ratings.append(True)
+        for _ in range(5 - current_rating):
+            own_ratings.append(False)
+    num_ratings = new_df.shape[0]
     my_comments = zip(names_comments, times_comments, comments, comment_ids)
     sig_squad = zip(sig_squad, sig_squad_links)
+    own_ratings = zip(own_ratings, [1, 2, 3, 4, 5])
     return render(request, "cards/card_data.html",
                   {"card_name": original_card_name, "image_name": image_name, "text": text,
                    "card_type": card_type, "cost": cost, "command": command, "attack": attack, "health": health,
@@ -458,4 +519,5 @@ def card_data(request, card_name):
                    "errata_bloodied_attack": errata_bloodied_attack, "errata_bloodied_health": errata_bloodied_health,
                    "errata_attack": errata_attack, "errata_health": errata_health, "errata_is_unit": errata_is_unit,
                    "light_dark_toggle": light_dark_toggle, "cycle_text": cycle_text,
-                   "errata_cycle_text": errata_cycle_text, "sig_squad": sig_squad})
+                   "errata_cycle_text": errata_cycle_text, "sig_squad": sig_squad,
+                   "ratings": ratings, "own_ratings": own_ratings, "num_ratings": num_ratings, "has_rated": has_rated})
