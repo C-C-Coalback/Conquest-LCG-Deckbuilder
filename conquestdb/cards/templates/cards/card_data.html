@@ -1,5 +1,5 @@
 {% extends "base.html" %}
-{% block title %}Card Data{% endblock %}
+{% block title %}{% if card_name %} {{ card_name }} {% else %} Card Data {% endif %} {% endblock %}
 {% block content %}
 {% load static %}
 <link rel="stylesheet" href="{% static 'card_data.css' %}">
