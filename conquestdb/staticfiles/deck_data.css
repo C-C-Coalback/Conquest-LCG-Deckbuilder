@@ -8,6 +8,12 @@
     justify-content: center;
 }
 
+#factions-box {
+    width:100%;
+    display: flex;
+    justify-content: center;
+}
+
 #description-area {
     position: relative;
     margin-top: 50px;
@@ -93,12 +99,12 @@
     height: 1010px;
     display: grid;
     grid-row-gap: 1px;
-    grid-template-columns: 500px 500px;
+    grid-template-columns: 200px 300px 500px;
     grid-template-rows: 333px 333px 333px;
     grid-template-areas:
-    "warlord deck-grid"
-    "synapse deck-grid"
-    "pledge deck-grid";
+    "synapse warlord deck-grid"
+    "pledge pledge deck-grid"
+    "none none deck-grid";
 }
 
 #deck-grid {
@@ -157,10 +163,6 @@
     max-height: 1000px;
 }
 
-#factions {
-    grid-area: factions;
-}
-
 .large-grid-section {
     display: flex;
     justify-content: center;
@@ -178,6 +180,14 @@
 
 .large-grid-section-pledge {
 
+}
+
+#warlord {
+    grid-area: warlord;
+}
+
+#synapse {
+    grid-area: synapse;
 }
 
 #sig_cards {
