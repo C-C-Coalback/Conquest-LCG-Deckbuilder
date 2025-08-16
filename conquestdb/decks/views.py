@@ -144,6 +144,80 @@ def convert_name_to_hyperlink(card_name):
     return card_name
 
 
+def convert_name_to_create_deck_hyperlink(card_name):
+    card_name = card_name.replace("\"", "")
+    card_name = card_name.replace(" ", "_")
+    card_name = "/decks/create_deck/preload_warlord/" + card_name
+    return card_name
+
+
+astra_militarum_warlords = []
+astra_militarum_img_srcs = []
+astra_militarum_hyperlinks = []
+space_marines_warlords = []
+space_marines_img_srcs = []
+space_marines_hyperlinks = []
+tau_warlords = []
+tau_img_srcs = []
+tau_hyperlinks = []
+eldar_warlords = []
+eldar_img_srcs = []
+eldar_hyperlinks = []
+dark_eldar_warlords = []
+dark_eldar_img_srcs = []
+dark_eldar_hyperlinks = []
+chaos_warlords = []
+chaos_img_srcs = []
+chaos_hyperlinks = []
+orks_warlords = []
+orks_img_srcs = []
+orks_hyperlinks = []
+tyranids_warlords = []
+tyranids_img_srcs = []
+tyranids_hyperlinks = []
+necrons_warlords = []
+necrons_img_srcs = []
+necrons_hyperlinks = []
+for i in range(len(card_array)):
+    if card_array[i].get_card_type() == "Warlord":
+        if card_array[i].get_faction() == "Astra Militarum":
+            astra_militarum_warlords.append(card_array[i].get_name())
+            astra_militarum_img_srcs.append(convert_name_to_img_src(card_array[i].get_name()))
+            astra_militarum_hyperlinks.append(convert_name_to_create_deck_hyperlink(card_array[i].get_name()))
+        if card_array[i].get_faction() == "Space Marines":
+            space_marines_warlords.append(card_array[i].get_name())
+            space_marines_img_srcs.append(convert_name_to_img_src(card_array[i].get_name()))
+            space_marines_hyperlinks.append(convert_name_to_create_deck_hyperlink(card_array[i].get_name()))
+        if card_array[i].get_faction() == "Tau":
+            tau_warlords.append(card_array[i].get_name())
+            tau_img_srcs.append(convert_name_to_img_src(card_array[i].get_name()))
+            tau_hyperlinks.append(convert_name_to_create_deck_hyperlink(card_array[i].get_name()))
+        if card_array[i].get_faction() == "Eldar":
+            eldar_warlords.append(card_array[i].get_name())
+            eldar_img_srcs.append(convert_name_to_img_src(card_array[i].get_name()))
+            eldar_hyperlinks.append(convert_name_to_create_deck_hyperlink(card_array[i].get_name()))
+        if card_array[i].get_faction() == "Dark Eldar":
+            dark_eldar_warlords.append(card_array[i].get_name())
+            dark_eldar_img_srcs.append(convert_name_to_img_src(card_array[i].get_name()))
+            dark_eldar_hyperlinks.append(convert_name_to_create_deck_hyperlink(card_array[i].get_name()))
+        if card_array[i].get_faction() == "Chaos":
+            chaos_warlords.append(card_array[i].get_name())
+            chaos_img_srcs.append(convert_name_to_img_src(card_array[i].get_name()))
+            chaos_hyperlinks.append(convert_name_to_create_deck_hyperlink(card_array[i].get_name()))
+        if card_array[i].get_faction() == "Orks":
+            orks_warlords.append(card_array[i].get_name())
+            orks_img_srcs.append(convert_name_to_img_src(card_array[i].get_name()))
+            orks_hyperlinks.append(convert_name_to_create_deck_hyperlink(card_array[i].get_name()))
+        if card_array[i].get_faction() == "Tyranids":
+            tyranids_warlords.append(card_array[i].get_name())
+            tyranids_img_srcs.append(convert_name_to_img_src(card_array[i].get_name()))
+            tyranids_hyperlinks.append(convert_name_to_create_deck_hyperlink(card_array[i].get_name()))
+        if card_array[i].get_faction() == "Necrons":
+            necrons_warlords.append(card_array[i].get_name())
+            necrons_img_srcs.append(convert_name_to_img_src(card_array[i].get_name()))
+            necrons_hyperlinks.append(convert_name_to_create_deck_hyperlink(card_array[i].get_name()))
+
+
 def clean_sent_deck(deck_message):
     print("Code to test if deck is ok")
     deck_sections = deck_message.split(sep="------------------"
@@ -650,9 +724,13 @@ def modify_deck(request, deck_key):
     if data:
         return render(request, "decks/createdeck.html", {"edit": "T", "data": data, "desc": desc,
                                                          "auto_complete": card_names_array,
+                                                         "warlord_name": "", "warlord_sig": [],
+                                                         "warlord_src": "",
                                                          "light_dark_toggle": light_dark_toggle})
     return render(request, "decks/createdeck.html", {"edit": "F", "data": "", "desc": "",
                                                      "auto_complete": card_names_array,
+                                                     "warlord_name": "", "warlord_sig": [],
+                                                     "warlord_src": "",
                                                      "light_dark_toggle": light_dark_toggle})
 
 
@@ -660,6 +738,33 @@ def create_deck(request):
     light_dark_toggle = light_dark_dict.get_light_mode(request.user.username)
     return render(request, "decks/createdeck.html", {"edit": "F", "data": "", "desc": "",
                                                      "auto_complete": card_names_array,
+                                                     "warlord_name": "", "warlord_sig": [],
+                                                     "warlord_src": "",
+                                                     "light_dark_toggle": light_dark_toggle})
+
+
+def create_deck_with_warlord(request, warlord_name):
+    light_dark_toggle = light_dark_dict.get_light_mode(request.user.username)
+    try:
+        actual_name = warlord_name.replace("_", " ")
+        if actual_name in cards_dict:
+            warlord_card = cards_dict[actual_name]
+            if warlord_card.get_card_type() == "Warlord":
+                warlord_faction = warlord_card.get_faction()
+                warlord_sig = warlord_card.signature_squad
+                warlord_src = convert_name_to_img_src(actual_name)
+                return render(request, "decks/createdeck.html", {"edit": "F", "data": "", "desc": "",
+                                                                 "auto_complete": card_names_array,
+                                                                 "warlord_name": warlord_name,
+                                                                 "warlord_sig": warlord_sig,
+                                                                 "warlord_src": warlord_faction,
+                                                                 "light_dark_toggle": light_dark_toggle})
+    except Exception as e:
+        print(e)
+    return render(request, "decks/createdeck.html", {"edit": "F", "data": "", "desc": "",
+                                                     "auto_complete": card_names_array,
+                                                     "warlord_name": "", "warlord_sig": [],
+                                                     "warlord_src": "",
                                                      "light_dark_toggle": light_dark_toggle})
 
 
@@ -1314,6 +1419,24 @@ def publish_deck(request, deck_key):
         except Exception as e:
             print(e)
     return HttpResponseRedirect('/decks/my_decks/')
+
+
+def select_warlord(request):
+    sent_astra_militarum = zip(astra_militarum_warlords, astra_militarum_img_srcs, astra_militarum_hyperlinks)
+    sent_space_marines = zip(space_marines_warlords, space_marines_img_srcs, space_marines_hyperlinks)
+    sent_tau = zip(tau_warlords, tau_img_srcs, tau_hyperlinks)
+    sent_eldar = zip(eldar_warlords, eldar_img_srcs, eldar_hyperlinks)
+    sent_dark_eldar = zip(dark_eldar_warlords, dark_eldar_img_srcs, dark_eldar_hyperlinks)
+    sent_chaos = zip(chaos_warlords, chaos_img_srcs, chaos_hyperlinks)
+    sent_orks = zip(orks_warlords, orks_img_srcs, orks_hyperlinks)
+    sent_tyranids = zip(tyranids_warlords, tyranids_img_srcs, tyranids_hyperlinks)
+    sent_necrons = zip(necrons_warlords, necrons_img_srcs, necrons_hyperlinks)
+    light_dark_toggle = light_dark_dict.get_light_mode(request.user.username)
+    return render(request, "decks/select_warlord.html",
+                  {"light_dark_toggle": light_dark_toggle,
+                   "astra_militarum": sent_astra_militarum, "space_marines": sent_space_marines,
+                   "tau": sent_tau, "eldar": sent_eldar, "dark_eldar": sent_dark_eldar,
+                   "chaos": sent_chaos, "orks": sent_orks, "tyranids": sent_tyranids, "necrons": sent_necrons})
 
 
 def ajax_view(request):

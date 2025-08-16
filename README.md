@@ -21,7 +21,7 @@ Haven't done this in a while. Seriously, this is an impressive crop. Great veget
 All done; things I want to do though:
 
 - More graphs/statistics on the adv. deck details page.
-- Separate decks into pages.
+- ~~Separate decks into pages.~~
 - Add support to search + filter decks.
 - Rework deck lookup logic to use a dataframe.
 - Add support for viewing user profiles.

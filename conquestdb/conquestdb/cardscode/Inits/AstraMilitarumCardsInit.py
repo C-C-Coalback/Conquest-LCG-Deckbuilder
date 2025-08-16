@@ -712,7 +712,7 @@ def astra_militarum_cards_init():
                                 action_in_play=True, allowed_phases_in_play="COMBAT",
                                 war_pack_info="Defenders of the Faith"),
         CardClasses.AttachmentCard("Armour of Saint Katherine", "Attach to your warlord.\n"
-                                                                "Reduce all damage dealth to attached unit to 3.\n"
+                                                                "Reduce all damage dealt to attached unit to 3.\n"
                                                                 "Reaction: After attached unit takes damage, place "
                                                                 "1 faith on it.", "Wargear. Armor.",
                                    0, faction, "Signature", 3, True, type_of_units_allowed_for_attachment="Warlord",

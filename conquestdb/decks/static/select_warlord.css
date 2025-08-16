@@ -1,0 +1,37 @@
+#main-box {
+    display: flex;
+    flex-direction: column;
+}
+
+.faction-warlords-box {
+    display: flex;
+    margin: 20px;
+}
+
+.inner-faction-box {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
+
+.faction-box {
+    margin-right: 20px;
+    background-color: #b7b2b2;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    min-width: 250px;
+    max-width: 250px;
+    justify-content: center;
+}
+
+.warlord-box {
+    display: flex;
+    gap: 20px;
+    flex-wrap: wrap;
+}
+
+.Card {
+    height: 400px;
+    width: 285px;
+}
