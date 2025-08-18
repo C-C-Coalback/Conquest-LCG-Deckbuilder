@@ -31,6 +31,7 @@
     display: inline-block;
     margin-bottom: 0;
     font-weight: 400;
+    border: 1px solid black;
     text-align: center;
     white-space: nowrap;
     vertical-align: middle;
@@ -38,7 +39,6 @@
     touch-action: manipulation;
     cursor: pointer;
     background-image: none;
-    border: 1px solid transparent;
     font-size: 14px;
     line-height: 1.42857143;
     border-radius: 4px;
@@ -46,6 +46,8 @@
     -moz-user-select: none;
     -ms-user-select: none;
     user-select: none;
+    margin-left: 10px;
+    margin-right: 10px;
 }
 
 #faction_code label.btn.active {
