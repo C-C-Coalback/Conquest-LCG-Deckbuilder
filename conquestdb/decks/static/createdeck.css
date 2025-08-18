@@ -23,8 +23,8 @@
     pointer-events: none;
 }
 
-.btn + .btn {
-    border-left: 2px solid black;
+.faction-btn-container {
+    min-width: 50px;
 }
 
 .btn {
