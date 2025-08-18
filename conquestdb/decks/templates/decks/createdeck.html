@@ -560,6 +560,7 @@
     var force_send = "F";
     var sent_sig_squad = {{ warlord_sig|safe }};
     var sent_warlord = "{{ warlord_name }}";
+    sent_warlord = sent_warlord.replace(new RegExp("&"+"#"+"x27;", "g"), "'");
     if (sent_warlord !== "") {
         name_warlord = sent_warlord.split('_').join(' ');
         var route = "/static/images/CardImages/" + name_warlord.split(' ').join('_') + ".jpg";
