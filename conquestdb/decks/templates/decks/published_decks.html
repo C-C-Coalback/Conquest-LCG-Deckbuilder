@@ -2,28 +2,26 @@
 {% block title %}Published Decks{% endblock %}
 {% block content %}
 {% load static %}
-<link rel="stylesheet" href="{% static 'mydecks.css' %}">
+<link rel="stylesheet" href="{% static 'published_decks.css' %}">
     <div id="main-box">
         <input id="prev-page" type="button" value="previous" onclick="previousPage();">
-        <div id="main-decks-box">
-            <div id="decks-list">
-                {% for name, warlord_name, date, img_src, key, creator_name in decks %}
-                    <div>
-                        <a href="/decks/{{ creator_name }}/{{ key }}">
-                        <div class="deck-item-grid">
-                            <h3 class="decklist-name">{{ name }}</h3>
-                            <h3 class="creator-name">{{ creator_name }}</h3>
-                            <h3 class="warlord-name">{{ warlord_name }}</h3>
-                            <h3 class="date">{{ date }}</h3>
-                            <img class="preview-image" src={{ img_src }}>
-                        </div>
-                        </a>
-                        <div class="center border-bottom">
-                            <p>Deck Key: {{ key }}</p>
-                        </div>
+        <div id="grid-box">
+            {% for name, warlord_name, date, img_src, key, creator_name in decks %}
+                <div class="border-right border-left">
+                    <a href="/decks/{{ creator_name }}/{{ key }}">
+                    <div class="deck-item-grid">
+                        <h3 class="decklist-name">{{ name }}</h3>
+                        <h3 class="creator-name">{{ creator_name }}</h3>
+                        <h3 class="warlord-name">{{ warlord_name }}</h3>
+                        <h3 class="date">{{ date }}</h3>
+                        <img class="preview-image" src="{{ img_src }}">
                     </div>
-                {% endfor %}
-            </div>
+                    </a>
+                    <div class="center border-bottom">
+                        <p>Deck Key: {{ key }}</p>
+                    </div>
+                </div>
+            {% endfor %}
         </div>
         <input id="next-page" type="button" value="next" onclick="nextPage();">
     </div>

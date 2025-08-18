@@ -205,9 +205,10 @@
             not_liked.style.display = "block";
         }
     }
-
+    {% if liked %}
     changeHeart();
     changeHeart();
+    {% endif %}
 
     {% if liked %}
     changeHeart();

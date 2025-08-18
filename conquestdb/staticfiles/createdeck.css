@@ -78,6 +78,7 @@
 
 .auto-deck-build {
     background: rgba(47, 40, 153, 0.3);
+    cursor: default;
     width: 36.01vw;
     height: calc(50vh + 125px);
     border: 5px solid green;

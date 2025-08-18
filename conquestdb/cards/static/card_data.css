@@ -76,7 +76,12 @@
     background-color: lightgrey;
 }
 
-#card-image {
+.rotated-card-image {
+    height:500px;
+    width:360px;
+}
+
+.card-image {
     border: 0.05em dashed blue;
     height:500px;
     width:360px;

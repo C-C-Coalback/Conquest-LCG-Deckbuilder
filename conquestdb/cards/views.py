@@ -504,6 +504,9 @@ def card_data(request, card_name):
     my_comments = zip(names_comments, times_comments, comments, comment_ids)
     sig_squad = zip(sig_squad, sig_squad_links)
     own_ratings = zip(own_ratings, [1, 2, 3, 4, 5])
+    rotate = False
+    if card_type == "Planet" or "Pledge" in traits:
+        rotate = True
     return render(request, "cards/card_data.html",
                   {"card_name": original_card_name, "image_name": image_name, "text": text,
                    "card_type": card_type, "cost": cost, "command": command, "attack": attack, "health": health,
@@ -519,5 +522,5 @@ def card_data(request, card_name):
                    "errata_bloodied_attack": errata_bloodied_attack, "errata_bloodied_health": errata_bloodied_health,
                    "errata_attack": errata_attack, "errata_health": errata_health, "errata_is_unit": errata_is_unit,
                    "light_dark_toggle": light_dark_toggle, "cycle_text": cycle_text,
-                   "errata_cycle_text": errata_cycle_text, "sig_squad": sig_squad,
+                   "errata_cycle_text": errata_cycle_text, "sig_squad": sig_squad, "rotate": rotate,
                    "ratings": ratings, "own_ratings": own_ratings, "num_ratings": num_ratings, "has_rated": has_rated})

@@ -7,10 +7,11 @@
     justify-content: center;
 }
 
-#decks-list {
-    width: auto;
+#grid-box {
+    display: grid;
     height: auto;
-    max-height: 1000px;
+    width: auto;
+    grid-template-columns: auto auto;
     border: 5px solid green;
 }
 
@@ -32,6 +33,14 @@
 
 .border-bottom {
     border-bottom: 5px solid green;
+}
+
+.border-right {
+    border-right: 5px solid green;
+}
+
+.border-left {
+    border-left: 5px solid green;
 }
 
 #next-page {
