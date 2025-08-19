@@ -330,7 +330,7 @@
     display: grid;
     grid-template-columns: max(10vw, 130px) max(11vw, 144px) max(10vw, 130px) max(10vw, 144px);
     grid-template-areas:
-    "p-card-name search p-card-type card-type"
+    "p-card-name search p-keyword keyword"
     "p-faction faction p-loyalty loyalty"
     "p-min-cost min-cost p-max-cost max-cost"
     "p-shields shields p-traits traits"

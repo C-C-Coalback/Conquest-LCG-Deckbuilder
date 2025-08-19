@@ -196,7 +196,7 @@ def orks_cards_init():
                                                  "cannot be dealt damage by units while you control an army unit at "
                                                  "this planet not named “Rickety Warbuggy”.",
                              "Vehicle.", 1, faction, "Loyal", 3, 1, 0, False, wargear_attachments_permitted=False,
-                             war_pack_info="Decree of Ruin"),
+                             war_pack_info="Decree of Ruin", goes_fasta=True),
         CardClasses.AttachmentCard("Lucky Warpaint", "Attach to an Orks unit.\n"
                                                      "Attached unit gains the Blue trait.\n"
                                                      "Attached unit gains Immune to enemy events.", "Upgrade.",
@@ -208,7 +208,7 @@ def orks_cards_init():
                                                  "GOES FASTA! - While your opponent has the initiative, "
                                                  "this unit gets +4 HP.", "Vehicle. Elite.",
                              5, faction, "Loyal", 7, 3, 2, False, wargear_attachments_permitted=False,
-                             war_pack_info="Boundless Hate"),
+                             war_pack_info="Boundless Hate", goes_fasta=True),
         CardClasses.EventCard("Rok Bombardment", "Combat Action: Target a planet where a battle is taking place. "
                                                  "Until the end of the battle, after each unit at the targeted planet"
                                                  " resolves an attack, deal 1 damage to it. If the targeted planet"
@@ -224,7 +224,7 @@ def orks_cards_init():
         CardClasses.ArmyCard("Gorzod's Wagons", "No Wargear Attachments.\n"
                                                 "GOES FASTA! - While your opponent has the initiative, "
                                                 "this unit gets +2 ATK.", "Vehicle.",
-                             2, faction, "Signature", 1, 3, 1, False, war_pack_info="Deadly Salvage"),
+                             2, faction, "Signature", 1, 3, 1, False, war_pack_info="Deadly Salvage", goes_fasta=True),
         CardClasses.SupportCard("Kustomisation Station", "Each Vehicle unit you control loses all faction "
                                                          "affiliations and gains the Orks faction affiliation.\n"
                                                          "Orks Vehicle units you control get +1 ATK and +1 HP.",
@@ -458,7 +458,7 @@ def orks_cards_init():
                              war_pack_info="The Shadow in the Warp"),
         CardClasses.ArmyCard("Da Boomy", "Retaliate (3).",
                              "Vehicle. Experimental.", 1, faction, "Signature", 1, 2, 1, False,
-                             war_pack_info="The Shadow in the Warp"),
+                             war_pack_info="The Shadow in the Warp", retaliate=3),
         CardClasses.ArmyCard("Da Sharpy", "Sweep (2).",
                              "Vehicle. Experimental.", 2, faction, "Signature", 2, 2, 1, False,
                              war_pack_info="The Shadow in the Warp"),

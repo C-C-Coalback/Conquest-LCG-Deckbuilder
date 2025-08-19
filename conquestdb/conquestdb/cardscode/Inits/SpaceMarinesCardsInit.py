@@ -401,7 +401,8 @@ def space_marines_cards_init():
                                                "Reaction: After another unit you control at this planet is dealt "
                                                "damage by an enemy unit, this unit gains Retaliate (1) until "
                                                "the end of the phase.", "Soldier. Ultramarines.",
-                             1, faction, "Common", 1, 2, 1, False, war_pack_info="Chronicles of Heroes"),
+                             1, faction, "Common", 1, 2, 1, False, war_pack_info="Chronicles of Heroes",
+                             retaliate=1),
         CardClasses.ArmyCard("Command Predator", "No Wargear Attachments.\n"
                                                  "Reaction: After a combat turn during which this unit was an "
                                                  "attacker ends, take a combat turn. (Limit once per phase.)",
@@ -452,7 +453,7 @@ def space_marines_cards_init():
                                                 "Reaction: After this unit enters play, a target army unit at this "
                                                 "planet is considered a warlord for your card effects.",
                              "Warrior. Mutant. Space Wolves.", 3, faction, "Loyal", 3, 3, 1, False,
-                             war_pack_info="The Shadow in the Warp"),
+                             war_pack_info="The Shadow in the Warp", retaliate=2),
         CardClasses.ArmyCard("Grand Master Belial", "Deep Strike (2)\n"
                                                     "Interrupt: When your Bloodied warlord is defeated, discard it "
                                                     "and pay 1 resource and Deep Strike this unit to have it be "
@@ -481,7 +482,7 @@ def space_marines_cards_init():
                                                      "Each other unit you control at this planet "
                                                      "gets +1 ATK and +1 HP.", "Questor Imperialis.",
                              6, faction, "Loyal", 5, 9, 6, True, no_attachments=True, lumbering=True,
-                             war_pack_info="Chronicles of Heroes"),
+                             war_pack_info="Chronicles of Heroes", retaliate=5),
         CardClasses.ArmyCard("Pinning Razorback", "No Wargear Attachments.\n"
                                                   "Combat Action: A target enemy non-warlord unit at this planet "
                                                   "cannot be declared as an attacker during your opponent's next "
@@ -509,7 +510,8 @@ def space_marines_cards_init():
                                                    "Reaction: After a combat round begins, deal 4 damage to each "
                                                    "enemy unit at this planet attacked by this unit during the "
                                                    "previous combat round.", "Psyker. Ultramarines.",
-                             3, faction, "Common", 1, 6, 1, False, war_pack_info="Chronicles of Heroes"),
+                             3, faction, "Common", 1, 6, 1, False, war_pack_info="Chronicles of Heroes",
+                             retaliate=1),
         CardClasses.ArmyCard("Thunderwolf Cavalry", "Reaction: After an enemy warlord commits to an adjacent planet "
                                                     "with a single army unit you control switch the location of "
                                                     "that single unit with this unit.", "Soldier. Space Wolves.",

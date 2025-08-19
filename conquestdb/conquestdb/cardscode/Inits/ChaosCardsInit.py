@@ -120,7 +120,7 @@ def chaos_cards_init():
                                                   "BLOODTHIRST - During a combat round in which 1 or more units "
                                                   "have been destroyed at this planet, double this unit's ATK.",
                              "Warrior. Khorne. World Eaters.", 4, "Chaos", "Loyal", 2, 5, 1, True, brutal=True,
-                             war_pack_info="The Great Devourer"),
+                             war_pack_info="The Great Devourer", bloodthirst=True),
         CardClasses.EventCard("Ecstatic Seizures", "Action: Discard each attachment from "
                                                    "each unit at a target planet.", "Power. Slaanesh.",
                               2, "Chaos", "Common", 1, False, action_in_hand=True, allowed_phases_in_hand="ALL",
@@ -301,7 +301,7 @@ def chaos_cards_init():
                                                        "have been destroyed at this planet, this unit gains "
                                                        "Armorbane, Brutal, and Flying.", "Daemon. Khorne. Elite.",
                              10, faction, "Loyal", 8, 8, 2, False, wargear_attachments_permitted=False,
-                             war_pack_info="The Final Gambit"),
+                             war_pack_info="The Final Gambit", bloodthirst=True),
         CardClasses.EventCard("Warp Rift", "HEADQUARTERS ACTION: Switch a target planet with an adjacent planet. "
                                            "(Units that were at a switched-out planet are now at "
                                            "the switched-in planet.)", "Power. Tzeentch.", 1, faction, "Loyal",
@@ -401,7 +401,7 @@ def chaos_cards_init():
                                                    "Immune to enemy events.\n"
                                                    "Forced Reaction: After a battle at an adjacent planet begins, move "
                                                    "this unit to that planet.", "Warrior. Khorne.",
-                             3, faction, "Loyal", 1, 6, 0, False, war_pack_info="Breaching the Veil"),
+                             3, faction, "Loyal", 1, 6, 0, False, war_pack_info="Breaching the Veil", bloodthirst=True),
         CardClasses.ArmyCard("Charging Juggernaut", "While this unit has an attachment, it gets +1 HP and it cannot "
                                                     "be routed until a combat round ended this round.\n"
                                                     "Forced Reaction: After the deploy phase begins, move this unit "
@@ -419,7 +419,7 @@ def chaos_cards_init():
                                                       "this planet move 1 damage from an army unit to another "
                                                       "army unit. (Limit once per phase.)", "Daemon. Nurgle.",
                              3, faction, "Common", 2, 6, 2, False, lumbering=True,
-                             war_pack_info="Herald of the Plague God"),
+                             war_pack_info="Herald of the Plague God", retaliate=2),
         CardClasses.ArmyCard("Expendable Pawn", "Reaction: After a unit is assigned damage at this planet or "
                                                 "an adjacent planet, sacrifice this unit to prevent 2 of that damage.",
                              "Cultist. Khorne.", 1, faction, "Common", 1, 1, 1, False,
@@ -468,7 +468,8 @@ def chaos_cards_init():
         CardClasses.ArmyCard("The Masque", "Sweep (1). Retaliate (4).\n"
                                            "Reaction: After this unit resolves an attack, put a Cultist token into "
                                            "play at this planet.", "Daemon. Slaanesh. Elite.",
-                             6, faction, "Common", 3, 6, 2, True, sweep=1, war_pack_info="Herald of the Plague God"),
+                             6, faction, "Common", 3, 6, 2, True, sweep=1, war_pack_info="Herald of the Plague God",
+                             retaliate=4),
         CardClasses.ArmyCard("Uncontrollable Rioters", "Cost of units you deploy is increased by 1.\n"
                                                        "This unit cannot change control more than once per round.\n"
                                                        "Action: Give control of this unit to your opponent.",

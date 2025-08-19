@@ -71,14 +71,25 @@
         <form id="myForm">
             <div id="filters-container">
                 <p id="p-card-name" class="filter">Card Name:</p><input id="searchInput" class="filter" type="text" name="search">
-                <p id="p-card-type" class="filter">Card Type:</p><select name="card-type" class="filter" id="cardType">
+                <p id="p-keyword" class="filter">Keyword or Specialization:</p><select name="keyword" class="filter" id="keywordInput">
                     <option value="None"></option>
-                    <option value="Army">Army</option>
-                    <option value="Support">Support</option>
-                    <option value="Event">Event</option>
-                    <option value="Attachment">Attachment</option>
-                    <option value="Warlord">Warlord</option>
-                    <option value="Synapse">Synapse</option>
+                    <option value="No Attachments">No Attachments</option>
+                    <option value="No Wargear Attachments">No Wargear Attachments</option>
+                    <option value="Armorbane">Armorbane</option>
+                    <option value="Brutal">Brutal</option>
+                    <option value="Limited">Limited</option>
+                    <option value="Flying">Flying</option>
+                    <option value="Area Effect">Area Effect</option>
+                    <option value="Ranged">Ranged</option>
+                    <option value="Ambush">Ambush</option>
+                    <option value="Deep Strike">Deep Strike</option>
+                    <option value="Lumbering">Lumbering</option>
+                    <option value="Sweep">Sweep</option>
+                    <option value="Retaliate">Retaliate</option>
+                    <option value="Hive Mind">Hive Mind</option>
+                    <option value="Unstoppable">Unstoppable</option>
+                    <option value="Goes Fasta">Goes Fasta!</option>
+                    <option value="Bloodthirst">Bloodthirst</option>
                 </select>
                 <p id="p-min-cost" class="filter">Min Cost:</p><input id="minCostInput" class="filter" type="text" name="cost-min">
                 <p id="p-max-cost" class="filter">Max Cost:</p><input id="maxCostInput" class="filter" type="text" name="cost-max">
@@ -372,7 +383,7 @@
         searchInput.value = "None";
         var searchInput = document.getElementById("asc-desc");
         searchInput.value = "Ascending";
-        var searchInput = document.getElementById("cardType");
+        var searchInput = document.getElementById("keywordInput");
         searchInput.value = "None";
         var searchInput = document.getElementById("minCostInput");
         searchInput.value = "";
@@ -1114,7 +1125,7 @@
                 data: {
                     'search': $('#searchInput').val(),
                     'faction': "None",
-                    'card_type': $('#cardType').val(),
+                    'card_type': "None",
                     'loyalty': "None",
                     'warlord_name': name_warlord,
                     'ally_faction': $('#ally').val(),
@@ -1122,6 +1133,7 @@
                     'shields': $('#shieldInput').val(),
                     'min-cost': $('#minCostInput').val(),
                     'max-cost': $('#maxCostInput').val(),
+                    'keyword': $('#keywordInput').val(),
                     'min-command': "-1",
                     'max-command': "-1",
                     'min-attack': "-1",

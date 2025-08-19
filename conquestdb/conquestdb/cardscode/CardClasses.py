@@ -120,10 +120,21 @@ class Card:
             self.war_pack = "Unknown Apoka War Pack"
             self.cycle = "Unknown Apoka Cycle"
 
+    def compute_keywords(self):
+        current_string = ""
+        if self.limited:
+            current_string += "Limited."
+        if self.ambush:
+            current_string += "Ambush."
+        if self.deepstrike > -1:
+            current_string += "Deep Strike."
+        return current_string
+
     def as_dict(self):
         return {'name': self.name, 'faction': self.faction, 'loyalty': self.loyalty, 'traits': self.traits,
                 'card type': self.card_type, 'image name': self.image_name, 'cost': self.cost, 'command': -1,
-                'attack': -1, 'health': -1, 'shields': self.shields, 'cycle': self.cycle, 'war pack': self.war_pack}
+                'attack': -1, 'health': -1, 'shields': self.shields, 'cycle': self.cycle, 'war pack': self.war_pack,
+                'keywords': self.compute_keywords()}
 
     def get_cycle_info_as_text(self):
         text = ""
@@ -322,7 +333,8 @@ class UnitCard(Card):
                  limited=False, ranged=False, wargear_attachments_permitted=True, no_attachments=False,
                  additional_resources_command_struggle=0, additional_cards_command_struggle=0,
                  mobile=False, ambush=False, hive_mind=False, unstoppable=False, deepstrike=-1,
-                 lumbering=False, sweep=0, cycle_info="", war_pack_info=""):
+                 lumbering=False, sweep=0, cycle_info="", war_pack_info="", retaliate=0, bloodthirst=False,
+                 goes_fasta=False):
         super().__init__(name, text, traits, cost, faction, loyalty, 0,
                          card_type, unique, image_name, applies_discounts, action_in_hand, allowed_phases_in_hand,
                          action_in_play, allowed_phases_in_play, limited, deepstrike=deepstrike,
@@ -391,12 +403,56 @@ class UnitCard(Card):
         self.new_additional_resources_command_struggle = 0
         self.new_additional_cards_command_struggle = 0
         self.new_brutal = False
+        self.retaliate = retaliate
+        self.bloodthirst = bloodthirst
+        self.goes_fasta = goes_fasta
+
+    def compute_keywords(self):
+        current_string = ""
+        if self.limited:
+            current_string += "Limited."
+        if self.ambush:
+            current_string += "Ambush."
+        if self.armorbane:
+            current_string += "Armorbane."
+        if self.brutal:
+            current_string += "Brutal."
+        if self.no_attachments:
+            current_string += "No Attachments."
+        if not self.wargear_attachments_permitted:
+            current_string += "No Wargear Attachments."
+        if self.sweep:
+            current_string += "Sweep."
+        if self.retaliate:
+            current_string += "Retaliate."
+        if self.area_effect:
+            current_string += "Area Effect."
+        if self.ranged:
+            current_string += "Ranged."
+        if self.flying:
+            current_string += "Flying."
+        if self.lumbering:
+            current_string += "Lumbering."
+        if self.deepstrike > -1:
+            current_string += "Deep Strike."
+        if self.has_hive_mind:
+            current_string += "Hive Mind."
+        if self.unstoppable:
+            current_string += "Unstoppable."
+        if self.bloodthirst:
+            current_string += "Bloodthirst."
+        if self.goes_fasta:
+            current_string += "Goes Fasta."
+        return current_string
 
     def as_dict(self):
         return {'name': self.name, 'faction': self.faction, 'loyalty': self.loyalty, 'traits': self.traits,
                 'card type': self.card_type, 'image name': self.image_name, 'cost': self.cost, 'command': self.command,
                 'attack': self.attack, 'health': self.health, 'shields': self.shields,
-                'cycle': self.cycle, 'war pack': self.war_pack}
+                'cycle': self.cycle, 'war pack': self.war_pack, 'keywords': self.compute_keywords()}
+
+    def get_retaliate(self):
+        return self.retaliate
 
     def get_sweep(self):
         sweep = self.sweep
@@ -873,7 +929,7 @@ class ArmyCard(UnitCard):
                  limited=False, ranged=False, wargear_attachments_permitted=True, no_attachments=False,
                  additional_cards_command_struggle=0, additional_resources_command_struggle=0, mobile=False,
                  ambush=False, hive_mind=False, unstoppable=False, deepstrike=-1, lumbering=False,
-                 sweep=0, cycle_info="", war_pack_info=""):
+                 sweep=0, cycle_info="", war_pack_info="", retaliate=0, bloodthirst=False, goes_fasta=False):
         super().__init__(name, text, traits, cost, faction, loyalty, "Army", attack, health, command,
                          unique, image_name, brutal, flying, armorbane, area_effect,
                          applies_discounts, action_in_hand, allowed_phases_in_hand,
@@ -882,7 +938,8 @@ class ArmyCard(UnitCard):
                          additional_cards_command_struggle=additional_cards_command_struggle,
                          additional_resources_command_struggle=additional_resources_command_struggle, mobile=mobile,
                          ambush=ambush, hive_mind=hive_mind, unstoppable=unstoppable, deepstrike=deepstrike,
-                         lumbering=lumbering, sweep=sweep, cycle_info=cycle_info, war_pack_info=war_pack_info)
+                         lumbering=lumbering, sweep=sweep, cycle_info=cycle_info, war_pack_info=war_pack_info,
+                         retaliate=retaliate, goes_fasta=goes_fasta, bloodthirst=bloodthirst)
 
     def print_info(self):
         if self.unique:
@@ -1050,7 +1107,7 @@ class PlanetCard(Card):
         return {'name': self.name, 'faction': self.faction, 'loyalty': self.loyalty, 'traits': self.traits,
                 'card type': self.card_type, 'image name': self.image_name, 'cost': self.cost, 'command': -1,
                 'attack': -1, 'health': -1, 'shields': self.shields, 'sector': self.sector,
-                'cycle': self.cycle, 'war pack': self.war_pack}
+                'cycle': self.cycle, 'war pack': self.war_pack, 'keywords': self.compute_keywords()}
 
     def get_name(self):
         return self.name

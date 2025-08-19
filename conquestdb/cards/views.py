@@ -110,6 +110,7 @@ def ajax_view(request):
         traits = request.POST.get('traits')
         card_type = request.POST.get('card_type')
         shields = request.POST.get('shields')
+        keyword_card = request.POST.get('keyword')
         view_as = request.POST.get('view-as')
         cycle = request.POST.get('cycle')
         warpack = request.POST.get('war-pack')
@@ -246,6 +247,8 @@ def ajax_view(request):
             filtered_df = filtered_df[filtered_df['traits'].str.contains(traits)]
         if search is not None:
             filtered_df = filtered_df[filtered_df['name'].str.contains(search)]
+        if keyword_card != "None":
+            filtered_df = filtered_df[filtered_df['keywords'].str.contains(keyword_card)]
         if cycle:
             filtered_df = filtered_df.loc[filtered_df['cycle'] == cycle]
         if warpack:
