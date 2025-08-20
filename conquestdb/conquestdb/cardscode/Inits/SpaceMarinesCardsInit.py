@@ -454,7 +454,7 @@ def space_marines_cards_init():
                                                 "planet is considered a warlord for your card effects.",
                              "Warrior. Mutant. Space Wolves.", 3, faction, "Loyal", 3, 3, 1, False,
                              war_pack_info="The Shadow in the Warp", retaliate=2),
-        CardClasses.ArmyCard("Grand Master Belial", "Deep Strike (2)\n"
+        CardClasses.ArmyCard("Grand Master Belial", "Deep Strike (2).\n"
                                                     "Interrupt: When your Bloodied warlord is defeated, discard it "
                                                     "and pay 1 resource and Deep Strike this unit to have it be "
                                                     "considered a warlord. If it is defeated you lose the game.",
@@ -467,7 +467,8 @@ def space_marines_cards_init():
                                                    "deal 1 damage to an enemy unit at that planet and draw a card.",
                              "Soldier. Space Wolves.", 1, faction, "Loyal", 3, 3, 1, True,
                              war_pack_info="Aligned Stars"),
-        CardClasses.ArmyCard("Inspiring Sergeant", "Reaction: After this unit resolves its attack, a target unit "
+        CardClasses.ArmyCard("Inspiring Sergeant", "Retaliate (1).\n"
+                                                   "Reaction: After this unit resolves its attack, a target unit "
                                                    "at this planet gets +1 ATK and +1 HP until the end of the phase.",
                              "Soldier. Space Marines.", 2, faction, "Loyal", 2, 2, 1, False,
                              war_pack_info="Chronicles of Heroes"),

@@ -331,7 +331,7 @@ def astra_militarum_cards_init():
         CardClasses.ArmyCard("Vostroyan Officer", "Each Elite unit you control at this planet gains "
                                                   "Immune to enemy events.", "Soldier. Vostroya.",
                              2, faction, "Common", 1, 3, 1, False, war_pack_info="Jungles of Nectavus"),
-        CardClasses.ArmyCard("Scion Strike Force", "Deep Strike (3), Ranged", "Soldier. Elite.",
+        CardClasses.ArmyCard("Scion Strike Force", "Deep Strike (3), Ranged.", "Soldier. Elite.",
                              5, faction, "Common", 3, 4, 2, False, deepstrike=3, ranged=True,
                              war_pack_info="Jungles of Nectavus"),
         CardClasses.EventCard("No Surprises", "Deploy Action: Destroy a target card in reserve.", "Tactic.",
