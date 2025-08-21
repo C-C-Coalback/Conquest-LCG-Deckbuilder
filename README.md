@@ -28,10 +28,22 @@ All done; things I want to do though:
 
 # How can I run it myself?
 
-(This assumes you have a general idea about how to use python and git already.)
+Runs python 3.9.7. You will need to already have git and python installed on your machine.
 
-First run "py -m pip install -r requirements.txt" to install dependencies.
+```
+git clone https://github.com/C-C-Coalback/Conquest-LCG-Deckbuilder conquestdbrepo
+cd conquestdbrepo
+pip install -r "requirements.txt"
+cd conquestdb
+py manage.py makemigrations
+py manage.py migrate
+```
 
-Then, you need to run "py manage.py makemigrations", followed by "py manage.py migrate" to create the user database.
+The website is ready to launch. There are not tests to run (yet). To run the website, 
 
-Now run "py manage.py runserver", and it should work.
+```
+py manage.py runserver
+```
+
+Replace "py"s with "python" or "python3" if needed.
+You should really probably be installing the requirements in a virtual environment but, it that is not necessary so is left as an exercise to the reader.
