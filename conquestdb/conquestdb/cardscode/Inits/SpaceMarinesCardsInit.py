@@ -524,7 +524,7 @@ def space_marines_cards_init():
                              "Vehicle. Black Templars.", 4, faction, "Loyal", 6, 3, 2, False,
                              wargear_attachments_permitted=False, unstoppable=True,
                              war_pack_info="Chronicles of Heroes"),
-        CardClasses.AttachmentCard("Call the Storm", "Attach to a planet.\n"
+        CardClasses.AttachmentCard("Call The Storm", "Attach to a planet.\n"
                                                      "Combat Action: If there is no enemy warlord at this planet, "
                                                      "exhaust this attachment to move a target enemy army unit at "
                                                      "this planet to a planet with a Space Wolves unit you control.",

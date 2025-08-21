@@ -408,7 +408,7 @@ def get_published_decks_lists():
                         split_data = data.split(sep="\n")
                         deck_name = split_data[0]
                         warlord_name = split_data[2]
-                        timestamp = os.path.getmtime(target_file + "/content")
+                        timestamp = os.path.getmtime(target_file + "/key")
                         datestamp = datetime.datetime.fromtimestamp(timestamp)
                         date = str(datestamp.date())
                         deck_names.append(deck_name)
@@ -565,7 +565,7 @@ def my_decks_page(request, page_num):
                         split_data = data.split(sep="\n")
                         deck_name = split_data[0]
                         warlord_name = split_data[2]
-                        timestamp = os.path.getmtime(target_file + "/content")
+                        timestamp = os.path.getmtime(target_file + "/key")
                         datestamp = datetime.datetime.fromtimestamp(timestamp)
                         date = str(datestamp.date())
                         deck_names.append(deck_name)
@@ -648,7 +648,7 @@ def my_decks(request):
                         split_data = data.split(sep="\n")
                         deck_name = split_data[0]
                         warlord_name = split_data[2]
-                        timestamp = os.path.getmtime(target_file + "/content")
+                        timestamp = os.path.getmtime(target_file + "/key")
                         datestamp = datetime.datetime.fromtimestamp(timestamp)
                         date = str(datestamp.date())
                         deck_names.append(deck_name)
