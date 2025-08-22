@@ -171,14 +171,14 @@
     function changeErrata() {
         if (image.src.includes("_apoka")) {
             image.src = image.src.replace("_apoka", "");
-            errata_button.innerHTML = "View Original Version";
+            errata_button.innerHTML = "View Errata Version";
             var e = document.getElementById("card-info");
             e.style.display = "block";
             e = document.getElementById("errata-card-info");
             e.style.display = "none";
         } else {
             image.src = image.src.replace(".jpg", "_apoka.jpg");
-            errata_button.innerHTML = "View Errata Version";
+            errata_button.innerHTML = "View Original Version";
             var e = document.getElementById("card-info");
             e.style.display = "none";
             e = document.getElementById("errata-card-info");
