@@ -9,7 +9,6 @@
 {% endif %}
 <link rel="shortcut icon" href="{% static 'images/favicon-v2.jpg' %}?v=4f32ecc8f43d">
 <head>
-  {% include 'header.html'%}
   <meta charset="utf-8">
   <meta name="application-name" content="ConquestDB">
   <meta name="description" content="A fan-made website for creating and sharing decks for the Warhammer 40,000: Conquest Living Card Game.">
@@ -20,6 +19,7 @@
 </head>
 
 <body>
+{% include 'header.html'%}
   <main>
     {% block content %}
     {% endblock %}
