@@ -462,7 +462,7 @@ def orks_cards_init():
         CardClasses.ArmyCard("Da Sharpy", "Sweep (2).",
                              "Vehicle. Experimental.", 2, faction, "Signature", 2, 2, 1, False,
                              war_pack_info="The Shadow in the Warp"),
-        CardClasses.ArmyCard("Da 'Eavy",
+        CardClasses.ArmyCard("Da Swoopy",
                              "Flying.\n"
                              "Reaction: After a battle starts at this planet, have a Warrior Orks army unit gain "
                              "flying until the end of the combat round.",
