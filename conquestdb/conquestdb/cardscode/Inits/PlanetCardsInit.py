@@ -103,7 +103,7 @@ def planet_cards_init():
         PlanetCard("Frontier World Jaris",
                    "Battle: If you have fewer cards in hand than your opponent, draw 3 cards.",
                    0, 1, True, True, True, "Veros"),
-        PlanetCard("Daprian's_Gate",
+        PlanetCard("Daprian's Gate",
                    "Battle: Exhaust an army unit. That unit cannot ready during the next headquarters phase.",
                    0, 2, False, False, True, "Veros"),
         PlanetCard("Craftworld Lugath",
