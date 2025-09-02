@@ -475,8 +475,8 @@ def dark_eldar_cards_init():
                               1, faction, "Signature", 1, False, war_pack_info="Overrun"),
         CardClasses.WarlordCard("Yvraine", "You cannot include Chaos Elite units in your deck.\n"
                                            "Reaction: After this unit commits to a planet, a non-Elite army "
-                                           "unit you control at an adjacent planet is considered to be a warlord "
-                                           "while checking for a battle at that planet this round.",
+                                           "unit at an adjacent planet gains +1 ATK and +1 HP. It is considered to be a"
+                                           " warlord while checking for a battle at that planet this round.",
                                 "Herald of Ynnead.", faction, 2, 7, 2, 5, "Bloodied.", 7, 7,
                                 ["1x Attuned Gyrinx", "1x Host of the Emissary",
                                  "2x Triumvirate of Ynnead", "4x Yvraine's Entourage"],
