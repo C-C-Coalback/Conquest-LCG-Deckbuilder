@@ -450,7 +450,7 @@ def dark_eldar_cards_init():
                                           "per phase.)", "Assassin. Wych.",
                                 faction, 2, 7, 2, 5, "Bloodied.", 7, 7,
                                 ["1x Cloak of Shade", "4x Liatha's Retinue",
-                                 "1x Reveal the Blade", "2x Shadow Hunt"],
+                                 "1x Reveal The Blade", "2x Shadow Hunt"],
                                 war_pack_info="Overrun"),
         CardClasses.AttachmentCard("Cloak of Shade", "Attach to your warlord.\n"
                                                      "Each unit at this planet loses Armorbane.\n"
@@ -462,7 +462,7 @@ def dark_eldar_cards_init():
                                                  "exhausted at a planet where no battle is taking place.",
                              "Assassin. Warrior. Creature.", 3, faction, "Signature", 3, 2, 1, False,
                              war_pack_info="Overrun"),
-        CardClasses.SupportCard("Reveal the Blade", "As an additional cost to target this support, discard two cards "
+        CardClasses.SupportCard("Reveal The Blade", "As an additional cost to target this support, discard two cards "
                                                     "at random from your hand.\n"
                                                     "Combat Action: Exhaust this support and turn face-up a face-down "
                                                     "card with no printed shield you removed from the game to give "

@@ -1,7 +1,8 @@
 import os
 
 
-replacements = [("Call the Storm", "Call The Storm")]
+replacements = [("Call the Storm", "Call The Storm"),
+                ("Reveal the Blade", "Reveal The Blade")]
 
 
 cwd = os.getcwd()
