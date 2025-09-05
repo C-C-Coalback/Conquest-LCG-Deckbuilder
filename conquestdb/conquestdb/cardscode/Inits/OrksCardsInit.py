@@ -414,8 +414,8 @@ def orks_cards_init():
                                 "last planet. Starting from the second round, if you win a battle at that planet, "
                                 "you may Deep Strike it for 2 resources.",
                                 "Pledge.", 1, faction, "Loyal", False, war_pack_info="For the Enclaves"),
-        CardClasses.SupportCard("Extra Boomsticks", "When an Orks unit is assigned damage, exhaust this support to "
-                                                    "give it Retaliate (2) until the end of the phase.",
+        CardClasses.SupportCard("Extra Boomsticks", "Interrupt: When an Orks unit is assigned damage, exhaust this"
+                                                    " support to give it Retaliate (2) until the end of the phase.",
                                 "Upgrade.", 2, faction, "Loyal", False, war_pack_info="The Shadow in the Warp"),
         CardClasses.SupportCard("Truck Wreck Launcha", "Interrupt: When a Vehicle unit you control leaves play, "
                                                        "exhaust this support to deal 1 damage to an enemy "
