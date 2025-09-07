@@ -43,7 +43,7 @@ def dark_eldar_cards_init():
                              allowed_phases_in_play="ALL", cycle_info="Core Set"),
         CardClasses.ArmyCard("Hellion Gang", "Flying. (This unit takes half damage from "
                                              "non-Flying units.", "Scout. Raider.",
-                             2, faction, "Common", 2, 2, 1, False, cycle_info="Core Set"),
+                             2, faction, "Common", 2, 2, 1, False, cycle_info="Core Set", flying=True),
         CardClasses.ArmyCard("Beasthunter Wyches", "Reaction: After you play a Dark Eldar event "
                                                    "card, pay 1 resource to put a Khymera token "
                                                    "into play at your HQ", "Warrior. Wych.",

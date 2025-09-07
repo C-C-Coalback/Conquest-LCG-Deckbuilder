@@ -1088,7 +1088,7 @@ class PlanetCard(Card):
         elif sector == "Gardis" or sector == "Veros":
             cycle_info = "Confrontation"
         elif sector == "Sargos":
-            war_pack_info = "For the Enclave"
+            war_pack_info = "For the Enclaves"
         elif sector == "Nepthis":
             war_pack_info = "Herald of the Plague God"
         elif sector == "The Breach":

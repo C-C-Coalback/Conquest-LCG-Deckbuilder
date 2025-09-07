@@ -1,9 +1,5 @@
 from ..CardClasses import PlanetCard
 
-"""
-
-"""
-
 
 def planet_cards_init():
     planet_array = [
