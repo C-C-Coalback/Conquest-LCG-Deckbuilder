@@ -15,7 +15,12 @@
     grid-template-areas:
     "my-decks published-decks"
     "my-published-decks my-liked-decks"
+    "search-decks search-decks"
     "create-deck create-deck"
+}
+
+#search-decks {
+    grid-area: search-decks;
 }
 
 #my-decks {

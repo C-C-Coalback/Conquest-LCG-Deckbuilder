@@ -32,13 +32,15 @@ for key in range(len(card_array)):
 for key in range(len(apoka_errata_array)):
     apoka_errata_dict[apoka_errata_array[key].image_name] = apoka_errata_array[key]
 pledges_array = []
+warlords_list = []
 for i in range(len(card_array)):
     if card_array[i].check_for_a_trait("Pledge"):
         pledges_array.append(card_array[i].get_name())
+    if card_array[i].get_card_type() == "Warlord":
+        warlords_list.append(card_array[i].get_name())
 temp_cwd = os.getcwd()
 target_dir_temp = temp_cwd + "/decks/publisheddecks/"
 os.makedirs(target_dir_temp, exist_ok=True)
-
 alignment_wheel = ["Astra Militarum", "Space Marines", "Tau", "Eldar", "Dark Eldar", "Chaos", "Orks"]
 
 
@@ -431,6 +433,49 @@ def get_liked_decks_lists(username):
                     print(e)
                     pass
     return deck_names, deck_warlords, deck_dates, img_srcs, keys, creator_name
+
+
+def get_published_decks_lists_with_extra_info():
+    deck_names = []
+    deck_warlords = []
+    deck_dates = []
+    img_srcs = []
+    keys = []
+    creator_name = []
+    factions = []
+    directory = os.getcwd()
+    target_directory = directory + "/decks/publisheddecks/"
+    if os.path.exists(target_directory):
+        for creator in os.listdir(target_directory):
+            for file in os.listdir(target_directory + "/" + creator):
+                try:
+                    target_file = target_directory + "/" + creator + "/" + file
+                    with open(target_file + "/content", "r") as f:
+                        data = f.read()
+                        split_data = data.split(sep="\n")
+                        deck_name = split_data[0]
+                        warlord_name = split_data[2]
+                        current_faction = split_data[3]
+                        main_faction = current_faction.split(sep=" (")[0]
+                        timestamp = os.path.getmtime(target_file + "/key")
+                        datestamp = datetime.datetime.fromtimestamp(timestamp)
+                        date = str(datestamp.date())
+                        deck_names.append(deck_name)
+                        creator_name.append(creator)
+                        deck_warlords.append(warlord_name)
+                        deck_dates.append(date)
+                        factions.append(main_faction)
+                        img_src = convert_name_to_img_src(warlord_name)
+                        img_srcs.append(img_src)
+                        f.close()
+                    with open(target_file + "/key", "r") as k:
+                        data = k.read()
+                        keys.append(data)
+                except Exception as e:
+                    print(e)
+                    pass
+    print("returning")
+    return deck_names, deck_warlords, factions, deck_dates, img_srcs, keys, creator_name
 
 
 def get_published_decks_lists():
@@ -1716,6 +1761,52 @@ def select_warlord(request):
                    "astra_militarum": sent_astra_militarum, "space_marines": sent_space_marines,
                    "tau": sent_tau, "eldar": sent_eldar, "dark_eldar": sent_dark_eldar,
                    "chaos": sent_chaos, "orks": sent_orks, "tyranids": sent_tyranids, "necrons": sent_necrons})
+
+
+def search_ajax_view(request):
+    if request.method == 'POST':
+        deck_names, deck_warlords, factions, deck_dates, img_srcs, keys, creator_name = \
+            get_published_decks_lists_with_extra_info()
+        data = {
+            "Deck Names": deck_names,
+            "Deck Warlords": deck_warlords,
+            "Factions": factions,
+            "Deck Dates": deck_dates,
+            "Img Srcs": img_srcs,
+            "Keys": keys,
+            "Creator Name": creator_name
+        }
+        deck_name = request.POST.get("search")
+        creator = request.POST.get("creator")
+        warlord_name = request.POST.get("warlord")
+        faction = request.POST.get("faction")
+        filtered_df = pd.DataFrame(data=data)
+        filtered_df = filtered_df.sort_values(by="Deck Dates", ascending=False)
+        if deck_name:
+            filtered_df = filtered_df[filtered_df['Deck Names'].str.contains(deck_name)]
+        if creator:
+            filtered_df = filtered_df[filtered_df['Creator Name'].str.contains(creator)]
+        if warlord_name:
+            filtered_df = filtered_df.loc[filtered_df['Deck Warlords'] == warlord_name]
+        if faction:
+            filtered_df = filtered_df.loc[filtered_df['Factions'] == faction]
+        deck_names = filtered_df['Deck Names'].to_list()
+        deck_warlords = filtered_df['Deck Warlords'].to_list()
+        deck_dates = filtered_df['Deck Dates'].to_list()
+        img_srcs = filtered_df['Img Srcs'].to_list()
+        keys = filtered_df['Keys'].to_list()
+        creator_name = filtered_df['Creator Name'].to_list()
+        return JsonResponse({'message': "SUCCESS", 'deck_names': deck_names, 'deck_warlords': deck_warlords,
+                             'deck_dates': deck_dates, 'img_srcs': img_srcs,
+                             'keys': keys, 'creator_name': creator_name})
+    return JsonResponse({'message': 'Invalid request'})
+
+
+def search_deck(request):
+    global warlords_list
+    light_dark_toggle = light_dark_dict.get_light_mode(request.user.username)
+    return render(request, 'decks/deck_search.html', {"light_dark_toggle": light_dark_toggle,
+                                                      "warlords_list": warlords_list})
 
 
 def ajax_view(request):

@@ -4,6 +4,8 @@ from . import views
 
 urlpatterns = [
     path("", views.decks, name="decks"),
+    path("search_deck/ajax/", views.search_ajax_view, name="deck_search_ajax_view"),
+    path("search_deck/", views.search_deck, name="deck_search"),
     path("create_deck/select_warlord/", views.select_warlord, name="select_warlord"),
     path("create_deck/preload_warlord/<str:warlord_name>/", views.create_deck_with_warlord, name="deck_warlord"),
     path("create_deck/<str:deck_key>/", views.modify_deck, name="modify_deck"),

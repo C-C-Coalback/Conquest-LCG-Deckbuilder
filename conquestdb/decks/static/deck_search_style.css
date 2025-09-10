@@ -1,0 +1,225 @@
+.Card {
+    height: 250px;
+    width: 178px;
+}
+
+.filters-container {
+    margin-top: 50px;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+#myform {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+#prev-page {
+    position:relative;
+    left:0;
+    top:0;
+    height: 100px;
+    width: 100px;
+}
+
+#next-page {
+    position:relative;
+    right:0;
+    top:0;
+    height: 100px;
+    width: 100px;
+}
+
+#buttons-container {
+    display: flex;
+    flex-wrap: nowrap;
+}
+
+#submit {
+    border: none;
+    background-color: green;
+    color: white;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    cursor: pointer;
+}
+
+#clear-filter {
+    border: none;
+    background-color: red;
+    color: white;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    cursor: pointer;
+}
+
+#deckBinder {
+    margin:auto;
+    border: 0.05em solid red;
+    display:flex;
+    flex-direction:row;
+    flex-wrap: wrap;
+    max-width: 1300px;
+    justify-content:center;
+}
+
+#responseMessage {
+    margin:auto;
+    background: #f9f9f9;
+    display:flex;
+    flex-direction:row;
+    flex-wrap: wrap;
+    max-width: 1000px;
+    justify-content:center;
+}
+
+.page {
+    margin:auto;
+    display:flex;
+    flex-direction:row;
+    flex-wrap: wrap;
+    max-width: 1000px;
+    justify-content:center;
+    gap: 20px;
+}
+
+.ranges-grid {
+    width: 1000px;
+    height: auto;
+    border: 5px solid green;
+    display: grid;
+    grid-row-gap: 1px;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    grid-template-areas:
+    "p-deck-name search p-creator creator"
+    "p-faction faction p-warlord warlord";
+}
+
+#deck-counts-pages {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#p-deck-name {
+    grid-area: p-deck-name;
+}
+
+#search {
+    grid-area: search;
+}
+
+#p-creator {
+    grid-area: p-creator
+}
+
+#creator {
+    grid-area: creator;
+}
+
+#p-faction {
+    grid-area: p-faction;
+}
+
+#faction {
+    grid-area: faction;
+}
+
+#p-warlord {
+    grid-area: p-warlord;
+}
+
+#warlord {
+    grid-area: warlord;
+}
+
+.round {
+    border-radius: 50%;
+}
+
+.center {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.border-top {
+    border-top: 5px solid green;
+}
+
+.border-bottom {
+    border-bottom: 5px solid green;
+}
+
+.border-right {
+    border-right: 5px solid green;
+}
+
+.border-left {
+    border-left: 5px solid green;
+}
+
+.preview-image {
+    width: 120px;
+    height: 168px;
+}
+
+.deck-item-grid {
+    width: 400px;
+    height: auto;
+    display: grid;
+    grid-template-columns: 280px 120px;
+    grid-template-areas:
+    "deck-name warlord-card"
+    "creator-name warlord-card"
+    "warlord-name warlord-card"
+    "date warlord-card";
+}
+
+.decklist-name {
+    grid-area: deck-name;
+}
+
+.creator-name {
+    grid-area: creator-name;
+}
+
+.warlord-name {
+    grid-area: warlord-name;
+}
+
+.date {
+    grid-area: date;
+}
+
+.preview-image {
+    grid-area: warlord-card;
+}
+
+a:link {
+      text-decoration: none;
+}
+
+a:visited {
+      text-decoration: none;
+}
+
+a:hover {
+      text-decoration: none;
+}
+
+a:active {
+      text-decoration: none;
+}

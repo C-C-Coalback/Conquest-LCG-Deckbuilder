@@ -1,0 +1,360 @@
+{% extends "base.html" %}
+{% block title %}Deck Search{% endblock %}
+{% block content %}
+{% load static %}
+<link rel="stylesheet" href="{% static 'deck_search_style.css' %}">
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<body>
+    <div class="filters-container">
+        <form id="myForm">
+            <div class="ranges-grid">
+                <p id="p-deck-name">Deck Name:</p><input id="searchInput" type="text" name="search">
+                <p id="p-creator">Creator:</p><input id="creatorInput" type="text" name="creator">
+                <p id="p-faction">Faction:</p><select name="faction" id="faction">
+                        <option value=""></option>
+                        <option value="Space Marines">Space Marines</option>
+                        <option value="Tau">Tau</option>
+                        <option value="Eldar">Eldar</option>
+                        <option value="Dark Eldar">Dark Eldar</option>
+                        <option value="Chaos">Chaos</option>
+                        <option value="Orks">Orks</option>
+                        <option value="Astra Militarum">Astra Militarum</option>
+                        <option value="Neutral">Neutral</option>
+                        <option value="Tyranids">Tyranids</option>
+                        <option value="Necrons">Necrons</option>
+                    </select>
+                <p id="p-warlord">Warlord:</p><select name="warlord" id="warlord">
+                    <option value=""></option>
+                    {% for warlord_name in warlords_list %}
+                        <option value="{{ warlord_name }}">{{ warlord_name }}</option>
+                    {% endfor %}
+                    </select>
+                <!--
+                <p id="p-order" class="filter">Order By:</p><select name="order" class="filter" id="order">
+                    <option value="None"></option>
+                    <option value="Name">Name</option>
+                    <option value="Card Type">Card Type</option>
+                    <option value="COST">COST</option>
+                    <option value="Attack">ATK</option>
+                    <option value="Health">HP</option>
+                    <option value="Command">Command</option>
+                    <option value="Shields">Shields</option>
+                    <option value="War Pack">War Pack</option>
+                    <option value="Cycle">Cycle</option>
+                </select>
+                <p id="p-asc-desc" class="filter">Asc./Desc.:</p><select name="asc-desc" class="filter" id="asc-desc">
+                    <option value="Ascending" selected="selected">Ascending</option>
+                    <option value="Descending">Descending</option>
+                </select>
+                -->
+            </div>
+            <div id="buttons-container">
+                <button type="submit" id="submit">Perform Search</button>
+                <button id="clear-filter" onclick="clearFilters();">Reset Filters</button>
+            </div>
+        </form>
+    </div>
+    <div id="deckBinder">
+        <input id="prev-page" type="button" value="previous" onclick="previousPage();">
+        <div id="responseMessage">
+            <div class="page" id="page"></div>
+        </div>
+        <input id="next-page" type="button" value="next" onclick="nextPage();">
+    </div>
+    <div id="deck-counts-pages">
+        <p>Showing 0-0 of 0 matches</p>
+    </div>
+    <div class="center" style="display:none">
+        Number of rows per page:<select name="num-rows" class="num-rows" id="num-rows" onchange="updateMaxRows(this)">
+            <option value="5">5</option>
+            <option value="10">10</option>
+            <option value="20" selected="selected">20</option>
+            <option value="50">50</option>
+            <option value="100">100</option>
+            <option value="200">200</option>
+            <option value="500">500</option>
+            <option value="1000">1000</option>
+            <option value="2000">2000</option>
+        </select>
+    </div>
+    <script>
+        var current_page_number = 0;
+        var max_page_number = 0;
+        var max_rows = "20";
+        var current_max_rows = 20;
+        var num_matches = 0;
+        var current_low_match = 0;
+        var current_high_match = 0;
+        var stored_deck_names = [];
+        var stored_image_srcs = [];
+        var stored_deck_warlords = [];
+        var stored_deck_dates = [];
+        var stored_deck_keys = [];
+        var stored_creator_names = [];
+        var stored_deck_links = [];
+
+        function clearFilters() {
+            var searchInput = document.getElementById("searchInput");
+            searchInput.value = "";
+            var searchInput = document.getElementById("creatorInput");
+            searchInput.value = "";
+        }
+
+        function updateMaxRows(e) {
+            max_rows = e.value;
+        }
+
+        function previousPage() {
+            if (current_page_number !== 0) {
+                current_page_number = current_page_number - 1;
+                current_low_match = current_low_match - current_max_rows;
+                current_high_match = (current_page_number + 1) * current_max_rows;
+                page_counter = document.getElementById("deck-counts-pages");
+                page_counter.innerHTML = `<p>Showing ` + current_low_match + `-` + current_high_match + ` of ` + num_matches + ` matches</p>`;
+                e = document.getElementById("responseMessage");
+                e.innerHTML = ``;
+                var deck_link = "";
+                var deck_name = "";
+                var creator_name = "";
+                var deck_warlord = "";
+                var deck_date = "";
+                var img_src = "";
+                var deck_key = "";
+                var new_string = "";
+                var new_id = "";
+                new_string += `<div class="page" id="page">`;
+                for (let i = 0; i < stored_deck_links[current_page_number].length; i++) {
+                    deck_link = stored_deck_links[current_page_number][i];
+                    deck_name = stored_deck_names[current_page_number][i];
+                    creator_name = stored_creator_names[current_page_number][i];
+                    deck_warlord = stored_deck_warlords[current_page_number][i];
+                    deck_date = stored_deck_dates[current_page_number][i];
+                    img_src = stored_image_srcs[current_page_number][i];
+                    deck_key = stored_deck_keys[current_page_number][i];
+                    new_string += `<div class="border-right border-left border-top">`
+                    new_string += `<a href=`
+                    new_string += deck_link;
+                    new_string += `>`;
+                    new_string += `<div class="deck-item-gird">`
+                    new_string += `<h3 class="decklist-name">`
+                    new_string += deck_name;
+                    new_string += `</h3>`;
+                    new_string += `<h3 class="creator-name">`
+                    new_string += creator_name;
+                    new_string += `</h3>`;
+                    new_string += `<h3 class="warlord-name">`
+                    new_string += deck_warlord;
+                    new_string += `</h3>`;
+                    new_string += `<h3 class="date">`
+                    new_string += deck_date;
+                    new_string += `</h3>`;
+                    new_string += `<img class="preview-image" src="`
+                    new_string += img_src;
+                    new_string += `">`;
+                    new_string += `</div>`;
+                    new_string += `</a>`;
+                    new_string += `<div class="center border-bottom">`;
+                    new_string += `<p>Deck Key: `
+                    new_string += deck_key;
+                    new_string += `</p>`
+                    new_string += `</div>`
+                    new_string += `</div>`
+                }
+                new_string += `</div>`;
+                e.innerHTML += new_string;
+            }
+        }
+
+        function nextPage() {
+            if (current_page_number !== max_page_number) {
+                current_page_number = current_page_number + 1;
+                e = document.getElementById("responseMessage");
+                e.innerHTML = ``;
+                current_low_match = current_low_match + current_max_rows;
+                current_high_match = (current_page_number + 1) * current_max_rows;
+                if (current_high_match > num_matches) {
+                    current_high_match = num_matches;
+                }
+                page_counter = document.getElementById("deck-counts-pages");
+                page_counter.innerHTML = `<p>Showing ` + current_low_match + `-` + current_high_match + ` of ` + num_matches + ` matches</p>`;
+                var deck_link = "";
+                var deck_name = "";
+                var creator_name = "";
+                var deck_warlord = "";
+                var deck_date = "";
+                var img_src = "";
+                var deck_key = "";
+                var new_string = "";
+                var new_id = "";
+                new_string += `<div class="page" id="page">`;
+                for (let i = 0; i < stored_deck_links[current_page_number].length; i++) {
+                    deck_link = stored_deck_links[current_page_number][i];
+                    deck_name = stored_deck_names[current_page_number][i];
+                    creator_name = stored_creator_names[current_page_number][i];
+                    deck_warlord = stored_deck_warlords[current_page_number][i];
+                    deck_date = stored_deck_dates[current_page_number][i];
+                    img_src = stored_image_srcs[current_page_number][i];
+                    deck_key = stored_deck_keys[current_page_number][i];
+                    new_string += `<div class="border-right border-left border-top">`
+                    new_string += `<a href=`
+                    new_string += deck_link;
+                    new_string += `>`;
+                    new_string += `<div class="deck-item-gird">`
+                    new_string += `<h3 class="decklist-name">`
+                    new_string += deck_name;
+                    new_string += `</h3>`;
+                    new_string += `<h3 class="creator-name">`
+                    new_string += creator_name;
+                    new_string += `</h3>`;
+                    new_string += `<h3 class="warlord-name">`
+                    new_string += deck_warlord;
+                    new_string += `</h3>`;
+                    new_string += `<h3 class="date">`
+                    new_string += deck_date;
+                    new_string += `</h3>`;
+                    new_string += `<img class="preview-image" src="`
+                    new_string += img_src;
+                    new_string += `">`;
+                    new_string += `</div>`;
+                    new_string += `</a>`;
+                    new_string += `<div class="center border-bottom">`;
+                    new_string += `<p>Deck Key: `
+                    new_string += deck_key;
+                    new_string += `</p>`
+                    new_string += `</div>`
+                    new_string += `</div>`
+                }
+                new_string += `</div>`;
+                e.innerHTML += new_string;
+            }
+        }
+
+        // Ajax setup for form submission
+        $(document).ready(function() {
+            $('#myForm').on('submit', function(event) {
+                event.preventDefault();
+
+                $.ajax({
+                    url: '/decks/search_deck/ajax/',  // The URL of the Django view that handles the request
+                    type: 'POST',
+                    data: {
+                        'search': $('#searchInput').val(),
+                        'creator': $('#creatorInput').val(),
+                        'faction': $('#faction').val(),
+                        'warlord': $('#warlord').val(),
+                        'csrfmiddlewaretoken': '{{ csrf_token }}' // CSRF token for security
+                    },
+                    success: function(response) {
+                        $('#responseMessage').text(response.message);  // Update the page dynamically
+                        const message = response.message;
+                        if (message === "REDIRECT") {
+                            location.href = "/cards/" + response.image_names[0] + "/";
+                        }
+                        current_page_number = 0;
+                        var deckCount = 0;
+                        var pageCount = 0;
+                        var deck_names = response.deck_names;
+                        const img_srcs = response.img_srcs;
+                        const deck_warlords = response.deck_warlords;
+                        const deck_dates = response.deck_dates;
+                        const deck_keys = response.keys;
+                        const creator_names = response.creator_name;
+                        e = document.getElementById("responseMessage");
+                        e.innerHTML = ``;
+                        var deck_name = "";
+                        var img_src = "";
+                        var deck_warlord = "";
+                        var deck_date = "";
+                        var deck_key = "";
+                        var creator_name = "";
+                        var new_string = "";
+                        var new_id = "";
+                        new_string += `<div class="page" id="page">`;
+                        stored_deck_names = [[]];
+                        stored_image_srcs = [[]];
+                        stored_deck_warlords = [[]];
+                        stored_deck_dates = [[]];
+                        stored_deck_keys = [[]];
+                        stored_creator_names = [[]];
+                        stored_deck_links = [[]];
+                        current_max_rows = parseInt(max_rows);
+                        num_matches = deck_names.length;
+                        current_low_match = 1;
+                        if (num_matches === 0) {
+                            current_low_match = 0;
+                        }
+                        current_high_match = current_max_rows;
+                        if (current_high_match > num_matches) {
+                            current_high_match = num_matches;
+                        }
+                        page_counter = document.getElementById("deck-counts-pages");
+                        page_counter.innerHTML = `<p>Showing ` + current_low_match + `-` + current_high_match + ` of ` + num_matches + ` matches</p>`;
+                        for (let i = 0; i < deck_names.length; i++) {
+                            if (deckCount === current_max_rows) {
+                                pageCount += 1
+                                deckCount = 0;
+                                stored_deck_names.push([]);
+                                stored_image_srcs.push([]);
+                                stored_deck_warlords.push([]);
+                                stored_deck_dates.push([]);
+                                stored_deck_keys.push([]);
+                                stored_creator_names.push([]);
+                                stored_deck_links.push([]);
+                            }
+                            deck_name = deck_names[i];
+                            stored_deck_names[pageCount].push(deck_name);
+                            deck_warlord = deck_warlords[i];
+                            stored_deck_warlords[pageCount].push(deck_warlord);
+                            deck_date = deck_dates[i];
+                            stored_deck_dates[pageCount].push(deck_date);
+                            deck_key = deck_keys[i];
+                            stored_deck_keys[pageCount].push(deck_key);
+                            creator_name = creator_names[i];
+                            stored_creator_names[pageCount].push(creator_name);
+                            deck_link = "/decks/" + creator_names[i] + "/" + deck_keys[i] + "/";
+                            stored_deck_links[pageCount].push(deck_link);
+                            img_src = img_srcs[i];
+                            stored_image_srcs[pageCount].push(img_src);
+                            if (pageCount === 0) {
+                                new_string += `<div class="border-right border-left border-top">`
+                                new_string += `<a href=`
+                                new_string += deck_link;
+                                new_string += `>`;
+                                new_string += `<div class="deck-item-gird">`
+                                new_string += `<h3 class="decklist-name">`
+                                new_string += deck_name;
+                                new_string += `</h3>`;
+                                new_string += `<h3 class="creator-name">`
+                                new_string += creator_name;
+                                new_string += `</h3>`;
+                                new_string += `<h3 class="warlord-name">`
+                                new_string += deck_warlord;
+                                new_string += `</h3>`;
+                                new_string += `<h3 class="date">`
+                                new_string += deck_date;
+                                new_string += `</h3>`;
+                                new_string += `<img class="preview-image" src="`
+                                new_string += img_src;
+                                new_string += `">`;
+                                new_string += `</div>`;
+                                new_string += `</a>`;
+                                new_string += `<div class="center border-bottom">`;
+                                new_string += `<p>Deck Key: `
+                                new_string += deck_key;
+                                new_string += `</p>`
+                                new_string += `</div>`
+                                new_string += `</div>`
+                            }
+                            deckCount += 1;
+                        }
+                        max_page_number = pageCount;
+                        new_string += `</div>`;
+                        // console.log(stored_image_links);
+                        e.innerHTML += new_string;
+                    }
+                });
+            });
+        });
+
+    </script>
+{% endblock %}
