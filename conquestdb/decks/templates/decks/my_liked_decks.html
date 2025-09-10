@@ -1,0 +1,52 @@
+{% extends "base.html" %}
+{% block title %}Liked Decks{% endblock %}
+{% block content %}
+{% load static %}
+<link rel="stylesheet" href="{% static 'published_decks.css' %}">
+    <div id="main-box">
+        <input id="prev-page" type="button" value="previous" onclick="previousPage();">
+        <div id="grid-box">
+            {% for name, warlord_name, date, img_src, key, creator_name in decks %}
+                <div class="border-right border-left">
+                    <a href="/decks/{{ creator_name }}/{{ key }}">
+                    <div class="deck-item-grid">
+                        <h3 class="decklist-name">{{ name }}</h3>
+                        <h3 class="creator-name">{{ creator_name }}</h3>
+                        <h3 class="warlord-name">{{ warlord_name }}</h3>
+                        <h3 class="date">{{ date }}</h3>
+                        <img class="preview-image" src="{{ img_src }}">
+                    </div>
+                    </a>
+                    <div class="center border-bottom">
+                        <p>Deck Key: {{ key }}</p>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+        <input id="next-page" type="button" value="next" onclick="nextPage();">
+    </div>
+    <script>
+        const current_url = document.URL;
+        const url_split = current_url.split("/");
+
+        function nextPage() {
+            if (url_split.length == 6) {
+                location.href = "/decks/my_liked_decks/1/";
+            } else {
+                var number = parseInt(url_split[5]);
+                number = number + 1;
+                location = "/decks/my_liked_decks/" + number.toString() + "/";
+            }
+        }
+
+        function previousPage() {
+            if (url_split.length == 7) {
+                var number = parseInt(url_split[5]);
+                number = number - 1;
+                if (number > 0) {
+                    location = "/decks/my_liked_decks/" + number.toString() + "/";
+                }
+            }
+        }
+    </script>
+{% endblock %}

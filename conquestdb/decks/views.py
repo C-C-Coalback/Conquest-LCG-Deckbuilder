@@ -389,6 +389,50 @@ def deck_validation(deck, remaining_signature_squad, factions, warlord=""):
     return "SUCCESS"
 
 
+def get_liked_decks_lists(username):
+    deck_names = []
+    deck_warlords = []
+    deck_dates = []
+    img_srcs = []
+    keys = []
+    creator_name = []
+    directory = os.getcwd()
+    target_directory = directory + "/decks/publisheddecks/"
+    if os.path.exists(target_directory):
+        for creator in os.listdir(target_directory):
+            for file in os.listdir(target_directory + "/" + creator):
+                try:
+                    target_file = target_directory + "/" + creator + "/" + file
+                    if os.path.exists(target_file + "/likes"):
+                        with open(target_file + "/likes", "r") as like_file:
+                            data = like_file.read()
+                            split_data = data.split(sep="\n")
+                            if username in split_data:
+                                with open(target_file + "/content", "r") as f:
+                                    data = f.read()
+                                    split_data = data.split(sep="\n")
+                                    deck_name = split_data[0]
+                                    warlord_name = split_data[2]
+                                    timestamp = os.path.getmtime(target_file + "/key")
+                                    datestamp = datetime.datetime.fromtimestamp(timestamp)
+                                    date = str(datestamp.date())
+                                    deck_names.append(deck_name)
+                                    creator_name.append(creator)
+                                    deck_warlords.append(warlord_name)
+                                    deck_dates.append(date)
+                                    img_src = convert_name_to_img_src(warlord_name)
+                                    img_srcs.append(img_src)
+                                    f.close()
+                                with open(target_file + "/key", "r") as k:
+                                    data = k.read()
+                                    keys.append(data)
+                            like_file.close()
+                except Exception as e:
+                    print(e)
+                    pass
+    return deck_names, deck_warlords, deck_dates, img_srcs, keys, creator_name
+
+
 def get_published_decks_lists():
     deck_names = []
     deck_warlords = []
@@ -513,6 +557,49 @@ def published_decks_page(request, page_num):
     return render(request, "decks/published_decks.html", {"decks": decks_var, "light_dark_toggle": light_dark_toggle})
 
 
+def my_liked_decks_page(request, page_num):
+    username = request.user.username
+    smallest_deck_num = (page_num - 1) * 10
+    largest_deck_num = page_num * 10
+    decks_var = zip([], [], [], [], [], [])
+    deck_names, deck_warlords, deck_dates, img_srcs, keys, creator_name = get_liked_decks_lists(username)
+    light_dark_toggle = light_dark_dict.get_light_mode(request.user.username)
+    data = {
+        "Deck Names": deck_names,
+        "Deck Warlords": deck_warlords,
+        "Deck Dates": deck_dates,
+        "Img Srcs": img_srcs,
+        "Keys": keys,
+        "Creator Name": creator_name
+    }
+    try:
+        df = pd.DataFrame(data=data)
+        df = df.sort_values(by="Deck Dates", ascending=False)
+        new_deck_names = df["Deck Names"]
+        if len(new_deck_names) < smallest_deck_num:
+            return render(request, "decks/my_liked_decks.html",
+                          {"decks": decks_var, "light_dark_toggle": light_dark_toggle})
+        if len(new_deck_names) <= largest_deck_num:
+            largest_deck_num = len(new_deck_names)
+        new_deck_names = new_deck_names[smallest_deck_num:largest_deck_num]
+        new_deck_warlords = df["Deck Warlords"]
+        new_deck_warlords = new_deck_warlords[smallest_deck_num:largest_deck_num]
+        new_deck_dates = df["Deck Dates"]
+        new_deck_dates = new_deck_dates[smallest_deck_num:largest_deck_num]
+        new_img_srcs = df["Img Srcs"]
+        new_img_srcs = new_img_srcs[smallest_deck_num:largest_deck_num]
+        new_keys = df["Keys"]
+        new_keys = new_keys[smallest_deck_num:largest_deck_num]
+        new_creator_name = df["Creator Name"]
+        new_creator_name = new_creator_name[smallest_deck_num:largest_deck_num]
+        decks_var = zip(new_deck_names, new_deck_warlords, new_deck_dates,
+                        new_img_srcs, new_keys, new_creator_name)
+        return render(request, "decks/my_liked_decks.html", {"decks": decks_var, "light_dark_toggle": light_dark_toggle})
+    except Exception as e:
+        print(e)
+    return render(request, "decks/my_liked_decks.html", {"decks": decks_var, "light_dark_toggle": light_dark_toggle})
+
+
 def published_decks(request):
     deck_names, deck_warlords, deck_dates, img_srcs, keys, creator_name = get_published_decks_lists()
     light_dark_toggle = light_dark_dict.get_light_mode(request.user.username)
@@ -540,6 +627,37 @@ def published_decks(request):
         print(e)
     decks_var = zip(deck_names, deck_warlords, deck_dates, img_srcs, keys, creator_name)
     return render(request, "decks/published_decks.html", {"decks": decks_var, "light_dark_toggle": light_dark_toggle})
+
+
+def my_liked_decks(request):
+    username = request.user.username
+    deck_names, deck_warlords, deck_dates, img_srcs, keys, creator_name = get_liked_decks_lists(username)
+    light_dark_toggle = light_dark_dict.get_light_mode(request.user.username)
+    data = {
+        "Deck Names": deck_names,
+        "Deck Warlords": deck_warlords,
+        "Deck Dates": deck_dates,
+        "Img Srcs": img_srcs,
+        "Keys": keys,
+        "Creator Name": creator_name
+    }
+    try:
+        df = pd.DataFrame(data=data)
+        df = df.sort_values(by="Deck Dates", ascending=False)
+        new_deck_names = df["Deck Names"]
+        new_deck_warlords = df["Deck Warlords"]
+        new_deck_dates = df["Deck Dates"]
+        new_img_srcs = df["Img Srcs"]
+        new_keys = df["Keys"]
+        new_creator_name = df["Creator Name"]
+        decks_var = zip(new_deck_names, new_deck_warlords, new_deck_dates,
+                        new_img_srcs, new_keys, new_creator_name)
+        return render(request, "decks/my_liked_decks.html",
+                      {"decks": decks_var, "light_dark_toggle": light_dark_toggle})
+    except Exception as e:
+        print(e)
+    decks_var = zip(deck_names, deck_warlords, deck_dates, img_srcs, keys, creator_name)
+    return render(request, "decks/my_liked_decks.html", {"decks": decks_var, "light_dark_toggle": light_dark_toggle})
 
 
 def my_decks_page(request, page_num):

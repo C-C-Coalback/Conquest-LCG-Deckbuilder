@@ -12,6 +12,30 @@
     display: grid;
     justify-content: center;
     grid-template-columns: 300px 300px;
+    grid-template-areas:
+    "my-decks published-decks"
+    "my-published-decks my-liked-decks"
+    "create-deck create-deck"
+}
+
+#my-decks {
+    grid-area: my-decks;
+}
+
+#published-decks {
+    grid-area: published-decks;
+}
+
+#my-published-decks {
+    grid-area: my-published-decks;
+}
+
+#my-liked-decks {
+    grid-area: my-liked-decks;
+}
+
+#create-deck {
+    grid-area: create-deck;
 }
 
 .grid-item {
