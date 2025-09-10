@@ -695,7 +695,7 @@ def my_published_decks_page(request, page_num):
         df = df.sort_values(by="Deck Dates", ascending=False)
         new_deck_names = df["Deck Names"]
         if len(new_deck_names) < smallest_deck_num:
-            return render(request, "decks/mydecks.html", {"decks": decks_var, "light_dark_toggle": light_dark_toggle})
+            return render(request, "decks/my_published_decks.html", {"decks": decks_var, "light_dark_toggle": light_dark_toggle})
         if len(new_deck_names) <= largest_deck_num:
             largest_deck_num = len(new_deck_names)
         new_deck_names = new_deck_names[smallest_deck_num:largest_deck_num]
@@ -708,10 +708,10 @@ def my_published_decks_page(request, page_num):
         new_keys = df["Keys"]
         new_keys = new_keys[smallest_deck_num:largest_deck_num]
         decks_var = zip(new_deck_names, new_deck_warlords, new_deck_dates, new_img_srcs, new_keys)
-        return render(request, "decks/mydecks.html", {"decks": decks_var, "light_dark_toggle": light_dark_toggle})
+        return render(request, "decks/my_published_decks.html", {"decks": decks_var, "light_dark_toggle": light_dark_toggle})
     except Exception as e:
         print(e)
-    return render(request, "decks/mydecks.html", {"decks": decks_var, "light_dark_toggle": light_dark_toggle})
+    return render(request, "decks/my_published_decks.html", {"decks": decks_var, "light_dark_toggle": light_dark_toggle})
 
 
 def my_published_decks(request):
