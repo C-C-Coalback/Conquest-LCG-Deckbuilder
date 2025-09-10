@@ -1,5 +1,5 @@
 {% extends "base.html" %}
-{% block title %}My Decks{% endblock %}
+{% block title %}My Published Decks{% endblock %}
 {% block content %}
 {% load static %}
 <link rel="stylesheet" href="{% static 'mydecks.css' %}">
@@ -36,11 +36,11 @@
 
         function nextPage() {
             if (url_split.length == 6) {
-                location.href = "/decks/my_decks/1/";
+                location.href = "/decks/my_published_decks/1/";
             } else {
                 var number = parseInt(url_split[5]);
                 number = number + 1;
-                location = "/decks/my_decks/" + number.toString() + "/";
+                location = "/decks/my_published_decks/" + number.toString() + "/";
             }
         }
 

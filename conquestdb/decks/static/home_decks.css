@@ -4,7 +4,27 @@
     width:100%;
 }
 
-#buttons-container, #featured-container {
+.buttons-container {
+    position: relative;
+    left: 0;
+    width:100%;
+    overflow-x: auto;
+    display: grid;
+    justify-content: center;
+    grid-template-columns: 300px 300px;
+}
+
+.grid-item {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.button {
+    width: 270px;
+}
+
+#featured-container {
     position: relative;
     left: 0;
     width:100%;

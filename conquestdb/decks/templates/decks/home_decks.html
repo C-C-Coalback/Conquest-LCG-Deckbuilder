@@ -4,16 +4,17 @@
 {% load static %}
 <link rel="stylesheet" href="{% static 'home_decks.css' %}">
     <div id="main-container">
-        <div id="buttons-container">
-            <a href="/decks/my_decks/1/">
+        <div class="buttons-container">
+            <a href="/decks/my_decks/1/" class="grid-item">
                 <button class="button">View your decks</button>
             </a>
-            <div></div>
-            <a href="/decks/published_decks/1/">
+            <a href="/decks/published_decks/1/" class="grid-item">
                 <button class="button">View published decks</button>
             </a>
-            <div></div>
-            <a href="/decks/create_deck/select_warlord/">
+            <a href="/decks/my_published_decks/1/" class="grid-item">
+                <button class="button">View your published decks</button>
+            </a>
+            <a href="/decks/create_deck/select_warlord/" class="grid-item">
                 <button class="button">Create a deck</button>
             </a>
         </div>

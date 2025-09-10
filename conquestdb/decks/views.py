@@ -628,6 +628,167 @@ def my_decks_page(request, page_num):
     return render(request, "decks/mydecks.html", {"decks": decks_var, "light_dark_toggle": light_dark_toggle})
 
 
+def my_published_decks_page(request, page_num):
+    smallest_deck_num = (page_num - 1) * 10
+    largest_deck_num = page_num * 10
+    deck_names = []
+    deck_warlords = []
+    deck_dates = []
+    img_srcs = []
+    keys = []
+    decks_var = zip([], [], [], [], [])
+    username = request.user.username
+    directory = os.getcwd()
+    target_directory = directory + "/decks/publisheddecks/" + username + "/"
+    light_dark_toggle = light_dark_dict.get_light_mode(request.user.username)
+    if username:
+        if os.path.exists(target_directory):
+            for file in os.listdir(target_directory):
+                try:
+                    target_file = target_directory + file
+                    with open(target_file + "/content", "r") as f:
+                        data = f.read()
+                        split_data = data.split(sep="\n")
+                        deck_name = split_data[0]
+                        warlord_name = split_data[2]
+                        timestamp = os.path.getmtime(target_file + "/key")
+                        datestamp = datetime.datetime.fromtimestamp(timestamp)
+                        date = str(datestamp.date())
+                        deck_names.append(deck_name)
+                        deck_warlords.append(warlord_name)
+                        deck_dates.append(date)
+                        img_src = convert_name_to_img_src(warlord_name)
+                        img_srcs.append(img_src)
+                        f.close()
+                    if not os.path.exists(target_file + "/key"):
+                        num_tries = 0
+                        set_key = False
+                        while not set_key:
+                            new_key = ''.join(random.choice(
+                                string.ascii_uppercase + string.ascii_lowercase + string.digits
+                            ) for _ in range(16 + num_tries))
+                            print(new_key)
+                            if not check_if_key_in_use(new_key):
+                                with open(target_file + "/key", "w") as file:
+                                    file.write(new_key)
+                                set_key = True
+                            if num_tries > 100:
+                                with open(target_file + "/key", "w") as file:
+                                    file.write(new_key)
+                                    set_key = True
+                            num_tries += 1
+                    with open(target_file + "/key", "r") as k:
+                        data = k.read()
+                        keys.append(data)
+                except Exception as e:
+                    print(e)
+                    pass
+    data = {
+        "Deck Names": deck_names,
+        "Deck Warlords": deck_warlords,
+        "Deck Dates": deck_dates,
+        "Img Srcs": img_srcs,
+        "Keys": keys
+    }
+    try:
+        df = pd.DataFrame(data=data)
+        df = df.sort_values(by="Deck Dates", ascending=False)
+        new_deck_names = df["Deck Names"]
+        if len(new_deck_names) < smallest_deck_num:
+            return render(request, "decks/mydecks.html", {"decks": decks_var, "light_dark_toggle": light_dark_toggle})
+        if len(new_deck_names) <= largest_deck_num:
+            largest_deck_num = len(new_deck_names)
+        new_deck_names = new_deck_names[smallest_deck_num:largest_deck_num]
+        new_deck_warlords = df["Deck Warlords"]
+        new_deck_warlords = new_deck_warlords[smallest_deck_num:largest_deck_num]
+        new_deck_dates = df["Deck Dates"]
+        new_deck_dates = new_deck_dates[smallest_deck_num:largest_deck_num]
+        new_img_srcs = df["Img Srcs"]
+        new_img_srcs = new_img_srcs[smallest_deck_num:largest_deck_num]
+        new_keys = df["Keys"]
+        new_keys = new_keys[smallest_deck_num:largest_deck_num]
+        decks_var = zip(new_deck_names, new_deck_warlords, new_deck_dates, new_img_srcs, new_keys)
+        return render(request, "decks/mydecks.html", {"decks": decks_var, "light_dark_toggle": light_dark_toggle})
+    except Exception as e:
+        print(e)
+    return render(request, "decks/mydecks.html", {"decks": decks_var, "light_dark_toggle": light_dark_toggle})
+
+
+def my_published_decks(request):
+    deck_names = []
+    deck_warlords = []
+    deck_dates = []
+    img_srcs = []
+    keys = []
+    username = request.user.username
+    directory = os.getcwd()
+    target_directory = directory + "/decks/publisheddecks/" + username + "/"
+    light_dark_toggle = light_dark_dict.get_light_mode(request.user.username)
+    if username:
+        if os.path.exists(target_directory):
+            for file in os.listdir(target_directory):
+                try:
+                    target_file = target_directory + file
+                    with open(target_file + "/content", "r") as f:
+                        data = f.read()
+                        split_data = data.split(sep="\n")
+                        deck_name = split_data[0]
+                        warlord_name = split_data[2]
+                        timestamp = os.path.getmtime(target_file + "/key")
+                        datestamp = datetime.datetime.fromtimestamp(timestamp)
+                        date = str(datestamp.date())
+                        deck_names.append(deck_name)
+                        deck_warlords.append(warlord_name)
+                        deck_dates.append(date)
+                        img_src = convert_name_to_img_src(warlord_name)
+                        img_srcs.append(img_src)
+                        f.close()
+                    if not os.path.exists(target_file + "/key"):
+                        num_tries = 0
+                        set_key = False
+                        while not set_key:
+                            new_key = ''.join(random.choice(
+                                string.ascii_uppercase + string.ascii_lowercase + string.digits
+                            ) for _ in range(16 + num_tries))
+                            print(new_key)
+                            if not check_if_key_in_use(new_key):
+                                with open(target_file + "/key", "w") as file:
+                                    file.write(new_key)
+                                set_key = True
+                            if num_tries > 100:
+                                with open(target_file + "/key", "w") as file:
+                                    file.write(new_key)
+                                    set_key = True
+                            num_tries += 1
+                    with open(target_file + "/key", "r") as k:
+                        data = k.read()
+                        keys.append(data)
+                except Exception as e:
+                    print(e)
+                    pass
+    data = {
+        "Deck Names": deck_names,
+        "Deck Warlords": deck_warlords,
+        "Deck Dates": deck_dates,
+        "Img Srcs": img_srcs,
+        "Keys": keys
+    }
+    try:
+        df = pd.DataFrame(data=data)
+        df = df.sort_values(by="Deck Dates", ascending=False)
+        new_deck_names = df["Deck Names"]
+        new_deck_warlords = df["Deck Warlords"]
+        new_deck_dates = df["Deck Dates"]
+        new_img_srcs = df["Img Srcs"]
+        new_keys = df["Keys"]
+        decks_var = zip(new_deck_names, new_deck_warlords, new_deck_dates, new_img_srcs, new_keys)
+        return render(request, "decks/my_published_decks.html", {"decks": decks_var, "light_dark_toggle": light_dark_toggle})
+    except Exception as e:
+        print(e)
+    decks_var = zip(deck_names, deck_warlords, deck_dates, img_srcs, keys)
+    return render(request, "decks/my_published_decks.html", {"decks": decks_var, "light_dark_toggle": light_dark_toggle})
+
+
 def my_decks(request):
     deck_names = []
     deck_warlords = []
