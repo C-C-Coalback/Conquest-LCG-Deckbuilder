@@ -131,7 +131,7 @@
                     deck_date = stored_deck_dates[current_page_number][i];
                     img_src = stored_image_srcs[current_page_number][i];
                     deck_key = stored_deck_keys[current_page_number][i];
-                    new_string += `<div class="border-right border-left border-top item-in-grid">`
+                    new_string += `<div class="border-right border-left border-top border-bottom item-in-grid">`
                     new_string += `<a href=`
                     new_string += deck_link;
                     new_string += `>`;
@@ -153,7 +153,7 @@
                     new_string += `">`;
                     new_string += `</div>`;
                     new_string += `</a>`;
-                    new_string += `<div class="center border-bottom">`;
+                    new_string += `<div class="center">`;
                     new_string += `<p>Deck Key: `
                     new_string += deck_key;
                     new_string += `</p>`
@@ -195,7 +195,7 @@
                     deck_date = stored_deck_dates[current_page_number][i];
                     img_src = stored_image_srcs[current_page_number][i];
                     deck_key = stored_deck_keys[current_page_number][i];
-                    new_string += `<div class="border-right border-left border-top item-in-grid">`
+                    new_string += `<div class="border-right border-left border-top border-bottom item-in-grid">`
                     new_string += `<a href=`
                     new_string += deck_link;
                     new_string += `>`;
@@ -217,7 +217,7 @@
                     new_string += `">`;
                     new_string += `</div>`;
                     new_string += `</a>`;
-                    new_string += `<div class="center border-bottom">`;
+                    new_string += `<div class="center">`;
                     new_string += `<p>Deck Key: `
                     new_string += deck_key;
                     new_string += `</p>`
@@ -316,7 +316,7 @@
                             img_src = img_srcs[i];
                             stored_image_srcs[pageCount].push(img_src);
                             if (pageCount === 0) {
-                                new_string += `<div class="border-right border-left border-top item-in-grid">`
+                                new_string += `<div class="border-right border-left border-top border-bottom item-in-grid">`
                                 new_string += `<a href=`
                                 new_string += deck_link;
                                 new_string += `>`;
@@ -338,7 +338,7 @@
                                 new_string += `">`;
                                 new_string += `</div>`;
                                 new_string += `</a>`;
-                                new_string += `<div class="center border-bottom">`;
+                                new_string += `<div class="center">`;
                                 new_string += `<p>Deck Key: `
                                 new_string += deck_key;
                                 new_string += `</p>`
