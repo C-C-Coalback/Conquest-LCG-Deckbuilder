@@ -71,7 +71,7 @@
     display:flex;
     flex-direction:row;
     flex-wrap: wrap;
-    max-width: 1300px;
+    max-width: 1500px;
     justify-content:center;
 }
 
@@ -81,7 +81,7 @@
     display:flex;
     flex-direction:row;
     flex-wrap: wrap;
-    max-width: 1000px;
+    max-width: 1200px;
     justify-content:center;
 }
 
@@ -90,7 +90,7 @@
     display:flex;
     flex-direction:row;
     flex-wrap: wrap;
-    max-width: 1000px;
+    max-width: 1200px;
     justify-content:center;
     gap: 20px;
 }
@@ -105,6 +105,10 @@
     grid-template-areas:
     "p-deck-name search p-creator creator"
     "p-faction faction p-warlord warlord";
+}
+
+.item-in-grid {
+    width: 250px;
 }
 
 #deck-counts-pages {
@@ -176,17 +180,6 @@
     height: 168px;
 }
 
-.deck-item-grid {
-    width: 400px;
-    height: auto;
-    display: grid;
-    grid-template-columns: 280px 120px;
-    grid-template-areas:
-    "deck-name warlord-card"
-    "creator-name warlord-card"
-    "warlord-name warlord-card"
-    "date warlord-card";
-}
 
 .decklist-name {
     grid-area: deck-name;
