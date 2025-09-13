@@ -116,7 +116,24 @@
     "min-attack min-attack-entry max-attack max-attack-entry"
     "min-health min-health-entry max-health max-health-entry"
     "p-cycle cycle p-war-pack war-pack"
+    "p-keyword keyword p-sector sector"
     "p-order order p-asc-desc asc-desc";
+}
+
+#p-keyword {
+    grid-area: p-keyword;
+}
+
+#keywordInput {
+    grid-area: keyword;
+}
+
+#p-sector {
+    grid-area: p-sector;
+}
+
+#sector {
+    grid-area: sector;
 }
 
 #card-counts-pages {

@@ -9,7 +9,7 @@
         <form id="myForm">
             <div class="ranges-grid">
                 <p id="p-card-name">Card Name:</p><input id="searchInput" type="text" name="search">
-                <p id="p-traits">Traits/Sector:</p><input id="traitsInput" type="text" name="traits">
+                <p id="p-traits">Traits:</p><input id="traitsInput" type="text" name="traits">
                 <p id="p-card-type">Card Type:</p><select name="card-type" id="cardType">
                         <option value="None"></option>
                         <option value="Army">Army</option>
@@ -67,6 +67,35 @@
                             <option value="{{ cycle_name }}">{{ cycle_name }}</option>
                         {% endfor %}
                     </select>
+                <p id="p-keyword" class="filter">Keyword or Specialization:</p><select name="keyword" class="filter" id="keywordInput">
+                    <option value="None"></option>
+                    <option value="No Attachments">No Attachments</option>
+                    <option value="No Wargear Attachments">No Wargear Attachments</option>
+                    <option value="Armorbane">Armorbane</option>
+                    <option value="Brutal">Brutal</option>
+                    <option value="Limited">Limited</option>
+                    <option value="Flying">Flying</option>
+                    <option value="Area Effect">Area Effect</option>
+                    <option value="Ranged">Ranged</option>
+                    <option value="Ambush">Ambush</option>
+                    <option value="Deep Strike">Deep Strike</option>
+                    <option value="Lumbering">Lumbering</option>
+                    <option value="Sweep">Sweep</option>
+                    <option value="Retaliate">Retaliate</option>
+                    <option value="Hive Mind">Hive Mind</option>
+                    <option value="Unstoppable">Unstoppable</option>
+                    <option value="Goes Fasta">Goes Fasta!</option>
+                    <option value="Bloodthirst">Bloodthirst</option>
+                </select>
+                <p id="p-sector" class="filter">Sector: (if planet)</p><select name="sector" class="filter" id="sector">
+                    <option value=""></option>
+                    <option value="Traxis">Traxis</option>
+                    <option value="Gardis">Gardis</option>
+                    <option value="Veros">Veros</option>
+                    <option value="The Breach">The Breach</option>
+                    <option value="Nepthis">Nepthis</option>
+                    <option value="Sargos">Sargos</option>
+                </select>
                 <p id="p-order" class="filter">Order By:</p><select name="order" class="filter" id="order">
                     <option value="None"></option>
                     <option value="Name">Name</option>
@@ -243,7 +272,8 @@
                         'shields': $('#shields').val(),
                         'min-cost': $('#minCost').val(),
                         'max-cost': $('#maxCost').val(),
-                        'keyword': "None",
+                        'keyword': $('#keywordInput').val(),
+                        'sector': $('#sector').val(),
                         'min-command': $('#minCommand').val(),
                         'max-command': $('#maxCommand').val(),
                         'min-attack': $('#minAttack').val(),
