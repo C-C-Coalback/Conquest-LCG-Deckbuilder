@@ -70,6 +70,8 @@ banned_cards = ["Bonesinger Choir", "Squiggoth Brute", "Corrupted Teleportarium"
                 "Crypt of Saint Camila", "Warpstorm"]
 warpacks_list = []
 cycles_list = []
+lower_case_dict = {}
+lower_case_planet_dict = {}
 for i in range(len(card_array)):
     if card_array[i].war_pack not in warpacks_list:
         warpacks_list.append(card_array[i].war_pack)
@@ -78,9 +80,11 @@ for i in range(len(card_array)):
 for key in range(len(card_array)):
     cards_dict[card_array[key].name] = card_array[key]
     images_dict[card_array[key].image_name] = card_array[key]
+    lower_case_dict[card_array[key].name.lower()] = card_array[key]
 for key in range(len(planet_array)):
     planets_dict[planet_array[key].name] = planet_array[key]
     images_dict[planet_array[key].image_name] = planet_array[key]
+    lower_case_planet_dict[planet_array[key].name.lower()] = planet_array[key]
 for key in range(len(apoka_errata_array)):
     apoka_errata_dict[apoka_errata_array[key].image_name] = apoka_errata_array[key]
 
@@ -100,6 +104,13 @@ def ajax_view(request):
         card_names = []
         search = request.POST.get('search')
         redirect_enabled = request.POST.get('redirect-enabled')
+        if search.islower():
+            if search in lower_case_dict and redirect_enabled == "Yes":
+                image_name = lower_case_dict[search].image_name
+                return JsonResponse({'message': "REDIRECT", 'cards': card_names, 'image_names': [image_name]})
+            elif search in lower_case_planet_dict and redirect_enabled == "Yes":
+                image_name = lower_case_planet_dict[search].image_name
+                return JsonResponse({'message': "REDIRECT", 'cards': card_names, 'image_names': [image_name]})
         if search in cards_dict and redirect_enabled == "Yes":
             image_name = cards_dict[search].image_name
             return JsonResponse({'message': "REDIRECT", 'cards': card_names, 'image_names': [image_name]})
@@ -116,7 +127,10 @@ def ajax_view(request):
         warpack = request.POST.get('war-pack')
         if card_type == "Planet" and view_as != "Rows Mini":
             filtered_df = planet_df
-            filtered_df = filtered_df[filtered_df['name'].str.contains(search)]
+            if search.islower():
+                filtered_df = filtered_df[filtered_df['name'].str.contains("(?i)" + search)]
+            else:
+                filtered_df = filtered_df[filtered_df['name'].str.contains(search)]
             sector = request.POST.get('sector')
             filtered_df = filtered_df[filtered_df['sector'].str.contains(sector)]
             card_names = filtered_df['name'].to_list()
@@ -247,7 +261,13 @@ def ajax_view(request):
         if traits:
             filtered_df = filtered_df[filtered_df['traits'].str.contains(traits)]
         if search is not None:
-            filtered_df = filtered_df[filtered_df['name'].str.contains(search)]
+            if search.islower():
+                try:
+                    filtered_df = filtered_df[filtered_df['name'].str.contains("(?i)" + search)]
+                except Exception as e:
+                    print(e)
+            else:
+                filtered_df = filtered_df[filtered_df['name'].str.contains(search)]
         if keyword_card != "None":
             filtered_df = filtered_df[filtered_df['keywords'].str.contains(keyword_card)]
         if cycle:
