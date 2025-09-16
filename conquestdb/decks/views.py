@@ -33,11 +33,19 @@ for key in range(len(apoka_errata_array)):
     apoka_errata_dict[apoka_errata_array[key].image_name] = apoka_errata_array[key]
 pledges_array = []
 warlords_list = []
+traits_list = []
 for i in range(len(card_array)):
     if card_array[i].check_for_a_trait("Pledge"):
         pledges_array.append(card_array[i].get_name())
     if card_array[i].get_card_type() == "Warlord":
         warlords_list.append(card_array[i].get_name())
+    traits = card_array[i].get_traits()
+    traits_split = traits.split(sep=". ")
+    for trait in traits_split:
+        cleaned_trait = trait.replace(".", "")
+        if cleaned_trait not in traits_list:
+            traits_list.append(cleaned_trait)
+traits_list.sort()
 temp_cwd = os.getcwd()
 target_dir_temp = temp_cwd + "/decks/publisheddecks/"
 os.makedirs(target_dir_temp, exist_ok=True)
@@ -1048,11 +1056,13 @@ def modify_deck(request, deck_key):
     if data:
         return render(request, "decks/createdeck.html", {"edit": "T", "data": data, "desc": desc,
                                                          "auto_complete": card_names_array,
+                                                         "traits_list": traits_list,
                                                          "warlord_name": "", "warlord_sig": [],
                                                          "warlord_src": "",
                                                          "light_dark_toggle": light_dark_toggle})
     return render(request, "decks/createdeck.html", {"edit": "F", "data": "", "desc": "",
                                                      "auto_complete": card_names_array,
+                                                     "traits_list": traits_list,
                                                      "warlord_name": "", "warlord_sig": [],
                                                      "warlord_src": "",
                                                      "light_dark_toggle": light_dark_toggle})
@@ -1062,6 +1072,7 @@ def create_deck(request):
     light_dark_toggle = light_dark_dict.get_light_mode(request.user.username)
     return render(request, "decks/createdeck.html", {"edit": "F", "data": "", "desc": "",
                                                      "auto_complete": card_names_array,
+                                                     "traits_list": traits_list,
                                                      "warlord_name": "", "warlord_sig": [],
                                                      "warlord_src": "",
                                                      "light_dark_toggle": light_dark_toggle})
@@ -1079,6 +1090,7 @@ def create_deck_with_warlord(request, warlord_name):
                 warlord_src = convert_name_to_img_src(actual_name)
                 return render(request, "decks/createdeck.html", {"edit": "F", "data": "", "desc": "",
                                                                  "auto_complete": card_names_array,
+                                                                 "traits_list": traits_list,
                                                                  "warlord_name": warlord_name,
                                                                  "warlord_sig": warlord_sig,
                                                                  "warlord_src": warlord_faction,
@@ -1087,6 +1099,7 @@ def create_deck_with_warlord(request, warlord_name):
         print(e)
     return render(request, "decks/createdeck.html", {"edit": "F", "data": "", "desc": "",
                                                      "auto_complete": card_names_array,
+                                                     "traits_list": traits_list,
                                                      "warlord_name": "", "warlord_sig": [],
                                                      "warlord_src": "",
                                                      "light_dark_toggle": light_dark_toggle})

@@ -9,6 +9,11 @@
         <option value="{{ card_name }}"></option>
     {% endfor %}
 </datalist>
+<datalist id="traitsList">
+    {% for trait in traits_list %}
+        <option value="{{ trait }}"></option>
+    {% endfor %}
+</datalist>
 <div id="deck-container">
     <input id="toggle-position-type-deck" type="button" value="Lock Deck" onclick="makeDeckSticky(this);">
     <div class="auto-deck-build">
@@ -100,7 +105,7 @@
                     <option value="2">2</option>
                     <option value="3">3</option>
                 </select>
-                <p id="p-traits" class="filter">Trait:</p><input id="traitsInput" class="filter" type="text" name="traits">
+                <p id="p-traits" class="filter">Trait:</p><input id="traitsInput" list="traitsList" autocomplete="off" class="filter" type="text" name="traits">
                 <p id="p-order" class="filter">Order By:</p><select name="order" class="filter" id="order">
                     <option value="None"></option>
                     <option value="Name">Name</option>

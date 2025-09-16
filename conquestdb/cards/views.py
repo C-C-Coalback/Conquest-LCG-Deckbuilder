@@ -70,6 +70,7 @@ banned_cards = ["Bonesinger Choir", "Squiggoth Brute", "Corrupted Teleportarium"
                 "Crypt of Saint Camila", "Warpstorm"]
 warpacks_list = []
 cycles_list = []
+traits_list = []
 lower_case_dict = {}
 lower_case_planet_dict = {}
 for i in range(len(card_array)):
@@ -77,6 +78,13 @@ for i in range(len(card_array)):
         warpacks_list.append(card_array[i].war_pack)
     if card_array[i].cycle not in cycles_list:
         cycles_list.append(card_array[i].cycle)
+    traits = card_array[i].get_traits()
+    traits_split = traits.split(sep=". ")
+    for trait in traits_split:
+        cleaned_trait = trait.replace(".", "")
+        if cleaned_trait not in traits_list:
+            traits_list.append(cleaned_trait)
+traits_list.sort()
 for key in range(len(card_array)):
     cards_dict[card_array[key].name] = card_array[key]
     images_dict[card_array[key].image_name] = card_array[key]
@@ -94,8 +102,10 @@ planet_df = pd.DataFrame([x.as_dict() for x in planet_array])
 
 def index(request):
     light_dark_toggle = light_dark_dict.get_light_mode(request.user.username)
-    return render(request, 'cards/index.html', {"light_dark_toggle": light_dark_toggle,
-                                                "cycles_list": cycles_list, "warpacks_list": warpacks_list})
+    return render(request, 'cards/index.html', {
+        "light_dark_toggle": light_dark_toggle, "cycles_list": cycles_list, "warpacks_list": warpacks_list,
+        "traits_list": traits_list
+    })
 
 
 # View to handle the Ajax request

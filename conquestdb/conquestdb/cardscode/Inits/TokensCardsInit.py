@@ -11,6 +11,6 @@ def tokens_cards_init():
                                                cycle_info="Core Set"),
                          CardClasses.TokenCard("Khymera", "No Attachments.", "Creature.", "Dark Eldar", 2, 1,
                                                no_attachments=True, cycle_info="Core Set"),
-                         CardClasses.TokenCard("Termagant", "", " Creature. Termagant.", "Tyranids", 1, 1,
+                         CardClasses.TokenCard("Termagant", "", "Creature. Termagant.", "Tyranids", 1, 1,
                                                cycle_info="The Great Devourer")]
     return tokens_card_array
