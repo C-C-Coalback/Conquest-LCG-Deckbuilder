@@ -105,7 +105,7 @@
                     <option value="None"></option>
                     <option value="Name">Name</option>
                     <option value="Card Type">Card Type</option>
-                    <option value="COST">COST</option>
+                    <option value="COST">Cost</option>
                     <option value="Attack">ATK</option>
                     <option value="Health">HP</option>
                     <option value="Command">Command</option>
@@ -128,10 +128,12 @@
             </div>
         </form>
     </div>
-    <div id="cardBinder">
+    <div id="cardBinderContainer">
         <input id="prev-page" type="button" value="previous" onclick="previousPage();">
-        <div id="responseMessage">
-            <div class="page" id="page"></div>
+        <div id="cardBinder">
+            <div id="responseMessage">
+                <div class="page" id="page"></div>
+            </div>
         </div>
         <input id="next-page" type="button" value="next" onclick="nextPage();">
     </div>
