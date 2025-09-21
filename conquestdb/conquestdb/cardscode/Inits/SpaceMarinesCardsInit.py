@@ -441,7 +441,7 @@ def space_marines_cards_init():
                                                        "this turn, prevent 1 of that damage and this unit gains "
                                                        "Retaliate (2) until the end of the phase.",
                              "Soldier. Black Templars.", 3, faction, "Loyal", 2, 3, 1, False, sweep=1,
-                             war_pack_info="The Shadow in the Warp"),
+                             war_pack_info="The Shadow in the Warp", unstoppable=True),
         CardClasses.ArmyCard("First Line Rhinos", "No Wargear Attachments.\n"
                                                   "Reaction: After you deploy this unit, Rally 6 a non-Vehicle "
                                                   "Space Marines unit with printed cost 3 or lower, attach it to "
