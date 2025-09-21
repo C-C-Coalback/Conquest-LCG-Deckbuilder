@@ -51,6 +51,7 @@
 
 .button {
     width: 270px;
+    min-height: 70px;
 }
 
 #featured-container {

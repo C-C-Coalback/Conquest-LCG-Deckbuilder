@@ -48,3 +48,7 @@ and navigate to "http://127.0.0.1:8000/" in your browser
 
 Replace "py"s with "python" or "python3" if needed.
 You should really probably be installing the requirements in a virtual environment but that is not necessary so is left as an exercise to the reader.
+
+# Additional credits
+
+Venite Adoremus font by Chequered Ink. https://www.dafont.com/venite-adoremus.font

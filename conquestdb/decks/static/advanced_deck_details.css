@@ -38,12 +38,11 @@
 
 #pie-chart-container {
     grid-area: pie-chart-container;
-    justify-content: center;
 }
 
 #cost-chart-container {
     grid-area: bar-chart-container;
-    justify-content: center;
+    margin-top: 150px;
 }
 
 #main-deck-info {
@@ -190,6 +189,7 @@
 .grid-section {
     overflow-y: auto;
     max-height: 330px;
+    border: 1px black dashed;
 }
 
 .non-max-grid-section {
@@ -204,6 +204,7 @@
 
 #factions {
     grid-area: factions;
+    border: none;
 }
 
 .large-grid-section {

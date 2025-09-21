@@ -2,25 +2,50 @@ body {
     background-color: #282626;
 }
 
+@font-face {
+    font-family: fontVenite;
+    src: url('fonts/venite_adoremus/Venite Adoremus Straight.otf');
+}
+
+footer {
+    font-family: fontVenite, Arial, sans-serif;
+}
+
+input {
+    font-family: fontVenite, Arial, sans-serif;
+}
+
+select {
+  font-family: fontVenite, Arial, sans-serif;
+}
+
+li {
+    font-family: fontVenite, Arial, sans-serif;
+}
+
+button {
+    font-family: fontVenite, Arial, sans-serif;
+}
+
 p {
-    font-family: Arial, sans-serif;
+    font-family: fontVenite, Arial, sans-serif;
     color: white;
 }
 
 div {
-    font-family: Arial, sans-serif;
+    font-family: fontVenite, Arial, sans-serif;
     color: white;
 }
 
 h1 {
-    font-family: Arial, sans-serif;
+    font-family: fontVenite, Arial, sans-serif;
     color: white;
 }
 h2 {
-    font-family: Arial, sans-serif;
+    font-family: fontVenite, Arial, sans-serif;
     color: white;
 }
 h3 {
-    font-family: Arial, sans-serif;
+    font-family: fontVenite, Arial, sans-serif;
     color: white;
 }

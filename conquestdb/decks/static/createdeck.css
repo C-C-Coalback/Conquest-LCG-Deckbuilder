@@ -170,19 +170,20 @@
 }
 
 .mini-card-name, .mini-card-faction {
-    width: max(14.40vw, 188px);
+    width: max(14.40vw, 25%);
 }
 
 .mini-card-type, .mini-card-loyalty {
     text-align: center;
     vertical-align: middle;
-    width: max(7.20vw, 94px);
+    width: max(7.20vw, 20%);
+    word-wrap: break-word;
 }
 
 .mini-card-cost, .mini-card-attack, .mini-card-health, .mini-card-command, .mini-card-shield {
     text-align: center;
     vertical-align: middle;
-    width: max(3.68vw, 48px);
+    width: max(3.68vw, 10%);
 }
 
 #description-container {
@@ -192,12 +193,11 @@
 }
 
 .filter {
-    width: 10vw;
+
 }
 
 #card-filter-results {
     cursor: pointer;
-    width:max(42vw, 550px);;
     border: 2px solid blue;
     overflow: hidden;
     background: rgba(47, 40, 153, 0.6);
@@ -232,12 +232,12 @@
 
 #clear-filter {
     position: relative;
-    left: max(10.43vw, 180px);
+    left: 30%;
     border: none;
     background-color: red;
     color: white;
     padding: 15px 32px;
-    width: max(19.2vw, 200px);
+    width: 40%;
     text-align: center;
     text-decoration: none;
     display: inline-block;
@@ -276,6 +276,7 @@
     text-align: center;
     padding: 5px 0;
     border-radius: 6px;
+    font-family: Arial, sans-serif;
 
     position: absolute;
     z-index: 1;
@@ -310,12 +311,12 @@
 
 #send-filter {
     position: relative;
-    left: max(10.43vw, 180px);
+    left: 30%;
     border: none;
     background-color: green;
     color: white;
     padding: 15px 32px;
-    width: max(19.2vw, 200px);
+    width: 40%;
     text-align: center;
     text-decoration: none;
     display: inline-block;
@@ -325,10 +326,9 @@
 }
 
 #filters-container {
-    width: 25vw;
     height: auto;
     display: grid;
-    grid-template-columns: max(10vw, 130px) max(11vw, 144px) max(10vw, 130px) max(10vw, 144px);
+    grid-template-columns: auto auto auto auto;
     grid-template-areas:
     "p-card-name search p-keyword keyword"
     "p-faction faction p-loyalty loyalty"

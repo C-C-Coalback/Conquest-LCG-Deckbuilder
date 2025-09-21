@@ -2,16 +2,22 @@
     position: relative;
     margin-top: 50px;
     left: 0;
-    width:max(1100px, 100%);
     overflow-x: auto;
     display: flex;
     justify-content: center;
+}
+
+#deck-header-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
 #factions-box {
     width:100%;
     display: flex;
     justify-content: center;
+    border: none;
 }
 
 #description-area {
@@ -95,11 +101,11 @@
 }
 
 #large-grid {
-    width: 1000px;
+    width: 1400px;
     height: 1010px;
     display: grid;
     grid-row-gap: 1px;
-    grid-template-columns: 200px 300px 500px;
+    grid-template-columns: 200px 300px 900px;
     grid-template-rows: 333px 333px 333px;
     grid-template-areas:
     "synapse warlord deck-grid"
@@ -125,13 +131,13 @@ a:active {
 
 #deck-grid {
     grid-area: deck-grid;
-    width: 500px;
+    width: 800px;
     height: 1000px;
     border: 5px solid green;
     background: #808080;
     display: grid;
     grid-row-gap: 1px;
-    grid-template-columns: 250px 250px;
+    grid-template-columns: 400px 400px;
     grid-template-rows: 333px 333px 333px;
     grid-template-areas:
     "sig_cards support_cards"
@@ -167,6 +173,7 @@ a:active {
 .grid-section {
     overflow-y: auto;
     max-height: 330px;
+    border: 1px black dashed;
 }
 
 .non-max-grid-section {
@@ -247,6 +254,7 @@ a:active {
 
 #like-area {
     display: flex;
+    justify-content: center;
 }
 
 .comment-name > p {
