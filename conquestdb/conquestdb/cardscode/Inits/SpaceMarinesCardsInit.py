@@ -32,7 +32,7 @@ def space_marines_cards_init():
                                                                  "Attached unit gets +1 ATK "
                                                                  "and gains Armorbane. (Shield "
                                                                  "cards cannot be used while "
-                                                                 "this unit is attacking.",
+                                                                 "this unit is attacking.)",
                                    "Relic. Weapon.", 1, faction, "Signature", 3, True,
                                    unit_must_be_unique=True, extra_attack=1, cycle_info="Core Set"),
         CardClasses.ArmyCard("10th Company Scout", "", "Scout. Ultramarines.", 1, faction,
