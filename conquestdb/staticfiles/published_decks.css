@@ -65,7 +65,7 @@
 .deck-item-grid {
     width: 400px;
     height: auto;
-    min-height: 250px;
+    min-height: 300px;
     display: grid;
     grid-template-columns: 280px 120px;
     grid-template-areas:
