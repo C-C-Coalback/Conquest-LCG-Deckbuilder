@@ -8,44 +8,46 @@ body {
 }
 
 footer {
-    font-family: fontVenite, Arial, sans-serif;
+    font-family: Arial, sans-serif;
 }
 
 input {
-    font-family: fontVenite, Arial, sans-serif;
+    font-family: Arial, sans-serif;
 }
 
 select {
-  font-family: fontVenite, Arial, sans-serif;
+  font-family: Arial, sans-serif;
 }
 
 li {
-    font-family: fontVenite, Arial, sans-serif;
+    font-family: Arial, sans-serif;
 }
 
 button {
-    font-family: fontVenite, Arial, sans-serif;
+    font-family: Arial, sans-serif;
 }
 
 p {
-    font-family: fontVenite, Arial, sans-serif;
+    font-family: Arial, sans-serif;
     color: white;
 }
 
 div {
-    font-family: fontVenite, Arial, sans-serif;
+    font-family: Arial, sans-serif;
     color: white;
 }
 
 h1 {
-    font-family: fontVenite, Arial, sans-serif;
+    font-family: Arial, sans-serif;
     color: white;
 }
+
 h2 {
-    font-family: fontVenite, Arial, sans-serif;
+    font-family: Arial, sans-serif;
     color: white;
 }
+
 h3 {
-    font-family: fontVenite, Arial, sans-serif;
+    font-family: Arial, sans-serif;
     color: white;
 }
