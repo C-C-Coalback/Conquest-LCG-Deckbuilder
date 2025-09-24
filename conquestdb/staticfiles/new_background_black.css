@@ -2,6 +2,14 @@ body {
     background-color: #282626;
 }
 
+.navi-user-profile-link {
+  display: inline;
+  color: white;
+  text-align: center;
+  padding: 0px;
+  text-decoration: none;
+}
+
 @font-face {
     font-family: fontVenite;
     src: url('fonts/venite_adoremus/Venite Adoremus Straight.otf');
