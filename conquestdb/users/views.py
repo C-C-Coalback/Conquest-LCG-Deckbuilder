@@ -289,8 +289,6 @@ def own_user(request):
         favorite_warlords = determine_favorite_warlords_private(username)
         num_entries = len(favorite_warlords)
         sent_warlords = []
-        print(favorite_warlords)
-        print(num_entries)
         warlord_names = []
         try:
             warlord_names = nlargest(min(num_entries, 3), favorite_warlords, key=favorite_warlords.get)
