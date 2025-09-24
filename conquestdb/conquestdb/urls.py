@@ -27,6 +27,7 @@ urlpatterns = [
     path("accounts/", include("accounts.urls")),
     path("cards/", include("cards.urls")),
     path("decks/", include("decks.urls")),
+    path("users/", include("users.urls")),
     path("api/", include("api.urls")),
     path('simple_upload/', views.simple_upload, name='simple_upload'),
     path("", views.home_page, name="home"),

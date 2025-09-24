@@ -1,0 +1,119 @@
+#user-profile-main {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+}
+
+#main-user-page-layout-grid {
+    width: 800px;
+    height: auto;
+    display: grid;
+    grid-row-gap: 1px;
+    grid-template-columns: 400px 40px 400px;
+    grid-template-rows: 400px auto auto auto;
+    grid-template-areas:
+    "profile-picture gap recent-deck"
+    "username gap faction-distribution"
+    "bio gap faction-distribution"
+    "bio gap top-three-warlords";
+}
+
+.faction-dist-item {
+    display: grid;
+    grid-row-gap: 1px;
+    grid-template-columns: 200px 200px;
+}
+
+.large-avatar {
+    width: 400px;
+    height: 400px;
+}
+
+#profile-picture-large {
+    grid-area: profile-picture;
+}
+
+#recent-deck {
+    grid-area: recent-deck;
+}
+
+.deck-item-grid {
+    width: 400px;
+    height: auto;
+    border: 5px solid green;
+    display: grid;
+    grid-template-columns: 280px 120px;
+    grid-template-areas:
+    "deck-name warlord-card"
+    "creator-name warlord-card"
+    "warlord-name warlord-card"
+    "date warlord-card";
+}
+
+.preview-image {
+    width: 120px;
+    height: 168px;
+}
+
+.decklist-name {
+    grid-area: deck-name;
+}
+
+.creator-name {
+    grid-area: creator-name;
+}
+
+.warlord-name {
+    grid-area: warlord-name;
+}
+
+.date {
+    grid-area: date;
+}
+
+.preview-image {
+    grid-area: warlord-card;
+}
+
+a:link {
+      text-decoration: none;
+}
+
+a:visited {
+      text-decoration: none;
+}
+
+a:hover {
+      text-decoration: none;
+}
+
+a:active {
+      text-decoration: none;
+}
+
+#username {
+    grid-area: username;
+}
+
+#faction-distribution {
+    grid-area: faction-distribution;
+}
+
+#top-three-warlords {
+    grid-area: top-three-warlords;
+}
+
+#warlords-container {
+    display: flex;
+    gap: 10px;
+}
+
+.warlord-favorite-name {
+    width: 133px;
+    height: 60px;
+}
+
+#bio {
+    grid-area: bio;
+}

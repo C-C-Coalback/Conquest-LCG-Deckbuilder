@@ -123,7 +123,7 @@
         <div class="comment-class">
             <div class="comment-name">
                 <img class="comment-avatar" src="/media/{{ name }}.jpg" onerror="this.onerror=null; this.src='/static/images/defaultprofile.jpg'">
-                <p>{{ name }}<br>{{ time }}</p>
+                <p><a href="/users/{{ name }}/">{{ name }}</a><br>{{ time }}</p>
             </div>
             <h3 class="comment-content"> {{ text|linebreaks }}</h3>
             {% if user.username == name %}

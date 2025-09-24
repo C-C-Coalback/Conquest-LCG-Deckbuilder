@@ -42,6 +42,14 @@ li a {
   text-decoration: none;
 }
 
+.navi-user-profile-link {
+  display: inline;
+  color: black;
+  text-align: center;
+  padding: 0px;
+  text-decoration: none;
+}
+
 body {
     background-size: cover;
 }

@@ -1,0 +1,64 @@
+{% extends "base.html" %}
+{% block title %}My Page{% endblock %}
+{% block content %}
+
+{% load static %}
+<link rel="stylesheet" href="{% static 'user_page.css' %}">
+<div id="user-profile-main">
+{% if user_exists == "No" %}
+    <h1>User does not exist</h1>
+{% else %}
+    <h1>{{ target_user }}'s profile</h1>
+    <div id="main-user-page-layout-grid">
+        <div id="profile-picture-large">
+            <img class="large-avatar" src="/media/{{ target_user }}.jpg" onerror="this.onerror=null; this.src='/static/images/defaultprofile.jpg'">
+        </div>
+        <div id="username">
+            <h4>{{ target_user }}</h4>
+        </div>
+        <div id="recent-deck">
+            {% if decks_exist == "Yes" %}
+                <h3>Recent Deck</h3>
+                {% for name, warlord_name, date, img_src, key, creator_name in decks %}
+                    <a href="/decks/{{ creator_name }}/{{ key }}">
+                    <div class="deck-item-grid">
+                        <h3 class="decklist-name">{{ name }}</h3>
+                        <h3 class="creator-name">{{ creator_name }}</h3>
+                        <h3 class="warlord-name">{{ warlord_name }}</h3>
+                        <h3 class="date">{{ date }}</h3>
+                        <img class="preview-image" src="{{ img_src }}">
+                    </div>
+                    </a>
+                {% endfor %}
+            {% else %}
+
+            {% endif %}
+        </div>
+        <div id="faction-distribution">
+            <h3>Faction distribution</h3>
+            {% for faction, percentage in factions %}
+                <div class="faction-dist-item">
+                    <p>{{ faction }}:</p><p>{{ percentage }}</p>
+                </div>
+            {% endfor %}
+        </div>
+        {% if decks_exist == "Yes" %}
+            <div id="top-three-warlords">
+                <h3>Favorite warlords</h3>
+                <div id="warlords-container">
+                    {% for warlord_name, warlord_src, warlord_link in warlords %}
+                        <div class="warlord-item">
+                            <p class="warlord-favorite-name">{{ warlord_name }}</p>
+                            <a href="{{ warlord_link }}">
+                                <img class="preview-image" src="{{ warlord_src }}">
+                            </a>
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
+        {% endif %}
+    </div>
+{% endif %}
+</div>
+
+{% endblock %}
