@@ -33,3 +33,13 @@ def simple_upload(request):
 def home_page(request):
     light_dark_toggle = light_dark_dict.get_light_mode(request.user.username)
     return render(request, "home.html", {"light_dark_toggle": light_dark_toggle})
+
+
+def play_formats_page(request):
+    light_dark_toggle = light_dark_dict.get_light_mode(request.user.username)
+    return render(request, "play_formats.html", {"light_dark_toggle": light_dark_toggle})
+
+
+def ban_lists_page(request):
+    light_dark_toggle = light_dark_dict.get_light_mode(request.user.username)
+    return render(request, "ban_lists.html", {"light_dark_toggle": light_dark_toggle})

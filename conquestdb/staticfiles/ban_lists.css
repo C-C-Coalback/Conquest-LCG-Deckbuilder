@@ -1,0 +1,22 @@
+h1 {
+    word-wrap: break-word;
+}
+
+p {
+    word-wrap: break-word;
+}
+
+.ban-list-image {
+    height: 512px;
+    width: 366px;
+}
+
+.ban-list-images-box {
+    display: flex;
+    margin-left:auto;
+    margin-right:auto;
+    gap: 20px;
+    justify-content: center;
+    flex-direction: row;
+    flex-wrap: wrap;
+}

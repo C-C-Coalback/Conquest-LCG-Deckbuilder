@@ -1,0 +1,64 @@
+{% extends "base.html" %}
+
+{% block content %}
+{% load static %}
+<link rel="stylesheet" href="{% static 'ban_lists.css' %}">
+<style>
+  .home-box {
+    top: 80px;
+    margin-left:auto;
+    margin-right:auto;
+    width: 30vw;
+    height: auto;
+    padding: 2px;
+    {% if light_dark_toggle %}
+    background-color: lightblue;
+    opacity:0.8;
+    {% else %}
+    background-color: rgba(0, 0, 139, 0.8);
+    {% endif %}
+    border: 2px solid blue;
+    margin-bottom: 100px;
+  }
+</style>
+<div class="main-box-banlist-page">
+  <div class="home-box">
+    <h3>Ban Lists</h3>
+    <p>Cards are banned using "Cycle." cards. These cards are shown at the bottom of this page.</p>
+    <p>First Dawn bans the following cards: <a href="/cards/Bonesinger_Choir/">Bonesinger Choir</a> (Eldar), <a href="/cards/Squiggoth_Brute/">Squiggoth Brute</a> (Orks), <a href="/cards/Corrupted_Teleportarium/">Corrupted Teleportarium</a> (Chaos), <a href="/cards/Archon's_Palace/">Archon's Palace</a> (Dark Eldar) and <a href="/cards/Land_Speeder_Vengeance/">Land Speeder Vengeance</a> (Space Marines).</p>
+    <p>Last Dawn bans the following cards: <a href="/cards/Sowing_Chaos/">Sowing Chaos</a> (Chaos), <a href="/cards/Smasha_Gun_Battery/">Smasha Gun Battery</a> (Orks), <a href="/cards/The_Prince's_Might/">The Prince's Might</a> (Chaos) and <a href="/cards/Purveyor_of_Hubris/">Purveyor of Hubris</a> (Chaos).</p>
+    <p>Virgin Dusk bans the following cards: <a href="/cards/Doom/">Doom</a> (Eldar), <a href="/cards/Exterminatus/">Exterminatus</a> (Space Marines), <a href="/cards/Mind_Shackle_Scarab/">Mind Shackle Scarab</a> (Necrons), <a href="/cards/Crypt_of_Saint_Camila/">Crypt of Saint Camila</a> (Space Marines) and <a href="/cards/Warp_Storm/">Warp Storm</a> (Chaos).</p>
+    <p>It should be noted that First Dawn works differently to the other ban lists. First, it has a limit, meaning that if you play two Squiggoth Brutes which get removed from the game by the card, you can play a third one without it being removed. Second, since the card is played, it can be cancelled by Nullify or similar card effects, which can allow the card to enter play despite the ban. However, in a competitive game it is highly unlikely that either of these limitations will come up during a game.</p>
+    <h3>Card Erratas</h3>
+    <p>There is no formal system for announcing card erratas; Team Apoka includes the new version of a card in a pack.</p>
+    <p>Due to this, it is more difficult to track what the errata cards are. That being said, this should be a complete list of all erratas.</p>
+    <p><a href="/cards/Ba'ar_Zul's_Cleavers/">Ba'ar Zul's Cleavers</a> (Chaos) has its cost reduced from 3 to 2.</p>
+    <p><a href="/cards/Maksim's_Squadron/">Maksim's Squadron</a> (Astra Militarum) has its text changed.</p>
+    <p><a href="/cards/Captain_Markis/">Captain Markis</a> (Astra Militarum) text changed from "(Limit once per phase)" to "(Limit once per round)".</p>
+    <p><a href="/cards/Death_Serves_the_Emperor/">Death Serves the Emperor</a> (Astra Militarum) has its text changed and once per round limitation removed.</p>
+    <p><a href="/cards/STC_Fragment/">STC Fragment</a> (Neutral) has its text changed.</p>
+    <p><a href="/cards/Shrieking_Harpy/">Shrieking Harpy</a> (Tyranids) gained "(Limit once per phase)".</p>
+    <p><a href="/cards/Loamy_Broodhive/">Loamy Broodhive</a> (Tyranids) become unique.</p>
+    <p><a href="/cards/Invasion_Site/">Invasion Site</a> (Tyranids) has its text changed.</p>
+    <p><a href="/cards/Syren_Zythlex/">Syren Zythlex</a> (Dark Eldar) is now forced and gained "(Limit once per phase)".</p>
+    <p><a href="/cards/Klaivex_Warleader/">Klaivex Warleader</a> (Dark Eldar) has its attack reduced to 1.</p>
+    <p><a href="/cards/Kabalite_Blackguard/">Kabalite Blackguard</a> (Dark Eldar) can take only 1 resource.</p>
+    <p><a href="/cards/Gut_and_Pillage/">Gut and Pillage</a> (Dark Eldar) gains one less resource.</p>
+    <p><a href="/cards/Mighty_Wraithknight/">Mighty Wraithknight</a> (Eldar) has its text changed.</p>
+    <p><a href="/cards/Shrieking_Exarch/">Shrieking Exarch</a> (Eldar) gained "(Limit once per phase)".</p>
+    <p><a href="/cards/For_the_Tau'va/">For the Tau'va</a> (Tau) has its text changed.</p>
+    <p><a href="/cards/Kroot_Hunter/">Kroot Hunter</a> (Tau) gains the Kroot trait.</p>
+    <p><a href="/cards/Ardent_Auxiliaries/">Ardent Auxiliaries</a> (Tau) gains additional text.</p>
+    <p><a href="/cards/Endless_Legions/">Endless Legions</a> (Necrons) has its text changed.</p>
+    <p><a href="/cards/Undying_Saint/">Undying Saint</a> (Astra Militarum) has its text changed.</p>
+    <p><a href="/cards/Brotherhood_Justicar/">Brotherhood Justicar</a> (Space Marines) has its text changed.</p>
+    <p><a href="/cards/Kwik'_Konstruckshun/">Kwik' Konstruckshun</a> (Orks) has one less shield icon.</p>
+    <p><a href="/cards/Commander_Bravestorm/">Commander Bravestorm</a> (Tau) gained "(Limit once per phase)".</p>
+  </div>
+  <div class="ban-list-images-box">
+    <img class="ban-list-image" src="{% static 'images/CardImages/First_Dawn.jpg' %}">
+    <img class="ban-list-image" src="{% static 'images/CardImages/Last_Dawn.jpg' %}">
+    <img class="ban-list-image" src="{% static 'images/CardImages/Virgin_Dusk.jpg' %}">
+  </div>
+</div>
+{% endblock %}

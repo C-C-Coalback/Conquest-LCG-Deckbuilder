@@ -1,0 +1,45 @@
+{% extends "base.html" %}
+
+{% block content %}
+<style>
+        .home-box {
+            top: 80px;
+            margin-left:auto;
+            margin-right:auto;
+            width: 30vw;
+            height: auto;
+            padding: 2px;
+            {% if light_dark_toggle %}
+            background-color: lightblue;
+            opacity:0.8;
+            {% else %}
+            background-color: rgba(0, 0, 139, 0.8);
+            {% endif %}
+            border: 2px solid blue;
+            margin-bottom: 100px;
+        }
+
+        h1 {
+            word-wrap: break-word;
+        }
+
+        p {
+            word-wrap: break-word;
+        }
+</style>
+<div class="home-box">
+  <h1>Play formats</h1>
+  <p>There is one official format, one "official" format, and two unofficial ones worth mentioning.</p>
+  <h3>FFG Format.</h3>
+  <p>This is the official format that games were played with while FFG was creating the game. Only FFG cards are allowed, and there are no card bans or erratas.</p>
+  <h3>Apoka Format.</h3>
+  <p>This is the fan-made "official" format. All FFG and Apoka cards are allowed. However, some cards are either forbidden from play, or have erratas made to them. Cards are banned by three "Cycle." cards; First Dawn, Last Dawn and Virgin Dusk.</p>
+  <p>Exact details for the card bans and erratas can be found on the "ban lists" page.</p>
+  <p>Cards which are on the ban list cannot be played. You are still permitted to put these cards in your deck.</p>
+  <p>Cards with errata must be played with their most recent errata. The errata made to the Area Effect keyword must also be used.</p>
+  <h3>Anything Goes</h3>
+  <p>The most casual format. All FFG and Apoka cards are allowed. This differs from the Full Apoka Format in that some or all of the ban lists or card erratas may be ignored.</p>
+  <h3>Anything Goes + The Black Crusade</h3>
+  <p>The Black Crusade was another team making Conquest fan expansions, however they stopped creating cards after a single release. These cards are not, and likely never will be, supported by the Tabletop Simulator mod, conquestdb.com or iridial.net.</p>
+</div>
+{% endblock %}

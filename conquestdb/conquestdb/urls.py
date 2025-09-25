@@ -29,6 +29,8 @@ urlpatterns = [
     path("decks/", include("decks.urls")),
     path("users/", include("users.urls")),
     path("api/", include("api.urls")),
+    path("play_formats/", views.play_formats_page, name="play_formats"),
+    path("ban_lists/", views.ban_lists_page, name="ban_lists"),
     path('simple_upload/', views.simple_upload, name='simple_upload'),
     path("", views.home_page, name="home"),
     re_path(r'^media/(?P<path>.*)$', serve, {'document_root': settings.MEDIA_ROOT}),
