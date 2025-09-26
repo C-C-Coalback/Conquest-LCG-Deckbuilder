@@ -67,7 +67,12 @@ def recent_reviews_page(request, page_num):
                             split_content = file_contents.split(sep="\n")
                             comments_users.append(split_content[0])
                             comments_dates.append(split_content[1])
-                            comments_contents.append(split_content[2])
+                            remade_content = ""
+                            for i in range(2, len(split_content)):
+                                remade_content += split_content[i]
+                                if i != len(split_content) - 1:
+                                    remade_content += "\n"
+                            comments_contents.append(remade_content)
                             card_names.append(card_name.replace("_", " "))
                             card_links.append(convert_name_to_hyperlink(card_name))
     data = {

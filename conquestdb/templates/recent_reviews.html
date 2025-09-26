@@ -95,7 +95,9 @@
           <div class="card-name">
             <p>{{ card_name }}</p><a href="{{ card_link }}"><input type="button" value="Go to Card"></a>
           </div>
-          <p class="comment-content">{{ content }}</p>
+          <div class="comment-content">
+            {{ content|linebreaks }}
+          </div>
         </div>
       {% endfor %}
     </div>
