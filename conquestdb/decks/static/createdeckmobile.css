@@ -1,0 +1,380 @@
+.Card {
+    position: relative;
+    height:8vh;
+    width:5vw;
+}
+
+#new-faction-filter, #new-card-type-filter {
+    background: rgba(30, 113, 114, 0.42);
+}
+
+#faction_code, #type_code {
+    border: 1px solid gray;
+    border-radius: 3px;
+    justify-content: space-between;
+    display: flex;
+    margin: 0 auto;
+    padding: 10px 0;
+}
+
+[data-toggle="buttons"] > .btn input[type="checkbox"], [data-toggle="buttons"] > .btn input[type="radio"], [data-toggle="buttons"] > .btn-group > .btn input[type="checkbox"], [data-toggle="buttons"] > .btn-group > .btn input[type="radio"] {
+    position: absolute;
+    clip: rect(0,0,0,0);
+    pointer-events: none;
+}
+
+.faction-btn-container {
+    min-width: 50px;
+}
+
+.btn {
+    display: inline-block;
+    margin-bottom: 0;
+    font-weight: 400;
+    border: 1px solid black;
+    text-align: center;
+    white-space: nowrap;
+    vertical-align: middle;
+    -ms-touch-action: manipulation;
+    touch-action: manipulation;
+    cursor: pointer;
+    background-image: none;
+    font-size: 14px;
+    line-height: 1.42857143;
+    border-radius: 4px;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    margin-left: 10px;
+    margin-right: 10px;
+}
+
+#faction_code label.btn.active {
+    background-color: rgb(50, 50, 50);
+}
+
+#type_code label.btn.active {
+    background-color: rgb(50, 50, 50);
+}
+
+.center {
+    display: flex;
+    justify-content: center;
+}
+
+.Card-saved-box {
+    position: relative;
+    width: 50px;
+    height: 70px;
+}
+
+.no-break {
+    display: inline;
+}
+
+.db-image {
+    width:11.75vw;
+    height: 16.45vw;
+}
+
+.auto-deck-build {
+    background: rgba(47, 40, 153, 0.3);
+    cursor: default;
+    width: 90.025vw;
+    height: calc(50vh + 16.45vw);
+    border: 5px solid green;
+    display: grid;
+    grid-template-columns: 11.75vw 11.75vw 6.525vw 5.225vw 9.125vw 15.65vw 30vw;
+    grid-template-rows: 16.45vw 25vh 25vh;
+    grid-template-areas:
+    "warlord-card synapse-card pledge-card pledge-card details details details"
+    "signature-squad-cards signature-squad-cards signature-squad-cards army-cards army-cards army-cards army-cards"
+    "event-cards event-cards event-cards attachment-cards attachment-cards attachment-cards support-cards";
+}
+
+.auto-deck-build > #details {
+    background: rgba(47, 40, 153, 0.3);
+    overflow-y: auto;
+    border: 1px solid black;
+    text-align: center;
+}
+
+.auto-deck-build > .db-section {
+    background: rgba(47, 40, 153, 0.3);
+    border: 1px solid black;
+    text-align: left;
+    overflow-y:auto;
+}
+
+#warlord-card {
+    grid-area: warlord-card;
+}
+
+#synapse-card {
+    grid-area: synapse-card;
+}
+
+#pledge-card {
+    grid-area: pledge-card;
+}
+
+#details {
+    grid-area: details;
+}
+
+#signature-squad-cards {
+    grid-area: signature-squad-cards;
+}
+
+#army-cards {
+    grid-area: army-cards;
+}
+
+#event-cards {
+    grid-area: event-cards;
+}
+
+#support-cards {
+    grid-area: support-cards;
+}
+
+#attachment-cards {
+    grid-area: attachment-cards;
+}
+
+#manual-deck-import {
+    display: none;
+}
+
+#deck-container {
+    width: auto;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+}
+
+#buttons-container {
+    white-space: nowrap;
+}
+
+#cursor-follower {
+    position:absolute;
+    width: 15.65vw;
+    height: 21.91vw;
+    display:none;
+}
+
+.minus-spacing {
+    margin-left: 10px;
+}
+
+.mini-card-name, .mini-card-faction {
+    width: max(14.40vw, 25%);
+}
+
+.mini-card-type, .mini-card-loyalty {
+    text-align: center;
+    vertical-align: middle;
+    width: max(7.20vw, 20%);
+    word-wrap: break-word;
+}
+
+.mini-card-cost, .mini-card-attack, .mini-card-health, .mini-card-command, .mini-card-shield {
+    text-align: center;
+    vertical-align: middle;
+    width: max(3.68vw, 10%);
+}
+
+#description-container {
+
+}
+
+#entire-deck-creation-box {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.filter {
+
+}
+
+#card-filter-results {
+    cursor: pointer;
+    border: 2px solid blue;
+    overflow: hidden;
+    background: rgba(47, 40, 153, 0.6);
+}
+
+#name-deck {
+    width: 10vw;
+}
+
+.searched-card, .searched-card-headers {
+    position: relative;
+    margin-top: 10px;
+    left: 0;
+    width:100%;
+    overflow-x: auto;
+    display: flex;
+    justify-content: center;
+}
+
+#mini-card-search-container-container {
+    overflow:hidden;
+}
+
+#mini-card-search-container {
+    border: 3px black double;
+    background-color: rgba(220, 220, 220, 0.5);
+}
+
+#clear-filter {
+    position: relative;
+    left: 30%;
+    border: none;
+    background-color: red;
+    color: white;
+    padding: 15px 32px;
+    width: 40%;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    cursor: pointer;
+}
+
+#card-counts-pages {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.tooltip {
+  position: relative;
+  display: inline-block;
+  border-bottom: 1px dotted black;
+}
+
+#card-count-tooltip {
+    margin-top: max(-125px, -8vh);
+    margin-left: -13vw;
+}
+
+#name-tooltip {
+    margin-left: -13vw;
+}
+
+.tooltip .tooltiptext {
+    visibility: hidden;
+    width: 200px;
+    max-width: 15vw;
+    background-color: black;
+    color: #fff;
+    text-align: center;
+    padding: 5px 0;
+    border-radius: 6px;
+    font-family: Arial, sans-serif;
+
+    position: absolute;
+    z-index: 1;
+}
+
+.tooltip:hover .tooltiptext {
+    visibility: visible;
+}
+
+.ally-area > * {
+    display:inline-block;
+}
+
+.card-count-div > * {
+    display:inline-block;
+    margin-right:10px;
+}
+
+#card-submit, #deck-submit-1, #toggle-position-type-deck {
+    border: none;
+    background-color: blue;
+    color: white;
+    padding: 15px 32px;
+    width: max(10.43vw, 150px);
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    cursor: pointer;
+}
+
+#send-filter {
+    position: relative;
+    left: 30%;
+    border: none;
+    background-color: green;
+    color: white;
+    padding: 15px 32px;
+    width: 40%;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    cursor: pointer;
+}
+
+#toggle-position-type-deck {
+    display: none;
+}
+
+#filters-container {
+    height: auto;
+    display: grid;
+    grid-template-columns: auto auto auto auto;
+    grid-template-areas:
+    "p-card-name search p-keyword keyword"
+    "p-faction faction p-loyalty loyalty"
+    "p-min-cost min-cost p-max-cost max-cost"
+    "p-shields shields p-traits traits"
+    "p-order order p-asc-desc asc-desc";
+}
+
+#prev-page {
+    position:relative;
+    left:0;
+    top:0;
+    height: 50px;
+    width: 10.43vw;
+}
+
+#next-page {
+    position:relative;
+    right:0;
+    top:0;
+    height: 50px;
+    width: 10.43vw;
+    float: right;
+}
+
+.saved-deck-box {
+    width: 200px;
+    height: 70px;
+    background-color: lightblue;
+    border: 2px solid blue;
+    margin: 10px;
+    display: flex;
+    flex-direction: row;
+}
+
+#existing-decks {
+    position: absolute;
+    left:max(600px, calc(100vw - 280px));
+    width:260px;
+    top:75px;
+    overflow-y: scroll;
+    max-height: 80vh;
+}

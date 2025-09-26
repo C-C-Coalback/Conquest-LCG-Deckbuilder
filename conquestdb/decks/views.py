@@ -11,6 +11,14 @@ import datetime
 import random
 import string
 import shutil
+import re
+
+MOBILE_AGENT_RE = re.compile(r".*(iphone|mobile|androidtouch)", re.IGNORECASE)
+
+
+def is_mobile(request):
+    """Return True if the request comes from a mobile device."""
+    return MOBILE_AGENT_RE.match(request.META['HTTP_USER_AGENT'])
 
 
 card_array = Initfunctions.init_player_cards()
@@ -1042,6 +1050,7 @@ def modify_deck(request, deck_key):
     data = []
     desc = ""
     light_dark_toggle = light_dark_dict.get_light_mode(request.user.username)
+    mobile = is_mobile(request)
     if username:
         if os.path.exists(target_directory):
             for file in os.listdir(target_directory):
@@ -1059,27 +1068,32 @@ def modify_deck(request, deck_key):
                                                          "traits_list": traits_list,
                                                          "warlord_name": "", "warlord_sig": [],
                                                          "warlord_src": "",
-                                                         "light_dark_toggle": light_dark_toggle})
+                                                         "light_dark_toggle": light_dark_toggle,
+                                                         "mobile": mobile})
     return render(request, "decks/createdeck.html", {"edit": "F", "data": "", "desc": "",
                                                      "auto_complete": card_names_array,
                                                      "traits_list": traits_list,
                                                      "warlord_name": "", "warlord_sig": [],
                                                      "warlord_src": "",
-                                                     "light_dark_toggle": light_dark_toggle})
+                                                     "light_dark_toggle": light_dark_toggle,
+                                                     "mobile": mobile})
 
 
 def create_deck(request):
     light_dark_toggle = light_dark_dict.get_light_mode(request.user.username)
+    mobile = is_mobile(request)
     return render(request, "decks/createdeck.html", {"edit": "F", "data": "", "desc": "",
                                                      "auto_complete": card_names_array,
                                                      "traits_list": traits_list,
                                                      "warlord_name": "", "warlord_sig": [],
                                                      "warlord_src": "",
-                                                     "light_dark_toggle": light_dark_toggle})
+                                                     "light_dark_toggle": light_dark_toggle,
+                                                     "mobile": mobile})
 
 
 def create_deck_with_warlord(request, warlord_name):
     light_dark_toggle = light_dark_dict.get_light_mode(request.user.username)
+    mobile = is_mobile(request)
     try:
         actual_name = warlord_name.replace("_", " ")
         if actual_name in cards_dict:
@@ -1094,7 +1108,8 @@ def create_deck_with_warlord(request, warlord_name):
                                                                  "warlord_name": warlord_name,
                                                                  "warlord_sig": warlord_sig,
                                                                  "warlord_src": warlord_faction,
-                                                                 "light_dark_toggle": light_dark_toggle})
+                                                                 "light_dark_toggle": light_dark_toggle,
+                                                                 "mobile": mobile})
     except Exception as e:
         print(e)
     return render(request, "decks/createdeck.html", {"edit": "F", "data": "", "desc": "",
@@ -1102,7 +1117,8 @@ def create_deck_with_warlord(request, warlord_name):
                                                      "traits_list": traits_list,
                                                      "warlord_name": "", "warlord_sig": [],
                                                      "warlord_src": "",
-                                                     "light_dark_toggle": light_dark_toggle})
+                                                     "light_dark_toggle": light_dark_toggle,
+                                                     "mobile": mobile})
 
 
 def user_deck_data(request, deck_creator):
