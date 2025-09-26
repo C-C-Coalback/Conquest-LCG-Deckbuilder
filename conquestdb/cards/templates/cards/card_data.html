@@ -129,9 +129,17 @@
             {% if user.username == name %}
                 <form class="delete-comment" method="post">
                     {% csrf_token %}
-                            <input name="username" value="{{ user.username }}" style="display:none;">
-                            <input name="flag" value="DELETE" style="display:none;">
-                            <input name="idcomment" value="{{ id }}" style="display:none;">
+                    <input name="username" value="{{ user.username }}" style="display:none;">
+                    <input name="flag" value="DELETE" style="display:none;">
+                    <input name="idcomment" value="{{ id }}" style="display:none;">
+                    <button type="submit">Delete</button>
+                </form>
+            {% elif name == "Anonymous" and user.username == "alex" or user.username == "Coalback" %}
+                <form class="delete-comment" method="post">
+                    {% csrf_token %}
+                    <input name="username" value="{{ user.username }}" style="display:none;">
+                    <input name="flag" value="DELETE" style="display:none;">
+                    <input name="idcomment" value="{{ id }}" style="display:none;">
                     <button type="submit">Delete</button>
                 </form>
             {% endif %}
