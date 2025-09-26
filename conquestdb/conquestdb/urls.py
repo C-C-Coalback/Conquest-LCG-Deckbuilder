@@ -31,6 +31,8 @@ urlpatterns = [
     path("api/", include("api.urls")),
     path("play_formats/", views.play_formats_page, name="play_formats"),
     path("ban_lists/", views.ban_lists_page, name="ban_lists"),
+    path("recent_reviews/", views.recent_reviews, name="recent_reviews"),
+    path("recent_reviews/<int:page_num>/", views.recent_reviews_page, name="recent_reviews_page"),
     path('simple_upload/', views.simple_upload, name='simple_upload'),
     path("", views.home_page, name="home"),
     re_path(r'^media/(?P<path>.*)$', serve, {'document_root': settings.MEDIA_ROOT}),

@@ -1,0 +1,128 @@
+{% extends "base.html" %}
+
+{% block content %}
+<style>
+
+        .recent-comments-container {
+            display: flex;
+            justify-content: center;
+            margin-top: 50px;
+        }
+
+        .recent-comments-box {
+            margin-left:auto;
+            margin-right:auto;
+            width: 50vw;
+            height: auto;
+            padding: 2px;
+            {% if light_dark_toggle %}
+            background-color: lightblue;
+            opacity:0.8;
+            {% else %}
+            background-color: rgba(0, 0, 139, 0.8);
+            {% endif %}
+            border: 2px solid blue;
+            margin-bottom: 100px;
+        }
+
+        .comment-box {
+            border: 5px solid green;
+            display: grid;
+            grid-template-columns: 10vw 40vw;
+            grid-template-rows: auto auto;
+            grid-template-areas:
+            "username comment-content"
+            "date comment-content"
+            "card-name comment-content"
+        }
+
+        .username {
+            grid-area: username;
+            margin-left: 20px;
+        }
+
+        .date {
+            grid-area: date;
+            margin-left: 20px;
+        }
+
+        .card-name {
+            grid-area: card-name;
+            margin-left: 20px;
+        }
+
+        .comment-content {
+            grid-area: comment-content;
+            align-content: center;
+        }
+
+        #prev-page {
+            position:relative;
+            left:0;
+            top:0;
+            background-color: #f1f1f1;
+            color: black;
+            height: 100px;
+            width: 100px;
+        }
+
+        #next-page {
+            position:relative;
+            right:0;
+            top:0;
+            background-color: #f1f1f1;
+            color: black;
+            height: 100px;
+            width: 100px;
+        }
+
+        h1 {
+            word-wrap: break-word;
+        }
+
+        p {
+            word-wrap: break-word;
+        }
+</style>
+<div class="recent-comments-container">
+  <input id="prev-page" type="button" value="previous" onclick="previousPage();">
+  <div>
+    <div class="recent-comments-box">
+      {% for content, username, date, card_name, card_link in sent_comments %}
+        <div class="comment-box">
+          <a href="/users/{{ username }}/"><p class="username">{{ username }}</p></a>
+          <p class="date"> {{ date }}</p>
+          <div class="card-name">
+            <p>{{ card_name }}</p><a href="{{ card_link }}"><input type="button" value="Go to Card"></a>
+          </div>
+          <p class="comment-content">{{ content }}</p>
+        </div>
+      {% endfor %}
+    </div>
+  </div>
+  <input id="next-page" type="button" value="next" onclick="nextPage();">
+</div>
+<script>
+    const current_url = document.URL;
+    const url_split = current_url.split("/");
+    function nextPage() {
+        if (url_split.length == 5) {
+            location.href = "/recent_reviews/1/";
+        } else {
+            var number = parseInt(url_split[4]);
+            number = number + 1;
+            location = "/recent_reviews/" + number.toString() + "/";
+        }
+    }
+
+    function previousPage() {
+        if (url_split.length == 6) {
+            var number = parseInt(url_split[4]);
+            number = number - 1;
+            if (number > 0) {
+                location = "/recent_reviews/" + number.toString() + "/";
+            }
+        }
+    }
+</script>
+{% endblock %}
