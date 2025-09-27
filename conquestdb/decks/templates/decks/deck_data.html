@@ -24,7 +24,7 @@
                             </div>
                             {% if public == "OWNER" %}
                                 <button class="button" id="retract" onclick="retractDeck();">Retract Deck</button>
-                            {% else %}
+                            {% elif user.is_authenticated %}
                                 <button class="button" id="copy" onclick="copyDeck();">Copy Deck</button>
                             {% endif %}
 
