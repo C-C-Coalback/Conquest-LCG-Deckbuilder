@@ -597,7 +597,7 @@
     if (data !== "") {
         force_send = "T";
         data = data.replace(new RegExp("&"+"#"+"x27;", "g"), "'");
-        // data = data.replace(new RegExp("%E2" + "%84" + "%A6", "g"), "Ω");
+        data = data.replace(new RegExp("&" + "quot;", "g"), "\"");
         var deck_data = data.split("|||");
         var pledge_card = "";
         if (deck_data[4] !== "") {
@@ -618,6 +618,7 @@
         }
         var route = "/static/images/CardImages/" + name_warlord.split(' ').join('_') + ".jpg";
         route = route.replaceAll(":", "");
+        route = route.replaceAll("\"", "");
         document.getElementById('warlord-card').innerHTML = `<img id=` + name_warlord.split(' ').join('_') + ` src=` + route + ` class="db-image" onmouseenter="showImg(this)" onmouseleave="clearImg()" data-src=` + route + `>`;
         document.getElementById('name-deck').value = name;
         var sig_pos = -1;

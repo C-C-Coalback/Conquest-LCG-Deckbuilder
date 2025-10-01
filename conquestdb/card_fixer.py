@@ -1,9 +1,23 @@
 import os
 
 
-replacements = [("Call the Storm", "Call The Storm"),
-                ("Reveal the Blade", "Reveal The Blade"),
-                ("Subject Omega-X62113", "Subject: Ω-X62113")]
+replacements = [
+    ("Call the Storm", "Call The Storm"),
+    ("Reveal the Blade", "Reveal The Blade"),
+    ("Subject Omega-X62113", "Subject: Ω-X62113"),
+    ("The Swarmlord", "\"The Swarmlord\""),
+    ("Old One Eye", "\"Old One Eye\""),
+    ("Subject: Ω-X62113", "\"Subject: Ω-X62113\""),
+    ("Parasite of Mortrex", "\"Parasite of Mortrex\""),
+    ("\"\"\"Subject: Ω-X62113\"\"\"", "\"Subject: Ω-X62113\""),
+    ("\"\"Subject: Ω-X62113\"\"", "\"Subject: Ω-X62113\""),
+    ("\"\"\"Parasite of Mortrex\"\"\"", "\"Parasite of Mortrex\""),
+    ("\"\"Parasite of Mortrex\"\"", "\"Parasite of Mortrex\""),
+    ("\"\"\"Old One Eye\"\"\"", "\"Old One Eye\""),
+    ("\"\"Old One Eye\"\"", "\"Old One Eye\""),
+    ("\"\"\"The Swarmlord\"\"\"", "\"The Swarmlord\""),
+    ("\"\"The Swarmlord\"\"", "\"The Swarmlord\""),
+]
 
 
 cwd = os.getcwd()
@@ -17,6 +31,8 @@ for file in os.listdir(target_directory):
         content_file = creator_file + deck_name + "/content"
         with open(content_file, "r", encoding="utf-8") as f:
             content = f.read()
+            content = "\n".join(content.split(sep="\n")[1:])
+            content = deck_name + "\n" + content
         for i in range(len(replacements)):
             content = content.replace(replacements[i][0], replacements[i][1])
             print(content)
@@ -31,6 +47,8 @@ for file in os.listdir(target_directory):
         content_file = creator_file + deck_name + "/content"
         with open(content_file, "r", encoding="utf-8") as f:
             content = f.read()
+            content = "\n".join(content.split(sep="\n")[1:])
+            content = deck_name + "\n" + content
         for i in range(len(replacements)):
             content = content.replace(replacements[i][0], replacements[i][1])
             print(content)

@@ -4,8 +4,8 @@ from .. import CardClasses
 def tyranids_cards_init():
     faction = "Tyranids"
     tyranids_card_array = [
-        CardClasses.WarlordCard("Old One Eye", "Reaction: After this warlord readies, remove half the damage from "
-                                               "it. (Limit once per round.)", "Creature. Behemoth.",
+        CardClasses.WarlordCard("\"Old One Eye\"", "Reaction: After this warlord readies, remove half the damage from "
+                                                   "it. (Limit once per round.)", "Creature. Behemoth.",
                                 faction, 2, 6, 1, 6, "Bloodied.", 6, 6,
                                 ["4x Lurking Hormagaunt", "1x Awakening Cavern", "2x Ferocious Strength",
                                  "1x Great Scything Talons"], war_pack_info="The Great Devourer"),
@@ -27,8 +27,8 @@ def tyranids_cards_init():
                                    1, faction, "Signature", 3, False,
                                    type_of_units_allowed_for_attachment="Warlord", extra_health=1,
                                    war_pack_info="The Great Devourer"),
-        CardClasses.WarlordCard("The Swarmlord", "Reaction: After this warlord commits to a planet, put 1 Termagant"
-                                                 " token into play at each adjacent planet.", "Creature. Behemoth.",
+        CardClasses.WarlordCard("\"The Swarmlord\"", "Reaction: After this warlord commits to a planet, put 1 Termagant"
+                                                     " token into play at each adjacent planet.", "Creature. Behemoth.",
                                 faction, 2, 6, 2, 5, "Bloodied.", 6, 6,
                                 ["4x Brood Warriors", "1x Leviathan Hive Ship", "2x Indescribable Horror",
                                  "1x Bone Sabres"], war_pack_info="The Great Devourer"),
@@ -248,8 +248,8 @@ def tyranids_cards_init():
                                                    "resources equal to the number of cards discarded by this effect.",
                               "Tactic.", 0, faction, "Common", 1, False,
                               action_in_hand=True, allowed_phases_in_hand="ALL", war_pack_info="Deadly Salvage"),
-        CardClasses.WarlordCard("Subject: Ω-X62113", "Each Genestealer card in your hand may be deployed to "
-                                                     "infested planets as if it had ambush.",
+        CardClasses.WarlordCard("\"Subject: Ω-X62113\"", "Each Genestealer card in your hand may be deployed to "
+                                                         "infested planets as if it had ambush.",
                                 "Creature. Genestealer.", faction, 2, 6, 2, 5, "Bloodied.", 6, 6,
                                 ["4x Invasive Genestealers", "1x Ruined Passages",
                                  "2x Gene Implantation", "1x Lethal Toxin Sacs"], war_pack_info="What Lurks Below"),
@@ -356,12 +356,12 @@ def tyranids_cards_init():
                                                     "prevent all but 2 of that damage.", "Wargear. Biomorph.",
                                    2, faction, "Common", 1, False, type_of_units_allowed_for_attachment="Army",
                                    must_be_own_unit=True, war_pack_info="The Warp Unleashed"),
-        CardClasses.WarlordCard("Parasite of Mortrex", "Flying.\n"
-                                                       "Reaction: After this warlord is declared as an attacker, "
-                                                       "search your discard pile or your deck for a Condition "
-                                                       "attachment. Reveal it, and put it into play attached to "
-                                                       "an eligible enemy unit at this planet. "
-                                                       "Then, shuffle your deck.", "Creature. Kraken.",
+        CardClasses.WarlordCard("\"Parasite of Mortrex\"", "Flying.\n"
+                                                           "Reaction: After this warlord is declared as an attacker, "
+                                                           "search your discard pile or your deck for a Condition "
+                                                           "attachment. Reveal it, and put it into play attached to "
+                                                           "an eligible enemy unit at this planet. "
+                                                           "Then, shuffle your deck.", "Creature. Kraken.",
                                 faction, 1, 7, 1, 5, "Flying. Bloodied.", 6, 6,
                                 ["4x Savage Parasite", "2x Swarming Rippers", "1x Sweep Attack",
                                  "1x Prey on the Weak"], flying=True, war_pack_info="Breaching the Veil"),

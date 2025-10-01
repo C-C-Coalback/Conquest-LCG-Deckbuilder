@@ -210,6 +210,9 @@ def request_deck(request, deck_key):
                         card_name = deck_content[i]
                         if deck_content[i] == "idden Base":
                             card_name = "'idden Base"
+                        card_name = card_name.replace("\"", "")
+                        card_name = card_name.replace("Ω", "Omega")
+                        card_name = card_name.replace(":", "")
                         front_links_sent.append(get_front_link(card_name))
                         back_links_sent.append(get_back_link(card_name))
                         desc_links_sent.append(get_desc(card_name))
@@ -227,6 +230,9 @@ def request_deck(request, deck_key):
                         card_name = deck_content[i][3:]
                         if card_name == "idden Base":
                             card_name = "'idden Base"
+                        card_name = card_name.replace("\"", "")
+                        card_name = card_name.replace("Ω", "Omega")
+                        card_name = card_name.replace(":", "")
                         nicknames_sent.append(card_name)
                         front_links_sent.append(get_front_link(card_name))
                         back_links_sent.append(get_back_link(card_name))

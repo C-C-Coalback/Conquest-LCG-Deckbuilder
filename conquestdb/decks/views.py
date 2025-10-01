@@ -1073,6 +1073,14 @@ def create_deck_with_warlord(request, warlord_name):
     mobile = is_mobile(request)
     try:
         actual_name = warlord_name.replace("_", " ")
+        if actual_name == "Subject: Ω-X62113":
+            actual_name = "\"Subject: Ω-X62113\""
+        if actual_name == "Old One Eye":
+            actual_name = "\"Old One Eye\""
+        if actual_name == "The Swarmlord":
+            actual_name = "\"The Swarmlord\""
+        if actual_name == "Parasite of Mortrex":
+            actual_name = "\"Parasite of Mortrex\""
         if actual_name in cards_dict:
             warlord_card = cards_dict[actual_name]
             if warlord_card.get_card_type() == "Warlord":
@@ -1826,9 +1834,11 @@ def ajax_view(request):
             description = request.POST.get('description')
             force_send = request.POST.get('force_send')
             message_to_send = ""
-            # text = text.replace("\"Subject: &Omega;-X62113\"", "")
             # text = text.replace("idden Base", "'idden Base")
-            # text = text.replace("\"", "")
+            text = text.replace("Subject: Ω-X62113", "\"Subject: Ω-X62113\"")
+            text = text.replace("Old One Eye", "\"Old One Eye\"")
+            text = text.replace("The Swarmlord", "\"The Swarmlord\"")
+            text = text.replace("Parasite of Mortrex", "\"Parasite of Mortrex\"")
             deck = clean_sent_deck(text)
             print(deck)
             deck_name = deck[0]
