@@ -4,6 +4,7 @@ from conquestdb.cardscode import Initfunctions
 from conquestdb.cardscode import FindCard
 from django.http import HttpResponseRedirect
 import light_dark_dict
+from card_utils import convert_name_to_img_src, convert_name_to_hyperlink, convert_name_to_create_deck_hyperlink
 import pandas as pd
 import os
 import copy
@@ -143,30 +144,6 @@ def delete_published_deck(key_string, name_user):
     except Exception as E:
         print(E)
     return False
-
-
-def convert_name_to_img_src(card_name):
-    card_name = card_name.replace("\"", "")
-    card_name = card_name.replace(" ", "_")
-    card_name = card_name.replace("'idden_Base", "idden_Base")
-    card_name = card_name + ".jpg"
-    card_name = "/static/images/CardImages/" + card_name
-    return card_name
-
-
-def convert_name_to_hyperlink(card_name):
-    card_name = card_name.replace("\"", "")
-    card_name = card_name.replace(" ", "_")
-    card_name = card_name.replace("'idden_Base", "idden_Base")
-    card_name = "/cards/" + card_name
-    return card_name
-
-
-def convert_name_to_create_deck_hyperlink(card_name):
-    card_name = card_name.replace("\"", "")
-    card_name = card_name.replace(" ", "_")
-    card_name = "/decks/create_deck/preload_warlord/" + card_name
-    return card_name
 
 
 astra_militarum_warlords = []
@@ -426,7 +403,7 @@ def get_liked_decks_lists(username):
                             data = like_file.read()
                             split_data = data.split(sep="\n")
                             if username in split_data:
-                                with open(target_file + "/content", "r") as f:
+                                with open(target_file + "/content", "r", encoding="utf-8") as f:
                                     data = f.read()
                                     split_data = data.split(sep="\n")
                                     deck_name = split_data[0]
@@ -466,7 +443,7 @@ def get_published_decks_lists_with_extra_info():
             for file in os.listdir(target_directory + "/" + creator):
                 try:
                     target_file = target_directory + "/" + creator + "/" + file
-                    with open(target_file + "/content", "r") as f:
+                    with open(target_file + "/content", "r", encoding="utf-8") as f:
                         data = f.read()
                         split_data = data.split(sep="\n")
                         deck_name = split_data[0]
@@ -508,7 +485,7 @@ def get_published_decks_lists():
             for file in os.listdir(target_directory + "/" + creator):
                 try:
                     target_file = target_directory + "/" + creator + "/" + file
-                    with open(target_file + "/content", "r") as f:
+                    with open(target_file + "/content", "r", encoding="utf-8") as f:
                         data = f.read()
                         split_data = data.split(sep="\n")
                         deck_name = split_data[0]
@@ -739,7 +716,7 @@ def my_decks_page(request, page_num):
             for file in os.listdir(target_directory):
                 try:
                     target_file = target_directory + file
-                    with open(target_file + "/content", "r") as f:
+                    with open(target_file + "/content", "r", encoding="utf-8") as f:
                         data = f.read()
                         split_data = data.split(sep="\n")
                         deck_name = split_data[0]
@@ -825,7 +802,7 @@ def my_published_decks_page(request, page_num):
             for file in os.listdir(target_directory):
                 try:
                     target_file = target_directory + file
-                    with open(target_file + "/content", "r") as f:
+                    with open(target_file + "/content", "r", encoding="utf-8") as f:
                         data = f.read()
                         split_data = data.split(sep="\n")
                         deck_name = split_data[0]
@@ -908,7 +885,7 @@ def my_published_decks(request):
             for file in os.listdir(target_directory):
                 try:
                     target_file = target_directory + file
-                    with open(target_file + "/content", "r") as f:
+                    with open(target_file + "/content", "r", encoding="utf-8") as f:
                         data = f.read()
                         split_data = data.split(sep="\n")
                         deck_name = split_data[0]
@@ -983,7 +960,7 @@ def my_decks(request):
             for file in os.listdir(target_directory):
                 try:
                     target_file = target_directory + file
-                    with open(target_file + "/content", "r") as f:
+                    with open(target_file + "/content", "r", encoding="utf-8") as f:
                         data = f.read()
                         split_data = data.split(sep="\n")
                         deck_name = split_data[0]
@@ -1058,7 +1035,7 @@ def modify_deck(request, deck_key):
                 with open(target_file + "/key", "r") as k:
                     current_key = k.read()
                     if current_key == deck_key:
-                        with open(target_file + "/content", "r") as f:
+                        with open(target_file + "/content", "r", encoding="utf-8") as f:
                             data = f.read().replace("\n", "|||")
                         with open(target_file + "/desc", "r") as f:
                             desc = f.read()
@@ -1167,7 +1144,7 @@ def advanced_deck_details(request, deck_creator, deck_key):
                     print(e)
     if permitted_to_read:
         deck_found = "Y"
-        with open(stored_target_file + "/content", "r") as f:
+        with open(stored_target_file + "/content", "r", encoding="utf-8") as f:
             deck_content = f.read()
         with open(stored_target_file + "/desc", "r") as f:
             description = f.read()
@@ -1471,7 +1448,7 @@ def deck_data(request, deck_creator, deck_key):
                     print(e)
     if permitted_to_read:
         deck_found = "Y"
-        with open(stored_target_file + "/content", "r") as f:
+        with open(stored_target_file + "/content", "r", encoding="utf-8") as f:
             deck_content = f.read()
         with open(stored_target_file + "/desc", "r") as f:
             description = f.read()
@@ -1849,9 +1826,9 @@ def ajax_view(request):
             description = request.POST.get('description')
             force_send = request.POST.get('force_send')
             message_to_send = ""
-            text = text.replace("\"Subject: &Omega;-X62113\"", "")
+            # text = text.replace("\"Subject: &Omega;-X62113\"", "")
             # text = text.replace("idden Base", "'idden Base")
-            text = text.replace("\"", "")
+            # text = text.replace("\"", "")
             deck = clean_sent_deck(text)
             print(deck)
             deck_name = deck[0]
@@ -1870,34 +1847,38 @@ def ajax_view(request):
                 os.makedirs(target_directory, exist_ok=True)
                 target_directory = directory + "/decks/deckstorage/" + username + "/" + deck_name
                 set_key = False
-                if not os.path.exists(target_directory):
-                    print("Path does not exist")
-                    os.mkdir(target_directory)
-                elif force_send == "T":
-                    print("Overwriting path")
-                    set_key = True
-                else:
-                    print("path exists")
-                    return JsonResponse({'message': 'deck with that name already exists'})
-                with open(target_directory + "/content", "w") as file:
-                    file.write(text)
-                with open(target_directory + "/desc", "w") as file:
-                    file.write(description)
-                num_tries = 0
-                while not set_key:
-                    new_key = ''.join(random.choice(
-                        string.ascii_uppercase + string.ascii_lowercase + string.digits
-                    ) for _ in range(16 + num_tries))
-                    print(new_key)
-                    if not check_if_key_in_use(new_key):
-                        with open(target_directory + "/key", "w") as file:
-                            file.write(new_key)
+                try:
+                    if not os.path.exists(target_directory):
+                        print("Path does not exist")
+                        os.mkdir(target_directory)
+                    elif force_send == "T":
+                        print("Overwriting path")
                         set_key = True
-                    if num_tries > 100:
-                        with open(target_directory + "/key", "w") as file:
-                            file.write(new_key)
-                        return JsonResponse({'message': 'deck ok'})
-                    num_tries += 1
+                    else:
+                        print("path exists")
+                        return JsonResponse({'message': 'deck with that name already exists'})
+                    with open(target_directory + "/content", "w", encoding="utf-8") as file:
+                        file.write(text)
+                    with open(target_directory + "/desc", "w") as file:
+                        file.write(description)
+                    num_tries = 0
+                    while not set_key:
+                        new_key = ''.join(random.choice(
+                            string.ascii_uppercase + string.ascii_lowercase + string.digits
+                        ) for _ in range(16 + num_tries))
+                        print(new_key)
+                        if not check_if_key_in_use(new_key):
+                            with open(target_directory + "/key", "w") as file:
+                                file.write(new_key)
+                            set_key = True
+                        if num_tries > 100:
+                            with open(target_directory + "/key", "w") as file:
+                                file.write(new_key)
+                            return JsonResponse({'message': 'deck ok'})
+                        num_tries += 1
+                except Exception as e:
+                    print(e)
+                    return JsonResponse({'message': 'problem encountered while saving deck'})
                 return JsonResponse({'message': 'deck ok'})
             # message_to_send = "Feedback/" + message_to_send
             message = message_to_send
@@ -1987,9 +1968,9 @@ def ajax_view(request):
                     ally_ok = True
             else:
                 position_main_faction = -1
-                for i in range(len(alignment_wheel)):
-                    if alignment_wheel[i] == warlord.get_faction():
-                        position_main_faction = i
+                for faction_pos in range(len(alignment_wheel)):
+                    if alignment_wheel[faction_pos] == warlord.get_faction():
+                        position_main_faction = faction_pos
                 if position_main_faction != -1:
                     ally_pos_1 = (position_main_faction + 1) % 7
                     ally_pos_2 = (position_main_faction - 1) % 7

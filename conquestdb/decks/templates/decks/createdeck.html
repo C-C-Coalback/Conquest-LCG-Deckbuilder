@@ -590,12 +590,14 @@
     if (sent_warlord !== "") {
         name_warlord = sent_warlord.split('_').join(' ');
         var route = "/static/images/CardImages/" + name_warlord.split(' ').join('_') + ".jpg";
+        route = route.replaceAll(":", "");
         document.getElementById('warlord-card').innerHTML = `<img id=` + name_warlord.split(' ').join('_') + ` src=` + route + ` class="db-image" onmouseenter="showImg(this)" onmouseleave="clearImg()" data-src=` + route + `>`;
         addSigSquad(sent_sig_squad);
     }
     if (data !== "") {
         force_send = "T";
         data = data.replace(new RegExp("&"+"#"+"x27;", "g"), "'");
+        // data = data.replace(new RegExp("%E2" + "%84" + "%A6", "g"), "Ω");
         var deck_data = data.split("|||");
         var pledge_card = "";
         if (deck_data[4] !== "") {
@@ -614,7 +616,8 @@
             // console.log(ally);
             document.getElementById('ally').value = ally;
         }
-        route = "/static/images/CardImages/" + name_warlord.split(' ').join('_') + ".jpg";
+        var route = "/static/images/CardImages/" + name_warlord.split(' ').join('_') + ".jpg";
+        route = route.replaceAll(":", "");
         document.getElementById('warlord-card').innerHTML = `<img id=` + name_warlord.split(' ').join('_') + ` src=` + route + ` class="db-image" onmouseenter="showImg(this)" onmouseleave="clearImg()" data-src=` + route + `>`;
         document.getElementById('name-deck').value = name;
         var sig_pos = -1;

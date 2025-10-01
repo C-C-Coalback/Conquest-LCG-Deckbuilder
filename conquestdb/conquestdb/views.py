@@ -7,14 +7,7 @@ from django.core.files.base import ContentFile
 import os
 import pandas as pd
 import light_dark_dict
-
-
-def convert_name_to_hyperlink(card_name):
-    card_name = card_name.replace("\"", "")
-    card_name = card_name.replace(" ", "_")
-    card_name = card_name.replace("'idden_Base", "idden_Base")
-    card_name = "/cards/" + card_name
-    return card_name
+from card_utils import convert_name_to_img_src, convert_name_to_hyperlink, convert_name_to_create_deck_hyperlink
 
 
 def simple_upload(request):

@@ -42,7 +42,7 @@ def get_users_published_decks(username):
                 for file in os.listdir(target_directory + "/" + creator):
                     try:
                         target_file = target_directory + "/" + creator + "/" + file
-                        with open(target_file + "/content", "r") as f:
+                        with open(target_file + "/content", "r", encoding="utf-8") as f:
                             data = f.read()
                             split_data = data.split(sep="\n")
                             deck_name = split_data[0]
@@ -79,7 +79,7 @@ def determine_favorite_warlords_public(username):
                 for file in os.listdir(target_directory + "/" + creator):
                     try:
                         target_file = target_directory + "/" + creator + "/" + file
-                        with open(target_file + "/content", "r") as f:
+                        with open(target_file + "/content", "r", encoding="utf-8") as f:
                             data = f.read()
                             split_data = data.split(sep="\n")
                             warlord = split_data[2]
@@ -109,7 +109,7 @@ def determine_favorite_warlords_private(username):
                 for file in os.listdir(target_directory + "/" + creator):
                     try:
                         target_file = target_directory + "/" + creator + "/" + file
-                        with open(target_file + "/content", "r") as f:
+                        with open(target_file + "/content", "r", encoding="utf-8") as f:
                             data = f.read()
                             split_data = data.split(sep="\n")
                             warlord = split_data[2]
@@ -147,7 +147,7 @@ def determine_faction_distribution_private(username):
                 for file in os.listdir(target_directory + "/" + creator):
                     try:
                         target_file = target_directory + "/" + creator + "/" + file
-                        with open(target_file + "/content", "r") as f:
+                        with open(target_file + "/content", "r", encoding="utf-8") as f:
                             data = f.read()
                             split_data = data.split(sep="\n")
                             factions = split_data[3]
@@ -184,7 +184,7 @@ def determine_faction_distribution_published(username):
                 for file in os.listdir(target_directory + "/" + creator):
                     try:
                         target_file = target_directory + "/" + creator + "/" + file
-                        with open(target_file + "/content", "r") as f:
+                        with open(target_file + "/content", "r", encoding="utf-8") as f:
                             data = f.read()
                             split_data = data.split(sep="\n")
                             factions = split_data[3]

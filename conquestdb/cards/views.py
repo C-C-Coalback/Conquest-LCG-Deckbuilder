@@ -9,6 +9,7 @@ import os
 import os.path
 import datetime
 import light_dark_dict
+from card_utils import convert_name_to_img_src, convert_name_to_hyperlink, convert_name_to_create_deck_hyperlink
 
 
 def sorter_cycles(column):
@@ -38,23 +39,6 @@ def sorter_warpacks(column):
                          'The Shadow in the Warp', 'Herald of the Plague God', 'For the Enclaves']
     cat = pd.Categorical(column, categories=order_of_warpacks, ordered=True)
     return pd.Series(cat)
-
-
-def convert_name_to_img_src(card_name):
-    card_name = card_name.replace("\"", "")
-    card_name = card_name.replace(" ", "_")
-    card_name = card_name.replace("'idden_Base", "idden_Base")
-    card_name = card_name + ".jpg"
-    card_name = "/static/images/CardImages/" + card_name
-    return card_name
-
-
-def convert_name_to_hyperlink(card_name):
-    card_name = card_name.replace("\"", "")
-    card_name = card_name.replace(" ", "_")
-    card_name = card_name.replace("'idden_Base", "idden_Base")
-    card_name = "/cards/" + card_name
-    return card_name
 
 
 card_array = Initfunctions.init_player_cards()

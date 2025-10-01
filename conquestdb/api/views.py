@@ -140,7 +140,7 @@ def send_deck_given_key(key_string):
                     with open(second_target_directory + "/" + deck_name + "/key", "r") as f:
                         this_key = f.read()
                         if this_key == key_string:
-                            with open(second_target_directory + "/" + deck_name + "/content", "r") as d:
+                            with open(second_target_directory + "/" + deck_name + "/content", "r", encoding="utf-8") as d:
                                 return d.read()
     target_directory = directory + "/decks/publisheddecks/"
     for username in os.listdir(target_directory):
@@ -151,7 +151,7 @@ def send_deck_given_key(key_string):
                     with open(second_target_directory + "/" + deck_name + "/key", "r") as f:
                         this_key = f.read()
                         if this_key == key_string:
-                            with open(second_target_directory + "/" + deck_name + "/content", "r") as d:
+                            with open(second_target_directory + "/" + deck_name + "/content", "r", encoding="utf-8") as d:
                                 return d.read()
     return ""
 

@@ -39,16 +39,16 @@
                 <div id="large-grid">
                     <div class="large-grid-section" id="warlord">
                         <div id="warlord-image-container">
-                            <a href={{ warlord_link }}>
-                                <img id="warlord-image" src={{ warlord_img }}>
+                            <a href="{{ warlord_link }}">
+                                <img id="warlord-image" src="{{ warlord_img }}">
                             </a>
                         </div>
                     </div>
                     <div class="large-grid-section" id="synapse">
                         <div id="synapse-image-container">
                             {% if synapse_img != "None" %}
-                            <a href={{ synapse_link }}>
-                                <img id="synapse-image" src={{ synapse_img }}>
+                            <a href="{{ synapse_link }}">
+                                <img id="synapse-image" src="{{ synapse_img }}">
                             </a>
                             {% endif %}
                         </div>
@@ -56,8 +56,8 @@
                     <div class="large-grid-section-pledge" id="pledge">
                         <div id="pledge-image-container">
                             {% if pledge_img != "None" %}
-                            <a href={{ pledge_link }}>
-                                <img id="pledge-image" src={{ pledge_img }}>
+                            <a href="{{ pledge_link }}">
+                                <img id="pledge-image" src="{{ pledge_img }}">
                             </a>
                             {% endif %}
                         </div>
@@ -66,8 +66,8 @@
                         <div class="grid-section" id="sig_cards">
                             <h2>Signature Squad</h2>
                             {% for card, link, src in sig_cards %}
-                                <a href={{ link }}>
-                                    <div onmouseenter="showImg(this)" onmouseleave="clearImg()" data-src={{ src }}>
+                                <a href="{{ link }}">
+                                    <div onmouseenter="showImg(this)" onmouseleave="clearImg()" data-src="{{ src }}">
                                         <h3 class="card-in-deck">{{ card }}</h3>
                                     </div>
                                 </a>
@@ -76,8 +76,8 @@
                         <div class="grid-army-section" id="army_cards">
                             <h2>Army Units ({{ army_card_count }} + {{ extra_army_cards }})</h2>
                             {% for card, link, src in army_cards %}
-                                <a href={{ link }}>
-                                    <div onmouseenter="showImg(this)" onmouseleave="clearImg()" data-src={{ src }}>
+                                <a href="{{ link }}">
+                                    <div onmouseenter="showImg(this)" onmouseleave="clearImg()" data-src="{{ src }}">
                                         <h3 class="card-in-deck">{{ card }}</h3>
                                     </div>
                                 </a>
@@ -86,8 +86,8 @@
                         <div class="grid-section" id="support_cards">
                             <h2>Supports ({{ support_card_count }} + {{ extra_support_cards }})</h2>
                             {% for card, link, src in support_cards %}
-                                <a href={{ link }}>
-                                    <div onmouseenter="showImg(this)" onmouseleave="clearImg()" data-src={{ src }}>
+                                <a href="{{ link }}">
+                                    <div onmouseenter="showImg(this)" onmouseleave="clearImg()" data-src="{{ src }}">
                                         <h3 class="card-in-deck">{{ card }}</h3>
                                     </div>
                                 </a>
@@ -96,8 +96,8 @@
                         <div class="grid-section" id="attachment_cards">
                             <h2>Attachments ({{ attachment_card_count }} + {{ extra_attachment_cards }})</h2>
                             {% for card, link, src in attachment_cards %}
-                                <a href={{ link }}>
-                                    <div onmouseenter="showImg(this)" onmouseleave="clearImg()" data-src={{ src }}>
+                                <a href="{{ link }}">
+                                    <div onmouseenter="showImg(this)" onmouseleave="clearImg()" data-src="{{ src }}">
                                         <h3 class="card-in-deck">{{ card }}</h3>
                                     </div>
                                 </a>
@@ -106,8 +106,8 @@
                         <div class="grid-section" id="event_cards">
                             <h2>Events ({{ event_card_count }} + {{ extra_event_cards }})</h2>
                             {% for card, link, src in event_cards %}
-                                <a href={{ link }}>
-                                    <div onmouseenter="showImg(this)" onmouseleave="clearImg()" data-src={{ src }}>
+                                <a href="{{ link }}">
+                                    <div onmouseenter="showImg(this)" onmouseleave="clearImg()" data-src="{{ src }}">
                                         <h3 class="card-in-deck">{{ card }}</h3>
                                     </div>
                                 </a>
