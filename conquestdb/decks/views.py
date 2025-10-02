@@ -230,7 +230,7 @@ def second_part_deck_validation(deck):
     global cards_dict
     print("Size should be fine")
     name = deck[0]
-    res = name != '' and all(c.isalnum() or c.isspace() for c in name)
+    res = name != '' and all(c.isalnum() or c.isspace() or c in ["(", ")", "_", ",", ".", "!", "'"] for c in name)
     if len(name) > 27:
         return "Name too long"
     elif not res:
