@@ -469,7 +469,7 @@ def orks_cards_init():
                              "Vehicle. Experimental.", 2, faction, "Signature", 2, 4, 1, False, flying=True,
                              war_pack_info="The Shadow in the Warp"),
         CardClasses.WarlordCard("Kaptin Bluddflagg",
-                                "The first unit each player deploys each round must be deploy in their HQ.\n"
+                                "The first unit each player deploys each round must be deployed in their HQ.\n"
                                 "Action: Move a non-Elite unit from your HQ to a target non-leftmost planet "
                                 "and ready it. (Limit once per round.)", "Soldier. Freebooter.",
                                 faction, 2, 7, 2, 5, "Bloodied.", 7, 7,
