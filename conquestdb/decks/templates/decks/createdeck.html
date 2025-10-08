@@ -28,7 +28,7 @@
             <div id="details">Details<br>
                 <label for="name-deck">Name:</label>
                 <input id="name-deck" type="search" size="28"><div class="tooltip">?
-                    <span id="name-tooltip" class="tooltiptext">Maximum of 29 characters are allowed. <br>Only letters, numbers, spaces and some symbols {(, ), _, ,, ., !, '} allowed.</span>
+                    <span id="name-tooltip" class="tooltiptext">Maximum of 29 characters are allowed.</span>
                 </div><br>
                 <div class="ally-area">
                     <label for="ally">Ally:</label>
@@ -302,6 +302,13 @@
     var current_low_match = 0;
     var current_high_match = 0;
     var cards_in_deck = 0;
+    var is_modify = "T";
+    var key_deck = "";
+    if (window.location.href.includes("preload_warlord")) {
+        is_modify = "F";
+    } else {
+        key_deck = window.location.href.split('/')[5];
+    }
 
     var mouse_x = 0;
     var mouse_y = 0;
@@ -970,6 +977,8 @@
                     'username': $('#username').val(),
                     'deck_text': chat_holder,
                     'description': $('#descriptionInput').val(),
+                    'is_modify': is_modify,
+                    'key_deck': key_deck,
                     'flag': 'SENDDECK',
                     'force_send': force_send,
                     'csrfmiddlewaretoken': '{{ csrf_token }}' // CSRF token for security

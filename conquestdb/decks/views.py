@@ -230,11 +230,11 @@ def second_part_deck_validation(deck):
     global cards_dict
     print("Size should be fine")
     name = deck[0]
-    res = name != '' and all(c.isalnum() or c.isspace() or c in ["(", ")", "_", ",", ".", "!", "'"] for c in name)
+    # res = name != '' and all(c.isalnum() or c.isspace() or c in ["(", ")", "_", ",", ".", "!", "'"] for c in name)
     if len(name) > 27:
         return "Name too long"
-    elif not res:
-        return "Name contains non-alphanumeric characters"
+    # elif not res:
+    #     return "Name contains non-alphanumeric characters"
     warlord_card = FindCard.find_card(deck[1], card_array, cards_dict)
     if warlord_card.get_card_type() != "Warlord":
         print("Card in Warlord position is not a warlord")
@@ -1670,6 +1670,7 @@ def copy_published_deck(request, deck_key):
                                 new_key = create_new_key()
                                 with open(target_directory + file + "/key", "w") as new_f:
                                     new_f.write(new_key)
+                                os.rename(target_directory + file, target_directory + new_key)
                                 return HttpResponseRedirect('/decks/' + og_username + "/" + new_key + "/")
                     except Exception as e:
                         print(e)
@@ -1748,11 +1749,13 @@ def publish_deck(request, deck_key):
                     if not check_if_key_in_use(new_key):
                         with open(target_directory + file + "/key", "w") as key_file:
                             key_file.write(new_key)
-                            return HttpResponseRedirect('/decks/' + username + "/" + new_key + "/")
+                        os.rename(target_directory + file, target_directory + new_key)
+                        return HttpResponseRedirect('/decks/' + username + "/" + new_key + "/")
                     if num_tries > 100:
                         with open(target_directory + file + "/key", "w") as key_file:
                             key_file.write(new_key)
-                            return HttpResponseRedirect('/decks/' + username + "/" + new_key + "/")
+                        os.rename(target_directory + file, target_directory + new_key)
+                        return HttpResponseRedirect('/decks/' + username + "/" + new_key + "/")
                     num_tries += 1
         except Exception as e:
             print(e)
@@ -1855,15 +1858,28 @@ def ajax_view(request):
                 os.makedirs(directory + "/decks/deckstorage/", exist_ok=True)
                 target_directory = directory + "/decks/deckstorage/" + username + "/"
                 os.makedirs(target_directory, exist_ok=True)
-                target_directory = directory + "/decks/deckstorage/" + username + "/" + deck_name
                 set_key = False
+                current_key = request.POST.get("key_deck")
+                if current_key:
+                    new_key = current_key
+                    force_send = "T"
+                else:
+                    new_key = create_new_key()
+                    num_tries = 0
+                    while not set_key and num_tries < 100:
+                        new_key = create_new_key()
+                        if not check_if_key_in_use(new_key):
+                            set_key = True
+                        else:
+                            new_key = create_new_key()
+                            num_tries += 1
+                target_directory = directory + "/decks/deckstorage/" + username + "/" + new_key
                 try:
                     if not os.path.exists(target_directory):
                         print("Path does not exist")
                         os.mkdir(target_directory)
                     elif force_send == "T":
                         print("Overwriting path")
-                        set_key = True
                     else:
                         print("path exists")
                         return JsonResponse({'message': 'deck with that name already exists'})
@@ -1871,26 +1887,12 @@ def ajax_view(request):
                         file.write(text)
                     with open(target_directory + "/desc", "w") as file:
                         file.write(description)
-                    num_tries = 0
-                    while not set_key:
-                        new_key = ''.join(random.choice(
-                            string.ascii_uppercase + string.ascii_lowercase + string.digits
-                        ) for _ in range(16 + num_tries))
-                        print(new_key)
-                        if not check_if_key_in_use(new_key):
-                            with open(target_directory + "/key", "w") as file:
-                                file.write(new_key)
-                            set_key = True
-                        if num_tries > 100:
-                            with open(target_directory + "/key", "w") as file:
-                                file.write(new_key)
-                            return JsonResponse({'message': 'deck ok'})
-                        num_tries += 1
+                    with open(target_directory + "/key", "w") as file:
+                        file.write(new_key)
+                    return JsonResponse({'message': 'deck ok'})
                 except Exception as e:
                     print(e)
                     return JsonResponse({'message': 'problem encountered while saving deck'})
-                return JsonResponse({'message': 'deck ok'})
-            # message_to_send = "Feedback/" + message_to_send
             message = message_to_send
             return JsonResponse({'message': message})
         if flag == "SETALLY":
