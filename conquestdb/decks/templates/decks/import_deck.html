@@ -40,10 +40,10 @@
                 success: function(response) {
                     $('#responseMessage').text(response.message);  // Update the page dynamically
                     const message = response.message;
-                    const username = response.username;
-                    const key = response.key;
                     console.log(message);
                     if (message === "saving deck") {
+                        const username = response.username;
+                        const key = response.key;
                         location.href = "/decks/" + username + "/" + key + "/";
                     }
                 }
