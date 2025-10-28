@@ -424,6 +424,8 @@ def convert_cardgamedb_conquestdb(deck_text):
         deck_text = re.sub(r'\([^)]*\)', '', deck_text)
         deck_text = deck_text.replace("”", "\"")
         deck_text = deck_text.replace("“", "\"")
+        deck_text = deck_text.replace("’", "'")
+        deck_text = deck_text.replace("Genestealer Harvester", "Genestealer Harvesters")
         deck_split = deck_text.split("\n")
         for i in range(len(deck_split)):
             deck_split[i] = deck_split[i].rstrip()
@@ -444,6 +446,7 @@ def convert_cardgamedb_conquestdb(deck_text):
                         "Signature Squad", ""]
             sig_squad = warlord_card.get_signature_squad()
             for i in range(len(sig_squad)):
+                "Genestealer Harvester"
                 new_deck.append(sig_squad[i])
             card_types = ["Army", "Support", "Synapse", "Attachment", "Event", "Planet"]
             for card_type in card_types:
@@ -458,6 +461,8 @@ def convert_cardgamedb_conquestdb(deck_text):
                             if card.get_card_type() == card_type:
                                 if card.get_loyalty() != "Signature":
                                     new_deck.append(deck_split[i])
+                if card_type == "Synapse" and warlord_card.get_faction() == "Tyranids":
+                    new_deck.append("1x Stalking Lictor")
             ally = determine_cardgamedb_ally(new_deck)
             if ally:
                 new_deck[3] = new_deck[3] + " (" + ally + ")"
