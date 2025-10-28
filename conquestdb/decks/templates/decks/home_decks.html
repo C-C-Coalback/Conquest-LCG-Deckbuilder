@@ -5,6 +5,21 @@
 <link rel="stylesheet" href="{% static 'home_decks.css' %}">
     <div id="main-container">
         <div class="buttons-container">
+            <div id="blank-1">
+
+            </div>
+            <div id="blank-2">
+
+            </div>
+            <div id="my-decks-header">
+                Your Decks
+            </div>
+            <div id="published-decks-header">
+                Published Decks
+            </div>
+            <div id="deck-creation-header">
+                Deck Creation
+            </div>
             <a href="/decks/my_decks/1/" class="grid-item" id="my-decks">
                 <button class="button">View your decks</button>
             </a>
@@ -22,6 +37,9 @@
             </a>
             <a href="/decks/create_deck/select_warlord/" class="grid-item" id="create-deck">
                 <button class="button">Create a deck</button>
+            </a>
+            <a href="/decks/import_deck/" class="grid-item" id="import-deck">
+                <button class="button">Import a deck</button>
             </a>
         </div>
         <div id="featured-container">

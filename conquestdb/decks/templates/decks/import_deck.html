@@ -1,0 +1,54 @@
+{% extends "base.html" %}
+{% block title %}Decks Home{% endblock %}
+{% block content %}
+{% load static %}
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<link rel="stylesheet" href="{% static 'import_deck.css' %}">
+    <div id="main-container">
+        <h1 style="text-align: center;">
+            Import Deck
+        </h1>
+        <div class="grid-container">
+            <button id="import-button" class="button grid-item" onclick="sendDeck()">Import Deck</button>
+            <select id="type-import" class="grid-item">
+                <option value="CardgameDB">CardgameDB</option>
+                <option value="ConquestDB">ConquestDB</option>
+            </select>
+            <textarea class="grid-item" id="deck-text-area"></textarea>
+            <div id="responseMessage">
+                <p></p>
+            </div>
+        </div>
+    </div>
+<script>
+    function sendDeck() {
+        var deck_text = document.querySelector('#deck-text-area').value;
+        var type_import = document.querySelector('#type-import').value;
+        if (deck_text === "") {
+            console.log("deck is blank");
+            $('#responseMessage').text("You have not entered anything into the deck area.");
+        } else {
+            $.ajax({
+                url: '/decks/ajax/',  // The URL of the Django view that handles the request
+                type: 'POST',
+                data: {
+                    'deck_text': deck_text,
+                    'type_import': type_import,
+                    'flag': 'IMPORT',
+                    'csrfmiddlewaretoken': '{{ csrf_token }}' // CSRF token for security
+                },
+                success: function(response) {
+                    $('#responseMessage').text(response.message);  // Update the page dynamically
+                    const message = response.message;
+                    const username = response.username;
+                    const key = response.key;
+                    console.log(message);
+                    if (message === "saving deck") {
+                        location.href = "/decks/" + username + "/" + key + "/";
+                    }
+                }
+            });
+        }
+    }
+</script>
+{% endblock %}

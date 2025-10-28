@@ -17,6 +17,7 @@ urlpatterns = [
     path("create_deck/", views.create_deck, name="create_deck"),
     path("my_decks/<int:page_num>/", views.my_decks_page, name="my_decks_page"),
     path("my_decks/", views.my_decks, name="my_decks"),
+    path("import_deck/", views.import_deck, name="import_deck"),
     path("my_published_decks/<int:page_num>/", views.my_published_decks_page, name="my_published_decks_page"),
     path("my_published_decks/", views.my_published_decks, name="my_published_decks"),
     path("my_liked_decks/<int:page_num>/", views.my_liked_decks_page, name="my_liked_decks_page"),

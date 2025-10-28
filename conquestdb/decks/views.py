@@ -384,6 +384,91 @@ def deck_validation(deck, remaining_signature_squad, factions, warlord=""):
     return "SUCCESS"
 
 
+def determine_cardgamedb_ally(new_deck_list):
+    valid_allies = []
+    warlord_name = new_deck_list[2]
+    warlord_card = FindCard.find_card(warlord_name, card_array, cards_dict)
+    if warlord_card.get_card_type() == "Warlord":
+        warlord_faction = warlord_card.get_faction()
+        if warlord_faction == "Tyranids" or warlord_faction == "Necrons":
+            return ""
+        if warlord_card.get_name() == "Gorzod":
+            return ""
+        if warlord_card.get_name() == "Commander Starblaze":
+            return "Astra Militarum"
+        position_main_faction = -1
+        for faction in range(len(alignment_wheel)):
+            if alignment_wheel[faction] == warlord_faction:
+                position_main_faction = faction
+        if position_main_faction != -1:
+            ally_pos_1 = (position_main_faction + 1) % 7
+            ally_pos_2 = (position_main_faction - 1) % 7
+            valid_allies.append(alignment_wheel[ally_pos_1])
+            valid_allies.append(alignment_wheel[ally_pos_2])
+            card_types = ["Army", "Support", "Synapse", "Attachment", "Event", "Planet"]
+            for i in range(len(new_deck_list)):
+                if i != 0:
+                    if new_deck_list[i] not in card_types and \
+                            new_deck_list[i] != \
+                            "----------------------------------------------------------------------" and \
+                            new_deck_list[i]:
+                        card_name = new_deck_list[i][3:]
+                        card = FindCard.find_card(card_name, card_array, cards_dict)
+                        if card.get_faction() in valid_allies:
+                            return card.get_faction()
+    return ""
+
+
+def convert_cardgamedb_conquestdb(deck_text):
+    try:
+        deck_text = re.sub(r'\([^)]*\)', '', deck_text)
+        deck_text = deck_text.replace("”", "\"")
+        deck_text = deck_text.replace("“", "\"")
+        deck_split = deck_text.split("\n")
+        for i in range(len(deck_split)):
+            deck_split[i] = deck_split[i].rstrip()
+            deck_split[i] = deck_split[i].replace("Warlord:", "")
+            deck_split[i] = deck_split[i].replace("Event", "")
+            deck_split[i] = deck_split[i].replace("Support", "")
+            deck_split[i] = deck_split[i].replace("Attachment", "")
+            deck_split[i] = deck_split[i].replace("Army Unit", "")
+        deck_split = [s for s in deck_split if s]
+        deck_split[0] = deck_split[0][3:]
+        warlord_name = deck_split[0]
+        warlord_card = FindCard.find_card(warlord_name, card_array, cards_dict)
+        if warlord_card.get_card_type() == "Warlord":
+            new_deck = ["IMPORTED DECK",
+                        "----------------------------------------------------------------------",
+                        warlord_name, warlord_card.get_faction(),
+                        "----------------------------------------------------------------------",
+                        "Signature Squad", ""]
+            sig_squad = warlord_card.get_signature_squad()
+            for i in range(len(sig_squad)):
+                new_deck.append(sig_squad[i])
+            card_types = ["Army", "Support", "Synapse", "Attachment", "Event", "Planet"]
+            for card_type in card_types:
+                new_deck.append("----------------------------------------------------------------------")
+                new_deck.append(card_type)
+                new_deck.append("")
+                if card_type != "Synapse" and card_type != "Planet":
+                    for i in range(len(deck_split)):
+                        if i != 0:
+                            card_name = deck_split[i][3:]
+                            card = FindCard.find_card(card_name, card_array, cards_dict)
+                            if card.get_card_type() == card_type:
+                                if card.get_loyalty() != "Signature":
+                                    new_deck.append(deck_split[i])
+            ally = determine_cardgamedb_ally(new_deck)
+            if ally:
+                new_deck[3] = new_deck[3] + " (" + ally + ")"
+            new_deck_text = "\n".join(new_deck)
+            print(new_deck_text)
+            return new_deck_text
+    except Exception as e:
+        print(e)
+        return "ERROR"
+
+
 def get_liked_decks_lists(username):
     deck_names = []
     deck_warlords = []
@@ -539,6 +624,13 @@ def decks(request):
     except Exception as e:
         print(e)
     return render(request, "decks/home_decks.html", {"decks_exist": "No", "light_dark_toggle": light_dark_toggle})
+
+
+def import_deck(request):
+    light_dark_toggle = light_dark_dict.get_light_mode(request.user.username)
+    if not request.user.is_authenticated:
+        return HttpResponseRedirect('/decks/')
+    return render(request, "decks/import_deck.html", {"light_dark_toggle": light_dark_toggle})
 
 
 def delete_deck(request, deck_key):
@@ -1829,6 +1921,51 @@ def search_deck(request):
 def ajax_view(request):
     if request.method == 'POST':
         flag = request.POST.get('flag')
+        if flag == "IMPORT":
+            type_import = request.POST.get('type_import')
+            deck_text = request.POST.get('deck_text')
+            if type_import == "CardgameDB":
+                deck_text = convert_cardgamedb_conquestdb(deck_text)
+            if deck_text == "ERROR":
+                return JsonResponse({'message': 'Error encountered while converting deck to ConquestDB version.'})
+            deck = clean_sent_deck(deck_text)
+            response_message = second_part_deck_validation(deck)
+            if response_message == "SUCCESS":
+                username = request.user.username
+                if not username:
+                    username = "Anonymous"
+                print("Need to save deck")
+                print(os.getcwd())
+                directory = os.getcwd()
+                os.makedirs(directory + "/decks/deckstorage/", exist_ok=True)
+                target_directory = directory + "/decks/deckstorage/" + username + "/"
+                os.makedirs(target_directory, exist_ok=True)
+                set_key = False
+                new_key = create_new_key()
+                num_tries = 0
+                while not set_key and num_tries < 100:
+                    new_key = create_new_key()
+                    if not check_if_key_in_use(new_key):
+                        set_key = True
+                    else:
+                        new_key = create_new_key()
+                        num_tries += 1
+                target_directory = directory + "/decks/deckstorage/" + username + "/" + new_key
+                try:
+                    if not os.path.exists(target_directory):
+                        print("Path does not exist")
+                        os.mkdir(target_directory)
+                    with open(target_directory + "/content", "w", encoding="utf-8") as file:
+                        file.write(deck_text)
+                    with open(target_directory + "/desc", "w") as file:
+                        file.write("")
+                    with open(target_directory + "/key", "w") as file:
+                        file.write(new_key)
+                    return JsonResponse({'message': 'saving deck', 'username': username, 'key': new_key})
+                except Exception as e:
+                    print(e)
+                    return JsonResponse({'message': 'problem encountered while saving deck'})
+            return JsonResponse({'message': response_message})
         if flag == "SENDDECK":
             text = request.POST.get('deck_text')
             username = request.POST.get('username')

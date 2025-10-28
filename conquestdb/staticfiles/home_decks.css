@@ -11,12 +11,41 @@
     overflow-x: auto;
     display: grid;
     justify-content: center;
-    grid-template-columns: 300px 300px;
+    grid-template-columns: min(300px, 30vw) min(300px, 30vw) min(300px, 30vw);
     grid-template-areas:
-    "my-decks published-decks"
-    "my-published-decks my-liked-decks"
-    "search-decks search-decks"
-    "create-deck create-deck"
+    "my-decks-header published-decks-header deck-creation-header"
+    "my-decks published-decks create-deck"
+    "my-published-decks my-liked-decks blank-1"
+    "blank-2 search-decks import-deck"
+}
+
+#blank-1 {
+    grid-area: blank-1;
+    display: none;
+}
+
+#blank-2 {
+    grid-area: blank-2;
+    display: none;
+}
+
+#deck-creation-header {
+    text-align: center;
+    grid-area: deck-creation-header;
+}
+
+#published-decks-header {
+    text-align: center;
+    grid-area: published-decks-header;
+}
+
+#my-decks-header {
+    text-align: center;
+    grid-area: my-decks-header;
+}
+
+#import-deck {
+    grid-area: import-deck;
 }
 
 #search-decks {
