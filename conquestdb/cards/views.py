@@ -10,7 +10,7 @@ import os.path
 import datetime
 import light_dark_dict
 from card_utils import convert_name_to_img_src, convert_name_to_hyperlink, convert_name_to_create_deck_hyperlink
-from PIL import Image, ImageTk, ImageDraw, ImageFont
+from PIL import Image, ImageDraw, ImageFont
 from .custom_card_creator.dict_inits.card_types_dict_positions import card_types_dictionary_positions
 from .custom_card_creator.dict_inits.command_dict import command_dictionary
 from .custom_card_creator.dict_inits.loyalty_dict import loyalty_dictionary
