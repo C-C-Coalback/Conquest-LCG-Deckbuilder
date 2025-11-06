@@ -10,6 +10,15 @@ import os.path
 import datetime
 import light_dark_dict
 from card_utils import convert_name_to_img_src, convert_name_to_hyperlink, convert_name_to_create_deck_hyperlink
+from PIL import Image, ImageTk, ImageDraw, ImageFont
+from .custom_card_creator.dict_inits.card_types_dict_positions import card_types_dictionary_positions
+from .custom_card_creator.dict_inits.command_dict import command_dictionary
+from .custom_card_creator.dict_inits.loyalty_dict import loyalty_dictionary
+from .custom_card_creator.dict_inits.icons_dict import icons_dict, special_text_dict
+import random
+import string
+from django.core.files.storage import FileSystemStorage
+from django.core.files.base import ContentFile
 
 
 def sorter_cycles(column):
@@ -92,6 +101,553 @@ def index(request):
     })
 
 
+card_types = ["Warlord", "Army", "Support", "Event", "Attachment", "Synapse", "Planet"]
+factions = ["Space Marines", "Astra Militarum", "Orks", "Chaos", "Dark Eldar",
+            "Eldar", "Tau", "Necrons", "Tyranids", "Neutral"]
+loyalties = ["Common", "Loyal", "Signature"]
+shields = ["0", "1", "2", "3"]
+
+
+# (1440, 2052) card size
+
+
+def get_pil_text_size(text, font_size, font_name):
+    font = ImageFont.truetype(font_name, font_size)
+    size = font.getbbox(text)
+    return size
+
+
+def get_position_text(card_type, faction, text_type):
+    return card_types_dictionary_positions[card_type][faction][text_type]
+
+
+def get_resize_command(faction, command_type):
+    return command_dictionary[faction]["Resize"][command_type]
+
+
+def get_position_command(faction, command_type):
+    return command_dictionary[faction][command_type]
+
+
+def get_position_loyalty(faction, card_type):
+    return loyalty_dictionary[card_type][faction]
+
+
+def get_wrapped_text(text: str, font: ImageFont.ImageFont, line_length: int):
+    lines = ['']
+    for word in text.split():
+        line = f'{lines[-1]} {word}'.strip()
+        if font.getlength(line) <= line_length:
+            lines[-1] = line
+        else:
+            lines.append(word)
+    return '\n'.join(lines)
+
+
+def get_wrapped_text_nlfix(text: str, font: ImageFont.ImageFont, line_length: int):
+    return "\n".join([get_wrapped_text(line, font, line_length) for line in text.splitlines()])
+
+
+def clicked():
+    pass
+
+
+def add_text_to_image(input_image, text, coords,
+                      font_src="cards/custom_card_creator/fonts/Markazi_Text/MarkaziText-VariableFont_wght.ttf",
+                      font_size=84, color=(0, 0, 0), line_length=1080,
+                      font_bold="cards/custom_card_creator/fonts/Markazi_Text/static/MarkaziText-Bold.ttf",
+                      font_italics="cards/custom_card_creator/fonts/open_sans/OpenSans-Italic.ttf"):
+    drawn_image = ImageDraw.Draw(input_image)
+    text_font = ImageFont.truetype(font_src, font_size)
+    text = get_wrapped_text_nlfix(text, text_font, line_length)
+    og_split_text = text.split(sep="\n")
+    for icon in icons_dict:
+        for i in range(len(og_split_text)):
+            if icon in og_split_text[i]:
+                current_x_pos_text = og_split_text[i].find(icon)
+                shortened_text = og_split_text[i][:current_x_pos_text]
+                x_offset = int(text_font.getlength(shortened_text))
+                initial_extra_offset = icons_dict[icon]["initial_extra_offset"]
+                extra_vertical_offset = icons_dict[icon]["extra_vertical_line_offset"]
+                x_pos_icon = coords[0] + x_offset + initial_extra_offset[0]
+                y_pos_icon = coords[1] + initial_extra_offset[1] + (font_size + extra_vertical_offset) * i
+                required_size = icons_dict[icon]["resize"]
+                text_icon_img = Image.open(icons_dict[icon]["src"], 'r').convert("RGBA")
+                text_icon_img = text_icon_img.resize(required_size)
+                input_image.paste(text_icon_img, (x_pos_icon, y_pos_icon), text_icon_img)
+        text = text.replace(icon, icons_dict[icon]["spacing"])
+    for item in special_text_dict:
+        for i in range(len(og_split_text)):
+            if item in og_split_text[i]:
+                current_x_pos_text = og_split_text[i].find(item)
+                shortened_text = og_split_text[i][:current_x_pos_text]
+                x_offset = int(text_font.getlength(shortened_text))
+                x_pos_icon = coords[0] + x_offset + special_text_dict[item]["initial_extra_offset"][0]
+                y_pos_icon = coords[1] + special_text_dict[item]["initial_extra_offset"][1] + (font_size - 8) * i
+                f_bold = ImageFont.truetype(font_bold, font_size)
+                txt_bold = Image.new('RGBA', (line_length, 330))
+                d_bold = ImageDraw.Draw(txt_bold)
+                d_bold.text((0, 0), special_text_dict[item]["text"], font=f_bold, fill="black")
+                input_image.paste(txt_bold, (x_pos_icon, y_pos_icon), txt_bold)
+        text = text.replace(item, special_text_dict[item]["spacing"])
+    split_text = text.split(sep="\n")
+    italics_active = False
+    current_coords = coords
+    f_italics = ImageFont.truetype(font_italics, int(font_size * 0.75))
+    for i in range(len(split_text)):
+        will_disable = False
+        if split_text[i].count("\\i") % 2:
+            if italics_active:
+                will_disable = True
+            italics_active = True
+        split_text[i] = split_text[i].replace("\\i", "")
+        if italics_active:
+            drawn_image.text(current_coords, split_text[i], fill=color, font=f_italics)
+        else:
+            drawn_image.text(current_coords, split_text[i], fill=color, font=text_font)
+        current_coords = (current_coords[0], current_coords[1] + (font_size - 8))
+        if will_disable:
+            italics_active = False
+    return input_image
+
+
+def add_text_to_planet_image(input_image, text,
+                             font_src="cards/custom_card_creator/fonts/Markazi_Text/MarkaziText-VariableFont_wght.ttf",
+                             font_size=84, line_length=1080,
+                             font_bold="cards/custom_card_creator/fonts/Markazi_Text/static/MarkaziText-Bold.ttf"):
+    text_font = ImageFont.truetype(font_src, font_size)
+    text = get_wrapped_text_nlfix(text, text_font, line_length)
+    og_split_text = text.split(sep="\n")
+    replacement_icons = ["[SPACE MARINES]", "[ASTRA MILITARUM]", "[ORKS]", "[CHAOS]", "[DARK ELDAR]",
+                         "[ELDAR]", "[TAU]", "[TYRANIDS]", "[NECRONS]", "[RESOURCE]",
+                         "[TECHNOLOGY]", "[MATERIAL]", "[STRONGPOINT]"]
+    coords = (30, 400)
+    for icon in replacement_icons:
+        for i in range(len(og_split_text)):
+            if icon in og_split_text[i]:
+                current_x_pos_text = og_split_text[i].find(icon)
+                shortened_text = og_split_text[i][:current_x_pos_text]
+                x_offset = int(text_font.getlength(shortened_text))
+                initial_extra_offset = icons_dict[icon]["initial_extra_offset"]
+                extra_vertical_offset = icons_dict[icon]["extra_vertical_line_offset"]
+                x_pos_icon = coords[0] + 240 + initial_extra_offset[0] - (font_size + extra_vertical_offset) * i
+                y_pos_icon = coords[1] + x_offset + initial_extra_offset[1]
+                required_size = icons_dict[icon]["resize"]
+                text_icon_img = Image.open(icons_dict[icon]["src"], 'r').convert("RGBA")
+                text_icon_img = text_icon_img.resize(required_size)
+                text_icon_img = text_icon_img.rotate(270)
+                input_image.paste(text_icon_img, (x_pos_icon, y_pos_icon), text_icon_img)
+                "A Non-[TAU] Unit."
+        text = text.replace(icon, icons_dict[icon]["spacing"])
+    for item in special_text_dict:
+        for i in range(len(og_split_text)):
+            if item in og_split_text[i]:
+                current_x_pos_text = og_split_text[i].find(item)
+                shortened_text = og_split_text[i][:current_x_pos_text]
+                x_offset = int(text_font.getlength(shortened_text))
+                x_offset = x_offset + special_text_dict[item]["initial_extra_offset"][0] + 400
+                y_offset = special_text_dict[item]["initial_extra_offset"][1] - (font_size + 0) * i + 30
+                f_bold = ImageFont.truetype(font_bold, font_size)
+                txt_bold = Image.new('RGBA', (line_length, 330))
+                d_bold = ImageDraw.Draw(txt_bold)
+                d_bold.text((0, 0), special_text_dict[item]["text"], font=f_bold, fill="black")
+                w_bold = txt_bold.rotate(270, expand=1)
+                input_image.paste(w_bold, (y_offset, x_offset), w_bold)
+        text = text.replace(item, special_text_dict[item]["spacing"])
+    f = ImageFont.truetype(font_src, font_size)
+    txt = Image.new('RGBA', (line_length, 330))
+    d = ImageDraw.Draw(txt)
+    d.text((0, 0), text, font=f, fill="black")
+    w = txt.rotate(270, expand=1)
+    x_offset = 400
+    input_image.paste(w, (30, x_offset), w)
+    return input_image
+
+
+def add_name_to_card(card_type, name, resulting_img):
+    if card_type == "Support":
+        f = ImageFont.truetype("cards/custom_card_creator/fonts/billboard-college-cufonfonts/Billboard-College.ttf", 84)
+        txt = Image.new('RGBA', (900, 100))
+        d = ImageDraw.Draw(txt)
+        d.text((0, 0), name, font=f, fill="black")
+        w = txt.rotate(90, expand=1)
+        x_offset = int((0.5 * get_pil_text_size(name, 84,
+                                                "cards/custom_card_creator/fonts/billboard-college-cufonfonts/Billboard-College.ttf")[
+            2]) - 100)
+        resulting_img.paste(w, (110, x_offset), w)
+    elif card_type == "Planet":
+        f = ImageFont.truetype("cards/custom_card_creator/fonts/billboard-college-cufonfonts/Billboard-College.ttf", 84)
+        txt = Image.new('RGBA', (900, 100))
+        d = ImageDraw.Draw(txt)
+        d.text((0, 0), name, font=f, fill="black")
+        w = txt.rotate(270, expand=1)
+        x_offset = int((-1 * get_pil_text_size(name, 84,
+                                               "cards/custom_card_creator/fonts/billboard-college-cufonfonts/Billboard-College.ttf")[
+            2]))
+        x_offset = x_offset + 1900
+        resulting_img.paste(w, (1210, x_offset), w)
+    elif card_type == "Attachment":
+        x_offset = int(690 - (0.5 * get_pil_text_size(name, 84,
+                                                      "cards/custom_card_creator/fonts/billboard-college-cufonfonts/Billboard-College.ttf")[
+            2]))
+        add_text_to_image(
+            resulting_img, name, (x_offset, 1220),
+            font_src="cards/custom_card_creator/fonts/billboard-college-cufonfonts/Billboard-College.ttf"
+        )
+    elif card_type == "Warlord":
+        x_offset = int(750 - (0.5 * get_pil_text_size(name, 84,
+                                                      "cards/custom_card_creator/fonts/billboard-college-cufonfonts/Billboard-College.ttf")[
+            2]))
+        add_text_to_image(
+            resulting_img, name, (x_offset, 94),
+            font_src="cards/custom_card_creator/fonts/billboard-college-cufonfonts/Billboard-College.ttf"
+        )
+    elif card_type == "Event":
+        x_offset = int(810 - (0.5 * get_pil_text_size(name, 84,
+                                                      "cards/custom_card_creator/fonts/billboard-college-cufonfonts/Billboard-College.ttf")[
+            2]))
+        add_text_to_image(
+            resulting_img, name, (x_offset, 78),
+            font_src="cards/custom_card_creator/fonts/billboard-college-cufonfonts/Billboard-College.ttf"
+        )
+    else:
+        x_offset = int(810 - (0.5 * get_pil_text_size(name, 84,
+                                                      "cards/custom_card_creator/fonts/billboard-college-cufonfonts/Billboard-College.ttf")[
+            2]))
+        add_text_to_image(
+            resulting_img, name, (x_offset, 108),
+            font_src="cards/custom_card_creator/fonts/billboard-college-cufonfonts/Billboard-College.ttf"
+        )
+    return resulting_img
+
+
+def add_traits_to_card(card_type, traits, resulting_img):
+    x_offset = int(840 - (0.5 * get_pil_text_size(traits, 84,
+                                                  "cards/custom_card_creator/fonts/Markazi_Text/static/MarkaziText-Bold.ttf")[
+        2]))
+    y_offset = 1320
+    if card_type == "Army":
+        x_offset = x_offset - 50
+    if card_type == "Support":
+        x_offset = x_offset - 100
+        y_offset = 1370
+    if card_type == "Warlord":
+        x_offset = x_offset - 80
+        y_offset = 230
+    if card_type == "Attachment":
+        x_offset = x_offset - 140
+        y_offset = 1370
+    if card_type == "Event":
+        x_offset = x_offset - 100
+        y_offset = 1390
+    add_text_to_image(
+        resulting_img, traits, (x_offset, y_offset),
+        font_src="cards/custom_card_creator/fonts/Markazi_Text/static/MarkaziText-Bold.ttf"
+    )
+    return resulting_img
+
+
+def add_command_icons(command, first_command_src, extra_command_src, command_end_src, resulting_img, faction):
+    command = int(command)
+    if command > 0:
+        current_x_pos_end_command, y_end_command = get_position_command(faction, "End")
+        first_command_img = Image.open(first_command_src, 'r').convert("RGBA")
+        first_command_img = first_command_img.resize(get_resize_command(faction, "First"))
+        resulting_img.paste(first_command_img, get_position_command(faction, "First"), first_command_img)
+        extra_command_img = Image.open(extra_command_src, 'r').convert("RGBA")
+        extra_command_img = extra_command_img.resize(get_resize_command(faction, "Extra"))
+        current_position_command, y_extra_command = get_position_command(faction, "Extra")
+        spacing = get_position_command(faction, "Spacing")
+        for i in range(command - 1):
+            resulting_img.paste(extra_command_img, (current_position_command, y_extra_command), extra_command_img)
+            current_position_command += spacing
+            current_x_pos_end_command += spacing
+        command_end_img = Image.open(command_end_src, 'r').convert("RGBA")
+        command_end_img = command_end_img.resize(get_resize_command(faction, "End"))
+        resulting_img.paste(command_end_img, (current_x_pos_end_command, y_end_command), command_end_img)
+
+
+def card_creator(request):
+    light_dark_toggle = light_dark_dict.get_light_mode(request.user.username)
+    current_src = "/static/images/CardImages/Nazdreg.jpg"
+    username = request.user.username
+    if username:
+        cwd = os.getcwd()
+        if os.path.exists(cwd + "/media/card_img_srcs/" + username):
+            file_names = os.listdir(cwd + "/media/card_img_srcs/" + username)
+            if file_names:
+                current_src = "/media/card_img_srcs/" + username + "/" + file_names[0]
+    return render(request, 'cards/card_creator.html', {
+        "light_dark_toggle": light_dark_toggle, "current_src": current_src
+    })
+
+
+def process_submitted_planet_card(name, card_type, text, cards_value, resources_value, icons_grouped, output_dir,
+                                  input_src):
+    resources_src = "cards/custom_card_creator/card_srcs/Planet/Values/resource_" + resources_value + ".jpg"
+    cards_src = "cards/custom_card_creator/card_srcs/Planet/Values/card_" + cards_value + ".jpg"
+    text_src = "cards/custom_card_creator/card_srcs/" + card_type + "/Text/Text.png"
+    if not os.path.exists(text_src):
+        return False
+    card_art_src = input_src
+    expansion_icon_src = "cards/custom_card_creator/current_card_info/expansion_icon/expansion_icon.png"
+    resulting_img = Image.new("RGBA", (1440, 2052))
+    dirs_art = os.listdir(card_art_src)
+    if not dirs_art:
+        return False
+    random.shuffle(dirs_art)
+    card_art_img = Image.open(card_art_src + dirs_art[0], 'r').convert("RGBA")
+    card_art_img = card_art_img.resize((1440, 2052))
+    resulting_img.paste(card_art_img, get_position_text(card_type, "Planet", "Art"))
+    text_resize_amount = (1440, 2052)
+    text_img = Image.open(text_src, 'r').convert("RGBA")
+    text_img = text_img.resize(text_resize_amount)
+    resulting_img.paste(text_img, get_position_text(card_type, "Planet", "Text Box"), text_img)
+    if os.path.exists(cards_src):
+        cards_value_img = Image.open(cards_src, 'r').convert("RGBA")
+        cards_value_img = cards_value_img.resize((256, 176))
+        resulting_img.paste(cards_value_img, get_position_text(card_type, "Planet", "Card"), cards_value_img)
+    if os.path.exists(resources_src):
+        resources_value_img = Image.open(resources_src, 'r').convert("RGBA")
+        resources_value_img = resources_value_img.resize((202, 142))
+        resulting_img.paste(resources_value_img, get_position_text(card_type, "Planet", "Resource"),
+                            resources_value_img)
+    expansion_icon_img = Image.open(expansion_icon_src, 'r').convert("RGBA").resize((40, 40))
+    resulting_img.paste(expansion_icon_img, get_position_text(card_type, "Planet", "Expansion Icon"),
+                        expansion_icon_img)
+    add_name_to_card(card_type, name, resulting_img)
+    x_offset = int(690 - (0.5 * get_pil_text_size(
+        text, 84, "cards/custom_card_creator/fonts/billboard-college-cufonfonts/Billboard-College.ttf"
+    )[2]))
+    add_text_to_planet_image(
+        resulting_img, text
+    )
+    num_icons = 0
+    for c in icons_grouped:
+        if c == "R":
+            material_src = "cards/custom_card_creator/card_srcs/Planet/Icons/Material.png"
+            material_img = Image.open(material_src, 'r').convert("RGBA").resize((197, 278))
+            icon_coords = get_position_text(card_type, "Planet", "First Icon")
+            icon_coords = (icon_coords[0],
+                           icon_coords[1] + num_icons * get_position_text(card_type, "Planet", "Icon Spacing"))
+            resulting_img.paste(material_img, icon_coords, material_img)
+            num_icons += 1
+        if c == "B":
+            technology_src = "cards/custom_card_creator/card_srcs/Planet/Icons/Technology.png"
+            technology_img = Image.open(technology_src, 'r').convert("RGBA").resize((197, 278))
+            icon_coords = get_position_text(card_type, "Planet", "First Icon")
+            icon_coords = (icon_coords[0],
+                           icon_coords[1] + num_icons * get_position_text(card_type, "Planet", "Icon Spacing"))
+            resulting_img.paste(technology_img, icon_coords, technology_img)
+            num_icons += 1
+        if c == "G":
+            strongpoint_src = "cards/custom_card_creator/card_srcs/Planet/Icons/Strongpoint.png"
+            strongpoint_img = Image.open(strongpoint_src, 'r').convert("RGBA").resize((197, 278))
+            icon_coords = get_position_text(card_type, "Planet", "First Icon")
+            icon_coords = (icon_coords[0],
+                           icon_coords[1] + num_icons * get_position_text(card_type, "Planet", "Icon Spacing"))
+            resulting_img.paste(strongpoint_img, icon_coords, strongpoint_img)
+            num_icons += 1
+        if c in ["R", "G", "B"] and num_icons > 1:
+            connector_src = "cards/custom_card_creator/card_srcs/Planet/Icons/Icon_Join.jpg"
+            connector_img = Image.open(connector_src, 'r').convert("RGBA").resize((74, 45))
+            icon_coords = get_position_text(card_type, "Planet", "First Join")
+            print(icon_coords)
+            icon_coords = (icon_coords[0], icon_coords[1] + (num_icons - 1)
+                           * get_position_text(card_type, "Planet", "Join Spacing"))
+            print(icon_coords)
+            resulting_img.paste(connector_img, icon_coords, connector_img)
+    resulting_img.save(output_dir, "PNG")
+    return True
+
+
+def process_submitted_card(name, card_type, text, faction, traits, output_dir,
+                           attack="0", health="0", command="0", cost="0",
+                           starting_cards="7", starting_resources="7",
+                           loyalty="Common", shield_value="0",
+                           input_src=""):
+    text_src = "cards/custom_card_creator/card_srcs/" + faction + "/" + card_type + "/Text.png"
+    if not os.path.exists(text_src):
+        return False
+    card_art_src = input_src
+    expansion_icon_dirs = "cards/custom_card_creator/current_card_info/expansion_icon/"
+    dirs_expansion = os.listdir(expansion_icon_dirs)
+    if not dirs_expansion:
+        return False
+    random.shuffle(dirs_expansion)
+    expansion_icon_src = "cards/custom_card_creator/current_card_info/expansion_icon/" + dirs_expansion[0]
+    first_command_src = "cards/custom_card_creator/card_srcs/" + faction + "/" + card_type + "/First_Command.png"
+    command_end_src = "cards/custom_card_creator/card_srcs/" + faction + "/" + card_type + "/Command_End.png"
+    extra_command_src = "cards/custom_card_creator/card_srcs/" + faction + "/" + card_type + "/Extra_Command_Icon.png"
+    resulting_img = Image.new("RGBA", (1440, 2052))
+    dirs_art = os.listdir(card_art_src)
+    if not dirs_art:
+        return False
+    random.shuffle(dirs_art)
+    card_art_img = Image.open(card_art_src + dirs_art[0], 'r').convert("RGBA")
+    if card_type == "Warlord":
+        card_art_img = card_art_img.resize((1440, 2052))
+    else:
+        card_art_img = card_art_img.resize((1440, 1500))
+    resulting_img.paste(card_art_img, get_position_text(card_type, faction, "Art"))
+    text_resize_amount = (1440, 2052)
+    required_line_length = 1240
+    if card_type == "Army":
+        required_line_length = 1080
+    if card_type == "Warlord":
+        required_line_length = 720
+    text_img = Image.open(text_src, 'r').convert("RGBA")
+    text_img = text_img.resize(text_resize_amount)
+    resulting_img.paste(text_img, get_position_text(card_type, faction, "Text Box"), text_img)
+    expansion_icon_img = Image.open(expansion_icon_src, 'r').convert("RGBA").resize((55, 55))
+    resulting_img.paste(expansion_icon_img, get_position_text(card_type, faction, "Expansion Icon"), expansion_icon_img)
+    add_name_to_card(card_type, name, resulting_img)
+    add_traits_to_card(card_type, traits, resulting_img)
+    add_text_to_image(resulting_img, text, get_position_text(card_type, faction, "Text"),
+                      line_length=required_line_length)
+    if card_type in ["Army", "Support", "Event", "Attachment"]:
+        add_text_to_image(
+            resulting_img, cost, get_position_text(card_type, faction, "Cost"), font_size=168, color=(0, 0, 0)
+        )
+    if card_type in ["Army", "Warlord", "Synapse"]:
+        add_text_to_image(
+            resulting_img, attack, get_position_text(card_type, faction, "Attack"), font_size=168, color=(255, 255, 255)
+        )
+        add_text_to_image(
+            resulting_img, health, get_position_text(card_type, faction, "Health"), font_size=168, color=(0, 0, 0)
+        )
+    if card_type in ["Army"] and faction != "Neutral":
+        try:
+            add_command_icons(command, first_command_src, extra_command_src, command_end_src, resulting_img, faction)
+        except ValueError:
+            pass
+    if card_type == "Warlord":
+        add_text_to_image(
+            resulting_img, starting_cards, get_position_text(card_type, faction, "Cards"),
+            font_size=168, color=(0, 0, 0)
+        )
+        add_text_to_image(
+            resulting_img, starting_resources, get_position_text(card_type, faction, "Resources"),
+            font_size=168, color=(243, 139, 18)
+        )
+    if card_type in ["Army", "Support", "Event", "Attachment"]:
+        if (loyalty == "Loyal" or loyalty == "Signature") and faction != "Neutral":
+            loyalty_src = "cards/custom_card_creator/card_srcs/" + faction + "/Loyalty/" + loyalty + ".png"
+            loyalty_img = Image.open(loyalty_src, 'r').convert("RGBA")
+            resize_loyalty = (127, 84)
+            if faction == "Tau":
+                resize_loyalty = (147, 184)
+            loyalty_img = loyalty_img.resize(resize_loyalty)
+            resulting_img.paste(loyalty_img, get_position_loyalty(faction, card_type), loyalty_img)
+    if card_type in ["Event", "Attachment"]:
+        shield_value = int(shield_value)
+        if shield_value > 0:
+            shield_src = "cards/custom_card_creator/card_srcs/" + faction + "/Shield/Shield_Icon.png"
+            shield_icon_img = Image.open(shield_src, 'r').convert("RGBA")
+            shield_icon_img = shield_icon_img.resize((221, 101))
+            starting_position_shield = get_position_text(card_type, faction, "Shield")
+            for _ in range(shield_value):
+                resulting_img.paste(shield_icon_img, starting_position_shield, shield_icon_img)
+                starting_position_shield = (starting_position_shield[0], starting_position_shield[1] + 100)
+    resulting_img.save(output_dir, "PNG")
+    return True
+
+
+def ajax_creator(request):
+    if request.method == 'POST':
+        try:
+            card_name = request.POST.get('card_name')
+            text = request.POST.get('text')
+            card_traits = request.POST.get('traits')
+            card_type = request.POST.get('card_type')
+            faction = request.POST.get('faction')
+            loyalty = request.POST.get('loyalty')
+            cost = request.POST.get('cost')
+            command = request.POST.get('command')
+            attack = request.POST.get('attack')
+            health = request.POST.get('health')
+            shield = request.POST.get('shield')
+            starting_cards = request.POST.get('starting_cards')
+            starting_resources = request.POST.get('starting_resources')
+            cards_value = request.POST.get('cards_value')
+            resources_value = request.POST.get('resources_value')
+            icons = request.POST.get('icons')
+            username = request.user.username
+            if not username:
+                username = "Anonymous"
+            key_code = ''.join(random.choice(string.ascii_uppercase + string.ascii_lowercase + string.digits)
+                               for _ in range(16))
+            output_dir = "media/resulting_images/" + username
+            if not os.path.exists("media/resulting_images/"):
+                os.mkdir("media/resulting_images/")
+            if not os.path.exists("media/card_img_srcs/"):
+                os.mkdir("media/card_img_srcs/")
+            if not os.path.exists(output_dir):
+                os.mkdir(output_dir)
+            for filename in os.listdir(output_dir):
+                file_path = os.path.join(output_dir, filename)
+                if os.path.isfile(file_path):
+                    os.remove(file_path)
+            output_src = output_dir + "/" + key_code + ".png"
+            cwd = os.getcwd()
+            input_src = "cards/custom_card_creator/current_card_info/src_img/"
+            username = request.user.username
+            if username:
+                if os.path.exists(cwd + "/media/card_img_srcs/" + username):
+                    file_names = os.listdir(cwd + "/media/card_img_srcs/" + username)
+                    if file_names:
+                        input_src = cwd + "/media/card_img_srcs/" + username + "/"
+            if card_type == "Planet":
+                if process_submitted_planet_card(card_name, card_type, text,
+                                                 cards_value, resources_value, icons, output_src, input_src):
+                    return JsonResponse({'message': 'SUCCESS', 'new_src': output_src})
+            else:
+                if process_submitted_card(card_name, card_type, text, faction, card_traits, output_src,
+                                          attack=attack, health=health, command=command, cost=cost,
+                                          starting_cards=starting_cards, starting_resources=starting_resources,
+                                          loyalty=loyalty, shield_value=shield, input_src=input_src):
+                    return JsonResponse({'message': 'SUCCESS', 'new_src': output_src})
+            return JsonResponse(
+                {'message': 'Failed - invalid parameters.', 'new_src': '/static/images/CardImages/Nazdreg.jpg'})
+        except Exception as e:
+            print(e)
+        return JsonResponse(
+            {'message': 'Failed - error during processing.', 'new_src': '/static/images/CardImages/Nazdreg.jpg'})
+    return render(request, 'cards/card_creator.html', {})
+
+
+def upload_card(request):
+    light_dark_toggle = light_dark_dict.get_light_mode(request.user.username)
+    return render(request, 'cards/upload_card.html', {
+        "light_dark_toggle": light_dark_toggle
+    })
+
+
+def simple_upload(request):
+    if request.method == 'POST' and request.FILES.get('file'):
+        if request.user.is_authenticated:
+            username = request.user.username
+            files = request.FILES['file']
+            print('got here')
+            cwd = os.getcwd()
+            destination = cwd + "/media/card_img_srcs/"
+            destination = destination + username
+            if os.path.exists(destination):
+                for filename in os.listdir(destination):
+                    file_path = os.path.join(destination, filename)
+                    if os.path.isfile(file_path):
+                        os.remove(file_path)
+            key_code = ''.join(random.choice(string.ascii_uppercase + string.ascii_lowercase + string.digits)
+                               for _ in range(16))
+            destination = "card_img_srcs/" + username + "/" + key_code + ".jpg"
+            print(destination)
+            file_data = files.read()
+            print(len(file_data))
+            fs = FileSystemStorage()
+            file_name = fs.save(destination, files)
+    return redirect("/cards/card_creator/")
+
+
 # View to handle the Ajax request
 def ajax_view(request):
     if request.method == 'POST':
@@ -171,13 +727,13 @@ def ajax_view(request):
                         filtered_df = filtered_df[filtered_df['card type'].isin(extra_card_type_filter)]
             if warlord_name == "Gorzod":
                 filtered_df = filtered_df[(((filtered_df['faction'] == "Space Marines") &
-                                           (filtered_df['loyalty'] == "Common") &
-                                           (filtered_df['traits'].str.contains("Vehicle"))) |
-                                          ((filtered_df['faction'] == "Astra Militarum") &
-                                           (filtered_df['loyalty'] == "Common") &
-                                           (filtered_df['traits'].str.contains("Vehicle"))) |
-                                          ((filtered_df['faction'] == "Orks") &
-                                           (filtered_df['loyalty'] != "Signature"))) |
+                                            (filtered_df['loyalty'] == "Common") &
+                                            (filtered_df['traits'].str.contains("Vehicle"))) |
+                                           ((filtered_df['faction'] == "Astra Militarum") &
+                                            (filtered_df['loyalty'] == "Common") &
+                                            (filtered_df['traits'].str.contains("Vehicle"))) |
+                                           ((filtered_df['faction'] == "Orks") &
+                                            (filtered_df['loyalty'] != "Signature"))) |
                                           (filtered_df['faction'] == "Neutral")]
             elif warlord.get_faction() == "Necrons":
                 valid_necrons_enslavement = ["Astra Militarum", "Space Marines", "Tau",
@@ -195,14 +751,14 @@ def ajax_view(request):
                                            (filtered_df['card type'] != "Army"))]
             elif warlord_name and ally_faction:
                 filtered_df = filtered_df[(((filtered_df['faction'] == warlord.get_faction()) &
-                                           (filtered_df['loyalty'] != "Signature")) |
-                                          ((filtered_df['faction'] == ally_faction) &
-                                           (filtered_df['loyalty'] == "Common"))) |
+                                            (filtered_df['loyalty'] != "Signature")) |
+                                           ((filtered_df['faction'] == ally_faction) &
+                                            (filtered_df['loyalty'] == "Common"))) |
                                           (filtered_df['faction'] == "Neutral")]
             elif warlord_name:
                 warlord = FindCard.find_card(warlord_name, card_array, cards_dict)
                 filtered_df = filtered_df[(((filtered_df['faction'] == warlord.get_faction()) &
-                                           (filtered_df['loyalty'] != "Signature"))) |
+                                            (filtered_df['loyalty'] != "Signature"))) |
                                           (filtered_df['faction'] == "Neutral")]
             if warlord_name == "Yvraine":
                 filtered_df = filtered_df[((filtered_df['faction'] != "Chaos") |
@@ -474,7 +1030,7 @@ def card_data(request, card_name):
     comment_ids = []
     no_comments = True
     if card_type == "Planet":
-        text = card.get_sector_as_text() + card.get_icons_as_text() + card.get_winnings_as_text() +\
+        text = card.get_sector_as_text() + card.get_icons_as_text() + card.get_winnings_as_text() + \
                card.get_commit_text_as_text() + text
     if os.path.exists(target_directory):
         for infile in sorted(os.listdir(target_directory)):

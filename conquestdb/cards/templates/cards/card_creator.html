@@ -1,0 +1,145 @@
+{% extends "base.html" %}
+{% block title %}Create Card{% endblock %}
+{% block content %}
+{% load static %}
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<link rel="stylesheet" href="{% static 'card_creator.css' %}">
+<div id="main-container">
+    <h1 style="text-align: center;">
+        Create Card
+    </h1>
+    <div class="grid-container">
+        <button id="create-card" class="button grid-item" onclick="sendCard()">Create Card</button>
+        <p id="text-header" class="grid-item">Text: </p>
+        <p id="name-header" class="grid-item">Name: </p>
+        <textarea class="grid-item" id="name"></textarea>
+        <p id="traits-header" class="grid-item">Traits: </p>
+        <textarea class="grid-item" id="traits"></textarea>
+        <p id="cost-header" class="grid-item">Cost: </p>
+        <textarea class="grid-item" id="cost"></textarea>
+        <p id="command-header" class="grid-item">Command: </p>
+        <textarea class="grid-item" id="command"></textarea>
+        <p id="attack-header" class="grid-item">Attack: </p>
+        <textarea class="grid-item" id="attack"></textarea>
+        <p id="health-header" class="grid-item">Health: </p>
+        <textarea class="grid-item" id="health"></textarea>
+        <p id="starting-card-header" class="grid-item">Starting Cards: </p>
+        <textarea class="grid-item" id="starting-card"></textarea>
+        <p id="starting-resource-header" class="grid-item">Starting Resources: </p>
+        <textarea class="grid-item" id="starting-resource"></textarea>
+        <p id="faction-header" class="grid-item">Faction: </p>
+        <select id="faction" class="grid-item">
+            <option value="Space Marines">Space Marines</option>
+            <option value="Astra Militarum">Astra Militarum</option>
+            <option value="Orks">Orks</option>
+            <option value="Chaos">Chaos</option>
+            <option value="Dark Eldar">Dark Eldar</option>
+            <option value="Eldar">Eldar</option>
+            <option value="Tau">Tau</option>
+            <option value="Tyranids">Tyranids</option>
+            <option value="Necrons">Necrons</option>
+            <option value="Neutral">Neutral</option>
+        </select>
+        <p id="card-type-header" class="grid-item">Card Type: </p>
+        <select id="card-type" class="grid-item">
+            <option value="Army">Army</option>
+            <option value="Support">Support</option>
+            <option value="Event">Event</option>
+            <option value="Attachment">Attachment</option>
+            <option value="Warlord">Warlord</option>
+            <option value="Synapse">Synapse</option>
+            <option value="Planet">Planet</option>
+        </select>
+        <p id="loyalty-header" class="grid-item">Loyalty: </p>
+        <select id="loyalty" class="grid-item">
+            <option value="Common">Common</option>
+            <option value="Loyal">Loyal</option>
+            <option value="Signature">Signature</option>
+        </select>
+        <p id="card-value-header">Cards (planet): </p>
+        <select id="card-value">
+            <option value="0">0</option>
+            <option value="1">1</option>
+            <option value="2">2</option>
+        </select>
+        <p id="resource-value-header">Resources (planet): </p>
+        <select id="resource-value">
+            <option value="0">0</option>
+            <option value="1">1</option>
+            <option value="2">2</option>
+        </select>
+        <p id="icons-header">Planet icons</p>
+        <textarea id="icons"></textarea>
+        <p id="shield-header" class="grid-item">Shields: </p>
+        <select id="shield" class="grid-item">
+            <option value="0">0</option>
+            <option value="1">1</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+        </select>
+        <textarea class="grid-item" id="text-box"></textarea>
+        <div class="grid-item" id="responseMessage">
+            <p id="actual-response">Feedback will show up here.</p>
+        </div>
+        <div class="grid-item" id="originalImageContainer">
+            <img src="{{ current_src }}" id="originalImage">
+        </div>
+        <div id="responseImageContainer">
+            <img src="/static/images/CardImages/Ammo_Depot.jpg" id="responseImage">
+        </div>
+    </div>
+</div>
+<script>
+    function sendCard() {
+        var card_name = document.querySelector('#name').value;
+        var text = document.querySelector('#text-box').value;
+        var traits = document.querySelector('#traits').value;
+        var card_type = document.querySelector('#card-type').value;
+        var faction = document.querySelector('#faction').value;
+        var loyalty = document.querySelector('#loyalty').value;
+        var cost = document.querySelector('#cost').value;
+        var command = document.querySelector('#command').value;
+        var attack = document.querySelector('#attack').value;
+        var health = document.querySelector('#health').value;
+        var shield = document.querySelector('#shield').value;
+        var starting_cards = document.querySelector('#starting-card').value;
+        var starting_resources = document.querySelector('#starting-resource').value;
+        var cards_value = document.querySelector('#card-value').value;
+        var resources_value = document.querySelector('#resource-value').value;
+        var icons = document.querySelector('#icons').value;
+        $.ajax({
+            url: '/cards/ajax_creator/',  // The URL of the Django view that handles the request
+            type: 'POST',
+            data: {
+                'card_name': card_name,
+                'text': text,
+                'traits': traits,
+                'card_type': card_type,
+                'faction': faction,
+                'loyalty': loyalty,
+                'cost': cost,
+                'command': command,
+                'attack': attack,
+                'health': health,
+                'shield': shield,
+                'starting_cards': starting_cards,
+                'starting_resources': starting_resources,
+                'cards_value': cards_value,
+                'resources_value': resources_value,
+                'icons': icons,
+                'flag': 'CREATE_CARD',
+                'csrfmiddlewaretoken': '{{ csrf_token }}' // CSRF token for security
+            },
+            success: function(response) {
+                $('#actual-response').text(response.message);  // Update the page dynamically
+                const message = response.message;
+                console.log(message);
+                if (message === "SUCCESS") {
+                    console.log(response.new_src);
+                    $('#responseImage').attr("src", "/" + response.new_src);
+                }
+            }
+        });
+    }
+</script>
+{% endblock %}

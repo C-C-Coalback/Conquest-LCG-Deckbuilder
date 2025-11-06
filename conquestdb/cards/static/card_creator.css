@@ -1,0 +1,236 @@
+#main-container {
+    position: relative;
+    left: 0;
+    width:100%;
+}
+
+.button {
+    width: 20vw;
+    min-height: 70px;
+}
+
+.grid-container {
+    position: relative;
+    left: 0;
+    width:100%;
+    overflow-x: auto;
+    display: grid;
+    justify-content: center;
+    grid-template-areas:
+    "name-header name original-image"
+    "text-header text-box original-image"
+    "traits-header traits original-image"
+    "card-type-header card-type original-image"
+    "faction-header faction original-image"
+    "loyalty-header loyalty result-image"
+    "cost-header cost result-image"
+    "command-header command result-image"
+    "attack-header attack result-image"
+    "health-header health result-image"
+    "shield-header shield result-image"
+    "starting-card-header starting-card result-image"
+    "starting-resource-header starting-resource result-image"
+    "card-value-header card-value result-image"
+    "resource-value-header resource-value result-image"
+    "icons-header icons result-image"
+    "response-message create-card result-image"
+}
+
+#card-value-header {
+    grid-area: card-value-header;
+}
+
+#card-value {
+    grid-area: card-value;
+}
+
+#resource-value-header {
+    grid-area: resource-value-header;
+}
+
+#resource-value {
+    grid-area: resource-value;
+}
+
+#icons-header {
+    grid-area: icons-header;
+}
+
+#icons {
+    grid-area: icons;
+}
+
+#starting-card-header {
+    grid-area: starting-card-header;
+}
+
+#starting-card {
+    grid-area: starting-card;
+}
+
+#starting-resource-header {
+    grid-area: starting-resource-header;
+}
+
+#starting-resource {
+    grid-area: starting-resource;
+}
+
+#shield-header {
+    grid-area: shield-header;
+}
+
+#shield {
+    grid-area: shield;
+}
+
+#cost-header {
+    grid-area: cost-header;
+}
+
+#command-header {
+    grid-area: command-header;
+}
+
+#attack-header {
+    grid-area: attack-header;
+}
+
+#health-header {
+    grid-area: health-header;
+}
+
+#cost {
+    grid-area: cost;
+}
+
+#command {
+    grid-area: command;
+}
+
+#attack {
+    grid-area: attack;
+}
+
+#health {
+    grid-area: health;
+}
+
+#text-header {
+    grid-area: text-header;
+}
+
+#responseImageContainer {
+    grid-area: result-image;
+}
+
+#originalImageContainer {
+    grid-area: original-image;
+}
+
+#originalImage, #responseImage {
+    width: 280px;
+    height: 400px;
+}
+
+#loyalty-header {
+    grid-area: loyalty-header;
+}
+
+#loyalty {
+    grid-area: loyalty;
+    width: 20vw;
+    margin-left: 2.5vw;
+}
+
+#card-type {
+    width: 20vw;
+    margin-left: 2.5vw;
+    grid-area: card-type;
+}
+
+#faction-header {
+    grid-area: faction-header;
+}
+
+#card-type-header {
+    grid-area: card-type-header;
+}
+
+#responseMessage {
+    grid-area: response-message;
+    text-align: center;
+    width: 10vw;
+}
+
+#create-card {
+    width: 15vw;
+    margin-left: 2.5vw;
+    grid-area: create-card;
+}
+
+#text-box {
+    width: 20vw;
+    height: 20vh;
+    grid-area: text-box;
+}
+
+#name {
+    width: 20vw;
+    height: 2vh;
+    grid-area: name;
+}
+
+#name-header {
+    grid-area: name-header;
+}
+
+#traits {
+    width: 20vw;
+    height: 2vh;
+    grid-area: traits;
+}
+
+#traits-header {
+    grid-area: traits-header;
+}
+
+#faction {
+    width: 20vw;
+    margin-left: 2.5vw;
+    grid-area: faction;
+}
+
+.button {
+    background-color: #808080;
+    border: none;
+    color: white;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    cursor: pointer;
+}
+
+.preview-image {
+    width: 120px;
+    height: 168px;
+}
+
+a:link {
+      text-decoration: none;
+}
+
+a:visited {
+      text-decoration: none;
+}
+
+a:hover {
+      text-decoration: none;
+}
+
+a:active {
+      text-decoration: none;
+}

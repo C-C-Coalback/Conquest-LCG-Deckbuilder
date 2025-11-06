@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+
+{% block title %}Upload Card{% endblock %}
+
+{% block content %}
+<div id="log-in-box" style="margin: auto;width: 50%;border: 3px solid green;padding: 10px;">
+    {% if user.is_authenticated %}
+    <h2>Upload new card.</h2>
+    <div>Upload a new card for custom card creation.</div>
+    <div class="profile-pic-entry">
+        <form method="post" enctype="multipart/form-data" action="/cards/simple_upload/">
+        {% csrf_token %}
+        <input type="file" name="file">
+        <button type="submit">Upload</button>
+        </form>
+    </div>
+    {% else %}
+    <h2>You must be logged in to upload a card.</h2>
+    {% endif %}
+</div>
+{% endblock %}

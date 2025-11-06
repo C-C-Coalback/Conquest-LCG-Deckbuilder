@@ -352,7 +352,7 @@ def eldar_cards_init():
                                    war_pack_info="Searching for Truth"),
         CardClasses.WarlordCard("Jain Zar", "Interrupt: When your opponent targets a unit you control at this planet "
                                             "with a triggered effect, cancel that effect. (Limit once per round.)",
-                                "Phoenix Lord. Warrior.", faction, 2, 6, 1, 6, "Bloodied.", 7, 7,
+                                "Phoenix Lord. Warrior.", faction, 2, 6, 2, 6, "Bloodied.", 7, 7,
                                 ["4x Banshee Assault Squad", "1x Intercept",
                                  "2x Storm of Silence", "1x The Mask of Jain Zar"],
                                 war_pack_info="Against the Great Enemy"),
