@@ -116,6 +116,8 @@
     grid-template-columns: 1fr 1fr 1fr 1fr;
     grid-template-areas:
     "p-card-name search p-traits traits"
+    "p-text p-text p-text p-text"
+    "text-input text-input text-input text-input"
     "p-card-type card-type p-faction faction"
     "p-loyalty loyalty p-shields shields"
     "min-cost min-cost-entry max-cost max-cost-entry"
@@ -125,6 +127,22 @@
     "p-cycle cycle p-war-pack war-pack"
     "p-keyword keyword p-sector sector"
     "p-order order p-asc-desc asc-desc";
+}
+
+.grid-item {
+    min-height: 15px;
+}
+
+#p-text {
+    display: flex;
+    justify-content: center;
+    grid-area: p-text;
+}
+
+#textInput {
+    grid-area: text-input;
+    min-height: 40px;
+    text-align: center;
 }
 
 #p-keyword {

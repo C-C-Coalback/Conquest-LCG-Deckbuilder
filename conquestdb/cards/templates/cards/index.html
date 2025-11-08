@@ -13,9 +13,10 @@
     <div class="filters-container">
         <form id="myForm">
             <div class="ranges-grid">
-                <p id="p-card-name">Card Name:</p><input id="searchInput" type="text" name="search">
-                <p id="p-traits">Traits:</p><input id="traitsInput" type="text" name="traits" autocomplete="off" list="traitsList">
-                <p id="p-card-type">Card Type:</p><select name="card-type" id="cardType">
+                <p id="p-card-name" class="grid-item">Card Name:</p><input class="grid-item" id="searchInput" type="text" name="search">
+                <p id="p-traits" class="grid-item">Traits:</p><input class="grid-item" id="traitsInput" type="text" name="traits" autocomplete="off" list="traitsList">
+                <p id="p-text" class="grid-item">Text:</p><input class="grid-item" id="textInput" type="text" name="text">
+                <p id="p-card-type" class="grid-item">Card Type:</p><select class="grid-item" name="card-type" id="cardType">
                         <option value="None"></option>
                         <option value="Army">Army</option>
                         <option value="Support">Support</option>
@@ -26,7 +27,7 @@
                         <option value="Token">Token</option>
                         <option value="Planet">Planet</option>
                     </select>
-                <p id="p-faction">Faction:</p><select name="faction" id="faction">
+                <p id="p-faction" class="grid-item">Faction:</p><select class="grid-item" name="faction" id="faction">
                         <option value="None"></option>
                         <option value="Space Marines">Space Marines</option>
                         <option value="Tau">Tau</option>
@@ -39,40 +40,40 @@
                         <option value="Tyranids">Tyranids</option>
                         <option value="Necrons">Necrons</option>
                     </select>
-                <p id="p-loyalty">Loyalty:</p><select name="loyalty" id="loyalty">
+                <p id="p-loyalty" class="grid-item">Loyalty:</p><select class="grid-item" name="loyalty" id="loyalty">
                         <option value="None"></option>
                         <option value="Common">Common</option>
                         <option value="Loyal">Loyal</option>
                         <option value="Signature">Signature</option>
                      </select>
-                <p id="p-shields">Shields:</p><select name="shields" id="shields">
+                <p id="p-shields" class="grid-item">Shields:</p><select class="grid-item" name="shields" id="shields">
                         <option value="-1"></option>
                         <option value="0">0</option>
                         <option value="1">1</option>
                         <option value="2">2</option>
                         <option value="3">3</option>
                     </select>
-                <p id="min-cost">Minimum Cost:</p><input id="minCost" type="text" name="minCost">
-                <p id="max-cost">Maximum Cost:</p><input id="maxCost" type="text" name="maxCost">
-                <p id="min-command">Minimum Command Icons:</p><input id="minCommand" type="text" name="minCommand">
-                <p id="max-command">Maximum Command Icons:</p><input id="maxCommand" type="text" name="maxCommand">
-                <p id="min-attack">Minimum Attack:</p><input id="minAttack" type="text" name="minAttack">
-                <p id="max-attack">Maximum Attack:</p><input id="maxAttack" type="text" name="maxAttack">
-                <p id="min-health">Minimum Health:</p><input id="minHealth" type="text" name="minHealth">
-                <p id="max-health">Maximum Health:</p><input id="maxHealth" type="text" name="maxHealth">
-                <p id="p-war-pack">War Pack:</p><select name="war-pack" id="war-pack">
+                <p id="min-cost" class="grid-item">Minimum Cost:</p><input class="grid-item" id="minCost" type="text" name="minCost">
+                <p id="max-cost" class="grid-item">Maximum Cost:</p><input class="grid-item" id="maxCost" type="text" name="maxCost">
+                <p id="min-command" class="grid-item">Minimum Command Icons:</p><input class="grid-item" id="minCommand" type="text" name="minCommand">
+                <p id="max-command" class="grid-item">Maximum Command Icons:</p><input class="grid-item" id="maxCommand" type="text" name="maxCommand">
+                <p id="min-attack" class="grid-item">Minimum Attack:</p><input class="grid-item" id="minAttack" type="text" name="minAttack">
+                <p id="max-attack" class="grid-item">Maximum Attack:</p><input id="maxAttack" class="grid-item" type="text" name="maxAttack">
+                <p id="min-health" class="grid-item">Minimum Health:</p><input id="minHealth" class="grid-item" type="text" name="minHealth">
+                <p id="max-health" class="grid-item">Maximum Health:</p><input id="maxHealth" class="grid-item" type="text" name="maxHealth">
+                <p id="p-war-pack" class="grid-item">War Pack:</p><select name="war-pack" class="grid-item" id="war-pack">
                         <option value=""></option>
                         {% for warpack_name in warpacks_list %}
                             <option value="{{ warpack_name }}">{{ warpack_name }}</option>
                         {% endfor %}
                     </select>
-                <p id="p-cycle">Cycle:</p><select name="cycle" id="cycle">
+                <p id="p-cycle" class="grid-item">Cycle:</p><select name="cycle" class="grid-item" id="cycle">
                         <option value=""></option>
                         {% for cycle_name in cycles_list %}
                             <option value="{{ cycle_name }}">{{ cycle_name }}</option>
                         {% endfor %}
                     </select>
-                <p id="p-keyword" class="filter">Keyword or Specialization:</p><select name="keyword" class="filter" id="keywordInput">
+                <p id="p-keyword" class="filter grid-item">Keyword or Specialization:</p><select name="keyword" class="filter grid-item" id="keywordInput">
                     <option value="None"></option>
                     <option value="No Attachments">No Attachments</option>
                     <option value="No Wargear Attachments">No Wargear Attachments</option>
@@ -92,7 +93,7 @@
                     <option value="Goes Fasta">Goes Fasta!</option>
                     <option value="Bloodthirst">Bloodthirst</option>
                 </select>
-                <p id="p-sector" class="filter">Sector: (if planet)</p><select name="sector" class="filter" id="sector">
+                <p id="p-sector" class="filter grid-item">Sector: (if planet)</p><select name="sector" class="filter grid-item" id="sector">
                     <option value=""></option>
                     <option value="Traxis">Traxis</option>
                     <option value="Gardis">Gardis</option>
@@ -101,7 +102,7 @@
                     <option value="Nepthis">Nepthis</option>
                     <option value="Sargos">Sargos</option>
                 </select>
-                <p id="p-order" class="filter">Order By:</p><select name="order" class="filter" id="order">
+                <p id="p-order" class="filter grid-item">Order By:</p><select name="order" class="filter grid-item" id="order">
                     <option value="None"></option>
                     <option value="Name">Name</option>
                     <option value="Card Type">Card Type</option>
@@ -113,7 +114,7 @@
                     <option value="War Pack">War Pack</option>
                     <option value="Cycle">Cycle</option>
                 </select>
-                <p id="p-asc-desc" class="filter">Asc./Desc.:</p><select name="asc-desc" class="filter" id="asc-desc">
+                <p id="p-asc-desc" class="filter grid-item">Asc./Desc.:</p><select name="asc-desc" class="filter grid-item" id="asc-desc">
                     <option value="Ascending" selected="selected">Ascending</option>
                     <option value="Descending">Descending</option>
                 </select>
@@ -174,6 +175,8 @@
             var searchInput = document.getElementById("cardType");
             searchInput.value = "None";
             var searchInput = document.getElementById("traitsInput");
+            searchInput.value = "";
+            var searchInput = document.getElementById("textInput");
             searchInput.value = "";
             var searchInput = document.getElementById("shields");
             searchInput.value = "-1";
@@ -274,6 +277,7 @@
                         'search': $('#searchInput').val(),
                         'faction': $('#faction').val(),
                         'card_type': $('#cardType').val(),
+                        'text': $('#textInput').val(),
                         'loyalty': $('#loyalty').val(),
                         'traits': $('#traitsInput').val(),
                         'shields': $('#shields').val(),

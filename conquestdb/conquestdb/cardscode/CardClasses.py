@@ -131,7 +131,7 @@ class Card:
         return current_string
 
     def as_dict(self):
-        return {'name': self.name, 'faction': self.faction, 'loyalty': self.loyalty, 'traits': self.traits,
+        return {'name': self.name, 'faction': self.faction, 'loyalty': self.loyalty, 'text': self.text, 'traits': self.traits,
                 'card type': self.card_type, 'image name': self.image_name, 'cost': self.cost, 'command': -1,
                 'attack': -1, 'health': -1, 'shields': self.shields, 'cycle': self.cycle, 'war pack': self.war_pack,
                 'keywords': self.compute_keywords()}
@@ -446,7 +446,7 @@ class UnitCard(Card):
         return current_string
 
     def as_dict(self):
-        return {'name': self.name, 'faction': self.faction, 'loyalty': self.loyalty, 'traits': self.traits,
+        return {'name': self.name, 'faction': self.faction, 'loyalty': self.loyalty, 'text': self.text, 'traits': self.traits,
                 'card type': self.card_type, 'image name': self.image_name, 'cost': self.cost, 'command': self.command,
                 'attack': self.attack, 'health': self.health, 'shields': self.shields,
                 'cycle': self.cycle, 'war pack': self.war_pack, 'keywords': self.compute_keywords()}
@@ -1104,7 +1104,7 @@ class PlanetCard(Card):
         self.sector = sector
 
     def as_dict(self):
-        return {'name': self.name, 'faction': self.faction, 'loyalty': self.loyalty, 'traits': self.traits,
+        return {'name': self.name, 'faction': self.faction, 'loyalty': self.loyalty, 'text': self.text, 'traits': self.traits,
                 'card type': self.card_type, 'image name': self.image_name, 'cost': self.cost, 'command': -1,
                 'attack': -1, 'health': -1, 'shields': self.shields, 'sector': self.sector,
                 'cycle': self.cycle, 'war pack': self.war_pack, 'keywords': self.compute_keywords()}

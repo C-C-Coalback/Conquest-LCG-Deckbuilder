@@ -669,6 +669,7 @@ def ajax_view(request):
             return JsonResponse({'message': "REDIRECT", 'cards': card_names, 'image_names': [image_name]})
         faction = request.POST.get('faction')
         traits = request.POST.get('traits')
+        text = request.POST.get('text')
         card_type = request.POST.get('card_type')
         shields = request.POST.get('shields')
         keyword_card = request.POST.get('keyword')
@@ -681,6 +682,10 @@ def ajax_view(request):
                 filtered_df = filtered_df[filtered_df['name'].str.contains("(?i)" + search)]
             else:
                 filtered_df = filtered_df[filtered_df['name'].str.contains(search)]
+            if text.islower():
+                filtered_df = filtered_df[filtered_df['text'].str.contains("(?i)" + text)]
+            else:
+                filtered_df = filtered_df[filtered_df['text'].str.contains(text)]
             sector = request.POST.get('sector')
             filtered_df = filtered_df[filtered_df['sector'].str.contains(sector)]
             card_names = filtered_df['name'].to_list()
@@ -818,6 +823,14 @@ def ajax_view(request):
                     print(e)
             else:
                 filtered_df = filtered_df[filtered_df['name'].str.contains(search)]
+        if text is not None:
+            if text.islower():
+                try:
+                    filtered_df = filtered_df[filtered_df['text'].str.contains("(?i)" + text)]
+                except Exception as e:
+                    print(e)
+            else:
+                filtered_df = filtered_df[filtered_df['text'].str.contains(text)]
         if keyword_card != "None":
             filtered_df = filtered_df[filtered_df['keywords'].str.contains(keyword_card)]
         if cycle:
