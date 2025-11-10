@@ -419,6 +419,8 @@ class UnitCard(Card):
             current_string += "Brutal."
         if self.no_attachments:
             current_string += "No Attachments."
+        if self.mobile:
+            current_string += "Mobile."
         if not self.wargear_attachments_permitted:
             current_string += "No Wargear Attachments."
         if self.sweep:
