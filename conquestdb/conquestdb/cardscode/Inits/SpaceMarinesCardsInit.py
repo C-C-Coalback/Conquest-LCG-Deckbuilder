@@ -544,7 +544,7 @@ def space_marines_cards_init():
                                    2, faction, "Loyal", 2, False, unit_must_match_faction=True,
                                    extra_attack=2, extra_health=2, type_of_units_allowed_for_attachment="Army",
                                    action_in_play=True, allowed_phases_in_play="ALL",
-                                   war_pack_info="Chronicles of Heroes"),
+                                   war_pack_info="Chronicles of Heroes", deepstrike=1),
         CardClasses.AttachmentCard("Trapped Objective", "Attach to a non-first planet.\n"
                                                         "Forced Reaction: After the combat phase begins, sacrifice "
                                                         "this attachment and deal 2 damage to a warlord at this "
