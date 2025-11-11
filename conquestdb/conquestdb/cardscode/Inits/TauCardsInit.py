@@ -506,7 +506,7 @@ def tau_cards_init():
                                 "support. Then shuffle your deck.\n"
                                 "Reaction: After the deploy phase begins, transfer a card from this support "
                                 "to your hand.", "Fleet.", 1, faction, "Signature", False,
-                                war_pack_info="For the Enclaves"),
+                                war_pack_info="For the Enclaves", preparation=True),
         CardClasses.AttachmentCard("The Dawn Blade",
                                    "Attach to your warlord.\n"
                                    "Attached unit gets Sweep (1).\n"

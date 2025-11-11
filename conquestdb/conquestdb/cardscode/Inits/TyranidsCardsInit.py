@@ -570,7 +570,7 @@ def tyranids_cards_init():
                                                          "attached unit or infest this planet.", "Biomorph.",
                                    2, faction, "Common", 1, False, action_in_play=True, allowed_phases_in_play="ALL",
                                    type_of_units_allowed_for_attachment="Warlord", required_traits="Behemoth",
-                                   war_pack_info="Herald of the Plague God"),
+                                   war_pack_info="Herald of the Plague God", preparation=True),
         CardClasses.SupportCard("Hive Fleet Behemoth",
                                 "Reaction: After you capture a planet, put a token on this support. Then if there "
                                 "are 2 tokens or more on this support, put a Termagant token into play "

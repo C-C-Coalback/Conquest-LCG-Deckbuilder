@@ -19,7 +19,7 @@ class Card:
     def __init__(self, name, text, traits, cost, faction, loyalty, shields, card_type, unique, image_name="",
                  applies_discounts=None, action_in_hand=False, allowed_phases_in_hand=None,
                  action_in_play=False, allowed_phases_in_play=None, is_faction_limited_unique_discounter=False,
-                 limited=False, ambush=False, deepstrike=-1, cycle_info="", war_pack_info=""):
+                 limited=False, ambush=False, deepstrike=-1, cycle_info="", war_pack_info="", preparation=False):
         if applies_discounts is None:
             applies_discounts = [False, 0, False]
         self.name_owner = ""
@@ -95,6 +95,9 @@ class Card:
         self.new_sweep = 0
         self.new_mobile = False
         self.new_ambush = False
+        if self.check_for_a_trait("Pledge."):
+            preparation = True
+        self.preparation = preparation
         self.war_pack = war_pack_info
         self.cycle = cycle_info
         if self.cycle and not self.war_pack:
@@ -128,6 +131,8 @@ class Card:
             current_string += "Ambush."
         if self.deepstrike > -1:
             current_string += "Deep Strike."
+        if self.preparation:
+            current_string += "Preparation."
         return current_string
 
     def as_dict(self):
@@ -334,11 +339,11 @@ class UnitCard(Card):
                  additional_resources_command_struggle=0, additional_cards_command_struggle=0,
                  mobile=False, ambush=False, hive_mind=False, unstoppable=False, deepstrike=-1,
                  lumbering=False, sweep=0, cycle_info="", war_pack_info="", retaliate=0, bloodthirst=False,
-                 goes_fasta=False):
+                 goes_fasta=False, preparation=False):
         super().__init__(name, text, traits, cost, faction, loyalty, 0,
                          card_type, unique, image_name, applies_discounts, action_in_hand, allowed_phases_in_hand,
                          action_in_play, allowed_phases_in_play, limited, deepstrike=deepstrike,
-                         cycle_info=cycle_info, war_pack_info=war_pack_info)
+                         cycle_info=cycle_info, war_pack_info=war_pack_info, preparation=preparation)
         self.attack = attack
         self.health = health
         self.damage = 0
@@ -411,6 +416,8 @@ class UnitCard(Card):
         current_string = ""
         if self.limited:
             current_string += "Limited."
+        if self.preparation:
+            current_string += "Preparation."
         if self.ambush:
             current_string += "Ambush."
         if self.armorbane:
@@ -931,7 +938,8 @@ class ArmyCard(UnitCard):
                  limited=False, ranged=False, wargear_attachments_permitted=True, no_attachments=False,
                  additional_cards_command_struggle=0, additional_resources_command_struggle=0, mobile=False,
                  ambush=False, hive_mind=False, unstoppable=False, deepstrike=-1, lumbering=False,
-                 sweep=0, cycle_info="", war_pack_info="", retaliate=0, bloodthirst=False, goes_fasta=False):
+                 sweep=0, cycle_info="", war_pack_info="", retaliate=0, bloodthirst=False, goes_fasta=False,
+                 preparation=False):
         super().__init__(name, text, traits, cost, faction, loyalty, "Army", attack, health, command,
                          unique, image_name, brutal, flying, armorbane, area_effect,
                          applies_discounts, action_in_hand, allowed_phases_in_hand,
@@ -941,7 +949,8 @@ class ArmyCard(UnitCard):
                          additional_resources_command_struggle=additional_resources_command_struggle, mobile=mobile,
                          ambush=ambush, hive_mind=hive_mind, unstoppable=unstoppable, deepstrike=deepstrike,
                          lumbering=lumbering, sweep=sweep, cycle_info=cycle_info, war_pack_info=war_pack_info,
-                         retaliate=retaliate, goes_fasta=goes_fasta, bloodthirst=bloodthirst)
+                         retaliate=retaliate, goes_fasta=goes_fasta, bloodthirst=bloodthirst,
+                         preparation=preparation)
 
     def print_info(self):
         if self.unique:
@@ -960,11 +969,12 @@ class EventCard(Card):
     def __init__(self, name, text, traits, cost, faction, loyalty,
                  shields, unique, image_name="", applies_discounts=None, action_in_hand=False
                  , allowed_phases_in_hand=None, action_in_play=False, allowed_phases_in_play=None,
-                 limited=False, deepstrike=-1, cycle_info="", war_pack_info=""):
+                 limited=False, deepstrike=-1, cycle_info="", war_pack_info="", preparation=False):
         super().__init__(name, text, traits, cost, faction, loyalty,
                          shields, "Event", unique, image_name, applies_discounts, action_in_hand
                          , allowed_phases_in_hand, action_in_play, allowed_phases_in_play,
-                         limited=limited, deepstrike=deepstrike, cycle_info=cycle_info, war_pack_info=war_pack_info)
+                         limited=limited, deepstrike=deepstrike, cycle_info=cycle_info, war_pack_info=war_pack_info,
+                         preparation=preparation)
 
     def print_info(self):
         if self.unique:
@@ -989,13 +999,13 @@ class AttachmentCard(Card):
                  must_be_enemy_unit=False, limit_one_per_unit=False, extra_attack=0, extra_health=0,
                  extra_command=0, required_traits="", forbidden_traits="NO FORBIDDEN TRAITS",
                  planet_attachment=False, ambush=False, blue_required=False, green_required=False, red_required=False,
-                 deepstrike=-1, cycle_info="", war_pack_info=""):
+                 deepstrike=-1, cycle_info="", war_pack_info="", preparation=False):
         super().__init__(name, text, traits, cost, faction, loyalty,
                          shields, "Attachment", unique, applies_discounts=applies_discounts,
                          action_in_hand=action_in_hand, allowed_phases_in_hand=allowed_phases_in_hand,
                          action_in_play=action_in_play, allowed_phases_in_play=allowed_phases_in_play,
                          limited=limited, ambush=ambush, deepstrike=deepstrike,
-                         cycle_info=cycle_info, war_pack_info=war_pack_info)
+                         cycle_info=cycle_info, war_pack_info=war_pack_info, preparation=preparation)
         self.type_of_units_allowed_for_attachment = type_of_units_allowed_for_attachment
         self.unit_must_be_unique = unit_must_be_unique
         self.unit_must_match_faction = unit_must_match_faction
@@ -1040,12 +1050,12 @@ class SupportCard(Card):
     def __init__(self, name, text, traits, cost, faction, loyalty, unique, image_name="", applies_discounts=None
                  , action_in_hand=False, allowed_phases_in_hand=None,
                  action_in_play=False, allowed_phases_in_play=None, is_faction_limited_unique_discounter=False,
-                 limited=False, cycle_info="", war_pack_info=""):
+                 limited=False, cycle_info="", war_pack_info="", preparation=False):
         super().__init__(name, text, traits, cost, faction, loyalty,
                          0, "Support", unique, image_name, applies_discounts, action_in_hand
                          , allowed_phases_in_hand, action_in_play, allowed_phases_in_play,
                          is_faction_limited_unique_discounter, limited,
-                         cycle_info=cycle_info, war_pack_info=war_pack_info)
+                         cycle_info=cycle_info, war_pack_info=war_pack_info, preparation=preparation)
 
     def print_info(self):
         if self.unique:
