@@ -3,7 +3,7 @@
 {% block meta %}
 <meta name="twitter:title" content="{{ card_name }}">
 <meta name="twitter:description" content="{{ text }}">
-<meta name="twitter:image" content="/static/images/CardImages/{{ image_name }}.jpg">
+<meta name="twitter:image" {% if rotate %} content="/static/images/RotatedPlanetImages/{{ image_name }}.jpg" {% else %} content="/static/images/CardImages/{{ image_name }}.jpg" {% endif %}>
 <meta name="twitter:card" content="summary_large_image">
 {% endblock %}
 {% block content %}
