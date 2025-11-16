@@ -1,5 +1,11 @@
 {% extends "base.html" %}
 {% block title %}{% if card_name %} {{ card_name }} {% else %} Card Data {% endif %} {% endblock %}
+{% block meta %}
+<meta name="twitter:title" content="{{ card_name }}">
+<meta name="twitter:description" content="{{ text }}">
+<meta name="twitter:image" content="/static/images/CardImages/{{ image_name }}.jpg">
+<meta name="twitter:card" content="summary_large_image">
+{% endblock %}
 {% block content %}
 {% load static %}
 <link rel="stylesheet" href="{% static 'card_data.css' %}">
