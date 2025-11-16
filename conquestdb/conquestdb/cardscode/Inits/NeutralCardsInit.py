@@ -20,9 +20,9 @@ def neutral_cards_init():
                               "Tactic.", 1, "Neutral", "Common", 1,
                               False, cycle_info="Core Set"),
         CardClasses.SupportCard("Promethium Mine", "Limited.\nFORCED REACTION: After this"
-                                                   " card enters play, place 4 resources on it.\n"
+                                                   " card enters play, place 4 RESOURCE on it.\n"
                                                    "Reaction: After the deploy phase begins, transfer"
-                                                   " 1 resource from this card to "
+                                                   " 1 RESOURCE from this card to "
                                                    "your resource pool.",
                                 "Location.", 1, "Neutral", "Common", False,
                                 limited=True, cycle_info="Core Set"),
@@ -72,9 +72,9 @@ def neutral_cards_init():
                                              "exhausted, draw one card. (Max 1 per round.)", "Tactic.",
                               0, faction, "Common", 1, False, war_pack_info="Breaching the Veil"),
         CardClasses.EventCard("Imperial Blockade",
-                              "Deploy Action: Pay 1 resource per copy of this card in your discard pile and draw a "
+                              "Deploy Action: Pay 1 RESOURCE per copy of this card in your discard pile and draw a "
                               "card to target a planet. Until the end of the round, at that planet, players must pay 1 "
-                              "resource to trigger a non-warlord card effect that moves a "
+                              "RESOURCE to trigger a non-warlord card effect that moves a "
                               "unit to that planet, rout a unit or makes a non-Runt unit enter play.", "Tactic.",
                               0, faction, "Common", 1, False, war_pack_info="Defenders of the Faith"),
         CardClasses.SupportCard("Eldritch Council",

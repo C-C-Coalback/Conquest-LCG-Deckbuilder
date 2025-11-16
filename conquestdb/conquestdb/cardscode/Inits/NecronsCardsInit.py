@@ -200,7 +200,7 @@ def necrons_cards_init():
         CardClasses.SupportCard("Sautekh Complex", "Limited.\n"
                                                    "Reaction: After you deploy a unit from a non-Necrons "
                                                    "faction, if you control no other units from that "
-                                                   "faction, gain 1 resource or draw 1 card.",
+                                                   "faction, gain 1 RESOURCE or draw 1 card.",
                                 "Location.", 1, faction, "Common", False, limited=True,
                                 war_pack_info="Legions of Death"),
         CardClasses.SupportCard("Master Program", "Action: Exhaust this support and sacrifice a Drone card to remove "
@@ -234,7 +234,7 @@ def necrons_cards_init():
                                                       "remove 1 damage from it.", "Drone. Elite.",
                              5, faction, "Common", 2, 7, 1, False, war_pack_info="Slash and Burn"),
         CardClasses.WarlordCard("Illuminor Szeras", "Reaction: After you remove any amount of damage from a"
-                                                    " Necrons army unit, gain 1 resource.", "Scholar.",
+                                                    " Necrons army unit, gain 1 RESOURCE.", "Scholar.",
                                 faction, 1, 8, 1, 5, "Bloodied.", 7, 6,
                                 ["4x Augmented Warriors", "1x Dissection Chamber",
                                  "2x Vivisection", "1x Eldritch Lance"],
@@ -376,7 +376,7 @@ def necrons_cards_init():
         CardClasses.EventCard("Eldritch Reaping", "Action: Your opponent announces a number between 0 and 5. "
                                                   "Then you choose another number. The player with the highest number "
                                                   "must deal an equal amount of indirect damage among units he "
-                                                  "controls, if that player is you, draw 2 cards and gain 2 resources.",
+                                                  "controls, if that player is you, draw 2 cards and gain 2 RESOURCE.",
                               "Tactic.", 0, faction, "Signature", 1, False,
                               action_in_hand=True, allowed_phases_in_hand="ALL",
                               war_pack_info="Herald of the Plague God"),
@@ -409,10 +409,10 @@ def necrons_cards_init():
                              "Vehicle. Transport.", 4, faction, "Common", 2, 5, 1, False,
                              wargear_attachments_permitted=False, war_pack_info="Promise of War"),
         CardClasses.ArmyCard("Flayed Ones Revenants", "As an additional cost to put this unit into play, discard 2 "
-                                                      "cards from your hand or pay 2 resources to discard the top "
+                                                      "cards from your hand or pay 2 RESOURCE to discard the top "
                                                       "8 cards of your deck.\n"
                                                       "Reaction: After this unit leaves play as a result of an "
-                                                      "enemy card effect, draw 2 cards and gain 2 resources.",
+                                                      "enemy card effect, draw 2 cards and gain 2 RESOURCE.",
                              "Warrior.", 4, faction, "Common", 6, 6, 2, False,
                              war_pack_info="Defenders of the Faith"),
         CardClasses.SupportCard("Endless Legions", "Reaction: After a Necrons unit enters your discard pile from play, "
@@ -422,9 +422,9 @@ def necrons_cards_init():
                                 "Upgrade.", 1, faction, "Common", False, war_pack_info="The Laughing God"),
         CardClasses.SupportCard("World Engine Beam", "Combat Action: Deal any amount of indirect damage that can "
                                                      "not be reduced or prevented to a unit you control to place "
-                                                     "or remove the same amount of resources on this support. "
+                                                     "or remove the same amount of RESOURCE on this support. "
                                                      "Each player may use this ability once per phase.\n"
-                                                     "Interrupt: When this support has 8 resources on it, sacrifice it "
+                                                     "Interrupt: When this support has 8 RESOURCE on it, sacrifice it "
                                                      "to destroy a non-unique unit, a support or an attachment.",
                                 "World Engine.", 2, faction, "Common", False,
                                 action_in_play=True, allowed_phases_in_play="COMBAT", war_pack_info="Aligned Stars"),
@@ -451,7 +451,7 @@ def necrons_cards_init():
         CardClasses.SupportCard("Novokh Dynasty",
                                 "Place 5 non-Necrons non-Deep Strike common units, with a different faction, from the"
                                 " card collection in reserve at 5 different planets as buried units.\n"
-                                "Interrupt: When you win a battle, gain 1 resource to Deep Strike your buried unit "
+                                "Interrupt: When you win a battle, gain 1 RESOURCE to Deep Strike your buried unit "
                                 "at that planet, its Deep Strike value equals its printed cost.",
                                 "Pledge.", 2, faction, "Common", False, war_pack_info="For the Enclaves"),
         CardClasses.SupportCard("Sautekh Dynasty",

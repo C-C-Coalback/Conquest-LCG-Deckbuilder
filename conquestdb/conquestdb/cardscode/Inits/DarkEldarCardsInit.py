@@ -36,7 +36,7 @@ def dark_eldar_cards_init():
                              1, faction, "Common", 2, 1, 0, False, ranged=True, cycle_info="Core Set"),
         CardClasses.ArmyCard("Incubus Warrior", "", "Warrior.", 2, faction,
                              "Common", 3, 1, 2, False, cycle_info="Core Set"),
-        CardClasses.ArmyCard("Haemonculus Tormentor", "Action: Pay 1 resource to give this "
+        CardClasses.ArmyCard("Haemonculus Tormentor", "Action: Pay 1 RESOURCE to give this "
                                                       "unit +2 ATK until the end of the phase.",
                              "Scholar. Haemonculus.", 4, faction,
                              "Common", 2, 4, 1, False, action_in_play=True,
@@ -45,7 +45,7 @@ def dark_eldar_cards_init():
                                              "non-Flying units.", "Scout. Raider.",
                              2, faction, "Common", 2, 2, 1, False, cycle_info="Core Set", flying=True),
         CardClasses.ArmyCard("Beasthunter Wyches", "Reaction: After you play a Dark Eldar event "
-                                                   "card, pay 1 resource to put a Khymera token "
+                                                   "card, pay 1 RESOURCE to put a Khymera token "
                                                    "into play at your HQ", "Warrior. Wych.",
                              3, faction, "Common", 1, 3, 2, False, cycle_info="Core Set"),
         CardClasses.ArmyCard("Baleful Mandrake", "Ranged. (This unit attacks during the "
@@ -90,7 +90,7 @@ def dark_eldar_cards_init():
                               "Power.", 2, faction, "Common", 1, False, action_in_hand=True,
                               allowed_phases_in_hand="COMBAT", cycle_info="Core Set"),
         CardClasses.EventCard("Raid", "Limited. (Limit one Limited card per round.)\n"
-                                      "Action: Take 1 resource from your opponent if he has "
+                                      "Action: Take 1 RESOURCE from your opponent if he has "
                                       "more resources than you.", "Tactic.",
                               0, faction, "Loyal", 2, False, action_in_hand=True,
                               allowed_phases_in_hand="ALL", limited=True, cycle_info="Core Set"),
@@ -240,14 +240,14 @@ def dark_eldar_cards_init():
                                 1, faction, "Loyal", False, war_pack_info="Decree of Ruin"),
         CardClasses.WarlordCard("Archon Salaine Morn", "Reaction: After a Kabalite or Raider unit enters play under "
                                                        "your control at a Material planet (red), "
-                                                       "gain 1 resource. (Limit once per phase.)", "Warrior. Archon.",
+                                                       "gain 1 RESOURCE. (Limit once per phase.)", "Warrior. Archon.",
                                 faction, 2, 7, 2, 6, "Bloodied", 7, 7,
                                 ["4x Shadowed Thorns Pillagers", "1x The Nexus of Shadows",
                                  "2x Inevitable Betrayal", "1x Last Breath"], war_pack_info="Boundless Hate"),
         CardClasses.ArmyCard("Shadowed Thorns Pillagers", "Ambush.", "Warrior. Raider. Kabalite.",
                              2, faction, "Signature", 2, 2, 1, False, ambush=True,
                              action_in_hand=True, allowed_phases_in_hand="COMBAT", war_pack_info="Boundless Hate"),
-        CardClasses.SupportCard("The Nexus of Shadows", "Action: Pay 2 resources to draw 1 card. "
+        CardClasses.SupportCard("The Nexus of Shadows", "Action: Pay 2 RESOURCE to draw 1 card. "
                                                         "(Limit once per phase.)", "Location.",
                                 1, faction, "Signature", True, action_in_play=True, allowed_phases_in_play="ALL",
                                 war_pack_info="Boundless Hate"),
@@ -271,7 +271,7 @@ def dark_eldar_cards_init():
                                    0, faction, "Common", 1, False,
                                    type_of_units_allowed_for_attachment="Army", required_traits="Kabalite",
                                    war_pack_info="Deadly Salvage"),
-        CardClasses.ArmyCard("Dying Sun Marauder", "Reaction: After you gain 1 or more resources, ready this unit.",
+        CardClasses.ArmyCard("Dying Sun Marauder", "Reaction: After you gain 1 or more RESOURCE, ready this unit.",
                              "Warrior. Raider. Kabalite.", 2, faction, "Loyal", 2, 3, 0, False,
                              war_pack_info="What Lurks Below"),
         CardClasses.ArmyCard("Kabalite Harriers", "Reaction: After a Kabalite unit enters play at this planet,"
@@ -279,7 +279,7 @@ def dark_eldar_cards_init():
                              "Warrior. Kabalite.", 2, faction, "Common", 1, 2, 1, False,
                              war_pack_info="What Lurks Below"),
         CardClasses.EventCard("Gut and Pillage", "Reaction: After you win a battle at a Material planet (red), "
-                                                 "gain 3 resources. (Max 1 per round.)", "Tactic.",
+                                                 "gain 3 RESOURCE. (Max 1 per round.)", "Tactic.",
                               0, faction, "Common", 1, False, war_pack_info="What Lurks Below"),
         CardClasses.ArmyCard("Shadowed Thorns Venom", "No Wargear Attachments.\n"
                                                       "Reaction: After you deploy this unit, you may move each "
@@ -345,7 +345,7 @@ def dark_eldar_cards_init():
                                           "in your opponent's HQ. Move the targeted unit to this planet.", "Tactic.",
                               0, faction, "Common", 1, False, deepstrike=1, war_pack_info="Searching for Truth"),
         CardClasses.ArmyCard("Kabalite Blackguard", "Reaction: After you win a battle at this planet, "
-                                                    "take up to 2 resources from your opponent.", "Warrior. Kabalite.",
+                                                    "take up to 2 RESOURCE from your opponent.", "Warrior. Kabalite.",
                              2, faction, "Loyal", 2, 3, 0, False, war_pack_info="Against the Great Enemy"),
         CardClasses.SupportCard("Abomination Workshop", "HEADQUARTERS ACTION: Sacrifice this support to have each "
                                                         "player discard cards from his hand until he has cards "
@@ -419,7 +419,7 @@ def dark_eldar_cards_init():
                                                 "unit to an adjacent planet of your choice.", "Torture.",
                               3, faction, "Common", 1, False, war_pack_info="Promise of War"),
         CardClasses.EventCard("Supply Line Incursion", "Action: Exhaust target support. Then, if that support is a "
-                                                       "Limited card, draw one card and gain 1 resource.",
+                                                       "Limited card, draw one card and gain 1 RESOURCE.",
                               "Tactic.", 1, faction, "Common", 1, False,
                               action_in_hand=True, allowed_phases_in_hand="ALL", war_pack_info="Enemy Territory"),
         CardClasses.SupportCard("Prophets of Flesh", "Interrupt: When you deploy an Abomination or Scholar unit, "

@@ -7,6 +7,15 @@ li {
     height: 50px;
 }
 
+@font-face {
+    font-family: fontConquest;
+    src: url('fonts/conquest_symbols/ConquestFonts-Regular.otf');
+}
+
+.faction-icon-font {
+    font-family: fontConquest;
+}
+
 ul {
   list-style-type: none;
   margin: 0;
@@ -60,15 +69,15 @@ ul {
 }
 
 .caret {
-  display: inline-block;
-  width: 0;
-  height: 0;
-  margin-left: 2px;
-  vertical-align: middle;
-  border-top: 4px dashed;
-  border-top: 4px solid;
-  border-right: 4px solid transparent;
-  border-left: 4px solid transparent;
+    display: inline-block;
+    width: 0;
+    height: 0;
+    margin-left: 2px;
+    vertical-align: middle;
+    border-top: 4px dashed;
+    border-top: 4px solid;
+    border-right: 4px solid transparent;
+    border-left: 4px solid transparent;
 }
 
 .avatar {

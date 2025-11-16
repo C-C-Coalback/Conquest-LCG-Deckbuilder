@@ -29,7 +29,7 @@ def tau_cards_init():
                               allowed_phases_in_hand="ALL", cycle_info="Core Set"),
         CardClasses.AttachmentCard("Command-link Drone", "Attach to a unit.\n"
                                                          "Attached unit gets +1 ATK.\n"
-                                                         "Action: Pay 1 resource to attach this card "
+                                                         "Action: Pay 1 RESOURCE to attach this card "
                                                          "to a different unit.", "Drone.",
                                    0, faction, "Signature", 3, False, action_in_play=True,
                                    allowed_phases_in_play="ALL", extra_attack=1, cycle_info="Core Set"),
@@ -38,7 +38,7 @@ def tau_cards_init():
         CardClasses.ArmyCard("Vior'la Marksman", "Ranged.", "Scout. Shas'la.", 1, faction, "Common",
                              1, 2, 1, False, ranged=True, cycle_info="Core Set"),
         CardClasses.ArmyCard("Carnivore Pack", "Interrupt: When this unit is destroyed, "
-                                               "gain 3 resources.", "Warrior. Kroot.",
+                                               "gain 3 RESOURCE.", "Warrior. Kroot.",
                              3, faction, "Common", 3, 3, 0, False, cycle_info="Core Set"),
         CardClasses.ArmyCard("Vash'ya Trailblazer", "Mobile.", "Scout. Pilot.",
                              2, faction, "Common", 1, 1, 2, False, mobile=True, cycle_info="Core Set"),
@@ -145,7 +145,7 @@ def tau_cards_init():
                               action_in_hand=True, allowed_phases_in_hand="COMBAT", war_pack_info="The Scourge"),
         CardClasses.AttachmentCard("Blacksun Filter", "Attach to an army unit.\n"
                                                       "After an enemy warlord commits to the same "
-                                                      "planet as attached unit, gain 1 resource.", "Wargear.",
+                                                      "planet as attached unit, gain 1 RESOURCE.", "Wargear.",
                                    0, faction, "Common", 1, False, type_of_units_allowed_for_attachment="Army",
                                    war_pack_info="The Scourge"),
         CardClasses.WarlordCard("Aun'shi", "Each Tau unit you control at this planet gains Armorbane.\n"
@@ -272,14 +272,14 @@ def tau_cards_init():
                                                            "be targeted instead (ignoring targeting restrictions).",
                                 "Upgrade.", 0, faction, "Common", False, war_pack_info="Wrath of the Crusaders"),
         CardClasses.ArmyCard("Kroot Hunter", "Reaction: After you deploy this unit at a "
-                                             "Material planet (red), gain 1 resource.", "Scout. Ally.",
+                                             "Material planet (red), gain 1 RESOURCE.", "Scout. Ally.",
                              1, faction, "Common", 2, 2, 0, False,
                              war_pack_info="The Final Gambit"),
         CardClasses.EventCard("War of Ideas", "Interrupt: When a command struggle resolves at a planet, "
                                               "exhausted army units you control count their command "
                                               "icons during that command struggle.", "Tactic.",
                               0, faction, "Common", 1, False, war_pack_info="The Final Gambit"),
-        CardClasses.ArmyCard("Kroot Guerrilla", "Reaction: After a battle a this planet begins, gain 1 resource.",
+        CardClasses.ArmyCard("Kroot Guerrilla", "Reaction: After a battle a this planet begins, gain 1 RESOURCE.",
                              "Warrior. Kroot.", 3, faction, "Common", 2, 3, 1, False,
                              war_pack_info="Jungles of Nectavus"),
         CardClasses.ArmyCard("XV8-05 Enforcer", "Reaction: After damage from an attack by this unit has been assigned,"
@@ -319,18 +319,19 @@ def tau_cards_init():
         CardClasses.AttachmentCard("Kroot Hunting Rifle", "Deep Strike (0).\n"
                                                           "Attach to an army unit you control.\n"
                                                           "Reaction: After attached unit destroys an enemy unit "
-                                                          "by an attack, gain 1 resource.", "Wargear. Kroot.",
+                                                          "by an attack, gain 1 RESOURCE.", "Wargear. Kroot.",
                                    2, faction, "Common", 1, False, deepstrike=0,
                                    type_of_units_allowed_for_attachment="Army", must_be_own_unit=True,
                                    war_pack_info="Against the Great Enemy"),
         CardClasses.ArmyCard("Raging Krootox", "No Attachments.\n"
                                                "Combat Action: This unit gets +X ATK until the end of ths phase."
-                                               " X is the number of in your resource pool. (Limit once per phase.)",
+                                               " X is the number of RESOURCE in your resource pool. "
+                                               "(Limit once per phase.)",
                              "Creature. Kroot. Elite.", 5, faction, "Loyal", 2, 6, 0, False,
                              no_attachments=True, action_in_play=True, allowed_phases_in_play="COMBAT",
                              war_pack_info="The Warp Unleashed"),
         CardClasses.EventCard("Hunter's Ploy", "Reaction: After the headquarters phase begins, each player gains "
-                                               "resources equal to the highest printed cost among units he controls.",
+                                               "RESOURCE equal to the highest printed cost among units he controls.",
                               "Tactic.", 0, faction, "Common", 1, False, war_pack_info="The Warp Unleashed"),
         CardClasses.ArmyCard("Commander Bravestorm",
                              "Reaction: After you attach a non-Drone attachment to a unit at this planet, "
@@ -361,7 +362,7 @@ def tau_cards_init():
                              war_pack_info="Breaching the Veil"),
         CardClasses.ArmyCard("Rampaging Knarloc",
                              "No Attachments.\n"
-                             "While you have 4 resources or more, reduce all damage taken by this unit to 3.\n"
+                             "While you have 4 RESOURCE or more, reduce all damage taken by this unit to 3.\n"
                              "Reaction: After this unit is declared as a defender, exhaust it "
                              "to deal 4 damage to the attacker.", "Creature. Kroot. Elite.",
                              5, faction, "Loyal", 4, 7, 0, False, no_attachments=True, war_pack_info="Overrun"),
@@ -371,7 +372,7 @@ def tau_cards_init():
                              "Kroot.", 2, faction, "Common", 3, 3, 0, False, war_pack_info="The Laughing God"),
         CardClasses.ArmyCard("Shas'el Lyst",
                              "While this unit is ready, as an additional cost to target units you control at this "
-                             "planet, your opponent must pay 1 resource.\n"
+                             "planet, your opponent must pay 1 RESOURCE.\n"
                              "Interrupt: When your opponent triggers an ability that discards a card from your hand "
                              "or routs a unit you control, put this unit from your hand into play at a planet.",
                              "Soldier. Hero.", 2, faction, "Loyal", 2, 3, 1, True,
@@ -384,7 +385,7 @@ def tau_cards_init():
         CardClasses.AttachmentCard("Arrangement at Elova IV",
                                    "Attach to a Tau army unit you control.\n"
                                    "Attached unit gains, \"Reaction: When your opponent wins a command struggle at "
-                                   "a planet with one or more Tau units you control, gain 1 resource.\"",
+                                   "a planet with one or more Tau units you control, gain 1 RESOURCE.\"",
                                    "Negotiation.", 0, faction, "Loyal", 2, True, must_be_own_unit=True,
                                    type_of_units_allowed_for_attachment="Army", unit_must_match_faction=True,
                                    war_pack_info="Breaching the Veil"),
@@ -412,18 +413,18 @@ def tau_cards_init():
                                    type_of_units_allowed_for_attachment="Army", extra_health=1, extra_attack=1,
                                    action_in_play=True, allowed_phases_in_play="ALL", war_pack_info="A Mask Falls Off"),
         CardClasses.EventCard("Breach and Clear",
-                              "If all effects of this event are cancelled, gain 2 resources.\n"
+                              "If all effects of this event are cancelled, gain 2 RESOURCE.\n"
                               "Action: Exhaust a target army unit. Then you may sacrifice an attachment to exhaust "
                               "another target army unit at the same planet.", "Tactic.",
                               2, faction, "Loyal", 2, False, action_in_hand=True, allowed_phases_in_hand="ALL",
                               war_pack_info="A Mask Falls Off"),
         CardClasses.EventCard("Consumed by the Kindred",
                               "Action: Exhaust a Kroot unit and sacrifice another non-Vehicle unit to gain "
-                              "resources equal to the sacrificed unit's printed cost.", "Tactic. Kroot.",
+                              "RESOURCE equal to the sacrificed unit's printed cost.", "Tactic. Kroot.",
                               0, faction, "Common", 1, False, action_in_hand=True, allowed_phases_in_hand="ALL",
                               war_pack_info="Enemy Territory"),
         CardClasses.EventCard("Guerrilla Tactics",
-                              "Command Action: Choose a planet with an enemy unit. Your opponent loses resources "
+                              "Command Action: Choose a planet with an enemy unit. Your opponent loses RESOURCE "
                               "equalt to the resource bonus and must discard cards equal to the card bonus. "
                               "Then move a Kroot army unit you control at that planet to the first planet.",
                               "Tactic. Kroot.", 1, faction, "Loyal", 2, False,
@@ -448,7 +449,7 @@ def tau_cards_init():
                                 "token on this support.", "Pledge.", 1, faction, "Loyal", False,
                                 war_pack_info="Chronicles of Heroes"),
         CardClasses.SupportCard("Smuggler's Den",
-                                "Action: Exhaust this support and pay 1 resource to return a target non-Drone "
+                                "Action: Exhaust this support and pay 1 RESOURCE to return a target non-Drone "
                                 "attachment you control to your hand and gain resources equal to the printed cost "
                                 "of the attachment.", "Location.", 1, faction, "Loyal", True,
                                 action_in_play=True, allowed_phases_in_play="ALL", war_pack_info="Enemy Territory"),
@@ -477,14 +478,14 @@ def tau_cards_init():
                                    war_pack_info="For the Enclaves"),
         CardClasses.EventCard("Tempting Ceasefire",
                               "Deploy Action: Each player secretly chooses a number on the command dial, reveal it and "
-                              "draw that many cards. Then if you set a lower number, take the difference in resources "
-                              "from your opponent. If not he takes the difference in resources from the token bank. "
+                              "draw that many cards. Then if you set a lower number, take the difference in RESOURCE "
+                              "from your opponent. If not he takes the difference in RESOURCE from the token bank. "
                               "If equal draw a card. Max 1 per round.", "Tactic.",
                               0, faction, "Signature", 1, False, action_in_hand=True, allowed_phases_in_hand="DEPLOY",
                               war_pack_info="For the Enclaves"),
         CardClasses.WarlordCard("Farsight",
                                 "Your attachment cards are considered to have Deep Strike (0).\n"
-                                "Reaction: After you Deep Strike a card, gain 2 resources. (Limit once per phase.)",
+                                "Reaction: After you Deep Strike a card, gain 2 RESOURCE. (Limit once per phase.)",
                                 "Shas'o.", faction, 2, 7, 2, 5,
                                 "Bloodied.\nYour attachment cards are considered to have Deep Strike (0).", 7, 7,
                                 ["2x Daring Assault", "4x Farsight Vanguard",
@@ -517,7 +518,7 @@ def tau_cards_init():
                                    war_pack_info="For the Enclaves"),
         CardClasses.WarlordCard("Shaper Agnok",
                                 "Interrupt: When your opponent wins a command struggle at a planet with one or "
-                                "more Kroot units you control, gain 1 resource or draw 1 card.", "Kroot.",
+                                "more Kroot units you control, gain 1 RESOURCE or draw 1 card.", "Kroot.",
                                 faction, 2, 7, 2, 5, "Bloodied.", 7, 7,
                                 ["4x Agnok's Shadows", "2x Behind Enemy Lines",
                                  "1x Evolutionary Adaptation", "1x Vanguard Pack"],
@@ -540,7 +541,7 @@ def tau_cards_init():
         CardClasses.AttachmentCard("Vanguard Pack",
                                    "Limited.\nAttach to a planet.\n"
                                    "Reaction: After an enemy unit is deployed at this planet, exhaust it. Then "
-                                   "your opponent may give you 1 resource to return this attachment to your hand.",
+                                   "your opponent may give you 1 RESOURCE to return this attachment to your hand.",
                                    "Stratagem. Kroot.", 0, faction, "Signature", 3, False, limited=True,
                                    planet_attachment=True, war_pack_info="Promise of War")
     ]

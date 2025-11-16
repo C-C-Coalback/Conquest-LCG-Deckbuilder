@@ -251,7 +251,7 @@ def astra_militarum_cards_init():
                                  "1x Forward Barracks", "1x Commissarial Bolt Pistol"],
                                 war_pack_info="Decree of Ruin"),
         CardClasses.ArmyCard("Anxious Infantry Platoon", "FORCED REACTION: After a combat round at this planet ends, "
-                                                         "you may pay 1 resource. If you do not, retreat this unit.",
+                                                         "you may pay 1 RESOURCE. If you do not, retreat this unit.",
                              "Soldier.", 2, faction, "Signature", 3, 3, 1, False, war_pack_info="Decree of Ruin"),
         CardClasses.SupportCard("Forward Barracks", "Reaction: After a combat round ends, if you control an "
                                                     "Astra Militarum unit at the planet where the battle is taking "
@@ -723,7 +723,7 @@ def astra_militarum_cards_init():
                              2, faction, "Signature", 2, 2, 1, False, war_pack_info="Defenders of the Faith"),
         CardClasses.EventCard("Miraculous Intervention", "Reaction: After a combat round begins at a planet, commit "
                                                          "your warlord to that planet and place 2 faith on it. Then "
-                                                         "you may pay 1 resource to put Guardsman tokens into play "
+                                                         "you may pay 1 RESOURCE to put Guardsman tokens into play "
                                                          "at that planet until you control at least as many units as "
                                                          "your opponent at that planet.", "Prayer. Ecclesiarchy.",
                               1, faction, "Signature", 1, False, war_pack_info="Defenders of the Faith"),

@@ -148,7 +148,7 @@ def eldar_cards_init():
         CardClasses.SupportCard("Dome of Crystal Seers", "Interrupt: When you search your deck, search "
                                                          "an additional 3 cards.", "Location.",
                                 1, faction, "Loyal", False, war_pack_info="The Scourge"),
-        CardClasses.ArmyCard("Warlock Destructor", "FORCED REACTION: After the deploy phase begins, pay 1 Resource"
+        CardClasses.ArmyCard("Warlock Destructor", "FORCED REACTION: After the deploy phase begins, pay 1 RESOURCE"
                                                    " or discard this unit.", "Psyker.",
                              2, faction, "Common", 3, 4, 1, False, war_pack_info="Gift of the Ethereals"),
         CardClasses.ArmyCard("Eldritch Corsair", "This unit gets +2 ATK while it is at a planet with a warlord.",
@@ -294,7 +294,7 @@ def eldar_cards_init():
                                 1, faction, "Signature", False,
                                 action_in_play=True, allowed_phases_in_play="HEADQUARTERS",
                                 war_pack_info="The Final Gambit"),
-        CardClasses.EventCard("Path of the Leader", "Action: Either (choose one): gain 1 resource, have a Warrior unit"
+        CardClasses.EventCard("Path of the Leader", "Action: Either (choose one): gain 1 RESOURCE, have a Warrior unit"
                                                     " you control get +1 ATK until the end of the phase, "
                                                     "or exhaust a Psyker unit you control to move it "
                                                     "from one planet to another.", "Tactic.",

@@ -543,7 +543,7 @@ def chaos_cards_init():
                                  "2x Torturer of Worlds", "4x War Cabal"],
                                 war_pack_info="The Shadow in the Warp"),
         CardClasses.SupportCard("Cult of Duplicity", "While triggering battle abilities with a choice on a replaced "
-                                                     "planet, you may pay 1 resource to choose both.", "Cult.",
+                                                     "planet, you may pay 1 RESOURCE to choose both.", "Cult.",
                                 1, faction, "Signature", False, war_pack_info="The Shadow in the Warp"),
         CardClasses.AttachmentCard("Iridescent Wand", "Attach to your warlord.\n"
                                                       "Action: Exhaust this attachment to have up to 2 army units "
@@ -581,7 +581,7 @@ def chaos_cards_init():
         CardClasses.SupportCard("Sacrificial Altar", "Deploy Action: Exhaust this support and target a non "
                                                      "first-planet to draw 1 card an gain 1 resource. If your "
                                                      "opponent wins a command struggle at the targeted planet "
-                                                     "this round, they draw 1 card and gain 1 resource.",
+                                                     "this round, they draw 1 card and gain 1 RESOURCE.",
                                 "Location.", 1, faction, "Signature", False,
                                 action_in_play=True, allowed_phases_in_play="DEPLOY",
                                 war_pack_info="The Laughing God"),

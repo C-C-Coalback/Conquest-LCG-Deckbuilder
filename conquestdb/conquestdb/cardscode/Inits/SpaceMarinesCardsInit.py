@@ -6,7 +6,7 @@ def space_marines_cards_init():
     space_marines_card_array = [
         CardClasses.WarlordCard("Captain Cato Sicarius",
                                 "Reaction: After an enemy unit at this planet"
-                                "is destoyed, gain 1 resource.", "Soldier. Ultramarines.",
+                                "is destroyed, gain 1 RESOURCE.", "Soldier. Ultramarines.",
                                 faction, 2, 6, 2, 5,
                                 "Bloodied.", 7, 7,
                                 ["1x Cato's Stronghold", "1x Tallassarian Tempest Blade",
@@ -195,7 +195,7 @@ def space_marines_cards_init():
                               2, faction, "Common", 1, False, action_in_hand=True, allowed_phases_in_hand="ALL",
                               war_pack_info="Zogwort's Curse"),
         CardClasses.SupportCard("Secluded Apothecarion", "Reaction: After a Space Marines unit you control is "
-                                                         "destroyed, exhaust this support to gain 1 resource.",
+                                                         "destroyed, exhaust this support to gain 1 RESOURCE.",
                                 "Location.", 1, faction, "Loyal", False, war_pack_info="Zogwort's Curse"),
         CardClasses.ArmyCard("Firedrake Terminators", "Reaction: After this unit is declared as a defender, "
                                                       "deal 1 damage to the attacker.", "Soldier. Salamanders. Elite.",
@@ -357,7 +357,7 @@ def space_marines_cards_init():
                              "Soldier. Salamanders.", 4, faction, "Common", 2, 5, 2, False, area_effect=1,
                              war_pack_info="Slash and Burn"),
         CardClasses.ArmyCard("Techmarine Aspirant", "Each Elite unit you control at this planet gains, “Action: Pay "
-                                                    "1 resource to ready this unit. (Limit once per round.)”",
+                                                    "1 RESOURCE to ready this unit. (Limit once per round.)”",
                              "Soldier. Dark Angels.", 2, faction, "Common", 1, 3, 1, False,
                              action_in_play=True, allowed_phases_in_play="ALL",
                              war_pack_info="Slash and Burn"),
@@ -455,8 +455,8 @@ def space_marines_cards_init():
                              "Warrior. Mutant. Space Wolves.", 3, faction, "Loyal", 3, 3, 1, False,
                              war_pack_info="The Shadow in the Warp", retaliate=2),
         CardClasses.ArmyCard("Grand Master Belial", "Deep Strike (2).\n"
-                                                    "Interrupt: When your Bloodied warlord is defeated, discard it "
-                                                    "and pay 1 resource and Deep Strike this unit to have it be "
+                                                    "Interrupt: When your Bloodied warlord is defeated, discard it, "
+                                                    "pay 1 RESOURCE and Deep Strike this unit to have it be "
                                                     "considered a warlord. If it is defeated you lose the game.",
                              "Soldier. Dark Angels.", -1, faction, "Loyal", 2, 6, 0, True, deepstrike=2,
                              war_pack_info="Chronicles of Heroes"),
@@ -498,7 +498,7 @@ def space_marines_cards_init():
                              2, faction, "Common", 2, 2, 1, False, war_pack_info="Chronicles of Heroes"),
         CardClasses.ArmyCard("Sanctified Aggressor", "Cannot be damaged by Area Effect.\n"
                                                      "Reaction: After two or more warlords commit to this planet, "
-                                                     "gain 1 resource and place 1 faith on an army unit at "
+                                                     "gain 1 RESOURCE and place 1 faith on an army unit at "
                                                      "this planet.", "Soldier. Space Wolves.",
                              3, faction, "Common", 3, 4, 1, False, war_pack_info="Chronicles of Heroes"),
         CardClasses.ArmyCard("Steadfast Sword Brethren", "Unstoppable - The first time this unit is assigned damage "
@@ -590,18 +590,18 @@ def space_marines_cards_init():
         CardClasses.SupportCard("Mobilize the Chapter", "When deployed choose a trait among: Dark Angels, "
                                                         "Ultramarines, Space Wolves, Black Templars.\n"
                                                         "Reaction: After the combat phase begins, draw a card or gain "
-                                                        "a resource. Use this ability only if each unit you "
+                                                        "1 RESOURCE. Use this ability only if each unit you "
                                                         "control shares the chosen trait.", "Upgrade.",
                                 0, faction, "Loyal", True, war_pack_info="Chronicles of Heroes", preparation=True),
         CardClasses.SupportCard("The Wolf Within", "Action: Sacrifice this support to have up to 2 target Space "
                                                    "Wolves units you control get +1 ATK and +1 HP until the end "
                                                    "of the phase. If both units are at a planet with 2 or more "
-                                                   "warlords, gain 1 resource.", "Tale.",
+                                                   "warlords, gain 1 RESOURCE.", "Tale.",
                                 1, faction, "Loyal", True, action_in_play=True, allowed_phases_in_play="ALL",
                                 war_pack_info="Herald of the Plague God"),
         CardClasses.SupportCard("Vamii Industrial Complex", "Limited.\n"
                                                             "Reaction: After the combat phase begins, place 2 "
-                                                            "resources on this support. Then you may sacrifice it to "
+                                                            "RESOURCE on this support. Then you may sacrifice it to "
                                                             "deploy a unit from your hand at a non-first planet, "
                                                             "reducing its cost by the number of tokens on this "
                                                             "support.", "Location.",
@@ -687,7 +687,7 @@ def space_marines_cards_init():
                               war_pack_info="By Imperial Decree"),
         CardClasses.WarlordCard("Mephiston", "Each unit you control gains Retaliate (1).\n"
                                              "Interrupt: When the command phase ends, if your opponent won more "
-                                             "command struggles than you this phase, draw a card or gain 1 resource.",
+                                             "command struggles than you this phase, draw a card or gain 1 RESOURCE.",
                                 "Myth. Blood Angels.", faction, 2, 7, 2, 6,
                                 "Bloodied.\n"
                                 "Each unit you control at this planet gains Retaliate (1).", 7, 7,

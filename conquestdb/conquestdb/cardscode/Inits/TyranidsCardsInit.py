@@ -95,7 +95,7 @@ def tyranids_cards_init():
                              "Creature. Leviathan.", 2, faction, "Common", 2, 2, 1, False,
                              war_pack_info="The Great Devourer"),
         CardClasses.ArmyCard("Toxic Venomthrope", "Reaction: After you win a command struggle at this planet, "
-                                                  "infest it. If it was already infested, either gain 1 resource "
+                                                  "infest it. If it was already infested, either gain 1 RESOURCE "
                                                   "or draw 1 card instead of infesting it.", "Creature. Kraken.",
                              2, faction, "Common", 0, 2, 2, False, war_pack_info="The Great Devourer"),
         CardClasses.ArmyCard("Termagant Horde", "Reaction: After a combat round at this planet begins, "
@@ -123,7 +123,7 @@ def tyranids_cards_init():
                              "Creature. Genestealer. Elite.", 5, faction, "Common", 4, 4, 2, False,
                              war_pack_info="The Great Devourer"),
         CardClasses.ArmyCard("Ravenous Haruspex", "Reaction: After this unit destroys an enemy army unit by an attack, "
-                                                  "gain X resources. X is equal to the "
+                                                  "gain X RESOURCE. X is equal to the "
                                                   "printed cost of the destroyed unit. (Limit once per phase.)",
                              "Creature. Behemoth. Elite.", 5, faction, "Common", 3, 5, 1, False,
                              war_pack_info="The Great Devourer"),
@@ -156,7 +156,7 @@ def tyranids_cards_init():
                               2, faction, "Common", 2, False, action_in_hand=True, allowed_phases_in_hand="DEPLOY",
                               war_pack_info="The Great Devourer"),
         CardClasses.EventCard("Dark Cunning", "Combat Action: Ready a target non-warlord unit you control. "
-                                              "Then, if that unit is at an infested planet, gain 1 resource.",
+                                              "Then, if that unit is at an infested planet, gain 1 RESOURCE.",
                               "Tactic.", 2, faction, "Common", 1, False,
                               action_in_hand=True, allowed_phases_in_hand="COMBAT", war_pack_info="The Great Devourer"),
         CardClasses.EventCard("Consumption", "Deploy Action: Each player must sacrifice a "
@@ -245,7 +245,7 @@ def tyranids_cards_init():
         CardClasses.ArmyCard("Genestealer Prowler", "", "Creature. Genestealer.",
                              1, faction, "Common", 2, 2, 0, False, war_pack_info="Deadly Salvage"),
         CardClasses.EventCard("Biomass Sacrifice", "Action: Discard 1 or more unit cards from your hand to gain "
-                                                   "resources equal to the number of cards discarded by this effect.",
+                                                   "RESOURCE equal to the number of cards discarded by this effect.",
                               "Tactic.", 0, faction, "Common", 1, False,
                               action_in_hand=True, allowed_phases_in_hand="ALL", war_pack_info="Deadly Salvage"),
         CardClasses.WarlordCard("\"Subject: Ω-X62113\"", "Each Genestealer card in your hand may be deployed to "
@@ -297,7 +297,7 @@ def tyranids_cards_init():
                                 1, faction, "Common", False, action_in_play=True, allowed_phases_in_play="ALL",
                                 war_pack_info="The Final Gambit"),
         CardClasses.AttachmentCard("Ymgarl Factor", "Attach to an army unit you control.\n"
-                                                    "Action: Pay 1 resource to have attached unit get, until the end "
+                                                    "Action: Pay 1 RESOURCE to have attached unit get, until the end "
                                                     "of the phase, either: +2 ATK or +2 HP.", "Skill. Genestealer.",
                                    1, faction, "Common", 2, False, type_of_units_allowed_for_attachment="Army",
                                    must_be_own_unit=True, action_in_play=True, allowed_phases_in_play="ALL",
@@ -344,7 +344,7 @@ def tyranids_cards_init():
                              4, faction, "Common", 3, 3, 1, False, deepstrike=2,
                              war_pack_info="Against the Great Enemy"),
         CardClasses.SupportCard("Invasion Site", "Reaction: After an Elite unit you control is destroyed, "
-                                                 "sacrifice this support to gain X resources. "
+                                                 "sacrifice this support to gain X RESOURCE. "
                                                  "X is equal to that unit's printed cost.", "Location.",
                                 0, faction, "Common", True, war_pack_info="Against the Great Enemy"),
         CardClasses.ArmyCard("Slavering Mawloc", "Deep Strike (3).\n"
@@ -437,7 +437,7 @@ def tyranids_cards_init():
                                                              "Headquarters Action: Exhaust this attachment to infest "
                                                              "attached planet. If the planet is already infested, "
                                                              "infest an adjacent planet instead. If all adjacent "
-                                                             "planets are already infested, gain 2 resources instead.",
+                                                             "planets are already infested, gain 2 RESOURCE instead.",
                                    "Location.", 1, faction, "Common", 1, False,
                                    limited=True, limit_one_per_unit=True, planet_attachment=True,
                                    action_in_play=True, allowed_phases_in_play="HEADQUARTERS",
@@ -466,7 +466,7 @@ def tyranids_cards_init():
                                                  "For each unit discarded, put a Termagant "
                                                  "token into play at a planet. "
                                                  "For each attachment, draw a card."
-                                                 "For each support, gain 1 resource."
+                                                 "For each support, gain 1 RESOURCE."
                                                  "(Limit 2 per type)", "Power.",
                               0, faction, "Common", 2, False, limited=True,
                               action_in_hand=True, allowed_phases_in_hand="DEPLOY",
@@ -544,13 +544,13 @@ def tyranids_cards_init():
                                                    "target army unit and put this unit into play from your hand "
                                                    "at the same planet under the control of the controller of "
                                                    "the destroyed unit. Then if that unit had 1 or more attachments, "
-                                                   "pay 1 resource, if able.", "Hybrid. Genestealer.",
+                                                   "pay 1 RESOURCE, if able.", "Hybrid. Genestealer.",
                              3, faction, "Common", 3, 4, 1, False, war_pack_info="Overrun"),
         CardClasses.ArmyCard("Strangleweb Termagant", "Interrupt: When an enemy army unit would move from this planet "
                                                       "to another planet, exhaust this unit to cancel that move.",
                              "Creature. Termagant.", 1, faction, "Common", 0, 2, 1, False,
                              war_pack_info="Promise of War"),
-        CardClasses.EventCard("Planet Absorption", "Deploy Action: Gain 3 resources and draw 3 cards. Then remove "
+        CardClasses.EventCard("Planet Absorption", "Deploy Action: Gain 3 RESOURCE and draw 3 cards. Then remove "
                                                    "a planet in your victory display from the game. When this round "
                                                    "ends or when another event named \"Planet Absorption\" is played, "
                                                    "you lost the game. Max 1 per round.", "Tactic.",

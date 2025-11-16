@@ -41,7 +41,7 @@ def apoka_errata_cards_init():
                                                    "put 2 Termagant tokens into play at the same planet as that unit.",
                                 "Location.", 1, "Tyranids", "Common", True, war_pack_info="For the Enclaves"),
         CardClasses.SupportCard("Invasion Site", "Reaction: After an Elite unit you control is destroyed, "
-                                                 "sacrifice this support to gain 3 resources. ", "Location.",
+                                                 "sacrifice this support to gain 3 RESOURCE. ", "Location.",
                                 0, "Tyranids", "Common", True, war_pack_info="For the Enclaves"),
         CardClasses.ArmyCard("Syren Zythlex", "Forced Reaction: After an enemy unit is deployed at "
                                               "this planet, exhaust it. (Limit once per phase.)",
@@ -53,10 +53,10 @@ def apoka_errata_cards_init():
                              4, "Dark Eldar", "Loyal", 1, 3, 2, False, ambush=True,
                              allowed_phases_in_hand="COMBAT", action_in_hand=True, war_pack_info="For the Enclaves"),
         CardClasses.ArmyCard("Kabalite Blackguard", "Reaction: After you win a battle at this planet, "
-                                                    "take up to 1 resources from your opponent.", "Warrior. Kabalite.",
+                                                    "take up to 1 RESOURCE from your opponent.", "Warrior. Kabalite.",
                              2, "Dark Eldar", "Loyal", 2, 3, 0, False, war_pack_info="For the Enclaves"),
         CardClasses.EventCard("Gut and Pillage", "Reaction: After you win a battle at a Material planet (red), "
-                                                 "gain 2 resources. (Max 1 per round.)", "Tactic.",
+                                                 "gain 2 RESOURCE. (Max 1 per round.)", "Tactic.",
                               0, "Dark Eldar", "Common", 1, False, war_pack_info="For the Enclaves"),
         CardClasses.ArmyCard("Mighty Wraithknight", "No Wargear Attachments.\n"
                                                     "Reaction: After this unit enters play, exhaust 2 non-Spirit"
@@ -72,7 +72,7 @@ def apoka_errata_cards_init():
                               2, "Tau", "Common", 1, False, action_in_hand=True, allowed_phases_in_hand="ALL",
                               war_pack_info="For the Enclaves"),
         CardClasses.ArmyCard("Kroot Hunter", "Reaction: After you deploy this unit at a "
-                                             "Material planet (red), gain 1 resource.", "Scout. Ally. Kroot.",
+                                             "Material planet (red), gain 1 RESOURCE.", "Scout. Ally. Kroot.",
                              1, "Tau", "Common", 2, 2, 0, False, war_pack_info="Chronicles of Heroes"),
         CardClasses.ArmyCard("Ardent Auxiliaries", "This unit is an Astra Militarum unit in addition to Tau.\n"
                                                    "Reaction: After this unit commits to a planet, if you control an "

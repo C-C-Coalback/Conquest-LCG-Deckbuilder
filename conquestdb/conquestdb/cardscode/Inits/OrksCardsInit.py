@@ -398,7 +398,7 @@ def orks_cards_init():
                               "Tactic. Snotling.", 1, faction, "Common", 1, False, war_pack_info="Promise of War"),
         CardClasses.EventCard("Sneaky Lootin'",
                               "Reaction: After an Orks Soldier unit you control damages an enemy unit by an attack, "
-                              "move the attacker to your HQ to gain 3 resources.",
+                              "move the attacker to your HQ to gain 3 RESOURCE.",
                               "Tactic.", 1, faction, "Common", 1, False, war_pack_info="Enemy Territory"),
         CardClasses.SupportCard("WAAAGH! Arbuttz",
                                 "Reaction: When you deploy an attachment, exhaust this support and deal 1 damage "
@@ -412,7 +412,7 @@ def orks_cards_init():
         CardClasses.SupportCard("WAAAGH! Ungskar",
                                 "Reaction: After you deploy this support, put a Squiggoth Brute in reserve at the "
                                 "last planet. Starting from the second round, if you win a battle at that planet, "
-                                "you may Deep Strike it for 2 resources.",
+                                "you may Deep Strike it for 2 RESOURCE.",
                                 "Pledge.", 1, faction, "Loyal", False, war_pack_info="For the Enclaves"),
         CardClasses.SupportCard("Extra Boomsticks", "Interrupt: When an Orks unit is assigned damage, exhaust this"
                                                     " support to give it Retaliate (2) until the end of the phase.",
@@ -451,7 +451,7 @@ def orks_cards_init():
         CardClasses.EventCard("Looted Skrap",
                               "Limited.\n"
                               "Action: Target a planet where a battle is taking place. Until the end of the battle, "
-                              "each time an enemy unit is destroyed at that planet, gain 1 resource (max 3).",
+                              "each time an enemy unit is destroyed at that planet, gain 1 RESOURCE (max 3).",
                               "Tactic.", 0, faction, "Signature", 1, False, war_pack_info="The Shadow in the Warp"),
         CardClasses.ArmyCard("Da 'Eavy", "Lumbering.\nCombat Action: Retreat this unit.",
                              "Vehicle. Experimental.", 0, faction, "Signature", 2, 3, 1, False, lumbering=True,
