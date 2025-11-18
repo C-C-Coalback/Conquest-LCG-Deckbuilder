@@ -251,7 +251,7 @@ def space_marines_cards_init():
                                                       " deal 2 damage to the attacker.", "Relic. Weapon.",
                                    2, faction, "Loyal", 2, True, required_traits="Black Templars",
                                    type_of_units_allowed_for_attachment="Army", war_pack_info="Boundless Hate"),
-        CardClasses.ArmyCard("Imperial Fists Devastators", "Reaction: After you deploy this unit to a tech planet "
+        CardClasses.ArmyCard("Imperial Fists Devastators", "Reaction: After you deploy this unit to a Tech planet "
                                                            "(blue), destroy a target Location support card.",
                              "Soldier. Imperial Fists.", 4, faction, "Common", 4, 3, 2, False,
                              war_pack_info="Deadly Salvage"),
@@ -267,7 +267,7 @@ def space_marines_cards_init():
                              "Vehicle. Black Templars. Elite.", 7, faction, "Loyal", 5, 6, 3, False,
                              unstoppable=True, wargear_attachments_permitted=False,
                              war_pack_info="What Lurks Below"),
-        CardClasses.EventCard("Declare the Crusade", "Reaction: After you win a battle at a tech planet (blue), "
+        CardClasses.EventCard("Declare the Crusade", "Reaction: After you win a battle at a Tech planet (blue), "
                                                      "choose another planet in play and a planet that has been"
                                                      " removed from the game. Switch the chosen planets.", "Tactic.",
                               2, faction, "Common", 1, False, war_pack_info="What Lurks Below"),
@@ -280,7 +280,7 @@ def space_marines_cards_init():
                                    action_in_play=True, allowed_phases_in_play="ALL",
                                    war_pack_info="What Lurks Below"),
         CardClasses.WarlordCard("Chaplain Mavros", "Action: Deal 1 damage to a target Space Marines unit you "
-                                                   "control at a tech planet (blue). The targeted unit gets +1 "
+                                                   "control at a Tech planet (blue). The targeted unit gets +1 "
                                                    "ATK until the end of the phase. (Limit twice per phase.)",
                                 "Soldier. Black Templars.", faction, 2, 7, 1, 6, "Bloodied.", 7, 7,
                                 ["3x Reclusiam Templars", "1x The Emperor's Champion", "1x Faith and Hatred",
@@ -310,13 +310,13 @@ def space_marines_cards_init():
                                                               " damage and remove 1 damage from this unit.”",
                                    "Wargear. Weapon.", 1, faction, "Signature", 3, False, must_be_own_unit=True,
                                    war_pack_info="Wrath of the Crusaders"),
-        CardClasses.ArmyCard("Reliquary Techmarine", "While this unit is at a tech planet (blue), "
+        CardClasses.ArmyCard("Reliquary Techmarine", "While this unit is at a Tech planet (blue), "
                                                      "it gains: +1 card when command struggle won at this planet.",
                              "Soldier. Black Templars. Ally.", 3, faction, "Common", 2, 4, 1, False,
                              war_pack_info="The Final Gambit"),
         CardClasses.SupportCard("Crypt of Saint Camila", "Deploy Action: Exhaust this support to put a non-Elite "
                                                          "Space Marines unit into play from your hand at a "
-                                                         "tech planet (blue). (Limit once per phase.)",
+                                                         "Tech planet (blue). (Limit once per phase.)",
                                 "Location. Ecclesiarchy.", 4, faction, "Loyal", True,
                                 action_in_play=True, allowed_phases_in_play="DEPLOY",
                                 war_pack_info="The Final Gambit"),

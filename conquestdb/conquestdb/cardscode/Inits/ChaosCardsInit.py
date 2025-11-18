@@ -229,7 +229,7 @@ def chaos_cards_init():
                                                     "same planet.", "Ally. Cultist. Khorne.",
                              2, faction, "Common", 1, 3, 1, False, war_pack_info="Decree of Ruin"),
         CardClasses.EventCard("Sowing Chaos", "Deploy Action: Destroy each army unit with printed cost 2"
-                                              " or lower at each tech planet (blue).", "Tactic.",
+                                              " or lower at each Tech planet (blue).", "Tactic.",
                               2, faction, "Common", 1, False, action_in_hand=True, allowed_phases_in_hand="DEPLOY",
                               war_pack_info="Decree of Ruin"),
         CardClasses.WarlordCard("Ba'ar Zul the Hate-Bound", "Reaction: After a unit you control at this planet "
@@ -263,7 +263,7 @@ def chaos_cards_init():
                                                        "enemy unit at this planet. X is the number of command icons"
                                                        " the targeted unit has.", "Psyker. Tzeentch. Elite.",
                              5, faction, "Loyal", 3, 6, 3, False, war_pack_info="Deadly Salvage"),
-        CardClasses.ArmyCard("Seer of Deceit", "While this unit is at a tech planet (blue), it gains: +1 card"
+        CardClasses.ArmyCard("Seer of Deceit", "While this unit is at a Tech planet (blue), it gains: +1 card"
                                                " when command struggle won at this planet.", "Scholar. Ally.",
                              3, faction, "Common", 3, 3, 1, False, war_pack_info="Deadly Salvage"),
         CardClasses.AttachmentCard("Khornate Chain Axe", "Attach to an army unit.\n"
@@ -277,7 +277,7 @@ def chaos_cards_init():
                                                  "cost of the next Elite unit you deploy this phase by 1.", "Scholar.",
                              4, faction, "Common", 2, 4, 2, False, war_pack_info="What Lurks Below"),
         CardClasses.SupportCard("Corrupted Teleportarium", "Action: Exhaust this support to move an Elite unit you"
-                                                           " control from a tech planet (blue) to another planet.",
+                                                           " control from a Tech planet (blue) to another planet.",
                                 "Location.", 1, faction, "Common", False,
                                 action_in_play=True, allowed_phases_in_play="ALL", war_pack_info="What Lurks Below"),
         CardClasses.ArmyCard("Berzerker Warriors", "Interrupt: When an enemy unit is destroyed, "
