@@ -22,8 +22,8 @@
             <h2>{{ card_name }}</h2>
             <h3>{{ cycle_text|linebreaks }}</h3>
             <h3>{{ faction }}</h3>
-            <h3>{{ loyalty }} {{ card_type }}</h3>
-            <h3>{{ traits }}</h3>
+            <h3>{% if card_type != "Warlord" %} {{ loyalty }} {% endif %} {{ card_type }}</h3>
+            <h3><b>{{ traits }}</b></h3>
             <h3 id="text">{{ text|linebreaks }}</h3>
             {% if cost != "-1" %}
                 <h3>Cost: {{ cost }}</h3>
