@@ -155,7 +155,7 @@
             </div>
             <form id="comment-form" method="post">
                 {% csrf_token %}
-                <p>Write a comment using the text box below.</p><br>
+                <p>Write a comment using the text box below.</p>
                 <input id="username" name="username" value="{{ user.username }}" style="display:none;">
                 <input name="flag" value="POST" style="display:none;">
                 <textarea id="commentInput" name="comment" rows="10" cols="80"></textarea><br>

@@ -48,6 +48,7 @@
     user-select: none;
     margin-left: 10px;
     margin-right: 10px;
+    width: auto !important;
 }
 
 #faction_code label.btn.active {
@@ -81,12 +82,12 @@
 .auto-deck-build {
     background: rgba(47, 40, 153, 0.3);
     cursor: default;
-    width: 36.01vw;
+    width: auto;
     height: calc(50vh + 125px);
     border: 5px solid green;
     display: grid;
-    grid-template-columns: 4.70vw 4.70vw 2.61vw 2.09vw 3.65vw 6.26vw 12.00vw;
-    grid-template-rows: 125px 25vh 25vh;
+    grid-template-columns: 4.70vw 4.70vw 2.61vw 2.09vw 3.65vw 6.26vw auto;
+    grid-template-rows: 125px 25vh auto;
     grid-template-areas:
     "warlord-card synapse-card pledge-card pledge-card details details details"
     "signature-squad-cards signature-squad-cards signature-squad-cards army-cards army-cards army-cards army-cards"
@@ -163,6 +164,7 @@
     width: 15.65vw;
     height: 21.91vw;
     display:none;
+    z-index: 9999 !important;
 }
 
 .minus-spacing {
@@ -193,7 +195,7 @@
 }
 
 .filter {
-
+    color: black;
 }
 
 #card-filter-results {
@@ -343,6 +345,7 @@
     top:0;
     height: 50px;
     width: 10.43vw;
+    color: black;
 }
 
 #next-page {
@@ -352,6 +355,11 @@
     height: 50px;
     width: 10.43vw;
     float: right;
+    color: black;
+}
+
+.num-rows {
+    color: black;
 }
 
 .saved-deck-box {

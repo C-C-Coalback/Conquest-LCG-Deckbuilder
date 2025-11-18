@@ -11,7 +11,7 @@
         <form method="post" enctype="multipart/form-data" action="/cards/simple_upload/">
         {% csrf_token %}
         <input type="file" name="file">
-        <button type="submit">Upload</button>
+        <button type="submit" class="black-button">Upload</button>
         </form>
     </div>
     {% else %}

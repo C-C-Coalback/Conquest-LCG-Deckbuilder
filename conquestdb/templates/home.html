@@ -6,7 +6,7 @@
             top: 80px;
             margin-left:auto;
             margin-right:auto;
-            width: 30vw;
+            width: max(30vw, 500px);
             height: auto;
             padding: 2px;
             {% if light_dark_toggle %}
@@ -16,13 +16,13 @@
             background-color: rgba(0, 0, 139, 0.8);
             {% endif %}
             border: 2px solid blue;
-            margin-bottom: 100px;
+            margin-bottom: 30px;
         }
 
         .box-scroll {
             margin-left:auto;
             margin-right:auto;
-            width: 30vw;
+            width: max(30vw, 500px);
             height: auto;
             {% if light_dark_toggle %}
             background-color: lightblue;
@@ -33,7 +33,7 @@
             border: 2px solid blue;
             max-height: 130px;
             overflow-y: scroll;
-            margin-bottom: 30px;
+            margin-bottom: 100px;
         }
 
         .greetings {
@@ -51,9 +51,33 @@
             word-wrap: break-word;
         }
 </style>
+<div class="jumbotron-custom text-center">
+  <h1 style="font-size: 63px;{% if not light_dark_toggle %} color:white {% endif %}">ConquestDB.com</h1>
+  <p style="margin-bottom: 15px; font-size: 21px; font-weight: 200;">A deckbuilder and database website for the Warhammer 40,000: Conquest LCG.</p>
+</div>
 <div>
+  <div class="home-box">
+    <h1>Welcome to conquestdb.com!</h1>
+    <p>This site serves as a deckbuilder for the Warhammer 40,000: Conquest Living Card Game.</p>
+    <p>For information about how to play the game, please see the links below.</p>
+    <p><a href="https://images-cdn.fantasyflightgames.com/ffg_content/warhammer-40k-conquest/support/Learn-to-Play-web.pdf">FFG Learn to Play</a></p>
+    <p><a href="https://images-cdn.fantasyflightgames.com/ffg_content/warhammer-40k-conquest/support/Rules-Reference-web.pdf">FFG Rules Reference</a></p>
+    <p>If you would rather watch a video, you can find a tutorial by The Hive Tyrant <a href="https://www.youtube.com/watch?v=NE8NL9PfjXU">here</a>.</p>
+    <p>All additional rules, such as those found in expansions or introduced by Apoka Team, can be found at:</p>
+    <p><a href="https://apoka.mozello.com/rules/">Apoka and Expansions rules collection</a></p>
+    <p>For playing the game online, there is a Tabletop Simulator (TTS) mod, and a website found respectively at:</p>
+    <p><a href="https://steamcommunity.com/sharedfiles/filedetails/?id=2471847304">TTS Mod</a></p>
+    <p><a href="https://www.iridial.net">iridial.net</a></p>
+    <p>This website supports exporting decks to both the TTS mod and iridial.net.</p>
+    <p>The source code for this website can be found on the <a href="https://github.com/C-C-Coalback/Conquest-LCG-Deckbuilder">GitHub</a>.</p>
+    <br/>
+    <h1>DISCLAIMER</h1>
+    <p>Warhammer 40,000: Conquest is a trademark of Fantasy Flight Publishing, Inc. and/or Games Workshop Group. </p>
+    <p>This website is not affiliated with either Fantasy Flight Games or Games Workshop Group.</p>
+  </div>
   <div class="box-scroll">
     <h1>Changelog</h1>
+    <p>18/11/2025 Version 1.7 - Switched to Bootstrap.js for front-end. This basically means that the site looks better. The developer would like it noted that this pains him greatly.</p>
     <p>16/11/2025 Version 1.6.2 - Card Data pages now display icons instead of text when relevant (e.g. faction or resource icon).</p>
     <p>16/11/2025 Version 1.6.1 - Linking a card in Discord now shows the image, text and name of the card.</p>
     <p>06/11/2025 Version 1.6 Beta - Added custom card creation.</p>
@@ -118,34 +142,5 @@
     <p>02/08/2025 Version 1.0.0a - Add spacing between - button and card name. Changed various text colours to always be black.</p>
     <p>01/08/2025 Version 1.0.0 - Website launched.</p>
   </div>
-  <div class="home-box">
-    <h1>Welcome to conquestdb.com!</h1>
-    <p>This site serves as a deckbuilder for the Warhammer 40,000: Conquest Living Card Game.</p>
-    <p>For information about how to play the game, please see the links below.</p>
-    <p><a href="https://images-cdn.fantasyflightgames.com/ffg_content/warhammer-40k-conquest/support/Learn-to-Play-web.pdf">FFG Learn to Play</a></p>
-    <p><a href="https://images-cdn.fantasyflightgames.com/ffg_content/warhammer-40k-conquest/support/Rules-Reference-web.pdf">FFG Rules Reference</a></p>
-    <p>If you would rather watch a video, you can find a tutorial by The Hive Tyrant <a href="https://www.youtube.com/watch?v=NE8NL9PfjXU">here</a>.</p>
-    <p>All additional rules, such as those found in expansions or introduced by Apoka Team, can be found at:</p>
-    <p><a href="https://apoka.mozello.com/rules/">Apoka and Expansions rules collection</a></p>
-    <p>For playing the game online, there is a Tabletop Simulator (TTS) mod, and a website found respectively at:</p>
-    <p><a href="https://steamcommunity.com/sharedfiles/filedetails/?id=2471847304">TTS Mod</a></p>
-    <p><a href="https://www.iridial.net">iridial.net</a></p>
-    <p>This website supports exporting decks to both the TTS mod and iridial.net.</p>
-    <p>The source code for this website can be found on the <a href="https://github.com/C-C-Coalback/Conquest-LCG-Deckbuilder">GitHub</a>.</p>
-    <br/>
-    <h1>DISCLAIMER</h1>
-    <p>Warhammer 40,000: Conquest is a trademark of Fantasy Flight Publishing, Inc. and/or Games Workshop Group. </p>
-    <p>This website is not affiliated with either Fantasy Flight Games or Games Workshop Group.</p>
-  </div>
 </div>
-{% if user.is_authenticated %}
-<div class="greetings">
-  <p>Hi {{ user.username }}!</p>
-</div>
-{% else %}
-<div class="greetings">
-  <p>You are not logged in</p>
-  <a href="{% url 'login' %}">Log In</a>
-</div>
-{% endif %}
 {% endblock %}

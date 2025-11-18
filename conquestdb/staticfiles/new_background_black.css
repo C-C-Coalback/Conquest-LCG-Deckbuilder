@@ -1,5 +1,14 @@
 body {
-    background-color: #282626;
+    background-color: #282626 !important;
+}
+
+#comment-form {
+    color: white;
+    margin-left: 100px;
+}
+
+select {
+    color:black !important;
 }
 
 .navi-user-profile-link {
@@ -31,6 +40,10 @@ li {
     font-family: Arial, sans-serif;
 }
 
+.black-button {
+    color: black !important;
+}
+
 button {
     font-family: Arial, sans-serif;
 }
@@ -48,6 +61,14 @@ div {
 h1 {
     font-family: Arial, sans-serif;
     color: white;
+}
+
+.jumbotron-custom {
+    padding-top: 30px;
+    padding-bottom: 30px;
+    margin-bottom: 30px;
+    color: inherit;
+    background-color: #444;
 }
 
 h2 {

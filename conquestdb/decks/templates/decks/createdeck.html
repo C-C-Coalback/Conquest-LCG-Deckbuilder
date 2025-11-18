@@ -71,7 +71,7 @@
     </div>
     <div id="description-container">
         <h2>Add a description for your deck here</h2>
-        <textarea id="descriptionInput" name="description" rows="20" cols="80" style="max-width:40vw;">{{ desc }}</textarea><br>
+        <textarea id="descriptionInput" name="description" rows="15" cols="80" style="max-width:40vw;">{{ desc }}</textarea><br>
     </div>
     <div id="mini-card-search-container-container">
         <div id="mini-card-search-container">
@@ -333,13 +333,11 @@
     function getFactionSelections() {
         var element = document.getElementById("faction_code");
         var childrenElements = element.children;
-        var className = "";
         var factions = [];
         var include_faction = [];
         for (let i = 0; i < childrenElements.length; i++) {
-            className = childrenElements[i].className;
             factions.push(childrenElements[i].dataset.faction);
-            if (className.includes("active")) {
+            if (childrenElements[i].dataset.just_clicked === "T") {
                 include_faction.push("Y");
             } else {
                 include_faction.push("N");
@@ -354,13 +352,11 @@
     function getTypeSelections() {
         var element = document.getElementById("type_code");
         var childrenElements = element.children;
-        var className = "";
         var factions = [];
         var include_faction = [];
         for (let i = 0; i < childrenElements.length; i++) {
-            className = childrenElements[i].className;
             factions.push(childrenElements[i].dataset.faction);
-            if (className.includes("active")) {
+            if (childrenElements[i].dataset.just_clicked === "T") {
                 include_faction.push("Y");
             } else {
                 include_faction.push("N");
@@ -376,11 +372,6 @@
         console.log(element.className);
         if (element.dataset.just_clicked === "F") {
             element.dataset.just_clicked = "T";
-            if (className.includes("active")) {
-                element.className = "faction-btn-container btn btn-default btn-sm";
-            } else {
-                element.className = "faction-btn-container btn btn-default btn-sm active";
-            }
         } else {
             element.dataset.just_clicked = "F";
         }

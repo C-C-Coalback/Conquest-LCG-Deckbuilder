@@ -2,6 +2,11 @@ body {
     background-color: #FFFFFF;
 }
 
+#comment-form {
+    color: black;
+    margin-left: 100px;
+}
+
 .navi-user-profile-link {
   display: inline;
   color: black;
@@ -49,6 +54,15 @@ h1 {
     font-family: Arial, sans-serif;
     color: black;
 }
+
+.jumbotron-custom {
+    padding-top: 30px;
+    padding-bottom: 30px;
+    margin-bottom: 30px;
+    color: inherit;
+    background-color: #eee;
+}
+
 h2 {
     font-family: Arial, sans-serif;
     color: black;

@@ -13,7 +13,7 @@
             <option value="Light">Light</option>
             <option value="Dark">Dark</option>
         </select>
-        <button type="submit">Save Settings</button>
+        <button type="submit" class="black-button">Save Settings</button>
     </form>
     <h2>Upload profile picture.</h2>
     <div>Change your profile picture by uploading a file here.</div>
@@ -22,13 +22,13 @@
         <form method="post" enctype="multipart/form-data" action="/simple_upload/">
         {% csrf_token %}
         <input type="file" name="file">
-        <button type="submit">Upload</button>
+        <button type="submit" class="black-button">Upload</button>
         </form>
     </div>
     <p><a href="{% url 'password_change' %}">Password Change</a></p>
     <form action="{% url 'logout' %}" method="post">
     {% csrf_token %}
-    <button type="submit">Log Out</button>
+    <button type="submit" class="black-button">Log Out</button>
     </form>
     {% else %}
     <h2>You must be logged in to change your settings.</h2>
