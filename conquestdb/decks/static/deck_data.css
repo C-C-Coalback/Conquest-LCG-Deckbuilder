@@ -137,8 +137,8 @@ a:active {
     background: #808080;
     display: grid;
     grid-row-gap: 1px;
-    grid-template-columns: 400px 400px;
-    grid-template-rows: 333px 333px 333px;
+    grid-template-columns: 400px auto;
+    grid-template-rows: 333px 333px auto;
     grid-template-areas:
     "sig_cards support_cards"
     "army_cards attachment_cards"
