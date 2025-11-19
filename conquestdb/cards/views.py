@@ -156,7 +156,9 @@ def add_text_to_image(input_image, text, coords,
                       font_src="cards/custom_card_creator/fonts/Markazi_Text/MarkaziText-VariableFont_wght.ttf",
                       font_size=84, color=(0, 0, 0), line_length=1080,
                       font_bold="cards/custom_card_creator/fonts/Markazi_Text/static/MarkaziText-Bold.ttf",
-                      font_italics="cards/custom_card_creator/fonts/open_sans/OpenSans-Italic.ttf"):
+                      font_italics="cards/custom_card_creator/fonts/open_sans/OpenSans-Italic.ttf", deepstrike=False):
+    if deepstrike:
+        color = (255, 0, 0)
     drawn_image = ImageDraw.Draw(input_image)
     text_font = ImageFont.truetype(font_src, font_size)
     text = get_wrapped_text_nlfix(text, text_font, line_length)
@@ -514,11 +516,14 @@ def process_submitted_card(name, card_type, text, faction, traits, output_dir,
     add_traits_to_card(card_type, traits, resulting_img)
     add_text_to_image(resulting_img, text, get_position_text(card_type, faction, "Text"),
                       line_length=required_line_length)
+    deepstrike = False
+    if "Deep Strike (" in text:
+        deepstrike = True
     if card_type in ["Army", "Support", "Event", "Attachment"]:
         add_text_to_image(
             resulting_img, cost, get_position_text(card_type, faction, "Cost"),
             font_src="cards/custom_card_creator/fonts/Jawbreak/BoxTube Labs - Jawbreak Sans.otf",
-            font_size=120, color=(0, 0, 0)
+            font_size=120, color=(0, 0, 0), deepstrike=deepstrike
         )
     if card_type in ["Army", "Warlord", "Synapse"]:
         add_text_to_image(
