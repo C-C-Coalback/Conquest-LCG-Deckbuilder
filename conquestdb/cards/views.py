@@ -347,24 +347,33 @@ def add_traits_to_card(card_type, traits, resulting_img):
     return resulting_img
 
 
-def add_command_icons(command, first_command_src, extra_command_src, command_end_src, resulting_img, faction):
+def add_command_icons(command, first_command_src, extra_command_src,
+                      command_end_src, resulting_img, faction, card_type):
     command = int(command)
     if command > 0:
-        current_x_pos_end_command, y_end_command = get_position_command(faction, "End")
-        first_command_img = Image.open(first_command_src, 'r').convert("RGBA")
-        first_command_img = first_command_img.resize(get_resize_command(faction, "First"))
-        resulting_img.paste(first_command_img, get_position_command(faction, "First"), first_command_img)
-        extra_command_img = Image.open(extra_command_src, 'r').convert("RGBA")
-        extra_command_img = extra_command_img.resize(get_resize_command(faction, "Extra"))
-        current_position_command, y_extra_command = get_position_command(faction, "Extra")
-        spacing = get_position_command(faction, "Spacing")
-        for i in range(command - 1):
-            resulting_img.paste(extra_command_img, (current_position_command, y_extra_command), extra_command_img)
-            current_position_command += spacing
-            current_x_pos_end_command += spacing
-        command_end_img = Image.open(command_end_src, 'r').convert("RGBA")
-        command_end_img = command_end_img.resize(get_resize_command(faction, "End"))
-        resulting_img.paste(command_end_img, (current_x_pos_end_command, y_end_command), command_end_img)
+        if faction != "Tyranids":
+            current_x_pos_end_command, y_end_command = get_position_command(faction, "End")
+            first_command_img = Image.open(first_command_src, 'r').convert("RGBA")
+            first_command_img = first_command_img.resize(get_resize_command(faction, "First"))
+            resulting_img.paste(first_command_img, get_position_command(faction, "First"), first_command_img)
+            extra_command_img = Image.open(extra_command_src, 'r').convert("RGBA")
+            extra_command_img = extra_command_img.resize(get_resize_command(faction, "Extra"))
+            current_position_command, y_extra_command = get_position_command(faction, "Extra")
+            spacing = get_position_command(faction, "Spacing")
+            for i in range(command - 1):
+                resulting_img.paste(extra_command_img, (current_position_command, y_extra_command), extra_command_img)
+                current_position_command += spacing
+                current_x_pos_end_command += spacing
+            command_end_img = Image.open(command_end_src, 'r').convert("RGBA")
+            command_end_img = command_end_img.resize(get_resize_command(faction, "End"))
+            resulting_img.paste(command_end_img, (current_x_pos_end_command, y_end_command), command_end_img)
+        elif (0 < command < 4 and card_type == "Army") or (0 < command < 3 and card_type == "Synapse"):
+            str_command = str(command)
+            first_command_src = "cards/custom_card_creator/card_srcs/" + faction + \
+                                "/" + card_type + "/" + str(command) + "_Command.png"
+            first_command_img = Image.open(first_command_src, 'r').convert("RGBA")
+            first_command_img = first_command_img.resize(get_resize_command(faction, str_command))
+            resulting_img.paste(first_command_img, get_position_command(faction, "First"), first_command_img)
 
 
 def card_creator(request):
@@ -507,18 +516,25 @@ def process_submitted_card(name, card_type, text, faction, traits, output_dir,
                       line_length=required_line_length)
     if card_type in ["Army", "Support", "Event", "Attachment"]:
         add_text_to_image(
-            resulting_img, cost, get_position_text(card_type, faction, "Cost"), font_size=168, color=(0, 0, 0)
+            resulting_img, cost, get_position_text(card_type, faction, "Cost"),
+            font_src="cards/custom_card_creator/fonts/Jawbreak/BoxTube Labs - Jawbreak Sans.otf",
+            font_size=120, color=(0, 0, 0)
         )
     if card_type in ["Army", "Warlord", "Synapse"]:
         add_text_to_image(
-            resulting_img, attack, get_position_text(card_type, faction, "Attack"), font_size=168, color=(255, 255, 255)
+            resulting_img, attack, get_position_text(card_type, faction, "Attack"),
+            font_src="cards/custom_card_creator/fonts/Jawbreak/BoxTube Labs - Jawbreak Sans.otf",
+            font_size=120, color=(255, 255, 255)
         )
         add_text_to_image(
-            resulting_img, health, get_position_text(card_type, faction, "Health"), font_size=168, color=(0, 0, 0)
+            resulting_img, health, get_position_text(card_type, faction, "Health"),
+            font_src="cards/custom_card_creator/fonts/Jawbreak/BoxTube Labs - Jawbreak Sans.otf",
+            font_size=120, color=(0, 0, 0)
         )
-    if card_type in ["Army"] and faction != "Neutral":
+    if card_type in ["Army", "Synapse"] and faction != "Neutral":
         try:
-            add_command_icons(command, first_command_src, extra_command_src, command_end_src, resulting_img, faction)
+            add_command_icons(command, first_command_src, extra_command_src,
+                              command_end_src, resulting_img, faction, card_type)
         except ValueError:
             pass
     if card_type == "Warlord":
