@@ -8,8 +8,8 @@
     <div class="filters-container">
         <form id="myForm">
             <div class="ranges-grid">
-                <p id="p-deck-name">Deck Name:</p><input id="searchInput" type="text" name="search">
-                <p id="p-creator">Creator:</p><input id="creatorInput" type="text" name="creator">
+                <p id="p-deck-name">Deck Name:</p><input id="searchInput" class="black-button" type="text" name="search">
+                <p id="p-creator">Creator:</p><input id="creatorInput" class="black-button" type="text" name="creator">
                 <p id="p-faction">Faction:</p><select name="faction" id="faction">
                         <option value=""></option>
                         <option value="Space Marines">Space Marines</option>
@@ -55,11 +55,11 @@
         </form>
     </div>
     <div id="deckBinder">
-        <input id="prev-page" type="button" value="previous" onclick="previousPage();">
+        <input id="prev-page" class="black-button" type="button" value="previous" onclick="previousPage();">
         <div id="responseMessage">
             <div class="page" id="page"></div>
         </div>
-        <input id="next-page" type="button" value="next" onclick="nextPage();">
+        <input id="next-page" class="black-button" type="button" value="next" onclick="nextPage();">
     </div>
     <div id="deck-counts-pages">
         <p>Showing 0-0 of 0 matches</p>
