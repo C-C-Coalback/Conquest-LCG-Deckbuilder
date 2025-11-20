@@ -40,6 +40,10 @@ li {
     font-family: Arial, sans-serif;
 }
 
+textarea {
+    color: black !important;
+}
+
 .black-button {
     color: black !important;
 }
