@@ -5,26 +5,7 @@ import pandas as pd
 import os
 import datetime
 from heapq import nlargest
-
-
-# Create your views here.
-
-
-def convert_name_to_img_src(card_name):
-    card_name = card_name.replace("\"", "")
-    card_name = card_name.replace(" ", "_")
-    card_name = card_name.replace("'idden_Base", "idden_Base")
-    card_name = card_name + ".jpg"
-    card_name = "/static/images/CardImages/" + card_name
-    return card_name
-
-
-def convert_name_to_hyperlink(card_name):
-    card_name = card_name.replace("\"", "")
-    card_name = card_name.replace(" ", "_")
-    card_name = card_name.replace("'idden_Base", "idden_Base")
-    card_name = "/cards/" + card_name
-    return card_name
+from card_utils import convert_name_to_img_src, convert_name_to_hyperlink
 
 
 def get_users_published_decks(username):
