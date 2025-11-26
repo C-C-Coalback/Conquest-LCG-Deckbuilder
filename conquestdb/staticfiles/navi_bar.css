@@ -3,8 +3,46 @@ li {
   float: left;
 }
 
-.navibar {
+.navbar-inverse {
+    background-color: #222;
+    border-color: #080808;
+}
+
+.navbar-icon {
+    height: 40px;
+    margin-top: -10px;
+}
+
+nav {
+    display:block;
+}
+
+.nav {
     height: 50px;
+}
+
+.navbar-static-top {
+    border-radius: 0;
+}
+
+.navbar-static-top {
+    z-index: 1000;
+    border-width: 0 0 1px;
+}
+
+.navbar-collapse {
+    padding-right: 15px;
+    padding-left: 15px;
+    margin-right: auto;
+    margin-left: auto;
+    width: 60% !important;
+}
+
+.navbar {
+    position: relative;
+    min-height: 50px;
+    margin-bottom: 20px;
+    border: 1px solid transparent;
 }
 
 @font-face {
@@ -17,10 +55,10 @@ li {
 }
 
 ul {
-  list-style-type: none;
-  margin: 0;
-  padding: 0;
-  background-color: #333;
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    background-color: #333;
 }
 
 .dropdown-item {
@@ -80,10 +118,8 @@ ul {
 }
 
 .avatar {
-    position:absolute;
     width: 40px;
     height: 40px;
-    right: 90px;
 }
 
 .pull-right {
@@ -91,9 +127,10 @@ ul {
 }
 
 #loggedin-name {
-    position:absolute;
-    top: 13px;
-    right: 140px;
+    position: relative;
+    margin-top: 13px;
+    padding-right: 10px;
+    padding-left: 10px;
 }
 
 #log-out-message {
@@ -102,9 +139,9 @@ ul {
 }
 
 #log-out-button {
-    position:absolute;
-    top: 12px;
-    right: 20px;
+    position: relative;
+    margin-top: 12px;
+    color: black! important;
 }
 
 li a {

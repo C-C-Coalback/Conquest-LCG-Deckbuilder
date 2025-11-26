@@ -67,7 +67,16 @@ h2 {
     font-family: Arial, sans-serif;
     color: black;
 }
+
 h3 {
     font-family: Arial, sans-serif;
     color: black;
+}
+
+.important-color {
+    color: black !important;
+}
+
+.icon-fill-style {
+    fill: rgb(0, 0, 0);
 }

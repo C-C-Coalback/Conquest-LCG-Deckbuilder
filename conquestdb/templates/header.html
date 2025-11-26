@@ -1,43 +1,53 @@
-<ul class="navibar">
-  <li><a href="/">Home</a></li>
-  <li><a href="/decks/">Decks</a></li>
-  <li><a href="/cards/">Cards</a></li>
-  <li><a href="/accounts/settings/">Settings</a></li>
-  <li class="dropdown">
-    <div id="nav-more-toggle-button" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false" onclick="navMoreToggleDropdown()">More<span class="caret"></span></div>
-    <ul id="nav-more-dropdown" class="dropdown-menu" role="menu">
-      <li class="dropdown-item">
-        <a href="/play_formats/">Play Formats</a>
-      </li>
-      <li class="dropdown-item">
-        <a href="/ban_lists/">Ban Lists</a>
-      </li>
-      <li class="dropdown-item">
-        <a href="/recent_reviews/1/">Card Comments</a>
-      </li>
-      <li class="dropdown-item">
-        <a href="/cards/upload_card/">Upload Card (Beta)</a>
-      </li>
-      <li class="dropdown-item">
-        <a href="/cards/card_creator/">Card Creator (Beta)</a>
+<nav class="navbar navbar-inverse navbar-static-top">
+  <div class="navbar-collapse">
+    <div class="navbar-header">
+      <a class="navbar-brand" href="/">
+        <span><img src="/static/images/favicon-v2.png" class="navbar-icon"></span>
+      </a>
+    </div>
+    <ul class="nav navbar-nav">
+      <li><a href="/decks/">Decks</a></li>
+      <li><a href="/cards/">Cards</a></li>
+      <li><a href="/accounts/settings/">Settings</a></li>
+      <li class="dropdown">
+        <div id="nav-more-toggle-button" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false" onclick="navMoreToggleDropdown()">More<span class="caret"></span></div>
+        <ul id="nav-more-dropdown" class="dropdown-menu" role="menu">
+          <li class="dropdown-item">
+            <a href="/play_formats/">Play Formats</a>
+          </li>
+          <li class="dropdown-item">
+            <a href="/ban_lists/">Ban Lists</a>
+          </li>
+          <li class="dropdown-item">
+            <a href="/recent_reviews/1/">Card Comments</a>
+          </li>
+          <li class="dropdown-item">
+            <a href="/cards/upload_card/">Upload Card (Beta)</a>
+          </li>
+          <li class="dropdown-item">
+            <a href="/cards/card_creator/">Card Creator (Beta)</a>
+          </li>
+        </ul>
       </li>
     </ul>
-  </li>
-  {% if user.is_authenticated %}
-  <li id="avatar" class="pull-right">
-    <img id="main-avatar" class="avatar" src="/media/{{ user.username }}.jpg" onerror="this.onerror=null; this.src='/static/images/defaultprofile.jpg'">
-  </li>
-  <li id="loggedin-name" class="pull-right"><p>Logged in as <a href="/users/" class="navi-user-profile-link">{{ user.username }}</a></p></li>
-  <li id="log-out-cont" class="pull-right"><form action="{% url 'logout' %}" method="post">
-  {% csrf_token %}
-  <button id="log-out-button" type="submit">Log Out</button>
-  </form></li>
-  {% else %}
-  <li id="sign-up-button" class="pull-right"><a href="{% url 'signup' %}">Sign Up</a></li>
-  <li id="log-in-button" class="pull-right"><a href="{% url 'login' %}">Log In</a></li>
-  <li id="log-out-message" class="pull-right"><p>You are not logged in</p></li>
-  {% endif %}
-</ul>
+    <ul class="nav navbar-nav navbar-right">
+      {% if user.is_authenticated %}
+      <li id="loggedin-name"><p>Logged in as <a href="/users/" class="navi-user-profile-link">{{ user.username }}</a></p></li>
+      <li id="avatar">
+        <img id="main-avatar" class="avatar" src="/media/{{ user.username }}.jpg" onerror="this.onerror=null; this.src='/static/images/defaultprofile.jpg'">
+      </li>
+      <li id="log-out-cont"><form action="{% url 'logout' %}" method="post">
+      {% csrf_token %}
+      <button id="log-out-button" type="submit">Log Out</button>
+      </form></li>
+      {% else %}
+      <li id="sign-up-button" class="pull-right"><a href="{% url 'signup' %}">Sign Up</a></li>
+      <li id="log-in-button" class="pull-right"><a href="{% url 'login' %}">Log In</a></li>
+      <li id="log-out-message" class="pull-right"><p>You are not logged in</p></li>
+      {% endif %}
+    </ul>
+  </div>
+</nav>
 <script>
   function navMoreToggleDropdown() {
     var dropdown_element = document.getElementById("nav-more-toggle-button");
