@@ -186,30 +186,24 @@ def add_text_to_image(input_image, text, coords,
                 x_offset = int(text_font.getlength(shortened_text))
                 x_pos_icon = coords[0] + x_offset + special_text_dict[item]["initial_extra_offset"][0]
                 y_pos_icon = coords[1] + special_text_dict[item]["initial_extra_offset"][1] + (font_size - 8) * i
-                f_bold = ImageFont.truetype(font_bold, font_size)
-                txt_bold = Image.new('RGBA', (line_length, 330))
-                d_bold = ImageDraw.Draw(txt_bold)
-                d_bold.text((0, 0), special_text_dict[item]["text"], font=f_bold, fill="black")
-                input_image.paste(txt_bold, (x_pos_icon, y_pos_icon), txt_bold)
+                if special_text_dict[item]["type"] == "Bold":
+                    f_bold = ImageFont.truetype(font_bold, font_size)
+                    txt_bold = Image.new('RGBA', (line_length, 330))
+                    d_bold = ImageDraw.Draw(txt_bold)
+                    d_bold.text((0, 0), special_text_dict[item]["text"], font=f_bold, fill="black")
+                    input_image.paste(txt_bold, (x_pos_icon, y_pos_icon), txt_bold)
+                else:
+                    f_italics = ImageFont.truetype(font_italics, font_size * 0.75)
+                    txt_italics = Image.new('RGBA', (line_length, 330))
+                    d_bold = ImageDraw.Draw(txt_italics)
+                    d_bold.text((0, 0), special_text_dict[item]["text"], font=f_italics, fill="black")
+                    input_image.paste(txt_italics, (x_pos_icon, y_pos_icon), txt_italics)
         text = text.replace(item, special_text_dict[item]["spacing"])
     split_text = text.split(sep="\n")
-    italics_active = False
     current_coords = coords
-    f_italics = ImageFont.truetype(font_italics, int(font_size * 0.75))
     for i in range(len(split_text)):
-        will_disable = False
-        if split_text[i].count("\\i") % 2:
-            if italics_active:
-                will_disable = True
-            italics_active = True
-        split_text[i] = split_text[i].replace("\\i", "")
-        if italics_active:
-            drawn_image.text(current_coords, split_text[i], fill=color, font=f_italics)
-        else:
-            drawn_image.text(current_coords, split_text[i], fill=color, font=text_font)
+        drawn_image.text(current_coords, split_text[i], fill=color, font=text_font)
         current_coords = (current_coords[0], current_coords[1] + (font_size - 8))
-        if will_disable:
-            italics_active = False
     return input_image
 
 
