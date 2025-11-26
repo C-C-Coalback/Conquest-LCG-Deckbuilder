@@ -28,7 +28,7 @@
         </ul>
       </li>
     </ul>
-    <ul class="nav navbar-nav navbar-right">
+    <ul class="nav navbar-nav navbar-right" style="margin-right: 0;">
       {% if user.is_authenticated %}
       <li id="loggedin-name"><p>Logged in as <a href="/users/" class="navi-user-profile-link">{{ user.username }}</a></p></li>
       <li id="avatar">
