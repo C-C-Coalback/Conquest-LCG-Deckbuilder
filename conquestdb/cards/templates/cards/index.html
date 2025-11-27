@@ -111,18 +111,18 @@
             </fieldset>
             <div class="form-row">
                 <div class="form-group col-md-6">
-                <label id="p-war-pack" class="">War Pack:</label><select name="war-pack" class="form-control" id="war-pack">
-                        <option value=""></option>
-                        {% for warpack_name in warpacks_list %}
-                            <option value="{{ warpack_name }}">{{ warpack_name }}</option>
-                        {% endfor %}
-                    </select>
-                </div>
-                <div class="form-group col-md-6">
                 <label id="p-cycle" class="">Cycle:</label><select name="cycle" class="form-control" id="cycle">
                         <option value=""></option>
                         {% for cycle_name in cycles_list %}
                             <option value="{{ cycle_name }}">{{ cycle_name }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+                <div class="form-group col-md-6">
+                <label id="p-war-pack" class="">War Pack:</label><select name="war-pack" class="form-control" id="war-pack">
+                        <option value=""></option>
+                        {% for warpack_name in warpacks_list %}
+                            <option value="{{ warpack_name }}">{{ warpack_name }}</option>
                         {% endfor %}
                     </select>
                 </div>
