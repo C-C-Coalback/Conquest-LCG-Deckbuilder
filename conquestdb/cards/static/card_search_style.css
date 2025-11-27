@@ -133,16 +133,8 @@
     min-height: 15px;
 }
 
-#p-text {
-    display: flex;
-    justify-content: center;
-    grid-area: p-text;
-}
-
 #textInput {
-    grid-area: text-input;
-    min-height: 40px;
-    text-align: center;
+    min-height: 80px;
 }
 
 #p-keyword {
