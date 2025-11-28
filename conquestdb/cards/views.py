@@ -371,7 +371,8 @@ def add_traits_to_card(card_type, traits, resulting_img):
         y_offset = 1390
     add_text_to_image(
         resulting_img, traits, (x_offset, y_offset),
-        font_src="cards/custom_card_creator/fonts/Markazi_Text/static/MarkaziText-Bold.ttf"
+        font_src="cards/custom_card_creator/fonts/andada/AndadaSC-BoldItalic.otf",
+        font_size=60
     )
     return resulting_img
 
