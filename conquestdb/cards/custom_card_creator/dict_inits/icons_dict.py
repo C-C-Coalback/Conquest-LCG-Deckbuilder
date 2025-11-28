@@ -1,12 +1,12 @@
 icons_dict = {
-    "[SPACE MARINES]": {
+    "[SPACE_MARINES]": {
         "src": "cards/custom_card_creator/icons/Space_Marines_Icon.png",
         "spacing": "        ",
         "initial_extra_offset": (0, 10),
         "extra_vertical_line_offset": -5,
         "resize": (120, 78)
     },
-    "[ASTRA MILITARUM]": {
+    "[ASTRA_MILITARUM]": {
         "src": "cards/custom_card_creator/icons/Astra_Militarum_Icon.png",
         "spacing": "       ",
         "initial_extra_offset": (0, 20),
@@ -27,7 +27,7 @@ icons_dict = {
         "extra_vertical_line_offset": -5,
         "resize": (105, 105)
     },
-    "[DARK ELDAR]": {
+    "[DARK_ELDAR]": {
         "src": "cards/custom_card_creator/icons/Dark_Eldar_Icon.png",
         "spacing": "      ",
         "initial_extra_offset": (5, 10),
@@ -105,25 +105,25 @@ special_text_dict = {
         "text": "Action:",
         "type": "Bold"
     },
-    "[DEPLOY ACTION:]": {
+    "[DEPLOY_ACTION:]": {
         "spacing": "                               ",
         "initial_extra_offset": (0, 0),
         "text": "Deploy Action:",
         "type": "Bold"
     },
-    "[COMMAND ACTION:]": {
+    "[COMMAND_ACTION:]": {
         "spacing": "                                      ",
         "initial_extra_offset": (0, 0),
         "text": "Command Action:",
         "type": "Bold"
     },
-    "[COMBAT ACTION:]": {
+    "[COMBAT_ACTION:]": {
         "spacing": "                                ",
         "initial_extra_offset": (0, 0),
         "text": "Combat Action:",
         "type": "Bold"
     },
-    "[HEADQUARTERS ACTION:]": {
+    "[HEADQUARTERS_ACTION:]": {
         "spacing": "                                            ",
         "initial_extra_offset": (0, 0),
         "text": "Headquarters Action:",
@@ -153,13 +153,13 @@ special_text_dict = {
         "text": "Bloodthirst — ",
         "type": "Italics"
     },
-    "[GOES FASTA]": {
+    "[GOES_FASTA]": {
         "spacing": "                            ",
         "initial_extra_offset": (0, 0),
         "text": "Goes Fasta! — ",
         "type": "Italics"
     },
-    "[HIVE MIND]": {
+    "[HIVE_MIND]": {
         "spacing": "                         ",
         "initial_extra_offset": (0, 0),
         "text": "Hive Mind — ",
