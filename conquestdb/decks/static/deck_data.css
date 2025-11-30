@@ -33,6 +33,7 @@
     background: #f9f9f9;
     border: 1px solid #000000;
     padding: 20px;
+    word-wrap: break-word;
 }
 
 .comment-class {
