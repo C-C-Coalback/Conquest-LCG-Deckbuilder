@@ -88,7 +88,7 @@ def chaos_cards_init():
                               allowed_phases_in_hand="COMBAT", cycle_info="Core Set"),
         CardClasses.EventCard("Tzeentch's Firestorm", "Action: Deal X damage "
                                                       "to a target non-warlord unit.", "Power. Tzeentch.",
-                              0, "Chaos", "Loyal", 2, False, action_in_hand=True,
+                              -1, "Chaos", "Loyal", 2, False, action_in_hand=True,
                               allowed_phases_in_hand="ALL", cycle_info="Core Set"),
         CardClasses.EventCard("Promise of Glory", "Deploy Action: Put 2 Cultist "
                                                   "tokens into play at your HQ.",
@@ -317,7 +317,7 @@ def chaos_cards_init():
                                                     "Reaction: After you Deep Strike this event, Daemon units at "
                                                     "this planet cannot be damaged by units with printed cost 2 "
                                                     "or lower until the end of the phase.", "Tactic.",
-                              0, faction, "Loyal", 2, False, deepstrike=1, war_pack_info="Jungles of Nectavus"),
+                              -1, faction, "Loyal", 2, False, deepstrike=1, war_pack_info="Jungles of Nectavus"),
         CardClasses.ArmyCard("Infectious Nurgling", "Armorbane.", "Daemon. Nurgle.",
                              1, faction, "Common", 2, 1, 0, False, armorbane=True, war_pack_info="Unforgiven"),
         CardClasses.ArmyCard("Seekers of Slaanesh", "No Wargear Attachments.\n"

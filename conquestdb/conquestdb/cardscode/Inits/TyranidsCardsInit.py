@@ -337,7 +337,7 @@ def tyranids_cards_init():
         CardClasses.EventCard("Burst Forth", "Deep Strike (0).\n"
                                              "Reaction: After you Deep Strike this event, commit either your "
                                              "warlord or a synapse unit you control to this planet.", "Tactic.",
-                              0, faction, "Common", 1, False, deepstrike=0, war_pack_info="Searching for Truth"),
+                              -1, faction, "Common", 1, False, deepstrike=0, war_pack_info="Searching for Truth"),
         CardClasses.ArmyCard("Lictor Vine Lurker", "Deep Strike (2).\n"
                                                    "Reaction: After you Deep Strike this unit, discard 1 "
                                                    "card at random from your opponent's hand.", "Creature. Leviathan.",
@@ -411,7 +411,7 @@ def tyranids_cards_init():
                                                        "into play from your hand or discard pile at this planet. "
                                                        "They must have different names and a printed cost of "
                                                        "1 or less.", "Creature. Transport.",
-                             0, faction, "Common", 1, 3, 0, False, deepstrike=1,
+                             -1, faction, "Common", 1, 3, 0, False, deepstrike=1,
                              war_pack_info="Herald of the Plague God"),
         CardClasses.ArmyCard("Spreading Genestealer Brood", "Reaction: After this unit enters play, put a Brood "
                                                             "unit into play from your discard pile at this planet.",

@@ -303,7 +303,7 @@ def tau_cards_init():
         CardClasses.EventCard("Tactical Withdrawal", "Deep Strike (0).\n"
                                                      "Reaction: After you Deep Strike this event, move any number"
                                                      " of units you control at this planet to an adjacent planet.",
-                              "Tactic.", 0, faction, "Loyal", 2, False, deepstrike=0, war_pack_info="Slash and Burn"),
+                              "Tactic.", -1, faction, "Loyal", 2, False, deepstrike=0, war_pack_info="Slash and Burn"),
         CardClasses.ArmyCard("Herald of the Tau'va", "Each Elite unit you control at this planet gains Mobile.\n"
                                                      "FORCED REACTION: After this unit resolves its attack,"
                                                      " move it to your HQ.", "Soldier. Ethereal.",

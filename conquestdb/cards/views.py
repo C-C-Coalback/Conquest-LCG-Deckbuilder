@@ -738,8 +738,8 @@ def ajax_view(request):
             card_names = filtered_df['name'].to_list()
             image_names = filtered_df['image name'].to_list()
             return JsonResponse({'message': "", 'cards': card_names, 'image_names': image_names})
-        min_cost = -1
-        max_cost = -1
+        min_cost = None
+        max_cost = None
         min_command = -1
         max_command = -1
         min_attack = -1
@@ -893,9 +893,9 @@ def ajax_view(request):
             filtered_df = filtered_df.loc[filtered_df['loyalty'] == loyalty]
         if card_type != "None":
             filtered_df = filtered_df.loc[filtered_df['card type'] == card_type]
-        if min_cost != -1:
+        if min_cost is not None:
             filtered_df = filtered_df.loc[filtered_df['cost'] >= min_cost]
-        if max_cost != -1:
+        if max_cost is not None:
             filtered_df = filtered_df.loc[filtered_df['cost'] <= max_cost]
         if min_command != -1:
             filtered_df = filtered_df.loc[filtered_df['command'] >= min_command]

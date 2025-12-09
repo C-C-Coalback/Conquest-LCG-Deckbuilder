@@ -345,7 +345,7 @@ def space_marines_cards_init():
         CardClasses.EventCard("Unseen Strike", "Deep Strike (1).\n"
                                                "Reaction: After you Deep Strike this event, you gain the "
                                                "initiative in this battle.", "Tactic.",
-                              0, faction, "Signature", 1, False, deepstrike=1, war_pack_info="Unforgiven"),
+                              -1, faction, "Signature", 1, False, deepstrike=1, war_pack_info="Unforgiven"),
         CardClasses.AttachmentCard("Fulgaris", "Attach to your warlord.\n"
                                                "Reaction: After you Deep Strike a card, attached unit gets "
                                                "+1 ATK and +1 HP until the end of the phase.", "Wargear. Weapon.",

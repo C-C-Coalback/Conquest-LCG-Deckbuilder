@@ -325,7 +325,7 @@ def eldar_cards_init():
                                                      "Reaction: After you Deep Strike this event, you may deploy "
                                                      "each unit in your hand at this planet as though it had "
                                                      "Ambush until the end of the phase.", "Power.",
-                              0, faction, "Common", 1, False, deepstrike=1, war_pack_info="Unforgiven"),
+                              -1, faction, "Common", 1, False, deepstrike=1, war_pack_info="Unforgiven"),
         CardClasses.ArmyCard("War Walker Squadron", "No Wargear Attachments.\n"
                                                     "Reaction: After this unit is chosen as a defender, "
                                                     "exhaust a Hardpoint attachment on it to cancel that attack.",

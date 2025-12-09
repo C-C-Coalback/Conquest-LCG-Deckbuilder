@@ -229,7 +229,7 @@ def necrons_cards_init():
                                                      "Reaction: After you Deep Strike this event, until the end of "
                                                      "this battle's first combat round, reduce all damage taken "
                                                      "by Necrons units you control to 1.", "Tactic.",
-                              0, faction, "Common", 1, False, deepstrike=2, war_pack_info="Unforgiven"),
+                              -1, faction, "Common", 1, False, deepstrike=2, war_pack_info="Unforgiven"),
         CardClasses.ArmyCard("Rumbling Tomb Stalker", "Reaction: After this unit assigns damage by an attack, "
                                                       "remove 1 damage from it.", "Drone. Elite.",
                              5, faction, "Common", 2, 7, 1, False, war_pack_info="Slash and Burn"),
