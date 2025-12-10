@@ -133,6 +133,8 @@ class Card:
             current_string += "Deep Strike."
         if self.preparation:
             current_string += "Preparation."
+        if self.unique:
+            current_string += "Unique."
         return current_string
 
     def as_dict(self):
@@ -452,6 +454,8 @@ class UnitCard(Card):
             current_string += "Bloodthirst."
         if self.goes_fasta:
             current_string += "Goes Fasta."
+        if self.unique:
+            current_string += "Unique."
         return current_string
 
     def as_dict(self):
