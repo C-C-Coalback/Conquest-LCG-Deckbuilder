@@ -59,6 +59,7 @@ ul {
 
 .dropdown-item {
     clear: left;
+    float: left;
 }
 
 .dropdown-toggle {
