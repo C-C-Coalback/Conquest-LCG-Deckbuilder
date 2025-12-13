@@ -6,11 +6,11 @@
 }
 
 #main-user-page-layout-grid {
-    width: 800px;
+    width: auto;
     height: auto;
     display: grid;
     grid-row-gap: 1px;
-    grid-template-columns: 400px 40px 400px;
+    grid-template-columns: 400px 40px auto;
     grid-template-rows: 400px auto auto auto;
     grid-template-areas:
     "profile-picture gap recent-deck"
@@ -39,11 +39,10 @@
 }
 
 .deck-item-grid {
-    width: 400px;
     height: auto;
     border: 5px solid green;
     display: grid;
-    grid-template-columns: 280px 120px;
+    grid-template-columns: 280px auto;
     grid-template-areas:
     "deck-name warlord-card"
     "creator-name warlord-card"
@@ -52,7 +51,6 @@
 }
 
 .preview-image {
-    width: 120px;
     height: 168px;
 }
 
