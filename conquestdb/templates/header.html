@@ -30,7 +30,7 @@
     </ul>
     <ul class="nav navbar-nav navbar-right" style="margin-right: 0;">
       {% if user.is_authenticated %}
-      <li id="loggedin-name"><p>Logged in as <a href="/users/" class="navi-user-profile-link">{{ user.username }}</a></p></li>
+      <li id="loggedin-name"><p><a href="/users/" class="navi-user-profile-link">{{ user.username }}</a></p></li>
       <li id="avatar">
         <img id="main-avatar" class="avatar" src="/media/{{ user.username }}.jpg" onerror="this.onerror=null; this.src='/static/images/defaultprofile.jpg'">
       </li>
@@ -41,7 +41,7 @@
       {% else %}
       <li id="sign-up-button" class="pull-right"><a href="{% url 'signup' %}">Sign Up</a></li>
       <li id="log-in-button" class="pull-right"><a href="{% url 'login' %}">Log In</a></li>
-      <li id="log-out-message" class="pull-right"><p>You are not logged in</p></li>
+      <li id="log-out-message" class="pull-right"></li>
       {% endif %}
     </ul>
   </div>
