@@ -1,7 +1,7 @@
-<nav class="navbar navbar-inverse navbar-static-top">
+<nav class="navbar navbar-expand-lg navbar-inverse navbar-static-top">
   <div class="navbar-collapse">
     <ul class="nav navbar-nav">
-      <li><a class="navbar-brand" href="/">
+      <li><a class="navbar-brand-custom" href="/">
         <span><img src="/static/images/favicon-v2.png" class="navbar-icon"></span>
       </a></li>
       <li><a href="/decks/">Decks</a></li>
@@ -28,7 +28,7 @@
         </ul>
       </li>
     </ul>
-    <ul class="nav navbar-nav navbar-right" style="margin-right: 0;">
+    <ul class="nav navbar-nav navbar-right" style="margin-right: 0; display: flex;">
       {% if user.is_authenticated %}
       <li id="loggedin-name"><p><a href="/users/" class="navi-user-profile-link">{{ user.username }}</a></p></li>
       <li id="avatar">
