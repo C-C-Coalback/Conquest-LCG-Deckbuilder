@@ -224,7 +224,7 @@
 }
 
 #mini-card-search-container-container {
-    overflow:hidden;
+
 }
 
 #mini-card-search-container {
@@ -252,40 +252,6 @@
     display: flex;
     justify-content: center;
     align-items: center;
-}
-
-.tooltip {
-  position: relative;
-  display: inline-block;
-  border-bottom: 1px dotted black;
-}
-
-#card-count-tooltip {
-    margin-top: max(-125px, -8vh);
-    margin-left: -13vw;
-}
-
-#name-tooltip {
-    margin-left: -13vw;
-}
-
-.tooltip .tooltiptext {
-    visibility: hidden;
-    width: 200px;
-    max-width: 15vw;
-    background-color: black;
-    color: #fff;
-    text-align: center;
-    padding: 5px 0;
-    border-radius: 6px;
-    font-family: Arial, sans-serif;
-
-    position: absolute;
-    z-index: 1;
-}
-
-.tooltip:hover .tooltiptext {
-    visibility: visible;
 }
 
 .ally-area > * {

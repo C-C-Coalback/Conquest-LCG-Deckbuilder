@@ -7,7 +7,7 @@
 {% else %}
 <link rel="stylesheet" href="{% static 'createdeck.css' %}">
 {% endif %}
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://unpkg.com/@popperjs/core@^2.0.0"></script>
 <datalist id="card_list">
     {% for card_name in auto_complete %}
         <option value="{{ card_name }}"></option>
@@ -27,9 +27,7 @@
             <div id="pledge-card" class="poster-card"><img id="Cardback_Two" src="/static/images/CardImages/Cardback.jpg" style="opacity:0.0" class="db-image"></div>
             <div id="details">Details<br>
                 <label for="name-deck">Name:</label>
-                <input id="name-deck" type="search" size="28"><div class="tooltip">?
-                    <span id="name-tooltip" class="tooltiptext">Maximum of 29 characters are allowed.</span>
-                </div><br>
+                <input id="name-deck" type="search" size="28"><div style="display: inline-block; margin-left: 4px;" data-toggle="tooltip" title="Maximum 29 characters."><u>?</u></div><br>
                 <div class="ally-area">
                     <label for="ally">Ally:</label>
                     <select name="ally" id="ally" onChange="notCheckedAlly();">
@@ -44,9 +42,9 @@
                     </select>
                     <p id="ok-ally">Ally OK</p>
                 </div>
-                <div class="card-count-div"><div>Card Count: </div><div id="card-count">0</div><div class="tooltip">?
-                    <span id="card-count-tooltip" class="tooltiptext">You need to have 50 cards in your deck for it to be legal. Warlords, synapses and pledges do not count toward this amount.</span>
-                </div></div>
+                <div class="card-count-div"><div>Card Count: </div><div id="card-count">0</div>
+                    <div data-toggle="tooltip" title="You need to have 50 cards in your deck for it to be legal. Warlords, synapses and pledges do not count toward this amount."><u>?</u></div>
+                </div>
             </div>
             <div id="signature-squad-cards" class="db-section">Signature Squad
 
@@ -75,7 +73,7 @@
     </div>
     <div id="mini-card-search-container-container">
         <div id="mini-card-search-container">
-            <div><h2>Card Filter</h2></div>
+            <div><h2>Card Filter</h2><div id="card-search-helper-tooltip" style="display: inline; cursor: default;" data-toggle="tooltip" title="Click on a searched card to add it to your deck. The search will only show cards that you can add."><u>?</u></div></div>
             <button id="clear-filter" onclick="clearFilters();">Reset Filters</button>
             <form id="myForm">
                 <div id="filters-container">
@@ -257,6 +255,10 @@
 </div>
 <img id="cursor-follower" src="/static/images/CardImages/Cardback.jpg">
 <script>
+
+    $(function () {
+        $('[data-toggle="tooltip"]').tooltip({ boundary: 'window' })
+    })
     const pledges_array = ["/static/images/CardImages/Anvil_Strike_Force.jpg",
                            "/static/images/CardImages/Gladius_Strike_Force.jpg",
                            "/static/images/CardImages/Talon_Strike_Force.jpg",
