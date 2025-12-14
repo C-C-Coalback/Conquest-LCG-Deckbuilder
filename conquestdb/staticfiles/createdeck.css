@@ -300,7 +300,7 @@
 #card-submit, #deck-submit-1, #toggle-position-type-deck {
     border: none;
     background-color: blue;
-    color: white;
+    color: white !important;
     padding: 15px 32px;
     width: max(10.43vw, 150px);
     text-align: center;
