@@ -313,7 +313,12 @@ def deck_validation(deck, remaining_signature_squad, factions, warlord=""):
     current_index += 1
     card_count = 0
     skippers = ["Support", "Attachment", "Event", "Synapse"]
+    print(deck)
     while deck[current_index] != "Planet" and current_index < len(deck):
+        while deck[current_index] in skippers:
+            current_index += 1
+        if deck[current_index] == "Planet":
+            break
         if len(deck[current_index]) > 3:
             current_name = deck[current_index][3:]
             current_amount = deck[current_index][0]
@@ -372,8 +377,6 @@ def deck_validation(deck, remaining_signature_squad, factions, warlord=""):
                 return "Faction check not passed (Main, Ally, Card): " \
                        + factions[0] + ", " + factions[1] + ", " + card_result.get_faction()
         current_index += 1
-        while deck[current_index] in skippers:
-            current_index += 1
     if synapse_needed and not has_synapse:
         return "No Synapse Unit Given"
     if card_count < 42:
