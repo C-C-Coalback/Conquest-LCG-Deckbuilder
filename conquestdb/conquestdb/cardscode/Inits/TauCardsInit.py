@@ -279,7 +279,7 @@ def tau_cards_init():
                                               "exhausted army units you control count their command "
                                               "icons during that command struggle.", "Tactic.",
                               0, faction, "Common", 1, False, war_pack_info="The Final Gambit"),
-        CardClasses.ArmyCard("Kroot Guerrilla", "Reaction: After a battle a this planet begins, gain 1 RESOURCE.",
+        CardClasses.ArmyCard("Kroot Guerrilla", "Reaction: After a battle at this planet begins, gain 1 RESOURCE.",
                              "Warrior. Kroot.", 3, faction, "Common", 2, 3, 1, False,
                              war_pack_info="Jungles of Nectavus"),
         CardClasses.ArmyCard("XV8-05 Enforcer", "Reaction: After damage from an attack by this unit has been assigned,"
