@@ -62,10 +62,11 @@ search results, then paste it into the text field in the addon.
 Your deck will appear from the centre of the table.
 
 Please note that it is possible, though very rare, for the addon to spawn 
-two decks in the same place if both. This does not impact gameplay much, 
-but it is a bit annoying when it happens, since you will need to split the 
-decks. To avoid this, move your deck to your HQ/deck area, and this will 
-not be able to occur.
+two decks in the same place if both are imported at the same time. 
+This does not impact gameplay much, but it is a bit annoying when it happens,
+since you will need to split the decks. To avoid this, move your deck 
+to your HQ/deck area before importing the second one, 
+and this will not be able to occur.
 
 Additional APIs can be added as requested.
 
