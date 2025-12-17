@@ -17,6 +17,7 @@ replacements = [
     ("\"\"Old One Eye\"\"", "\"Old One Eye\""),
     ("\"\"\"The Swarmlord\"\"\"", "\"The Swarmlord\""),
     ("\"\"The Swarmlord\"\"", "\"The Swarmlord\""),
+    ("Ulthwe Spirit Stone", "Ulthwé Spirit Stone"),
 ]
 
 

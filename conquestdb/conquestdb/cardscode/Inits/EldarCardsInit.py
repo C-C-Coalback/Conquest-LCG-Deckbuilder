@@ -111,7 +111,7 @@ def eldar_cards_init():
         CardClasses.ArmyCard("Autarch Celachia", "Action: Pay 1 to give this unit one of the following keywords"
                                                  " until the end of the round (choose one): Area Effect (1), "
                                                  "Armorbane, or Mobile. (Limit once per round.)",
-                             "Warrior. Autarch. Ulthwe.", 4, faction, "Loyal", 3, 3, 1, True,
+                             "Warrior. Autarch. Ulthwé.", 4, faction, "Loyal", 3, 3, 1, True,
                              action_in_play=True, allowed_phases_in_play="ALL", war_pack_info="The Great Devourer"),
         CardClasses.EventCard("Subdual", "Action: Place a target support card or "
                                          "attachment on top of its owner's deck.",
@@ -139,7 +139,7 @@ def eldar_cards_init():
                                    type_of_units_allowed_for_attachment="Army",
                                    unit_must_match_faction=True, required_traits="Vehicle",
                                    war_pack_info="The Howl of Blackmane"),
-        CardClasses.ArmyCard("Black Guardians", "", "Warrior. Ulthwe.", 2, faction, "Common", 2, 4, 0, False,
+        CardClasses.ArmyCard("Black Guardians", "", "Warrior. Ulthwé.", 2, faction, "Common", 2, 4, 0, False,
                              war_pack_info="The Scourge"),
         CardClasses.EventCard("Death from Above", "Deploy Action: Put a non-Elite mobile unit into play "
                                                   "from your hand at the last planet.", "Tactic.",
@@ -344,9 +344,9 @@ def eldar_cards_init():
                                                  "draw 1 card and deal 1 damage to a target enemy unit.",
                              "Warrior. Elite.", 5, faction, "Common", 4, 6, 2, False,
                              war_pack_info="Searching for Truth"),
-        CardClasses.AttachmentCard("Ulthwe Spirit Stone", "Attach to an army unit you control\n"
+        CardClasses.AttachmentCard("Ulthwé Spirit Stone", "Attach to an army unit you control\n"
                                                           ".Interrupt: When attached unit would be destroyed, "
-                                                          "return it to your hand instead.", "Wargear. Ulthwe.",
+                                                          "return it to your hand instead.", "Wargear. Ulthwé.",
                                    0, faction, "Common", 1, False, unit_must_match_faction=True,
                                    type_of_units_allowed_for_attachment="Army", must_be_own_unit=True,
                                    war_pack_info="Searching for Truth"),
