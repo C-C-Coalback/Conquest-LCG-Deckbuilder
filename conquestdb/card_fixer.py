@@ -32,8 +32,7 @@ for file in os.listdir(target_directory):
         content_file = creator_file + deck_name + "/content"
         with open(content_file, "r", encoding="utf-8") as f:
             content = f.read()
-            content = "\n".join(content.split(sep="\n")[1:])
-            content = deck_name + "\n" + content
+            content = "\n".join(content.split(sep="\n"))
         for i in range(len(replacements)):
             content = content.replace(replacements[i][0], replacements[i][1])
             print(content)
@@ -48,8 +47,7 @@ for file in os.listdir(target_directory):
         content_file = creator_file + deck_name + "/content"
         with open(content_file, "r", encoding="utf-8") as f:
             content = f.read()
-            content = "\n".join(content.split(sep="\n")[1:])
-            content = deck_name + "\n" + content
+            content = "\n".join(content.split(sep="\n"))
         for i in range(len(replacements)):
             content = content.replace(replacements[i][0], replacements[i][1])
             print(content)
