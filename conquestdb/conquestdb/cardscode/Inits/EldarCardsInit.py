@@ -344,8 +344,8 @@ def eldar_cards_init():
                                                  "draw 1 card and deal 1 damage to a target enemy unit.",
                              "Warrior. Elite.", 5, faction, "Common", 4, 6, 2, False,
                              war_pack_info="Searching for Truth"),
-        CardClasses.AttachmentCard("Ulthwé Spirit Stone", "Attach to an army unit you control\n"
-                                                          ".Interrupt: When attached unit would be destroyed, "
+        CardClasses.AttachmentCard("Ulthwé Spirit Stone", "Attach to an army unit you control.\n"
+                                                          "Interrupt: When attached unit would be destroyed, "
                                                           "return it to your hand instead.", "Wargear. Ulthwé.",
                                    0, faction, "Common", 1, False, unit_must_match_faction=True,
                                    type_of_units_allowed_for_attachment="Army", must_be_own_unit=True,
