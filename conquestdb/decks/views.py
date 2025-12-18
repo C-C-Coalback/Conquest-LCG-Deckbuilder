@@ -61,6 +61,25 @@ os.makedirs(target_dir_temp, exist_ok=True)
 alignment_wheel = ["Astra Militarum", "Space Marines", "Tau", "Eldar", "Dark Eldar", "Chaos", "Orks"]
 
 
+dire = os.getcwd()
+private_dir = dire + "/decks/deckstorage"
+date = datetime.date.today()
+date = date.strftime("%B %d, %Y")
+if os.path.exists(private_dir):
+    for creator in os.listdir(private_dir):
+        for file in os.listdir(private_dir + "/" + creator):
+            if not os.path.exists(private_dir + "/" + creator + "/" + file + "/date"):
+                with open(private_dir + "/" + creator + "/" + file + "/date", "w") as date_file:
+                    date_file.write(date)
+public_dir = dire + "/decks/publisheddecks"
+if os.path.exists(public_dir):
+    for creator in os.listdir(public_dir):
+        for file in os.listdir(public_dir + "/" + creator):
+            if not os.path.exists(public_dir + "/" + creator + "/" + file + "/date"):
+                with open(public_dir + "/" + creator + "/" + file + "/date", "w") as date_file:
+                    date_file.write(date)
+
+
 def check_if_key_in_use(key_string):
     directory = os.getcwd()
     target_directory = directory + "/decks/deckstorage/"
@@ -501,9 +520,8 @@ def get_liked_decks_lists(username):
                                     split_data = data.split(sep="\n")
                                     deck_name = split_data[0]
                                     warlord_name = split_data[2]
-                                    timestamp = os.path.getmtime(target_file + "/key")
-                                    datestamp = datetime.datetime.fromtimestamp(timestamp)
-                                    date = str(datestamp.date())
+                                    with open(target_file + "/date", "r", encoding="utf-8") as date_file:
+                                        date = date_file.read()
                                     deck_names.append(deck_name)
                                     creator_name.append(creator)
                                     deck_warlords.append(warlord_name)
@@ -543,9 +561,8 @@ def get_published_decks_lists_with_extra_info():
                         warlord_name = split_data[2]
                         current_faction = split_data[3]
                         main_faction = current_faction.split(sep=" (")[0]
-                        timestamp = os.path.getmtime(target_file + "/key")
-                        datestamp = datetime.datetime.fromtimestamp(timestamp)
-                        date = str(datestamp.date())
+                        with open(target_file + "/date", "r", encoding="utf-8") as date_file:
+                            date = date_file.read()
                         deck_names.append(deck_name)
                         creator_name.append(creator)
                         deck_warlords.append(warlord_name)
@@ -583,9 +600,8 @@ def get_published_decks_lists():
                         split_data = data.split(sep="\n")
                         deck_name = split_data[0]
                         warlord_name = split_data[2]
-                        timestamp = os.path.getmtime(target_file + "/key")
-                        datestamp = datetime.datetime.fromtimestamp(timestamp)
-                        date = str(datestamp.date())
+                        with open(target_file + "/date", "r", encoding="utf-8") as date_file:
+                            date = date_file.read()
                         deck_names.append(deck_name)
                         creator_name.append(creator)
                         deck_warlords.append(warlord_name)
@@ -617,6 +633,7 @@ def decks(request):
     }
     try:
         df = pd.DataFrame(data=data)
+        df["Deck Dates"] = pd.to_datetime(df["Deck Dates"], format="%B %d, %Y").dt.date
         df = df.sort_values(by="Deck Dates", ascending=False)
         new_deck_names = df["Deck Names"]
         new_deck_warlords = df["Deck Warlords"]
@@ -669,6 +686,7 @@ def published_decks_page(request, page_num):
     }
     try:
         df = pd.DataFrame(data=data)
+        df["Deck Dates"] = pd.to_datetime(df["Deck Dates"], format="%B %d, %Y").dt.date
         df = df.sort_values(by="Deck Dates", ascending=False)
         new_deck_names = df["Deck Names"]
         if len(new_deck_names) < smallest_deck_num:
@@ -712,6 +730,7 @@ def my_liked_decks_page(request, page_num):
     }
     try:
         df = pd.DataFrame(data=data)
+        df["Deck Dates"] = pd.to_datetime(df["Deck Dates"], format="%B %d, %Y").dt.date
         df = df.sort_values(by="Deck Dates", ascending=False)
         new_deck_names = df["Deck Names"]
         if len(new_deck_names) < smallest_deck_num:
@@ -751,6 +770,7 @@ def published_decks(request):
     }
     try:
         df = pd.DataFrame(data=data)
+        df["Deck Dates"] = pd.to_datetime(df["Deck Dates"], format="%B %d, %Y").dt.date
         df = df.sort_values(by="Deck Dates", ascending=False)
         new_deck_names = df["Deck Names"]
         new_deck_warlords = df["Deck Warlords"]
@@ -781,6 +801,7 @@ def my_liked_decks(request):
     }
     try:
         df = pd.DataFrame(data=data)
+        df["Deck Dates"] = pd.to_datetime(df["Deck Dates"], format="%B %d, %Y").dt.date
         df = df.sort_values(by="Deck Dates", ascending=False)
         new_deck_names = df["Deck Names"]
         new_deck_warlords = df["Deck Warlords"]
@@ -821,9 +842,8 @@ def my_decks_page(request, page_num):
                         split_data = data.split(sep="\n")
                         deck_name = split_data[0]
                         warlord_name = split_data[2]
-                        timestamp = os.path.getmtime(target_file + "/key")
-                        datestamp = datetime.datetime.fromtimestamp(timestamp)
-                        date = str(datestamp.date())
+                        with open(target_file + "/date", "r", encoding="utf-8") as date_file:
+                            date = date_file.read()
                         deck_names.append(deck_name)
                         deck_warlords.append(warlord_name)
                         deck_dates.append(date)
@@ -862,6 +882,7 @@ def my_decks_page(request, page_num):
     }
     try:
         df = pd.DataFrame(data=data)
+        df["Deck Dates"] = pd.to_datetime(df["Deck Dates"], format="%B %d, %Y").dt.date
         df = df.sort_values(by="Deck Dates", ascending=False)
         new_deck_names = df["Deck Names"]
         if len(new_deck_names) < smallest_deck_num:
@@ -907,9 +928,8 @@ def my_published_decks_page(request, page_num):
                         split_data = data.split(sep="\n")
                         deck_name = split_data[0]
                         warlord_name = split_data[2]
-                        timestamp = os.path.getmtime(target_file + "/key")
-                        datestamp = datetime.datetime.fromtimestamp(timestamp)
-                        date = str(datestamp.date())
+                        with open(target_file + "/date", "r", encoding="utf-8") as date_file:
+                            date = date_file.read()
                         deck_names.append(deck_name)
                         deck_warlords.append(warlord_name)
                         deck_dates.append(date)
@@ -948,6 +968,7 @@ def my_published_decks_page(request, page_num):
     }
     try:
         df = pd.DataFrame(data=data)
+        df["Deck Dates"] = pd.to_datetime(df["Deck Dates"], format="%B %d, %Y").dt.date
         df = df.sort_values(by="Deck Dates", ascending=False)
         new_deck_names = df["Deck Names"]
         if len(new_deck_names) < smallest_deck_num:
@@ -1031,6 +1052,7 @@ def my_published_decks(request):
     }
     try:
         df = pd.DataFrame(data=data)
+        df["Deck Dates"] = pd.to_datetime(df["Deck Dates"], format="%B %d, %Y").dt.date
         df = df.sort_values(by="Deck Dates", ascending=False)
         new_deck_names = df["Deck Names"]
         new_deck_warlords = df["Deck Warlords"]
@@ -1106,6 +1128,7 @@ def my_decks(request):
     }
     try:
         df = pd.DataFrame(data=data)
+        df["Deck Dates"] = pd.to_datetime(df["Deck Dates"], format="%B %d, %Y").dt.date
         df = df.sort_values(by="Deck Dates", ascending=False)
         new_deck_names = df["Deck Names"]
         new_deck_warlords = df["Deck Warlords"]
@@ -1898,7 +1921,13 @@ def search_ajax_view(request):
         warlord_name = request.POST.get("warlord")
         faction = request.POST.get("faction")
         filtered_df = pd.DataFrame(data=data)
-        filtered_df = filtered_df.sort_values(by="Deck Dates", ascending=False)
+        try:
+            print(filtered_df["Deck Dates"])
+            filtered_df["Deck Dates"] = pd.to_datetime(filtered_df["Deck Dates"], format="%B %d, %Y").dt.date
+            print(filtered_df["Deck Dates"])
+            filtered_df = filtered_df.sort_values(by="Deck Dates", ascending=False)
+        except Exception as e:
+            print(e)
         if deck_name:
             filtered_df = filtered_df[filtered_df['Deck Names'].str.contains(deck_name)]
         if creator:
@@ -2034,6 +2063,10 @@ def ajax_view(request):
                         file.write(description)
                     with open(target_directory + "/key", "w") as file:
                         file.write(new_key)
+                    with open(target_directory + "/date", "w") as file:
+                        current_date = datetime.date.today()
+                        current_date = current_date.strftime("%B %d, %Y")
+                        file.write(current_date)
                     return JsonResponse({'message': 'deck ok'})
                 except Exception as e:
                     print(e)
