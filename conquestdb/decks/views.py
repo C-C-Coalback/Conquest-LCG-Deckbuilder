@@ -1011,9 +1011,8 @@ def my_published_decks(request):
                         split_data = data.split(sep="\n")
                         deck_name = split_data[0]
                         warlord_name = split_data[2]
-                        timestamp = os.path.getmtime(target_file + "/key")
-                        datestamp = datetime.datetime.fromtimestamp(timestamp)
-                        date = str(datestamp.date())
+                        with open(target_file + "/date", "r") as date_file:
+                            date = date_file.read()
                         deck_names.append(deck_name)
                         deck_warlords.append(warlord_name)
                         deck_dates.append(date)
@@ -1087,9 +1086,8 @@ def my_decks(request):
                         split_data = data.split(sep="\n")
                         deck_name = split_data[0]
                         warlord_name = split_data[2]
-                        timestamp = os.path.getmtime(target_file + "/key")
-                        datestamp = datetime.datetime.fromtimestamp(timestamp)
-                        date = str(datestamp.date())
+                        with open(target_file + "/date", "r") as date_file:
+                            date = date_file.read()
                         deck_names.append(deck_name)
                         deck_warlords.append(warlord_name)
                         deck_dates.append(date)
@@ -1922,9 +1920,7 @@ def search_ajax_view(request):
         faction = request.POST.get("faction")
         filtered_df = pd.DataFrame(data=data)
         try:
-            print(filtered_df["Deck Dates"])
             filtered_df["Deck Dates"] = pd.to_datetime(filtered_df["Deck Dates"], format="%B %d, %Y").dt.date
-            print(filtered_df["Deck Dates"])
             filtered_df = filtered_df.sort_values(by="Deck Dates", ascending=False)
         except Exception as e:
             print(e)
