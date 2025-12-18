@@ -520,7 +520,7 @@ def get_liked_decks_lists(username):
                                     split_data = data.split(sep="\n")
                                     deck_name = split_data[0]
                                     warlord_name = split_data[2]
-                                    with open(target_file + "/date", "r", encoding="utf-8") as date_file:
+                                    with open(target_file + "/date", "r") as date_file:
                                         date = date_file.read()
                                     deck_names.append(deck_name)
                                     creator_name.append(creator)
@@ -561,7 +561,7 @@ def get_published_decks_lists_with_extra_info():
                         warlord_name = split_data[2]
                         current_faction = split_data[3]
                         main_faction = current_faction.split(sep=" (")[0]
-                        with open(target_file + "/date", "r", encoding="utf-8") as date_file:
+                        with open(target_file + "/date", "r") as date_file:
                             date = date_file.read()
                         deck_names.append(deck_name)
                         creator_name.append(creator)
@@ -600,7 +600,7 @@ def get_published_decks_lists():
                         split_data = data.split(sep="\n")
                         deck_name = split_data[0]
                         warlord_name = split_data[2]
-                        with open(target_file + "/date", "r", encoding="utf-8") as date_file:
+                        with open(target_file + "/date", "r") as date_file:
                             date = date_file.read()
                         deck_names.append(deck_name)
                         creator_name.append(creator)
@@ -842,7 +842,7 @@ def my_decks_page(request, page_num):
                         split_data = data.split(sep="\n")
                         deck_name = split_data[0]
                         warlord_name = split_data[2]
-                        with open(target_file + "/date", "r", encoding="utf-8") as date_file:
+                        with open(target_file + "/date", "r") as date_file:
                             date = date_file.read()
                         deck_names.append(deck_name)
                         deck_warlords.append(warlord_name)
@@ -928,7 +928,7 @@ def my_published_decks_page(request, page_num):
                         split_data = data.split(sep="\n")
                         deck_name = split_data[0]
                         warlord_name = split_data[2]
-                        with open(target_file + "/date", "r", encoding="utf-8") as date_file:
+                        with open(target_file + "/date", "r") as date_file:
                             date = date_file.read()
                         deck_names.append(deck_name)
                         deck_warlords.append(warlord_name)
