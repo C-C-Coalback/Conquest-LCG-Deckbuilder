@@ -199,7 +199,6 @@
 }
 
 #card-filter-results {
-    cursor: pointer;
     border: 2px solid blue;
     overflow: hidden;
     background: rgba(47, 40, 153, 0.6);
@@ -217,6 +216,10 @@
     overflow-x: auto;
     display: flex;
     justify-content: center;
+}
+
+.searched-card {
+    cursor: pointer;
 }
 
 #mini-card-search-container-container {
