@@ -167,7 +167,8 @@ footer {
     position: fixed;
     bottom: 0;
     width: 100%;
-    border-bottom: 1px solid #f4f4f4
+    border-bottom: 1px solid #f4f4f4;
+    z-index: 9999;
 }
 
 #main-avatar {
