@@ -568,7 +568,7 @@ def tyranids_cards_init():
                                                          "Reduce all damage taken by attached unit to 2.\n"
                                                          "Action: Exhaust this attachment to remove 2 damage from "
                                                          "attached unit or infest this planet.", "Biomorph.",
-                                   2, faction, "Common", 1, False, action_in_play=True, allowed_phases_in_play="ALL",
+                                   2, faction, "Common", 1, True, action_in_play=True, allowed_phases_in_play="ALL",
                                    type_of_units_allowed_for_attachment="Warlord", required_traits="Behemoth",
                                    war_pack_info="Herald of the Plague God", preparation=True),
         CardClasses.SupportCard("Hive Fleet Behemoth",
