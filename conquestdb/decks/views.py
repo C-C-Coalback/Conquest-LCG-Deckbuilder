@@ -1959,6 +1959,13 @@ def ajax_view(request):
             deck_text = request.POST.get('deck_text')
             if type_import == "CardgameDB":
                 deck_text = convert_cardgamedb_conquestdb(deck_text)
+            else:
+                true_split_message = deck_text.split(sep="\n")
+                while true_split_message:
+                    if true_split_message[0].strip():
+                        break
+                    del true_split_message[0]
+                deck_text = "\n".join(true_split_message)
             if deck_text == "ERROR":
                 return JsonResponse({'message': 'Error encountered while converting deck to ConquestDB version.'})
             deck = clean_sent_deck(deck_text)
@@ -2012,6 +2019,12 @@ def ajax_view(request):
             text = text.replace("Old One Eye", "\"Old One Eye\"")
             text = text.replace("The Swarmlord", "\"The Swarmlord\"")
             text = text.replace("Parasite of Mortrex", "\"Parasite of Mortrex\"")
+            true_split_message = text.split(sep="\n")
+            while true_split_message:
+                if true_split_message[0].strip():
+                    break
+                del true_split_message[0]
+            text = "\n".join(true_split_message)
             deck = clean_sent_deck(text)
             print(deck)
             deck_name = deck[0]
