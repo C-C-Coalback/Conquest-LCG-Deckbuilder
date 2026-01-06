@@ -975,6 +975,7 @@ def card_data(request, card_name):
     directory = os.getcwd()
     target_directory = directory + "/cards/comments/" + card_name + "/"
     ratings_file = directory + "/cards/ratings/" + card_name + ".csv"
+    print("Request Received for:", card_name)
     if request.method == 'POST':
         flag = request.POST.get('flag')
         if flag == "POST":
@@ -1056,7 +1057,6 @@ def card_data(request, card_name):
         except:
             pass
     for a in range(len(sig_squad)):
-        print(sig_squad[a])
         sig_squad_links.append(convert_name_to_hyperlink(sig_squad[a]))
         sig_squad[a] = convert_name_to_img_src(sig_squad[a])
     if card_name in apoka_errata_dict:
