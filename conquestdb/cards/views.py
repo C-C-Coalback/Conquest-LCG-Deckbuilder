@@ -975,7 +975,7 @@ def card_data(request, card_name):
     directory = os.getcwd()
     target_directory = directory + "/cards/comments/" + card_name + "/"
     ratings_file = directory + "/cards/ratings/" + card_name + ".csv"
-    print("Request Received for:", card_name)
+    print("Request Received for", card_name, "from", username)
     if request.method == 'POST':
         flag = request.POST.get('flag')
         if flag == "POST":
