@@ -271,7 +271,7 @@ def orks_cards_init():
                                 "Location.", 2, faction, "Loyal", True, war_pack_info="The Final Gambit"),
         CardClasses.ArmyCard("Blitza-Bommer", "No Wargear Attachments.\n"
                                               "While this unit is ready it gains Flying.\n"
-                                              "Reaction: After this units readies, have your opponent deal 3 "
+                                              "Reaction: After this unit readies, have your opponent deal 3 "
                                               "indirect damage among units they control at this planet.",
                              "Vehicle. Elite.", 5, faction, "Loyal", 3, 5, 2, False,
                              wargear_attachments_permitted=False, war_pack_info="Jungles of Nectavus"),
