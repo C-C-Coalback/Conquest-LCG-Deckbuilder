@@ -441,13 +441,17 @@ def determine_cardgamedb_ally(new_deck_list):
     return ""
 
 
+def convert_common_mistakes(deck_text):
+    deck_text = deck_text.replace("Genestealer Harvester", "Genestealer Harvesters")
+    return deck_text
+
 def convert_cardgamedb_conquestdb(deck_text):
     try:
         deck_text = re.sub(r'\([^)]*\)', '', deck_text)
         deck_text = deck_text.replace("”", "\"")
         deck_text = deck_text.replace("“", "\"")
         deck_text = deck_text.replace("’", "'")
-        deck_text = deck_text.replace("Genestealer Harvester", "Genestealer Harvesters")
+        deck_text = convert_common_mistakes(deck_text)
         deck_split = deck_text.split("\n")
         for i in range(len(deck_split)):
             deck_split[i] = deck_split[i].rstrip()
@@ -1957,6 +1961,7 @@ def ajax_view(request):
         if flag == "IMPORT":
             type_import = request.POST.get('type_import')
             deck_text = request.POST.get('deck_text')
+            deck_text = convert_common_mistakes(deck_text)
             if type_import == "CardgameDB":
                 deck_text = convert_cardgamedb_conquestdb(deck_text)
             else:
