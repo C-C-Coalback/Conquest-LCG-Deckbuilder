@@ -104,7 +104,7 @@ def save_as_csv():
             quantity_count = 1
         elif r["card type"] == "Token":
             quantity_count = 10
-        elif "Pledge" in  r["traits"]:
+        elif "Pledge" in r["traits"]:
             quantity_count = 1
         elif r["loyalty"] == "Signature":
             found = False
