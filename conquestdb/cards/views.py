@@ -95,6 +95,38 @@ df = pd.DataFrame([x.as_dict() for x in card_array])
 planet_df = pd.DataFrame([x.as_dict() for x in planet_array])
 
 
+def save_as_csv():
+    new_df = df.copy()
+    quantities = []
+    for _, r in new_df.iterrows():
+        quantity_count = 3
+        if r["card type"] == "Warlord" or r["card type"] == "Synapse":
+            quantity_count = 1
+        elif r["card type"] == "Token":
+            quantity_count = 10
+        elif "Pledge" in  r["traits"]:
+            quantity_count = 1
+        elif r["loyalty"] == "Signature":
+            found = False
+            for _, r_2 in new_df.iterrows():
+                if r_2["card type"] == "Warlord":
+                    sig_squad = cards_dict[r_2["name"]].signature_squad
+                    for a in range(len(sig_squad)):
+                        if r["name"] in sig_squad[a]:
+                            quantity_count = int(sig_squad[a][0])
+                            found = True
+                if found:
+                    break
+        quantities.append(quantity_count)
+    print(quantities)
+    new_df["useful_quantities"] = quantities
+    new_df.to_csv(os.getcwd() + "/conquestdb_card_data.csv")
+    new_planet_df = planet_df.copy()
+    quantities = [1 for _ in range(new_planet_df.shape[0])]
+    new_planet_df["useful_quantities"] = quantities
+    new_planet_df.to_csv(os.getcwd() + "/conquest_planet_data.csv")
+
+
 def index(request):
     light_dark_toggle = light_dark_dict.get_light_mode(request.user.username)
     return render(request, 'cards/index.html', {
