@@ -20,7 +20,7 @@ import string
 from django.core.files.storage import FileSystemStorage
 from django.core.files.base import ContentFile
 import file_inits
-from file_inits import increment_card_count
+from file_inits import increment_card_count, increment_date_csv_count
 
 
 def sorter_cycles(column):
@@ -1179,6 +1179,11 @@ def card_data(request, card_name):
         increment_card_count(card_name)
     except Exception as e:
         print("failed to increment card count")
+        print(e)
+    try:
+        increment_date_csv_count()
+    except Exception as e:
+        print("failed to increment date count")
         print(e)
     return render(request, "cards/card_data.html",
                   {"card_name": original_card_name, "image_name": image_name, "text": text,
