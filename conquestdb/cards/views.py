@@ -905,6 +905,7 @@ def ajax_view(request):
             else:
                 filtered_df = filtered_df[filtered_df['name'].str.contains(search)]
         if text is not None:
+            text = text.replace("+", "\\+")
             if text.islower():
                 try:
                     filtered_df = filtered_df[filtered_df['text'].str.contains("(?i)" + text)]
