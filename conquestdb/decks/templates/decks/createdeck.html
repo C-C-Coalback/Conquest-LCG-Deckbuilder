@@ -43,7 +43,7 @@
                     <p id="ok-ally">Ally OK</p>
                 </div>
                 <div class="card-count-div"><div>Card Count: </div><div id="card-count">0</div>
-                    <div data-toggle="tooltip" title="You need to have 50 cards in your deck for it to be legal. Warlords, synapses and pledges do not count toward this amount."><u>?</u></div>
+                    <div data-toggle="tooltip" title="You need to have 50 cards in your deck for it to be legal. Warlords and synapses do not count toward this amount."><u>?</u></div>
                 </div>
             </div>
             <div id="signature-squad-cards" class="db-section">Signature Squad
@@ -387,6 +387,8 @@
 
     function clearPledge() {
         document.getElementById('pledge-card').innerHTML = `<img id="Cardback_Two" src="/static/images/CardImages/Cardback.jpg" style="opacity:0.0" class="db-image">`;
+        cards_in_deck = cards_in_deck - 1;
+        update_card_count_div();
         clearImg();
     }
 
@@ -689,8 +691,10 @@
         if (pledge_card !== "" && pledge_card !== "----------------------------------------------------------------------") {
             pledge_card = pledge_card.split(' ').join('_');
             route = "/static/images/CardImages/" + pledge_card + ".jpg";
+            cards_in_deck = cards_in_deck + 1;
             document.getElementById('pledge-card').innerHTML = `<img id=` + pledge_card + ` src=` + route + ` class="db-image" onmouseenter="showImg(this)" onmouseleave="clearImg()" onclick="clearPledge()" data-src=` + route + `>`
         }
+        update_card_count_div();
     }
 
     document.querySelector('#card-input').focus();
@@ -1119,6 +1123,8 @@
                     } else if (card_type === "Pledge") {
                         var pledgeName = cardName.split(' ').join('_');
                         route = "/static/images/CardImages/" + pledgeName + ".jpg";
+                        cards_in_deck = cards_in_deck + 1;
+                        update_card_count_div();
                         document.getElementById('pledge-card').innerHTML = `<img id=` + pledgeName + ` src=` + route + ` class="db-image" onmouseenter="showImg(this)" onmouseleave="clearImg()" onclick="clearPledge()" data-src=` + route + `>`
                     } else {
                         addCard(card_type, cardName);

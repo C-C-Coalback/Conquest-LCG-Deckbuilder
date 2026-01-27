@@ -301,12 +301,14 @@ def deck_validation(deck, remaining_signature_squad, factions, warlord=""):
     global cards_dict
     print("Can continue")
     current_index = 4
+    card_count = 0
     holy_crusade_relevant = False
     if deck[current_index] == "Signature Squad":
         card = FindCard.find_card(deck[current_index - 1], card_array, cards_dict)
         print(deck[current_index - 1])
         if card.check_for_a_trait("Pledge"):
             current_index = 5
+            card_count += 1
             if card.get_name() == "Holy Crusade":
                 holy_crusade_relevant = True
         else:
@@ -330,7 +332,6 @@ def deck_validation(deck, remaining_signature_squad, factions, warlord=""):
     if factions[0] == "Tyranids":
         synapse_needed = True
     current_index += 1
-    card_count = 0
     skippers = ["Support", "Attachment", "Event", "Synapse"]
     print(deck)
     while deck[current_index] != "Planet" and current_index < len(deck):
