@@ -244,7 +244,7 @@ def astra_militarum_cards_init():
                               allowed_phases_in_hand="COMBAT", war_pack_info="Descendants of Isha"),
         CardClasses.WarlordCard("Broderick Worr", "Army units that retreat from this planet are destroyed instead.\n"
                                                   "Each other Astra Militarum unit you control at a "
-                                                  "Stronghold planet (green)"
+                                                  "Strongpoint planet (green)"
                                                   " gets +1 ATK and gains, “Cannot retreat or be routed.”",
                                 "Soldier. Commissar.", faction, 2, 6, 2, 5, "Bloodied.", 7, 7,
                                 ["4x Anxious Infantry Platoon", "2x Summary Execution",
@@ -259,7 +259,7 @@ def astra_militarum_cards_init():
                                 "Location.", 2, faction, "Signature", False, war_pack_info="Decree of Ruin"),
         CardClasses.EventCard("Summary Execution", "Play only during a battle.\n"
                                                    "Combat Action: Sacrifice a unit at a planet with your warlord "
-                                                   "to have that planet gain a Stronghold icon (green) until the "
+                                                   "to have that planet gain a Strongpoint icon (green) until the "
                                                    "end of the battle. Then, draw 1 card.", "Tactic.",
                               0, faction, "Signature", 1, False, action_in_hand=True, allowed_phases_in_hand="COMBAT",
                               war_pack_info="Decree of Ruin"),
@@ -270,13 +270,13 @@ def astra_militarum_cards_init():
                                                                "unit at this planet.", "Wargear. Weapon.",
                                    1, faction, "Signature", 3, False, extra_attack=1, required_traits="Commissar",
                                    war_pack_info="Decree of Ruin"),
-        CardClasses.ArmyCard("Sacaellum Shrine Guard", "While this unit is at a Stronghold planet (green) it gets"
+        CardClasses.ArmyCard("Sacaellum Shrine Guard", "While this unit is at a Strongpoint planet (green) it gets"
                                                        " +1 ATK and +1 HP.", "Soldier. Sacaellum. Ally.",
                              1, faction, "Common", 1, 1, 1, False, war_pack_info="Boundless Hate"),
         CardClasses.SupportCard("Troop Transport", "Limited.\n"
                                                    "Action: Sacrifice this support to either put a Guardsman "
                                                    "token into play at a planet, or put 2 Guardsman tokens into "
-                                                   "play at a Stronghold planet (green).", "Upgrade.",
+                                                   "play at a Strongpoint planet (green).", "Upgrade.",
                                 0, faction, "Loyal", False, limited=True, action_in_play=True,
                                 allowed_phases_in_play="ALL", war_pack_info="Boundless Hate"),
         CardClasses.ArmyCard("Death Korps Engineers", "Action: Sacrifice this unit to destroy a "
@@ -287,11 +287,11 @@ def astra_militarum_cards_init():
                                                   "ready another target army unit you control.", "Soldier. Sacaellum.",
                              3, faction, "Loyal", 3, 3, 1, False, war_pack_info="Deadly Salvage"),
         CardClasses.EventCard("Inspirational Fervor", "Reaction: After you win a battle at a "
-                                                      "Stronghold planet (green), move up to 2 non-warlord units"
+                                                      "Strongpoint planet (green), move up to 2 non-warlord units"
                                                       " you control at that planet to a target planet.", "Tactic.",
                               1, faction, "Common", 1, False, war_pack_info="Deadly Salvage"),
         CardClasses.ArmyCard("Taurox APC", "No Wargear Attachments.\n"
-                                           "Reaction: After a combat round at a Stronghold planet (green) ends, "
+                                           "Reaction: After a combat round at a Strongpoint planet (green) ends, "
                                            "move this unit to that planet.", "Vehicle. Transport.",
                              2, faction, "Common", 2, 2, 1, False, wargear_attachments_permitted=False,
                              war_pack_info="What Lurks Below"),
@@ -302,13 +302,13 @@ def astra_militarum_cards_init():
                                    1, faction, "Common", 1, False, extra_attack=1, extra_health=1,
                                    type_of_units_allowed_for_attachment="Army/Token/Synapse",
                                    war_pack_info="What Lurks Below"),
-        CardClasses.ArmyCard("Sacaellum's Finest", "Reaction: After you win a battle at a non-first Stronghold planet"
+        CardClasses.ArmyCard("Sacaellum's Finest", "Reaction: After you win a battle at a non-first Strongpoint planet"
                                                    " (green), instead of triggering the planet's Battle ability, "
-                                                   "put this unit into play from your hand at a Stronghold planet"
+                                                   "put this unit into play from your hand at a Strongpoint planet"
                                                    " (green).", "Soldier. Sacaellum.",
                              4, faction, "Loyal", 3, 4, 2, False, war_pack_info="Wrath of the Crusaders"),
         CardClasses.SupportCard("Cathedral of Saint Camila", "Combat Action: Exhaust this support to target up to 1 "
-                                                             "non-Elite enemy army unit at each Stronghold planet"
+                                                             "non-Elite enemy army unit at each Strongpoint planet"
                                                              " (green). Exhaust each targeted unit. "
                                                              "(Limit once per phase.)", "Location. Ecclesiarchy.",
                                 3, faction, "Loyal", True, action_in_play=True, allowed_phases_in_play="COMBAT",
@@ -323,7 +323,7 @@ def astra_militarum_cards_init():
                                                      " number of army unit you control at a planet.", "Tactic.",
                               0, faction, "Loyal", 2, False, action_in_hand=True, allowed_phases_in_hand="COMBAT",
                               war_pack_info="The Final Gambit"),
-        CardClasses.AttachmentCard("Imperial Rally Point", "Attach to a Stronghold planet (green).\n"
+        CardClasses.AttachmentCard("Imperial Rally Point", "Attach to a Strongpoint planet (green).\n"
                                                            "Reduce the cost of each Astra Militarum unit you deploy "
                                                            "at this planet by 1 (to a minimum of 1).", "Location.",
                                    1, faction, "Common", 1, False, planet_attachment=True, green_required=True,

@@ -211,7 +211,7 @@ def eldar_cards_init():
                              "Psyker. Saim-Hann.", 3, faction, "Common", 2, 4, 1, False,
                              war_pack_info="Decree of Ruin"),
         CardClasses.ArmyCard("Wraithguard Revenant", "Interrupt: When you win a command struggle at a "
-                                                     "Stronghold planet (green), put this unit into play from your"
+                                                     "Strongpoint planet (green), put this unit into play from your"
                                                      " discard pile or hand at that planet instead of taking the "
                                                      "planet's card and resource bonuses.", "Drone. Spirit.",
                              2, faction, "Common", 3, 2, 0, False,
@@ -255,10 +255,10 @@ def eldar_cards_init():
                                                     " its cost by 2 (to a minimum of 1).", "Upgrade.",
                                 2, faction, "Common", False, limited=True,
                                 applies_discounts=[True, 2, True], war_pack_info="What Lurks Below"),
-        CardClasses.ArmyCard("Saim-Hann Kinsman", "While this unit is at a Stronghold planet (green) "
+        CardClasses.ArmyCard("Saim-Hann Kinsman", "While this unit is at a Strongpoint planet (green) "
                                                   "it gets +1 ATK and +1 HP.", "Scout. Saim-Hann. Ally.",
                              1, faction, "Common", 1, 1, 1, False, war_pack_info="Wrath of the Crusaders"),
-        CardClasses.EventCard("Eldritch Storm", "Combat Action: Target up to 1 enemy unit at each Stronghold planet"
+        CardClasses.EventCard("Eldritch Storm", "Combat Action: Target up to 1 enemy unit at each Strongpoint planet"
                                                 " (green). Deal 2 damage to each targeted unit.", "Power.",
                               2, faction, "Common", 1, False, action_in_hand=True, allowed_phases_in_hand="COMBAT",
                               war_pack_info="Wrath of the Crusaders"),
