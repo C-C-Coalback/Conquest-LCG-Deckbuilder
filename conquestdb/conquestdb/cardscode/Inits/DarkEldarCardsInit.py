@@ -347,7 +347,7 @@ def dark_eldar_cards_init():
         CardClasses.ArmyCard("Kabalite Blackguard", "Reaction: After you win a battle at this planet, "
                                                     "take up to 2 RESOURCE from your opponent.", "Warrior. Kabalite.",
                              2, faction, "Loyal", 2, 3, 0, False, war_pack_info="Against the Great Enemy"),
-        CardClasses.SupportCard("Abomination Workshop", "HEADQUARTERS ACTION: Sacrifice this support to have each "
+        CardClasses.SupportCard("Abomination Workshop", "Headquarters Action: Sacrifice this support to have each "
                                                         "player discard cards from his hand until he has cards "
                                                         "equal to or less than the highest printed cost among "
                                                         "units he controls.", "Location.", 2, faction, "Common",

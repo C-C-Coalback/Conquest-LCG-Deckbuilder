@@ -56,7 +56,7 @@ def necrons_cards_init():
         CardClasses.ArmyCard("Warriors of Gidrim", "This unit gains 1 command icon while you have 2 or more non-Necrons"
                                                    " factions among units you control.", "Warrior. Sautekh.",
                              1, faction, "Common", 1, 1, 1, False, war_pack_info="Legions of Death"),
-        CardClasses.ArmyCard("Flayed Ones Pack", "FORCED REACTION: After this unit is declared as an attacker, "
+        CardClasses.ArmyCard("Flayed Ones Pack", "Forced Reaction: After this unit is declared as an attacker, "
                                                  "discard the top 3 cards of your deck.", "Warrior.",
                              2, faction, "Common", 3, 2, 1, False, war_pack_info="Legions of Death"),
         CardClasses.ArmyCard("Immortal Vanguard", "Each non-Necrons Warrior unit you control"
@@ -104,7 +104,7 @@ def necrons_cards_init():
                              4, faction, "Common", 3, 4, 1, False, war_pack_info="Legions of Death"),
         CardClasses.ArmyCard("Harbinger of Eternity", "You may play each event card from your discard pile "
                                                       "as if it were in your hand.\n"
-                                                      "FORCED REACTION: After you play a event card from your"
+                                                      "Forced Reaction: After you play a event card from your"
                                                       " discard pile, remove that card from the game.",
                              "Scholar. Elite.", 5, faction, "Common", 3, 5, 3, False,
                              action_in_play=True, allowed_phases_in_play="ALL", war_pack_info="Legions of Death"),
@@ -239,11 +239,11 @@ def necrons_cards_init():
                                 ["4x Augmented Warriors", "1x Dissection Chamber",
                                  "2x Vivisection", "1x Eldritch Lance"],
                                 war_pack_info="Searching for Truth"),
-        CardClasses.ArmyCard("Augmented Warriors", "FORCED REACTION: After this unit enters play, deal "
+        CardClasses.ArmyCard("Augmented Warriors", "Forced Reaction: After this unit enters play, deal "
                                                    "it 2 unpreventable damage.", "Soldier.",
                              2, faction, "Signature", 2, 4, 1, False,
                              war_pack_info="Searching for Truth"),
-        CardClasses.SupportCard("Dissection Chamber", "FORCED REACTION: After an army unit enters play,"
+        CardClasses.SupportCard("Dissection Chamber", "Forced Reaction: After an army unit enters play,"
                                                       " deal it 1 damage.", "Location.",
                                 2, faction, "Signature", False,
                                 war_pack_info="Searching for Truth"),
@@ -271,13 +271,13 @@ def necrons_cards_init():
                                    unit_must_match_faction=True, must_be_own_unit=True,
                                    war_pack_info="Against the Great Enemy"),
         CardClasses.ArmyCard("Dread Command Barge", "No Wargear Attachments.\n"
-                                                    "COMMAND ACTION: Discard a non-Necrons card from your hand "
+                                                    "Command Action: Discard a non-Necrons card from your hand "
                                                     "to move this unit to an adjacent planet.", "Vehicle.",
                              4, faction, "Common", 3, 3, 3, False, wargear_attachments_permitted=False,
                              action_in_play=True, allowed_phases_in_play="COMMAND",
                              war_pack_info="The Warp Unleashed"),
         CardClasses.ArmyCard("Shard of the Deceiver", "X is equal to the number of cards in your discard pile.\n"
-                                                      "FORCED REACTION: After a phase or combat round at this planet "
+                                                      "Forced Reaction: After a phase or combat round at this planet "
                                                       "begins, discard a card. If you have no cards in your hand, "
                                                       "discard this unit.", "C'tan. Elite.",
                              7, faction, "Common", 0, 0, 2, False, war_pack_info="The Warp Unleashed"),

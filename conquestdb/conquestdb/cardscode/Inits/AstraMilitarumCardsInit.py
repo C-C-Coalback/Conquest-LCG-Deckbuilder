@@ -179,7 +179,7 @@ def astra_militarum_cards_init():
                                                           "to rout a target army unit.", "Location.",
                                 2, faction, "Loyal", False, action_in_play=True, allowed_phases_in_play="ALL",
                                 war_pack_info="The Scourge"),
-        CardClasses.ArmyCard("Mystic Warden", "FORCED REACTION: After a battle at this planet ends, "
+        CardClasses.ArmyCard("Mystic Warden", "Forced Reaction: After a battle at this planet ends, "
                                               "sacrifice this unit.", "Psyker.",
                              0, faction, "Common", 2, 2, 0, False, war_pack_info="Gift of the Ethereals"),
         CardClasses.EventCard("To Arms!", "Action: Ready a target support card.", "Tactic.",
@@ -250,7 +250,7 @@ def astra_militarum_cards_init():
                                 ["4x Anxious Infantry Platoon", "2x Summary Execution",
                                  "1x Forward Barracks", "1x Commissarial Bolt Pistol"],
                                 war_pack_info="Decree of Ruin"),
-        CardClasses.ArmyCard("Anxious Infantry Platoon", "FORCED REACTION: After a combat round at this planet ends, "
+        CardClasses.ArmyCard("Anxious Infantry Platoon", "Forced Reaction: After a combat round at this planet ends, "
                                                          "you may pay 1 RESOURCE. If you do not, retreat this unit.",
                              "Soldier.", 2, faction, "Signature", 3, 3, 1, False, war_pack_info="Decree of Ruin"),
         CardClasses.SupportCard("Forward Barracks", "Reaction: After a combat round ends, if you control an "

@@ -239,7 +239,7 @@ def space_marines_cards_init():
                                                       " control at that planet. (Max 1 per round.)", "Tactic. Vow.",
                               1, faction, "Common", 1, False,
                               war_pack_info="Decree of Ruin"),
-        CardClasses.ArmyCard("Neophyte Apprentice", "FORCED REACTION: After this unit damages an enemy unit by an "
+        CardClasses.ArmyCard("Neophyte Apprentice", "Forced Reaction: After this unit damages an enemy unit by an "
                                                     "attack, sacrifice it to search the top 6 cards of your"
                                                     " deck for a Black Templars unit with cost 4 or lower. "
                                                     "Put that unit into play at this planet, and shuffle the"

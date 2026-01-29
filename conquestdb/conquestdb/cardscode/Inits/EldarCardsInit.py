@@ -148,7 +148,7 @@ def eldar_cards_init():
         CardClasses.SupportCard("Dome of Crystal Seers", "Interrupt: When you search your deck, search "
                                                          "an additional 3 cards.", "Location.",
                                 1, faction, "Loyal", False, war_pack_info="The Scourge"),
-        CardClasses.ArmyCard("Warlock Destructor", "FORCED REACTION: After the deploy phase begins, pay 1 RESOURCE"
+        CardClasses.ArmyCard("Warlock Destructor", "Forced Reaction: After the deploy phase begins, pay 1 RESOURCE"
                                                    " or discard this unit.", "Psyker.",
                              2, faction, "Common", 3, 4, 1, False, war_pack_info="Gift of the Ethereals"),
         CardClasses.ArmyCard("Eldritch Corsair", "This unit gets +2 ATK while it is at a planet with a warlord.",
@@ -286,7 +286,7 @@ def eldar_cards_init():
                              3, faction, "Signature", 3, 2, 1, False,
                              action_in_play=True, allowed_phases_in_play="COMBAT",
                              war_pack_info="The Final Gambit"),
-        CardClasses.SupportCard("Wisdom of the Serpent", "HEADQUARTERS ACTION: Exhaust this support to choose"
+        CardClasses.SupportCard("Wisdom of the Serpent", "Headquarters Action: Exhaust this support to choose"
                                                          " Psyker or Warrior. Then, search the top 3 cards of your "
                                                          "deck for a unit with the chosen Trait. Reveal it, add it "
                                                          "to your hand, and place the remaining cards on the bottom"

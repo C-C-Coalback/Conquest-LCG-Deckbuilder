@@ -147,7 +147,7 @@ def orks_cards_init():
                                 "put a Snotlings token into play at this planet.",
                                 "Psyker. Oddboy.", faction, 1, 7, 1, 6,
                                 "Bloodied.\n"
-                                "FORCED REACTION: After the combat phase ends, destroy each "
+                                "Forced Reaction: After the combat phase ends, destroy each "
                                 "Snotlings token you control.", 7, 7,
                                 ['1x Wyrdboy Stikk', "1x Zogwort's Hovel",
                                  '2x Launch da Snots', "4x Zogwort's Runtherders"],
@@ -168,7 +168,7 @@ def orks_cards_init():
                                                  " it gets +X ATK for that attack. X is the number of "
                                                  "Snotlings tokens at the same planet as the attacking unit.",
                               "Tactic.", 1, faction, "Signature", 1, False, war_pack_info="Zogwort's Curse"),
-        CardClasses.ArmyCard("Snakebite Thug", "FORCED REACTION: After this unit resolves its attack, "
+        CardClasses.ArmyCard("Snakebite Thug", "Forced Reaction: After this unit resolves its attack, "
                                                "deal 1 damage to it.", "Warrior. Boyz.",
                              2, faction, "Common", 3, 4, 1, False, war_pack_info="The Threat Beyond"),
         CardClasses.ArmyCard("Evil Sunz Warbiker", "This unit gets +2 ATK while it is at a planet with a warlord.",
@@ -314,7 +314,7 @@ def orks_cards_init():
                              war_pack_info="Against the Great Enemy"),
         CardClasses.AttachmentCard("Repulsor Minefield", "Deep Strike (1).\n"
                                                          "Attach to a planet.\n"
-                                                         "FORCED REACTION: After an enemy army unit is declared as "
+                                                         "Forced Reaction: After an enemy army unit is declared as "
                                                          "an attacker at this planet, deal it 1 damage.", "Upgrade.",
                                    2, faction, "Common", 1, False, deepstrike=1, planet_attachment=True,
                                    war_pack_info="Against the Great Enemy"),
@@ -322,7 +322,7 @@ def orks_cards_init():
                                                  "“Interrupt: When this unit is assigned damage, "
                                                  "reduce that damage by 2.”", "Warrior.",
                              2, faction, "Common", 1, 3, 1, False, war_pack_info="The Warp Unleashed"),
-        CardClasses.SupportCard("Fungal Turf", "HEADQUARTERS ACTION: Sacrifice this support to put X Snotling tokens "
+        CardClasses.SupportCard("Fungal Turf", "Headquarters Action: Sacrifice this support to put X Snotling tokens "
                                                "into play divided among any number of planets. "
                                                "X is the highest printed cost among units you control.", "Location.",
                                 2, faction, "Loyal", False, action_in_play=True, allowed_phases_in_play="HEADQUARTERS",

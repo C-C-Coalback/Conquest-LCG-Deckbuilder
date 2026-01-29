@@ -132,7 +132,7 @@ def chaos_cards_init():
                              5, "Chaos", "Common", 3, 5, 2, False, war_pack_info="Legions of Death"),
         CardClasses.ArmyCard("Death Guard Infantry", "", "Warrior. Death Guard. Nurgle.",
                              3, "Chaos", "Common", 2, 4, 1, False, war_pack_info="The Howl of Blackmane"),
-        CardClasses.ArmyCard("Heretek Inventor", "FORCED REACTION: After this unit enters play, your opponent may "
+        CardClasses.ArmyCard("Heretek Inventor", "Forced Reaction: After this unit enters play, your opponent may "
                                                  "move it to a planet of his choice.", "Scholar.",
                              1, "Chaos", "Loyal", 3, 3, 1, False, war_pack_info="The Howl of Blackmane"),
         CardClasses.WarlordCard("Ku'gath Plaguefather", "Reaction: After this warlord is declared as an attacker, "
@@ -141,7 +141,7 @@ def chaos_cards_init():
                                 1, 7, 1, 5, "Bloodied.", 7, 7,
                                 ["4x Ku'gath's Nurglings", "1x Vile Laboratory",
                                  "1x The Plaguefather's Banner", "2x Fetid Haze"], war_pack_info="The Scourge"),
-        CardClasses.ArmyCard("Ku'gath's Nurglings", "FORCED REACTION: After a unit moves to this planet, "
+        CardClasses.ArmyCard("Ku'gath's Nurglings", "Forced Reaction: After a unit moves to this planet, "
                                                     "deal it 1 damage.", "Daemon. Nurgle.",
                              2, "Chaos", "Signature", 2, 2, 1, False, war_pack_info="The Scourge"),
         CardClasses.SupportCard("Vile Laboratory", "Deploy Action: Exhaust this support to have your opponent choose "
@@ -178,7 +178,7 @@ def chaos_cards_init():
                                 action_in_play=True, allowed_phases_in_play="ALL",
                                 war_pack_info="Gift of the Ethereals"),
         CardClasses.ArmyCard("Gleeful Plague Beast", "No Wargear Attachments.\n"
-                                                     "FORCED REACTION: After the combat phase begins, deal 1 damage "
+                                                     "Forced Reaction: After the combat phase begins, deal 1 damage "
                                                      "to each unit at this planet.", "Daemon. Nurgle. Elite.",
                              5, faction, "Loyal", 3, 5, 1, False, wargear_attachments_permitted=False,
                              war_pack_info="Zogwort's Curse"),
@@ -213,7 +213,7 @@ def chaos_cards_init():
         CardClasses.AttachmentCard("Slaanesh's Temptation", "Attach to a planet.\n"
                                                             "Increase the cost of each enemy unit being deployed "
                                                             "at another planet by 1.\n"
-                                                            "FORCED REACTION: After a battle at attached planet ends, "
+                                                            "Forced Reaction: After a battle at attached planet ends, "
                                                             "sacrifice this attachment.", "Power. Slaanesh.",
                                    2, faction, "Loyal", 2, True, planet_attachment=True,
                                    war_pack_info="Descendants of Isha"),
@@ -345,7 +345,7 @@ def chaos_cards_init():
                               2, faction, "Common", 1, False, action_in_hand=True, allowed_phases_in_hand="ALL",
                               war_pack_info="Searching for Truth"),
         CardClasses.ArmyCard("Sickening Helbrute", "Brutal.\n"
-                                                   "FORCED REACTION: After a unit at this planet is declared as a "
+                                                   "Forced Reaction: After a unit at this planet is declared as a "
                                                    "defender, deal 1 damage to it.", "Vehicle. Nurgle. Elite.",
                              7, faction, "Common", 2, 9, 2, False, brutal=True,
                              war_pack_info="Against the Great Enemy"),

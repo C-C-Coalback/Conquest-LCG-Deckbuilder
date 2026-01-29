@@ -126,7 +126,7 @@ def tau_cards_init():
                              3, faction, "Common", 2, 2, 0, False, wargear_attachments_permitted=False, mobile=True,
                              war_pack_info="The Howl of Blackmane"),
         CardClasses.ArmyCard("Aun'ui Prelate", "Ambush.\n"
-                                               "FORCED REACTION: After this unit resolves its attack, "
+                                               "Forced Reaction: After this unit resolves its attack, "
                                                "move it to your HQ.\n"
                                                "Reaction: After you deploy this unit, each other Tau unit \n"
                                                "you control at this planet gets +1 ATK until the end of the phase.",
@@ -149,13 +149,13 @@ def tau_cards_init():
                                    0, faction, "Common", 1, False, type_of_units_allowed_for_attachment="Army",
                                    war_pack_info="The Scourge"),
         CardClasses.WarlordCard("Aun'shi", "Each Tau unit you control at this planet gains Armorbane.\n"
-                                           "FORCED REACTION: After this warlord resolves its attack,"
+                                           "Forced Reaction: After this warlord resolves its attack,"
                                            " move it to your HQ.", "Ethereal. Soldier.", faction,
                                 2, 7, 1, 5, "Bloodied.", 7, 7,
                                 ["4x Ethereal Envoy", "1x Aun'shi's Sanctum",
                                  "1x Honor Blade", "2x Ethereal Wisdom"],
                                 war_pack_info="Gift of the Ethereals"),
-        CardClasses.ArmyCard("Ethereal Envoy", "FORCED REACTION: After this unit resolves its attack, "
+        CardClasses.ArmyCard("Ethereal Envoy", "Forced Reaction: After this unit resolves its attack, "
                                                "move it to your HQ.", "Ethereal. Soldier.",
                              1, faction, "Signature", 1, 3, 1, False, war_pack_info="Gift of the Ethereals"),
         CardClasses.SupportCard("Aun'shi's Sanctum", "Action: Exhaust this support to ready a target unit at a "
@@ -305,7 +305,7 @@ def tau_cards_init():
                                                      " of units you control at this planet to an adjacent planet.",
                               "Tactic.", -1, faction, "Loyal", 2, False, deepstrike=0, war_pack_info="Slash and Burn"),
         CardClasses.ArmyCard("Herald of the Tau'va", "Each Elite unit you control at this planet gains Mobile.\n"
-                                                     "FORCED REACTION: After this unit resolves its attack,"
+                                                     "Forced Reaction: After this unit resolves its attack,"
                                                      " move it to your HQ.", "Soldier. Ethereal.",
                              2, faction, "Common", 1, 3, 1, False, war_pack_info="Searching for Truth"),
         CardClasses.SupportCard("Beleaguered Garrison", "Each card you control in reserve is counted as a command "

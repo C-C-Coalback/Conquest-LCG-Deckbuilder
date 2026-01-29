@@ -19,7 +19,7 @@ def neutral_cards_init():
                                             "put it into play from your discard pile at your HQ.",
                               "Tactic.", 1, "Neutral", "Common", 1,
                               False, cycle_info="Core Set"),
-        CardClasses.SupportCard("Promethium Mine", "Limited.\nFORCED REACTION: After this"
+        CardClasses.SupportCard("Promethium Mine", "Limited.\nForced Reaction: After this"
                                                    " card enters play, place 4 RESOURCE on it.\n"
                                                    "Reaction: After the deploy phase begins, transfer"
                                                    " 1 RESOURCE from this card to "
@@ -48,7 +48,7 @@ def neutral_cards_init():
                                                 "to reduce the cost of that unit by 2.", "Relic.",
                                 1, "Neutral", "Common", True, limited=True, applies_discounts=[True, 2, False],
                                 war_pack_info="Legions of Death"),
-        CardClasses.EventCard("Calamity", "HEADQUARTERS ACTION: Return each army unit with printed cost 2 or "
+        CardClasses.EventCard("Calamity", "Headquarters Action: Return each army unit with printed cost 2 or "
                                           "lower to its owner's hand.", "Disaster.",
                               2, "Neutral", "Common", 1, False,
                               action_in_hand=True, allowed_phases_in_hand="HEADQUARTERS",
