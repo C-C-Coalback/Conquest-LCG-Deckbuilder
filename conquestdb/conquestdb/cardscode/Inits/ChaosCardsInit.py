@@ -302,7 +302,7 @@ def chaos_cards_init():
                                                        "Armorbane, Brutal, and Flying.", "Daemon. Khorne. Elite.",
                              10, faction, "Loyal", 8, 8, 2, False, wargear_attachments_permitted=False,
                              war_pack_info="The Final Gambit", bloodthirst=True),
-        CardClasses.EventCard("Warp Rift", "HEADQUARTERS ACTION: Switch a target planet with an adjacent planet. "
+        CardClasses.EventCard("Warp Rift", "Headquarters Action: Switch a target planet with an adjacent planet. "
                                            "(Units that were at a switched-out planet are now at "
                                            "the switched-in planet.)", "Power. Tzeentch.", 1, faction, "Loyal",
                               2, False, action_in_hand=True, allowed_phases_in_hand="HEADQUARTERS",
