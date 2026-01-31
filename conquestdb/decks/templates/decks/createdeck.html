@@ -1123,8 +1123,11 @@
                     } else if (card_type === "Pledge") {
                         var pledgeName = cardName.split(' ').join('_');
                         route = "/static/images/CardImages/" + pledgeName + ".jpg";
-                        cards_in_deck = cards_in_deck + 1;
-                        update_card_count_div();
+                        const previous_pledge_name = document.getElementById("pledge-card").children[0].id;
+                        if (previous_pledge_name === "Cardback_Two") {
+                            cards_in_deck = cards_in_deck + 1;
+                            update_card_count_div();
+                        }
                         document.getElementById('pledge-card').innerHTML = `<img id=` + pledgeName + ` src=` + route + ` class="db-image" onmouseenter="showImg(this)" onmouseleave="clearImg()" onclick="clearPledge()" data-src=` + route + `>`
                     } else {
                         addCard(card_type, cardName);
