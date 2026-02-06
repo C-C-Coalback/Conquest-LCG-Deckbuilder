@@ -344,7 +344,7 @@ class UnitCard(Card):
                  goes_fasta=False, preparation=False):
         super().__init__(name, text, traits, cost, faction, loyalty, 0,
                          card_type, unique, image_name, applies_discounts, action_in_hand, allowed_phases_in_hand,
-                         action_in_play, allowed_phases_in_play, limited, deepstrike=deepstrike,
+                         action_in_play, allowed_phases_in_play, limited=limited, deepstrike=deepstrike,
                          cycle_info=cycle_info, war_pack_info=war_pack_info, preparation=preparation)
         self.attack = attack
         self.health = health
