@@ -947,7 +947,7 @@ class ArmyCard(UnitCard):
         super().__init__(name, text, traits, cost, faction, loyalty, "Army", attack, health, command,
                          unique, image_name, brutal, flying, armorbane, area_effect,
                          applies_discounts, action_in_hand, allowed_phases_in_hand,
-                         action_in_play, allowed_phases_in_play, limited, ranged=ranged,
+                         action_in_play, allowed_phases_in_play, limited=limited, ranged=ranged,
                          wargear_attachments_permitted=wargear_attachments_permitted, no_attachments=no_attachments,
                          additional_cards_command_struggle=additional_cards_command_struggle,
                          additional_resources_command_struggle=additional_resources_command_struggle, mobile=mobile,
