@@ -290,7 +290,7 @@ def tau_cards_init():
                                                      "attack while a unit with printed cost 3 or higher at"
                                                      " this planet is ready.", "Drone.",
                              1, faction, "Common", 0, 4, 0, False, war_pack_info="Unforgiven"),
-        CardClasses.AttachmentCard("Missile Pod", "Attach to a Pilot or Vehicle unit you control."
+        CardClasses.AttachmentCard("Missile Pod", "Attach to a Pilot or Vehicle unit you control.\n"
                                                   "Deploy Action: Sacrifice this attachment to deal 3 damage to a "
                                                   "target enemy army unit in your opponent's HQ or destroy a target "
                                                   "support card.", "Hardpoint.", 2, faction, "Common", 1, False,
