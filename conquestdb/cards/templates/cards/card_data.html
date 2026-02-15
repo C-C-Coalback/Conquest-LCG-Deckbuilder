@@ -158,7 +158,7 @@
         <input id="username" name="username" value="{{ user.username }}" style="display:none;">
         <input name="flag" value="POST" style="display:none;">
         <textarea id="commentInput" name="comment" rows="10" cols="80"></textarea><br>
-        <button type="submit">Submit</button>
+        <button type="submit" style="color:black">Submit</button>
     </form>
 <script>
     {% if card_type != "Planet" %}
@@ -234,6 +234,7 @@
             </svg>`],
             [`RESOURCE`, `<span><img style="width: 20px; margin-bottom: 3px;" src="/static/images/Icons/Resource_Icon.png"></span>`],
             [`Battle Ability: `, `<b>Battle:</b> `],
+            [`Forced Battle: `, `<b>Forced Battle:</b>`],
             [`Battle: `, `<b>Battle:</b> `],
             [`Commit: `, `<b>Commit:</b> `]]
     {% endif %}
