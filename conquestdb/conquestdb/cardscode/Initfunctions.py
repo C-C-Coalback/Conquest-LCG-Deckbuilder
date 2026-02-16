@@ -18,6 +18,22 @@ def init_player_cards():
     card_array = space_marines_card_array + astra_militarum_card_array + orks_card_array + chaos_card_array + \
         dark_eldar_card_array + eldar_card_array + tau_card_array + tyranids_card_array + \
         necrons_card_array + neutral_card_array + tokens_card_array
+    for i in range(len(card_array)):
+        if card_array[i].check_for_a_trait("Pledge"):
+            card_array[i].quantity = 1
+        elif card_array[i].get_loyalty() == "Signature" and card_array[i].get_card_type() != "Warlord":
+            for j in range(len(card_array)):
+                if card_array[j].get_card_type() == "Warlord":
+                    sig_squad = card_array[j].get_signature_squad()
+                    found_card = False
+                    for k in range(len(sig_squad)):
+                        card_name = sig_squad[k][3:]
+                        if card_name == card_array[i].get_name():
+                            found_card = True
+                            card_array[i].quantity = int(sig_squad[k][0])
+                            break
+                    if found_card:
+                        break
     return card_array
 
 

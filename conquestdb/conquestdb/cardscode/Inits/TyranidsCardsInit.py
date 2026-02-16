@@ -306,7 +306,7 @@ def tyranids_cards_init():
                                                       "planet to trigger its Battle ability. (Limit once per phase.)",
                                 "Creature. Leviathan. Elite.", 1, 5, 1, True,
                                 action_in_play=True, allowed_phases_in_play="COMBAT",
-                                war_pack_info="Jungles of Nectavus"),
+                                war_pack_info="Jungles of Nectavus", quantity=3),
         CardClasses.ArmyCard("Crush of Sky-Slashers", "Flying.\n"
                                                       "Reaction: After a combat round begins at this planet, "
                                                       "deal 1 damage to a target enemy unit at this planet with "

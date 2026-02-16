@@ -34,54 +34,59 @@ def tau_cards_init():
                                    0, faction, "Signature", 3, False, action_in_play=True,
                                    allowed_phases_in_play="ALL", extra_attack=1, cycle_info="Core Set"),
         CardClasses.ArmyCard("Recon Drone", "Limited.", "Drone. Ally.", 0, faction, "Loyal",
-                             0, 1, 2, False, limited=True, cycle_info="Core Set"),
+                             0, 1, 2, False, limited=True, cycle_info="Core Set", quantity=1),
         CardClasses.ArmyCard("Vior'la Marksman", "Ranged.", "Scout. Shas'la.", 1, faction, "Common",
-                             1, 2, 1, False, ranged=True, cycle_info="Core Set"),
+                             1, 2, 1, False, ranged=True, cycle_info="Core Set", quantity=1),
         CardClasses.ArmyCard("Carnivore Pack", "Interrupt: When this unit is destroyed, "
                                                "gain 3 RESOURCE.", "Warrior. Kroot.",
-                             3, faction, "Common", 3, 3, 0, False, cycle_info="Core Set"),
+                             3, faction, "Common", 3, 3, 0, False, cycle_info="Core Set", quantity=1),
         CardClasses.ArmyCard("Vash'ya Trailblazer", "Mobile.", "Scout. Pilot.",
-                             2, faction, "Common", 1, 1, 2, False, mobile=True, cycle_info="Core Set"),
+                             2, faction, "Common", 1, 1, 2, False, mobile=True, cycle_info="Core Set", quantity=1),
         CardClasses.ArmyCard("Fire Warrior Elite", "Interrupt: When an enemy unit would declare an "
                                                    "attack against a unit you control at this planet, "
                                                    "declare this unit as the defender instead.",
-                             "Soldier. Shas'la.", 3, faction, "Common", 1, 5, 0, False, cycle_info="Core Set"),
+                             "Soldier. Shas'la.", 3, faction, "Common", 1, 5, 0, False, cycle_info="Core Set",
+                             quantity=1),
         CardClasses.ArmyCard("Fire Warrior Strike Team", "This unit gets +1 ATK "
                                                          "for every attachment on it.",
-                             "Soldier. Shas'la.", 4, faction, "Common", 1, 5, 1, False, cycle_info="Core Set"),
+                             "Soldier. Shas'la.", 4, faction, "Common", 1, 5, 1, False, cycle_info="Core Set",
+                             quantity=1),
         CardClasses.ArmyCard("Crisis Battle Guard", "Mobile.", "Soldier. Pilot. Elite.",
-                             5, faction, "Loyal", 3, 5, 3, False, mobile=True, cycle_info="Core Set"),
+                             5, faction, "Loyal", 3, 5, 3, False, mobile=True, cycle_info="Core Set",
+                             quantity=1),
         CardClasses.ArmyCard("Earth Caste Technician", "Reaction: After this unit enters play, "
                                                        "search the top 6 cards of your deck for an "
                                                        "attachment or Drone card. Reveal it, add it "
                                                        "to your hand, and place the remaining cards "
                                                        "on the bottom of your deck in any order.",
-                             "Scholar. Ally.", 1, faction, "Common", 1, 1, 1, False, cycle_info="Core Set"),
+                             "Scholar. Ally.", 1, faction, "Common", 1, 1, 1, False, cycle_info="Core Set",
+                             quantity=2),
         CardClasses.ArmyCard("Gun Drones", "You may deploy this card as a Drone attachment with the "
                                            "text, \"Attach to a non-Vehicle army unit."
                                            "Attached unit gains Area Effect (2).\"", "Drone.",
-                             2, faction, "Loyal", 2, 2, 1, False, cycle_info="Core Set"),
+                             2, faction, "Loyal", 2, 2, 1, False, cycle_info="Core Set", quantity=1),
         CardClasses.ArmyCard("Stingwing Swarm", "Ranged.", "Warrior. Vespid.", 4, faction, "Common",
-                             3, 3, 1, False, ranged=True, cycle_info="Core Set"),
+                             3, 3, 1, False, ranged=True, cycle_info="Core Set", quantity=1),
         CardClasses.ArmyCard("Fireblade Kais'vre", "Interrupt: When you use a Tau card as a shield card "
                                                    "at this planet, it gains 1 shield icon.",
-                             "Soldier. Hero.", 3, faction, "Loyal", 2, 3, 2, True, cycle_info="Core Set"),
+                             "Soldier. Hero.", 3, faction, "Loyal", 2, 3, 2, True, cycle_info="Core Set",
+                             quantity=1),
         CardClasses.ArmyCard("Experimental Devilfish", "No Wargear Attachments.\n"
                                                        "Reaction: After this unit commits to a "
                                                        "planet, ready it.", "Vehicle. Transport.",
                              3, faction, "Common", 4, 2, 1, False,
-                             wargear_attachments_permitted=False, cycle_info="Core Set"),
+                             wargear_attachments_permitted=False, cycle_info="Core Set", quantity=2),
         CardClasses.EventCard("Even the Odds", "Action: Move a target attachment to another eligible "
                                                "unit controlled by the same player.", "Tactic.",
                               1, faction, "Common", 1, False, action_in_hand=True,
-                              allowed_phases_in_hand="ALL", cycle_info="Core Set"),
+                              allowed_phases_in_hand="ALL", cycle_info="Core Set", quantity=1),
         CardClasses.EventCard("Calculated Strike", "Action: Destroy a target Limited card.",
                               "Tactic.", 1, faction, "Common", 1, False, action_in_hand=True,
-                              allowed_phases_in_hand="ALL", cycle_info="Core Set"),
+                              allowed_phases_in_hand="ALL", cycle_info="Core Set", quantity=1),
         CardClasses.EventCard("Deception", "Deploy Action: Return a target non-Elite army "
                                            "unit to its owner's hand.", "Tactic.",
                               2, faction, "Loyal", 2, False, action_in_hand=True,
-                              allowed_phases_in_hand="DEPLOY", cycle_info="Core Set"),
+                              allowed_phases_in_hand="DEPLOY", cycle_info="Core Set", quantity=1),
         CardClasses.AttachmentCard("Repulsor Impact Field", "Attach to an army unit."
                                                             "Limit 1 per unit.\n"
                                                             "Reaction: After attached unit is damaged "
@@ -89,23 +94,25 @@ def tau_cards_init():
                                                             "attacker.", "Wargear.",
                                    2, faction, "Loyal", 2, False,
                                    type_of_units_allowed_for_attachment="Army", limit_one_per_unit=True,
-                                   cycle_info="Core Set"),
+                                   cycle_info="Core Set", quantity=1),
         CardClasses.AttachmentCard("Ion Rifle", "Attach to an army unit.\n"
                                                 "Attached unit gets +3 ATK.", "Wargear. Weapon.",
                                    1, faction, "Common", 1, False,
-                                   type_of_units_allowed_for_attachment="Army", extra_attack=3, cycle_info="Core Set"),
+                                   type_of_units_allowed_for_attachment="Army", extra_attack=3, cycle_info="Core Set",
+                                   quantity=1),
         CardClasses.SupportCard("Frontline Launch Bay", "Limited.\n"
                                                         "Interrupt: When you deploy a Tau unit, exhaust "
                                                         "this support to reduce that unit's cost by 1.",
                                 "Location.", 1, faction, "Common", True,
                                 applies_discounts=[True, 1, True],
-                                is_faction_limited_unique_discounter=True, limited=True, cycle_info="Core Set"),
+                                is_faction_limited_unique_discounter=True, limited=True, cycle_info="Core Set",
+                                quantity=1),
         CardClasses.SupportCard("Ambush Platform", "Interrupt: When you deploy an attachment, "
                                                    "reduce its cost by 1.\n"
                                                    "Combat Action: Exhaust this support to deploy "
                                                    "an attachment from your hand.",
                                 "Upgrade.", 2, faction, "Common", False, action_in_play=True,
-                                allowed_phases_in_play="COMBAT", cycle_info="Core Set"),
+                                allowed_phases_in_play="COMBAT", cycle_info="Core Set", quantity=1),
         CardClasses.ArmyCard("Pathfinder Shi Or'es", "Action: Discard an attachment on this unit to ready it."
                                                      " (Limit once per phase.)", "Scout.",
                              3, faction, "Loyal", 3, 3, 1, True, action_in_play=True, allowed_phases_in_play="ALL",

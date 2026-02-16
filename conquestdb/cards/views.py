@@ -1051,6 +1051,7 @@ def card_data(request, card_name):
     loyalty = card.loyalty
     faction = card.faction
     traits = card.traits
+    quantity = card.quantity
     if card.is_unit:
         if card_type != "Warlord":
             card_type = card_type + " Unit"
@@ -1079,6 +1080,7 @@ def card_data(request, card_name):
     errata_bloodied_health = -1
     errata_attack = -1
     errata_health = -1
+    errata_quantity = -1
     errata_is_unit = "False"
     sig_squad = []
     sig_squad_links = []
@@ -1096,6 +1098,7 @@ def card_data(request, card_name):
         sig_squad[a] = convert_name_to_img_src(sig_squad[a])
     if card_name in apoka_errata_dict:
         card = apoka_errata_dict[card_name]
+        errata_quantity = card.quantity
         errata_card_name = card.get_name()
         errata_cycle_text = card.get_cycle_info_as_text()
         errata_faction = card.get_faction()
@@ -1202,4 +1205,5 @@ def card_data(request, card_name):
                    "errata_attack": errata_attack, "errata_health": errata_health, "errata_is_unit": errata_is_unit,
                    "light_dark_toggle": light_dark_toggle, "cycle_text": cycle_text,
                    "errata_cycle_text": errata_cycle_text, "sig_squad": sig_squad, "rotate": rotate,
-                   "ratings": ratings, "own_ratings": own_ratings, "num_ratings": num_ratings, "has_rated": has_rated})
+                   "ratings": ratings, "own_ratings": own_ratings, "num_ratings": num_ratings, "has_rated": has_rated,
+                   "quantity": quantity, "errata_quantity": errata_quantity})

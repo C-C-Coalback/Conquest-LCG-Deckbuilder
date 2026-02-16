@@ -36,86 +36,88 @@ def chaos_cards_init():
                                    False, type_of_units_allowed_for_attachment="Army", cycle_info="Core Set"),
         CardClasses.ArmyCard("Alpha Legion Infiltrator", "", "Alpha Legion. Scout.",
                              2, "Chaos", "Loyal", 4, 1, 1,
-                             False, cycle_info="Core Set"),
+                             False, cycle_info="Core Set", quantity=1),
         CardClasses.ArmyCard("Possessed", "", "Daemon. Elite.", 5, "Chaos",
-                             "Common", 9, 4, 1, False, cycle_info="Core Set"),
+                             "Common", 9, 4, 1, False, cycle_info="Core Set", quantity=1),
         CardClasses.ArmyCard("Splintered Path Acolyte", "Interrupt: When you deploy a Daemon unit, "
                                                         "sacrifice this unit to "
                                                         "reduce its cost by 2.", "Cultist. Tzeentch",
                              1, "Chaos", "Common", 1, 1, 1,
-                             False, cycle_info="Core Set"),
+                             False, cycle_info="Core Set", quantity=1),
         CardClasses.ArmyCard("Khorne Berzerker", "Brutal.", "Khorne. Warrior. World Eaters.",
-                             3, "Chaos", "Common", 2, 4, 1, False, cycle_info="Core Set", brutal=True),
+                             3, "Chaos", "Common", 2, 4, 1, False, cycle_info="Core Set", brutal=True, quantity=1),
         CardClasses.ArmyCard("Vicious Bloodletter", "Area Effect (3), No Wargear Attachments",
                              "Daemon. Elite. Khorne.", 5, "Chaos", "Loyal",
                              4, 4, 0, False, area_effect=3,
-                             wargear_attachments_permitted=False, cycle_info="Core Set"),
+                             wargear_attachments_permitted=False, cycle_info="Core Set", quantity=1),
         CardClasses.ArmyCard("Umbral Preacher", "Each army unit at this "
                                                 "planet cannot retreat from battle.",
                              "Cultist. Priest.", 3, "Chaos", "Common",
-                             1, 4, 2, False, cycle_info="Core Set"),
+                             1, 4, 2, False, cycle_info="Core Set", quantity=1),
         CardClasses.ArmyCard("Black Legion Heldrake", "Flying, No Wargear Attachments",
                              "Black Legion. Daemon. Elite.", 8, "Chaos", "Loyal",
                              8, 8, 3, False, cycle_info="Core Set", flying=True,
-                             wargear_attachments_permitted=False),
+                             wargear_attachments_permitted=False, quantity=1),
         CardClasses.ArmyCard("Ravenous Flesh Hounds", "No Attachments.\n"
                                                       "Action: Sacrifice a Cultist unit to "
                                                       "remove all damage from this unit.",
                              "Daemon. Elite. Khorne.", 5, "Chaos", "Common",
                              3, 6, 1, False, action_in_play=True, allowed_phases_in_play="ALL",
-                             no_attachments=True, cycle_info="Core Set"),
+                             no_attachments=True, cycle_info="Core Set", quantity=1),
         CardClasses.ArmyCard("Virulent Plague Squad", "This unit gets +1 ATK for each unit "
                                                       "in your opponent's discard pile.",
                              "Death Guard. Nurgle. Warrior.", 4, "Chaos", "Common",
-                             1, 4, 1, False, cycle_info="Core Set"),
+                             1, 4, 1, False, cycle_info="Core Set", quantity=1),
         CardClasses.ArmyCard("Chaos Fanatics", "", "Cultist.", 2, "Chaos",
-                             "Common", 1, 2, 2, False, cycle_info="Core Set"),
+                             "Common", 1, 2, 2, False, cycle_info="Core Set", quantity=2),
         CardClasses.ArmyCard("Soul Grinder", "No Wargear Attachments.\n"
                                              "Reaction: After you win a command "
                                              "struggle at this planet,"
                                              " your opponent must sacrifice a non-warlord unit"
                                              " at the same planet, if able.",
                              "Daemon. Elite. War Engine.", 6, "Chaos", "Common",
-                             4, 6, 2, False, wargear_attachments_permitted=False, cycle_info="Core Set"),
+                             4, 6, 2, False, wargear_attachments_permitted=False, cycle_info="Core Set", quantity=2),
         CardClasses.ArmyCard("Xavaes Split-Tongue", "Reaction: After an enemy unit at this "
                                                     "planet is destroyed, put a Cultist token "
                                                     "into play at your HQ.",
                              "Slaanesh. Warrior.", 3, "Chaos", "Loyal",
-                             2, 3, 2, True, cycle_info="Core Set"),
+                             2, 3, 2, True, cycle_info="Core Set", quantity=1),
         CardClasses.EventCard("Warpstorm", "Combat Action: Deal 2 damage to each unit without"
                                            " any attachments at a target planet or HQ.", "Power.",
                               3, "Chaos", "Common", 1, False, action_in_hand=True,
-                              allowed_phases_in_hand="COMBAT", cycle_info="Core Set"),
+                              allowed_phases_in_hand="COMBAT", cycle_info="Core Set", quantity=1),
         CardClasses.EventCard("Tzeentch's Firestorm", "Action: Deal X damage "
                                                       "to a target non-warlord unit.", "Power. Tzeentch.",
                               -1, "Chaos", "Loyal", 2, False, action_in_hand=True,
-                              allowed_phases_in_hand="ALL", cycle_info="Core Set"),
+                              allowed_phases_in_hand="ALL", cycle_info="Core Set", quantity=1),
         CardClasses.EventCard("Promise of Glory", "Deploy Action: Put 2 Cultist "
                                                   "tokens into play at your HQ.",
                               "Tactic.", 0, "Chaos", "Common", 1, False, action_in_hand=True,
-                              allowed_phases_in_hand="DEPLOY", cycle_info="Core Set"),
+                              allowed_phases_in_hand="DEPLOY", cycle_info="Core Set", quantity=1),
         CardClasses.AttachmentCard("Rune-Encrusted Armor", "Attach to an army unit.\n"
                                                            "Attached unit gets +2 ATK and +2 HP.",
                                    "Armor. Wargear.", 2, "Chaos", "Common", 1, False,
                                    type_of_units_allowed_for_attachment="Army", extra_attack=2,
-                                   extra_health=2, cycle_info="Core Set"),
+                                   extra_health=2, cycle_info="Core Set", quantity=1),
         CardClasses.AttachmentCard("Dire Mutation", "Ambush.\nAttach to an army unit.\n"
                                                     "Forced Interrupt: When attached unit exhaust,"
                                                     " deal it 1 damage.", "Curse. Tzeentch.",
                                    1, "Chaos", "Common", 1, False,
                                    type_of_units_allowed_for_attachment="Army", ambush=True,
-                                   action_in_hand=True, allowed_phases_in_hand="COMBAT", cycle_info="Core Set"),
+                                   action_in_hand=True, allowed_phases_in_hand="COMBAT", cycle_info="Core Set",
+                                   quantity=1),
         CardClasses.SupportCard("Fortress of Madness", "Limited.\nInterrupt: When you deploy"
                                                        " a Chaos unit, exhaust this support to "
                                                        "reduce that unit's cost by 1.",
                                 "Location.", 1, "Chaos", "Common", True,
                                 [True, 1, True],
-                                is_faction_limited_unique_discounter=True, limited=True, cycle_info="Core Set"),
+                                is_faction_limited_unique_discounter=True, limited=True, cycle_info="Core Set",
+                                quantity=1),
         CardClasses.SupportCard("Murder Cogitator", "Reaction: After a or unit you control "
                                                     "leaves play, exhaust this support to reveal the "
                                                     "top card of your deck. If that card is a "
                                                     "Chaos unit, add it to your hand.", "Upgrade.",
-                                0, "Chaos", "Common", False, cycle_info="Core Set"),
+                                0, "Chaos", "Common", False, cycle_info="Core Set", quantity=1),
         CardClasses.ArmyCard("Roghrax Bloodhand", "Brutal.\n"
                                                   "BLOODTHIRST - During a combat round in which 1 or more units "
                                                   "have been destroyed at this planet, double this unit's ATK.",
