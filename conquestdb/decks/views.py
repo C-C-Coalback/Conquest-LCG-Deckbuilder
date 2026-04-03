@@ -13,6 +13,7 @@ import random
 import string
 import shutil
 import re
+from django.contrib.auth.models import User
 
 MOBILE_AGENT_RE = re.compile(r".*(iphone|mobile|androidtouch)", re.IGNORECASE)
 
@@ -59,6 +60,18 @@ temp_cwd = os.getcwd()
 target_dir_temp = temp_cwd + "/decks/publisheddecks/"
 os.makedirs(target_dir_temp, exist_ok=True)
 alignment_wheel = ["Astra Militarum", "Space Marines", "Tau", "Eldar", "Dark Eldar", "Chaos", "Orks"]
+
+
+def get_users():
+    all_users = User.objects.values()
+    usernames = []
+    for i in range(len(all_users)):
+        usernames.append((all_users[i]['username']))
+    with open(os.getcwd() + "/users_list.txt", "w") as user_file:
+        user_file.write("\n".join(usernames))
+
+
+get_users()
 
 
 dire = os.getcwd()
