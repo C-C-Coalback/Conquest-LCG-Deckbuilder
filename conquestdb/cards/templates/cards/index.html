@@ -245,6 +245,7 @@
         var current_high_match = 0;
         var stored_image_links = [];
         var stored_image_names = [];
+        const cards_required_for_extra_buttons = 6;
 
         function clearFilters() {
             var searchInput = document.getElementById("searchInput");
@@ -336,7 +337,7 @@
                 if (current_high_match > num_matches) {
                     current_high_match = num_matches;
                 }
-                if (num_matches - current_low_match < 11) {
+                if (num_matches - current_low_match < cards_required_for_extra_buttons) {
                     hideExtraPageButtons();
                 } else {
                     displayExtraPageButtons();
@@ -452,7 +453,7 @@
                             }
                             cardCount += 1;
                         }
-                        if (cardCount < 11 && pageCount === 0) {
+                        if (cardCount < cards_required_for_extra_buttons && pageCount === 0) {
                             hideExtraPageButtons();
                         } else {
                             displayExtraPageButtons();
