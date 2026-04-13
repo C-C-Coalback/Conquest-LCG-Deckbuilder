@@ -25,6 +25,17 @@
     top:0;
     height: 100px;
     width: 100px;
+    grid-area: prev-1;
+}
+
+#prev-page-2 {
+    display: none;
+    position:relative;
+    left:0;
+    bottom:0;
+    height: 100px;
+    width: 100px;
+    grid-area: prev-2;
 }
 
 #next-page {
@@ -33,6 +44,17 @@
     top:0;
     height: 100px;
     width: 100px;
+    grid-area: next-1;
+}
+
+#next-page-2 {
+    display: none;
+    position:relative;
+    right:0;
+    bottom:0;
+    height: 100px;
+    width: 100px;
+    grid-area: next-2;
 }
 
 #buttons-container {
@@ -79,12 +101,19 @@
     flex-wrap: wrap;
     max-width: 1300px;
     justify-content:center;
+    grid-area: cards;
 }
 
 #cardBinderContainer {
-    display:flex;
+    display:grid;
+    grid-template-areas:
+    "prev-1 cards next-1"
+    ". cards ."
+    "prev-2 cards next-2";
+    grid-template-columns: 100px auto 100px;
     max-width: 1200px;
     margin: auto;
+    position: relative;
 }
 
 #responseMessage {

@@ -210,12 +210,14 @@
     </div>
     <div id="cardBinderContainer">
         <input id="prev-page" class="black-button" type="button" value="previous" onclick="previousPage();">
+        <input id="prev-page-2" class="black-button" type="button" value="previous" onclick="previousPage();">
         <div id="cardBinder">
             <div id="responseMessage">
                 <div class="page" id="page"></div>
             </div>
         </div>
         <input id="next-page" class="black-button" type="button" value="next" onclick="nextPage();">
+        <input id="next-page-2" class="black-button" type="button" value="next" onclick="nextPage();">
     </div>
     <div id="card-counts-pages">
         <p>Showing 0-0 of 0 matches</p>
@@ -281,6 +283,16 @@
             searchInput.value = "None";
         }
 
+        function displayExtraPageButtons() {
+            document.getElementById("prev-page-2").style["display"] = "block";
+            document.getElementById("next-page-2").style["display"] = "block";
+        }
+
+        function hideExtraPageButtons() {
+            document.getElementById("prev-page-2").style["display"] = "none";
+            document.getElementById("next-page-2").style["display"] = "none";
+        }
+
         function updateMaxRows(e) {
             max_rows = e.value;
         }
@@ -290,6 +302,7 @@
                 current_page_number = current_page_number - 1;
                 current_low_match = current_low_match - current_max_rows;
                 current_high_match = (current_page_number + 1) * current_max_rows;
+                displayExtraPageButtons();
                 page_counter = document.getElementById("card-counts-pages");
                 page_counter.innerHTML = `<p>Showing ` + current_low_match + `-` + current_high_match + ` of ` + num_matches + ` matches</p>`;
                 e = document.getElementById("responseMessage");
@@ -322,6 +335,11 @@
                 current_high_match = (current_page_number + 1) * current_max_rows;
                 if (current_high_match > num_matches) {
                     current_high_match = num_matches;
+                }
+                if (num_matches - current_low_match < 11) {
+                    hideExtraPageButtons();
+                } else {
+                    displayExtraPageButtons();
                 }
                 page_counter = document.getElementById("card-counts-pages");
                 page_counter.innerHTML = `<p>Showing ` + current_low_match + `-` + current_high_match + ` of ` + num_matches + ` matches</p>`;
@@ -433,6 +451,11 @@
                                 new_string += `</a>`;
                             }
                             cardCount += 1;
+                        }
+                        if (cardCount < 11 && pageCount === 0) {
+                            hideExtraPageButtons();
+                        } else {
+                            displayExtraPageButtons();
                         }
                         max_page_number = pageCount;
                         new_string += `</div>`;
