@@ -1051,7 +1051,11 @@
         var e = document.getElementById(countName);
         if (typeof(e) != 'undefined' && e != null) {
             var str = e.innerHTML;
-            if (str !== "3") {
+            var max_copies = "3";
+            if (card_type === "Event" && name_warlord === "Kariaq Dreadking") {
+                max_copies = "1";
+            }
+            if (str !== max_copies) {
                 str = incrementString(str);
                 e.innerHTML = str;
                 cards_in_deck = cards_in_deck + 1;
@@ -1061,9 +1065,13 @@
             var newPart = `<div class="card-name-and-count" id=`;
             newPart += holderName;
             newPart += `>`;
-            newPart += `<input id=`;
-            newPart += idName + "-Increase";
-            newPart += ` type="button" value="+" onclick="incrementCount(this.id);">`
+            if (card_type === "Event" && name_warlord === "Kariaq Dreadking") {
+
+            } else {
+                newPart += `<input id=`;
+                newPart += idName + "-Increase";
+                newPart += ` type="button" value="+" onclick="incrementCount(this.id);">`
+            }
             newPart += `<div id=`;
             newPart += idName + "-Count";
             newPart += ` class="no-break">1</div>`;

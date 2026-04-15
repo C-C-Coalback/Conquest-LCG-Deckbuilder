@@ -304,7 +304,7 @@ def second_part_deck_validation(deck):
                     return deck_validation(deck, remaining_signature_squad, factions, "Farseer Tadheris")
             elif factions[1] == alignment_wheel[ally_pos_1] \
                     or factions[1] == alignment_wheel[ally_pos_2]:
-                return deck_validation(deck, remaining_signature_squad, factions)
+                return deck_validation(deck, remaining_signature_squad, factions, warlord=warlord_card.get_name())
         return "Issue with faction matching."
     return "Unknown issue"
 
@@ -320,6 +320,8 @@ def deck_validation(deck, remaining_signature_squad, factions, warlord=""):
         card = FindCard.find_card(deck[current_index - 1], card_array, cards_dict)
         print(deck[current_index - 1])
         if card.check_for_a_trait("Pledge"):
+            if warlord == "Kariaq Dreadking":
+                return "Kariaq Dreadking cannot include a non-signature pledge."
             current_index = 5
             card_count += 1
             if card.get_name() == "Holy Crusade":
@@ -385,6 +387,12 @@ def deck_validation(deck, remaining_signature_squad, factions, warlord=""):
                 if not card_result.check_for_a_trait("Ecclesiarchy"):
                     return "Non-Ecclesiarchy card present: " + card_result.get_name()
             if card_result.get_faction() == factions[0]:
+                faction_check_passed = True
+            elif card_result.get_card_type() == "Event" and warlord == "Kariaq Dreadking":
+                if card_result.get_faction() in ["Tyranids", "Necrons"]:
+                    return "Kariaq Dreadking cannot include Tyranids or Necrons events: " + card_result.get_name()
+                if current_amount > 1:
+                    return "Kariaq Dreadking can only have one copy of each event: " + card_result.get_name()
                 faction_check_passed = True
             elif card_result.get_faction() == factions[1] and card_result.get_loyalty() == "Common":
                 if warlord == "Yvraine":
@@ -2172,6 +2180,11 @@ def ajax_view(request):
                     ally_ok = True
             elif card.get_faction() == "Neutral":
                 ally_ok = True
+            elif warlord_name == "Kariaq Dreadking":
+                if card.get_card_type() == "Event":
+                    if card.get_faction() not in ["Tyranids", "Necrons"]:
+                        if card.get_loyalty() != "Signature":
+                            ally_ok = True
             elif warlord_name == "Commander Starblaze":
                 if ally == "Astra Militarum" and card.get_faction() == "Astra Militarum" and \
                         card.get_loyalty() == "Common":
@@ -2203,6 +2216,8 @@ def ajax_view(request):
             if ally_ok:
                 if card.check_for_a_trait("Pledge"):
                     card_type = "Pledge"
+                    if warlord_name == "Kariaq Dreadking":
+                        return JsonResponse({'message': 'Kariaq Dreadking cannot include a non-signature pledge.'})
                 return JsonResponse({'message': 'ADDCARD', 'card_type': card_type,
                                      'card_name': card_name})
             else:
