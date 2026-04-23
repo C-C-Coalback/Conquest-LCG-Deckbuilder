@@ -1487,14 +1487,15 @@ def advanced_deck_details(request, deck_creator, deck_key):
                 username = request.POST.get('username')
                 if not username:
                     username = "Anonymous"
-                comment = request.POST.get('comment')
-                time = str(datetime.datetime.now())
-                os.makedirs(target_directory, exist_ok=True)
-                file_id = len(
-                    [name for name in os.listdir(target_directory) if os.path.isfile(target_directory + "/" + name)])
-                name_file = str(file_id) + ".txt"
-                with open(target_directory + name_file, 'w') as file:
-                    file.write(username + "\n" + time + "\n" + comment)
+                if username != "Eric Jones":
+                    comment = request.POST.get('comment')
+                    time = str(datetime.datetime.now())
+                    os.makedirs(target_directory, exist_ok=True)
+                    file_id = len(
+                        [name for name in os.listdir(target_directory) if os.path.isfile(target_directory + "/" + name)])
+                    name_file = str(file_id) + ".txt"
+                    with open(target_directory + name_file, 'w') as file:
+                        file.write(username + "\n" + time + "\n" + comment)
             elif flag == "DELETE":
                 # username = request.POST.get('username')
                 id_c = request.POST.get('idcomment')
@@ -1734,14 +1735,15 @@ def deck_data(request, deck_creator, deck_key):
                 username = request.POST.get('username')
                 if not username:
                     username = "Anonymous"
-                comment = request.POST.get('comment')
-                time = str(datetime.datetime.now())
-                os.makedirs(target_directory, exist_ok=True)
-                file_id = len(
-                    [name for name in os.listdir(target_directory) if os.path.isfile(target_directory + "/" + name)])
-                name_file = str(file_id) + ".txt"
-                with open(target_directory + name_file, 'w') as file:
-                    file.write(username + "\n" + time + "\n" + comment)
+                if username != "Eric Jones":
+                    comment = request.POST.get('comment')
+                    time = str(datetime.datetime.now())
+                    os.makedirs(target_directory, exist_ok=True)
+                    file_id = len(
+                        [name for name in os.listdir(target_directory) if os.path.isfile(target_directory + "/" + name)])
+                    name_file = str(file_id) + ".txt"
+                    with open(target_directory + name_file, 'w') as file:
+                        file.write(username + "\n" + time + "\n" + comment)
             elif flag == "DELETE":
                 # username = request.POST.get('username')
                 id_c = request.POST.get('idcomment')
