@@ -341,7 +341,7 @@
     "Khymera Den": 4,
     "Kith's Khymeramasters": 4,
     "Packmaster Kith": 1,
-    "Reveal The Blade": 4,
+    "Reveal the Blade": 4,
     "Cloak of Shade": 4,
     "Shadow Hunt": 4,
     "Liatha's Retinue": 4,
@@ -359,6 +359,11 @@
     "Inevitable Betrayal": 4,
     "Shadowed Thorns Pillagers": 4,
     "Archon Salaine Morn": 1,
+    "Grand Schemes": 1,
+    "Webway Schemes": 1,
+    "The Silent Eye": 1,
+    "Kariaq's Inner Circle": 1,
+    "Kariaq Dreadking": 1,
     "Autarch Powersword": 4,
     "Path of the Leader": 4,
     "Wisdom of the Serpent": 1,
@@ -1058,5 +1063,10 @@
     "Gene Implantation": 4,
     "Ruined Passages": 4,
     "Invasive Genestealers": 4,
-    "Subject Omega-X62113": 1
+    "Subject Omega-X62113": 1,
+    "Planetary Devastation": 1,
+    "Protective Horrors": 1,
+    "Burgeoning Incubation": 1,
+    "The Shadow in the Warp": 1,
+    "Subject W-808": 1
 }

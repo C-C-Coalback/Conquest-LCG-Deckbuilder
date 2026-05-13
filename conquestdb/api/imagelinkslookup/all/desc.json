@@ -341,7 +341,7 @@
     "Khymera Den": "",
     "Kith's Khymeramasters": "",
     "Packmaster Kith": "{ \"Resource\":7, \"Card\":7 }",
-    "Reveal The Blade": "",
+    "Reveal the Blade": "",
     "Cloak of Shade": "",
     "Shadow Hunt": "",
     "Liatha's Retinue": "",
@@ -359,6 +359,11 @@
     "Inevitable Betrayal": "",
     "Shadowed Thorns Pillagers": "",
     "Archon Salaine Morn": "{ \"Resource\":7, \"Card\":7 }",
+    "Grand Schemes": "",
+    "Webway Schemes": "",
+    "The Silent Eye": "",
+    "Kariaq's Inner Circle": "",
+    "Kariaq Dreadking": "{ \"Resource\":7, \"Card\":7 }",
     "Autarch Powersword": "",
     "Path of the Leader": "",
     "Wisdom of the Serpent": "",
@@ -1058,5 +1063,10 @@
     "Gene Implantation": "",
     "Ruined Passages": "",
     "Invasive Genestealers": "",
-    "Subject Omega-X62113": "{ \"Resource\":6, \"Card\":6 }"
+    "Subject Omega-X62113": "{ \"Resource\":6, \"Card\":6 }",
+    "Planetary Devastation": "",
+    "Protective Horrors": "",
+    "Burgeoning Incubation": "",
+    "The Shadow in the Warp": "",
+    "Subject W-808": "{ \"Resource\":6, \"Card\":6 }"
 }

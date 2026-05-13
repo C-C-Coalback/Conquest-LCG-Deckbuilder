@@ -391,7 +391,7 @@ def deck_validation(deck, remaining_signature_squad, factions, warlord=""):
             elif card_result.get_card_type() == "Event" and warlord == "Kariaq Dreadking":
                 if card_result.get_faction() in ["Tyranids", "Necrons"]:
                     return "Kariaq Dreadking cannot include Tyranids or Necrons events: " + card_result.get_name()
-                if current_amount > 1:
+                if int(current_amount) > 1:
                     return "Kariaq Dreadking can only have one copy of each event: " + card_result.get_name()
                 faction_check_passed = True
             elif card_result.get_faction() == factions[1] and card_result.get_loyalty() == "Common":
@@ -1222,6 +1222,8 @@ def create_deck_with_warlord(request, warlord_name):
         actual_name = warlord_name.replace("_", " ")
         if actual_name == "Subject: Ω-X62113":
             actual_name = "\"Subject: Ω-X62113\""
+        if actual_name == "Subject: W-808":
+            actual_name = "\"Subject: W-808\""
         if actual_name == "Old One Eye":
             actual_name = "\"Old One Eye\""
         if actual_name == "The Swarmlord":
@@ -2045,6 +2047,7 @@ def ajax_view(request):
             message_to_send = ""
             # text = text.replace("idden Base", "'idden Base")
             text = text.replace("Subject: Ω-X62113", "\"Subject: Ω-X62113\"")
+            text = text.replace("Subject: W-808", "\"Subject: W-808\"")
             text = text.replace("Old One Eye", "\"Old One Eye\"")
             text = text.replace("The Swarmlord", "\"The Swarmlord\"")
             text = text.replace("Parasite of Mortrex", "\"Parasite of Mortrex\"")
@@ -2182,11 +2185,10 @@ def ajax_view(request):
                     ally_ok = True
             elif card.get_faction() == "Neutral":
                 ally_ok = True
-            elif warlord_name == "Kariaq Dreadking":
-                if card.get_card_type() == "Event":
-                    if card.get_faction() not in ["Tyranids", "Necrons"]:
-                        if card.get_loyalty() != "Signature":
-                            ally_ok = True
+            elif warlord_name == "Kariaq Dreadking" and card.get_card_type() == "Event":
+                if card.get_faction() not in ["Tyranids", "Necrons"]:
+                    if card.get_loyalty() != "Signature":
+                        ally_ok = True
             elif warlord_name == "Commander Starblaze":
                 if ally == "Astra Militarum" and card.get_faction() == "Astra Militarum" and \
                         card.get_loyalty() == "Common":

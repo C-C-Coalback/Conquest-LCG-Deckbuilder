@@ -341,7 +341,7 @@
     "Khymera Den": false,
     "Kith's Khymeramasters": false,
     "Packmaster Kith": false,
-    "Reveal The Blade": false,
+    "Reveal the Blade": false,
     "Cloak of Shade": false,
     "Shadow Hunt": false,
     "Liatha's Retinue": false,
@@ -359,6 +359,11 @@
     "Inevitable Betrayal": false,
     "Shadowed Thorns Pillagers": false,
     "Archon Salaine Morn": false,
+    "Grand Schemes": false,
+    "Webway Schemes": false,
+    "The Silent Eye": false,
+    "Kariaq's Inner Circle": false,
+    "Kariaq Dreadking": false,
     "Autarch Powersword": false,
     "Path of the Leader": false,
     "Wisdom of the Serpent": false,
@@ -1058,5 +1063,10 @@
     "Gene Implantation": false,
     "Ruined Passages": false,
     "Invasive Genestealers": false,
-    "Subject Omega-X62113": false
+    "Subject Omega-X62113": false,
+    "Planetary Devastation": false,
+    "Protective Horrors": false,
+    "Burgeoning Incubation": false,
+    "The Shadow in the Warp": false,
+    "Subject W-808": false
 }

@@ -821,6 +821,18 @@ def ajax_view(request):
                                            ((filtered_df['faction'] == "Orks") &
                                             (filtered_df['loyalty'] != "Signature"))) |
                                           (filtered_df['faction'] == "Neutral")]
+            elif warlord_name == "Kariaq Dreadking":
+                valid_kariaq_factions = ["Astra Militarum", "Space Marines", "Tau",
+                                         "Eldar", "Dark Eldar", "Chaos", "Orks"]
+                filtered_df = filtered_df[(((filtered_df['faction'] == warlord.get_faction()) &
+                                            (filtered_df['loyalty'] != "Signature")) |
+                                           ((filtered_df['faction'].isin(valid_kariaq_factions)) &
+                                            (filtered_df['loyalty'] == "Common") |
+                                            (filtered_df['loyalty'] == "Loyal")) &
+                                           (filtered_df['card type'] == "Event")) |
+                                          (filtered_df['faction'] == "Neutral") |
+                                          ((filtered_df['faction'] == ally_faction) &
+                                           (filtered_df["loyalty"] == "Common"))]
             elif warlord.get_faction() == "Necrons":
                 valid_necrons_enslavement = ["Astra Militarum", "Space Marines", "Tau",
                                              "Eldar", "Dark Eldar", "Chaos", "Orks"]
@@ -1180,6 +1192,9 @@ def card_data(request, card_name):
     rotate = False
     if card_type == "Planet" or "Pledge" in traits:
         rotate = True
+        print(card_name)
+        if card_name == "Grand_Schemes":
+            rotate = False
     try:
         increment_card_count(card_name)
     except Exception as e:
