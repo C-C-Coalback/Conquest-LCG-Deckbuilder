@@ -215,29 +215,29 @@ def planet_cards_init():
                    1, 0, True, True, True, "Sargos"),
         PlanetCard("Frontier World Egulth", "Activity: Exhaust a target army unit.\n"
                                             "Battle: Put 1 Khymera token into play at each adjacent planet.",
-                   1, 1, False, True, True, "Unknown"),
+                   1, 1, False, True, True, "Monn-Rai"),
         PlanetCard("Quarantined World Arkos", "Activity: If you control no unit at this planet, draw a card.\n"
                                               "Battle: Target army unit gains +1 ATK and HP.",
-                   0, 2, True, False, False, "Unknown"),
+                   0, 2, True, False, False, "Monn-Rai"),
         PlanetCard("Mordatyne", "Activity: Move a non-Elite army unit you control at this planet to an adjacent "
-                                "planet.\n Battle: Rout a target army unit.", 2, 0, False, False, True, "Unknown"),
+                                "planet.\n Battle: Rout a target army unit.", 2, 0, False, False, True, "Monn-Rai"),
         PlanetCard("Helvetis", "Forced Activity: Flip a coin, on tails, each player deals 2 indirect damage among "
                                "units he controls at this planet. (Once for both players.)",
-                   0, 2, False, False, True, "Unknown"),
+                   0, 2, False, False, True, "Monn-Rai"),
         PlanetCard("Zadruk Prime", "Activity: Rally 6 a unit, deploy it at this planet, reducing its cost by 1.\n"
                                    "Battle: Remove up to 3 damage among cards.",
-                   1, 0, True, True, True, "Unknown"),
+                   1, 0, True, True, True, "Monn-Rai"),
         PlanetCard("Hostaryn XXI", "Activity: Flip a coin, for each player, on tails: gain 1 Resource, on heads: "
-                                   "lose 1 Resource. \nBattle: Draw two cards.", 1, 1, True, True, False, "Unknown"),
+                                   "lose 1 Resource. \nBattle: Draw two cards.", 1, 1, True, True, False, "Monn-Rai"),
         PlanetCard("Deltadurne", "Activity: If you control only units of your warlord's faction at this planet, draw "
                                  "a card.\n Battle: Draw 1 card and gain 1 Resource.",
-                   1, 1, True, True, False, "Unknown"),
+                   1, 1, True, True, False, "Monn-Rai"),
         PlanetCard("Caldera", "Activity: Deal 1 damage to an army unit.\n"
                               "Battle: Your opponent must sacrifice an army unit.",
-                   1, 1, True, False, True, "Unknown"),
+                   1, 1, True, False, True, "Monn-Rai"),
         PlanetCard("Hangyz", "Activity: Look at the top card of your deck, you may discard it.\n"
-                             "Battle: Give 1 command icon to an army unit.", 1, 1, True, True, True, "Unknown"),
+                             "Battle: Give 1 command icon to an army unit.", 1, 1, True, True, True, "Monn-Rai"),
         PlanetCard("Forge World Dagon", "Activity: Remove 1 damage from your warlord.\n"
-                                        "Battle: Gain 2 Resources.", 2, 0, False, True, False, "Unknown")
+                                        "Battle: Gain 2 Resources.", 2, 0, False, True, False, "Monn-Rai")
     ]
     return planet_array
