@@ -585,7 +585,7 @@ def tyranids_cards_init():
                                 "Reduce damage dealt by Area Effect to 1.\n"
                                 "Reaction: After you deploy this support, infest a target planet.",
                                 "Pledge.", 1, faction, "Common", False, war_pack_info="Chronicles of Heroes"),
-        CardClasses.WarlordCard("Subject W-808",
+        CardClasses.WarlordCard("\"Subject: W-808\"",
                                 "Reaction: After the deploy phase begins, pay 1 resource to put into "
                                 "play a synapse unit from the card collection at a non-first planet."
                                 " Remove that card from the game at the end of the round. "
