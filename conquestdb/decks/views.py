@@ -467,6 +467,7 @@ def convert_common_mistakes(deck_text):
     deck_text = deck_text.replace("Genestealer Harvester", "Genestealer Harvesters")
     return deck_text
 
+
 def convert_cardgamedb_conquestdb(deck_text):
     try:
         deck_text = re.sub(r'\([^)]*\)', '', deck_text)
@@ -626,6 +627,11 @@ def get_published_decks_lists():
                         split_data = data.split(sep="\n")
                         deck_name = split_data[0]
                         warlord_name = split_data[2]
+                        if not os.path.exists(target_file + "/date"):
+                            with open(target_file + "/date", "w") as date_file:
+                                date = datetime.date.today()
+                                date = date.strftime("%B %d, %Y")
+                                date_file.write(date)
                         with open(target_file + "/date", "r") as date_file:
                             date = date_file.read()
                         deck_names.append(deck_name)
@@ -868,6 +874,11 @@ def my_decks_page(request, page_num):
                         split_data = data.split(sep="\n")
                         deck_name = split_data[0]
                         warlord_name = split_data[2]
+                        if not os.path.exists(target_file + "/date"):
+                            with open(target_file + "/date", "w") as date_file:
+                                date = datetime.date.today()
+                                date = date.strftime("%B %d, %Y")
+                                date_file.write(date)
                         with open(target_file + "/date", "r") as date_file:
                             date = date_file.read()
                         deck_names.append(deck_name)
