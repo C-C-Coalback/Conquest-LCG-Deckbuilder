@@ -2,6 +2,9 @@ from django.shortcuts import render
 from django.http import JsonResponse
 from conquestdb.cardscode import Initfunctions
 from conquestdb.cardscode import FindCard
+from conquestdb.cardscode.SetData import warlord_cycle_warpacks, confrontation_cycle_warpacks,\
+    death_world_cycle_warpacks, planetfall_cycle_warpacks, navida_prime_cycle_warpacks, bloodied_path_cycle_warpacks, \
+    deluxe_expansions
 from django.http import HttpResponseRedirect
 import light_dark_dict
 from card_utils import convert_name_to_img_src, convert_name_to_hyperlink, convert_name_to_create_deck_hyperlink
@@ -566,6 +569,32 @@ def get_liked_decks_lists(username):
     return deck_names, deck_warlords, deck_dates, img_srcs, keys, creator_name
 
 
+def obtain_deck_card_names_as_list(split_data, include_sigs=False):
+    warlord_name = split_data[2]
+    pledge_name = ""
+    current_index = 6
+    skippers = ["Support", "Attachment", "Event", "Synapse"]
+    if split_data[current_index] == "Signature Squad":
+        pledge_name = split_data[4]
+    while split_data[current_index] != "Army" and current_index < len(split_data) - 1:
+        current_index += 1
+    current_index += 1
+    card_names = [warlord_name]
+    if pledge_name:
+        card_names.append(pledge_name)
+    while current_index < len(split_data):
+        if split_data[current_index]:
+            if split_data[current_index] in skippers:
+                current_index += 1
+            if split_data[current_index] == "Planet":
+                break
+            if split_data[current_index] and split_data[current_index] != "----------------------------------------------------------------------":
+                current_name = split_data[current_index][3:]
+                card_names.append(current_name)
+        current_index += 1
+    return card_names
+
+
 def get_published_decks_lists_with_extra_info():
     deck_names = []
     deck_warlords = []
@@ -574,6 +603,7 @@ def get_published_decks_lists_with_extra_info():
     keys = []
     creator_name = []
     factions = []
+    sets_included = []
     directory = os.getcwd()
     target_directory = directory + "/decks/publisheddecks/"
     if os.path.exists(target_directory):
@@ -601,11 +631,31 @@ def get_published_decks_lists_with_extra_info():
                     with open(target_file + "/key", "r") as k:
                         data = k.read()
                         keys.append(data)
+                    if not os.path.exists(target_file + "/sets"):
+                        with open(target_file + "/sets", "w") as s:
+                            card_names = obtain_deck_card_names_as_list(split_data)
+                            set_names = []
+                            for idx in range(len(card_names)):
+                                card = FindCard.find_card(card_names[idx], card_array, cards_dict)
+                                if card.get_name() != "Termagant":
+                                    if not card.war_pack:
+                                        if card.cycle not in set_names:
+                                            set_names.append(card.cycle)
+                                    if card.war_pack not in set_names:
+                                        set_names.append(card.war_pack)
+                            joined_set_names = "/".join(set_names)
+                            s.write(joined_set_names)
+                            sets_included.append(set_names)
+                    else:
+                        with open(target_file + "/sets", "r") as s:
+                            joined_set_names = s.readline()
+                            set_names = joined_set_names.split(sep="/")
+                            sets_included.append(set_names)
                 except Exception as e:
                     print(e)
                     pass
     print("returning")
-    return deck_names, deck_warlords, factions, deck_dates, img_srcs, keys, creator_name
+    return deck_names, deck_warlords, factions, deck_dates, img_srcs, keys, creator_name, sets_included
 
 
 def get_published_decks_lists():
@@ -1944,7 +1994,7 @@ def select_warlord(request):
 
 def search_ajax_view(request):
     if request.method == 'POST':
-        deck_names, deck_warlords, factions, deck_dates, img_srcs, keys, creator_name = \
+        deck_names, deck_warlords, factions, deck_dates, img_srcs, keys, creator_name, sets_included = \
             get_published_decks_lists_with_extra_info()
         data = {
             "Deck Names": deck_names,
@@ -1953,12 +2003,14 @@ def search_ajax_view(request):
             "Deck Dates": deck_dates,
             "Img Srcs": img_srcs,
             "Keys": keys,
-            "Creator Name": creator_name
+            "Creator Name": creator_name,
+            "Sets": sets_included
         }
         deck_name = request.POST.get("search")
         creator = request.POST.get("creator")
         warlord_name = request.POST.get("warlord")
         faction = request.POST.get("faction")
+        allowed_sets = request.POST.get("set_info")
         filtered_df = pd.DataFrame(data=data)
         try:
             filtered_df["Deck Dates"] = pd.to_datetime(filtered_df["Deck Dates"], format="%B %d, %Y").dt.date
@@ -1973,6 +2025,10 @@ def search_ajax_view(request):
             filtered_df = filtered_df.loc[filtered_df['Deck Warlords'] == warlord_name]
         if faction:
             filtered_df = filtered_df.loc[filtered_df['Factions'] == faction]
+        if allowed_sets != "All":
+            allowed_sets_names = allowed_sets.split(sep="/")
+            allowed_sets_names = [a for a in allowed_sets_names if a]
+            filtered_df = filtered_df[filtered_df["Sets"].apply(lambda x: all(set_name in allowed_sets_names for set_name in x))]
         deck_names = filtered_df['Deck Names'].to_list()
         deck_warlords = filtered_df['Deck Warlords'].to_list()
         deck_dates = filtered_df['Deck Dates'].to_list()

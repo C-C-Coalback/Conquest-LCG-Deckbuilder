@@ -3,6 +3,14 @@
     width: 178px;
 }
 
+.cycle-adjustment {
+    margin-left: 20px;
+}
+
+.warpack-adjustment {
+    margin-left: 40px;
+}
+
 .filters-container {
     margin-top: 50px;
     display: flex;

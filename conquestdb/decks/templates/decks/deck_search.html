@@ -48,6 +48,261 @@
                 </select>
                 -->
             </div>
+            <div id="set-selection">
+                <h2>Set Data</h2>
+                <div class="form-check">
+                    <input class="form-check-input" type="checkbox" value="All" id="flexCheckAll" checked onclick="toggleAllDisabledSets();">
+                    <label class="form-check-label" for="flexCheckAll">
+                        All
+                    </label>
+                </div>
+                <div class="form-check cycle-adjustment">
+                    <input class="form-check-input" type="checkbox" value="Core Set" id="flexCheckCore" checked disabled>
+                    <label class="form-check-label" for="flexCheckCore">
+                        Core Set
+                    </label>
+                </div>
+                <div class="form-check cycle-adjustment">
+                    <input class="form-check-input" type="checkbox" value="The Great Devourer" id="flexCheckGreatDevourer" checked disabled>
+                    <label class="form-check-label" for="flexCheckGreatDevourer">
+                        The Great Devourer
+                    </label>
+                </div>
+                <div class="form-check cycle-adjustment">
+                    <input class="form-check-input" type="checkbox" value="Legions of Death" id="flexCheckLegionsDeath" checked disabled>
+                    <label class="form-check-label" for="flexCheckLegionsDeath">
+                        Legions of Death
+                    </label>
+                </div>
+                <div class="form-check cycle-adjustment">
+                    <input class="form-check-input" data-warpackclassname="warlord-cycle-pack" type="checkbox" value="Warlord Cycle" id="flexCheckWarlordCycle" onclick="toggleAllParticularCycleSets(this);" checked disabled>
+                    <label class="form-check-label" for="flexCheckWarlordCycle">
+                        Warlord Cycle
+                    </label>
+                </div>
+                <div class="form-check warpack-adjustment">
+                    <input class="form-check-input warlord-cycle-pack" type="checkbox" value="The Howl of Blackmane" id="flexCheckHowlBlackmane" checked disabled>
+                    <label class="form-check-label" for="flexCheckHowlBlackmane">
+                        The Howl of Blackmane
+                    </label>
+                </div>
+                <div class="form-check warpack-adjustment">
+                    <input class="form-check-input warlord-cycle-pack" type="checkbox" value="The Scourge" id="flexCheckTheScourge" checked disabled>
+                    <label class="form-check-label" for="flexCheckTheScourge">
+                        The Scourge
+                    </label>
+                </div>
+                <div class="form-check warpack-adjustment">
+                    <input class="form-check-input warlord-cycle-pack" type="checkbox" value="Gift of the Ethereals" id="flexCheckGiftEthereals" checked disabled>
+                    <label class="form-check-label" for="flexCheckGiftEthereals">
+                        Gift of the Ethereals
+                    </label>
+                </div>
+                <div class="form-check warpack-adjustment">
+                    <input class="form-check-input warlord-cycle-pack" type="checkbox" value="Zogwort's Curse" id="flexCheckZogwortsCurse" checked disabled>
+                    <label class="form-check-label" for="flexCheckZogwortsCurse">
+                        Zogwort's Curse
+                    </label>
+                </div>
+                <div class="form-check warpack-adjustment">
+                    <input class="form-check-input warlord-cycle-pack" type="checkbox" value="The Threat Beyond" id="flexCheckTheThreatBeyond" checked disabled>
+                    <label class="form-check-label" for="flexCheckTheThreatBeyond">
+                        The Threat Beyond
+                    </label>
+                </div>
+                <div class="form-check warpack-adjustment">
+                    <input class="form-check-input warlord-cycle-pack" type="checkbox" value="Descendants of Isha" id="flexCheckDescendantsIsha" checked disabled>
+                    <label class="form-check-label" for="flexCheckDescendantsIsha">
+                        Descendants of Isha
+                    </label>
+                </div>
+                <div class="form-check cycle-adjustment">
+                    <input class="form-check-input" type="checkbox" data-warpackclassname="planetfall-cycle-pack" value="Planetfall Cycle" id="flexCheckPlanetfallCycle" onclick="toggleAllParticularCycleSets(this);" checked disabled>
+                    <label class="form-check-label" for="flexCheckPlanetfallCycle">
+                        Planetfall Cycle
+                    </label>
+                </div>
+                <div class="form-check warpack-adjustment">
+                    <input class="form-check-input planetfall-cycle-pack" type="checkbox" value="Decree of Ruin" id="flexCheckDecreeRuin" checked disabled>
+                    <label class="form-check-label" for="flexCheckDecreeRuin">
+                        Decree of Ruin
+                    </label>
+                </div>
+                <div class="form-check warpack-adjustment">
+                    <input class="form-check-input planetfall-cycle-pack" type="checkbox" value="Boundless Hate" id="flexCheckBoundlessHate" checked disabled>
+                    <label class="form-check-label" for="flexCheckBoundlessHate">
+                        Boundless Hate
+                    </label>
+                </div>
+                <div class="form-check warpack-adjustment">
+                    <input class="form-check-input planetfall-cycle-pack" type="checkbox" value="Deadly Salvage" id="flexCheckDeadlySalvage" checked disabled>
+                    <label class="form-check-label" for="flexCheckDeadlySalvage">
+                        Deadly Salvage
+                    </label>
+                </div>
+                <div class="form-check warpack-adjustment">
+                    <input class="form-check-input planetfall-cycle-pack" type="checkbox" value="What Lurks Below" id="flexCheckWhatLurksBelow" checked disabled>
+                    <label class="form-check-label" for="flexCheckWhatLurksBelow">
+                        What Lurks Below
+                    </label>
+                </div>
+                <div class="form-check warpack-adjustment">
+                    <input class="form-check-input planetfall-cycle-pack" type="checkbox" value="Wrath of the Crusaders" id="flexCheckWrathCrusaders" checked disabled>
+                    <label class="form-check-label" for="flexCheckWrathCrusaders">
+                        Wrath of the Crusaders
+                    </label>
+                </div>
+                <div class="form-check warpack-adjustment">
+                    <input class="form-check-input planetfall-cycle-pack" type="checkbox" value="The Final Gambit" id="flexCheckTheFinalGambit" checked disabled>
+                    <label class="form-check-label" for="flexCheckTheFinalGambit">
+                        The Final Gambit
+                    </label>
+                </div>
+                <div class="form-check cycle-adjustment">
+                    <input class="form-check-input" type="checkbox" data-warpackclassname="deathworld-cycle-pack" value="Death World Cycle" id="flexCheckDeathWorldCycle" onclick="toggleAllParticularCycleSets(this);" checked disabled>
+                    <label class="form-check-label" for="flexCheckDeathWorldCycle">
+                        Death World Cycle
+                    </label>
+                </div>
+                <div class="form-check warpack-adjustment">
+                    <input class="form-check-input deathworld-cycle-pack" type="checkbox" value="Jungles of Nectavus" id="flexCheckJunglesNectavus" checked disabled>
+                    <label class="form-check-label" for="flexCheckJunglesNectavus">
+                        Jungles of Nectavus
+                    </label>
+                </div>
+                <div class="form-check warpack-adjustment">
+                    <input class="form-check-input deathworld-cycle-pack" type="checkbox" value="Unforgiven" id="flexCheckUnforgiven" checked disabled>
+                    <label class="form-check-label" for="flexCheckUnforgiven">
+                        Unforgiven
+                    </label>
+                </div>
+                <div class="form-check warpack-adjustment">
+                    <input class="form-check-input deathworld-cycle-pack" type="checkbox" value="Slash and Burn" id="flexCheckSlashBurn" checked disabled>
+                    <label class="form-check-label" for="flexCheckSlashBurn">
+                        Slash and Burn
+                    </label>
+                </div>
+                <div class="form-check warpack-adjustment">
+                    <input class="form-check-input deathworld-cycle-pack" type="checkbox" value="Searching for Truth" id="flexCheckSearchingTruth" checked disabled>
+                    <label class="form-check-label" for="flexCheckSearchingTruth">
+                        Searching for Truth
+                    </label>
+                </div>
+                <div class="form-check warpack-adjustment">
+                    <input class="form-check-input deathworld-cycle-pack" type="checkbox" value="Against the Great Enemy" id="flexCheckAgainstGreatEnemy" checked disabled>
+                    <label class="form-check-label" for="flexCheckAgainstGreatEnemy">
+                        Against the Great Enemy
+                    </label>
+                </div>
+                <div class="form-check warpack-adjustment">
+                    <input class="form-check-input deathworld-cycle-pack" type="checkbox" value="The Warp Unleashed" id="flexCheckTheWarpUnleashed" checked disabled>
+                    <label class="form-check-label" for="flexCheckTheWarpUnleashed">
+                        The Warp Unleashed
+                    </label>
+                </div>
+                <div class="form-check cycle-adjustment">
+                    <input class="form-check-input" type="checkbox" value="Chronicles of Heroes" id="flexCheckChroniclesHeroes" checked disabled>
+                    <label class="form-check-label" for="flexCheckChroniclesHeroes">
+                        Chronicles of Heroes
+                    </label>
+                </div>
+                <div class="form-check cycle-adjustment">
+                    <input class="form-check-input" type="checkbox" value="Defenders of the Faith" id="flexCheckDefendersFaith" checked disabled>
+                    <label class="form-check-label" for="flexCheckDefendersFaith">
+                        Defenders of the Faith
+                    </label>
+                </div>
+                <div class="form-check cycle-adjustment">
+                    <input class="form-check-input" type="checkbox" data-warpackclassname="confrontation-cycle-pack" value="Confrontation Cycle" id="flexCheckConfrontationCycle" onclick="toggleAllParticularCycleSets(this);" checked disabled>
+                    <label class="form-check-label" for="flexCheckConfrontationCycle">
+                        Confrontation Cycle
+                    </label>
+                </div>
+                <div class="form-check warpack-adjustment">
+                    <input class="form-check-input confrontation-cycle-pack" type="checkbox" value="By Imperial Decree" id="flexCheckByImperialDecree" checked disabled>
+                    <label class="form-check-label" for="flexCheckByImperialDecree">
+                        By Imperial Decree
+                    </label>
+                </div>
+                <div class="form-check warpack-adjustment">
+                    <input class="form-check-input confrontation-cycle-pack" type="checkbox" value="A Mask Falls Off" id="flexCheckAMaskFallsOff" checked disabled>
+                    <label class="form-check-label" for="flexCheckAMaskFallsOff">
+                        A Mask Falls Off
+                    </label>
+                </div>
+                <div class="form-check warpack-adjustment">
+                    <input class="form-check-input confrontation-cycle-pack" type="checkbox" value="The Laughing God" id="flexCheckTheLaughingGod" checked disabled>
+                    <label class="form-check-label" for="flexCheckTheLaughingGod">
+                        The Laughing God
+                    </label>
+                </div>
+                <div class="form-check cycle-adjustment">
+                    <input class="form-check-input" type="checkbox" data-warpackclassname="navidaprime-cycle-pack" value="Navida Prime Cycle" id="flexCheckNavidaPrimeCycle" onclick="toggleAllParticularCycleSets(this);" checked disabled>
+                    <label class="form-check-label" for="flexCheckNavidaPrimeCycle">
+                        Navida Prime Cycle
+                    </label>
+                </div>
+                <div class="form-check warpack-adjustment">
+                    <input class="form-check-input navidaprime-cycle-pack" type="checkbox" value="Enemy Territory" id="flexCheckEnemyTerritory" checked disabled>
+                    <label class="form-check-label" for="flexCheckEnemyTerritory">
+                        Enemy Territory
+                    </label>
+                </div>
+                <div class="form-check warpack-adjustment">
+                    <input class="form-check-input navidaprime-cycle-pack" type="checkbox" value="Aligned Stars" id="flexCheckAlignedStars" checked disabled>
+                    <label class="form-check-label" for="flexCheckAlignedStars">
+                        Aligned Stars
+                    </label>
+                </div>
+                <div class="form-check warpack-adjustment">
+                    <input class="form-check-input navidaprime-cycle-pack" type="checkbox" value="Promise of War" id="flexCheckPromiseWar" checked disabled>
+                    <label class="form-check-label" for="flexCheckPromiseWar">
+                        Promise of War
+                    </label>
+                </div>
+                <div class="form-check warpack-adjustment">
+                    <input class="form-check-input navidaprime-cycle-pack" type="checkbox" value="Breaching the Veil" id="flexCheckBreachingVeil" checked disabled>
+                    <label class="form-check-label" for="flexCheckBreachingVeil">
+                        Breaching the Veil
+                    </label>
+                </div>
+                <div class="form-check warpack-adjustment">
+                    <input class="form-check-input navidaprime-cycle-pack" type="checkbox" value="Overrun" id="flexCheckOverrun" checked disabled>
+                    <label class="form-check-label" for="flexCheckOverrun">
+                        Overrun
+                    </label>
+                </div>
+                <div class="form-check cycle-adjustment">
+                    <input class="form-check-input" type="checkbox" data-warpackclassname="bloodiedpath-cycle-pack" value="Bloodied Path Cycle" id="flexCheckBloodiedPathCycle" onclick="toggleAllParticularCycleSets(this);" checked disabled>
+                    <label class="form-check-label" for="flexCheckBloodiedPathCycle">
+                        Bloodied Path Cycle
+                    </label>
+                </div>
+                <div class="form-check warpack-adjustment">
+                    <input class="form-check-input bloodiedpath-cycle-pack" type="checkbox" value="The Shadow in the Warp" id="flexCheckTheShadowWarp" checked disabled>
+                    <label class="form-check-label" for="flexCheckTheShadowWarp">
+                        The Shadow in the Warp
+                    </label>
+                </div>
+                <div class="form-check warpack-adjustment">
+                    <input class="form-check-input bloodiedpath-cycle-pack" type="checkbox" value="Herald of the Plague God" id="flexCheckHeraldPlagueGod" checked disabled>
+                    <label class="form-check-label" for="flexCheckHeraldPlagueGod">
+                        Herald of the Plague God
+                    </label>
+                </div>
+                <div class="form-check warpack-adjustment">
+                    <input class="form-check-input bloodiedpath-cycle-pack" type="checkbox" value="For the Enclaves" id="flexCheckForEnclaves" checked disabled>
+                    <label class="form-check-label" for="flexCheckForEnclaves">
+                        For the Enclaves
+                    </label>
+                </div>
+                <div class="form-check warpack-adjustment">
+                    <input class="form-check-input bloodiedpath-cycle-pack" type="checkbox" value="Last Stand" id="flexCheckLastStand" checked disabled>
+                    <label class="form-check-label" for="flexCheckLastStand">
+                        Last Stand
+                    </label>
+                </div>
+            </div>
             <div id="buttons-container">
                 <button type="submit" id="submit">Perform Search</button>
                 <button id="clear-filter" onclick="clearFilters();">Reset Filters</button>
@@ -229,6 +484,65 @@
             }
         }
 
+        function toggleAllParticularCycleSets(element) {
+            const warpack_class_name = element.dataset.warpackclassname;
+            var elements = document.getElementsByClassName(warpack_class_name);
+            var new_checked_state = element.checked;
+            for (let i = 0; i < elements.length; i++) {
+                var current_element = elements[i];
+                current_element.disabled = new_checked_state;
+                current_element.checked = new_checked_state;
+            }
+        }
+
+        function toggleAllDisabledSets() {
+            var elements = document.getElementsByClassName("form-check-input");
+            var new_checked_state = document.getElementById("flexCheckAll").checked;
+            for (let i = 0; i < elements.length; i++) {
+                var current_element = elements[i];
+                if (current_element.id !== "flexCheckAll") {
+                    current_element.disabled = new_checked_state;
+                    current_element.checked = new_checked_state;
+                }
+            }
+            var elements = document.getElementsByClassName("warpack-adjustment");
+            for (let i = 0; i < elements.length; i++) {
+                var current_element = elements[i];
+                if (new_checked_state) {
+                    current_element.style.display = "none";
+                } else {
+                    current_element.style.display = "";
+                }
+            }
+            var elements = document.getElementsByClassName("cycle-adjustment");
+            for (let i = 0; i < elements.length; i++) {
+                var current_element = elements[i];
+                if (new_checked_state) {
+                    current_element.style.display = "none";
+                } else {
+                    console.log("restore")
+                    current_element.style.display = "";
+                }
+            }
+        }
+
+        toggleAllDisabledSets();
+
+        function getSelectedSetData() {
+            if (document.getElementById("flexCheckAll").checked) {
+                return "All";
+            }
+            var return_value = "";
+            elements = document.getElementsByClassName("form-check-input");
+            for (let i = 0; i < elements.length; i++) {
+                var current_element = elements[i];
+                if (current_element.checked) {
+                    return_value = return_value + "/" + current_element.value;
+                }
+            }
+            return return_value
+        }
+
         // Ajax setup for form submission
         $(document).ready(function() {
             $('#myForm').on('submit', function(event) {
@@ -242,6 +556,7 @@
                         'creator': $('#creatorInput').val(),
                         'faction': $('#faction').val(),
                         'warlord': $('#warlord').val(),
+                        'set_info': getSelectedSetData(),
                         'csrfmiddlewaretoken': '{{ csrf_token }}' // CSRF token for security
                     },
                     success: function(response) {
