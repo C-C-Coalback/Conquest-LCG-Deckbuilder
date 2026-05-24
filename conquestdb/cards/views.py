@@ -788,7 +788,13 @@ def ajax_view(request):
             special_types = ast.literal_eval(special_types)
             special_types_enabled = request.POST.get('special_types_enabled')
             special_types_enabled = ast.literal_eval(special_types_enabled)
+            ffg_only = request.POST.get('ffg_only')
+            ffg_only = ast.literal_eval(ffg_only)
             warlord = FindCard.find_card(warlord_name, card_array, cards_dict)
+            if ffg_only:
+                allowed_sets_names = ["Core Set", "The Great Devourer", "Legions of Death",
+                                      "Warlord Cycle", "Planetfall Cycle", "Death World Cycle"]
+                filtered_df = filtered_df[filtered_df["cycle"].isin(allowed_sets_names)]
             if special_factions:
                 if len(special_factions) == len(special_enabled):
                     extra_faction_filter = []

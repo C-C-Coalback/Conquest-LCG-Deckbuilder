@@ -73,7 +73,7 @@
     </div>
     <div id="mini-card-search-container-container">
         <div id="mini-card-search-container">
-            <div><h2>Card Filter</h2><div id="card-search-helper-tooltip" style="display: inline; cursor: default;" data-toggle="tooltip" title="Click on a searched card to add it to your deck. The search will only show cards that you can add."><u>?</u></div></div>
+            <div><h2 style="display: inline;">Card Filter</h2><div id="card-search-helper-tooltip" style="display: inline; cursor: default; margin-left: 20px;" data-toggle="tooltip" title="Click on a searched card to add it to your deck. The search will only show cards that you can add."><u>?</u></div><div><input id="FFGOnlyCheckbox" type="checkbox" name="FFGOnly" value="FFGOnly">FFG Only</div></div>
             <button id="clear-filter" onclick="clearFilters();">Reset Filters</button>
             <form id="myForm">
                 <div id="filters-container">
@@ -1156,6 +1156,10 @@
             var string_enabled = JSON.stringify(faction_selections[1]);
             var string_types = JSON.stringify(card_type_selections[0]);
             var string_types_enabled = JSON.stringify(card_type_selections[1]);
+            var ffg_only = "False";
+            if ($('#FFGOnlyCheckbox').is(':checked')) {
+                ffg_only = "True"
+            }
             $.ajax({
                 url: '/cards/ajax/',  // The URL of the Django view that handles the request
                 type: 'POST',
@@ -1188,6 +1192,7 @@
                     'order': $('#order').val(),
                     'asc': $('#asc-desc').val(),
                     'view-as': "Rows Mini",
+                    'ffg_only': ffg_only,
                     'csrfmiddlewaretoken': '{{ csrf_token }}' // CSRF token for security
                 },
                 success: function(response) {
