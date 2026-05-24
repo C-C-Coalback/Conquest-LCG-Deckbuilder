@@ -500,7 +500,7 @@ def convert_common_mistakes_octgn(deck_text):
     deck_text = deck_text.replace("Kommando Kunning", "Kommando Cunning")
     deck_text = deck_text.replace("Kwik' Konstrukshun", "Kwik' Konstruckshun")
     deck_text = deck_text.replace("Call the Storm", "Call The Storm")
-    deck_text = deck_text.replace("Flickering Holofield", "Flickering Holofield")
+    deck_text = deck_text.replace("Flickering Holofield", "Flickering Holosuit")
     return deck_text
 
 
