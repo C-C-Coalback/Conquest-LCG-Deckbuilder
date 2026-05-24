@@ -334,9 +334,8 @@ def add_name_to_card(card_type, name, resulting_img):
         d = ImageDraw.Draw(txt)
         d.text((0, 0), name, font=f, fill="black")
         w = txt.rotate(90, expand=1)
-        x_offset = int((0.5 * get_pil_text_size(name, 84,
-                                                "cards/custom_card_creator/fonts/billboard-college-cufonfonts/Billboard-College.ttf")[
-            2]) - 100)
+        x_offset = int((0.5 * get_pil_text_size(
+            name, 84, "cards/custom_card_creator/fonts/billboard-college-cufonfonts/Billboard-College.ttf")[2]) - 100)
         resulting_img.paste(w, (110, x_offset), w)
     elif card_type == "Planet":
         f = ImageFont.truetype("cards/custom_card_creator/fonts/billboard-college-cufonfonts/Billboard-College.ttf", 84)
@@ -344,39 +343,34 @@ def add_name_to_card(card_type, name, resulting_img):
         d = ImageDraw.Draw(txt)
         d.text((0, 0), name, font=f, fill="black")
         w = txt.rotate(270, expand=1)
-        x_offset = int((-1 * get_pil_text_size(name, 84,
-                                               "cards/custom_card_creator/fonts/billboard-college-cufonfonts/Billboard-College.ttf")[
-            2]))
+        x_offset = int((-1 * get_pil_text_size(
+            name, 84, "cards/custom_card_creator/fonts/billboard-college-cufonfonts/Billboard-College.ttf")[2]))
         x_offset = x_offset + 1900
         resulting_img.paste(w, (1210, x_offset), w)
     elif card_type == "Attachment":
-        x_offset = int(690 - (0.5 * get_pil_text_size(name, 84,
-                                                      "cards/custom_card_creator/fonts/billboard-college-cufonfonts/Billboard-College.ttf")[
-            2]))
+        x_offset = int(690 - (0.5 * get_pil_text_size(
+            name, 84, "cards/custom_card_creator/fonts/billboard-college-cufonfonts/Billboard-College.ttf")[2]))
         add_text_to_image(
             resulting_img, name, (x_offset, 1220),
             font_src="cards/custom_card_creator/fonts/billboard-college-cufonfonts/Billboard-College.ttf"
         )
     elif card_type == "Warlord":
-        x_offset = int(750 - (0.5 * get_pil_text_size(name, 84,
-                                                      "cards/custom_card_creator/fonts/billboard-college-cufonfonts/Billboard-College.ttf")[
-            2]))
+        x_offset = int(750 - (0.5 * get_pil_text_size(
+            name, 84, "cards/custom_card_creator/fonts/billboard-college-cufonfonts/Billboard-College.ttf")[2]))
         add_text_to_image(
             resulting_img, name, (x_offset, 94),
             font_src="cards/custom_card_creator/fonts/billboard-college-cufonfonts/Billboard-College.ttf"
         )
     elif card_type == "Event":
-        x_offset = int(810 - (0.5 * get_pil_text_size(name, 84,
-                                                      "cards/custom_card_creator/fonts/billboard-college-cufonfonts/Billboard-College.ttf")[
-            2]))
+        x_offset = int(810 - (0.5 * get_pil_text_size(
+            name, 84, "cards/custom_card_creator/fonts/billboard-college-cufonfonts/Billboard-College.ttf")[2]))
         add_text_to_image(
             resulting_img, name, (x_offset, 78),
             font_src="cards/custom_card_creator/fonts/billboard-college-cufonfonts/Billboard-College.ttf"
         )
     else:
-        x_offset = int(810 - (0.5 * get_pil_text_size(name, 84,
-                                                      "cards/custom_card_creator/fonts/billboard-college-cufonfonts/Billboard-College.ttf")[
-            2]))
+        x_offset = int(810 - (0.5 * get_pil_text_size(
+            name, 84, "cards/custom_card_creator/fonts/billboard-college-cufonfonts/Billboard-College.ttf")[2]))
         add_text_to_image(
             resulting_img, name, (x_offset, 108),
             font_src="cards/custom_card_creator/fonts/billboard-college-cufonfonts/Billboard-College.ttf"
@@ -385,9 +379,8 @@ def add_name_to_card(card_type, name, resulting_img):
 
 
 def add_traits_to_card(card_type, traits, resulting_img):
-    x_offset = int(840 - (0.5 * get_pil_text_size(traits, 84,
-                                                  "cards/custom_card_creator/fonts/Markazi_Text/static/MarkaziText-Bold.ttf")[
-        2]))
+    x_offset = int(840 - (0.5 * get_pil_text_size(
+        traits, 84, "cards/custom_card_creator/fonts/Markazi_Text/static/MarkaziText-Bold.ttf")[2]))
     y_offset = 1320
     if card_type == "Army":
         x_offset = x_offset - 50
@@ -785,6 +778,7 @@ def ajax_view(request):
         asc = request.POST.get('asc')
         if view_as == "Rows Mini":
             warlord_name = request.POST.get('warlord_name')
+            warlord_name = warlord_name.replace("Zen Xi Aonia", "Zen \"Xi\" Aonia")
             ally_faction = request.POST.get('ally_faction')
             special_factions = request.POST.get('special_factions')
             special_factions = ast.literal_eval(special_factions)

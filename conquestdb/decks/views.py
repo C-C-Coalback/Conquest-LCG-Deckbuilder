@@ -471,6 +471,94 @@ def convert_common_mistakes(deck_text):
     return deck_text
 
 
+def convert_common_mistakes_octgn(deck_text):
+    deck_text = deck_text.replace("Ksi'M'Yen Orbital City", "Ksi'm'yen Orbital City")
+    deck_text = deck_text.replace("Corrupted Clawed fiend", "Corrupted Clawed Fiend")
+    deck_text = deck_text.replace("Repent", "Repent!")
+    deck_text = deck_text.replace("Hot-Shot-Laspistol", "Hot-Shot Laspistol")
+    deck_text = deck_text.replace("Ulthwe Spirit Stone ", "Ulthwé Spirit Stone")
+    deck_text = deck_text.replace("Tower of Worhship", "Tower of Worship")
+    deck_text = deck_text.replace("Death guard Infantry", "Death Guard Infantry")
+    deck_text = deck_text.replace("Launch Da Snots", "Launch da Snots")
+    deck_text = deck_text.replace("Sa'cea XV88 Broadside ", "Sa'cea XV88 Broadside")
+    deck_text = deck_text.replace("Ancient Keeper Of Secrets", "Ancient Keeper of Secrets")
+    deck_text = deck_text.replace("Accept any Challenge", "Accept Any Challenge")
+    deck_text = deck_text.replace("Blood For the Blood God!", "Blood For The Blood God!")
+    deck_text = deck_text.replace("Front line 'Ard Boyz", "Front Line 'Ard Boyz")
+    deck_text = deck_text.replace("'Subject O-X62113'", "\"Subject: Ω-X62113\"")
+    deck_text = deck_text.replace("Reclusian Templars", "Reclusiam Templars")
+    deck_text = deck_text.replace("Order of Our Martyred Lady", "Order of the Crimson Oath")
+    deck_text = deck_text.replace("Exalting Celestians", "Exalted Celestians")
+    deck_text = deck_text.replace("Evangelizing Ship", "Evangelizing Ships")
+    deck_text = deck_text.replace("Siege Masters", "The Siege Masters")
+    deck_text = deck_text.replace("Zen 'Xi' Aonia", "Zen \"Xi\" Aonia")
+    deck_text = deck_text.replace("Command Bravestorm", "Commander Bravestorm")
+    deck_text = deck_text.replace("Adraci-strain Broodlord", "Ardaci-strain Broodlord")
+    deck_text = deck_text.replace("Agnok's Shadow", "Agnok's Shadows")
+    deck_text = deck_text.replace("Strangleweb Termagants", "Strangleweb Termagant")
+    deck_text = deck_text.replace("Prey On The Weak", "Prey on the Weak")
+    deck_text = deck_text.replace("Kommando Kunning", "Kommando Cunning")
+    deck_text = deck_text.replace("Kwik' Konstrukshun", "Kwik' Konstruckshun")
+    deck_text = deck_text.replace("Call the Storm", "Call The Storm")
+    deck_text = deck_text.replace("Flickering Holofield", "Flickering Holofield")
+    return deck_text
+
+
+def convert_octgn_conquestdb(deck_text):
+    try:
+        deck_text = re.sub(r'\([^)]*\)', '', deck_text)
+        deck_text = deck_text.replace("”", "\"")
+        deck_text = deck_text.replace("“", "\"")
+        deck_text = deck_text.replace("’", "'")
+        deck_text = deck_text.replace("Warhammer 40K Conquest LCG", "")
+        deck_text = convert_common_mistakes_octgn(deck_text)
+        deck_split = deck_text.split("\n")
+        for i in range(len(deck_split)):
+            deck_split[i] = deck_split[i].rstrip()
+            deck_split[i] = deck_split[i].replace("Warlord", "")
+            deck_split[i] = deck_split[i].replace("Events", "")
+            deck_split[i] = deck_split[i].replace("Supports", "")
+            deck_split[i] = deck_split[i].replace("Synapse", "")
+            deck_split[i] = deck_split[i].replace("Attachments", "")
+            deck_split[i] = deck_split[i].replace("Armies", "")
+        deck_split = [s for s in deck_split if s]
+        deck_split[0] = deck_split[0][3:]
+        warlord_name = deck_split[0]
+        warlord_card = FindCard.find_card(warlord_name, card_array, cards_dict)
+        if warlord_card.get_card_type() == "Warlord":
+            new_deck = ["IMPORTED DECK",
+                        "----------------------------------------------------------------------",
+                        warlord_name, warlord_card.get_faction(),
+                        "----------------------------------------------------------------------",
+                        "Signature Squad", ""]
+            sig_squad = warlord_card.get_signature_squad()
+            for i in range(len(sig_squad)):
+                new_deck.append(sig_squad[i])
+            card_types = ["Army", "Support", "Synapse", "Attachment", "Event", "Planet"]
+            for card_type in card_types:
+                new_deck.append("----------------------------------------------------------------------")
+                new_deck.append(card_type)
+                new_deck.append("")
+                if card_type != "Planet":
+                    for i in range(len(deck_split)):
+                        if i != 0:
+                            card_name = deck_split[i][3:]
+                            card = FindCard.find_card(card_name, card_array, cards_dict)
+                            if card.get_card_type() == card_type:
+                                if card.get_loyalty() != "Signature":
+                                    new_deck.append(deck_split[i])
+
+            ally = determine_cardgamedb_ally(new_deck)
+            if ally:
+                new_deck[3] = new_deck[3] + " (" + ally + ")"
+            new_deck_text = "\n".join(new_deck)
+            print(new_deck_text)
+            return new_deck_text
+    except Exception as e:
+        print(e)
+        return "ERROR"
+
+
 def convert_cardgamedb_conquestdb(deck_text):
     try:
         deck_text = re.sub(r'\([^)]*\)', '', deck_text)
@@ -498,7 +586,6 @@ def convert_cardgamedb_conquestdb(deck_text):
                         "Signature Squad", ""]
             sig_squad = warlord_card.get_signature_squad()
             for i in range(len(sig_squad)):
-                "Genestealer Harvester"
                 new_deck.append(sig_squad[i])
             card_types = ["Army", "Support", "Synapse", "Attachment", "Event", "Planet"]
             for card_type in card_types:
@@ -1291,6 +1378,8 @@ def create_deck_with_warlord(request, warlord_name):
             actual_name = "\"The Swarmlord\""
         if actual_name == "Parasite of Mortrex":
             actual_name = "\"Parasite of Mortrex\""
+        if actual_name == "Zen Xi Aonia":
+            actual_name = "Zen \"Xi\" Aonia"
         if actual_name in cards_dict:
             warlord_card = cards_dict[actual_name]
             if warlord_card.get_card_type() == "Warlord":
@@ -2057,6 +2146,8 @@ def ajax_view(request):
             deck_text = convert_common_mistakes(deck_text)
             if type_import == "CardgameDB":
                 deck_text = convert_cardgamedb_conquestdb(deck_text)
+            elif type_import == "OCTGN":
+                deck_text = convert_octgn_conquestdb(deck_text)
             else:
                 true_split_message = deck_text.split(sep="\n")
                 while true_split_message:
@@ -2118,6 +2209,7 @@ def ajax_view(request):
             text = text.replace("Old One Eye", "\"Old One Eye\"")
             text = text.replace("The Swarmlord", "\"The Swarmlord\"")
             text = text.replace("Parasite of Mortrex", "\"Parasite of Mortrex\"")
+            text = text.replace("Zen Xi Aonia", "Zen \"Xi\" Aonia")
             true_split_message = text.split(sep="\n")
             while true_split_message:
                 if true_split_message[0].strip():
@@ -2236,6 +2328,7 @@ def ajax_view(request):
                 return JsonResponse({'message': 'Cannot add Signature units'})
             card_type = card.get_card_type()
             warlord_name = request.POST.get('warlord_name')
+            warlord_name = warlord_name.replace("Zen Xi Aonia", "Zen \"Xi\" Aonia")
             print(warlord_name)
             warlord = FindCard.find_card(warlord_name, card_array, cards_dict)
             main_faction = warlord.get_faction()

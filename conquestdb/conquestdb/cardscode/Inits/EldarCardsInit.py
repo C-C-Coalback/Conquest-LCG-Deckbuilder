@@ -507,11 +507,11 @@ def eldar_cards_init():
                                    war_pack_info="Herald of the Plague God"),
         CardClasses.SupportCard("Wisdom of Biel-tan", "Reaction: After you perform a mulligan, draw a card.",
                                 "Doctrine.", 0, faction, "Signature", False, war_pack_info="Herald of the Plague God"),
-        CardClasses.WarlordCard("Zen Xi Aonia", "Each unit at this planet loses the Area Effect keyword.\n"
-                                                "Forced Interrupt: When a unit you control at this planet is "
-                                                "chosen as a defender, declare another eligible unit at this planet "
-                                                "as the defender instead, if able.", "Shadowseer. Harlequin.",
-                                faction, 2, 6, 2, 6, "Bloodied.", 7, 7,
+        CardClasses.WarlordCard("Zen \"Xi\" Aonia", "Each unit at this planet loses the Area Effect keyword.\n"
+                                                    "Forced Interrupt: When a unit you control at this planet is "
+                                                    "chosen as a defender, declare another eligible unit at this "
+                                                    "planet as the defender instead, if able.",
+                                "Shadowseer. Harlequin.", faction, 2, 6, 2, 6, "Bloodied.", 7, 7,
                                 ["2x Access to the Black Library", "1x Masters of the Webway", "1x Starmist Raiment",
                                  "1x The Blinded Princess", "1x The Dawnsinger",
                                  "1x The Sun Prince", "1x The Webway Witch"], war_pack_info="By Imperial Decree"),
