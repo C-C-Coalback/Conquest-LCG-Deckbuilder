@@ -74,12 +74,111 @@
     display: inline;
 }
 
+.larger-db-image {
+    width: 7.83vw;
+    height: 10.96vw;
+    border: 2px solid aqua;
+    border-radius: 5px;
+}
+
+.images-variant-section-last {
+    display: flex;
+    column-gap: 20px;
+    flex-wrap: wrap;
+    row-gap: 10px;
+    border-top: 2.5px black solid;
+    margin-bottom: 2.5px;
+}
+
+.images-variant-section {
+    display: flex;
+    column-gap: 20px;
+    flex-wrap: wrap;
+    row-gap: 10px;
+    border-bottom: 2.5px black solid;
+    border-top: 2.5px black solid;
+    margin-bottom: 2.5px;
+}
+
+.card-images-cluster {
+    display: flex;
+}
+
+.card-images-cluster img {
+    margin-left: -6vw;
+}
+
+.card-images-cluster img:first-child {
+    margin-left: 0;
+}
+
+.image-input {
+    max-width: 2vw;
+}
+
 .db-image {
     width: 4.70vw;
     height: 125px;
 }
 
-.auto-deck-build {
+#image-deck-build {
+    background: rgba(47, 40, 153, 0.3);
+    cursor: default;
+    width: auto;
+    min-height: 50vh;
+    border: 5px solid green;
+    display: none;
+    grid-template-columns: 4.70vw 4.70vw 4.70vw auto;
+    grid-template-rows: 125px auto;
+    grid-template-areas:
+    "warlord-card synapse-card pledge-card details"
+    "main-cards main-cards main-cards main-cards";
+}
+
+#warlord-image-header-card {
+    grid-area: warlord-card;
+}
+
+#synapse-image-header-card {
+    grid-area: synapse-card;
+}
+
+#pledge-image-header-card {
+    grid-area: pledge-card;
+}
+
+#main-deck-images-container {
+    grid-area: main-cards;
+    display: flex;
+    flex-direction: column;
+}
+
+#images-details {
+    background: rgba(47, 40, 153, 0.3);
+    overflow-y: auto;
+    border: 1px solid black;
+    text-align: center;
+}
+
+#images-details {
+    grid-area: details;
+}
+
+#image-deck-build > #details {
+    background: rgba(47, 40, 153, 0.3);
+    overflow-y: auto;
+    border: 1px solid black;
+    text-align: center;
+}
+
+#image-deck-build > .db-section {
+    background: rgba(47, 40, 153, 0.3);
+    border: 1px solid black;
+    text-align: left;
+    overflow-y:auto;
+}
+
+#auto-deck-build {
     background: rgba(47, 40, 153, 0.3);
     cursor: default;
     width: auto;
@@ -94,14 +193,14 @@
     "event-cards event-cards event-cards attachment-cards attachment-cards attachment-cards support-cards";
 }
 
-.auto-deck-build > #details {
+#auto-deck-build > #details {
     background: rgba(47, 40, 153, 0.3);
     overflow-y: auto;
     border: 1px solid black;
     text-align: center;
 }
 
-.auto-deck-build > .db-section {
+#auto-deck-build > .db-section {
     background: rgba(47, 40, 153, 0.3);
     border: 1px solid black;
     text-align: left;
@@ -152,7 +251,7 @@
     position: absolute;
     left: 100px;
     top: 100px;
-    width: 37vw;
+    width: 40vw;
 }
 
 #buttons-container {
@@ -265,7 +364,7 @@
     margin-right:10px;
 }
 
-#card-submit, #deck-submit-1, #toggle-position-type-deck {
+#card-submit, #deck-submit-1, #toggle-position-type-deck, #toggle-way-cards-viewed {
     border: none;
     background-color: blue;
     color: white !important;
