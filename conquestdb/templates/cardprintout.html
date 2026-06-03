@@ -1,0 +1,471 @@
+{% extends "base.html" %}
+
+{% block content %}
+{% load static %}
+<link rel="stylesheet" href="{% static 'card_printout.css' %}">
+<div id="container-card-printout">
+    <div class="header-card-area">
+        <h1>Add cards to the box below via the search function.</h1>
+        <button onclick="window.print()">Print Cards</button>
+        <button onclick="addCardToPrintoutArea('/static/images/CardImages/Cardback.jpg')">Add Cardback</button>
+    </div>
+    <div id="card-grid">
+
+    </div>
+</div>
+
+{% load static %}
+<link rel="stylesheet" href="{% static 'card_search_style.css' %}">
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<datalist id="traitsList">
+    {% for trait in traits_list %}
+        <option value="{{ trait }}"></option>
+    {% endfor %}
+</datalist>
+<body>
+    <div class="container">
+        <h1>Card Search</h1>
+        <form id="myForm">
+            <fieldset>
+                <legend class="important-color" style="padding-top: 10px;">Title and Texts</legend>
+            </fieldset>
+            <div class="form-row">
+                <label for="searchInput" id="p-card-name" class="">Card Name:</label><input class="form-control" id="searchInput" type="text" name="search">
+            </div>
+            <div class="form-row">
+                <label for="traitsInput" id="p-traits" class="">Traits:</label><input class="form-control" id="traitsInput" type="text" name="traits" autocomplete="off" list="traitsList">
+            </div>
+            <div class="form-row">
+                <label for="textInput" id="p-text" class="">Text:</label><textarea class="form-control" id="textInput" name="text"></textarea>
+            </div>
+            <fieldset>
+                <legend class="important-color" style="padding-top: 10px;">Faction and Type</legend>
+            </fieldset>
+            <div class="form-row">
+                <label id="p-card-type" class="">Card Type:</label><select class="form-control" name="card-type" id="cardType">
+                        <option value="None"></option>
+                        <option value="Army">Army</option>
+                        <option value="Support">Support</option>
+                        <option value="Event">Event</option>
+                        <option value="Attachment">Attachment</option>
+                        <option value="Warlord">Warlord</option>
+                        <option value="Synapse">Synapse</option>
+                        <option value="Token">Token</option>
+                        <option value="Planet">Planet</option>
+                    </select>
+                <label id="p-faction" class="">Faction:</label><select class="form-control" name="faction" id="faction">
+                        <option value="None"></option>
+                        <option value="Space Marines">Space Marines</option>
+                        <option value="Tau">Tau</option>
+                        <option value="Eldar">Eldar</option>
+                        <option value="Dark Eldar">Dark Eldar</option>
+                        <option value="Chaos">Chaos</option>
+                        <option value="Orks">Orks</option>
+                        <option value="Astra Militarum">Astra Militarum</option>
+                        <option value="Neutral">Neutral</option>
+                        <option value="Tyranids">Tyranids</option>
+                        <option value="Necrons">Necrons</option>
+                    </select>
+            </div>
+            <div class="form-row">
+                <label id="p-loyalty" class="">Loyalty:</label><select class="form-control" name="loyalty" id="loyalty">
+                        <option value="None"></option>
+                        <option value="Common">Common</option>
+                        <option value="Loyal">Loyal</option>
+                        <option value="Signature">Signature</option>
+                     </select>
+            </div>
+            <fieldset>
+                <legend class="important-color" style="padding-top: 10px;">Numerics</legend>
+            </fieldset>
+            <div class="form-row">
+                <div class="form-group col-md-6">
+                    <label id="min-cost" class="">Minimum Cost:</label><input class="form-control" id="minCost" type="text" name="minCost">
+                </div>
+                <div class="form-group col-md-6">
+                    <label id="max-cost" class="">Maximum Cost:</label><input class="form-control" id="maxCost" type="text" name="maxCost">
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="form-group col-md-6">
+                    <label id="min-command" class="">Minimum Command Icons:</label><input class="form-control" id="minCommand" type="text" name="minCommand">
+                </div>
+                <div class="form-group col-md-6">
+                    <label id="max-command" class="">Maximum Command Icons:</label><input class="form-control" id="maxCommand" type="text" name="maxCommand">
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="form-group col-md-6">
+                    <label id="min-attack" class="">Minimum Attack:</label><input class="form-control" id="minAttack" type="text" name="minAttack">
+                </div>
+                <div class="form-group col-md-6">
+                    <label id="max-attack" class="">Maximum Attack:</label><input id="maxAttack" class="form-control" type="text" name="maxAttack">
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="form-group col-md-6">
+                    <label id="min-health" class="">Minimum Health:</label><input id="minHealth" class="form-control" type="text" name="minHealth">
+                </div>
+                <div class="form-group col-md-6">
+                    <label id="max-health" class="">Maximum Health:</label><input id="maxHealth" class="form-control" type="text" name="maxHealth">
+                </div>
+            </div>
+            <div class="form-row">
+                <label id="p-shields" class="">Shields:</label><select class="form-control" name="shields" id="shields">
+                        <option value="-1"></option>
+                        <option value="0">0</option>
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                </select>
+            </div>
+            <fieldset>
+                <legend class="important-color" style="padding-top: 10px;">Cycle/War Pack</legend>
+            </fieldset>
+            <div class="form-row">
+                <div class="form-group col-md-6">
+                <label id="p-cycle" class="">Cycle:</label><select name="cycle" class="form-control" id="cycle">
+                        <option value=""></option>
+                        {% for cycle_name in cycles_list %}
+                            <option value="{{ cycle_name }}">{{ cycle_name }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+                <div class="form-group col-md-6">
+                <label id="p-war-pack" class="">War Pack:</label><select name="war-pack" class="form-control" id="war-pack">
+                        <option value=""></option>
+                        {% for warpack_name in warpacks_list %}
+                            <option value="{{ warpack_name }}">{{ warpack_name }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+            </div>
+            <fieldset style="min-width: fit-content;">
+                <legend class="important-color" style="padding-top: 10px;">Miscellaneous</legend>
+            </fieldset>
+            <div class="form-row">
+                <label id="p-keyword" class="filter">Keyword or Specialization:</label><select name="keyword" class="filter form-control" id="keywordInput">
+                    <option value="None"></option>
+                    <option value="No Attachments">No Attachments</option>
+                    <option value="No Wargear Attachments">No Wargear Attachments</option>
+                    <option value="Armorbane">Armorbane</option>
+                    <option value="Brutal">Brutal</option>
+                    <option value="Limited">Limited</option>
+                    <option value="Flying">Flying</option>
+                    <option value="Area Effect">Area Effect</option>
+                    <option value="Ranged">Ranged</option>
+                    <option value="Ambush">Ambush</option>
+                    <option value="Mobile">Mobile</option>
+                    <option value="Deep Strike">Deep Strike</option>
+                    <option value="Lumbering">Lumbering</option>
+                    <option value="Sweep">Sweep</option>
+                    <option value="Retaliate">Retaliate</option>
+                    <option value="Hive Mind">Hive Mind</option>
+                    <option value="Unstoppable">Unstoppable</option>
+                    <option value="Goes Fasta">Goes Fasta!</option>
+                    <option value="Bloodthirst">Bloodthirst</option>
+                    <option value="Preparation">Preparation</option>
+                    <option value="Unique">Unique</option>
+                </select>
+                <label id="p-sector" class="filter">Sector: (if planet)</label><select name="sector" class="filter form-control" id="sector">
+                    <option value=""></option>
+                    <option value="Traxis">Traxis</option>
+                    <option value="Gardis">Gardis</option>
+                    <option value="Veros">Veros</option>
+                    <option value="The Breach">The Breach</option>
+                    <option value="Nepthis">Nepthis</option>
+                    <option value="Sargos">Sargos</option>
+                    <option value="Monn-Rai">Monn-Rai</option>
+                </select>
+            </div>
+            <fieldset>
+                <legend class="important-color" style="padding-top: 10px;">Order</legend>
+            </fieldset>
+            <div class="form-row">
+                <div class="form-group col-md-6">
+                    <label id="p-order" class="filter">Order By:</label><select name="order" class="filter form-control" id="order">
+                        <option value="None"></option>
+                        <option value="Name">Name</option>
+                        <option value="Card Type">Card Type</option>
+                        <option value="COST">Cost</option>
+                        <option value="Attack">ATK</option>
+                        <option value="Health">HP</option>
+                        <option value="Command">Command</option>
+                        <option value="Shields">Shields</option>
+                        <option value="War Pack">War Pack</option>
+                        <option value="Cycle">Cycle</option>
+                    </select>
+                </div>
+                <div class="form-group col-md-6">
+                    <label id="p-asc-desc" class="filter">Asc./Desc.:</label><select name="asc-desc" class="filter form-control" id="asc-desc">
+                        <option value="Ascending" selected="selected">Ascending</option>
+                        <option value="Descending">Descending</option>
+                    </select>
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="form-group col-md-3">
+
+                </div>
+                <div class="form-group col-md-4">
+                    <button type="submit" id="submit">Perform Search</button>
+                </div>
+                <div class="form-group col-md-4">
+                    <div class="float-end">
+                        <button id="clear-filter" onclick="clearFilters();">Reset Filters</button>
+                    </div>
+                </div>
+                    <h3 id="view-as">View as: </h3><select name="view-as-selector" id="view-as-selector">
+                        <option value="Images" selected="selected">Images</option>
+                        <option value="Rows">Rows</option>
+                    </select>
+            </div>
+        </form>
+    </div>
+    <div id="cardBinderContainer">
+        <input id="prev-page" class="black-button" type="button" value="previous" onclick="previousPage();">
+        <input id="prev-page-2" class="black-button" type="button" value="previous" onclick="previousPage();">
+        <div id="cardBinder">
+            <div id="responseMessage">
+                <div class="page" id="page"></div>
+            </div>
+        </div>
+        <input id="next-page" class="black-button" type="button" value="next" onclick="nextPage();">
+        <input id="next-page-2" class="black-button" type="button" value="next" onclick="nextPage();">
+    </div>
+    <div id="card-counts-pages">
+        <p>Showing 0-0 of 0 matches</p>
+    </div>
+    <div class="center" style="display:none">
+        Number of rows per page:<select name="num-rows" class="num-rows" id="num-rows" onchange="updateMaxRows(this)">
+            <option value="5">5</option>
+            <option value="10">10</option>
+            <option value="20" selected="selected">20</option>
+            <option value="50">50</option>
+            <option value="100">100</option>
+            <option value="200">200</option>
+            <option value="500">500</option>
+            <option value="1000">1000</option>
+            <option value="2000">2000</option>
+        </select>
+    </div>
+    <script>
+        var current_page_number = 0;
+        var max_page_number = 0;
+        var max_rows = "20";
+        var current_max_rows = 20;
+        var num_matches = 0;
+        var current_low_match = 0;
+        var current_high_match = 0;
+        var stored_image_names = [];
+        const cards_required_for_extra_buttons = 6;
+
+        function addCardToPrintoutArea(src) {
+            const card_src = src;
+            var cardContainer = document.getElementById("card-grid");
+            var newString = ``;
+            newString += `<div class="card" onclick="this.remove()">`;
+            newString += `<img src="` + card_src + `" class="Card">`;
+            newString += `<span class="card-label"></span>`;
+            newString += `</div>`;
+            cardContainer.innerHTML += newString;
+        }
+
+        function clearFilters() {
+            var searchInput = document.getElementById("searchInput");
+            searchInput.value = "";
+            var searchInput = document.getElementById("loyalty");
+            searchInput.value = "None";
+            var searchInput = document.getElementById("faction");
+            searchInput.value = "None";
+            var searchInput = document.getElementById("cardType");
+            searchInput.value = "None";
+            var searchInput = document.getElementById("traitsInput");
+            searchInput.value = "";
+            var searchInput = document.getElementById("textInput");
+            searchInput.value = "";
+            var searchInput = document.getElementById("shields");
+            searchInput.value = "-1";
+            var searchInput = document.getElementById("minCost");
+            searchInput.value = "";
+            var searchInput = document.getElementById("maxCost");
+            searchInput.value = "";
+            var searchInput = document.getElementById("minCommand");
+            searchInput.value = "";
+            var searchInput = document.getElementById("maxCommand");
+            searchInput.value = "";
+            var searchInput = document.getElementById("minAttack");
+            searchInput.value = "";
+            var searchInput = document.getElementById("maxAttack");
+            searchInput.value = "";
+            var searchInput = document.getElementById("minHealth");
+            searchInput.value = "";
+            var searchInput = document.getElementById("maxHealth");
+            searchInput.value = "";
+            var searchInput = document.getElementById("cycle");
+            searchInput.value = "None";
+            var searchInput = document.getElementById("war-pack");
+            searchInput.value = "None";
+        }
+
+        function displayExtraPageButtons() {
+            document.getElementById("prev-page-2").style["display"] = "block";
+            document.getElementById("next-page-2").style["display"] = "block";
+        }
+
+        function hideExtraPageButtons() {
+            document.getElementById("prev-page-2").style["display"] = "none";
+            document.getElementById("next-page-2").style["display"] = "none";
+        }
+
+        function updateMaxRows(e) {
+            max_rows = e.value;
+        }
+
+        function previousPage() {
+            if (current_page_number !== 0) {
+                current_page_number = current_page_number - 1;
+                current_low_match = current_low_match - current_max_rows;
+                current_high_match = (current_page_number + 1) * current_max_rows;
+                displayExtraPageButtons();
+                page_counter = document.getElementById("card-counts-pages");
+                page_counter.innerHTML = `<p>Showing ` + current_low_match + `-` + current_high_match + ` of ` + num_matches + ` matches</p>`;
+                e = document.getElementById("responseMessage");
+                e.innerHTML = ``;
+                var img_src = "";
+                var new_string = "";
+                var new_id = "";
+                new_string += `<div class="page" id="page">`;
+                for (let i = 0; i < stored_image_names[current_page_number].length; i++) {
+                    img_src = stored_image_names[current_page_number][i];
+                    new_string += `<img class="Card" onclick="addCardToPrintoutArea(this.src)" src=` + img_src + ` alt="Loading...">`;
+                }
+                new_string += `</div>`;
+                e.innerHTML += new_string;
+            }
+        }
+
+        function nextPage() {
+            if (current_page_number !== max_page_number) {
+                current_page_number = current_page_number + 1;
+                e = document.getElementById("responseMessage");
+                e.innerHTML = ``;
+                current_low_match = current_low_match + current_max_rows;
+                current_high_match = (current_page_number + 1) * current_max_rows;
+                if (current_high_match > num_matches) {
+                    current_high_match = num_matches;
+                }
+                if (num_matches - current_low_match < cards_required_for_extra_buttons) {
+                    hideExtraPageButtons();
+                } else {
+                    displayExtraPageButtons();
+                }
+                page_counter = document.getElementById("card-counts-pages");
+                page_counter.innerHTML = `<p>Showing ` + current_low_match + `-` + current_high_match + ` of ` + num_matches + ` matches</p>`;
+                var img_src = "";
+                var new_string = "";
+                var new_id = "";
+                new_string += `<div class="page" id="page">`;
+                for (let i = 0; i < stored_image_names[current_page_number].length; i++) {
+                    img_src = stored_image_names[current_page_number][i];
+                    new_string += `<img class="Card" onclick="addCardToPrintoutArea(this.src)" src=` + img_src + ` alt="Loading...">`;
+                }
+                new_string += `</div>`;
+                e.innerHTML += new_string;
+            }
+        }
+
+        // Ajax setup for form submission
+        $(document).ready(function() {
+            $('#myForm').on('submit', function(event) {
+                event.preventDefault();
+
+                $.ajax({
+                    url: '/cards/ajax/',  // The URL of the Django view that handles the request
+                    type: 'POST',
+                    data: {
+                        'search': $('#searchInput').val(),
+                        'faction': $('#faction').val(),
+                        'card_type': $('#cardType').val(),
+                        'text': $('#textInput').val(),
+                        'loyalty': $('#loyalty').val(),
+                        'traits': $('#traitsInput').val(),
+                        'shields': $('#shields').val(),
+                        'min-cost': $('#minCost').val(),
+                        'max-cost': $('#maxCost').val(),
+                        'keyword': $('#keywordInput').val(),
+                        'sector': $('#sector').val(),
+                        'min-command': $('#minCommand').val(),
+                        'max-command': $('#maxCommand').val(),
+                        'min-attack': $('#minAttack').val(),
+                        'max-attack': $('#maxAttack').val(),
+                        'min-health': $('#minHealth').val(),
+                        'max-health': $('#maxHealth').val(),
+                        'war-pack': $('#war-pack').val(),
+                        'cycle': $('#cycle').val(),
+                        'redirect-enabled': "Yes",
+                        'order': $('#order').val(),
+                        'asc': $('#asc-desc').val(),
+                        'view-as': $('#view-as-selector').val(),
+                        'csrfmiddlewaretoken': '{{ csrf_token }}' // CSRF token for security
+                    },
+                    success: function(response) {
+                        $('#responseMessage').text(response.message);  // Update the page dynamically
+                        const message = response.message;
+                        if (message === "REDIRECT") {
+                            location.href = "/cards/" + response.image_names[0] + "/";
+                        }
+                        var responseDiv = document.getElementById("responseMessage")
+                        responseDiv.scrollIntoView({ behavior: "smooth", top: responseDiv});
+                        current_page_number = 0;
+                        var cardCount = 0;
+                        var pageCount = 0;
+                        var card_names = response.cards;
+                        const image_names = response.image_names;
+                        e = document.getElementById("responseMessage");
+                        e.innerHTML = ``;
+                        var img_src = "";
+                        var new_string = "";
+                        var new_id = "";
+                        new_string += `<div class="page" id="page">`;
+                        stored_image_names = [[]];
+                        current_max_rows = parseInt(max_rows);
+                        num_matches = image_names.length;
+                        current_low_match = 1;
+                        if (num_matches === 0) {
+                            current_low_match = 0;
+                        }
+                        current_high_match = current_max_rows;
+                        if (current_high_match > num_matches) {
+                            current_high_match = num_matches;
+                        }
+                        page_counter = document.getElementById("card-counts-pages");
+                        page_counter.innerHTML = `<p>Showing ` + current_low_match + `-` + current_high_match + ` of ` + num_matches + ` matches</p>`;
+                        for (let i = 0; i < image_names.length; i++) {
+                            if (cardCount === 20) {
+                                pageCount += 1
+                                cardCount = 0;
+                                stored_image_names.push([]);
+                            }
+                            img_src ="/static/images/CardImages/" + image_names[i] + ".jpg";
+                            stored_image_names[pageCount].push(img_src);
+                            if (pageCount === 0) {
+                                new_string += `<img class="Card" onclick="addCardToPrintoutArea(this.src)" src=` + img_src + ` alt="Loading...">`;
+                            }
+                            cardCount += 1;
+                        }
+                        if (cardCount < cards_required_for_extra_buttons && pageCount === 0) {
+                            hideExtraPageButtons();
+                        } else {
+                            displayExtraPageButtons();
+                        }
+                        max_page_number = pageCount;
+                        new_string += `</div>`;
+                        e.innerHTML += new_string;
+                    }
+                });
+            });
+        });
+    </script>
+
+{% endblock %}

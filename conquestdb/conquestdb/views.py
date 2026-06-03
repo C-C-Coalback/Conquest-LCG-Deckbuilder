@@ -8,6 +8,12 @@ import os
 import pandas as pd
 import light_dark_dict
 from card_utils import convert_name_to_img_src, convert_name_to_hyperlink, convert_name_to_create_deck_hyperlink
+import various_lists
+
+
+warpacks_list = various_lists.get_warpacks_list()
+cycles_list = various_lists.get_cycles_list()
+traits_list = various_lists.get_traits_list()
 
 
 def simple_upload(request):
@@ -150,3 +156,14 @@ def play_formats_page(request):
 def ban_lists_page(request):
     light_dark_toggle = light_dark_dict.get_light_mode(request.user.username)
     return render(request, "ban_lists.html", {"light_dark_toggle": light_dark_toggle})
+
+
+def card_printout_page(request):
+    light_dark_toggle = light_dark_dict.get_light_mode(request.user.username)
+    return render(
+        request, "cardprintout.html",
+        {
+            "light_dark_toggle": light_dark_toggle, "cycles_list": cycles_list,
+            "warpacks_list": warpacks_list, "traits_list": traits_list
+        }
+    )

@@ -21,6 +21,7 @@ from django.core.files.storage import FileSystemStorage
 from django.core.files.base import ContentFile
 import file_inits
 from file_inits import increment_card_count, increment_date_csv_count
+import various_lists
 
 
 def sorter_cycles(column):
@@ -55,41 +56,19 @@ def sorter_warpacks(column):
 card_array = Initfunctions.init_player_cards()
 planet_array = Initfunctions.init_planet_cards()
 apoka_errata_array = Initfunctions.init_apoka_errata_cards()
-images_dict = {}
-cards_dict = {}
-planets_dict = {}
-apoka_errata_dict = {}
+images_dict = various_lists.get_images_dict()
+cards_dict = various_lists.get_cards_dict()
+planets_dict = various_lists.get_planets_dict()
+apoka_errata_dict = various_lists.get_apoka_errata_dict()
 banned_cards = ["Bonesinger Choir", "Squiggoth Brute", "Corrupted Teleportarium", "Gun Drones", "Archon's Palace",
                 "Land Speeder Vengeance", "Sowing Chaos", "Smasha Gun Battery", "The Prince's Might",
                 "Purveyor of Hubris", "Doom", "Exterminatus", "Mind Shackle Scarab",
                 "Crypt of Saint Camila", "Warpstorm"]
-warpacks_list = []
-cycles_list = []
-traits_list = []
-lower_case_dict = {}
-lower_case_planet_dict = {}
-for i in range(len(card_array)):
-    if card_array[i].war_pack not in warpacks_list:
-        warpacks_list.append(card_array[i].war_pack)
-    if card_array[i].cycle not in cycles_list:
-        cycles_list.append(card_array[i].cycle)
-    traits = card_array[i].get_traits()
-    traits_split = traits.split(sep=". ")
-    for trait in traits_split:
-        cleaned_trait = trait.replace(".", "")
-        if cleaned_trait not in traits_list:
-            traits_list.append(cleaned_trait)
-traits_list.sort()
-for key in range(len(card_array)):
-    cards_dict[card_array[key].name] = card_array[key]
-    images_dict[card_array[key].image_name] = card_array[key]
-    lower_case_dict[card_array[key].name.lower()] = card_array[key]
-for key in range(len(planet_array)):
-    planets_dict[planet_array[key].name] = planet_array[key]
-    images_dict[planet_array[key].image_name] = planet_array[key]
-    lower_case_planet_dict[planet_array[key].name.lower()] = planet_array[key]
-for key in range(len(apoka_errata_array)):
-    apoka_errata_dict[apoka_errata_array[key].image_name] = apoka_errata_array[key]
+warpacks_list = various_lists.get_warpacks_list()
+cycles_list = various_lists.get_cycles_list()
+traits_list = various_lists.get_traits_list()
+lower_case_dict = various_lists.get_lower_case_dict()
+lower_case_planet_dict = various_lists.get_lower_case_planet_dict()
 
 df = pd.DataFrame([x.as_dict() for x in card_array])
 planet_df = pd.DataFrame([x.as_dict() for x in planet_array])
