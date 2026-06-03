@@ -20,16 +20,25 @@
 }
 
 @media print {
-    button, nav, header, .sidebar, h1, h2, p, span, form, input, #cardBinderContainer {
+    button, nav, header, .sidebar, h1, h2, p, span, form, input, #cardBinderContainer, .no-print {
         display: none !important;
     }
 
     #card-grid {
         display:grid;
-        grid-template-columns: repeat(4, 1fr);
+        grid-template-columns: repeat(3, 1fr);
+        margin-top: 0px !important;
     }
 
     .card {
         break-inside: avoid;
+        width: 6.35cm !important;
+        height: 8.8cm !important;
+    }
+
+    .Card {
+        width: 6.52cm !important;
+        height: 9.03cm !important;
+        border: 0.075cm solid black;
     }
 }

@@ -4,10 +4,10 @@
 {% load static %}
 <link rel="stylesheet" href="{% static 'card_printout.css' %}">
 <div id="container-card-printout">
-    <div class="header-card-area">
+    <div class="header-card-area no-print">
         <h1>Add cards to the box below via the search function.</h1>
-        <button onclick="window.print()">Print Cards</button>
-        <button onclick="addCardToPrintoutArea('/static/images/CardImages/Cardback.jpg')">Add Cardback</button>
+        <button class="important-color" onclick="window.print()">Print Cards</button>
+        <button class="important-color" onclick="addCardToPrintoutArea('/static/images/CardImages/Cardback.jpg')">Add Cardback</button>
     </div>
     <div id="card-grid">
 
