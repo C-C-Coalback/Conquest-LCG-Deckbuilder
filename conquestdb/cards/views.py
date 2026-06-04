@@ -945,6 +945,12 @@ def ajax_view(request):
         cost_vals = filtered_df['cost'].to_list()
         command_vals = filtered_df['command'].to_list()
         shield_vals = filtered_df['shields'].to_list()
+        has_errata = []
+        for card_name in image_names:
+            if card_name in apoka_errata_dict:
+                has_errata.append(True)
+            else:
+                has_errata.append(False)
         for i in range(len(attack_vals)):
             if attack_vals[i] == -1:
                 attack_vals[i] = "-"
@@ -960,7 +966,7 @@ def ajax_view(request):
         return JsonResponse({'message': message, 'cards': card_names, 'image_names': image_names,
                              'loyalties': loyalties, 'card_types': card_types, 'factions': factions,
                              'attack': attack_vals, 'health': health_vals, 'cost': cost_vals,
-                             'command': command_vals, "shield": shield_vals})
+                             'command': command_vals, "shield": shield_vals, "has_errata": has_errata})
     return JsonResponse({'message': 'Invalid request'})
 
 

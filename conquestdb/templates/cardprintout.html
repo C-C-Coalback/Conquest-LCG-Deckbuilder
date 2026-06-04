@@ -7,7 +7,7 @@
     <div class="header-card-area no-print">
         <h1>Add cards to the box below via the search function.</h1>
         <button style="color:black;" onclick="window.print()">Print Cards</button>
-        <button style="color:black;" onclick="addCardToPrintoutArea('/static/images/CardImages/Cardback.jpg')">Add Cardback</button>
+        <button style="color:black;" onclick="addCardToPrintoutArea('/static/images/CardImages/Cardback.jpg', '')">Add Cardback</button>
     </div>
     <div id="card-grid">
 
@@ -258,15 +258,48 @@
         var current_low_match = 0;
         var current_high_match = 0;
         var stored_image_names = [];
+        var stored_toggles = []
         const cards_required_for_extra_buttons = 6;
 
-        function addCardToPrintoutArea(src) {
+        function toggleBloodied(el) {
+            var parentEl = el.parentNode.parentNode;
+            console.log(parentEl.children);
+            var imgEl = parentEl.children[0];
+            if (imgEl.src.includes("_bloodied")) {
+                imgEl.src = imgEl.src.replace("_bloodied", "");
+            } else {
+                imgEl.src = imgEl.src.replace(".jpg", "_bloodied.jpg");
+            }
+        }
+
+        function toggleErrata(el) {
+            var parentEl = el.parentNode.parentNode;
+            var imgEl = parentEl.children[0];
+            if (imgEl.src.includes("_apoka")) {
+                imgEl.src = imgEl.src.replace("_apoka", "");
+            } else {
+                imgEl.src = imgEl.src.replace(".jpg", "_apoka.jpg");
+            }
+        }
+
+        function removeCard(el) {
+            var parentEl = el.parentNode;
+            parentEl.remove();
+        }
+
+        function addCardToPrintoutArea(src, toggle) {
             const card_src = src;
             var cardContainer = document.getElementById("card-grid");
             var newString = ``;
-            newString += `<div class="card" onclick="this.remove()">`;
-            newString += `<img src="` + card_src + `" class="Card">`;
-            newString += `<span class="card-label"></span>`;
+            newString += `<div class="card">`;
+            newString += `<img onclick="removeCard(this)" src="` + card_src + `" class="Card">`;
+            newString += `<span class="card-label">`;
+            if (toggle === "bloody") {
+                newString += `<button style="color:black;" onclick="toggleBloodied(this)">Toggle Bloodied</button>`;
+            } else if (toggle === "errata") {
+                newString += `<button style="color:black;" onclick="toggleErrata(this)">Toggle Errata</button>`;
+            }
+            newString += `</span>`;
             newString += `</div>`;
             cardContainer.innerHTML += newString;
         }
@@ -338,7 +371,8 @@
                 new_string += `<div class="page" id="page">`;
                 for (let i = 0; i < stored_image_names[current_page_number].length; i++) {
                     img_src = stored_image_names[current_page_number][i];
-                    new_string += `<img class="Card" onclick="addCardToPrintoutArea(this.src)" src=` + img_src + ` alt="Loading...">`;
+                    let toggle_value = stored_toggles[current_page_number][i];
+                    new_string += `<img class="Card" onclick="addCardToPrintoutArea(this.src, '` + toggle_value + `')" src=` + img_src + ` alt="Loading...">`;
                 }
                 new_string += `</div>`;
                 e.innerHTML += new_string;
@@ -368,7 +402,8 @@
                 new_string += `<div class="page" id="page">`;
                 for (let i = 0; i < stored_image_names[current_page_number].length; i++) {
                     img_src = stored_image_names[current_page_number][i];
-                    new_string += `<img class="Card" onclick="addCardToPrintoutArea(this.src)" src=` + img_src + ` alt="Loading...">`;
+                    let toggle_value = stored_toggles[current_page_number][i];
+                    new_string += `<img class="Card" onclick="addCardToPrintoutArea(this.src, '` + toggle_value + `')" src=` + img_src + ` alt="Loading...">`;
                 }
                 new_string += `</div>`;
                 e.innerHTML += new_string;
@@ -422,6 +457,8 @@
                         var pageCount = 0;
                         var card_names = response.cards;
                         const image_names = response.image_names;
+                        const card_types = response.card_types;
+                        const erratas = response.has_errata;
                         e = document.getElementById("responseMessage");
                         e.innerHTML = ``;
                         var img_src = "";
@@ -429,6 +466,7 @@
                         var new_id = "";
                         new_string += `<div class="page" id="page">`;
                         stored_image_names = [[]];
+                        stored_toggles = [[]];
                         current_max_rows = parseInt(max_rows);
                         num_matches = image_names.length;
                         current_low_match = 1;
@@ -446,11 +484,19 @@
                                 pageCount += 1
                                 cardCount = 0;
                                 stored_image_names.push([]);
+                                stored_toggles.push([]);
                             }
                             img_src ="/static/images/CardImages/" + image_names[i] + ".jpg";
+                            let toggle = "";
+                            if (card_types[i] === "Warlord") {
+                                toggle = "bloody";
+                            } else if (erratas[i]) {
+                                toggle = "errata";
+                            }
                             stored_image_names[pageCount].push(img_src);
+                            stored_toggles[pageCount].push(toggle);
                             if (pageCount === 0) {
-                                new_string += `<img class="Card" onclick="addCardToPrintoutArea(this.src)" src=` + img_src + ` alt="Loading...">`;
+                                new_string += `<img class="Card" onclick="addCardToPrintoutArea(this.src, '` + toggle + `')" src=` + img_src + ` alt="Loading...">`;
                             }
                             cardCount += 1;
                         }
