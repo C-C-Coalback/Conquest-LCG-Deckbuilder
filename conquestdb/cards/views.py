@@ -796,7 +796,10 @@ def ajax_view(request):
             filtered_df = filtered_df[filtered_df['sector'].str.contains(sector)]
             card_names = filtered_df['name'].to_list()
             image_names = filtered_df['image name'].to_list()
-            return JsonResponse({'message': "", 'cards': card_names, 'image_names': image_names})
+            has_errata = ["" for _ in range(len(image_names))]
+            card_types = ["Planet" for _ in range(len(image_names))]
+            return JsonResponse({'message': "", 'cards': card_names, 'image_names': image_names,
+                                 "has_errata": has_errata, 'card_types': card_types})
         min_cost = None
         max_cost = None
         min_command = -1
