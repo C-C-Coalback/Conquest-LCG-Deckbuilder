@@ -748,8 +748,6 @@ def deck_printout_import_ajax(request):
                 if i == 0:
                     card_srcs.append(image_name.replace(".jpg", "_bloodied.jpg"))
                     toggles.append("bloody")
-            print(toggles)
-            print(apoka_errata_dict)
             return JsonResponse({'message': 'Deck found', "img_srcs": card_srcs, "toggles": toggles})
     except Exception as e:
         print(e)
