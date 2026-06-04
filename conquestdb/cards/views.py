@@ -10,6 +10,7 @@ import os.path
 import datetime
 import light_dark_dict
 from card_utils import convert_name_to_img_src, convert_name_to_hyperlink, convert_name_to_create_deck_hyperlink
+from deck_utils import get_deck_given_key
 from PIL import Image, ImageDraw, ImageFont
 from .custom_card_creator.dict_inits.card_types_dict_positions import card_types_dictionary_positions
 from .custom_card_creator.dict_inits.command_dict import command_dictionary
@@ -69,6 +70,7 @@ cycles_list = various_lists.get_cycles_list()
 traits_list = various_lists.get_traits_list()
 lower_case_dict = various_lists.get_lower_case_dict()
 lower_case_planet_dict = various_lists.get_lower_case_planet_dict()
+pledges_array = various_lists.get_pledges_array()
 
 df = pd.DataFrame([x.as_dict() for x in card_array])
 planet_df = pd.DataFrame([x.as_dict() for x in planet_array])
@@ -681,7 +683,6 @@ def simple_upload(request):
         if request.user.is_authenticated:
             username = request.user.username
             files = request.FILES['file']
-            print('got here')
             cwd = os.getcwd()
             destination = cwd + "/media/card_img_srcs/"
             destination = destination + username
@@ -693,12 +694,66 @@ def simple_upload(request):
             key_code = ''.join(random.choice(string.ascii_uppercase + string.ascii_lowercase + string.digits)
                                for _ in range(16))
             destination = "card_img_srcs/" + username + "/" + key_code + ".jpg"
-            print(destination)
             file_data = files.read()
-            print(len(file_data))
             fs = FileSystemStorage()
             file_name = fs.save(destination, files)
     return redirect("/cards/card_creator/")
+
+
+def deck_printout_import_ajax(request):
+    try:
+        if request.method == "POST":
+            deck_key = request.POST.get("key")
+            deck_content = get_deck_given_key(deck_key)
+            if not deck_content:
+                return JsonResponse({'message': 'Deck not found'})
+            card_srcs = []
+            toggles = []
+            deck_content = deck_content.replace(
+                "----------------------------------------------------------------------", "")
+            deck_content = deck_content.split(sep="\n")
+            if "Planet" in deck_content:
+                deck_content.remove("Planet")
+            if "Signature Squad" in deck_content:
+                deck_content.remove("Signature Squad")
+            if "Synapse" in deck_content:
+                deck_content.remove("Synapse")
+            if "Attachment" in deck_content:
+                deck_content.remove("Attachment")
+            if "Event" in deck_content:
+                deck_content.remove("Event")
+            if "Army" in deck_content:
+                deck_content.remove("Army")
+            if "Support" in deck_content:
+                deck_content.remove("Support")
+            deck_content = [x for x in deck_content if x != ""]
+            del deck_content[0]
+            del deck_content[1]
+            for i in range(len(deck_content)):
+                if i == 0 or deck_content[i] in pledges_array:
+                    card_name = deck_content[i]
+                    card_amount = 1
+                else:
+                    card_amount = int(deck_content[i][0])
+                    card_name = deck_content[i][3:]
+                image_name = convert_name_to_img_src(card_name)
+                toggle_value = ""
+                if card_name.replace(" ", "_") in apoka_errata_dict:
+                    toggle_value = "errata"
+                elif i == 0:
+                    toggle_value = "bloody"
+                for _ in range(card_amount):
+                    card_srcs.append(image_name)
+                    toggles.append(toggle_value)
+                if i == 0:
+                    card_srcs.append(image_name.replace(".jpg", "_bloodied.jpg"))
+                    toggles.append("bloody")
+            print(toggles)
+            print(apoka_errata_dict)
+            return JsonResponse({'message': 'Deck found', "img_srcs": card_srcs, "toggles": toggles})
+    except Exception as e:
+        print(e)
+    return JsonResponse({'message': 'Invalid request'})
 
 
 # View to handle the Ajax request

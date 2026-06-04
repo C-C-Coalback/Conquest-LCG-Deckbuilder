@@ -5,6 +5,7 @@ from . import views
 urlpatterns = [
     path("", views.index, name="index"),
     path("ajax/", views.ajax_view, name="ajax_view"),
+    path("ajax_deck_printout/", views.deck_printout_import_ajax, name="ajax_deck_printout"),
     path("ajax_creator/", views.ajax_creator, name="ajax_creator"),
     path("card_creator/", views.card_creator, name="card_creator"),
     path('upload_card/', views.upload_card, name='upload_card'),

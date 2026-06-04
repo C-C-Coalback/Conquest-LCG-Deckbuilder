@@ -14,6 +14,7 @@ cycles_list = []
 traits_list = []
 lower_case_dict = {}
 lower_case_planet_dict = {}
+pledges_array = []
 for i in range(len(card_array)):
     if card_array[i].war_pack not in warpacks_list:
         warpacks_list.append(card_array[i].war_pack)
@@ -27,6 +28,8 @@ for i in range(len(card_array)):
             traits_list.append(cleaned_trait)
 traits_list.sort()
 for key in range(len(card_array)):
+    if card_array[key].check_for_a_trait("Pledge"):
+        pledges_array.append(card_array[key].get_name())
     cards_dict[card_array[key].name] = card_array[key]
     images_dict[card_array[key].image_name] = card_array[key]
     lower_case_dict[card_array[key].name.lower()] = card_array[key]
@@ -36,6 +39,10 @@ for key in range(len(planet_array)):
     lower_case_planet_dict[planet_array[key].name.lower()] = planet_array[key]
 for key in range(len(apoka_errata_array)):
     apoka_errata_dict[apoka_errata_array[key].image_name] = apoka_errata_array[key]
+
+
+def get_pledges_array():
+    return pledges_array
 
 
 def get_images_dict():

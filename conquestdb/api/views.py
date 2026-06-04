@@ -10,6 +10,8 @@ import random
 import string
 import shutil
 import json
+from deck_utils import get_deck_given_key
+from various_lists import get_pledges_array
 
 
 card_array = Initfunctions.init_player_cards()
@@ -30,14 +32,13 @@ banned_cards = ["Bonesinger Choir", "Squiggoth Brute", "Corrupted Teleportarium"
                 "Land Speeder Vengeance", "Sowing Chaos", "Smasha Gun Battery", "The Prince's Might",
                 "Purveyor of Hubris", "Doom", "Exterminatus", "Mind Shackle Scarab",
                 "Crypt of Saint Camila", "Warpstorm"]
-pledges_array = []
+pledges_array = get_pledges_array()
 preparation_array = ["The Blood Pits", "The Grand Plan",
                      "The Inevitable Decay", "The Orgiastic Feast",
                      "Mobilize the Chapter", "Support Fleet",
                      "Pulsating Carapace"]
 for i in range(len(card_array)):
     if card_array[i].check_for_a_trait("Pledge"):
-        pledges_array.append(card_array[i].get_name())
         preparation_array.append(card_array[i].get_name())
     if card_array[i].get_card_type() == "Synapse":
         preparation_array.append(card_array[i].get_name())
@@ -129,33 +130,6 @@ def get_horizontal_link(name_card):
     return False
 
 
-def send_deck_given_key(key_string):
-    directory = os.getcwd()
-    target_directory = directory + "/decks/deckstorage/"
-    for username in os.listdir(target_directory):
-        if username:
-            second_target_directory = target_directory + "/" + username
-            for deck_name in os.listdir(second_target_directory):
-                if os.path.exists(second_target_directory + "/" + deck_name + "/key"):
-                    with open(second_target_directory + "/" + deck_name + "/key", "r") as f:
-                        this_key = f.read()
-                        if this_key == key_string:
-                            with open(second_target_directory + "/" + deck_name + "/content", "r", encoding="utf-8") as d:
-                                return d.read()
-    target_directory = directory + "/decks/publisheddecks/"
-    for username in os.listdir(target_directory):
-        if username:
-            second_target_directory = target_directory + "/" + username
-            for deck_name in os.listdir(second_target_directory):
-                if os.path.exists(second_target_directory + "/" + deck_name + "/key"):
-                    with open(second_target_directory + "/" + deck_name + "/key", "r") as f:
-                        this_key = f.read()
-                        if this_key == key_string:
-                            with open(second_target_directory + "/" + deck_name + "/content", "r", encoding="utf-8") as d:
-                                return d.read()
-    return ""
-
-
 def nothing(request):
     return render(request, "home.html")
 
@@ -164,7 +138,7 @@ def request_deck(request, deck_key):
     if request.method == 'GET':
         print("received get request, deck key:", deck_key)
         try:
-            deck_content = send_deck_given_key(deck_key)
+            deck_content = get_deck_given_key(deck_key)
             if deck_content:
                 deck_content = deck_content.replace(
                     "----------------------------------------------------------------------", "")

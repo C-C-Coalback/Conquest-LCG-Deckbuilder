@@ -5,6 +5,24 @@
     margin-top: 20px;
 }
 
+#mistarget-info {
+    position: fixed;
+    display: none;
+    z-index: 1000;
+    border-width: 2px;
+    border-style: double;
+    border-color: lightblue;
+    background: rgba(47, 40, 153, 0.3);
+    color: yellow;
+    margin-left: 40vw;
+    top: -10vh;
+    min-width: 20vw;
+    text-align: center;
+    max-width: 20vw;
+    font-size: 30px;
+    line-height: 30px;
+}
+
 .card {
     display: flex;
     flex-direction: column;
@@ -26,19 +44,20 @@
 
     #card-grid {
         display:grid;
-        grid-template-columns: repeat(3, 1fr);
+        grid-template-columns: repeat(2, 1fr);
         margin-top: 0px !important;
     }
 
     .card {
         break-inside: avoid;
-        width: 6.35cm !important;
-        height: 8.8cm !important;
+        width: 6.50cm !important;
+        height: 9.00cm !important;
     }
 
     .Card {
-        width: 6.52cm !important;
-        height: 9.03cm !important;
+        width: 6.50cm !important;
+        height: 9.00cm !important;
         border: 0.075cm solid black;
+        transform: scale(1);
     }
 }

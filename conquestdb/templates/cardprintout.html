@@ -8,6 +8,12 @@
         <h1>Add cards to the box below via the search function.</h1>
         <button style="color:black;" onclick="window.print()">Print Cards</button>
         <button style="color:black;" onclick="addCardToPrintoutArea('/static/images/CardImages/Cardback.jpg', '')">Add Cardback</button>
+        <br>
+        <input type="text" id="deck-key-input">
+        <button style="color:black;" onclick="importDeckWithKey()">Import with Deck Key</button>
+    </div>
+    <div id="mistarget-info">
+        <p style="color:red">Deck Not Found</p>
     </div>
     <div id="card-grid">
 
@@ -408,6 +414,70 @@
                 new_string += `</div>`;
                 e.innerHTML += new_string;
             }
+        }
+
+        function clearMistarget() {
+            var mistarget_element = document.getElementById("mistarget-info");
+            mistarget_element.style["display"] = "none";
+        }
+
+        function makeMistargetDisappearAndSlide() {
+            var elem = document.getElementById("mistarget-info");
+            var pos = 5;
+            var id = null;
+            clearInterval(id);
+            id = setInterval(frame, 1);
+            function frame() {
+                if (pos <= -10) {
+                    clearInterval(id);
+                    clearMistarget();
+                } else {
+                    pos = pos - 1;
+                    elem.style.top = pos + 'vh';
+                }
+            }
+        }
+
+        function makeMistargetAppearAndSlide() {
+            var elem = document.getElementById("mistarget-info");
+            elem.style["display"] = "block";
+            setTimeout(makeMistargetDisappearAndSlide, 5000);
+            var pos = -10;
+            var id = null;
+            clearInterval(id);
+            id = setInterval(frame, 1);
+            function frame() {
+                if (pos >= 5) {
+                    clearInterval(id);
+                } else {
+                    pos = pos + 1;
+                    elem.style.top = pos + 'vh';
+                }
+            }
+        }
+
+        function importDeckWithKey() {
+            $.ajax({
+                url: '/cards/ajax_deck_printout/',
+                type: 'POST',
+                data: {
+                    'key': document.getElementById("deck-key-input").value,
+                    'csrfmiddlewaretoken': '{{ csrf_token }}'
+                },
+                success:
+                function(response) {
+                    const message = response.message;
+                    if (message === "Deck found") {
+                        var card_srcs = response.img_srcs;
+                        var toggles = response.toggles;
+                        for (let i = 0; i < card_srcs.length; i++) {
+                            addCardToPrintoutArea(card_srcs[i], toggles[i]);
+                        }
+                    } else if (message === "Deck not found") {
+                        makeMistargetAppearAndSlide();
+                    }
+                }
+            })
         }
 
         // Ajax setup for form submission
