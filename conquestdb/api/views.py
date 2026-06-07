@@ -125,6 +125,8 @@ def get_width(name_card):
 
 
 def get_horizontal_link(name_card):
+    if name_card == "Grand Schemes":
+        return False
     if name_card in pledges_array:
         return True
     return False
