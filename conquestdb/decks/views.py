@@ -520,7 +520,7 @@ def convert_tts_conquestdb(deck_text):
                 card = FindCard.find_card(nickname, card_array, cards_dict)
                 if card.get_card_type() == "Warlord":
                     warlord_name = nickname
-                if card.check_for_a_trait("Pledge"):
+                if card.check_for_a_trait("Pledge") and card.get_name() != "Grand Schemes":
                     pledge_name = nickname
                 if card.get_card_type() == "Synapse":
                     cards_in_deck.append(nickname)
