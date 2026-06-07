@@ -10,6 +10,7 @@ import light_dark_dict
 from card_utils import convert_name_to_img_src, convert_name_to_hyperlink, convert_name_to_create_deck_hyperlink
 import pandas as pd
 import os
+import json
 import copy
 import datetime
 import random
@@ -502,6 +503,112 @@ def convert_common_mistakes_octgn(deck_text):
     deck_text = deck_text.replace("Call the Storm", "Call The Storm")
     deck_text = deck_text.replace("Flickering Holofield", "Flickering Holosuit")
     return deck_text
+
+
+def convert_tts_conquestdb(deck_text):
+    deck_text = convert_common_mistakes_tts(deck_text)
+    warlord_name = ""
+    pledge_name = ""
+    cards_in_deck = []
+    try:
+        json_loaded = json.loads(deck_text)
+        json_loaded_object = json_loaded["ObjectStates"]
+        for i in range(len(json_loaded_object)):
+            nickname = json_loaded_object[i]["Nickname"]
+            print(nickname)
+            if nickname:
+                card = FindCard.find_card(nickname, card_array, cards_dict)
+                if card.get_card_type() == "Warlord":
+                    warlord_name = nickname
+                if card.check_for_a_trait("Pledge"):
+                    pledge_name = nickname
+                if card.get_card_type() == "Synapse":
+                    cards_in_deck.append(nickname)
+            else:
+                contained_json = json_loaded_object[i]["ContainedObjects"]
+                for j in range(len(contained_json)):
+                    nickname = contained_json[j]["Nickname"]
+                    print(nickname)
+                    card = FindCard.find_card(nickname, card_array, cards_dict)
+                    if card.get_name() == "FINAL_CARD":
+                        return "ERROR: COULD NOT FIND CARD WITH NAME: " + nickname
+                    if card.get_card_type() == "Warlord":
+                        warlord_name = nickname
+                    elif card.check_for_a_trait("Pledge"):
+                        pledge_name = nickname
+                    else:
+                        cards_in_deck.append(nickname)
+    except Exception as e:
+        print(e)
+        return "ERROR: COULD NOT LOAD THE TTS DATA"
+    if not warlord_name:
+        return "ERROR: NO WARLORD DETECTED"
+    warlord_card = FindCard.find_card(warlord_name, card_array, cards_dict)
+    new_deck = ["IMPORTED DECK",
+                "----------------------------------------------------------------------",
+                warlord_name, warlord_card.get_faction()]
+    if pledge_name:
+        new_deck.append(pledge_name)
+    new_deck = new_deck + ["----------------------------------------------------------------------",
+                           "Signature Squad", ""]
+    sig_squad = warlord_card.get_signature_squad()
+    for i in range(len(sig_squad)):
+        new_deck.append(sig_squad[i])
+    card_types = ["Army", "Support", "Synapse", "Attachment", "Event", "Planet"]
+    deck_split = []
+    while cards_in_deck:
+        current_card_name = cards_in_deck[0]
+        num_copies = cards_in_deck.count(current_card_name)
+        deck_split.append(str(num_copies) + "x " + current_card_name)
+        cards_in_deck = [x for x in cards_in_deck if x != current_card_name]
+    for card_type in card_types:
+        new_deck.append("----------------------------------------------------------------------")
+        new_deck.append(card_type)
+        new_deck.append("")
+        if card_type != "Planet":
+            for i in range(len(deck_split)):
+                card_name = deck_split[i][3:]
+                card = FindCard.find_card(card_name, card_array, cards_dict)
+                if card.get_card_type() == card_type:
+                    if card.get_loyalty() != "Signature":
+                        new_deck.append(deck_split[i])
+    ally = determine_cardgamedb_ally(new_deck)
+    if ally:
+        new_deck[3] = new_deck[3] + " (" + ally + ")"
+    new_deck_text = "\n".join(new_deck)
+
+    deck_text = new_deck_text
+    return deck_text
+
+
+def convert_common_mistakes_tts(current_text):
+    current_text = current_text.replace("Strangleweb Termagants", "Strangleweb Termagant")
+    current_text = current_text.replace("Prey On The Weak", "Prey on the Weak")
+    current_text = current_text.replace("Captain Cato Sigcarius", "Captain Cato Sicarius")
+    current_text = current_text.replace("Ardent Auxilliaries", "Ardent Auxiliaries")
+    current_text = current_text.replace("Daring Assult Squad", "Daring Assault Squad")
+    current_text = current_text.replace("Imperial Fist Siege Force", "Imperial Fists Siege Force")
+    current_text = current_text.replace("Rightous Initiate", "Righteous Initiate")
+    current_text = current_text.replace("Imperial Fist Devastators", "Imperial Fists Devastators")
+    current_text = current_text.replace("Sword Brethren Deadnought", "Sword Brethren Dreadnought")
+    current_text = current_text.replace("Declare The Crusade", "Declare the Crusade")
+    current_text = current_text.replace("Front line 'Ard Boyz", "Front Line 'Ard Boyz")
+    current_text = current_text.replace("Ba'ar Zuls Cleavers", "Ba'ar Zul's Cleavers")
+    current_text = current_text.replace("Ulthwe Spirit Stone", "Ulthwe Spirit Stone")
+    current_text = current_text.replace("Knight Paladin Valoris", "Knight Paladin Voris")
+    current_text = current_text.replace("Wrathful Dreadnaught", "Wrathful Dreadnought")
+    current_text = current_text.replace("Waaagh!", "WAAAGH!")
+    current_text = current_text.replace("Herald of the WAAAGH!", "Herald of the WAAGH!")
+    current_text = current_text.replace("Impuslive Loota", "Impulsive Loota")
+    current_text = current_text.replace("Big Mek Kagdrak Warlord Cards", "Big Mek Kagdrak")
+    current_text = current_text.replace("Da `Eavy", "Da 'Eavy")
+    current_text = current_text.replace("Kommando Kunning", "Kommando Cunning")
+    current_text = current_text.replace("Ghosts of Cegorath", "Ghosts of Cegorach")
+    current_text = current_text.replace("Call the Storm", "Call The Storm")
+    current_text = current_text.replace("Eratta", "Errata")
+    current_text = current_text.replace("Errated", "Errata")
+    current_text = current_text.replace(" (Errata)", "")
+    return current_text
 
 
 def convert_octgn_conquestdb(deck_text):
@@ -2143,7 +2250,13 @@ def ajax_view(request):
         if flag == "IMPORT":
             type_import = request.POST.get('type_import')
             deck_text = request.POST.get('deck_text')
-            deck_text = convert_common_mistakes(deck_text)
+            if type_import == "TTS":
+                try:
+                    deck_text = convert_tts_conquestdb(deck_text)
+                    if "ERROR" in deck_text:
+                        return JsonResponse({"message": deck_text})
+                except:
+                    return JsonResponse({"message": "ERROR: Could not convert deck to conquestDB format. Please check that you pasted it right."})
             if type_import == "CardgameDB":
                 deck_text = convert_cardgamedb_conquestdb(deck_text)
             elif type_import == "OCTGN":
