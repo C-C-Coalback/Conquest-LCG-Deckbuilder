@@ -1122,7 +1122,9 @@ class PlanetCard(Card):
         return {'name': self.name, 'faction': self.faction, 'loyalty': self.loyalty, 'text': self.text, 'traits': self.traits,
                 'card type': self.card_type, 'image name': self.image_name, 'cost': self.cost, 'command': -1,
                 'attack': -1, 'health': -1, 'shields': self.shields, 'sector': self.sector,
-                'cycle': self.cycle, 'war pack': self.war_pack, 'keywords': self.compute_keywords()}
+                'cycle': self.cycle, 'war pack': self.war_pack, 'keywords': self.compute_keywords(),
+                'green': self.get_green(), 'blue': self.get_blue(), 'red': self.get_red(),
+                'resources': self.get_resources(), 'cards': self.get_cards()}
 
     def get_name(self):
         return self.name

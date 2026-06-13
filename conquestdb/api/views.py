@@ -136,6 +136,19 @@ def nothing(request):
     return render(request, "home.html")
 
 
+def request_deck_iridial(request, deck_key):
+    if request.method == 'GET':
+        print("received get request, deck key:", deck_key)
+        try:
+            deck_content = get_deck_given_key(deck_key)
+            if deck_content:
+                return JsonResponse({'message': 'DECK FOUND', 'deck_content': deck_content})
+        except Exception as e:
+            print(e)
+            return JsonResponse({'message': 'DECK NOT FOUND', 'deck_content': ""})
+    return render(request, "home.html")
+
+
 def request_deck(request, deck_key):
     if request.method == 'GET':
         print("received get request, deck key:", deck_key)
