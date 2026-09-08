@@ -23,6 +23,7 @@ from django.core.files.base import ContentFile
 import file_inits
 from file_inits import increment_card_count, increment_date_csv_count
 import various_lists
+from .cardCreator import process_submitted_card, process_submitted_planet_card
 
 
 def sorter_cycles(column):
@@ -416,196 +417,9 @@ def add_command_icons(command, first_command_src, extra_command_src,
 
 def card_creator(request):
     light_dark_toggle = light_dark_dict.get_light_mode(request.user.username)
-    current_src = "/static/images/CardImages/Nazdreg.jpg"
-    username = request.user.username
-    if username:
-        cwd = os.getcwd()
-        if os.path.exists(cwd + "/media/card_img_srcs/" + username):
-            file_names = os.listdir(cwd + "/media/card_img_srcs/" + username)
-            if file_names:
-                current_src = "/media/card_img_srcs/" + username + "/" + file_names[0]
     return render(request, 'cards/card_creator.html', {
-        "light_dark_toggle": light_dark_toggle, "current_src": current_src
+        "light_dark_toggle": light_dark_toggle
     })
-
-
-def process_submitted_planet_card(name, card_type, text, cards_value, resources_value, icons_grouped, output_dir,
-                                  input_src):
-    resources_src = "cards/custom_card_creator/card_srcs/Planet/Values/resource_" + resources_value + ".jpg"
-    cards_src = "cards/custom_card_creator/card_srcs/Planet/Values/card_" + cards_value + ".jpg"
-    text_src = "cards/custom_card_creator/card_srcs/" + card_type + "/Text/Text.png"
-    if not os.path.exists(text_src):
-        return False
-    card_art_src = input_src
-    expansion_icon_src = "cards/custom_card_creator/current_card_info/expansion_icon/expansion_icon.png"
-    resulting_img = Image.new("RGBA", (1440, 2052))
-    dirs_art = os.listdir(card_art_src)
-    if not dirs_art:
-        return False
-    random.shuffle(dirs_art)
-    card_art_img = Image.open(card_art_src + dirs_art[0], 'r').convert("RGBA")
-    card_art_img = card_art_img.resize((1440, 2052))
-    resulting_img.paste(card_art_img, get_position_text(card_type, "Planet", "Art"))
-    text_resize_amount = (1440, 2052)
-    text_img = Image.open(text_src, 'r').convert("RGBA")
-    text_img = text_img.resize(text_resize_amount)
-    resulting_img.paste(text_img, get_position_text(card_type, "Planet", "Text Box"), text_img)
-    if os.path.exists(cards_src):
-        cards_value_img = Image.open(cards_src, 'r').convert("RGBA")
-        cards_value_img = cards_value_img.resize((256, 176))
-        resulting_img.paste(cards_value_img, get_position_text(card_type, "Planet", "Card"), cards_value_img)
-    if os.path.exists(resources_src):
-        resources_value_img = Image.open(resources_src, 'r').convert("RGBA")
-        resources_value_img = resources_value_img.resize((202, 142))
-        resulting_img.paste(resources_value_img, get_position_text(card_type, "Planet", "Resource"),
-                            resources_value_img)
-    expansion_icon_img = Image.open(expansion_icon_src, 'r').convert("RGBA").resize((40, 40))
-    resulting_img.paste(expansion_icon_img, get_position_text(card_type, "Planet", "Expansion Icon"),
-                        expansion_icon_img)
-    add_name_to_card(card_type, name, resulting_img)
-    x_offset = int(690 - (0.5 * get_pil_text_size(
-        text, 84, "cards/custom_card_creator/fonts/billboard-college-cufonfonts/Billboard-College.ttf"
-    )[2]))
-    add_text_to_planet_image(
-        resulting_img, text
-    )
-    num_icons = 0
-    for c in icons_grouped:
-        if c == "R":
-            material_src = "cards/custom_card_creator/card_srcs/Planet/Icons/Material.png"
-            material_img = Image.open(material_src, 'r').convert("RGBA").resize((197, 278))
-            icon_coords = get_position_text(card_type, "Planet", "First Icon")
-            icon_coords = (icon_coords[0],
-                           icon_coords[1] + num_icons * get_position_text(card_type, "Planet", "Icon Spacing"))
-            resulting_img.paste(material_img, icon_coords, material_img)
-            num_icons += 1
-        if c == "B":
-            technology_src = "cards/custom_card_creator/card_srcs/Planet/Icons/Technology.png"
-            technology_img = Image.open(technology_src, 'r').convert("RGBA").resize((197, 278))
-            icon_coords = get_position_text(card_type, "Planet", "First Icon")
-            icon_coords = (icon_coords[0],
-                           icon_coords[1] + num_icons * get_position_text(card_type, "Planet", "Icon Spacing"))
-            resulting_img.paste(technology_img, icon_coords, technology_img)
-            num_icons += 1
-        if c == "G":
-            strongpoint_src = "cards/custom_card_creator/card_srcs/Planet/Icons/Strongpoint.png"
-            strongpoint_img = Image.open(strongpoint_src, 'r').convert("RGBA").resize((197, 278))
-            icon_coords = get_position_text(card_type, "Planet", "First Icon")
-            icon_coords = (icon_coords[0],
-                           icon_coords[1] + num_icons * get_position_text(card_type, "Planet", "Icon Spacing"))
-            resulting_img.paste(strongpoint_img, icon_coords, strongpoint_img)
-            num_icons += 1
-        if c in ["R", "G", "B"] and num_icons > 1:
-            connector_src = "cards/custom_card_creator/card_srcs/Planet/Icons/Icon_Join.jpg"
-            connector_img = Image.open(connector_src, 'r').convert("RGBA").resize((74, 45))
-            icon_coords = get_position_text(card_type, "Planet", "First Join")
-            print(icon_coords)
-            icon_coords = (icon_coords[0], icon_coords[1] + (num_icons - 1)
-                           * get_position_text(card_type, "Planet", "Join Spacing"))
-            print(icon_coords)
-            resulting_img.paste(connector_img, icon_coords, connector_img)
-    resulting_img.save(output_dir, "PNG")
-    return True
-
-
-def process_submitted_card(name, card_type, text, faction, traits, output_dir,
-                           attack="0", health="0", command="0", cost="0",
-                           starting_cards="7", starting_resources="7",
-                           loyalty="Common", shield_value="0",
-                           input_src=""):
-    text_src = "cards/custom_card_creator/card_srcs/" + faction + "/" + card_type + "/Text.png"
-    if not os.path.exists(text_src):
-        return False
-    card_art_src = input_src
-    expansion_icon_dirs = "cards/custom_card_creator/current_card_info/expansion_icon/"
-    dirs_expansion = os.listdir(expansion_icon_dirs)
-    if not dirs_expansion:
-        return False
-    random.shuffle(dirs_expansion)
-    expansion_icon_src = "cards/custom_card_creator/current_card_info/expansion_icon/" + dirs_expansion[0]
-    first_command_src = "cards/custom_card_creator/card_srcs/" + faction + "/" + card_type + "/First_Command.png"
-    command_end_src = "cards/custom_card_creator/card_srcs/" + faction + "/" + card_type + "/Command_End.png"
-    extra_command_src = "cards/custom_card_creator/card_srcs/" + faction + "/" + card_type + "/Extra_Command_Icon.png"
-    resulting_img = Image.new("RGBA", (1440, 2052))
-    dirs_art = os.listdir(card_art_src)
-    if not dirs_art:
-        return False
-    random.shuffle(dirs_art)
-    card_art_img = Image.open(card_art_src + dirs_art[0], 'r').convert("RGBA")
-    if card_type == "Warlord":
-        card_art_img = card_art_img.resize((1440, 2052))
-    else:
-        card_art_img = card_art_img.resize((1440, 1500))
-    resulting_img.paste(card_art_img, get_position_text(card_type, faction, "Art"))
-    text_resize_amount = (1440, 2052)
-    required_line_length = 1240
-    if card_type != "Planet":
-        required_line_length = card_types_dictionary_positions[card_type][faction]["Text Length"]
-    text_img = Image.open(text_src, 'r').convert("RGBA")
-    text_img = text_img.resize(text_resize_amount)
-    resulting_img.paste(text_img, get_position_text(card_type, faction, "Text Box"), text_img)
-    expansion_icon_img = Image.open(expansion_icon_src, 'r').convert("RGBA").resize((55, 55))
-    resulting_img.paste(expansion_icon_img, get_position_text(card_type, faction, "Expansion Icon"), expansion_icon_img)
-    add_name_to_card(card_type, name, resulting_img)
-    add_traits_to_card(card_type, traits, resulting_img)
-    add_text_to_image(resulting_img, text, get_position_text(card_type, faction, "Text"),
-                      line_length=required_line_length)
-    deepstrike = False
-    if "Deep Strike (" in text:
-        deepstrike = True
-    if card_type in ["Army", "Support", "Event", "Attachment"]:
-        add_text_to_image(
-            resulting_img, cost, get_position_text(card_type, faction, "Cost"),
-            font_src="cards/custom_card_creator/fonts/Jawbreak/BoxTube Labs - Jawbreak Sans.otf",
-            font_size=120, color=(0, 0, 0), deepstrike=deepstrike
-        )
-    if card_type in ["Army", "Warlord", "Synapse"]:
-        add_text_to_image(
-            resulting_img, attack, get_position_text(card_type, faction, "Attack"),
-            font_src="cards/custom_card_creator/fonts/Jawbreak/BoxTube Labs - Jawbreak Sans.otf",
-            font_size=120, color=(255, 255, 255)
-        )
-        add_text_to_image(
-            resulting_img, health, get_position_text(card_type, faction, "Health"),
-            font_src="cards/custom_card_creator/fonts/Jawbreak/BoxTube Labs - Jawbreak Sans.otf",
-            font_size=120, color=(0, 0, 0)
-        )
-    if card_type in ["Army", "Synapse"] and faction != "Neutral":
-        try:
-            add_command_icons(command, first_command_src, extra_command_src,
-                              command_end_src, resulting_img, faction, card_type)
-        except ValueError:
-            pass
-    if card_type == "Warlord":
-        add_text_to_image(
-            resulting_img, starting_cards, get_position_text(card_type, faction, "Cards"),
-            font_size=168, color=(0, 0, 0)
-        )
-        add_text_to_image(
-            resulting_img, starting_resources, get_position_text(card_type, faction, "Resources"),
-            font_size=168, color=(243, 139, 18)
-        )
-    if card_type in ["Army", "Support", "Event", "Attachment"]:
-        if (loyalty == "Loyal" or loyalty == "Signature") and faction != "Neutral":
-            loyalty_src = "cards/custom_card_creator/card_srcs/" + faction + "/Loyalty/" + loyalty + ".png"
-            loyalty_img = Image.open(loyalty_src, 'r').convert("RGBA")
-            resize_loyalty = (127, 84)
-            if faction == "Tau":
-                resize_loyalty = (147, 184)
-            loyalty_img = loyalty_img.resize(resize_loyalty)
-            resulting_img.paste(loyalty_img, get_position_loyalty(faction, card_type), loyalty_img)
-    if card_type in ["Event", "Attachment"]:
-        shield_value = int(shield_value)
-        if shield_value > 0:
-            shield_src = "cards/custom_card_creator/card_srcs/" + faction + "/Shield/Shield_Icon.png"
-            shield_icon_img = Image.open(shield_src, 'r').convert("RGBA")
-            shield_icon_img = shield_icon_img.resize((221, 101))
-            starting_position_shield = get_position_text(card_type, faction, "Shield")
-            for _ in range(shield_value):
-                resulting_img.paste(shield_icon_img, starting_position_shield, shield_icon_img)
-                starting_position_shield = (starting_position_shield[0], starting_position_shield[1] + 100)
-    resulting_img.save(output_dir, "PNG")
-    return True
 
 
 def ajax_creator(request):
@@ -644,23 +458,16 @@ def ajax_creator(request):
                 if os.path.isfile(file_path):
                     os.remove(file_path)
             output_src = output_dir + "/" + key_code + ".png"
-            cwd = os.getcwd()
-            input_src = "cards/custom_card_creator/current_card_info/src_img/"
             username = request.user.username
-            if username:
-                if os.path.exists(cwd + "/media/card_img_srcs/" + username):
-                    file_names = os.listdir(cwd + "/media/card_img_srcs/" + username)
-                    if file_names:
-                        input_src = cwd + "/media/card_img_srcs/" + username + "/"
             if card_type == "Planet":
                 if process_submitted_planet_card(card_name, card_type, text,
-                                                 cards_value, resources_value, icons, output_src, input_src):
+                                                 cards_value, resources_value, icons, output_src):
                     return JsonResponse({'message': 'SUCCESS', 'new_src': output_src})
             else:
                 if process_submitted_card(card_name, card_type, text, faction, card_traits, output_src,
                                           attack=attack, health=health, command=command, cost=cost,
                                           starting_cards=starting_cards, starting_resources=starting_resources,
-                                          loyalty=loyalty, shield_value=shield, input_src=input_src):
+                                          loyalty=loyalty, shield_value=shield):
                     return JsonResponse({'message': 'SUCCESS', 'new_src': output_src})
             return JsonResponse(
                 {'message': 'Failed - invalid parameters.', 'new_src': '/static/images/CardImages/Nazdreg.jpg'})
@@ -669,35 +476,6 @@ def ajax_creator(request):
         return JsonResponse(
             {'message': 'Failed - error during processing.', 'new_src': '/static/images/CardImages/Nazdreg.jpg'})
     return render(request, 'cards/card_creator.html', {})
-
-
-def upload_card(request):
-    light_dark_toggle = light_dark_dict.get_light_mode(request.user.username)
-    return render(request, 'cards/upload_card.html', {
-        "light_dark_toggle": light_dark_toggle
-    })
-
-
-def simple_upload(request):
-    if request.method == 'POST' and request.FILES.get('file'):
-        if request.user.is_authenticated:
-            username = request.user.username
-            files = request.FILES['file']
-            cwd = os.getcwd()
-            destination = cwd + "/media/card_img_srcs/"
-            destination = destination + username
-            if os.path.exists(destination):
-                for filename in os.listdir(destination):
-                    file_path = os.path.join(destination, filename)
-                    if os.path.isfile(file_path):
-                        os.remove(file_path)
-            key_code = ''.join(random.choice(string.ascii_uppercase + string.ascii_lowercase + string.digits)
-                               for _ in range(16))
-            destination = "card_img_srcs/" + username + "/" + key_code + ".jpg"
-            file_data = files.read()
-            fs = FileSystemStorage()
-            file_name = fs.save(destination, files)
-    return redirect("/cards/card_creator/")
 
 
 def deck_printout_import_ajax(request):

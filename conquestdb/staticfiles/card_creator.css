@@ -17,11 +17,11 @@
     display: grid;
     justify-content: center;
     grid-template-areas:
-    "name-header name original-image"
-    "text-header text-box original-image"
-    "traits-header traits original-image"
-    "card-type-header card-type original-image"
-    "faction-header faction original-image"
+    "name-header name result-image"
+    "text-header text-box result-image"
+    "traits-header traits result-image"
+    "card-type-header card-type result-image"
+    "faction-header faction result-image"
     "loyalty-header loyalty result-image"
     "cost-header cost result-image"
     "command-header command result-image"
@@ -122,10 +122,6 @@
 
 #responseImageContainer {
     grid-area: result-image;
-}
-
-#originalImageContainer {
-    grid-area: original-image;
 }
 
 #originalImage, #responseImage {

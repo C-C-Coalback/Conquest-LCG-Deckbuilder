@@ -5,3 +5,4 @@
 /conquestdb/decks/comments/
 /conquestdb/light_mode_dict.txt
 /conquestdb/cards/ratings/
+*.pyc
