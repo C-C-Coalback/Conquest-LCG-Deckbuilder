@@ -552,16 +552,6 @@ def process_submitted_card(name, card_type, text, faction, traits, output_dir,
         font_src=numbers_font, font_size=get_position_text(card_type, faction, "Card Number Size"),
         color=get_position_text(card_type, faction, "Card Number Color")
     )
-    add_text_to_image(
-        resulting_img, "Blackstone Project 2026", get_position_text(card_type, faction, "Disclaimer_1"),
-        font_src=numbers_font, font_size=40,
-        color=get_position_text(card_type, faction, "Disclaimer Color")
-    )
-    add_text_to_image(
-        resulting_img, "UNOFFICIAL FAN-MADE CARD", get_position_text(card_type, faction, "Disclaimer_2"),
-        font_src=numbers_font, font_size=40,
-        color=get_position_text(card_type, faction, "Disclaimer Color")
-    )
     name_header = name
     if unique:
         name_header = ". " + name
