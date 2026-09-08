@@ -1,4 +1,4 @@
-from PIL import Image, ImageTk, ImageDraw, ImageFont
+from PIL import Image, ImageDraw, ImageFont
 from .custom_card_creator.dict_inits.card_types_dict_positions import card_types_dictionary_positions
 from .custom_card_creator.dict_inits.command_dict import command_dictionary
 from .custom_card_creator.dict_inits.loyalty_dict import loyalty_dictionary, resize_loyalty_dictionary, \
