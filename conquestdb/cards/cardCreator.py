@@ -25,6 +25,7 @@ numbers_font = "cards/custom_card_creator/fonts/armorhide/Armorhide.otf"
 name_size = 90
 trait_size = 70
 default_text_size = 68
+default_planet_text_size = 68
 numbers_size = 115
 
 
@@ -370,7 +371,7 @@ def add_text_to_image(input_image, text, coords, font_src=text_font,
 
 
 def add_text_to_planet_image(input_image, text, font_src=text_font,
-                             font_size=84, line_length=1080,
+                             font_size=default_planet_text_size, line_length=1230,
                              font_bold=text_bold_font, font_italics=text_italics_font):
     text = text.replace("[DARK ELDAR]", "[DARK_ELDAR]")
     text = text.replace("[SPACE MARINES]", "[SPACE_MARINES]")
@@ -381,12 +382,10 @@ def add_text_to_planet_image(input_image, text, font_src=text_font,
     text = text.replace("[HEADQUARTERS ACTION]", "[HEADQUARTERS_ACTION]")
     text = text.replace("[GOES FASTA]", "[GOES_FASTA]")
     text = text.replace("[HIVE MIND]", "[HIVE_MIND]")
-    drawn_image = ImageDraw.Draw(input_image)
+    txt = Image.new('RGBA', (line_length, 300))
     text = text.replace("\n", " \n")
-    if text:
-        text = "PLANET TEXT NOT SUPPORTED."
     split_text = text.split(sep=" ")
-    coords = (30, 400)
+    coords = (400, 250)
     default_spacing = 15
     current_coords = coords
     color = (0, 0, 0)
@@ -421,21 +420,30 @@ def add_text_to_planet_image(input_image, text, font_src=text_font,
             required_size = icons_dict[no_new_lines]["resize"]
             len_word = required_size[0]
         if length_of_current_line + len_word > line_length or "\n" in split_text[0]:
-            current_coords = (og_coords[0], current_coords[1] + font_size)
+            current_coords = (og_coords[0], current_coords[1] - font_size)
             length_of_current_line = 0
         if no_new_lines in icons_dict:
             special_icon = True
             initial_extra_offset = icons_dict[no_new_lines]["initial_extra_offset"]
-            x_pos_icon = int(current_coords[0] + initial_extra_offset[0])
-            y_pos_icon = int(current_coords[1] + initial_extra_offset[1])
+            x_pos_icon = int(current_coords[1] + initial_extra_offset[1] + 13)
+            y_pos_icon = int(current_coords[0] + initial_extra_offset[0])
             required_size = icons_dict[no_new_lines]["resize"]
+            req_size_x = required_size[0]
+            req_size_y = required_size[1]
             text_icon_img = Image.open(icons_dict[no_new_lines]["src"], 'r').convert("RGBA")
-            text_icon_img = text_icon_img.resize(required_size)
+            text_icon_img = text_icon_img.resize((req_size_x, req_size_y))
+            text_icon_img = text_icon_img.rotate(270)
             input_image.paste(text_icon_img, (x_pos_icon, y_pos_icon), text_icon_img)
             len_word = required_size[0]
         length_of_current_line = length_of_current_line + len_word + spacing
         if not special_icon:
-            drawn_image.text(current_coords, no_new_lines, fill=color, font=current_font)
+            txt = Image.new('RGBA', (900, 100))
+            d = ImageDraw.Draw(txt)
+            d.text((0, 0), no_new_lines, font=current_font, fill="black")
+            w = txt.rotate(270, expand=1)
+            x_pos = int(current_coords[1])
+            y_pos = int(current_coords[0])
+            input_image.paste(w, (x_pos, y_pos), w)
         current_coords = (current_coords[0] + len_word + spacing, current_coords[1])
         del split_text[0]
     return input_image
