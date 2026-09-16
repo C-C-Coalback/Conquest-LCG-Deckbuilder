@@ -898,7 +898,7 @@ def get_published_decks_lists():
 
 def decks(request):
     deck_names, deck_warlords, deck_dates, img_srcs, keys, creator_name = get_published_decks_lists()
-    light_dark_toggle = light_dark_dict.get_light_mode(request.user.username)
+    light_dark_toggle = light_dark_dict.get_light_mode(request)
     data = {
         "Deck Names": deck_names,
         "Deck Warlords": deck_warlords,
@@ -928,7 +928,7 @@ def decks(request):
 
 
 def import_deck(request):
-    light_dark_toggle = light_dark_dict.get_light_mode(request.user.username)
+    light_dark_toggle = light_dark_dict.get_light_mode(request)
     if not request.user.is_authenticated:
         return HttpResponseRedirect('/decks/')
     return render(request, "decks/import_deck.html", {"light_dark_toggle": light_dark_toggle})
@@ -951,7 +951,7 @@ def published_decks_page(request, page_num):
     largest_deck_num = page_num * 10
     decks_var = zip([], [], [], [], [], [])
     deck_names, deck_warlords, deck_dates, img_srcs, keys, creator_name = get_published_decks_lists()
-    light_dark_toggle = light_dark_dict.get_light_mode(request.user.username)
+    light_dark_toggle = light_dark_dict.get_light_mode(request)
     data = {
         "Deck Names": deck_names,
         "Deck Warlords": deck_warlords,
@@ -995,7 +995,7 @@ def my_liked_decks_page(request, page_num):
     largest_deck_num = page_num * 10
     decks_var = zip([], [], [], [], [], [])
     deck_names, deck_warlords, deck_dates, img_srcs, keys, creator_name = get_liked_decks_lists(username)
-    light_dark_toggle = light_dark_dict.get_light_mode(request.user.username)
+    light_dark_toggle = light_dark_dict.get_light_mode(request)
     data = {
         "Deck Names": deck_names,
         "Deck Warlords": deck_warlords,
@@ -1035,7 +1035,7 @@ def my_liked_decks_page(request, page_num):
 
 def published_decks(request):
     deck_names, deck_warlords, deck_dates, img_srcs, keys, creator_name = get_published_decks_lists()
-    light_dark_toggle = light_dark_dict.get_light_mode(request.user.username)
+    light_dark_toggle = light_dark_dict.get_light_mode(request)
     data = {
         "Deck Names": deck_names,
         "Deck Warlords": deck_warlords,
@@ -1066,7 +1066,7 @@ def published_decks(request):
 def my_liked_decks(request):
     username = request.user.username
     deck_names, deck_warlords, deck_dates, img_srcs, keys, creator_name = get_liked_decks_lists(username)
-    light_dark_toggle = light_dark_dict.get_light_mode(request.user.username)
+    light_dark_toggle = light_dark_dict.get_light_mode(request)
     data = {
         "Deck Names": deck_names,
         "Deck Warlords": deck_warlords,
@@ -1107,7 +1107,7 @@ def my_decks_page(request, page_num):
     username = request.user.username
     directory = os.getcwd()
     target_directory = directory + "/decks/deckstorage/" + username + "/"
-    light_dark_toggle = light_dark_dict.get_light_mode(request.user.username)
+    light_dark_toggle = light_dark_dict.get_light_mode(request)
     if username:
         if os.path.exists(target_directory):
             for file in os.listdir(target_directory):
@@ -1198,7 +1198,7 @@ def my_published_decks_page(request, page_num):
     username = request.user.username
     directory = os.getcwd()
     target_directory = directory + "/decks/publisheddecks/" + username + "/"
-    light_dark_toggle = light_dark_dict.get_light_mode(request.user.username)
+    light_dark_toggle = light_dark_dict.get_light_mode(request)
     if username:
         if os.path.exists(target_directory):
             for file in os.listdir(target_directory):
@@ -1281,7 +1281,7 @@ def my_published_decks(request):
     username = request.user.username
     directory = os.getcwd()
     target_directory = directory + "/decks/publisheddecks/" + username + "/"
-    light_dark_toggle = light_dark_dict.get_light_mode(request.user.username)
+    light_dark_toggle = light_dark_dict.get_light_mode(request)
     if username:
         if os.path.exists(target_directory):
             for file in os.listdir(target_directory):
@@ -1356,7 +1356,7 @@ def my_decks(request):
     username = request.user.username
     directory = os.getcwd()
     target_directory = directory + "/decks/deckstorage/" + username + "/"
-    light_dark_toggle = light_dark_dict.get_light_mode(request.user.username)
+    light_dark_toggle = light_dark_dict.get_light_mode(request)
     if username:
         if os.path.exists(target_directory):
             for file in os.listdir(target_directory):
@@ -1428,7 +1428,7 @@ def modify_deck(request, deck_key):
     target_directory = directory + "/decks/deckstorage/" + username + "/"
     data = []
     desc = ""
-    light_dark_toggle = light_dark_dict.get_light_mode(request.user.username)
+    light_dark_toggle = light_dark_dict.get_light_mode(request)
     mobile = is_mobile(request)
     if username:
         if os.path.exists(target_directory):
@@ -1459,7 +1459,7 @@ def modify_deck(request, deck_key):
 
 
 def create_deck(request):
-    light_dark_toggle = light_dark_dict.get_light_mode(request.user.username)
+    light_dark_toggle = light_dark_dict.get_light_mode(request)
     mobile = is_mobile(request)
     return render(request, "decks/createdeck.html", {"edit": "F", "data": "", "desc": "",
                                                      "auto_complete": card_names_array,
@@ -1471,7 +1471,7 @@ def create_deck(request):
 
 
 def create_deck_with_warlord(request, warlord_name):
-    light_dark_toggle = light_dark_dict.get_light_mode(request.user.username)
+    light_dark_toggle = light_dark_dict.get_light_mode(request)
     mobile = is_mobile(request)
     try:
         actual_name = warlord_name.replace("_", " ")
@@ -1513,12 +1513,12 @@ def create_deck_with_warlord(request, warlord_name):
 
 
 def user_deck_data(request, deck_creator):
-    light_dark_toggle = light_dark_dict.get_light_mode(request.user.username)
+    light_dark_toggle = light_dark_dict.get_light_mode(request)
     return render(request, "decks/user_deck_data.html", {"light_dark_toggle": light_dark_toggle})
 
 
 def advanced_deck_details(request, deck_creator, deck_key):
-    light_dark_toggle = light_dark_dict.get_light_mode(request.user.username)
+    light_dark_toggle = light_dark_dict.get_light_mode(request)
     deck_found = "N"
     username = request.user.username
     directory = os.getcwd()
@@ -1808,7 +1808,7 @@ def advanced_deck_details(request, deck_creator, deck_key):
 
 
 def deck_data(request, deck_creator, deck_key):
-    light_dark_toggle = light_dark_dict.get_light_mode(request.user.username)
+    light_dark_toggle = light_dark_dict.get_light_mode(request)
     deck_found = "N"
     username = request.user.username
     directory = os.getcwd()
@@ -2180,7 +2180,7 @@ def select_warlord(request):
     sent_orks = zip(orks_warlords, orks_img_srcs, orks_hyperlinks)
     sent_tyranids = zip(tyranids_warlords, tyranids_img_srcs, tyranids_hyperlinks)
     sent_necrons = zip(necrons_warlords, necrons_img_srcs, necrons_hyperlinks)
-    light_dark_toggle = light_dark_dict.get_light_mode(request.user.username)
+    light_dark_toggle = light_dark_dict.get_light_mode(request)
     return render(request, "decks/select_warlord.html",
                   {"light_dark_toggle": light_dark_toggle,
                    "astra_militarum": sent_astra_militarum, "space_marines": sent_space_marines,
@@ -2239,7 +2239,7 @@ def search_ajax_view(request):
 
 def search_deck(request):
     global warlords_list
-    light_dark_toggle = light_dark_dict.get_light_mode(request.user.username)
+    light_dark_toggle = light_dark_dict.get_light_mode(request)
     return render(request, 'decks/deck_search.html', {"light_dark_toggle": light_dark_toggle,
                                                       "warlords_list": warlords_list})
 

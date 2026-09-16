@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from django.template import loader
-from django.http import HttpResponse
+from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import redirect
 from django.core.files.storage import FileSystemStorage
 from django.core.files.base import ContentFile
@@ -39,12 +39,29 @@ def simple_upload(request):
 
 
 def home_page(request):
-    light_dark_toggle = light_dark_dict.get_light_mode(request.user.username)
-    return render(request, "home.html", {"light_dark_toggle": light_dark_toggle})
+    light_dark_toggle = light_dark_dict.get_light_mode(request)
+    response = render(request, "home.html", {"light_dark_toggle": light_dark_toggle})
+    response.set_cookie(key="light_mode", value=light_dark_toggle)
+    return response
 
+
+def light_dark_toggle(request):
+    if request.method == 'POST':
+        value = request.COOKIES.get('light_mode')
+        if value is None:
+            value = "Light"
+        elif value == "Light":
+            value = "Dark"
+        else:
+            value = "Light"
+        link = request.POST.get('next')
+        response = HttpResponseRedirect(link)
+        response.set_cookie(key="light_mode", value=value)
+        return response
+    return redirect("/")
 
 def recent_reviews_page(request, page_num):
-    light_dark_toggle = light_dark_dict.get_light_mode(request.user.username)
+    light_dark_toggle = light_dark_dict.get_light_mode(request)
     cwd = os.getcwd()
     target_directory = cwd + "/cards/comments/"
     comments_contents = []
@@ -100,7 +117,7 @@ def recent_reviews_page(request, page_num):
 
 
 def recent_reviews(request):
-    light_dark_toggle = light_dark_dict.get_light_mode(request.user.username)
+    light_dark_toggle = light_dark_dict.get_light_mode(request)
     cwd = os.getcwd()
     target_directory = cwd + "/cards/comments/"
     comments_contents = []
@@ -149,17 +166,17 @@ def recent_reviews(request):
 
 
 def play_formats_page(request):
-    light_dark_toggle = light_dark_dict.get_light_mode(request.user.username)
+    light_dark_toggle = light_dark_dict.get_light_mode(request)
     return render(request, "play_formats.html", {"light_dark_toggle": light_dark_toggle})
 
 
 def ban_lists_page(request):
-    light_dark_toggle = light_dark_dict.get_light_mode(request.user.username)
+    light_dark_toggle = light_dark_dict.get_light_mode(request)
     return render(request, "ban_lists.html", {"light_dark_toggle": light_dark_toggle})
 
 
 def card_printout_page(request):
-    light_dark_toggle = light_dark_dict.get_light_mode(request.user.username)
+    light_dark_toggle = light_dark_dict.get_light_mode(request)
     return render(
         request, "cardprintout.html",
         {

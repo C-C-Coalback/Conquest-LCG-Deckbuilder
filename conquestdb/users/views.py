@@ -186,7 +186,7 @@ def target_user(request, chosen_user):
     if username == chosen_user:
         return HttpResponseRedirect("/users/")
     deck_names, deck_warlords, deck_dates, img_srcs, keys, creator_name = get_users_published_decks(chosen_user)
-    light_dark_toggle = light_dark_dict.get_light_mode(username)
+    light_dark_toggle = light_dark_dict.get_light_mode(request)
     data = {
         "Deck Names": deck_names,
         "Deck Warlords": deck_warlords,
@@ -240,7 +240,7 @@ def target_user(request, chosen_user):
 def own_user(request):
     username = request.user.username
     deck_names, deck_warlords, deck_dates, img_srcs, keys, creator_name = get_users_published_decks(username)
-    light_dark_toggle = light_dark_dict.get_light_mode(username)
+    light_dark_toggle = light_dark_dict.get_light_mode(request)
     data = {
         "Deck Names": deck_names,
         "Deck Warlords": deck_warlords,

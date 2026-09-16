@@ -9,7 +9,7 @@
             width: max(30vw, 500px);
             height: auto;
             padding: 2px;
-            {% if light_dark_toggle %}
+            {% if light_dark_toggle == "Light" %}
             background-color: lightblue;
             opacity:0.8;
             {% else %}
@@ -24,7 +24,7 @@
             margin-right:auto;
             width: max(30vw, 500px);
             height: auto;
-            {% if light_dark_toggle %}
+            {% if light_dark_toggle == "Light" %}
             background-color: lightblue;
             opacity:0.8;
             {% else %}
@@ -52,7 +52,7 @@
         }
 </style>
 <div class="jumbotron-custom text-center">
-  <h1 style="font-size: 63px;{% if not light_dark_toggle %} color:white {% endif %}">ConquestDB.com</h1>
+  <h1 style="font-size: 63px;{% if light_dark_toggle == "Dark" %} color:white {% endif %}">ConquestDB.com</h1>
   <p style="margin-bottom: 15px; font-size: 21px; font-weight: 200;">A deckbuilder and database website for the Warhammer 40,000: Conquest LCG.</p>
 </div>
 <div>

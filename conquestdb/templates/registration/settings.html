@@ -5,16 +5,6 @@
 {% block content %}
 <div id="log-in-box" style="margin: auto;width: 50%;border: 3px solid green;padding: 10px;">
     {% if user.is_authenticated %}
-    <form method="post">
-        {% csrf_token %}
-        <h2>Light or Dark mode.</h2>
-        <select name="light" id="light">
-            <option value="None" selected="selected"></option>
-            <option value="Light">Light</option>
-            <option value="Dark">Dark</option>
-        </select>
-        <button type="submit" class="black-button">Save Settings</button>
-    </form>
     <h2>Upload profile picture.</h2>
     <div>Change your profile picture by uploading a file here.</div>
     <div>Please note that it could take several minutes for your profile picture to update.</div>

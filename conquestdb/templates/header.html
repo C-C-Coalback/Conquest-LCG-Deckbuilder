@@ -29,6 +29,23 @@
       </li>
     </ul>
     <ul class="nav navbar-nav navbar-right" style="margin-right: 0; display: flex;">
+      {% if light_dark_toggle == "Light" %}
+      <li id="toggle-light-dark">
+        <form action="/lightdarktoggle/" method="POST">
+          {% csrf_token %}
+          <input type="hidden" name="next" value="{{ request.path }}">
+          <input type="image" src="/static/images/light_mode.png" style="width: 80px; margin-top:7px;">
+        </form>
+      </li>
+      {% else %}
+      <li id="toggle-light-dark">
+        <form action="/lightdarktoggle/" method="POST">
+          {% csrf_token %}
+          <input type="hidden" name="next" value="{{ request.path }}">
+          <input type="image" src="/static/images/dark_mode.png" style="width: 80px; margin-top:7px;">
+        </form>
+      </li>
+      {% endif %}
       {% if user.is_authenticated %}
       <li id="loggedin-name"><p><a href="/users/" class="navi-user-profile-link">{{ user.username }}</a></p></li>
       <li id="avatar">

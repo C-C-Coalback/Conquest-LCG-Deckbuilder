@@ -1,11 +1,11 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 
-from django.contrib.auth.forms import UsernameField
+from django.contrib.auth.forms import UsernameField, AuthenticationForm
 from django import forms
 from django.urls import reverse_lazy
 from django.views.generic import CreateView
 from django.utils.translation import gettext_lazy as _
-from django.contrib.auth import authenticate, get_user_model, password_validation
+from django.contrib.auth import authenticate, get_user_model, password_validation, login
 from django.contrib.auth.models import User
 from django.core.exceptions import ValidationError
 import light_dark_dict
@@ -111,10 +111,37 @@ class SignUpView(CreateView):
     template_name = "registration/signup.html"
 
 
-def user_settings(request):
+def signup_view(request):
     if request.method == "POST":
-        light_dark = request.POST.get("light")
-        if light_dark != "None":
-            light_dark_dict.update_light_mode(request.user.username, light_dark)
-    light_dark_toggle = light_dark_dict.get_light_mode(request.user.username)
-    return render(request, "registration/settings.html", {"light_dark_toggle": light_dark_toggle})
+        form = CustomUserCreationForm(request.POST)
+        if form.is_valid():
+            form.save()
+            username = form.cleaned_data.get('username')
+            password = form.cleaned_data.get('password1')
+            user = authenticate(username=username, password=password)
+            login(request, user)
+            return redirect("/")
+    else:
+        form = CustomUserCreationForm()
+    light_dark_toggle = light_dark_dict.get_light_mode(request)
+    return render(request, 'registration/signup.html', {'form': form, "light_dark_toggle": light_dark_toggle})
+
+
+def login_view(request):
+    if request.method == "POST":
+        form = AuthenticationForm(data=request.POST)
+        if form.is_valid():
+            username = form.cleaned_data.get('username')
+            password = form.cleaned_data.get('password')
+            user = authenticate(username=username, password=password)
+            login(request, user)
+            return redirect("/")
+    else:
+        form = AuthenticationForm()
+    light_dark_toggle = light_dark_dict.get_light_mode(request)
+    return render(request, 'registration/login.html', {'form': form, "light_dark_toggle": light_dark_toggle})
+
+def user_settings(request):
+    light_dark_toggle = light_dark_dict.get_light_mode(request)
+    response = render(request, "registration/settings.html", {"light_dark_toggle": light_dark_toggle})
+    return response

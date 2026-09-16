@@ -24,6 +24,7 @@ from . import views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path("lightdarktoggle/", views.light_dark_toggle, name="toggle_light_dark"),
     path("accounts/", include("accounts.urls")),
     path("cards/", include("cards.urls")),
     path("decks/", include("decks.urls")),
