@@ -29,6 +29,12 @@
                         <option value="{{ warlord_name }}">{{ warlord_name }}</option>
                     {% endfor %}
                     </select>
+                <p id="p-tag">Tag:</p><select name="tag" id="tag">
+                    <option value=""></option>
+                    {% for tag in tags %}
+                        <option value="{{ tag }}">{{ tag }}</option>
+                    {% endfor %}
+                </select>
                 <!--
                 <p id="p-order" class="filter">Order By:</p><select name="order" class="filter" id="order">
                     <option value="None"></option>
@@ -557,6 +563,7 @@
                         'faction': $('#faction').val(),
                         'warlord': $('#warlord').val(),
                         'set_info': getSelectedSetData(),
+                        'tag': $('#tag').val(),
                         'csrfmiddlewaretoken': '{{ csrf_token }}' // CSRF token for security
                     },
                     success: function(response) {

@@ -76,6 +76,11 @@
     margin:auto;
 }
 
+#container-author-settings {
+    display: grid;
+    grid-template-columns: 70% 30%;
+}
+
 #desc-id {
     margin:auto;
     max-width: min(1100px, 100%);

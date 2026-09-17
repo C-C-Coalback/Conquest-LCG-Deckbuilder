@@ -27,6 +27,7 @@ def is_mobile(request):
     return MOBILE_AGENT_RE.match(request.META['HTTP_USER_AGENT'])
 
 
+valid_tags = ["Mono-Core", "Three Cores", "Casual", "Competitive", "Historical"]
 card_array = Initfunctions.init_player_cards()
 card_names_array = []
 for i in range(len(card_array)):
@@ -798,6 +799,7 @@ def get_published_decks_lists_with_extra_info():
     creator_name = []
     factions = []
     sets_included = []
+    tags = []
     directory = os.getcwd()
     target_directory = directory + "/decks/publisheddecks/"
     if os.path.exists(target_directory):
@@ -825,6 +827,12 @@ def get_published_decks_lists_with_extra_info():
                     with open(target_file + "/key", "r") as k:
                         data = k.read()
                         keys.append(data)
+                    tags_deck = []
+                    if os.path.exists(target_file + "/tags"):
+                        with open(target_file + "/tags", "r") as k:
+                            text_tags = k.read()
+                            tags_deck = text_tags.split(sep=",")
+                    tags.append(tags_deck)
                     if not os.path.exists(target_file + "/sets"):
                         with open(target_file + "/sets", "w") as s:
                             card_names = obtain_deck_card_names_as_list(split_data)
@@ -849,7 +857,7 @@ def get_published_decks_lists_with_extra_info():
                     print(e)
                     pass
     print("returning")
-    return deck_names, deck_warlords, factions, deck_dates, img_srcs, keys, creator_name, sets_included
+    return deck_names, deck_warlords, factions, deck_dates, img_srcs, keys, creator_name, sets_included, tags
 
 
 def get_published_decks_lists():
@@ -1807,6 +1815,21 @@ def advanced_deck_details(request, deck_creator, deck_key):
                    "cards_raw": []})
 
 
+def get_deck_tags(deck_creator, deck_key):
+    directory = os.getcwd()
+    target_file = directory + "/decks/publisheddecks/" + deck_creator + "/" + deck_key + "/" + "tags"
+    if not os.path.exists(target_file):
+        return []
+    with open(target_file, "r") as f:
+        text_tags = f.read()
+    split_tags = text_tags.split(sep=",")
+    for tag in split_tags:
+        if not tag:
+            if tag in split_tags:
+                split_tags.remove(tag)
+    return split_tags
+
+
 def deck_data(request, deck_creator, deck_key):
     light_dark_toggle = light_dark_dict.get_light_mode(request)
     deck_found = "N"
@@ -1817,6 +1840,7 @@ def deck_data(request, deck_creator, deck_key):
     public_deck = "F"
     liked = False
     like_count = 0
+    deck_tags = []
     stored_target_file = ""
     if os.path.exists(target_directory):
         for file in os.listdir(target_directory):
@@ -1843,6 +1867,7 @@ def deck_data(request, deck_creator, deck_key):
                             permitted_to_read = True
                             stored_target_file = target_file
                             public_deck = "T"
+                            deck_tags = get_deck_tags(deck_creator, data)
                             if username == deck_creator:
                                 public_deck = "OWNER"
                             if not os.path.exists(target_file + "/likes"):
@@ -2027,6 +2052,7 @@ def deck_data(request, deck_creator, deck_key):
                         no_comments = False
         my_comments = zip(names_comments, times_comments, comments, comment_ids)
         deck_content = deck_content.replace("\n", "|||")
+        print(deck_tags)
         return render(request, "decks/deck_data.html", {"deck_found": deck_found, "deck_content": deck_content,
                                                         "description": description, "deck_list": deck_list,
                                                         "factions": factions, "deck_name": deck_name,
@@ -2049,7 +2075,8 @@ def deck_data(request, deck_creator, deck_key):
                                                         "extra_attachment_cards": extra_attachment_cards,
                                                         "support_card_count": support_card_count,
                                                         "extra_support_cards": extra_support_cards,
-                                                        "liked": liked, "like_count": like_count})
+                                                        "liked": liked, "like_count": like_count, 
+                                                        "tags": deck_tags, "all_tags": valid_tags})
     return render(request, "decks/deck_data.html", {"deck_found": deck_found, "deck_content": "",
                                                     "light_dark_toggle": light_dark_toggle})
 
@@ -2170,6 +2197,31 @@ def publish_deck(request, deck_key):
     return HttpResponseRedirect('/decks/my_decks/')
 
 
+def tag_deck(request, deck_key, tag):
+    username = request.user.username
+    if tag not in valid_tags:
+        return HttpResponseRedirect('/decks/' + username + '/' + deck_key + '/')
+    directory = os.getcwd()
+    target_directory = directory + "/decks/publisheddecks/" + username + "/"
+    for file in os.listdir(target_directory):
+        if file == deck_key:
+            print("found the deck")
+            if not os.path.exists(target_directory + "/" + file + "/tags"):
+                with open(target_directory + "/" + file + "/tags", "w") as f:
+                    f.close()
+            with open(target_directory + "/" + file + "/tags", "r") as f:
+                extracted_tags = f.read()
+            split_tags = extracted_tags.split(sep=",")
+            if tag in split_tags:
+                split_tags.remove(tag)
+            else:
+                split_tags.append(tag)
+            extracted_tags = ",".join(split_tags)
+            with open(target_directory + "/" + file + "/tags", "w") as f:
+                f.write(extracted_tags)
+    return HttpResponseRedirect('/decks/' + username + '/' + deck_key + '/')
+
+
 def select_warlord(request):
     sent_astra_militarum = zip(astra_militarum_warlords, astra_militarum_img_srcs, astra_militarum_hyperlinks)
     sent_space_marines = zip(space_marines_warlords, space_marines_img_srcs, space_marines_hyperlinks)
@@ -2190,7 +2242,7 @@ def select_warlord(request):
 
 def search_ajax_view(request):
     if request.method == 'POST':
-        deck_names, deck_warlords, factions, deck_dates, img_srcs, keys, creator_name, sets_included = \
+        deck_names, deck_warlords, factions, deck_dates, img_srcs, keys, creator_name, sets_included, tags = \
             get_published_decks_lists_with_extra_info()
         data = {
             "Deck Names": deck_names,
@@ -2200,13 +2252,15 @@ def search_ajax_view(request):
             "Img Srcs": img_srcs,
             "Keys": keys,
             "Creator Name": creator_name,
-            "Sets": sets_included
+            "Sets": sets_included,
+            "Tags": tags
         }
         deck_name = request.POST.get("search")
         creator = request.POST.get("creator")
         warlord_name = request.POST.get("warlord")
         faction = request.POST.get("faction")
         allowed_sets = request.POST.get("set_info")
+        tag = request.POST.get("tag")
         filtered_df = pd.DataFrame(data=data)
         try:
             filtered_df["Deck Dates"] = pd.to_datetime(filtered_df["Deck Dates"], format="%B %d, %Y").dt.date
@@ -2221,6 +2275,8 @@ def search_ajax_view(request):
             filtered_df = filtered_df.loc[filtered_df['Deck Warlords'] == warlord_name]
         if faction:
             filtered_df = filtered_df.loc[filtered_df['Factions'] == faction]
+        if tag:
+            filtered_df = filtered_df[filtered_df["Tags"].apply(lambda x: tag in x)]
         if allowed_sets != "All":
             allowed_sets_names = allowed_sets.split(sep="/")
             allowed_sets_names = [a for a in allowed_sets_names if a]
@@ -2241,7 +2297,7 @@ def search_deck(request):
     global warlords_list
     light_dark_toggle = light_dark_dict.get_light_mode(request)
     return render(request, 'decks/deck_search.html', {"light_dark_toggle": light_dark_toggle,
-                                                      "warlords_list": warlords_list})
+                                                      "warlords_list": warlords_list, "tags": valid_tags})
 
 
 def ajax_view(request):

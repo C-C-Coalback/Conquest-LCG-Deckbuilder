@@ -119,15 +119,34 @@
                 </div>
             </div>
         </div>
-        <div id="author-desc-container">
-            <div id="author-desc-text">
-                <h2>Description from the author</h2>
+        <div id="container-author-settings" {% if public == "OWNER" %}{% elif not tags %}style="grid-template-columns: 100%;"{% endif %}>
+            <div id="desc-container">
+                <div id="author-desc-container">
+                    <div id="author-desc-text">
+                        <h2>Description from the author</h2>
+                    </div>
+                </div>
+                <div id="description-area">
+                    <div id="desc-id">
+                        <h4 id="desc-text">{{ description|linebreaks }}</h4>
+                    </div>
+                </div>
             </div>
-        </div>
-        <div id="description-area">
-            <div id="desc-id">
-                <h4 id="desc-text">{{ description|linebreaks }}</h4>
-            </div>
+            {% if public == "OWNER" %}
+                <div id="tags-container">
+                    <h2>Tagged as:</h2>
+                    {% for tag in all_tags %}
+                    <h3>{{ tag }}<a href="/decks/tag_deck/{{ deck_key }}/{{ tag }}"><input style="margin-left:10px; pointer-events:none;" type="checkbox"{% if tag in tags %} checked{% endif %}></a></h3>
+                    {% endfor %}
+                </div>
+            {% elif tags %}
+                <div id="tags-container">
+                    <h2>Tagged as:</h2>
+                    {% for tag in tags %}
+                    <h3>{{ tag }}</h3>
+                    {% endfor %}
+                </div>
+            {% endif %}
         </div>
         {% if public != "F" %}
             <div id="card-reviews">
