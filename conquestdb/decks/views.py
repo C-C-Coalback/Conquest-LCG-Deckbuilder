@@ -790,7 +790,7 @@ def obtain_deck_card_names_as_list(split_data, include_sigs=False):
     return card_names
 
 
-def get_published_decks_lists_with_extra_info():
+def get_published_decks_lists_with_extra_info(required_card=""):
     deck_names = []
     deck_warlords = []
     deck_dates = []
@@ -811,6 +811,10 @@ def get_published_decks_lists_with_extra_info():
                         data = f.read()
                         split_data = data.split(sep="\n")
                         deck_name = split_data[0]
+                        temp_data = "\n".join(split_data[1:])
+                        if required_card:
+                            if required_card.lower() not in temp_data.lower():
+                                continue
                         warlord_name = split_data[2]
                         current_faction = split_data[3]
                         main_faction = current_faction.split(sep=" (")[0]
@@ -2242,8 +2246,9 @@ def select_warlord(request):
 
 def search_ajax_view(request):
     if request.method == 'POST':
+        searched_card = request.POST.get("required-card")
         deck_names, deck_warlords, factions, deck_dates, img_srcs, keys, creator_name, sets_included, tags = \
-            get_published_decks_lists_with_extra_info()
+            get_published_decks_lists_with_extra_info(searched_card)
         data = {
             "Deck Names": deck_names,
             "Deck Warlords": deck_warlords,
@@ -2308,7 +2313,8 @@ def search_deck(request):
     global warlords_list
     light_dark_toggle = light_dark_dict.get_light_mode(request)
     return render(request, 'decks/deck_search.html', {"light_dark_toggle": light_dark_toggle,
-                                                      "warlords_list": warlords_list, "tags": valid_tags})
+                                                      "warlords_list": warlords_list, "tags": valid_tags, 
+                                                      "auto_complete": card_names_array})
 
 
 def ajax_view(request):

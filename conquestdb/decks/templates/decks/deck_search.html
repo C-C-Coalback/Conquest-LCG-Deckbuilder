@@ -4,6 +4,11 @@
 {% load static %}
 <link rel="stylesheet" href="{% static 'deck_search_style.css' %}">
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<datalist id="card_list">
+    {% for card_name in auto_complete %}
+        <option value="{{ card_name }}"></option>
+    {% endfor %}
+</datalist>
 <body>
     <div class="filters-container">
         <form id="myForm">
@@ -29,12 +34,13 @@
                         <option value="{{ warlord_name }}">{{ warlord_name }}</option>
                     {% endfor %}
                     </select>
-                <p id="p-tag">Tag:</p><select name="tag" id="tag">
+                <p class="row-gap-item" id="p-tag">Tag:</p><select class="row-gap-item" name="tag" id="tag">
                     <option value=""></option>
                     {% for tag in tags %}
                         <option value="{{ tag }}">{{ tag }}</option>
                     {% endfor %}
                 </select>
+                <p class="row-gap-item" id="p-required-card">Required Card:</p><input class="row-gap-item" id="required-card" list="card_list" class="black-button" type="text" name="required-card">
                 <p id="p-order" class="filter">Order By:</p><select name="order" class="filter" id="order">
                     <option value=""></option>
                     <option value="Name">Name</option>
@@ -557,6 +563,7 @@
                         'asc_desc': $('#asc-desc').val(),
                         'set_info': getSelectedSetData(),
                         'tag': $('#tag').val(),
+                        'required-card': $('#required-card').val(),
                         'csrfmiddlewaretoken': '{{ csrf_token }}' // CSRF token for security
                     },
                     success: function(response) {

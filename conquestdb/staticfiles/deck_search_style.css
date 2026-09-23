@@ -112,7 +112,7 @@
     grid-template-areas:
     "p-deck-name search p-creator creator"
     "p-faction faction p-warlord warlord"
-    "p-tag tag none none"
+    "p-tag tag p-required-card required-card"
     "p-order order p-asc-desc asc-desc";
 }
 
@@ -128,12 +128,22 @@
 
 #p-tag {
     grid-area: p-tag;
-    margin-bottom: 30px;
 }
 
 #tag {
     grid-area: tag;
+}
+
+#p-required-card {
+    grid-area: p-required-card;
+}
+
+.row-gap-item {
     margin-bottom: 20px;
+}
+
+#required-card {
+    grid-area: required-card;
 }
 
 #p-deck-name {
