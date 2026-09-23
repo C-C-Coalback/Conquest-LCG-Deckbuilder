@@ -111,7 +111,9 @@
     grid-template-columns: 1fr 1fr 1fr 1fr;
     grid-template-areas:
     "p-deck-name search p-creator creator"
-    "p-faction faction p-warlord warlord";
+    "p-faction faction p-warlord warlord"
+    "p-tag tag none none"
+    "p-order order p-asc-desc asc-desc";
 }
 
 .item-in-grid {
@@ -122,6 +124,16 @@
     display: flex;
     justify-content: center;
     align-items: center;
+}
+
+#p-tag {
+    grid-area: p-tag;
+    margin-bottom: 30px;
+}
+
+#tag {
+    grid-area: tag;
+    margin-bottom: 20px;
 }
 
 #p-deck-name {
@@ -150,6 +162,22 @@
 
 #p-warlord {
     grid-area: p-warlord;
+}
+
+#p-asc-desc {
+    grid-area: p-asc-desc;
+}
+
+#asc-desc {
+    grid-area: asc-desc;
+}
+
+#p-order {
+    grid-area: p-order;
+}
+
+#order {
+    grid-area: order;
 }
 
 #warlord {

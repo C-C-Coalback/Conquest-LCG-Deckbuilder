@@ -1817,7 +1817,7 @@ def advanced_deck_details(request, deck_creator, deck_key):
 
 def get_deck_tags(deck_creator, deck_key):
     directory = os.getcwd()
-    target_file = directory + "/decks/publisheddecks/" + deck_creator + "/" + deck_key + "/" + "tags"
+    target_file = directory + "/decks/publisheddecks/" + deck_creator + "/" + deck_key + "/tags"
     if not os.path.exists(target_file):
         return []
     with open(target_file, "r") as f:
@@ -2260,6 +2260,8 @@ def search_ajax_view(request):
         warlord_name = request.POST.get("warlord")
         faction = request.POST.get("faction")
         allowed_sets = request.POST.get("set_info")
+        order = request.POST.get("order")
+        asc_desc = request.POST.get("asc_desc")
         tag = request.POST.get("tag")
         filtered_df = pd.DataFrame(data=data)
         try:
@@ -2281,6 +2283,15 @@ def search_ajax_view(request):
             allowed_sets_names = allowed_sets.split(sep="/")
             allowed_sets_names = [a for a in allowed_sets_names if a]
             filtered_df = filtered_df[filtered_df["Sets"].apply(lambda x: all(set_name in allowed_sets_names for set_name in x))]
+        if order:
+            asc_desc = asc_desc == "Ascending"
+            if order == "Date":
+                try:
+                    filtered_df = filtered_df.sort_values(by="Deck Dates", ascending=asc_desc)
+                except Exception as e:
+                    print(e)
+            if order == "Name":
+                filtered_df = filtered_df.sort_values(by="Deck Names", ascending=asc_desc)
         deck_names = filtered_df['Deck Names'].to_list()
         deck_warlords = filtered_df['Deck Warlords'].to_list()
         deck_dates = filtered_df['Deck Dates'].to_list()
