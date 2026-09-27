@@ -556,11 +556,12 @@ def card_data(request, card_name):
     if request.method == 'POST':
         flag = request.POST.get('flag')
         if flag == "POST":
-            username = request.POST.get('username')
+            if username and not request.user.is_authenticated:
+                return redirect("/")
             if not username:
                 username = "Anonymous"
             comment = request.POST.get('comment')
-            if card_name == "Bonesinger_Choir" and "hello conquestdb" in comment:
+            if card_name == "Bonesinger_Choir" and "blastleadgeneration" in comment:
                 return redirect("/")
             time = str(datetime.datetime.now())
             os.makedirs(target_directory, exist_ok=True)
