@@ -12,19 +12,9 @@ https://www.youtube.com/watch?v=NE8NL9PfjXU
 
 # What is the current progress?
 
-Haven't done this in a while. Seriously, this is an impressive crop. 
-Great vegetables.
+Really makes you FEEL like a heretic.
 
-Just left with converting the deck lookup logic to use a dataframe now, 
-though I am honestly not too bothered by it; the website is already very
-fast, so the extra speed from the dataframe probably isn't noticeable 
-enough to bother with.
-
-- ~~More graphs/statistics on the adv. deck details page.~~
-- ~~Separate decks into pages.~~
-- ~~Add support to search + filter decks.~~
-- Rework deck lookup logic to use a dataframe.
-- ~~Add support for viewing user profiles.~~
+Trying to switch to models and away from dataframes, got some disgustingly hacky thing running for card data pages. Is it good? Hope so.
 
 # How can I run it myself?
 
@@ -38,6 +28,14 @@ pip install -r "requirements.txt"
 cd conquestdb
 py manage.py makemigrations
 py manage.py migrate
+```
+
+As we are running this for the first time, we need to populate the models with the card data/rules clarifications data.
+
+```
+py manage.py import_cards conquestdb_card_data.csv
+py manage.py import_cards conquestdb_planet_data.csv
+py manage.py import_rules rules/
 ```
 
 The website is ready to launch. There are not tests to run (yet). 
