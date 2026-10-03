@@ -290,7 +290,7 @@
 #description-container {
     position: absolute;
     left: calc(47vw + 100px);
-    top: 100px;
+    top: 80px;
 }
 
 .filter {

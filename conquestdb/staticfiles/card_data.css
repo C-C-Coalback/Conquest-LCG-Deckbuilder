@@ -16,6 +16,20 @@
     justify-content:center;
 }
 
+.inner-faq-container {
+    width: 70%;
+}
+
+.faq-container {
+    margin-top: 30px;
+    border-top: dashed darkcyan 2px;
+    border-bottom: dashed darkcyan 2px;
+    padding-bottom: 30px;
+    width:100%;
+    display:flex;
+    justify-content:center;
+}
+
 .own-rating {
     cursor: pointer;
 }
@@ -128,20 +142,4 @@
 
 .comment-name > p {
     color: black !important;
-}
-
-a:link {
-      text-decoration: none;
-}
-
-a:visited {
-      text-decoration: none;
-}
-
-a:hover {
-      text-decoration: none;
-}
-
-a:active {
-      text-decoration: none;
 }

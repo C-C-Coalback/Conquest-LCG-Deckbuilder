@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from conquestdb.cardscode import Initfunctions
 import pandas as pd
 from django.http import JsonResponse
@@ -20,10 +20,12 @@ import random
 import string
 from django.core.files.storage import FileSystemStorage
 from django.core.files.base import ContentFile
+from django.core.exceptions import ObjectDoesNotExist
 import file_inits
 from file_inits import increment_card_count, increment_date_csv_count
 import various_lists
 from .cardCreator import process_submitted_card, process_submitted_planet_card
+from .models import Card
 
 
 def sorter_cycles(column):
@@ -550,6 +552,15 @@ def card_data(request, card_name):
     username = request.user.username
     light_dark_toggle = light_dark_dict.get_light_mode(request)
     directory = os.getcwd()
+    cardModel = get_object_or_404(
+        Card.objects.prefetch_related("clarifications", "faqs__related_cards"),
+        pk=card_name,
+    )
+    # Include FAQs from other cards that mention this one
+    clarifications = list(cardModel.clarifications.all())
+    faqs = list(cardModel.faqs.all())
+    mentioned_faqs = cardModel.mentioned_in_faqs.select_related("card")
+    faq_count = len(faqs) + len(mentioned_faqs)
     target_directory = directory + "/cards/comments/" + card_name + "/"
     ratings_file = directory + "/cards/ratings/" + card_name + ".csv"
     print("Request Received for", card_name, "from", username)
@@ -756,7 +767,12 @@ def card_data(request, card_name):
             "light_dark_toggle": light_dark_toggle, "cycle_text": cycle_text,
             "errata_cycle_text": errata_cycle_text, "sig_squad": sig_squad, "rotate": rotate,
             "ratings": ratings, "own_ratings": own_ratings, "num_ratings": num_ratings, "has_rated": has_rated,
-            "quantity": quantity, "errata_quantity": errata_quantity
+            "quantity": quantity, "errata_quantity": errata_quantity, "card": card,
+            "clarifications": clarifications,
+            "faqs": faqs,
+            "mentioned_faqs": mentioned_faqs,
+            "faq_count": faq_count,
+            "default_tab": "clarifications" if clarifications else "faq",
         }
     )
     return response

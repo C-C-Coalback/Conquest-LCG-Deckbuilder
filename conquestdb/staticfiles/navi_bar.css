@@ -1,17 +1,3 @@
-.navbar-inverse {
-    background-color: #222;
-    border-color: #080808;
-}
-
-.navbar-icon {
-    height: 40px;
-    margin-top: -10px;
-}
-
-nav {
-    display:block;
-}
-
 @media (min-width: 768px) {
     .navbar-brand-custom {
       float: left;
@@ -20,31 +6,6 @@ nav {
       font-size: 18px;
       line-height: 20px;
     }
-}
-
-.navbar-static-top {
-    border-radius: 0;
-}
-
-.navbar-static-top {
-    z-index: 1000;
-    border-width: 0 0 1px;
-}
-
-.navbar-collapse {
-    padding-right: 15px;
-    padding-left: 15px;
-    margin-right: auto;
-    margin-left: auto;
-    width: 60% !important;
-    background-color: #333;
-}
-
-.navbar {
-    position: relative;
-    min-height: 50px;
-    margin-bottom: 20px;
-    border: 1px solid transparent;
 }
 
 @font-face {
@@ -56,84 +17,9 @@ nav {
     font-family: fontConquest;
 }
 
-ul {
-    list-style-type: none;
-    margin: 0;
-    padding: 0;
-    background-color: #333;
-}
-
-.dropdown-item {
-    clear: left;
-    float: left;
-}
-
-.dropdown-toggle {
-    display: block;
-    color: white;
-    text-align: center;
-    padding: 14px 16px;
-    text-decoration: none;
-    cursor: pointer;
-}
-
-.dropdown-menu > li > a {
-  display: block;
-  padding: 3px 20px;
-  clear: both;
-  font-weight: 400;
-  line-height: 1.42857143;
-  white-space: nowrap;
-}
-
-.dropdown-menu {
-    z-index: 9999 !important;
-    position: absolute;
-    display: none;
-    float: left;
-    min-width: 160px;
-    padding: 5px 0;
-    margin: 2px 0 0;
-    font-size: 14px;
-    text-align: left;
-    list-style: none;
-    background-clip: padding-box;
-    border: 1px solid rgba(0,0,0,.15);
-    border-radius: 4px;
-    border-top-left-radius: 4px;
-    border-top-right-radius: 4px;
-    box-shadow: 0 6px 12px rgba(0,0,0,.175);
-    font-size: 14px;
-    text-align: left;
-    list-style: none;
-}
-
-.caret {
-    display: inline-block;
-    width: 0;
-    height: 0;
-    margin-left: 2px;
-    vertical-align: middle;
-    border-top: 4px dashed;
-    border-top: 4px solid;
-    border-right: 4px solid transparent;
-    border-left: 4px solid transparent;
-}
-
 .avatar {
     width: 40px;
     height: 40px;
-}
-
-.pull-right {
-    float: right
-}
-
-#loggedin-name {
-    position: relative;
-    margin-top: 13px;
-    padding-right: 10px;
-    padding-left: 10px;
 }
 
 #log-out-message {
@@ -147,28 +33,13 @@ ul {
     color: black! important;
 }
 
-li a {
-  display: block;
-  color: white;
-  text-align: center;
-  padding: 14px 16px;
-  text-decoration: none;
-}
-
 body {
     background-size: cover;
-    padding-bottom: 100px;
 }
 
-footer {
-    background-color: #f1f1f1;
-    text-align: center;
-    padding: 10px;
-    position: fixed;
-    bottom: 0;
-    width: 100%;
-    border-bottom: 1px solid #f4f4f4;
-    z-index: 9999;
+.navbar-icon {
+    height: 40px;
+    margin-top: -10px;
 }
 
 #main-avatar {

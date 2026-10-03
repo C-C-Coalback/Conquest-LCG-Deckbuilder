@@ -1,0 +1,66 @@
+{% if clarifications or faq_count %}
+<section id="rules" class="mt-4">
+  <h2 class="h4 mb-3">Rules</h2>
+
+  {# ---------- Tab buttons ---------- #}
+  <ul class="nav nav-tabs" id="rulesTabs" role="tablist">
+    <li class="nav-item" role="presentation">
+      <button class="nav-link {% if default_tab == 'clarifications' %}active{% endif %}"
+              id="clarifications-tab" data-bs-toggle="tab"
+              data-bs-target="#clarifications-pane" type="button" role="tab"
+              aria-controls="clarifications-pane"
+              aria-selected="{% if default_tab == 'clarifications' %}true{% else %}false{% endif %}">
+        Clarifications
+        <span class="badge text-bg-secondary">{{ clarifications|length }}</span>
+      </button>
+    </li>
+    <li class="nav-item" role="presentation">
+      <button class="nav-link {% if default_tab == 'faq' %}active{% endif %}"
+              id="faq-tab" data-bs-toggle="tab"
+              data-bs-target="#faq-pane" type="button" role="tab"
+              aria-controls="faq-pane"
+              aria-selected="{% if default_tab == 'faq' %}true{% else %}false{% endif %}">
+        FAQ
+        <span class="badge text-bg-secondary">{{ faq_count }}</span>
+      </button>
+    </li>
+  </ul>
+
+  <div class="tab-content border border-top-0 rounded-bottom p-3">
+
+    {# ---------- Clarifications pane ---------- #}
+    <div class="tab-pane fade {% if default_tab == 'clarifications' %}show active{% endif %}"
+         id="clarifications-pane" role="tabpanel"
+         aria-labelledby="clarifications-tab" tabindex="0">
+      {% for c in clarifications %}
+        <div class="{% if not forloop.last %}mb-3 pb-3 border-bottom{% endif %}">
+          {{ c.text|linebreaksbr }}
+          {% if c.source %}
+            <div class="text-body-secondary small mt-1">{{ c.source }}</div>
+          {% endif %}
+        </div>
+      {% empty %}
+        <p class="text-body-secondary mb-0">No clarifications for this card.</p>
+      {% endfor %}
+    </div>
+
+    {# ---------- FAQ pane ---------- #}
+    <div class="tab-pane fade {% if default_tab == 'faq' %}show active{% endif %}"
+         id="faq-pane" role="tabpanel" aria-labelledby="faq-tab" tabindex="0">
+      {% if faq_count %}
+        <div class="accordion accordion-flush" id="faqAccordion">
+          {% for faq in faqs %}
+            {% include "cards/_faq_item.html" with faq=faq %}
+          {% endfor %}
+          {% for faq in mentioned_faqs %}
+            {% include "cards/_faq_item.html" with faq=faq show_origin=True %}
+          {% endfor %}
+        </div>
+      {% else %}
+        <p class="text-body-secondary mb-0">No FAQ entries for this card.</p>
+      {% endif %}
+    </div>
+
+  </div>
+</section>
+{% endif %}

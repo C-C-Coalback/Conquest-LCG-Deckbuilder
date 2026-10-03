@@ -1,0 +1,28 @@
+<div class="accordion-item" id="faq-{{ faq.pk }}">
+  <h4 class="accordion-header">
+    <button class="accordion-button collapsed" type="button"
+            data-bs-toggle="collapse" data-bs-target="#faq-body-{{ faq.pk }}"
+            aria-expanded="false" aria-controls="faq-body-{{ faq.pk }}">
+      {{ faq.question }}
+    </button>
+  </h4>
+<div id="faq-body-{{ faq.pk }}" class="accordion-collapse collapse">
+    <div class="accordion-body">
+      {{ faq.answer|linebreaks }}
+
+      {% if faq.related_cards.exists or show_origin %}
+        <div class="small text-body-secondary mt-2">
+          Related:
+          {% if show_origin %}
+            <a href="/cards/{{ faq.card.code }}">{{ faq.card.name }}</a>
+          {% endif %}
+          {% for rc in faq.related_cards.all %}
+            {% if card_name != rc.name %}
+            <a href="/cards/{{ rc.code }}">{{ rc.name }}</a>
+            {% endif %}
+          {% endfor %}
+        </div>
+      {% endif %}
+    </div>
+  </div>
+</div>
