@@ -1,0 +1,86 @@
+,name,faction,loyalty,text,traits,card type,image name,cost,command,attack,health,shields,sector,cycle,war pack,keywords,green,blue,red,resources,cards,useful_quantities
+0,Plannum,,,Battle Ability: Move a non-warlord unit you control to a planet of your choice.,,Planet,Plannum,-1,-1,-1,-1,0,Traxis,Core Set,Core Set,Unique.,True,True,False,1,1,1
+1,Atrox Prime,,,Battle: Deal 1 damage to each enemy unit at a target HQ or adjacent planet.,,Planet,Atrox_Prime,-1,-1,-1,-1,0,Traxis,Core Set,Core Set,Unique.,False,True,True,1,1,1
+2,Barlus,,,Battle: Discard 1 card at random from your opponent's hand.,,Planet,Barlus,-1,-1,-1,-1,0,Traxis,Core Set,Core Set,Unique.,True,False,False,0,2,1
+3,Elouith,,,"Battle: Search the top 3 cards of your deck for a card. Add it to your hand, and place the remaining cards on the bottom of your deck in any order.",,Planet,Elouith,-1,-1,-1,-1,0,Traxis,Core Set,Core Set,Unique.,False,True,False,0,2,1
+4,Carnath,,,Battle: Trigger the Battle ability of another planet in play,,Planet,Carnath,-1,-1,-1,-1,0,Traxis,Core Set,Core Set,Unique.,False,True,True,1,1,1
+5,Tarrus,,,"Battle: If you control fewer units than your opponent, gain 3 resources or draw 3 cards.",,Planet,Tarrus,-1,-1,-1,-1,0,Traxis,Core Set,Core Set,Unique.,True,False,True,1,1,1
+6,Osus IV,,,Battle: Take 1 resource from your opponent.,,Planet,Osus_IV,-1,-1,-1,-1,0,Traxis,Core Set,Core Set,Unique.,True,False,False,2,0,1
+7,Ferrin,,,Battle: Rout a target non-warlord unit.,,Planet,Ferrin,-1,-1,-1,-1,0,Traxis,Core Set,Core Set,Unique.,False,False,True,2,0,1
+8,Y'varn,,,Battle: Each player puts a unit into play from his hand at his HQ.,,Planet,Y'varn,-1,-1,-1,-1,0,Traxis,Core Set,Core Set,Unique.,True,True,True,1,0,1
+9,Iridial,,,Battle: Remove all damage from a target unit.,,Planet,Iridial,-1,-1,-1,-1,0,Traxis,Core Set,Core Set,Unique.,True,True,True,0,1,1
+10,Anshan,,,"Battle: Rally 6 a unit with printed cost 3 or lower, put it into play at this planet.",,Planet,Anshan,-1,-1,-1,-1,0,Gardis,Confrontation,Confrontation,Unique.,False,True,True,1,1,1
+11,Beckel,,,"Battle: Name a card. Look at your opponent's hand. If there is a card by that name, gain 1 resource.",,Planet,Beckel,-1,-1,-1,-1,0,Gardis,Confrontation,Confrontation,Unique.,True,True,True,0,1,1
+12,Erida,,,Battle: Sacrifice an army unit to draw 2 cards and gain 2 resources.,,Planet,Erida,-1,-1,-1,-1,0,Gardis,Confrontation,Confrontation,Unique.,True,True,True,1,0,1
+13,Excellor,,,Battle: Switch the location of two army units of the same player.,,Planet,Excellor,-1,-1,-1,-1,0,Gardis,Confrontation,Confrontation,Unique.,True,True,False,1,1,1
+14,Jalayerid,,,Battle: Deal 1 damage to a target enemy unit at each adjacent planet and each enemy HQ.,,Planet,Jalayerid,-1,-1,-1,-1,0,Gardis,Confrontation,Confrontation,Unique.,False,False,True,2,0,1
+15,Jaricho,,,Battle: Resolve a battle at another non-first planet where no battle is taking place. (Can only be triggered during the combat phase.),,Planet,Jaricho,-1,-1,-1,-1,0,Gardis,Confrontation,Confrontation,Unique.,True,False,True,1,1,1
+16,Munos,,,Battle: Return a target army unit and each attachment on it to its owner's hand. Then the unit's owner gains resources equal to the unit cost.,,Planet,Munos,-1,-1,-1,-1,0,Gardis,Confrontation,Confrontation,Unique.,True,False,False,2,0,1
+17,Navida Prime,,,Battle: Copy the Battle Ability of a planet in a victory display.,,Planet,Navida_Prime,-1,-1,-1,-1,0,Gardis,Confrontation,Confrontation,Unique.,True,False,False,0,2,1
+18,Nectavus XI,,,"Battle: Resolve a command struggle at a planet. While resolving it, control of each unit at that planet is switched with your opponent.",,Planet,Nectavus_XI,-1,-1,-1,-1,0,Gardis,Confrontation,Confrontation,Unique.,False,True,True,1,1,1
+19,Vargus,,,"Battle: Move 1 damage from a unit to another. If that other unit is destroyed as a result of this effect, gain 1 resource.",,Planet,Vargus,-1,-1,-1,-1,0,Gardis,Confrontation,Confrontation,Unique.,False,True,False,0,2,1
+20,Zarvoss Foundry,,,"Battle: Rally 8 a support or attachment card, put it into play at your HQ or attached to an eligible target.",,Planet,Zarvoss_Foundry,-1,-1,-1,-1,0,Veros,Confrontation,Confrontation,Unique.,True,True,True,0,1,1
+21,Xenos World Tallin,,,Battle: Target a planet. Your opponent must move an army unit he controls to that planet. Then you may move an army unit you control to that planet.,,Planet,Xenos_World_Tallin,-1,-1,-1,-1,0,Veros,Confrontation,Confrontation,Unique.,True,True,False,1,1,1
+22,Mangeras,,,Battle: Remove up to 4 damage among cards you control.,,Planet,Mangeras,-1,-1,-1,-1,0,Veros,Confrontation,Confrontation,Unique.,False,True,True,1,1,1
+23,Kunarog The Slave Market,,,Battle: Put 2 token units (of any kind) into play exhausted at a target planet.,,Planet,Kunarog_The_Slave_Market,-1,-1,-1,-1,0,Veros,Confrontation,Confrontation,Unique.,False,False,True,2,0,1
+24,Ironforge,,,Battle: You may move an army unit to your HQ. Then an army unit in your HQ gets +2 ATK and +2 HP until the end of the game.,,Planet,Ironforge,-1,-1,-1,-1,0,Veros,Confrontation,Confrontation,Unique.,True,False,False,0,2,1
+25,Frontier World Jaris,,,"Battle: If you have fewer cards in hand than your opponent, draw 3 cards.",,Planet,Frontier_World_Jaris,-1,-1,-1,-1,0,Veros,Confrontation,Confrontation,Unique.,True,True,True,1,0,1
+26,Daprian's Gate,,,Battle: Exhaust an army unit. That unit cannot ready during the next headquarters phase.,,Planet,Daprian's_Gate,-1,-1,-1,-1,0,Veros,Confrontation,Confrontation,Unique.,True,False,False,2,0,1
+27,Craftworld Lugath,,,"Battle: Switch this planet, if it is not the first planet, with another one or copy the Battle ability of an adjacent planet.",,Planet,Craftworld_Lugath,-1,-1,-1,-1,0,Veros,Confrontation,Confrontation,Unique.,False,True,False,0,2,1
+28,Contaminated World Adracan,,,"Battle: Deal 1 damage to up to 5 units at a target planet. Then, you may infest it.",,Planet,Contaminated_World_Adracan,-1,-1,-1,-1,0,Veros,Confrontation,Confrontation,Unique.,False,True,True,1,1,1
+29,Bhorsapolis The Decadent,,,Battle: Put a non-Elite unit into play from your discard pile or your hand at the last planet or your HQ.,,Planet,Bhorsapolis_The_Decadent,-1,-1,-1,-1,0,Veros,Confrontation,Confrontation,Unique.,True,False,True,1,1,1
+30,Wounded Scream,,,Battle: Gain 2 resources and draw 1 card. Then you may have this card's textbox be considered blank.,,Planet,Wounded_Scream,-1,-1,-1,-1,0,The Breach,Bloodied Path Cycle,The Shadow in the Warp,Unique.,True,True,True,1,1,1
+31,Tool of Abolition,,,Battle: Deal 2 damage to an army unit and exhaust it or remove 2 damage from a unit and ready it.,,Planet,Tool_of_Abolition,-1,-1,-1,-1,0,The Breach,Bloodied Path Cycle,The Shadow in the Warp,Unique.,False,True,True,1,1,1
+32,The Frozen Heart,,,Battle: Trigger the battle ability of a planet in your or your opponent's victory display.,,Planet,The_Frozen_Heart,-1,-1,-1,-1,0,The Breach,Bloodied Path Cycle,The Shadow in the Warp,Unique.,True,True,True,0,1,1
+33,Petrified Desolations,,,"Battle: Remove 1 damage from up to 3 units, or deal 1 damage to up to 2 units.",,Planet,Petrified_Desolations,-1,-1,-1,-1,0,The Breach,Bloodied Path Cycle,The Shadow in the Warp,Unique.,False,False,True,2,0,1
+34,Immortal Sorrows,,,Battle: Your warlord gains Brutal or Armorbane.,,Planet,Immortal_Sorrows,-1,-1,-1,-1,0,The Breach,Bloodied Path Cycle,The Shadow in the Warp,Unique.,False,True,True,1,1,1
+35,Hell's Theet,,,Battle: A target army unit gets +3 HP or place 5 faith among units you control.,,Planet,Hell's_Theet,-1,-1,-1,-1,0,The Breach,Bloodied Path Cycle,The Shadow in the Warp,Unique.,True,True,False,1,1,1
+36,Freezing Tower,,,Battle: Move an army unit with a printed cost of 3 or lower you control to a target planet or rout a target army unit.,,Planet,Freezing_Tower,-1,-1,-1,-1,0,The Breach,Bloodied Path Cycle,The Shadow in the Warp,Unique.,True,False,False,2,0,1
+37,Clipped Wings,,,Battle: Draw a card or discard your hand to draw 4 cards.,,Planet,Clipped_Wings,-1,-1,-1,-1,0,The Breach,Bloodied Path Cycle,The Shadow in the Warp,Unique.,True,False,True,1,1,1
+38,Beheaded Hope,,,"Battle: Return an army unit you control to your hand to gain 3 resources or deploy an army unit, reducing its cost by 2.",,Planet,Beheaded_Hope,-1,-1,-1,-1,0,The Breach,Bloodied Path Cycle,The Shadow in the Warp,Unique.,True,False,False,0,2,1
+39,Baneful Veil,,,Battle: Trigger the battle ability of an adjacent left or right planet.,,Planet,Baneful_Veil,-1,-1,-1,-1,0,The Breach,Bloodied Path Cycle,The Shadow in the Warp,Unique.,False,True,False,0,2,1
+40,Xorlom,,,Forced Battle: Rout an army unit you control.,,Planet,Xorlom,-1,-1,-1,-1,0,Nepthis,Bloodied Path Cycle,Herald of the Plague God,Unique.,True,False,False,2,0,1
+41,Selphini VII,,,"Forced Battle: Your opponent may move a damage from a unit to another, then remove another damage.",,Planet,Selphini_VII,-1,-1,-1,-1,0,Nepthis,Bloodied Path Cycle,Herald of the Plague God,Unique.,False,True,True,1,1,1
+42,New Vulcan,,,Forced Battle: Move your warlord to the last planet. Then exhaust it.,,Planet,New_Vulcan,-1,-1,-1,-1,0,Nepthis,Bloodied Path Cycle,Herald of the Plague God,Unique.,True,True,False,1,1,1
+43,Hissan XI,,,"Forced Battle: Have your opponent target another planet in play, you must trigger the battle ability of that planet.",,Planet,Hissan_XI,-1,-1,-1,-1,0,Nepthis,Bloodied Path Cycle,Herald of the Plague God,Unique.,False,True,False,0,2,1
+44,Gareth Prime,,,Forced Battle: Your opponent may move a target army unit you control to a planet of his choice.,,Planet,Gareth_Prime,-1,-1,-1,-1,0,Nepthis,Bloodied Path Cycle,Herald of the Plague God,Unique.,True,True,True,0,1,1
+45,Erekiel,,,"Forced Battle: Your opponent chooses: place up to 4 faith among units he controls, or do it at the beginning of the next deploy phase.",,Planet,Erekiel,-1,-1,-1,-1,0,Nepthis,Bloodied Path Cycle,Herald of the Plague God,Unique.,True,False,False,0,2,1
+46,Diamat,,,Forced Battle: Deal 2 indirect damage among units you control.,,Planet,Diamat,-1,-1,-1,-1,0,Nepthis,Bloodied Path Cycle,Herald of the Plague God,Unique.,True,False,True,1,1,1
+47,Coradim,,,Forced Battle: Sacrifice an army unit.,,Planet,Coradim,-1,-1,-1,-1,0,Nepthis,Bloodied Path Cycle,Herald of the Plague God,Unique.,False,False,True,2,0,1
+48,Belis,,,Forced Battle: Discard a card.,,Planet,Belis,-1,-1,-1,-1,0,Nepthis,Bloodied Path Cycle,Herald of the Plague God,Unique.,True,True,True,1,1,1
+49,Agerath Minor,,,Forced Battle: Your opponent draws a card and gains 1 resource.,,Planet,Agerath_Minor,-1,-1,-1,-1,0,Nepthis,Bloodied Path Cycle,Herald of the Plague God,Unique.,False,True,True,1,1,1
+50,Radex,,,"Battle: Exhaust a target non-Elite army unit to have it gain a keyword among Mobile, Flying, Armorbane, Sweep (3) or Retaliate (4).",,Planet,Radex,-1,-1,-1,-1,0,Sargos,Bloodied Path Cycle,For the Enclaves,Unique.,True,True,True,1,0,1
+51,Langeran,,,Battle: Have a target army unit or support lose its textbox until the end of the next round.,,Planet,Langeran,-1,-1,-1,-1,0,Sargos,Bloodied Path Cycle,For the Enclaves,Unique.,False,True,True,1,1,1
+52,Josoon,,,"While Captured: owner gains 1 resource each deploy phase.
+Battle: Exhaust a target army unit. Then move it to an adjacent planet.",,Planet,Josoon,-1,-1,-1,-1,0,Sargos,Bloodied Path Cycle,For the Enclaves,Unique.,False,True,False,0,2,1
+53,Ice World Hydras IV,,,"Battle: Reveal the top card of your deck until you reveal a unit, you may deploy it at a planet reducing its cost by 1. Then shuffle your deck.",,Planet,Ice_World_Hydras_IV,-1,-1,-1,-1,0,Sargos,Bloodied Path Cycle,For the Enclaves,Unique.,True,False,False,0,2,1
+54,Heletine,,,"Battle: Look at the top 4 cards of your deck. Place up to 4 at the bottom in any order. Then, gain 1 resource.",,Planet,Heletine,-1,-1,-1,-1,0,Sargos,Bloodied Path Cycle,For the Enclaves,Unique.,True,False,True,1,1,1
+55,Fortress World Garid,,,"While captured: the first shield card the owner plays each round gains 1 shield.
+Battle: Draw 3 cards. Then discard a card.",,Planet,Fortress_World_Garid,-1,-1,-1,-1,0,Sargos,Bloodied Path Cycle,For the Enclaves,Unique.,False,False,True,2,0,1
+56,Fenos,,,"Army units cannot enter play at this planet during the combat phase.
+Battle: Deal 2 damage among up to two target units.",,Planet,Fenos,-1,-1,-1,-1,0,Sargos,Bloodied Path Cycle,For the Enclaves,Unique.,True,True,False,1,1,1
+57,Essio,,,"Increase cost to deploy Elite units at this planet by 2.
+Battle: Discard up to 2 cards, for each card discarded draw 2 cards or gain 2 resources.",,Planet,Essio,-1,-1,-1,-1,0,Sargos,Bloodied Path Cycle,For the Enclaves,Unique.,False,True,True,1,1,1
+58,Daemon World Ivandis,,,"While captured: owner's warlord gets +2 HP.
+Battle: Remove up to 3 damage from a unit, then you may turn your warlord to its hale side.",,Planet,Daemon_World_Ivandis,-1,-1,-1,-1,0,Sargos,Bloodied Path Cycle,For the Enclaves,Unique.,True,False,False,2,0,1
+59,Chiros The Great Bazaar,,,"Each warlord at this planet gets +1 ATK.
+Battle: Look at the planets removed from the game. Reveal one to trigger its battle ability.",,Planet,Chiros_The_Great_Bazaar,-1,-1,-1,-1,0,Sargos,Bloodied Path Cycle,For the Enclaves,Unique.,True,True,True,0,1,1
+60,Frontier World Egulth,,,"Activity: Exhaust a target army unit.
+Battle: Put 1 Khymera token into play at each adjacent planet.",,Planet,Frontier_World_Egulth,-1,-1,-1,-1,0,Monn-Rai,Bloodied Path Cycle,Last Stand,Unique.,True,True,False,1,1,1
+61,Quarantined World Arkos,,,"Activity: If you control no unit at this planet, draw a card.
+Battle: Target army unit gains +1 ATK and HP.",,Planet,Quarantined_World_Arkos,-1,-1,-1,-1,0,Monn-Rai,Bloodied Path Cycle,Last Stand,Unique.,False,False,True,2,0,1
+62,Mordatyne,,,"Activity: Move a non-Elite army unit you control at this planet to an adjacent planet.
+ Battle: Rout a target army unit.",,Planet,Mordatyne,-1,-1,-1,-1,0,Monn-Rai,Bloodied Path Cycle,Last Stand,Unique.,True,False,False,0,2,1
+63,Helvetis,,,"Forced Activity: Flip a coin, on tails, each player deals 2 indirect damage among units he controls at this planet. (Once for both players.)",,Planet,Helvetis,-1,-1,-1,-1,0,Monn-Rai,Bloodied Path Cycle,Last Stand,Unique.,True,False,False,2,0,1
+64,Zadruk Prime,,,"Activity: Rally 6 a unit, deploy it at this planet, reducing its cost by 1.
+Battle: Remove up to 3 damage among cards.",,Planet,Zadruk_Prime,-1,-1,-1,-1,0,Monn-Rai,Bloodied Path Cycle,Last Stand,Unique.,True,True,True,0,1,1
+65,Hostaryn XXI,,,"Activity: Flip a coin, for each player, on tails: gain 1 Resource, on heads: lose 1 Resource. 
+Battle: Draw two cards.",,Planet,Hostaryn_XXI,-1,-1,-1,-1,0,Monn-Rai,Bloodied Path Cycle,Last Stand,Unique.,False,True,True,1,1,1
+66,Deltadurne,,,"Activity: If you control only units of your warlord's faction at this planet, draw a card.
+ Battle: Draw 1 card and gain 1 Resource.",,Planet,Deltadurne,-1,-1,-1,-1,0,Monn-Rai,Bloodied Path Cycle,Last Stand,Unique.,False,True,True,1,1,1
+67,Caldera,,,"Activity: Deal 1 damage to an army unit.
+Battle: Your opponent must sacrifice an army unit.",,Planet,Caldera,-1,-1,-1,-1,0,Monn-Rai,Bloodied Path Cycle,Last Stand,Unique.,True,False,True,1,1,1
+68,Hangyz,,,"Activity: Look at the top card of your deck, you may discard it.
+Battle: Give 1 command icon to an army unit.",,Planet,Hangyz,-1,-1,-1,-1,0,Monn-Rai,Bloodied Path Cycle,Last Stand,Unique.,True,True,True,1,1,1
+69,Forge World Dagon,,,"Activity: Remove 1 damage from your warlord.
+Battle: Gain 2 Resources.",,Planet,Forge_World_Dagon,-1,-1,-1,-1,0,Monn-Rai,Bloodied Path Cycle,Last Stand,Unique.,False,True,False,0,2,1
