@@ -6,3 +6,6 @@
 /conquestdb/light_mode_dict.txt
 /conquestdb/cards/ratings/
 *.pyc
+conquestdb/card_views.csv
+conquestdb/views_dates.csv
+conquestdb/users_list.txt

@@ -34,7 +34,7 @@ As we are running this for the first time, we need to populate the models with t
 
 ```
 py manage.py import_cards conquestdb_card_data.csv
-py manage.py import_cards conquestdb_planet_data.csv
+py manage.py import_cards conquest_planet_data.csv
 py manage.py import_rules rules/
 ```
 

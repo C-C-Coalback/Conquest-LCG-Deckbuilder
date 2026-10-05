@@ -75,9 +75,10 @@ def get_users():
     with open(os.getcwd() + "/users_list.txt", "w") as user_file:
         user_file.write("\n".join(usernames))
 
-
-get_users()
-
+try:
+    get_users()
+except Exception as e:
+    print("Error getting users: ", e)
 
 dire = os.getcwd()
 private_dir = dire + "/decks/deckstorage"
