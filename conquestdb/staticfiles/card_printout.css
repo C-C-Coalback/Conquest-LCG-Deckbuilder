@@ -38,18 +38,19 @@
 }
 
 @media print {
-    button, nav, header, .sidebar, h1, h2, p, span, form, input, #cardBinderContainer, .no-print {
+    button, nav, header, .sidebar, h1, h2, p, span, form, input, #cardBinderContainer, .no-print, footer {
         display: none !important;
     }
 
     #card-grid {
         display:grid;
-        grid-template-columns: repeat(3, 1fr);
+        grid-template-columns: repeat(2, 1fr);
         margin-top: 0px !important;
     }
 
     .card {
         break-inside: avoid;
+        border: none;
         width: 6.50cm !important;
         height: 9.00cm !important;
     }
