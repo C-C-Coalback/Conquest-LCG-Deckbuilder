@@ -8,6 +8,7 @@
         <h1>Add cards to the box below via the search function.</h1>
         <button style="color:black;" onclick="window.print()">Print Cards</button>
         <button style="color:black;" onclick="addCardToPrintoutArea('/static/images/CardImages/Cardback.jpg', '')">Add Cardback</button>
+        <button style="color:black;" onclick="addTokenCardToPrintoutArea('/static/images/CardImages/Cardback.jpg')">Add Token Cardback</button>
         <br>
         <input type="text" id="deck-key-input">
         <button style="color:black;" onclick="importDeckWithKey()">Import with Deck Key</button>
@@ -274,7 +275,8 @@
         var current_low_match = 0;
         var current_high_match = 0;
         var stored_image_names = [];
-        var stored_toggles = []
+        var stored_toggles = [];
+        var token_cards = ["Snotlings.jpg", "Cultist.jpg", "Guardsman.jpg", "Khymera.jpg", "Termagant.jpg"]
         const cards_required_for_extra_buttons = 6;
 
         function toggleBloodied(el) {
@@ -303,7 +305,30 @@
             parentEl.remove();
         }
 
+        function addTokenCardToPrintoutArea(src)
+        {
+            const card_src = src;
+            var cardContainer = document.getElementById("card-grid");
+            var newString = ``;
+            newString += `<div class="token-card">`;
+            newString += `<img onclick="removeCard(this)" src="` + card_src + `" class="Token-Card">`;
+            newString += `<span class="card-label">`;
+            newString += `</span>`;
+            newString += `</div>`;
+            cardContainer.innerHTML += newString;
+        }
+
         function addCardToPrintoutArea(src, toggle) {
+            console.log(src);
+            var src_split = src.split("/");
+            for (let i = 0; i < token_cards.length; i++) {
+                for (let j = 0; j < src_split.length; j++) {
+                    if (token_cards[i] === src_split[j]) {
+                        addTokenCardToPrintoutArea(src);
+                        return ;
+                    }
+                }
+            }
             const card_src = src;
             var cardContainer = document.getElementById("card-grid");
             var newString = ``;
@@ -518,7 +543,7 @@
                         'max-health': $('#maxHealth').val(),
                         'war-pack': $('#war-pack').val(),
                         'cycle': $('#cycle').val(),
-                        'redirect-enabled': "Yes",
+                        'redirect-enabled': "No",
                         'order': $('#order').val(),
                         'asc': $('#asc-desc').val(),
                         'view-as': $('#view-as-selector').val(),

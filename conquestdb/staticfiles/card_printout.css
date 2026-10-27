@@ -23,13 +23,18 @@
     line-height: 30px;
 }
 
-.card {
+.card, .token-card {
     display: flex;
     flex-direction: column;
     text-align: center;
 }
 
-.Card {
+.Token-Card {
+    height: 175px;
+    width: 125px;
+}
+
+.Card, .Token-Card {
     cursor: pointer;
 }
 
@@ -55,9 +60,23 @@
         height: 9.00cm !important;
     }
 
+    .token-card {
+        break-inside: avoid;
+        border: none;
+        width: 4.35cm !important;
+        height: 6.43cm !important;
+    }
+
     .Card {
         width: 6.50cm !important;
         height: 9.00cm !important;
+        border: 0.075cm solid black;
+        transform: scale(1);
+    }
+
+    .Token-Card {
+        width: 4.35cm !important;
+        height: 6.43cm !important;
         border: 0.075cm solid black;
         transform: scale(1);
     }
