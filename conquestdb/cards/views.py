@@ -572,7 +572,7 @@ def card_data(request, card_name):
             if not username:
                 username = "Anonymous"
             comment = request.POST.get('comment')
-            if card_name == "Bonesinger_Choir" and "blastleadgeneration" in comment:
+            if card_name == "Bonesinger_Choir" and "blastleadgeneration" in comment or "boostleadgen" in comment:
                 return redirect("/")
             time = str(datetime.datetime.now())
             os.makedirs(target_directory, exist_ok=True)
